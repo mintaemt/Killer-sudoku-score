@@ -37,7 +37,7 @@ export const UserNameInput = ({ onSubmit, onGuestMode, loading = false, error }:
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-2">
+            <div>
               <Input
                 id="name"
                 type="text"
@@ -63,7 +63,7 @@ export const UserNameInput = ({ onSubmit, onGuestMode, loading = false, error }:
               </Alert>
             )}
 
-            <div className="space-y-2">
+            <div>
               <Button 
                 type="submit" 
                 className="w-full" 
@@ -81,7 +81,9 @@ export const UserNameInput = ({ onSubmit, onGuestMode, loading = false, error }:
                   </>
                 )}
               </Button>
-              
+            </div>
+            
+            <div>
               <Button 
                 type="button"
                 variant="outline" 
@@ -92,10 +94,10 @@ export const UserNameInput = ({ onSubmit, onGuestMode, loading = false, error }:
                 <UserX className="mr-2 h-4 w-4" />
                 GUEST 模式
               </Button>
-              
-              <div className="text-xs text-muted-foreground text-center">
-                GUEST 模式不計分，不參與排行榜
-              </div>
+            </div>
+            
+            <div className="text-xs text-muted-foreground text-center">
+              GUEST 模式不計分，不參與排行榜
             </div>
           </form>
         </CardContent>
