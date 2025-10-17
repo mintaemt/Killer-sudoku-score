@@ -21,6 +21,7 @@ interface NumberPadProps {
   showClearOnly?: boolean;
   showNumbersOnly?: boolean;
   currentTheme?: string;
+  clearButtonWidth?: 'full' | 'match-first-three';
 }
 
 export const NumberPad = ({ 
@@ -29,7 +30,8 @@ export const NumberPad = ({
   disabled, 
   showClearOnly = false, 
   showNumbersOnly = false,
-  currentTheme = "blue"
+  currentTheme = "blue",
+  clearButtonWidth = 'full'
 }: NumberPadProps) => {
   // 如果只顯示 clear 按鈕
   if (showClearOnly) {
@@ -41,13 +43,14 @@ export const NumberPad = ({
           onClick={onClear}
           disabled={disabled}
           className={cn(
-            "w-full transition-smooth font-semibold",
+            "transition-smooth font-semibold",
             "hover:scale-105 active:scale-95",
             "shadow-apple-sm hover:shadow-apple-md",
             themeColors.bg,
             themeColors.hover,
             themeColors.text,
-            "border-0"
+            "border-0",
+            clearButtonWidth === 'match-first-three' ? "w-[calc(100%-1.5rem)]" : "w-full"
           )}
         >
           Clear

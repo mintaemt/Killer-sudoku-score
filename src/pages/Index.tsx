@@ -281,6 +281,7 @@ const Index = () => {
                   disabled={!selectedCell}
                   showClearOnly={true}
                   currentTheme={currentTheme}
+                  clearButtonWidth="match-first-three"
                 />
               </div>
 
