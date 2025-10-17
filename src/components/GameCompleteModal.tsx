@@ -62,8 +62,6 @@ export const GameCompleteModal = ({
             <Trophy className="h-8 w-8 text-primary" />
           </div>
           <CardTitle className="text-2xl text-primary">恭喜完成</CardTitle>
-          <CardTitle className="text-2xl text-green-600">恭喜完成</CardTitle>
-          <CardTitle className="text-2xl text-green-600">恭喜完成</CardTitle>
           <CardDescription>
             您成功完成了「{difficultyLabels[difficulty]}」難度的遊戲
           </CardDescription>
