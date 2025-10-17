@@ -6,7 +6,6 @@ import { DifficultySelector } from "@/components/DifficultySelector";
 import { UserNameInput } from "@/components/UserNameInput";
 import { GameCompleteModal } from "@/components/GameCompleteModal";
 import { Leaderboard } from "@/components/Leaderboard";
-import { UserStatus } from "@/components/UserStatus";
 import { generateKillerSudoku } from "@/lib/sudoku-generator";
 import { useUser } from "@/hooks/useUser";
 import { useGameRecord } from "@/hooks/useGameRecord";
@@ -238,10 +237,6 @@ const Index = () => {
                 />
               </div>
 
-              {/* UserStatus - 顯示用戶狀態 */}
-              <div>
-                <UserStatus />
-              </div>
 
               {/* DifficultySelector */}
               <div>
