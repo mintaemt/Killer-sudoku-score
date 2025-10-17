@@ -68,7 +68,8 @@ const LeaderboardEntryItem = ({ entry, isCurrentUser }: { entry: LeaderboardEntr
 );
 
 export const Leaderboard = ({ currentUserId, onClose }: LeaderboardProps) => {
-  const [selectedDifficulty, setSelectedDifficulty] = useState<Difficulty | undefined>(undefined);
+  const [activeTab, setActiveTab] = useState<string>("all");
+  const selectedDifficulty = activeTab === "all" ? undefined : activeTab as Difficulty;
   const { leaderboard, loading, error, refetch } = useLeaderboard(selectedDifficulty);
 
   const handleRefresh = () => {
@@ -118,23 +119,19 @@ export const Leaderboard = ({ currentUserId, onClose }: LeaderboardProps) => {
         </div>
       </CardHeader>
       <CardContent>
-        <Tabs defaultValue="all" className="w-full">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="grid w-full grid-cols-5">
-            <TabsTrigger value="all" onClick={() => setSelectedDifficulty(undefined)}>
+            <TabsTrigger value="all">
               全部
             </TabsTrigger>
             {Object.entries(difficultyLabels).map(([key, label]) => (
-              <TabsTrigger 
-                key={key} 
-                value={key} 
-                onClick={() => setSelectedDifficulty(key as Difficulty)}
-              >
+              <TabsTrigger key={key} value={key}>
                 {label}
               </TabsTrigger>
             ))}
           </TabsList>
 
-          <TabsContent value={selectedDifficulty || "all"} className="mt-6">
+          <TabsContent value={activeTab} className="mt-6">
             {leaderboard.length === 0 ? (
               <div className="text-center py-8 text-muted-foreground">
                 暫無排行榜資料
