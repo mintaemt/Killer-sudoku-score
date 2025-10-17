@@ -185,6 +185,7 @@ const Index = () => {
             onNewGame={handleNewGame}
             onThemeChange={handleThemeChange}
             currentTheme={currentTheme}
+            onShowLeaderboard={handleShowLeaderboard}
           />
           
           <DifficultySelector 
@@ -235,6 +236,7 @@ const Index = () => {
                   onNewGame={handleNewGame}
                   onThemeChange={handleThemeChange}
                   currentTheme={currentTheme}
+                  onShowLeaderboard={handleShowLeaderboard}
                 />
               </div>
 
