@@ -6,6 +6,7 @@ import { DifficultySelector } from "@/components/DifficultySelector";
 import { UserNameInput } from "@/components/UserNameInput";
 import { GameCompleteModal } from "@/components/GameCompleteModal";
 import { Leaderboard } from "@/components/Leaderboard";
+import { LeaderboardDebug } from "@/components/LeaderboardDebug";
 import { generateKillerSudoku } from "@/lib/sudoku-generator";
 import { useUser } from "@/hooks/useUser";
 import { useGameRecord } from "@/hooks/useGameRecord";
@@ -328,6 +329,10 @@ const Index = () => {
               currentUserId={user?.name}
               onClose={handleCloseLeaderboard}
             />
+            {/* 暫時添加調試信息 */}
+            <div className="mt-4">
+              <LeaderboardDebug />
+            </div>
           </div>
         </div>
       )}
