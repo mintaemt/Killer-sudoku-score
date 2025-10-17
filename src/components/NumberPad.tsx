@@ -41,7 +41,7 @@ export const NumberPad = ({
           onClick={onClear}
           disabled={disabled}
           className={cn(
-            "w-full transition-smooth font-semibold",
+            "w-[calc(33.333%*3+2*0.5rem)] transition-smooth font-semibold",
             "hover:scale-105 active:scale-95",
             "shadow-apple-sm hover:shadow-apple-md",
             themeColors.bg,
