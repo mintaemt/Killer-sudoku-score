@@ -117,7 +117,48 @@ export const GameCompleteModal = ({
                   <span className="text-sm">錯誤次數</span>
                 </div>
                 <span className="font-semibold">{mistakes}</span>
+          <div className="grid grid-cols-2 gap-3">
+            {/* 左上：目前排名 */}
+            <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg border border-blue-200">
+              <div className="flex items-center space-x-2">
+                <Trophy className="h-4 w-4 text-blue-600" />
+                <span className="text-sm font-medium">目前排名</span>
               </div>
+              <span className="text-lg font-bold text-blue-600">{typeof rank === 'number' ? `#${rank}` : '-'}</span>
+            </div>
+
+            {/* 右上：總分數（藍色外框） */}
+            <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg border border-blue-200">
+              <div className="flex items-center space-x-2">
+                <Star className="h-4 w-4 text-yellow-500" />
+                <span className="text-sm font-medium">總分數</span>
+              </div>
+              <div className="text-right">
+                <div className="text-lg font-bold text-primary">{formatScore(score)}</div>
+                {isNewRecord && (
+                  <Badge variant="secondary" className="text-[10px]">
+                    新紀錄！
+                  </Badge>
+                )}
+              </div>
+            </div>
+
+            {/* 左下：完成時間 */}
+            <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+              <div className="flex items-center space-x-2">
+                <Clock className="h-4 w-4 text-blue-500" />
+                <span className="text-sm">完成時間</span>
+              </div>
+              <span className="font-semibold">{formatTime(completionTime)}</span>
+            </div>
+
+            {/* 右下：錯誤次數 */}
+            <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+              <div className="flex items-center space-x-2">
+                <Target className="h-4 w-4 text-red-500" />
+                <span className="text-sm">錯誤次數</span>
+              </div>
+              <span className="font-semibold">{mistakes}</span>
             </div>
           </div>
 
