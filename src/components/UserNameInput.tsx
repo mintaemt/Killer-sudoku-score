@@ -8,12 +8,12 @@ import { Loader2, User, UserX } from 'lucide-react';
 
 interface UserNameInputProps {
   onSubmit: (name: string) => Promise<void>;
-  onGuestMode: () => void;
+  onVisitorMode: () => void;
   loading?: boolean;
   error?: string | null;
 }
 
-export const UserNameInput = ({ onSubmit, onGuestMode, loading = false, error }: UserNameInputProps) => {
+export const UserNameInput = ({ onSubmit, onVisitorMode, loading = false, error }: UserNameInputProps) => {
   const [name, setName] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -87,17 +87,17 @@ export const UserNameInput = ({ onSubmit, onGuestMode, loading = false, error }:
               <Button 
                 type="button"
                 variant="outline" 
-                className="w-full" 
+                className="w-full guest-mode-button" 
                 disabled={loading}
-                onClick={onGuestMode}
+                onClick={onVisitorMode}
               >
                 <UserX className="mr-2 h-4 w-4" />
-                GUEST 模式
+                訪客模式
               </Button>
             </div>
             
             <div className="text-xs text-muted-foreground text-center">
-              GUEST 模式不計分，不參與排行榜
+              訪客模式不計分，不參與排行榜
             </div>
           </form>
         </CardContent>

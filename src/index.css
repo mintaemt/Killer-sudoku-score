@@ -344,4 +344,23 @@ All colors MUST be HSL.
       border: 1px solid rgba(255,255,255,0.5) !important;
     }
   }
+
+  /* 訪客模式按鈕自定義樣式 */
+  .guest-mode-button {
+    @apply border-gray-300 text-gray-600 hover:bg-gray-100 hover:text-gray-700;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .guest-mode-button:active {
+    @apply bg-gray-200 text-gray-800;
+    transform: translateY(1px);
+  }
+  
+  .dark .guest-mode-button {
+    @apply border-gray-600 text-gray-400 hover:bg-gray-800 hover:text-gray-300;
+  }
+  
+  .dark .guest-mode-button:active {
+    @apply bg-gray-700 text-gray-200;
+  }
 }
