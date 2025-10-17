@@ -35,23 +35,27 @@ export const NumberPad = ({
   if (showClearOnly) {
     const themeColors = getThemeColors(currentTheme);
     return (
-      <div className="glass rounded-2xl p-2 shadow-apple-lg">
-        <Button
-          size="lg"
-          onClick={onClear}
-          disabled={disabled}
-          className={cn(
-            "w-[calc(33.333%*3+2*0.5rem)] transition-smooth font-semibold",
-            "hover:scale-105 active:scale-95",
-            "shadow-apple-sm hover:shadow-apple-md",
-            themeColors.bg,
-            themeColors.hover,
-            themeColors.text,
-            "border-0"
-          )}
-        >
-          Clear
-        </Button>
+      <div className="glass rounded-2xl p-3 shadow-apple-lg w-full h-full flex flex-col">
+        <div className="grid grid-cols-3 gap-2 flex-1">
+          <div className="col-span-3">
+            <Button
+              size="lg"
+              onClick={onClear}
+              disabled={disabled}
+              className={cn(
+                "w-full h-full transition-smooth font-semibold",
+                "hover:scale-105 active:scale-95",
+                "shadow-apple-sm hover:shadow-apple-md",
+                themeColors.bg,
+                themeColors.hover,
+                themeColors.text,
+                "border-0"
+              )}
+            >
+              Clear
+            </Button>
+          </div>
+        </div>
       </div>
     );
   }
