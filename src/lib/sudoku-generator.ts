@@ -1,0 +1,330 @@
+import { Difficulty } from "@/pages/Index";
+
+export interface Cell {
+  value: number | null;
+  solution: number;
+  given: boolean;
+  isError?: boolean;
+}
+
+export interface Cage {
+  id: number;
+  cells: { row: number; col: number }[];
+  sum: number;
+}
+
+export interface KillerSudokuData {
+  grid: Cell[][];
+  cages: Cage[];
+  puzzleId: string; // 唯一題目ID
+}
+
+// 題目歷史記錄（實際應用中應該存儲在服務器或本地存儲中）
+const generatedPuzzles = new Set<string>();
+
+// 生成隨機的已解決數獨網格 - 使用更簡單可靠的方法
+function generateRandomSolvedGrid(): number[][] {
+  // 使用預定義的基礎模式，然後進行隨機變換
+  const baseGrid = [
+    [1, 2, 3, 4, 5, 6, 7, 8, 9],
+    [4, 5, 6, 7, 8, 9, 1, 2, 3],
+    [7, 8, 9, 1, 2, 3, 4, 5, 6],
+    [2, 3, 4, 5, 6, 7, 8, 9, 1],
+    [5, 6, 7, 8, 9, 1, 2, 3, 4],
+    [8, 9, 1, 2, 3, 4, 5, 6, 7],
+    [3, 4, 5, 6, 7, 8, 9, 1, 2],
+    [6, 7, 8, 9, 1, 2, 3, 4, 5],
+    [9, 1, 2, 3, 4, 5, 6, 7, 8]
+  ];
+
+  // 創建深拷貝
+  const grid = baseGrid.map(row => [...row]);
+
+  // 隨機變換行
+  for (let i = 0; i < 3; i++) {
+    const blockStart = i * 3;
+    const rows = [blockStart, blockStart + 1, blockStart + 2];
+    
+    // 隨機交換行
+    for (let j = 0; j < 2; j++) {
+      const row1 = rows[Math.floor(Math.random() * 3)];
+      const row2 = rows[Math.floor(Math.random() * 3)];
+      if (row1 !== row2) {
+        [grid[row1], grid[row2]] = [grid[row2], grid[row1]];
+      }
+    }
+  }
+
+  // 隨機變換列
+  for (let i = 0; i < 3; i++) {
+    const blockStart = i * 3;
+    const cols = [blockStart, blockStart + 1, blockStart + 2];
+    
+    // 隨機交換列
+    for (let j = 0; j < 2; j++) {
+      const col1 = cols[Math.floor(Math.random() * 3)];
+      const col2 = cols[Math.floor(Math.random() * 3)];
+      if (col1 !== col2) {
+        for (let row = 0; row < 9; row++) {
+          [grid[row][col1], grid[row][col2]] = [grid[row][col2], grid[row][col1]];
+        }
+      }
+    }
+  }
+
+  // 隨機變換數字
+  const numberMap = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  for (let i = numberMap.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [numberMap[i], numberMap[j]] = [numberMap[j], numberMap[i]];
+  }
+
+  // 應用數字變換
+  for (let row = 0; row < 9; row++) {
+    for (let col = 0; col < 9; col++) {
+      grid[row][col] = numberMap[grid[row][col] - 1];
+    }
+  }
+
+  return grid;
+}
+
+// 檢查數獨網格是否有唯一解
+function hasUniqueSolution(grid: number[][], cages: Cage[]): boolean {
+  // 簡化的唯一解檢查 - 實際應用中需要更複雜的算法
+  // 這裡我們檢查基本的約束條件
+  for (const cage of cages) {
+    const cageValues = cage.cells.map(cell => grid[cell.row][cell.col]);
+    const sum = cageValues.reduce((a, b) => a + b, 0);
+    
+    if (sum !== cage.sum) return false;
+    
+    // 檢查cage內是否有重複數字
+    const uniqueValues = new Set(cageValues);
+    if (uniqueValues.size !== cageValues.length) return false;
+  }
+  
+  return true;
+}
+
+// 生成隨機的 cage 配置 - 確保最低數量的單格 cage
+function generateRandomCages(grid: number[][]): Cage[] {
+  const cages: Cage[] = [];
+  const used = Array(9)
+    .fill(null)
+    .map(() => Array(9).fill(false));
+  let cageId = 0;
+
+  // 創建所有位置列表
+  const allPositions = [];
+  for (let row = 0; row < 9; row++) {
+    for (let col = 0; col < 9; col++) {
+      allPositions.push({ row, col });
+    }
+  }
+
+  // 隨機打亂位置順序
+  for (let i = allPositions.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [allPositions[i], allPositions[j]] = [allPositions[j], allPositions[i]];
+  }
+
+  // 計算目標單格 cage 數量（約 15-25% 的 cage 為單格）
+  const totalCages = Math.floor(81 / 2.5); // 預估總 cage 數量
+  const targetSingleCages = Math.floor(totalCages * 0.2); // 20% 為單格 cage
+  let singleCageCount = 0;
+
+  // 為每個位置生成 cage
+  for (const startPos of allPositions) {
+    if (used[startPos.row][startPos.col]) continue;
+
+    const cageCells: { row: number; col: number }[] = [startPos];
+    used[startPos.row][startPos.col] = true;
+    let sum = grid[startPos.row][startPos.col];
+
+    // 決定 cage 大小
+    let targetSize: number;
+    const remainingPositions = allPositions.filter(pos => !used[pos.row][pos.col]).length;
+    
+    // 如果還需要更多單格 cage 且剩餘位置足夠，優先生成單格 cage
+    if (singleCageCount < targetSingleCages && remainingPositions > targetSingleCages - singleCageCount) {
+      targetSize = 1;
+    } else {
+      // 隨機決定 cage 大小 (1-4 格)
+      targetSize = Math.floor(Math.random() * 4) + 1;
+    }
+
+    let attempts = 0;
+    const maxAttempts = 10;
+
+    while (cageCells.length < targetSize && attempts < maxAttempts) {
+      // 獲取當前 cage 的鄰居
+      const neighbors: { row: number; col: number }[] = [];
+      
+      for (const cell of cageCells) {
+        const adjacent = [
+          { row: cell.row - 1, col: cell.col },
+          { row: cell.row + 1, col: cell.col },
+          { row: cell.row, col: cell.col - 1 },
+          { row: cell.row, col: cell.col + 1 },
+        ];
+        
+        for (const adj of adjacent) {
+          if (adj.row >= 0 && adj.row < 9 && 
+              adj.col >= 0 && adj.col < 9 && 
+              !used[adj.row][adj.col] &&
+              !neighbors.some(n => n.row === adj.row && n.col === adj.col)) {
+            neighbors.push(adj);
+          }
+        }
+      }
+
+      if (neighbors.length === 0) break;
+
+      // 隨機選擇一個鄰居
+      const selected = neighbors[Math.floor(Math.random() * neighbors.length)];
+      cageCells.push(selected);
+      used[selected.row][selected.col] = true;
+      sum += grid[selected.row][selected.col];
+      attempts++;
+    }
+
+    // 記錄單格 cage 數量
+    if (cageCells.length === 1) {
+      singleCageCount++;
+    }
+
+    // 添加 cage
+    cages.push({
+      id: cageId++,
+      cells: cageCells,
+      sum,
+    });
+  }
+
+  return cages;
+}
+
+// 生成題目唯一ID
+function generatePuzzleId(grid: number[][], cages: Cage[]): string {
+  try {
+    const gridString = grid.map(row => row.join('')).join('');
+    const cageString = cages.map(cage => 
+      `${cage.sum}:${cage.cells.map(c => `${c.row},${c.col}`).join(';')}`
+    ).join('|');
+    
+    // 使用簡單的哈希函數
+    let hash = 0;
+    const str = gridString + cageString;
+    for (let i = 0; i < str.length; i++) {
+      const char = str.charCodeAt(i);
+      hash = ((hash << 5) - hash) + char;
+      hash = hash & hash; // 轉換為32位整數
+    }
+    
+    return Math.abs(hash).toString(36);
+  } catch (error) {
+    console.error('Error generating puzzle ID:', error);
+    return Math.random().toString(36).substring(2);
+  }
+}
+
+export function generateKillerSudoku(difficulty: Difficulty): KillerSudokuData {
+  try {
+    // 簡化版本：直接生成，減少複雜檢查
+    const solution = generateRandomSolvedGrid();
+    const cages = generateRandomCages(solution);
+    const puzzleId = generatePuzzleId(solution, cages);
+    
+    // 記錄已生成的題目（簡化版本）
+    generatedPuzzles.add(puzzleId);
+    
+    // 根據難度決定顯示的數字數量
+    const givensCount = {
+      easy: 30,      // 簡單：30個數字，適合初學者
+      medium: 25,    // 中等：25個數字，需要一些推理
+      hard: 10,      // 困難：10個數字，需要較強邏輯推理
+      expert: 1,     // 專家：僅1個數字，極具挑戰性
+    }[difficulty];
+
+    const grid: Cell[][] = solution.map((row) =>
+      row.map((val) => ({
+        value: null,
+        solution: val,
+        given: false,
+      }))
+    );
+
+    // 根據難度選擇要顯示的格子
+    if (difficulty === 'expert') {
+      // Expert 難度：隨機放置一個數字
+      const positions = [];
+      for (let i = 0; i < 9; i++) {
+        for (let j = 0; j < 9; j++) {
+          positions.push({ row: i, col: j });
+        }
+      }
+      
+      // 隨機選擇一個位置
+      const randomPos = positions[Math.floor(Math.random() * positions.length)];
+      grid[randomPos.row][randomPos.col].given = true;
+      grid[randomPos.row][randomPos.col].value = solution[randomPos.row][randomPos.col];
+    } else {
+      // 其他難度：隨機選擇要顯示的格子
+      const positions = [];
+      for (let i = 0; i < 9; i++) {
+        for (let j = 0; j < 9; j++) {
+          positions.push({ row: i, col: j });
+        }
+      }
+
+      // 打亂位置順序
+      for (let i = positions.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [positions[i], positions[j]] = [positions[j], positions[i]];
+      }
+
+      // 設置給定的格子
+      for (let i = 0; i < givensCount; i++) {
+        const { row, col } = positions[i];
+        grid[row][col].given = true;
+        grid[row][col].value = solution[row][col];
+      }
+    }
+
+    return { grid, cages, puzzleId };
+  } catch (error) {
+    console.error('Critical error in generateKillerSudoku:', error);
+    
+    // 返回一個最基本的題目作為後備
+    const fallbackGrid: Cell[][] = Array(9).fill(null).map(() => 
+      Array(9).fill(null).map(() => ({
+        value: null,
+        solution: 1,
+        given: false,
+      }))
+    );
+    
+    const fallbackCages: Cage[] = [{
+      id: 0,
+      cells: [{ row: 0, col: 0 }],
+      sum: 1
+    }];
+    
+    return { 
+      grid: fallbackGrid, 
+      cages: fallbackCages, 
+      puzzleId: 'fallback-' + Math.random().toString(36).substring(2)
+    };
+  }
+}
+
+// 獲取已生成題目數量（用於調試）
+export function getGeneratedPuzzleCount(): number {
+  return generatedPuzzles.size;
+}
+
+// 清除已生成題目記錄（用於測試）
+export function clearGeneratedPuzzles(): void {
+  generatedPuzzles.clear();
+}

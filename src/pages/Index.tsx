@@ -1,0 +1,202 @@
+import { useState, useEffect } from "react";
+import { KillerSudokuGrid } from "@/components/KillerSudokuGrid";
+import { NumberPad } from "@/components/NumberPad";
+import { GameHeader } from "@/components/GameHeader";
+import { DifficultySelector } from "@/components/DifficultySelector";
+import { generateKillerSudoku } from "@/lib/sudoku-generator";
+
+export type Difficulty = "easy" | "medium" | "hard" | "expert";
+
+const Index = () => {
+  const [selectedCell, setSelectedCell] = useState<{ row: number; col: number } | null>(null);
+  const [difficulty, setDifficulty] = useState<Difficulty>("easy");
+  const [mistakes, setMistakes] = useState(0);
+  const [gameData, setGameData] = useState(generateKillerSudoku(difficulty));
+  const [time, setTime] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const [currentTheme, setCurrentTheme] = useState("blue");
+
+  useEffect(() => {
+    try {
+      setTimeout(() => {
+        const newGameData = generateKillerSudoku(difficulty);
+        setGameData(newGameData);
+        setMistakes(0);
+        setSelectedCell(null);
+        setTime(0);
+        setIsPaused(false);
+      }, 0);
+    } catch (error) {
+      console.error('Error generating game on difficulty change:', error);
+    }
+  }, [difficulty]);
+
+  useEffect(() => {
+    if (isPaused) return;
+    
+    const interval = setInterval(() => {
+      setTime((prev) => prev + 1);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [isPaused]);
+
+  const handleNumberInput = (num: number) => {
+    if (!selectedCell) return;
+
+    const { row, col } = selectedCell;
+    if (gameData.grid[row][col].given) return;
+
+    const newGrid = gameData.grid.map((r, i) =>
+      r.map((cell, j) => {
+        if (i === row && j === col) {
+          const isCorrect = cell.solution === num;
+          if (!isCorrect && num !== 0) {
+            setMistakes((prev) => prev + 1);
+          }
+          return { ...cell, value: num === 0 ? null : num, isError: !isCorrect && num !== 0 };
+        }
+        return cell;
+      })
+    );
+
+    setGameData({ ...gameData, grid: newGrid });
+  };
+
+  const handleClear = () => {
+    if (!selectedCell) return;
+    handleNumberInput(0);
+  };
+
+  const handleNewGame = () => {
+    try {
+      // 使用 setTimeout 來避免阻塞 UI
+      setTimeout(() => {
+        const newGameData = generateKillerSudoku(difficulty);
+        setGameData(newGameData);
+        setMistakes(0);
+        setSelectedCell(null);
+        setTime(0);
+        setIsPaused(false);
+      }, 0);
+    } catch (error) {
+      console.error('Error generating new game:', error);
+      // 如果出錯，至少重置遊戲狀態
+      setMistakes(0);
+      setSelectedCell(null);
+      setTime(0);
+      setIsPaused(false);
+    }
+  };
+
+  const handleTogglePause = () => {
+    setIsPaused((prev) => !prev);
+  };
+
+  const handleThemeChange = (theme: string) => {
+    setCurrentTheme(theme);
+    document.documentElement.setAttribute('data-theme', theme);
+  };
+
+  return (
+    <div className="min-h-screen bg-background flex items-center justify-center p-2 md:p-4" data-theme={currentTheme}>
+      <div className="w-full max-w-6xl mx-auto animate-fade-in">
+        {/* 移動裝置佈局 - 保持原有垂直佈局 */}
+        <div className="block md:hidden space-y-4">
+          <GameHeader 
+            onNewGame={handleNewGame}
+            onThemeChange={handleThemeChange}
+            currentTheme={currentTheme}
+          />
+          
+          <DifficultySelector 
+            difficulty={difficulty} 
+            onDifficultyChange={setDifficulty}
+            mistakes={mistakes}
+            time={time}
+            isPaused={isPaused}
+            onTogglePause={handleTogglePause}
+          />
+
+          <div className="space-y-4">
+            <KillerSudokuGrid
+              grid={gameData.grid}
+              cages={gameData.cages}
+              selectedCell={selectedCell}
+              onCellSelect={setSelectedCell}
+            />
+
+            <NumberPad
+              onNumberSelect={handleNumberInput}
+              onClear={handleClear}
+              disabled={!selectedCell}
+            />
+          </div>
+        </div>
+
+        {/* 桌面/平板佈局 - 根據 wireframe 設計 */}
+        <div className="hidden md:block">
+          <div className="flex items-center justify-center gap-6 h-[500px]">
+            {/* 左側：九宮格 - 使用固定尺寸確保大小合適 */}
+            <div className="flex-shrink-0">
+              <div className="w-[500px] h-[500px]">
+                <KillerSudokuGrid
+                  grid={gameData.grid}
+                  cages={gameData.cages}
+                  selectedCell={selectedCell}
+                  onCellSelect={setSelectedCell}
+                />
+              </div>
+            </div>
+
+            {/* 右側：垂直排列所有其他元件 - 統一間距系統 */}
+            <div className="flex flex-col w-[400px] h-[500px] space-y-3">
+              {/* GameHeader - 與九宮格上緣切齊 */}
+              <div>
+                <GameHeader 
+                  onNewGame={handleNewGame}
+                  onThemeChange={handleThemeChange}
+                  currentTheme={currentTheme}
+                />
+              </div>
+
+              {/* DifficultySelector */}
+              <div>
+                <DifficultySelector 
+                  difficulty={difficulty} 
+                  onDifficultyChange={setDifficulty}
+                  mistakes={mistakes}
+                  time={time}
+                  isPaused={isPaused}
+                  onTogglePause={handleTogglePause}
+                />
+              </div>
+
+              {/* Clear 按鈕 */}
+              <div>
+                <NumberPad
+                  onNumberSelect={handleNumberInput}
+                  onClear={handleClear}
+                  disabled={!selectedCell}
+                  showClearOnly={true}
+                />
+              </div>
+
+              {/* NumberPad - 自動填滿剩餘空間並與九宮格底部對齊 */}
+              <div className="flex-1 flex justify-end">
+                <NumberPad
+                  onNumberSelect={handleNumberInput}
+                  onClear={handleClear}
+                  disabled={!selectedCell}
+                  showNumbersOnly={true}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Index;
