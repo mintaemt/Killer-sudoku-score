@@ -53,7 +53,13 @@ export const UserNameInput = ({ onSubmit, loading = false, error }: UserNameInpu
             
             {error && (
               <Alert variant="destructive">
-                <AlertDescription>{error}</AlertDescription>
+                <AlertDescription>
+                  {error}
+                  <br />
+                  <small className="text-xs mt-1 block">
+                    請檢查網路連接或稍後再試。如果問題持續，請聯繫管理員。
+                  </small>
+                </AlertDescription>
               </Alert>
             )}
 

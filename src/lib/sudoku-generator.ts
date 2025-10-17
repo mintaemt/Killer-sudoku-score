@@ -107,7 +107,7 @@ function hasUniqueSolution(grid: number[][], cages: Cage[]): boolean {
   return true;
 }
 
-// 生成隨機的 cage 配置 - 確保最低數量的單格 cage
+// 生成隨機的 cage 配置 - 優化單格 cage 數量
 function generateRandomCages(grid: number[][]): Cage[] {
   const cages: Cage[] = [];
   const used = Array(9)
@@ -129,10 +129,11 @@ function generateRandomCages(grid: number[][]): Cage[] {
     [allPositions[i], allPositions[j]] = [allPositions[j], allPositions[i]];
   }
 
-  // 計算目標單格 cage 數量（約 15-25% 的 cage 為單格）
-  const totalCages = Math.floor(81 / 2.5); // 預估總 cage 數量
-  const targetSingleCages = Math.floor(totalCages * 0.2); // 20% 為單格 cage
+  // 計算目標單格 cage 數量（限制在 5-8 個，約 10-15%）
+  const maxSingleCages = 8; // 最多 8 個單格 cage
+  const minSingleCages = 5; // 最少 5 個單格 cage
   let singleCageCount = 0;
+  let totalCages = 0;
 
   // 為每個位置生成 cage
   for (const startPos of allPositions) {
@@ -142,20 +143,34 @@ function generateRandomCages(grid: number[][]): Cage[] {
     used[startPos.row][startPos.col] = true;
     let sum = grid[startPos.row][startPos.col];
 
-    // 決定 cage 大小
+    // 決定 cage 大小 - 優先生成多格 cage
     let targetSize: number;
     const remainingPositions = allPositions.filter(pos => !used[pos.row][pos.col]).length;
     
-    // 如果還需要更多單格 cage 且剩餘位置足夠，優先生成單格 cage
-    if (singleCageCount < targetSingleCages && remainingPositions > targetSingleCages - singleCageCount) {
-      targetSize = 1;
+    // 如果已經達到最大單格 cage 數量，強制生成多格 cage
+    if (singleCageCount >= maxSingleCages) {
+      targetSize = Math.floor(Math.random() * 3) + 2; // 2-4 格
+    }
+    // 如果還需要更多單格 cage 且剩餘位置足夠
+    else if (singleCageCount < minSingleCages && remainingPositions > minSingleCages - singleCageCount) {
+      // 有 30% 機率生成單格 cage
+      targetSize = Math.random() < 0.3 ? 1 : Math.floor(Math.random() * 3) + 2;
     } else {
-      // 隨機決定 cage 大小 (1-4 格)
-      targetSize = Math.floor(Math.random() * 4) + 1;
+      // 正常情況下，優先生成多格 cage
+      const rand = Math.random();
+      if (rand < 0.1) {
+        targetSize = 1; // 10% 機率生成單格 cage
+      } else if (rand < 0.6) {
+        targetSize = 2; // 50% 機率生成 2 格 cage
+      } else if (rand < 0.9) {
+        targetSize = 3; // 30% 機率生成 3 格 cage
+      } else {
+        targetSize = 4; // 10% 機率生成 4 格 cage
+      }
     }
 
     let attempts = 0;
-    const maxAttempts = 10;
+    const maxAttempts = 15; // 增加嘗試次數
 
     while (cageCells.length < targetSize && attempts < maxAttempts) {
       // 獲取當前 cage 的鄰居
@@ -193,6 +208,7 @@ function generateRandomCages(grid: number[][]): Cage[] {
     if (cageCells.length === 1) {
       singleCageCount++;
     }
+    totalCages++;
 
     // 添加 cage
     cages.push({
@@ -202,7 +218,70 @@ function generateRandomCages(grid: number[][]): Cage[] {
     });
   }
 
-  return cages;
+  console.log(`Generated ${totalCages} cages with ${singleCageCount} single-cell cages (${(singleCageCount/totalCages*100).toFixed(1)}%)`);
+  
+  // 後處理：嘗試合併一些單格 cage 來進一步減少單格 cage 數量
+  const optimizedCages = optimizeCages(cages, grid);
+  
+  return optimizedCages;
+}
+
+// 優化 cage 配置，減少單格 cage 數量
+function optimizeCages(cages: Cage[], grid: number[][]): Cage[] {
+  const optimizedCages = [...cages];
+  const singleCages = optimizedCages.filter(cage => cage.cells.length === 1);
+  
+  // 如果單格 cage 數量仍然太多，嘗試合併一些
+  if (singleCages.length > 6) {
+    console.log(`Optimizing cages: ${singleCages.length} single-cell cages found`);
+    
+    // 嘗試合併相鄰的單格 cage
+    for (let i = 0; i < singleCages.length - 1 && singleCages.length > 6; i++) {
+      const cage1 = singleCages[i];
+      const cell1 = cage1.cells[0];
+      
+      // 尋找相鄰的單格 cage
+      for (let j = i + 1; j < singleCages.length; j++) {
+        const cage2 = singleCages[j];
+        const cell2 = cage2.cells[0];
+        
+        // 檢查是否相鄰
+        const isAdjacent = (
+          (Math.abs(cell1.row - cell2.row) === 1 && cell1.col === cell2.col) ||
+          (Math.abs(cell1.col - cell2.col) === 1 && cell1.row === cell2.row)
+        );
+        
+        if (isAdjacent) {
+          // 合併兩個單格 cage
+          const mergedCage: Cage = {
+            id: cage1.id,
+            cells: [cell1, cell2],
+            sum: cage1.sum + cage2.sum
+          };
+          
+          // 替換原來的 cage
+          const cage1Index = optimizedCages.findIndex(c => c.id === cage1.id);
+          const cage2Index = optimizedCages.findIndex(c => c.id === cage2.id);
+          
+          if (cage1Index !== -1 && cage2Index !== -1) {
+            optimizedCages[cage1Index] = mergedCage;
+            optimizedCages.splice(cage2Index, 1);
+            
+            // 更新 singleCages 列表
+            singleCages.splice(j, 1);
+            singleCages.splice(i, 1);
+            i--; // 調整索引
+            break;
+          }
+        }
+      }
+    }
+    
+    const finalSingleCages = optimizedCages.filter(cage => cage.cells.length === 1).length;
+    console.log(`After optimization: ${finalSingleCages} single-cell cages (${(finalSingleCages/optimizedCages.length*100).toFixed(1)}%)`);
+  }
+  
+  return optimizedCages;
 }
 
 // 生成題目唯一ID
