@@ -1,9 +1,10 @@
 import { Button } from "@/components/ui/button";
-import { RotateCcw, Palette, User, LogOut } from "lucide-react";
+import { RotateCcw, Palette, User, LogOut, Trophy, Clock } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { cn } from "@/lib/utils";
 import { useState, useRef, useEffect } from "react";
 import { useUser } from "@/hooks/useUser";
+import { useUserStats } from "@/hooks/useUserStats";
 
 interface GameHeaderProps {
   onNewGame: () => void;
@@ -26,6 +27,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme }: GameHeade
   const dropdownRef = useRef<HTMLDivElement>(null);
   const userDropdownRef = useRef<HTMLDivElement>(null);
   const { user, clearUser, isLoggedIn } = useUser();
+  const { stats, loading: statsLoading } = useUserStats(user?.id || null);
 
   // Handle click outside to close dropdowns
   useEffect(() => {
@@ -97,7 +99,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme }: GameHeade
           </div>
 
           {/* 用戶狀態 */}
-          {isLoggedIn && (
+          {user && (
             <div className="relative" ref={userDropdownRef}>
               <Button
                 variant="outline"
@@ -110,12 +112,59 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme }: GameHeade
               </Button>
               
               {isUserOpen && (
-                <div className="absolute top-full right-0 mt-1 dropdown-glass rounded-md shadow-lg z-[9999] p-3 min-w-[200px] dropdown-menu">
-                  <div className="space-y-2">
-                    <div className="text-sm font-medium text-center">{user?.name}</div>
-                    <div className="text-xs text-muted-foreground text-center">
-                      用戶 ID: {user?.id?.slice(0, 8)}...
+                <div className="absolute top-full right-0 mt-1 dropdown-glass rounded-md shadow-lg z-[9999] p-3 min-w-[240px] dropdown-menu">
+                  <div className="space-y-3">
+                    <div className="text-center">
+                      <div className="text-sm font-medium">{user?.name}</div>
+                      <div className="text-xs text-muted-foreground">
+                        ID: {user?.id?.slice(0, 8)}...
+                      </div>
                     </div>
+                    
+                    {stats && (
+                      <div className="space-y-2">
+                        <div className="border-t pt-2">
+                          <div className="text-xs font-medium text-muted-foreground mb-2">遊戲統計</div>
+                          <div className="grid grid-cols-2 gap-2 text-xs">
+                            <div className="flex items-center space-x-1">
+                              <Trophy className="h-3 w-3 text-yellow-500" />
+                              <span>最佳分數</span>
+                            </div>
+                            <div className="text-right font-medium">
+                              {stats.bestScore.toLocaleString()}
+                            </div>
+                            <div className="flex items-center space-x-1">
+                              <Clock className="h-3 w-3 text-blue-500" />
+                              <span>最佳時間</span>
+                            </div>
+                            <div className="text-right font-medium">
+                              {Math.floor(stats.bestTime / 60)}:{(stats.bestTime % 60).toString().padStart(2, '0')}
+                            </div>
+                            <div className="flex items-center space-x-1">
+                              <User className="h-3 w-3 text-green-500" />
+                              <span>總遊戲數</span>
+                            </div>
+                            <div className="text-right font-medium">
+                              {stats.totalGames}
+                            </div>
+                            <div className="flex items-center space-x-1">
+                              <Trophy className="h-3 w-3 text-purple-500" />
+                              <span>平均分數</span>
+                            </div>
+                            <div className="text-right font-medium">
+                              {Math.round(stats.averageScore).toLocaleString()}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                    
+                    {statsLoading && (
+                      <div className="text-center text-xs text-muted-foreground">
+                        載入統計中...
+                      </div>
+                    )}
+                    
                     <div className="border-t pt-2">
                       <Button
                         variant="outline"

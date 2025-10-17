@@ -76,6 +76,7 @@ const Index = () => {
     const userData = await createOrUpdateUser(name);
     if (userData) {
       setShowUserNameInput(false);
+      // 用戶狀態會自動更新，不需要重新載入頁面
     }
   };
 
