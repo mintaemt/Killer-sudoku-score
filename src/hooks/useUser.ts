@@ -45,6 +45,8 @@ export const useUser = () => {
       setLoading(true);
       setError(null);
 
+      console.log('開始創建/更新用戶:', name);
+
       // 檢查是否已存在相同名稱的用戶
       const { data: existingUsers, error: searchError } = await supabase
         .from('users')
@@ -53,12 +55,16 @@ export const useUser = () => {
         .limit(1);
 
       if (searchError) {
+        console.error('搜尋用戶時發生錯誤:', searchError);
         throw searchError;
       }
+
+      console.log('搜尋結果:', existingUsers);
 
       let userData: User;
 
       if (existingUsers && existingUsers.length > 0) {
+        console.log('找到現有用戶，更新最後登入時間');
         // 更新現有用戶的最後登入時間
         const { data: updatedUser, error: updateError } = await supabase
           .from('users')
@@ -68,11 +74,14 @@ export const useUser = () => {
           .single();
 
         if (updateError) {
+          console.error('更新用戶時發生錯誤:', updateError);
           throw updateError;
         }
 
         userData = updatedUser;
+        console.log('用戶更新成功:', userData);
       } else {
+        console.log('創建新用戶');
         // 創建新用戶
         const { data: newUser, error: insertError } = await supabase
           .from('users')
@@ -85,10 +94,12 @@ export const useUser = () => {
           .single();
 
         if (insertError) {
+          console.error('創建用戶時發生錯誤:', insertError);
           throw insertError;
         }
 
         userData = newUser;
+        console.log('新用戶創建成功:', userData);
       }
 
       // 儲存到 localStorage
@@ -99,7 +110,8 @@ export const useUser = () => {
       return userData;
     } catch (err) {
       console.error('Error creating/updating user:', err);
-      setError('創建用戶失敗');
+      const errorMessage = err instanceof Error ? err.message : '創建用戶失敗';
+      setError(`創建用戶失敗: ${errorMessage}`);
       return null;
     } finally {
       setLoading(false);
