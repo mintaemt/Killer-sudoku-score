@@ -3,9 +3,14 @@ import { KillerSudokuGrid } from "@/components/KillerSudokuGrid";
 import { NumberPad } from "@/components/NumberPad";
 import { GameHeader } from "@/components/GameHeader";
 import { DifficultySelector } from "@/components/DifficultySelector";
+import { UserNameInput } from "@/components/UserNameInput";
+import { GameCompleteModal } from "@/components/GameCompleteModal";
+import { Leaderboard } from "@/components/Leaderboard";
 import { generateKillerSudoku } from "@/lib/sudoku-generator";
-
-export type Difficulty = "easy" | "medium" | "hard" | "expert";
+import { useUser } from "@/hooks/useUser";
+import { useGameRecord } from "@/hooks/useGameRecord";
+import { Difficulty, GameCompletionResult } from "@/lib/types";
+import { calculateScore } from "@/lib/scoreCalculator";
 
 const Index = () => {
   const [selectedCell, setSelectedCell] = useState<{ row: number; col: number } | null>(null);
@@ -15,6 +20,62 @@ const Index = () => {
   const [time, setTime] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [currentTheme, setCurrentTheme] = useState("blue");
+  
+  // 新增狀態
+  const [showUserNameInput, setShowUserNameInput] = useState(false);
+  const [showGameCompleteModal, setShowGameCompleteModal] = useState(false);
+  const [showLeaderboard, setShowLeaderboard] = useState(false);
+  const [gameCompletionResult, setGameCompletionResult] = useState<GameCompletionResult | null>(null);
+  
+  // Hooks
+  const { user, loading: userLoading, createOrUpdateUser, isLoggedIn } = useUser();
+  const { saveGameRecord } = useGameRecord();
+
+  // 檢查用戶是否已登入
+  useEffect(() => {
+    if (!userLoading && !isLoggedIn) {
+      setShowUserNameInput(true);
+    }
+  }, [userLoading, isLoggedIn]);
+
+  // 遊戲完成檢查
+  useEffect(() => {
+    if (isGameComplete()) {
+      handleGameComplete();
+    }
+  }, [gameData]);
+
+  // 檢查遊戲是否完成
+  const isGameComplete = (): boolean => {
+    return gameData.grid.every(row => 
+      row.every(cell => cell.value === cell.solution)
+    );
+  };
+
+  // 處理遊戲完成
+  const handleGameComplete = async () => {
+    if (!user) return;
+
+    setIsPaused(true);
+    
+    try {
+      const result = await saveGameRecord(user.id, difficulty, time, mistakes);
+      if (result) {
+        setGameCompletionResult(result);
+        setShowGameCompleteModal(true);
+      }
+    } catch (error) {
+      console.error('Error handling game completion:', error);
+    }
+  };
+
+  // 處理用戶名稱提交
+  const handleUserNameSubmit = async (name: string) => {
+    const userData = await createOrUpdateUser(name);
+    if (userData) {
+      setShowUserNameInput(false);
+    }
+  };
 
   useEffect(() => {
     try {
@@ -78,6 +139,8 @@ const Index = () => {
         setSelectedCell(null);
         setTime(0);
         setIsPaused(false);
+        setShowGameCompleteModal(false);
+        setGameCompletionResult(null);
       }, 0);
     } catch (error) {
       console.error('Error generating new game:', error);
@@ -86,6 +149,8 @@ const Index = () => {
       setSelectedCell(null);
       setTime(0);
       setIsPaused(false);
+      setShowGameCompleteModal(false);
+      setGameCompletionResult(null);
     }
   };
 
@@ -96,6 +161,16 @@ const Index = () => {
   const handleThemeChange = (theme: string) => {
     setCurrentTheme(theme);
     document.documentElement.setAttribute('data-theme', theme);
+  };
+
+  // 處理排行榜顯示
+  const handleShowLeaderboard = () => {
+    setShowLeaderboard(true);
+    setShowGameCompleteModal(false);
+  };
+
+  const handleCloseLeaderboard = () => {
+    setShowLeaderboard(false);
   };
 
   return (
@@ -195,6 +270,42 @@ const Index = () => {
           </div>
         </div>
       </div>
+
+      {/* 用戶名稱輸入模態框 */}
+      {showUserNameInput && (
+        <UserNameInput
+          onSubmit={handleUserNameSubmit}
+          loading={userLoading}
+        />
+      )}
+
+      {/* 遊戲完成模態框 */}
+      {showGameCompleteModal && gameCompletionResult && (
+        <GameCompleteModal
+          isOpen={showGameCompleteModal}
+          onClose={() => setShowGameCompleteModal(false)}
+          onNewGame={handleNewGame}
+          onShowLeaderboard={handleShowLeaderboard}
+          score={gameCompletionResult.score}
+          completionTime={time}
+          mistakes={mistakes}
+          difficulty={difficulty}
+          rank={gameCompletionResult.rank}
+          isNewRecord={gameCompletionResult.isNewRecord}
+        />
+      )}
+
+      {/* 排行榜模態框 */}
+      {showLeaderboard && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
+          <div className="w-full max-w-6xl max-h-[90vh] overflow-auto">
+            <Leaderboard
+              currentUserId={user?.name}
+              onClose={handleCloseLeaderboard}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,0 +1,115 @@
+import { useState, useEffect } from 'react';
+import { supabase } from '@/lib/supabase';
+import { User } from '@/lib/types';
+
+const USER_STORAGE_KEY = 'killer-sudoku-user';
+
+export const useUser = () => {
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // 從 localStorage 載入用戶資料
+  useEffect(() => {
+    const loadUserFromStorage = () => {
+      try {
+        const storedUser = localStorage.getItem(USER_STORAGE_KEY);
+        if (storedUser) {
+          const userData = JSON.parse(storedUser);
+          setUser(userData);
+        }
+      } catch (err) {
+        console.error('Error loading user from storage:', err);
+        setError('載入用戶資料失敗');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadUserFromStorage();
+  }, []);
+
+  // 創建或更新用戶
+  const createOrUpdateUser = async (name: string): Promise<User | null> => {
+    try {
+      setLoading(true);
+      setError(null);
+
+      // 檢查是否已存在相同名稱的用戶
+      const { data: existingUsers, error: searchError } = await supabase
+        .from('users')
+        .select('*')
+        .eq('name', name)
+        .limit(1);
+
+      if (searchError) {
+        throw searchError;
+      }
+
+      let userData: User;
+
+      if (existingUsers && existingUsers.length > 0) {
+        // 更新現有用戶的最後登入時間
+        const { data: updatedUser, error: updateError } = await supabase
+          .from('users')
+          .update({ last_login: new Date().toISOString() })
+          .eq('id', existingUsers[0].id)
+          .select()
+          .single();
+
+        if (updateError) {
+          throw updateError;
+        }
+
+        userData = updatedUser;
+      } else {
+        // 創建新用戶
+        const { data: newUser, error: insertError } = await supabase
+          .from('users')
+          .insert({
+            name,
+            created_at: new Date().toISOString(),
+            last_login: new Date().toISOString()
+          })
+          .select()
+          .single();
+
+        if (insertError) {
+          throw insertError;
+        }
+
+        userData = newUser;
+      }
+
+      // 儲存到 localStorage
+      localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(userData));
+      setUser(userData);
+
+      return userData;
+    } catch (err) {
+      console.error('Error creating/updating user:', err);
+      setError('創建用戶失敗');
+      return null;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // 清除用戶資料
+  const clearUser = () => {
+    localStorage.removeItem(USER_STORAGE_KEY);
+    setUser(null);
+  };
+
+  // 檢查用戶是否已登入
+  const isLoggedIn = !!user;
+
+  return {
+    user,
+    loading,
+    error,
+    createOrUpdateUser,
+    clearUser,
+    isLoggedIn
+  };
+};
