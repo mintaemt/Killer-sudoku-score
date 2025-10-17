@@ -39,7 +39,7 @@ const Index = () => {
     } else if (!userLoading && isLoggedIn) {
       setShowUserNameInput(false);
     }
-  }, [userLoading, isLoggedIn]);
+  }, [userLoading, isLoggedIn, user, isVisitorMode]);
 
   // 遊戲完成檢查
   useEffect(() => {
@@ -228,6 +228,7 @@ const Index = () => {
               onNumberSelect={handleNumberInput}
               onClear={handleClear}
               disabled={!selectedCell}
+              currentTheme={currentTheme}
             />
           </div>
         </div>
@@ -279,6 +280,7 @@ const Index = () => {
                   onClear={handleClear}
                   disabled={!selectedCell}
                   showClearOnly={true}
+                  currentTheme={currentTheme}
                 />
               </div>
 
@@ -289,6 +291,7 @@ const Index = () => {
                   onClear={handleClear}
                   disabled={!selectedCell}
                   showNumbersOnly={true}
+                  currentTheme={currentTheme}
                 />
               </div>
             </div>
@@ -329,10 +332,6 @@ const Index = () => {
               currentUserId={user?.name}
               onClose={handleCloseLeaderboard}
             />
-            {/* 暫時添加調試信息 */}
-            <div className="mt-4">
-              <LeaderboardDebug />
-            </div>
           </div>
         </div>
       )}
