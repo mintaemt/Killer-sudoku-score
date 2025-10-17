@@ -35,13 +35,13 @@ export const NumberPad = ({
   if (showClearOnly) {
     const themeColors = getThemeColors(currentTheme);
     return (
-      <div className="glass rounded-2xl p-2 shadow-apple-lg">
+      <div className="glass rounded-2xl p-3 shadow-apple-lg w-full">
         <Button
           size="lg"
           onClick={onClear}
           disabled={disabled}
           className={cn(
-            "w-[calc(33.333%*3+2*0.5rem)] transition-smooth font-semibold",
+            "w-full transition-smooth font-semibold",
             "hover:scale-105 active:scale-95",
             "shadow-apple-sm hover:shadow-apple-md",
             themeColors.bg,
