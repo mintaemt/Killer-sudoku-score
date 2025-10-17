@@ -61,13 +61,23 @@ export const GameCompleteModal = ({
           <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
             <Trophy className="h-8 w-8 text-primary" />
           </div>
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
           <CardTitle className="text-2xl text-primary">恭喜完成</CardTitle>
+=======
+          <CardTitle className="text-2xl text-green-600">恭喜完成</CardTitle>
+>>>>>>> Stashed changes
+=======
+          <CardTitle className="text-2xl text-green-600">恭喜完成</CardTitle>
+>>>>>>> Stashed changes
           <CardDescription>
             您成功完成了「{difficultyLabels[difficulty]}」難度的遊戲
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           {/* 成績統計 */}
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-3">
               {/* 左上：目前排名 */}
@@ -117,8 +127,62 @@ export const GameCompleteModal = ({
                   <span className="text-sm">錯誤次數</span>
                 </div>
                 <span className="font-semibold">{mistakes}</span>
+=======
+=======
+>>>>>>> Stashed changes
+          <div className="grid grid-cols-2 gap-3">
+            {/* 左上：目前排名 */}
+            <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg border border-blue-200">
+              <div className="flex items-center space-x-2">
+                <Trophy className="h-4 w-4 text-blue-600" />
+                <span className="text-sm font-medium">目前排名</span>
+              </div>
+              <span className="text-lg font-bold text-blue-600">{typeof rank === 'number' ? `#${rank}` : '-'}</span>
+            </div>
+
+            {/* 右上：總分數（藍色外框） */}
+            <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg border border-blue-200">
+              <div className="flex items-center space-x-2">
+                <Star className="h-4 w-4 text-yellow-500" />
+                <span className="text-sm font-medium">總分數</span>
+              </div>
+              <div className="text-right">
+                <div className="text-lg font-bold text-primary">{formatScore(score)}</div>
+                {isNewRecord && (
+                  <Badge variant="secondary" className="text-[10px]">
+                    新紀錄！
+                  </Badge>
+                )}
               </div>
             </div>
+
+            {/* 左下：完成時間 */}
+            <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+              <div className="flex items-center space-x-2">
+                <Clock className="h-4 w-4 text-blue-500" />
+                <span className="text-sm">完成時間</span>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+              </div>
+              <span className="font-semibold">{formatTime(completionTime)}</span>
+            </div>
+<<<<<<< Updated upstream
+=======
+
+            {/* 右下：錯誤次數 */}
+            <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+              <div className="flex items-center space-x-2">
+                <Target className="h-4 w-4 text-red-500" />
+                <span className="text-sm">錯誤次數</span>
+              </div>
+              <span className="font-semibold">{mistakes}</span>
+            </div>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
           </div>
 
           {/* 按鈕區域 */}
