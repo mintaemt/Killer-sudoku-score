@@ -5,9 +5,9 @@ import { Difficulty, ScoreCalculationParams } from './types';
  * 
  * 計分規則：
  * 1. 基礎分數：根據難度給予不同基礎分數
- * 2. 時間獎勵：完成時間越短，獎勵越高（最多1000分）
- * 3. 錯誤懲罰：每個錯誤扣除50分
- * 4. 最終分數不能低於0
+ * 2. 時間獎勵：完成時間越短，獎勵越高
+ * 3. 錯誤懲罰：每個錯誤扣除分數，但不會讓總分為0
+ * 4. 最終分數不能低於基礎分數的20%
  */
 export const calculateScore = ({
   difficulty,
@@ -23,25 +23,36 @@ export const calculateScore = ({
   };
 
   // 時間獎勵計算（完成時間越短獎勵越高）
-  // 假設理想完成時間：easy(300s), medium(600s), hard(900s), expert(1200s)
+  // 調整理想完成時間，讓時間獎勵更合理
   const idealTimes = {
-    easy: 300,
-    medium: 600,
-    hard: 900,
-    expert: 1200
+    easy: 600,    // 10分鐘
+    medium: 900,  // 15分鐘
+    hard: 1200,   // 20分鐘
+    expert: 1800  // 30分鐘
   };
 
   const idealTime = idealTimes[difficulty];
   
-  // 時間獎勵：如果完成時間少於理想時間，給予額外獎勵
-  // 最多獎勵1000分
-  const timeBonus = Math.max(0, Math.min(1000, (idealTime - completionTime) * 2));
+  // 時間獎勵：基於完成時間與理想時間的比例
+  // 如果完成時間少於理想時間，給予獎勵
+  // 如果完成時間多於理想時間，給予較少獎勵但不為負
+  let timeBonus = 0;
+  if (completionTime <= idealTime) {
+    // 提前完成：給予額外獎勵
+    timeBonus = Math.min(500, (idealTime - completionTime) * 0.5);
+  } else {
+    // 超時完成：給予少量獎勵
+    timeBonus = Math.max(0, 100 - (completionTime - idealTime) * 0.1);
+  }
   
-  // 錯誤懲罰：每個錯誤扣除50分
-  const mistakePenalty = mistakes * 50;
+  // 錯誤懲罰：每個錯誤扣除分數，但不會過度懲罰
+  const mistakePenalty = mistakes * 20; // 從50分降低到20分
   
   // 計算最終分數
-  const finalScore = Math.max(0, baseScore[difficulty] + timeBonus - mistakePenalty);
+  const finalScore = Math.max(
+    baseScore[difficulty] * 0.2, // 最低分數為基礎分數的20%
+    baseScore[difficulty] + timeBonus - mistakePenalty
+  );
   
   return Math.round(finalScore);
 };

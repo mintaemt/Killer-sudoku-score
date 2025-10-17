@@ -4,15 +4,16 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Loader2, User } from 'lucide-react';
+import { Loader2, User, UserX } from 'lucide-react';
 
 interface UserNameInputProps {
   onSubmit: (name: string) => Promise<void>;
+  onGuestMode: () => void;
   loading?: boolean;
   error?: string | null;
 }
 
-export const UserNameInput = ({ onSubmit, loading = false, error }: UserNameInputProps) => {
+export const UserNameInput = ({ onSubmit, onGuestMode, loading = false, error }: UserNameInputProps) => {
   const [name, setName] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -31,17 +32,17 @@ export const UserNameInput = ({ onSubmit, loading = false, error }: UserNameInpu
           </div>
           <CardTitle className="text-2xl">歡迎來到 Killer Sudoku</CardTitle>
           <CardDescription>
-            請輸入您的姓名以開始遊戲並參與排行榜
+            請輸入您的名稱以開始遊戲並參與排行榜
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="name">姓名</Label>
+              <Label htmlFor="name">名稱</Label>
               <Input
                 id="name"
                 type="text"
-                placeholder="請輸入您的姓名"
+                placeholder="請輸入您的名稱"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 disabled={loading}
@@ -63,20 +64,40 @@ export const UserNameInput = ({ onSubmit, loading = false, error }: UserNameInpu
               </Alert>
             )}
 
-            <Button 
-              type="submit" 
-              className="w-full" 
-              disabled={loading || !name.trim()}
-            >
-              {loading ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  處理中...
-                </>
-              ) : (
-                '開始遊戲'
-              )}
-            </Button>
+            <div className="space-y-2">
+              <Button 
+                type="submit" 
+                className="w-full" 
+                disabled={loading || !name.trim()}
+              >
+                {loading ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    處理中...
+                  </>
+                ) : (
+                  <>
+                    <User className="mr-2 h-4 w-4" />
+                    開始遊戲
+                  </>
+                )}
+              </Button>
+              
+              <Button 
+                type="button"
+                variant="outline" 
+                className="w-full" 
+                disabled={loading}
+                onClick={onGuestMode}
+              >
+                <UserX className="mr-2 h-4 w-4" />
+                GUEST 模式
+              </Button>
+              
+              <div className="text-xs text-muted-foreground text-center">
+                GUEST 模式不計分，不參與排行榜
+              </div>
+            </div>
           </form>
         </CardContent>
       </Card>

@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { RotateCcw, Palette, User, LogOut, Trophy, Clock } from "lucide-react";
+import { RotateCcw, Palette, User, Trophy, Clock, ListOrdered } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { cn } from "@/lib/utils";
 import { useState, useRef, useEffect } from "react";
@@ -10,6 +10,7 @@ interface GameHeaderProps {
   onNewGame: () => void;
   onThemeChange: (theme: string) => void;
   currentTheme: string;
+  onShowLeaderboard: () => void;
 }
 
 const themes = [
@@ -21,12 +22,12 @@ const themes = [
   { name: "teal", label: "Teal", color: "#14b8a6" },
 ];
 
-export const GameHeader = ({ onNewGame, onThemeChange, currentTheme }: GameHeaderProps) => {
+export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeaderboard }: GameHeaderProps) => {
   const [isThemeOpen, setIsThemeOpen] = useState(false);
   const [isUserOpen, setIsUserOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const userDropdownRef = useRef<HTMLDivElement>(null);
-  const { user, clearUser, isLoggedIn } = useUser();
+  const { user, clearUser, isLoggedIn, isGuestMode } = useUser();
   const { stats, loading: statsLoading } = useUserStats(user?.id || null);
 
   // Handle click outside to close dropdowns
@@ -98,8 +99,8 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme }: GameHeade
             )}
           </div>
 
-          {/* 用戶狀態 */}
-          {user && (
+          {/* 用戶狀態 - GUEST 模式下隱藏 */}
+          {user && !isGuestMode && (
             <div className="relative" ref={userDropdownRef}>
               <Button
                 variant="outline"
@@ -112,7 +113,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme }: GameHeade
               </Button>
               
               {isUserOpen && (
-                <div className="absolute top-full right-0 mt-1 dropdown-glass rounded-md shadow-lg z-[9999] p-3 min-w-[240px] dropdown-menu">
+                <div className="absolute top-full right-0 mt-1 dropdown-glass rounded-md shadow-lg z-[9999] p-3 min-w-[200px] dropdown-menu">
                   <div className="space-y-3">
                     <div className="text-center">
                       <div className="text-sm font-medium">{user?.name}</div>
@@ -147,13 +148,6 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme }: GameHeade
                             <div className="text-right font-medium">
                               {stats.totalGames}
                             </div>
-                            <div className="flex items-center space-x-1">
-                              <Trophy className="h-3 w-3 text-purple-500" />
-                              <span>平均分數</span>
-                            </div>
-                            <div className="text-right font-medium">
-                              {Math.round(stats.averageScore).toLocaleString()}
-                            </div>
                           </div>
                         </div>
                       </div>
@@ -170,13 +164,13 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme }: GameHeade
                         variant="outline"
                         size="sm"
                         onClick={() => {
-                          clearUser();
+                          onShowLeaderboard();
                           setIsUserOpen(false);
                         }}
                         className="w-full text-xs"
                       >
-                        <LogOut className="h-3 w-3 mr-1" />
-                        切換用戶
+                        <ListOrdered className="h-3 w-3 mr-1" />
+                        查看排行榜
                       </Button>
                     </div>
                   </div>
