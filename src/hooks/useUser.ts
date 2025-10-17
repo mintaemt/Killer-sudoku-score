@@ -16,11 +16,21 @@ export const useUser = () => {
         const storedUser = localStorage.getItem(USER_STORAGE_KEY);
         if (storedUser) {
           const userData = JSON.parse(storedUser);
-          setUser(userData);
+          // 驗證用戶資料格式
+          if (userData && userData.id && userData.name) {
+            setUser(userData);
+            console.log('用戶資料已從本地儲存載入:', userData.name);
+          } else {
+            // 如果資料格式不正確，清除它
+            localStorage.removeItem(USER_STORAGE_KEY);
+            console.log('清除無效的用戶資料');
+          }
         }
       } catch (err) {
         console.error('Error loading user from storage:', err);
         setError('載入用戶資料失敗');
+        // 清除可能損壞的資料
+        localStorage.removeItem(USER_STORAGE_KEY);
       } finally {
         setLoading(false);
       }
@@ -84,6 +94,7 @@ export const useUser = () => {
       // 儲存到 localStorage
       localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(userData));
       setUser(userData);
+      console.log('用戶資料已儲存到本地:', userData.name);
 
       return userData;
     } catch (err) {
@@ -99,6 +110,7 @@ export const useUser = () => {
   const clearUser = () => {
     localStorage.removeItem(USER_STORAGE_KEY);
     setUser(null);
+    console.log('用戶資料已清除');
   };
 
   // 檢查用戶是否已登入
