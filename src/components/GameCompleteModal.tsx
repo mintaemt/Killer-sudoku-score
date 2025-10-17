@@ -61,16 +61,28 @@ export const GameCompleteModal = ({
           <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
             <Trophy className="h-8 w-8 text-primary" />
           </div>
-          <CardTitle className="text-2xl text-primary">恭喜完成！</CardTitle>
+          <CardTitle className="text-2xl text-primary">恭喜完成</CardTitle>
           <CardDescription>
-            您成功完成了 {difficultyLabels[difficulty]} 難度的遊戲
+            您成功完成了「{difficultyLabels[difficulty]}」難度的遊戲
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           {/* 成績統計 */}
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-3">
-              <div className="flex items-center justify-between p-3 bg-primary/5 rounded-lg">
+              {/* 左上：目前排名 */}
+              {rank && (
+                <div className="flex items-center justify-between p-3 bg-primary/5 rounded-lg border border-primary/20">
+                  <div className="flex items-center space-x-2">
+                    <Trophy className="h-4 w-4 text-primary" />
+                    <span className="text-sm font-medium">目前排名</span>
+                  </div>
+                  <span className="text-lg font-bold text-primary">#{rank}</span>
+                </div>
+              )}
+
+              {/* 右上：總分數 */}
+              <div className="flex items-center justify-between p-3 bg-primary/5 rounded-lg border border-primary/20">
                 <div className="flex items-center space-x-2">
                   <Star className="h-4 w-4 text-primary" />
                   <span className="text-sm font-medium">總分數</span>
@@ -86,7 +98,10 @@ export const GameCompleteModal = ({
                   )}
                 </div>
               </div>
+            </div>
 
+            <div className="grid grid-cols-2 gap-3">
+              {/* 左下：完成時間 */}
               <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
                 <div className="flex items-center space-x-2">
                   <Clock className="h-4 w-4 text-primary" />
@@ -94,9 +109,8 @@ export const GameCompleteModal = ({
                 </div>
                 <span className="font-semibold">{formatTime(completionTime)}</span>
               </div>
-            </div>
 
-            <div className="grid grid-cols-2 gap-3">
+              {/* 右下：錯誤次數 */}
               <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
                 <div className="flex items-center space-x-2">
                   <Target className="h-4 w-4 text-primary" />
@@ -104,16 +118,6 @@ export const GameCompleteModal = ({
                 </div>
                 <span className="font-semibold">{mistakes}</span>
               </div>
-
-              {rank && (
-                <div className="flex items-center justify-between p-3 bg-primary/5 rounded-lg border border-primary/20">
-                  <div className="flex items-center space-x-2">
-                    <Trophy className="h-4 w-4 text-primary" />
-                    <span className="text-sm font-medium">目前排名</span>
-                  </div>
-                  <span className="text-lg font-bold text-primary">#{rank}</span>
-                </div>
-              )}
             </div>
           </div>
 
