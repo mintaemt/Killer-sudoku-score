@@ -1,12 +1,26 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
+// 主題顏色映射
+const getThemeColors = (theme: string) => {
+  const themeColors: Record<string, { bg: string; hover: string; text: string }> = {
+    blue: { bg: "bg-blue-500", hover: "hover:bg-blue-600", text: "text-white" },
+    orange: { bg: "bg-orange-500", hover: "hover:bg-orange-600", text: "text-white" },
+    green: { bg: "bg-green-500", hover: "hover:bg-green-600", text: "text-white" },
+    purple: { bg: "bg-purple-500", hover: "hover:bg-purple-600", text: "text-white" },
+    pink: { bg: "bg-pink-500", hover: "hover:bg-pink-600", text: "text-white" },
+    teal: { bg: "bg-teal-500", hover: "hover:bg-teal-600", text: "text-white" },
+  };
+  return themeColors[theme] || themeColors.blue;
+};
+
 interface NumberPadProps {
   onNumberSelect: (num: number) => void;
   onClear: () => void;
   disabled?: boolean;
   showClearOnly?: boolean;
   showNumbersOnly?: boolean;
+  currentTheme?: string;
 }
 
 export const NumberPad = ({ 
@@ -14,21 +28,26 @@ export const NumberPad = ({
   onClear, 
   disabled, 
   showClearOnly = false, 
-  showNumbersOnly = false 
+  showNumbersOnly = false,
+  currentTheme = "blue"
 }: NumberPadProps) => {
   // 如果只顯示 clear 按鈕
   if (showClearOnly) {
+    const themeColors = getThemeColors(currentTheme);
     return (
       <div className="glass rounded-2xl p-2 shadow-apple-lg">
         <Button
-          variant="destructive"
           size="lg"
           onClick={onClear}
           disabled={disabled}
           className={cn(
             "w-full transition-smooth font-semibold",
             "hover:scale-105 active:scale-95",
-            "shadow-apple-sm hover:shadow-apple-md"
+            "shadow-apple-sm hover:shadow-apple-md",
+            themeColors.bg,
+            themeColors.hover,
+            themeColors.text,
+            "border-0"
           )}
         >
           Clear
@@ -94,14 +113,17 @@ export const NumberPad = ({
         
         {/* Clear button below */}
         <Button
-          variant="destructive"
           size="lg"
           onClick={onClear}
           disabled={disabled}
           className={cn(
             "w-full transition-smooth font-semibold",
             "hover:scale-105 active:scale-95",
-            "shadow-apple-sm hover:shadow-apple-md"
+            "shadow-apple-sm hover:shadow-apple-md",
+            getThemeColors(currentTheme).bg,
+            getThemeColors(currentTheme).hover,
+            getThemeColors(currentTheme).text,
+            "border-0"
           )}
         >
           Clear
