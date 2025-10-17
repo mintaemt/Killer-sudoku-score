@@ -27,7 +27,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
   const [isUserOpen, setIsUserOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const userDropdownRef = useRef<HTMLDivElement>(null);
-  const { user, clearUser, isLoggedIn } = useUser();
+  const { user, clearUser, isLoggedIn, isGuestMode } = useUser();
   const { stats, loading: statsLoading } = useUserStats(user?.id || null);
 
   // Handle click outside to close dropdowns
@@ -99,8 +99,8 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
             )}
           </div>
 
-          {/* 用戶狀態 */}
-          {user && (
+          {/* 用戶狀態 - GUEST 模式下隱藏 */}
+          {user && !isGuestMode && (
             <div className="relative" ref={userDropdownRef}>
               <Button
                 variant="outline"

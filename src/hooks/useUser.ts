@@ -8,6 +8,7 @@ export const useUser = () => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isGuestMode, setIsGuestMode] = useState(false);
 
   // 從 localStorage 載入用戶資料
   useEffect(() => {
@@ -122,18 +123,29 @@ export const useUser = () => {
   const clearUser = () => {
     localStorage.removeItem(USER_STORAGE_KEY);
     setUser(null);
+    setIsGuestMode(false);
     console.log('用戶資料已清除');
   };
 
-  // 檢查用戶是否已登入
-  const isLoggedIn = !!user;
+  // 進入 GUEST 模式
+  const enterGuestMode = () => {
+    setUser(null);
+    setIsGuestMode(true);
+    localStorage.removeItem(USER_STORAGE_KEY);
+    console.log('進入 GUEST 模式');
+  };
+
+  // 檢查用戶是否已登入（包括 GUEST 模式）
+  const isLoggedIn = !!user || isGuestMode;
 
   return {
     user,
     loading,
     error,
+    isGuestMode,
     createOrUpdateUser,
     clearUser,
+    enterGuestMode,
     isLoggedIn
   };
 };

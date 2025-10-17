@@ -28,7 +28,7 @@ const Index = () => {
   const [gameCompletionResult, setGameCompletionResult] = useState<GameCompletionResult | null>(null);
   
   // Hooks
-  const { user, loading: userLoading, createOrUpdateUser, isLoggedIn } = useUser();
+  const { user, loading: userLoading, createOrUpdateUser, enterGuestMode, isGuestMode, isLoggedIn } = useUser();
   const { saveGameRecord } = useGameRecord();
 
   // 檢查用戶是否已登入
@@ -56,12 +56,24 @@ const Index = () => {
 
   // 處理遊戲完成
   const handleGameComplete = async () => {
-    if (!user) return;
+    if (!user && !isGuestMode) return;
 
     setIsPaused(true);
     
+    // GUEST 模式下不保存記錄，只顯示完成模態框
+    if (isGuestMode) {
+      const score = calculateScore({ difficulty, completionTime: time, mistakes });
+      setGameCompletionResult({ 
+        score, 
+        rank: null, 
+        isNewRecord: false 
+      });
+      setShowGameCompleteModal(true);
+      return;
+    }
+    
     try {
-      const result = await saveGameRecord(user.id, difficulty, time, mistakes);
+      const result = await saveGameRecord(user!.id, difficulty, time, mistakes);
       if (result) {
         setGameCompletionResult(result);
         setShowGameCompleteModal(true);
@@ -78,6 +90,12 @@ const Index = () => {
       setShowUserNameInput(false);
       // 用戶狀態會自動更新，不需要重新載入頁面
     }
+  };
+
+  // 處理 GUEST 模式
+  const handleGuestMode = () => {
+    enterGuestMode();
+    setShowUserNameInput(false);
   };
 
   useEffect(() => {
@@ -281,6 +299,7 @@ const Index = () => {
       {showUserNameInput && (
         <UserNameInput
           onSubmit={handleUserNameSubmit}
+          onGuestMode={handleGuestMode}
           loading={userLoading}
         />
       )}
