@@ -29,7 +29,7 @@ const Index = () => {
   const [gameCompletionResult, setGameCompletionResult] = useState<GameCompletionResult | null>(null);
   
   // Hooks
-  const { user, loading: userLoading, createOrUpdateUser, enterGuestMode, isGuestMode, isLoggedIn } = useUser();
+  const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisitorMode, isLoggedIn } = useUser();
   const { saveGameRecord } = useGameRecord();
 
   // 檢查用戶是否已登入
@@ -57,12 +57,12 @@ const Index = () => {
 
   // 處理遊戲完成
   const handleGameComplete = async () => {
-    if (!user && !isGuestMode) return;
+    if (!user && !isVisitorMode) return;
 
     setIsPaused(true);
     
-    // GUEST 模式下不保存記錄，只顯示完成模態框
-    if (isGuestMode) {
+    // 訪客模式下不保存記錄，只顯示完成模態框
+    if (isVisitorMode) {
       const score = calculateScore({ difficulty, completionTime: time, mistakes });
       setGameCompletionResult({ 
         score, 
@@ -93,9 +93,9 @@ const Index = () => {
     }
   };
 
-  // 處理 GUEST 模式
-  const handleGuestMode = () => {
-    enterGuestMode();
+  // 處理訪客模式
+  const handleVisitorMode = () => {
+    enterVisitorMode();
     setShowUserNameInput(false);
   };
 
@@ -300,7 +300,7 @@ const Index = () => {
       {showUserNameInput && (
         <UserNameInput
           onSubmit={handleUserNameSubmit}
-          onGuestMode={handleGuestMode}
+          onVisitorMode={handleVisitorMode}
           loading={userLoading}
         />
       )}
