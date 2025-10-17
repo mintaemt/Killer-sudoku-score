@@ -38,7 +38,6 @@ export const UserNameInput = ({ onSubmit, onGuestMode, loading = false, error }:
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="name">名稱</Label>
               <Input
                 id="name"
                 type="text"
