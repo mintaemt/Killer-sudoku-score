@@ -524,3 +524,25 @@ All colors MUST be HSL.
     --d2: #F472B6;  /* 更亮的粉色 */
   }
 }
+
+/* Game Over 流動顏色效果 - 粉色和橘色搭配 */
+.flowing-text {
+  background: linear-gradient(90deg, #F472B6, #FB923C, #F472B6, #FB923C);
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: flowing-color 3s ease-in-out infinite;
+}
+
+@keyframes flowing-color {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

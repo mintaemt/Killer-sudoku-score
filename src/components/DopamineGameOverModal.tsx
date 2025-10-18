@@ -87,7 +87,7 @@ export const DopamineGameOverModal = ({
           {/* 大型 GAME OVER 標題 */}
           <div className="text-center py-8">
             <div 
-              className="text-6xl md:text-8xl font-black text-red-600 retro-pixel-text"
+              className="text-6xl md:text-8xl font-black retro-pixel-text flowing-text"
             >
               GAME OVER
             </div>
