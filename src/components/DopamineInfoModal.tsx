@@ -33,7 +33,20 @@ export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge }: Dopamin
                 <div>
                   <CardTitle className="flex items-center gap-2">
                     <span>多巴胺模式</span>
-                    <Badge variant="secondary" className="gradient-flow text-white">
+                    <Badge 
+                      variant="secondary" 
+                      className="text-white relative overflow-hidden"
+                      style={{
+                        background: `
+                          radial-gradient(circle farthest-corner at 15% 25%, rgba(249, 115, 22, 0.95) 0%, rgba(249, 115, 22, 0) 50%),
+                          radial-gradient(circle farthest-side at 85% 25%, rgba(59, 130, 246, 0.75) 0%, rgba(59, 130, 246, 0) 45%),
+                          radial-gradient(circle farthest-corner at 85% 75%, rgba(168, 85, 247, 0.85) 0%, rgba(168, 85, 247, 0) 55%),
+                          radial-gradient(circle farthest-corner at 15% 75%, rgba(236, 72, 153, 0.65) 0%, rgba(236, 72, 153, 0) 50%),
+                          radial-gradient(ellipse at center, rgba(59, 130, 246, 0.4) 0%, rgba(59, 130, 246, 0) 70%),
+                          linear-gradient(135deg, rgba(249, 115, 22, 0.15) 0%, rgba(59, 130, 246, 0.15) 100%)
+                        `
+                      }}
+                    >
                       <Users className="h-3 w-3 mr-1" />
                       用戶限定
                     </Badge>
@@ -108,7 +121,17 @@ export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge }: Dopamin
             <div className="pt-4">
               <Button 
                 onClick={onStartChallenge}
-                className="w-full h-12 text-lg font-bold gradient-flow text-white shadow-lg hover:shadow-xl transition-all duration-300"
+                className="w-full h-12 text-lg font-bold text-white shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden"
+                style={{
+                  background: `
+                    radial-gradient(circle farthest-corner at 15% 25%, rgba(249, 115, 22, 0.95) 0%, rgba(249, 115, 22, 0) 50%),
+                    radial-gradient(circle farthest-side at 85% 25%, rgba(59, 130, 246, 0.75) 0%, rgba(59, 130, 246, 0) 45%),
+                    radial-gradient(circle farthest-corner at 85% 75%, rgba(168, 85, 247, 0.85) 0%, rgba(168, 85, 247, 0) 55%),
+                    radial-gradient(circle farthest-corner at 15% 75%, rgba(236, 72, 153, 0.65) 0%, rgba(236, 72, 153, 0) 50%),
+                    radial-gradient(ellipse at center, rgba(59, 130, 246, 0.4) 0%, rgba(59, 130, 246, 0) 70%),
+                    linear-gradient(135deg, rgba(249, 115, 22, 0.15) 0%, rgba(59, 130, 246, 0.15) 100%)
+                  `
+                }}
               >
                 <Trophy className="mr-2 h-5 w-5" />
                 開始挑戰
