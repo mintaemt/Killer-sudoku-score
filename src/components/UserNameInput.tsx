@@ -39,7 +39,8 @@ export const UserNameInput = ({ onSubmit, onVisitorMode, loading = false, error 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <Input
-                id="name"
+                id="user-name-input"
+                name="userName"
                 type="text"
                 placeholder="請輸入您的名稱"
                 value={name}

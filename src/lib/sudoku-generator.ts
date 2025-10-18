@@ -399,14 +399,64 @@ export function generateKillerSudoku(difficulty: Difficulty): KillerSudokuData {
 }
 
 /**
- * 生成地獄難度數獨 - 極少提示數字
+ * 生成地獄難度數獨 - 無給定數字，限制單格 cage
  */
 function generateHellDifficultySudoku(): KillerSudokuData {
   try {
     const solvedGrid = generateRandomSolvedGrid();
-    const cages = generateCages(solvedGrid);
     
-    // 地獄難度：只保留極少數的給定數字
+    // 生成 cage，但限制單格 cage 數量
+    let cages = generateCages(solvedGrid);
+    
+    // 檢查單格 cage 數量，如果超過2個則重新生成
+    let attempts = 0;
+    while (attempts < 10) {
+      const singleCageCount = cages.filter(cage => cage.cells.length === 1).length;
+      if (singleCageCount <= 2) {
+        break;
+      }
+      
+      // 重新生成 cage
+      cages = generateCages(solvedGrid);
+      attempts++;
+    }
+    
+    // 如果仍然超過2個單格 cage，手動合併一些
+    const singleCages = cages.filter(cage => cage.cells.length === 1);
+    if (singleCages.length > 2) {
+      console.log(`Hell mode: Found ${singleCages.length} single cages, merging excess ones`);
+      
+      // 移除多餘的單格 cage
+      const cagesToRemove = singleCages.slice(2);
+      cages = cages.filter(cage => !cagesToRemove.includes(cage));
+      
+      // 將移除的單格合併到相鄰的 cage 中
+      cagesToRemove.forEach(cageToRemove => {
+        const cell = cageToRemove.cells[0];
+        const { row, col } = cell;
+        
+        // 尋找相鄰的 cage
+        const neighbors = [
+          { row: row - 1, col }, { row: row + 1, col },
+          { row, col: col - 1 }, { row, col: col + 1 }
+        ].filter(pos => pos.row >= 0 && pos.row < 9 && pos.col >= 0 && pos.col < 9);
+        
+        for (const neighbor of neighbors) {
+          const adjacentCage = cages.find(cage => 
+            cage.cells.some(c => c.row === neighbor.row && c.col === neighbor.col)
+          );
+          
+          if (adjacentCage) {
+            // 合併到相鄰 cage
+            adjacentCage.cells.push(cell);
+            adjacentCage.sum += solvedGrid[row][col];
+            break;
+          }
+        }
+      });
+    }
+    
+    // 地獄難度：不提供任何給定數字
     const grid: Cell[][] = solvedGrid.map(row => 
       row.map(cell => ({
         value: null,
@@ -415,44 +465,10 @@ function generateHellDifficultySudoku(): KillerSudokuData {
       }))
     );
     
-    // 隨機選擇 8-12 個格子作為給定數字（極少提示）
-    const givenCount = Math.floor(Math.random() * 5) + 8; // 8-12個
-    const positions: { row: number; col: number }[] = [];
-    
-    // 確保每個3x3宮格至少有0-1個給定數字
-    for (let boxRow = 0; boxRow < 3; boxRow++) {
-      for (let boxCol = 0; boxCol < 3; boxCol++) {
-        const boxPositions: { row: number; col: number }[] = [];
-        for (let r = boxRow * 3; r < (boxRow + 1) * 3; r++) {
-          for (let c = boxCol * 3; c < (boxCol + 1) * 3; c++) {
-            boxPositions.push({ row: r, col: c });
-          }
-        }
-        
-        // 每個宮格隨機選擇0-1個位置
-        const selectedCount = Math.random() < 0.7 ? 0 : 1; // 70%機率沒有給定數字
-        const shuffled = boxPositions.sort(() => Math.random() - 0.5);
-        positions.push(...shuffled.slice(0, selectedCount));
-      }
-    }
-    
-    // 如果給定數字太少，隨機添加更多
-    while (positions.length < givenCount) {
-      const row = Math.floor(Math.random() * 9);
-      const col = Math.floor(Math.random() * 9);
-      if (!positions.some(p => p.row === row && p.col === col)) {
-        positions.push({ row, col });
-      }
-    }
-    
-    // 設置給定數字
-    positions.forEach(({ row, col }) => {
-      grid[row][col].value = solvedGrid[row][col];
-      grid[row][col].given = true;
-    });
-    
     const puzzleId = 'hell-' + Math.random().toString(36).substring(2);
     generatedPuzzles.add(puzzleId);
+    
+    console.log(`Hell mode generated: ${cages.length} cages, ${cages.filter(c => c.cells.length === 1).length} single cages`);
     
     return { grid, cages, puzzleId };
   } catch (error) {

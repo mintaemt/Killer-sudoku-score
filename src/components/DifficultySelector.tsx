@@ -102,7 +102,7 @@ export const DifficultySelector = ({
             variant="outline"
             size="sm"
             onClick={onDopamineMode}
-            className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md bg-gradient-to-r from-purple-500/10 to-pink-500/10 hover:from-purple-500/20 hover:to-pink-500/20 border-purple-500/30"
+            className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md bg-gradient-to-r from-purple-500/10 to-pink-500/10 hover:bg-gradient-to-r hover:from-purple-500/20 hover:to-pink-500/20 border-purple-500/30 hover:border-purple-500/50 text-purple-600 hover:text-purple-700"
             title="多巴胺模式 - 挑戰極限！"
           >
             <Zap className="h-3 w-3 md:h-4 md:w-4 text-purple-500" />
