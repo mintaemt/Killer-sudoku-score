@@ -515,24 +515,42 @@ function generateHellDifficultySudoku(): KillerSudokuData {
   }
 }
 
+// 多巴胺模式保底計數器
+let dopaminePityCounter = 0;
+const PITY_THRESHOLD = 20; // 20次保底
+
 /**
  * 生成多巴胺模式數獨
  */
 export function generateDopamineSudoku(): { data: KillerSudokuData; difficulty: DopamineDifficulty } {
-  // 隨機選擇難度，地獄模式有10%機率
-  const random = Math.random();
+  // 增加保底計數器
+  dopaminePityCounter++;
+  
+  // 檢查是否觸發保底機制
+  const isPityTriggered = dopaminePityCounter >= PITY_THRESHOLD;
+  
   let difficulty: DopamineDifficulty;
   
-  if (random < 0.1) {
+  if (isPityTriggered) {
+    // 保底觸發，必定生成地獄模式
     difficulty = 'hell';
-  } else if (random < 0.3) {
-    difficulty = 'easy';
-  } else if (random < 0.6) {
-    difficulty = 'medium';
-  } else if (random < 0.9) {
-    difficulty = 'hard';
+    dopaminePityCounter = 0; // 重置計數器
   } else {
-    difficulty = 'expert';
+    // 正常隨機生成，調整機率分佈
+    const random = Math.random();
+    
+    if (random < 0.15) {
+      difficulty = 'easy';      // 15% - 降低簡單機率
+    } else if (random < 0.35) {
+      difficulty = 'medium';    // 20% - 降低中等機率
+    } else if (random < 0.60) {
+      difficulty = 'hard';      // 25% - 降低困難機率
+    } else if (random < 0.80) {
+      difficulty = 'expert';    // 20% - 提高專家機率
+    } else {
+      difficulty = 'hell';      // 20% - 提高地獄機率（非保底）
+      dopaminePityCounter = 0; // 如果隨機抽到地獄，也重置計數器
+    }
   }
   
   let data: KillerSudokuData;
@@ -549,6 +567,15 @@ export function generateDopamineSudoku(): { data: KillerSudokuData; difficulty: 
 // 獲取已生成題目數量（用於調試）
 export function getGeneratedPuzzleCount(): number {
   return generatedPuzzles.size;
+}
+
+// 獲取多巴胺模式保底計數器狀態
+export function getDopaminePityStatus(): { counter: number; threshold: number; remaining: number } {
+  return {
+    counter: dopaminePityCounter,
+    threshold: PITY_THRESHOLD,
+    remaining: Math.max(0, PITY_THRESHOLD - dopaminePityCounter)
+  };
 }
 
 // 清除已生成題目記錄（用於測試）
