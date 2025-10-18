@@ -115,10 +115,10 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
               </TabsContent>
 
               <TabsContent value="scoring" className="mt-6">
-                <div className="space-y-6">
+                <div className="space-y-4">
                   {/* 排行榜說明 */}
-                  <div className="p-4 rounded-lg bg-card border">
-                    <div className="space-y-2 text-sm text-muted-foreground">
+                  <div className="p-3 rounded-lg bg-card border">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-muted-foreground">
                       <div>• 排行榜按難度分類，顯示各難度的最佳成績</div>
                       <div>• 排名依據：最高分數 → 最佳時間 → 遊戲次數</div>
                       <div>• 每次完成遊戲都會自動更新排行榜</div>
@@ -126,79 +126,86 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
                     </div>
                   </div>
 
-                  {/* 計分規則 */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="p-4 rounded-lg bg-gradient-to-r from-blue-50 to-green-50 dark:from-blue-950/20 dark:to-green-950/20 border">
-                      <h4 className="font-semibold mb-3 flex items-center gap-2">
+                  {/* 計分規則 - 優化為更緊湊的佈局 */}
+                  <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-3">
+                    {/* 基礎分數 */}
+                    <div className="p-3 rounded-lg bg-gradient-to-r from-blue-50 to-green-50 dark:from-blue-950/20 dark:to-green-950/20 border">
+                      <h4 className="font-semibold mb-2 flex items-center gap-2 text-sm">
                         <Trophy className="h-4 w-4 text-yellow-500" />
                         基礎分數
                       </h4>
-                      <div className="grid grid-cols-2 gap-2 text-sm">
-                        <div className="text-center p-2 rounded bg-background/50">
+                      <div className="grid grid-cols-2 gap-1 text-xs">
+                        <div className="text-center p-1.5 rounded bg-background/50">
                           <div className="font-medium">簡單</div>
                           <div className="text-muted-foreground">100分</div>
                         </div>
-                        <div className="text-center p-2 rounded bg-background/50">
+                        <div className="text-center p-1.5 rounded bg-background/50">
                           <div className="font-medium">中等</div>
                           <div className="text-muted-foreground">200分</div>
                         </div>
-                        <div className="text-center p-2 rounded bg-background/50">
+                        <div className="text-center p-1.5 rounded bg-background/50">
                           <div className="font-medium">困難</div>
                           <div className="text-muted-foreground">300分</div>
                         </div>
-                        <div className="text-center p-2 rounded bg-background/50">
+                        <div className="text-center p-1.5 rounded bg-background/50">
                           <div className="font-medium">專家</div>
                           <div className="text-muted-foreground">500分</div>
                         </div>
                       </div>
                     </div>
 
-                    <div className="p-4 rounded-lg bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-950/20 dark:to-blue-950/20 border">
-                      <h4 className="font-semibold mb-3 flex items-center gap-2">
+                    {/* 時間獎勵 */}
+                    <div className="p-3 rounded-lg bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-950/20 dark:to-blue-950/20 border">
+                      <h4 className="font-semibold mb-2 flex items-center gap-2 text-sm">
                         <Clock className="h-4 w-4 text-blue-500" />
                         時間獎勵
                       </h4>
-                      <div className="space-y-2 text-sm text-muted-foreground">
-                        <div className="flex items-center gap-2">
-                          <Badge variant="secondary" className="text-xs">提前完成</Badge>
-                          <span>每提前1秒獲得0.5分獎勵（最多500分）</span>
+                      <div className="space-y-1.5 text-xs text-muted-foreground">
+                        <div className="flex items-center gap-1.5">
+                          <Badge variant="secondary" className="text-xs px-1 py-0.5">提前</Badge>
+                          <span>每提前1秒+0.5分（最多500分）</span>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <Badge variant="secondary" className="text-xs">超時完成</Badge>
-                          <span>每超時1秒扣除0.1分獎勵（最少0分）</span>
+                        <div className="flex items-center gap-1.5">
+                          <Badge variant="secondary" className="text-xs px-1 py-0.5">超時</Badge>
+                          <span>每超時1秒-0.1分（最少0分）</span>
                         </div>
-                        <div className="text-sm text-muted-foreground mt-2">
-                          <strong>理想時間：</strong>簡單10分鐘、中等15分鐘、困難20分鐘、專家30分鐘
+                        <div className="text-xs text-muted-foreground mt-1">
+                          <strong>理想時間：</strong>簡10分、中15分、難20分、專30分
                         </div>
                       </div>
                     </div>
 
-                    <div className="p-4 rounded-lg bg-gradient-to-r from-red-50 to-orange-50 dark:from-red-950/20 dark:to-orange-950/20 border">
-                      <h4 className="font-semibold mb-3 flex items-center gap-2">
+                    {/* 錯誤懲罰 */}
+                    <div className="p-3 rounded-lg bg-gradient-to-r from-red-50 to-orange-50 dark:from-red-950/20 dark:to-orange-950/20 border">
+                      <h4 className="font-semibold mb-2 flex items-center gap-2 text-sm">
                         <Target className="h-4 w-4 text-red-500" />
                         錯誤懲罰
                       </h4>
-                      <div className="text-sm text-muted-foreground">
-                        <div className="flex items-center gap-2 mb-2">
-                          <Badge variant="destructive" className="text-xs">每個錯誤</Badge>
-                          <span>扣除20分</span>
+                      <div className="text-xs text-muted-foreground space-y-1">
+                        <div className="flex items-center gap-1.5">
+                          <Badge variant="destructive" className="text-xs px-1 py-0.5">錯誤</Badge>
+                          <span>每個錯誤扣除20分</span>
                         </div>
-                        <div className="text-sm text-muted-foreground">
-                          <strong>最低分數：</strong>基礎分數的20%（簡單20分、中等40分、困難60分、專家100分）
+                        <div className="text-xs text-muted-foreground">
+                          <strong>最低分數：</strong>基礎分數的20%
+                        </div>
+                        <div className="text-xs text-muted-foreground">
+                          （簡20分、中40分、難60分、專100分）
                         </div>
                       </div>
                     </div>
 
-                    <div className="p-4 rounded-lg bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/20 dark:to-pink-950/20 border">
-                      <h4 className="font-semibold mb-3 flex items-center gap-2">
+                    {/* 分數計算公式 */}
+                    <div className="p-3 rounded-lg bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/20 dark:to-pink-950/20 border">
+                      <h4 className="font-semibold mb-2 flex items-center gap-2 text-sm">
                         <Calculator className="h-4 w-4 text-purple-500" />
-                        分數計算公式
+                        計算公式
                       </h4>
-                      <div className="text-sm text-muted-foreground space-y-1">
-                        <div className="font-mono bg-background/50 p-2 rounded text-xs">
+                      <div className="text-xs text-muted-foreground space-y-1">
+                        <div className="font-mono bg-background/50 p-1.5 rounded text-xs">
                           最終分數 = max(基礎分數 × 0.2, 基礎分數 + 時間獎勵 - 錯誤懲罰)
                         </div>
-                        <div className="text-sm text-muted-foreground mt-2">
+                        <div className="text-xs text-muted-foreground">
                           <strong>範例：</strong>簡單模式，2分鐘完成，1次錯誤 = 100 + 240 - 20 = 320分
                         </div>
                       </div>
