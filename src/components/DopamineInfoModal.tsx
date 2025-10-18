@@ -55,8 +55,8 @@ export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge }: Dopamin
           
           <CardContent className="space-y-6">
             {/* 模式介紹 */}
-            <div className="space-y-4">
-              <div className="p-4 rounded-lg bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/20 dark:to-pink-950/20 border">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="p-3 rounded-lg bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/20 dark:to-pink-950/20 border">
                 <h3 className="font-semibold mb-2 flex items-center gap-2 text-sm">
                   <Star className="h-4 w-4 text-purple-500" />
                   模式特色
@@ -67,7 +67,7 @@ export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge }: Dopamin
                 </ul>
               </div>
 
-              <div className="p-4 rounded-lg bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-950/20 border">
+              <div className="p-3 rounded-lg bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-950/20 border">
                 <h3 className="font-semibold mb-2 flex items-center gap-2 text-sm">
                   <AlertTriangle className="h-4 w-4 text-blue-500" />
                   遊戲規則
