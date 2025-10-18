@@ -492,4 +492,35 @@ All colors MUST be HSL.
   background-repeat: repeat;
   animation: gradient-flow 60s linear infinite;
 }
+
+/* 多巴胺資訊卡hover效果 - 使用四個主題顏色 */
+@property --d1 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #F97316;
+}
+
+@property --d2 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #3B82F6;
+}
+
+.d {
+  background: linear-gradient(30deg, var(--d1), var(--d2));
+}
+
+.d:hover {
+  animation: oxxo-d .5s infinite alternate;
+}
+
+@keyframes oxxo-d {
+  0% {
+    --d1: #F97316;  /* 橘色 */
+    --d2: #3B82F6;  /* 藍色 */
+  }
+  100% {
+    --d1: #A855F7;  /* 紫色 */
+    --d2: #EC4899;  /* 粉色 */
+  }
 }
