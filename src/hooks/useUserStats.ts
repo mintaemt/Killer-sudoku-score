@@ -54,6 +54,15 @@ export const useUserStats = (userId: string | null, mode: 'normal' | 'dopamine' 
         let filteredRecords = gameRecords;
         if (gameRecords.length > 0 && gameRecords[0].hasOwnProperty('mode')) {
           filteredRecords = gameRecords.filter(record => record.mode === mode);
+        } else {
+          // 如果沒有mode欄位，根據模式決定是否顯示記錄
+          if (mode === 'dopamine') {
+            // 多巴胺模式：不顯示任何記錄（因為沒有多巴胺記錄）
+            filteredRecords = [];
+          } else {
+            // 普通模式：顯示所有記錄
+            filteredRecords = gameRecords;
+          }
         }
 
         if (filteredRecords.length === 0) {
