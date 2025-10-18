@@ -7,6 +7,7 @@ interface DopamineProgressBarProps {
   timeLeft: number;
   timeLimit: number;
   isVisible: boolean;
+  onTestWin?: () => void;
 }
 
 export const DopamineProgressBar = ({
@@ -15,7 +16,8 @@ export const DopamineProgressBar = ({
   currentScore,
   timeLeft,
   timeLimit,
-  isVisible
+  isVisible,
+  onTestWin
 }: DopamineProgressBarProps) => {
   if (!isVisible) return null;
 
@@ -39,15 +41,28 @@ export const DopamineProgressBar = ({
             <span className="font-bold text-xl">{currentScore.toLocaleString()}</span>
           </div>
           
-          {/* 右邊：COMBO數 */}
-          {comboCount > 0 ? (
-            <div className="flex items-center gap-1 bg-accent/20 text-accent border border-accent/30 px-3 py-1 rounded-lg">
-              <span>🔥</span>
-              <span className="font-bold">{comboCount}x COMBO</span>
-            </div>
-          ) : (
-            <div className="w-[120px]"></div> // 佔位空間，保持佈局平衡
-          )}
+          {/* 右邊：COMBO數和測試按鈕 */}
+          <div className="flex items-center gap-2">
+            {comboCount > 0 ? (
+              <div className="flex items-center gap-1 bg-accent/20 text-accent border border-accent/30 px-3 py-1 rounded-lg">
+                <span>🔥</span>
+                <span className="font-bold">{comboCount}x COMBO</span>
+              </div>
+            ) : (
+              <div className="w-[120px]"></div> // 佔位空間，保持佈局平衡
+            )}
+            
+            {/* 測試按鈕 */}
+            {onTestWin && (
+              <button
+                onClick={onTestWin}
+                className="bg-red-500/80 hover:bg-red-500 text-white px-3 py-1 rounded-lg text-xs font-bold transition-all duration-200 hover:scale-105 active:scale-95"
+                title="測試WIN資訊卡"
+              >
+                TEST WIN
+              </button>
+            )}
+          </div>
         </div>
       </div>
       

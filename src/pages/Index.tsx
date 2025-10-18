@@ -371,6 +371,53 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
     setIsPaused(true);
   };
 
+  // 測試WIN資訊卡（用於測試）
+  const handleTestWin = async () => {
+    const score = calculateDopamineScore({
+      difficulty: dopamineDifficulty,
+      timeLeft: time,
+      remainingCells,
+      comboCount,
+      mistakes,
+      completionTime: timeLimit - time
+    }).finalScore;
+
+    let topScore = null;
+    let isNewRecord = false;
+
+    // 獲取該難度的最高分
+    if (user && !isVisitorMode) {
+      try {
+        const bestScore = await getUserBestScore(user.id, dopamineDifficulty);
+        
+        if (bestScore && bestScore.score === score) {
+          topScore = score;
+          isNewRecord = true;
+        } else if (bestScore) {
+          topScore = bestScore.score;
+        } else {
+          topScore = score;
+          isNewRecord = true;
+        }
+      } catch (error) {
+        console.error('獲取最高分失敗:', error);
+      }
+    }
+
+    setDopamineWinData({
+      score,
+      timeLeft: time,
+      difficulty: dopamineDifficulty,
+      comboCount,
+      mistakes,
+      topScore,
+      isNewRecord
+    });
+    
+    setShowDopamineWin(true);
+    setIsPaused(true);
+  };
+
   // 處理多巴胺模式 Win
   const handleDopamineWin = async () => {
     const score = calculateDopamineScore({
@@ -454,6 +501,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
           timeLeft={time}
           timeLimit={timeLimit}
           isVisible={isDopamineMode}
+          onTestWin={handleTestWin}
         />
         
         {/* 移動裝置佈局 - 保持原有垂直佈局 */}
