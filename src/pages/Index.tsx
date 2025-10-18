@@ -5,6 +5,7 @@ import { GameHeader } from "@/components/GameHeader";
 import { DifficultySelector } from "@/components/DifficultySelector";
 import { DopamineProgressBar } from "@/components/DopamineProgressBar";
 import { DopamineGameOverModal } from "@/components/DopamineGameOverModal";
+import { AnimatedGradientBackground } from "@/components/AnimatedGradientBackground";
 import { UserNameInput } from "@/components/UserNameInput";
 import { GameCompleteModal } from "@/components/GameCompleteModal";
 import { GameRulesModal } from "@/components/GameRulesModal";
@@ -367,6 +368,9 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-2 md:p-4" data-theme={currentTheme}>
+      {/* 動態漸層背景 */}
+      <AnimatedGradientBackground isDopamineMode={isDopamineMode} />
+      
       {/* 多巴胺模式進度條 */}
       <DopamineProgressBar
         timeLeft={time}
