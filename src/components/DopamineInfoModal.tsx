@@ -87,33 +87,26 @@ export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge }: Dopamin
                 <Crown className="h-4 w-4 text-yellow-500" />
                 選擇挑戰難度
               </h3>
-              <div className="space-y-2">
+              <div className="grid grid-cols-5 gap-2">
                 {difficultyOptions.map((difficulty) => (
                   <div 
                     key={difficulty.value} 
                     className={cn(
-                      "flex items-center justify-between p-3 rounded-lg border cursor-pointer transition-all duration-200",
+                      "flex flex-col items-center justify-center p-2 rounded-lg border cursor-pointer transition-all duration-200 text-center",
                       difficulty.color,
                       selectedDifficulty === difficulty.value && "ring-2 ring-primary ring-offset-2"
                     )}
                     onClick={() => setSelectedDifficulty(difficulty.value)}
                   >
-                    <div className="flex items-center gap-3">
-                      <div className="flex items-center gap-2">
-                        <input
-                          type="radio"
-                          name="difficulty"
-                          value={difficulty.value}
-                          checked={selectedDifficulty === difficulty.value}
-                          onChange={() => setSelectedDifficulty(difficulty.value)}
-                          className="w-4 h-4 text-primary"
-                        />
-                        <div>
-                          <div className="font-bold">{difficulty.label}</div>
-                          <div className="text-xs text-muted-foreground">{difficulty.description}</div>
-                        </div>
-                      </div>
-                    </div>
+                    <input
+                      type="radio"
+                      name="difficulty"
+                      value={difficulty.value}
+                      checked={selectedDifficulty === difficulty.value}
+                      onChange={() => setSelectedDifficulty(difficulty.value)}
+                      className="w-3 h-3 text-primary mb-1"
+                    />
+                    <div className="text-xs font-bold">{difficulty.label}</div>
                   </div>
                 ))}
               </div>
