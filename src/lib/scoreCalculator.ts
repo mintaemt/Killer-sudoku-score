@@ -29,10 +29,10 @@ export const calculateScoreWithDetails = ({
 
   // 理想完成時間
   const idealTimes = {
-    easy: 600,    // 10分鐘
-    medium: 900,  // 15分鐘
-    hard: 1200,   // 20分鐘
-    expert: 1800  // 30分鐘
+    easy: 360,    // 6分鐘
+    medium: 720,  // 12分鐘
+    hard: 1080,   // 18分鐘
+    expert: 1440  // 24分鐘
   };
 
   const idealTime = idealTimes[difficulty];
@@ -116,11 +116,11 @@ export const calculateDopamineScore = ({
 }: DopamineScoreParams): ScoreCalculationDetails => {
   // 基礎分數和時間限制
   const difficultyConfig = {
-    easy: { baseScore: 200, timeLimit: 600 },      // 10分鐘
-    medium: { baseScore: 400, timeLimit: 480 },    // 8分鐘
-    hard: { baseScore: 600, timeLimit: 360 },      // 6分鐘
-    expert: { baseScore: 1000, timeLimit: 240 },   // 4分鐘
-    hell: { baseScore: 2000, timeLimit: 900 }      // 15分鐘
+    easy: { baseScore: 200, timeLimit: 360 },      // 6分鐘
+    medium: { baseScore: 400, timeLimit: 720 },    // 12分鐘
+    hard: { baseScore: 600, timeLimit: 1080 },     // 18分鐘
+    expert: { baseScore: 1000, timeLimit: 1440 },  // 24分鐘
+    hell: { baseScore: 2000, timeLimit: 1200 }      // 20分鐘
   };
 
   const config = difficultyConfig[difficulty];

@@ -222,7 +222,7 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
-    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
+    font-family: 'Dongle', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -362,5 +362,38 @@ All colors MUST be HSL.
   
   .dark .guest-mode-button:active {
     @apply bg-gray-700 text-gray-200;
+  }
+
+  /* Retro Pixel Font for Game Over */
+  .retro-pixel-text {
+    font-family: 'Courier New', 'Monaco', 'Menlo', monospace;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-shadow: 
+      2px 2px 0px #000,
+      4px 4px 0px #333,
+      6px 6px 0px #666,
+      8px 8px 0px #999;
+    animation: pixel-glow 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes pixel-glow {
+    0% {
+      text-shadow: 
+        2px 2px 0px #000,
+        4px 4px 0px #333,
+        6px 6px 0px #666,
+        8px 8px 0px #999,
+        0 0 10px currentColor;
+    }
+    100% {
+      text-shadow: 
+        2px 2px 0px #000,
+        4px 4px 0px #333,
+        6px 6px 0px #666,
+        8px 8px 0px #999,
+        0 0 20px currentColor,
+        0 0 30px currentColor;
+    }
   }
 }

@@ -170,7 +170,7 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
                           <span>每超時1秒-0.1分（最少0分）</span>
                         </div>
                         <div className="text-xs text-muted-foreground mt-1">
-                          <strong>理想時間：</strong>簡10分、中15分、難20分、專30分
+                          <strong>理想時間：</strong>簡6分、中12分、難18分、專24分
                         </div>
                       </div>
                     </div>
