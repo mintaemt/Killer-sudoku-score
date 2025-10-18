@@ -65,7 +65,7 @@ export const DifficultySelector = ({
   const currentDifficulty = difficulties.find(d => d.value === difficulty);
 
   return (
-    <div className="glass rounded-2xl px-4 md:px-6 py-4 shadow-apple-md relative z-10">
+    <div className="glass rounded-2xl px-4 md:px-8 py-4 shadow-apple-md relative z-10 w-full max-w-6xl mx-auto">
       <div className="flex items-center justify-between gap-4">
         {/* 難度選擇器 */}
         <div className="relative" ref={dropdownRef}>

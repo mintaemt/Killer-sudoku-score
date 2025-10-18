@@ -29,7 +29,7 @@ export const DopamineProgressBar = ({
       {/* 主要資訊欄 - 響應式佈局 */}
       <div className="px-2 sm:px-4 py-2 text-white">
         {/* 桌面版佈局 */}
-        <div className="hidden sm:flex items-center justify-center w-full max-w-4xl mx-auto gap-4">
+        <div className="hidden sm:flex items-center justify-center w-full max-w-6xl mx-auto gap-4">
           {/* 左邊：剩餘格數 */}
           <div className="flex items-center gap-2 bg-white/10 text-white border border-white/20 px-3 py-1 rounded-lg">
             <span className="text-sm opacity-90">剩餘:</span>

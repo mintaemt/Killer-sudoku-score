@@ -5,7 +5,7 @@ import { Language } from '@/components/LanguageToggle';
 const translations = {
   en: {
     // 遊戲相關
-    gameTitle: '數獨',
+    gameTitle: 'Sudoku',
     newGame: 'New Game',
     gameRules: 'Game Rules',
     difficulty: 'Difficulty',
@@ -21,6 +21,19 @@ const translations = {
     remaining: 'Remaining',
     score: 'Score',
     combo: 'COMBO',
+    
+    // 多巴胺資訊卡
+    dopamineInfoTitle: 'Dopamine Mode',
+    dopamineInfoSubtitle: 'Challenge Your Limits!',
+    dopamineFeatures: 'Mode Features',
+    dopamineRules: 'Game Rules',
+    basicAchievement: 'Basic Achievement',
+    moderateChallenge: 'Moderate Challenge',
+    highAchievement: 'High Achievement',
+    topChallenge: 'Top Challenge',
+    highestAchievement: 'Highest Achievement',
+    selectDifficulty: 'Select Difficulty',
+    startDopamineChallenge: 'Start Challenge',
     
     // 排行榜
     leaderboard: 'Leaderboard',
@@ -70,6 +83,19 @@ const translations = {
     score: '分數',
     combo: 'COMBO',
     
+    // 多巴胺資訊卡
+    dopamineInfoTitle: '多巴胺模式',
+    dopamineInfoSubtitle: '挑戰你的極限！',
+    dopamineFeatures: '模式特色',
+    dopamineRules: '遊戲規則',
+    basicAchievement: '基礎成就感',
+    moderateChallenge: '適度挑戰',
+    highAchievement: '高成就感',
+    topChallenge: '頂級挑戰',
+    highestAchievement: '最高成就感',
+    selectDifficulty: '選擇難度',
+    startDopamineChallenge: '開始挑戰',
+    
     // 排行榜
     leaderboard: '排行榜',
     viewLeaderboard: '查看排行榜',
@@ -118,6 +144,19 @@ const translations = {
     score: '점수',
     combo: 'COMBO',
     
+    // 도파민 정보 카드
+    dopamineInfoTitle: '도파민 모드',
+    dopamineInfoSubtitle: '한계에 도전하세요!',
+    dopamineFeatures: '모드 특징',
+    dopamineRules: '게임 규칙',
+    basicAchievement: '기본 성취감',
+    moderateChallenge: '적당한 도전',
+    highAchievement: '높은 성취감',
+    topChallenge: '최고 도전',
+    highestAchievement: '최고 성취감',
+    selectDifficulty: '난이도 선택',
+    startDopamineChallenge: '도전 시작',
+    
     // 리더보드
     leaderboard: '리더보드',
     viewLeaderboard: '리더보드 보기',
@@ -165,6 +204,19 @@ const translations = {
     remaining: '残り',
     score: 'スコア',
     combo: 'COMBO',
+    
+    // ドーパミン情報カード
+    dopamineInfoTitle: 'ドーパミンモード',
+    dopamineInfoSubtitle: '限界に挑戦しよう！',
+    dopamineFeatures: 'モード特徴',
+    dopamineRules: 'ゲームルール',
+    basicAchievement: '基本達成感',
+    moderateChallenge: '適度な挑戦',
+    highAchievement: '高い達成感',
+    topChallenge: '最高挑戦',
+    highestAchievement: '最高達成感',
+    selectDifficulty: '難易度選択',
+    startDopamineChallenge: 'チャレンジ開始',
     
     // リーダーボード
     leaderboard: 'リーダーボード',

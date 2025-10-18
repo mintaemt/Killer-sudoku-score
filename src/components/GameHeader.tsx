@@ -56,7 +56,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
   }, [isThemeOpen, isUserOpen]);
 
   return (
-    <div className="glass rounded-2xl px-3 md:px-6 py-3 md:py-4 shadow-apple-md relative z-20">
+    <div className="glass rounded-2xl px-4 md:px-8 py-3 md:py-4 shadow-apple-md relative z-20 w-full max-w-6xl mx-auto">
       <div className="flex items-center justify-between">
         {/* 左側：標題 */}
         <div className="flex items-center gap-2 md:gap-8">
