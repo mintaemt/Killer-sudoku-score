@@ -255,16 +255,38 @@ const Index = () => {
     try {
       // 使用 setTimeout 來避免阻塞 UI
       setTimeout(() => {
-        const newGameData = generateKillerSudoku(difficulty);
-        setGameData(newGameData);
-        setMistakes(0);
-        setSelectedCell(null);
+        if (isDopamineMode) {
+          // 多巴胺模式：重新生成多巴胺遊戲
+          const { data, difficulty: generatedDifficulty } = generateDopamineSudoku();
+          
+          // 根據難度設定時間限制
+          const timeLimits = {
+            easy: 360,    // 6分鐘
+            medium: 720,  // 12分鐘
+            hard: 1080,   // 18分鐘
+            expert: 1440, // 24分鐘
+            hell: 1200    // 20分鐘
+          };
+          
+          setDopamineDifficulty(generatedDifficulty);
+          setTimeLimit(timeLimits[generatedDifficulty]);
+          setGameData(data);
+          setMistakes(0);
+          setSelectedCell(null);
+          setTime(timeLimits[generatedDifficulty]);
+          setComboCount(0);
+          setLastCorrectTime(0);
+          setRemainingCells(81);
+        } else {
+          // 普通模式：重新生成普通遊戲
+          const newGameData = generateKillerSudoku(difficulty);
+          setGameData(newGameData);
+          setMistakes(0);
+          setSelectedCell(null);
+          setTime(0);
+        }
         
-        // 重置多巴胺模式狀態
-        setIsDopamineMode(false);
-        setTime(0);
         setIsDisqualified(false);
-        
         setIsPaused(false);
         setShowGameCompleteModal(false);
         setShowDopamineGameOver(false);
