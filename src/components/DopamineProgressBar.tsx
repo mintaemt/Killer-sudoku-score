@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { useLanguage } from '@/hooks/useLanguage';
 
 interface DopamineProgressBarProps {
   remainingCells: number;
@@ -19,6 +20,8 @@ export const DopamineProgressBar = ({
   isVisible,
   onTestWin
 }: DopamineProgressBarProps) => {
+  const { t } = useLanguage();
+  
   if (!isVisible) return null;
 
   const progressPercentage = ((81 - remainingCells) / 81) * 100;
@@ -32,13 +35,13 @@ export const DopamineProgressBar = ({
         <div className="hidden sm:flex items-center justify-center w-full max-w-6xl mx-auto gap-4">
           {/* 左邊：剩餘格數 */}
           <div className="flex items-center gap-2 bg-white/10 text-white border border-white/20 px-3 py-1 rounded-lg">
-            <span className="text-sm opacity-90">剩餘:</span>
+            <span className="text-sm opacity-90">{t('remaining')}:</span>
             <span className="font-bold">{remainingCells}</span>
           </div>
           
           {/* 中間：分數 */}
           <div className="flex items-center gap-2 bg-white/20 text-white border border-white/30 px-4 py-2 rounded-lg">
-            <span className="text-sm opacity-90">分數:</span>
+            <span className="text-sm opacity-90">{t('score')}:</span>
             <span className="font-bold text-xl">{currentScore.toLocaleString()}</span>
           </div>
           
@@ -47,7 +50,7 @@ export const DopamineProgressBar = ({
             {comboCount > 0 ? (
               <div className="flex items-center gap-1 bg-white/10 text-white border border-white/20 px-3 py-1 rounded-lg">
                 <span>🔥</span>
-                <span className="font-bold">{comboCount}x COMBO</span>
+                <span className="font-bold">{comboCount}x {t('combo')}</span>
               </div>
             ) : (
               <div className="w-[120px]"></div>
@@ -71,7 +74,7 @@ export const DopamineProgressBar = ({
           {/* 第一行：分數（主要） */}
           <div className="flex items-center justify-center">
             <div className="flex items-center gap-2 bg-white/20 text-white border border-white/30 px-4 py-2 rounded-lg">
-              <span className="text-sm opacity-90">分數:</span>
+              <span className="text-sm opacity-90">{t('score')}:</span>
               <span className="font-bold text-lg">{currentScore.toLocaleString()}</span>
             </div>
           </div>

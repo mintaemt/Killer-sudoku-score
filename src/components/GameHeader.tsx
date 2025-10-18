@@ -59,20 +59,20 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
     <div className="glass rounded-2xl px-4 md:px-8 py-3 md:py-4 shadow-apple-md relative z-20 w-full max-w-6xl mx-auto">
       <div className="flex items-center justify-between">
         {/* 左側：標題 */}
-        <div className="flex items-center gap-2 md:gap-8">
+        <div className="flex items-center gap-2 md:gap-8 flex-1 min-w-0">
           <div className="flex flex-col items-start">
-            <h1 className="text-lg md:text-2xl font-bold tracking-tight leading-tight">{t('gameTitle')}</h1>
+            <h1 className="text-lg md:text-2xl font-bold tracking-tight leading-tight truncate">{t('gameTitle')}</h1>
           </div>
         </div>
 
         {/* 右側：遊戲規則、主題切換、主題選擇器、用戶狀態和新遊戲按鈕 */}
-        <div className="flex items-center gap-1 md:gap-2">
+        <div className="flex items-center gap-1 md:gap-2 flex-shrink-0">
           {/* 遊戲規則按鈕 */}
           <Button
             variant="outline"
             size="sm"
             onClick={onShowRules}
-            className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md"
+            className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md flex-shrink-0"
             title={t('gameRules')}
           >
             <Info className="h-3 w-3 md:h-4 md:w-4" />
