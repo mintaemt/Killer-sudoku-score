@@ -127,7 +127,7 @@ export const DopamineGameOverModal = ({
             <div className="flex gap-3 pt-4">
               <Button
                 onClick={onRestart}
-                className="flex-1 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
+                className="flex-1 h-12 text-lg font-bold text-white shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden flowing-button"
               >
                 <RotateCcw className="h-4 w-4 mr-2" />
                 再次挑戰

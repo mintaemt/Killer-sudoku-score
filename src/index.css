@@ -364,8 +364,8 @@ All colors MUST be HSL.
 
   /* Retro Pixel Font for Game Over */
   .retro-pixel-text {
-    font-family: 'Courier New', 'Monaco', 'Menlo', monospace;
-    font-weight: 900;
+    font-family: 'Pixelify Sans', 'Courier New', 'Monaco', 'Menlo', monospace;
+    font-weight: 700;
     letter-spacing: 0.1em;
     text-shadow: 
       2px 2px 0px #000,
