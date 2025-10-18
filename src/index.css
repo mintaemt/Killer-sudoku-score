@@ -226,7 +226,6 @@ All colors MUST be HSL.
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-}
 
 @layer utilities {
   .glass {
