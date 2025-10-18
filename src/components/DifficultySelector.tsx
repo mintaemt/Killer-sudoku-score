@@ -107,12 +107,12 @@ export const DifficultySelector = ({
             className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md border-purple-500/30 hover:border-purple-500/50 text-purple-600 hover:text-purple-700 relative overflow-hidden"
             style={{
               background: `
-                radial-gradient(circle farthest-corner at top left, rgba(255, 0, 150, 0.8) 0%, rgba(255, 0, 150, 0) 50%),
-                radial-gradient(circle farthest-side at top right, rgba(0, 255, 255, 0.6) 0%, rgba(0, 255, 255, 0) 30%),
-                radial-gradient(circle farthest-corner at bottom right, rgba(255, 255, 0, 0.7) 0%, rgba(255, 255, 0, 0) 40%),
-                radial-gradient(circle farthest-corner at bottom left, rgba(255, 0, 255, 0.5) 0%, rgba(255, 0, 255, 0) 35%),
-                radial-gradient(ellipse at center, rgba(0, 150, 255, 0.3) 0%, rgba(0, 150, 255, 0) 60%),
-                linear-gradient(135deg, rgba(255, 0, 150, 0.1) 0%, rgba(0, 255, 255, 0.1) 100%)
+                radial-gradient(circle farthest-corner at top left, rgba(249, 115, 22, 0.8) 0%, rgba(249, 115, 22, 0) 50%),
+                radial-gradient(circle farthest-side at top right, rgba(59, 130, 246, 0.6) 0%, rgba(59, 130, 246, 0) 30%),
+                radial-gradient(circle farthest-corner at bottom right, rgba(168, 85, 247, 0.7) 0%, rgba(168, 85, 247, 0) 40%),
+                radial-gradient(circle farthest-corner at bottom left, rgba(236, 72, 153, 0.5) 0%, rgba(236, 72, 153, 0) 35%),
+                radial-gradient(ellipse at center, rgba(59, 130, 246, 0.3) 0%, rgba(59, 130, 246, 0) 60%),
+                linear-gradient(135deg, rgba(249, 115, 22, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%)
               `
             }}
             title="多巴胺模式 - 挑戰極限！"
