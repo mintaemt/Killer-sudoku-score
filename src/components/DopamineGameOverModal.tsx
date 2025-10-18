@@ -74,7 +74,6 @@ export const DopamineGameOverModal = ({
                 <div>
                   <CardTitle className="flex items-center gap-2">
                     <span>多巴胺模式</span>
-                    <Badge variant="destructive" className="text-xs">GAME OVER</Badge>
                   </CardTitle>
                   <CardDescription>挑戰失敗，但你的努力值得讚賞！</CardDescription>
                 </div>
@@ -84,6 +83,27 @@ export const DopamineGameOverModal = ({
               </Button>
             </div>
           </CardHeader>
+          
+          {/* 大型 GAME OVER 標題 */}
+          <div className="text-center py-8">
+            <div 
+              className="text-6xl md:text-8xl font-black text-transparent bg-clip-text animate-pulse"
+              style={{
+                background: `
+                  radial-gradient(circle farthest-corner at top left, rgba(255, 0, 0, 1) 0%, rgba(255, 0, 0, 0) 50%),
+                  radial-gradient(circle farthest-side at top right, rgba(255, 255, 0, 1) 0%, rgba(255, 255, 0, 0) 30%),
+                  radial-gradient(circle farthest-corner at bottom right, rgba(255, 0, 255, 1) 0%, rgba(255, 0, 255, 0) 40%),
+                  radial-gradient(circle farthest-corner at bottom left, rgba(0, 255, 255, 1) 0%, rgba(0, 255, 255, 0) 35%),
+                  linear-gradient(135deg, rgba(255, 0, 0, 0.8) 0%, rgba(255, 255, 0, 0.8) 50%, rgba(255, 0, 255, 0.8) 100%)
+                `
+              }}
+            >
+              GAME OVER
+            </div>
+            <div className="text-lg text-muted-foreground mt-2 font-semibold">
+              挑戰失敗！
+            </div>
+          </div>
           
           <CardContent className="space-y-6">
             {/* 本次遊戲統計 */}

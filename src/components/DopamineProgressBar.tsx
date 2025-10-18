@@ -24,7 +24,19 @@ export const DopamineProgressBar = ({
   const progressPercentage = ((81 - remainingCells) / 81) * 100;
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-purple-600 to-pink-600 shadow-lg">
+    <div 
+      className="fixed top-0 left-0 right-0 z-50 shadow-lg"
+      style={{
+        background: `
+          radial-gradient(circle farthest-corner at top left, rgba(255, 0, 150, 0.9) 0%, rgba(255, 0, 150, 0) 50%),
+          radial-gradient(circle farthest-side at top right, rgba(0, 255, 255, 0.7) 0%, rgba(0, 255, 255, 0) 30%),
+          radial-gradient(circle farthest-corner at bottom right, rgba(255, 255, 0, 0.8) 0%, rgba(255, 255, 0, 0) 40%),
+          radial-gradient(circle farthest-corner at bottom left, rgba(255, 0, 255, 0.6) 0%, rgba(255, 0, 255, 0) 35%),
+          radial-gradient(ellipse at center, rgba(0, 150, 255, 0.4) 0%, rgba(0, 150, 255, 0) 60%),
+          linear-gradient(135deg, rgba(255, 0, 150, 0.2) 0%, rgba(0, 255, 255, 0.2) 100%)
+        `
+      }}
+    >
       {/* 主要資訊欄 */}
       <div className="flex items-center justify-between px-4 py-2 text-white">
         <div className="flex items-center gap-4">
