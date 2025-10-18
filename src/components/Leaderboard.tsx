@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Loader2, Trophy, Medal, Award, Crown, RefreshCw } from 'lucide-react';
+import { Loader2, Trophy, Medal, Award, Crown, RefreshCw, X } from 'lucide-react';
 import { useLeaderboard } from '@/hooks/useLeaderboard';
 import { Difficulty, LeaderboardEntry } from '@/lib/types';
 import { formatTime, formatScore } from '@/lib/scoreCalculator';
@@ -112,7 +112,7 @@ export const Leaderboard = ({ currentUserId, onClose }: LeaderboardProps) => {
             </Button>
             {onClose && (
               <Button variant="outline" size="sm" onClick={onClose}>
-                關閉
+                <X className="h-4 w-4" />
               </Button>
             )}
           </div>

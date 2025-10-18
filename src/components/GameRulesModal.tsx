@@ -27,34 +27,23 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
                   <Info className="h-6 w-6 text-primary" />
                   <span>遊戲規則與計分說明</span>
                 </CardTitle>
-                <CardDescription>
-                  了解殺手數獨的遊戲規則、解題技巧和計分方式
-                </CardDescription>
               </div>
               <Button variant="outline" size="sm" onClick={onClose}>
                 <X className="h-4 w-4" />
-                關閉
               </Button>
             </div>
           </CardHeader>
           
           <CardContent>
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-              <TabsList className="grid w-full grid-cols-4">
+              <TabsList className="grid w-full grid-cols-3">
                 <TabsTrigger value="rules">遊戲規則</TabsTrigger>
                 <TabsTrigger value="tips">解題技巧</TabsTrigger>
-                <TabsTrigger value="scoring">計分規則</TabsTrigger>
-                <TabsTrigger value="leaderboard">排行榜</TabsTrigger>
+                <TabsTrigger value="scoring">排行榜計分規則</TabsTrigger>
               </TabsList>
 
               <TabsContent value="rules" className="mt-6">
-                <div className="space-y-4">
-                  <div className="flex items-center gap-2">
-                    <Target className="h-5 w-5 text-blue-500" />
-                    <h3 className="text-lg font-semibold">遊戲規則</h3>
-                  </div>
-                  
-                  <div className="space-y-3">
+                <div className="space-y-3">
                     <div className="flex items-start gap-3 p-3 rounded-lg bg-card border">
                       <Badge variant="outline" className="mt-0.5">1</Badge>
                       <div>
@@ -83,13 +72,7 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
               </TabsContent>
 
               <TabsContent value="tips" className="mt-6">
-                <div className="space-y-4">
-                  <div className="flex items-center gap-2">
-                    <Lightbulb className="h-5 w-5 text-yellow-500" />
-                    <h3 className="text-lg font-semibold">解題技巧</h3>
-                  </div>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="p-4 rounded-lg bg-card border">
                       <h4 className="font-medium mb-2 flex items-center gap-2">
                         <Target className="h-4 w-4 text-blue-500" />
@@ -134,12 +117,18 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
               </TabsContent>
 
               <TabsContent value="scoring" className="mt-6">
-                <div className="space-y-4">
-                  <div className="flex items-center gap-2">
-                    <Calculator className="h-5 w-5 text-green-500" />
-                    <h3 className="text-lg font-semibold">計分規則</h3>
+                <div className="space-y-6">
+                  {/* 排行榜說明 */}
+                  <div className="p-4 rounded-lg bg-card border">
+                    <div className="space-y-2 text-sm text-muted-foreground">
+                      <div>• 排行榜按難度分類，顯示各難度的最佳成績</div>
+                      <div>• 排名依據：最高分數 → 最佳時間 → 遊戲次數</div>
+                      <div>• 每次完成遊戲都會自動更新排行榜</div>
+                      <div>• 分數計算過程會完整記錄，確保公平透明</div>
+                    </div>
                   </div>
-                  
+
+                  {/* 計分規則 */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="p-4 rounded-lg bg-gradient-to-r from-blue-50 to-green-50 dark:from-blue-950/20 dark:to-green-950/20 border">
                       <h4 className="font-semibold mb-3 flex items-center gap-2">
@@ -215,24 +204,6 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
                           <strong>範例：</strong>簡單模式，2分鐘完成，1次錯誤 = 100 + 240 - 20 = 320分
                         </div>
                       </div>
-                    </div>
-                  </div>
-                </div>
-              </TabsContent>
-
-              <TabsContent value="leaderboard" className="mt-6">
-                <div className="space-y-4">
-                  <div className="flex items-center gap-2">
-                    <Award className="h-5 w-5 text-purple-500" />
-                    <h3 className="text-lg font-semibold">排行榜說明</h3>
-                  </div>
-                  
-                  <div className="p-4 rounded-lg bg-card border">
-                    <div className="space-y-2 text-sm text-muted-foreground">
-                      <div>• 排行榜按難度分類，顯示各難度的最佳成績</div>
-                      <div>• 排名依據：最高分數 → 最佳時間 → 遊戲次數</div>
-                      <div>• 每次完成遊戲都會自動更新排行榜</div>
-                      <div>• 分數計算過程會完整記錄，確保公平透明</div>
                     </div>
                   </div>
                 </div>
