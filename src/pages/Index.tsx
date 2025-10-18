@@ -5,6 +5,7 @@ import { GameHeader } from "@/components/GameHeader";
 import { DifficultySelector } from "@/components/DifficultySelector";
 import { UserNameInput } from "@/components/UserNameInput";
 import { GameCompleteModal } from "@/components/GameCompleteModal";
+import { GameRulesModal } from "@/components/GameRulesModal";
 import { Leaderboard } from "@/components/Leaderboard";
 import { LeaderboardDebug } from "@/components/LeaderboardDebug";
 import { generateKillerSudoku } from "@/lib/sudoku-generator";
@@ -26,6 +27,7 @@ const Index = () => {
   const [showUserNameInput, setShowUserNameInput] = useState(false);
   const [showGameCompleteModal, setShowGameCompleteModal] = useState(false);
   const [showLeaderboard, setShowLeaderboard] = useState(false);
+  const [showRules, setShowRules] = useState(false);
   const [gameCompletionResult, setGameCompletionResult] = useState<GameCompletionResult | null>(null);
   
   // Hooks
@@ -195,6 +197,14 @@ const Index = () => {
     setShowLeaderboard(false);
   };
 
+  const handleShowRules = () => {
+    setShowRules(true);
+  };
+
+  const handleCloseRules = () => {
+    setShowRules(false);
+  };
+
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-2 md:p-4" data-theme={currentTheme}>
       <div className="w-full max-w-6xl mx-auto animate-fade-in">
@@ -205,6 +215,7 @@ const Index = () => {
             onThemeChange={handleThemeChange}
             currentTheme={currentTheme}
             onShowLeaderboard={handleShowLeaderboard}
+            onShowRules={handleShowRules}
           />
           
           <DifficultySelector 
@@ -257,6 +268,7 @@ const Index = () => {
                   onThemeChange={handleThemeChange}
                   currentTheme={currentTheme}
                   onShowLeaderboard={handleShowLeaderboard}
+                  onShowRules={handleShowRules}
                 />
               </div>
 
@@ -335,6 +347,12 @@ const Index = () => {
           </div>
         </div>
       )}
+
+      {/* 遊戲規則模態框 */}
+      <GameRulesModal 
+        isOpen={showRules} 
+        onClose={handleCloseRules} 
+      />
     </div>
   );
 };

@@ -5,13 +5,13 @@ import { cn } from "@/lib/utils";
 import { useState, useRef, useEffect } from "react";
 import { useUser } from "@/hooks/useUser";
 import { useUserStats } from "@/hooks/useUserStats";
-import { GameRulesModal } from "@/components/GameRulesModal";
 
 interface GameHeaderProps {
   onNewGame: () => void;
   onThemeChange: (theme: string) => void;
   currentTheme: string;
   onShowLeaderboard: () => void;
+  onShowRules: () => void;
 }
 
 const themes = [
@@ -23,10 +23,9 @@ const themes = [
   { name: "teal", label: "Teal", color: "#14b8a6" },
 ];
 
-export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeaderboard }: GameHeaderProps) => {
+export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeaderboard, onShowRules }: GameHeaderProps) => {
   const [isThemeOpen, setIsThemeOpen] = useState(false);
   const [isUserOpen, setIsUserOpen] = useState(false);
-  const [isRulesOpen, setIsRulesOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const userDropdownRef = useRef<HTMLDivElement>(null);
   const { user, clearUser, isLoggedIn, isVisitorMode } = useUser();
@@ -69,7 +68,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
           <Button
             variant="outline"
             size="sm"
-            onClick={() => setIsRulesOpen(true)}
+            onClick={onShowRules}
             className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md"
             title="遊戲規則"
           >
@@ -204,12 +203,6 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
           </Button>
         </div>
       </div>
-      
-      {/* 遊戲規則模態框 */}
-      <GameRulesModal 
-        isOpen={isRulesOpen} 
-        onClose={() => setIsRulesOpen(false)} 
-      />
     </div>
   );
 };
