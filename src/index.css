@@ -367,33 +367,9 @@ All colors MUST be HSL.
     font-family: 'Pixelify Sans', 'Courier New', 'Monaco', 'Menlo', monospace;
     font-weight: 700;
     letter-spacing: 0.1em;
-    text-shadow: 
-      2px 2px 0px #000,
-      4px 4px 0px #333,
-      6px 6px 0px #666,
-      8px 8px 0px #999;
-    animation: pixel-glow 2s ease-in-out infinite alternate;
+    /* 移除文字陰影，讓flowing-text效果正常顯示 */
   }
 
-  @keyframes pixel-glow {
-    0% {
-      text-shadow: 
-        2px 2px 0px #000,
-        4px 4px 0px #333,
-        6px 6px 0px #666,
-        8px 8px 0px #999,
-        0 0 10px currentColor;
-    }
-    100% {
-      text-shadow: 
-        2px 2px 0px #000,
-        4px 4px 0px #333,
-        6px 6px 0px #666,
-        8px 8px 0px #999,
-        0 0 20px currentColor,
-        0 0 30px currentColor;
-    }
-  }
 }
 
 /* Glassmorphism 效果 */
