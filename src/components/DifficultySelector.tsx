@@ -107,17 +107,18 @@ export const DifficultySelector = ({
             className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md border-purple-500/30 hover:border-purple-500/50 text-purple-600 hover:text-purple-700 relative overflow-hidden"
             style={{
               background: `
-                radial-gradient(circle farthest-corner at 15% 25%, rgba(249, 115, 22, 0.9) 0%, rgba(249, 115, 22, 0) 40%),
-                radial-gradient(circle farthest-side at 85% 25%, rgba(59, 130, 246, 0.7) 0%, rgba(59, 130, 246, 0) 35%),
-                radial-gradient(circle farthest-corner at 85% 75%, rgba(168, 85, 247, 0.8) 0%, rgba(168, 85, 247, 0) 45%),
-                radial-gradient(circle farthest-corner at 15% 75%, rgba(236, 72, 153, 0.6) 0%, rgba(236, 72, 153, 0) 40%),
-                radial-gradient(ellipse at center, rgba(59, 130, 246, 0.3) 0%, rgba(59, 130, 246, 0) 60%),
-                linear-gradient(135deg, rgba(249, 115, 22, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%)
-              `
+                radial-gradient(circle farthest-corner at 15% 25%, rgba(249, 115, 22, 0.95) 0%, rgba(249, 115, 22, 0) 50%),
+                radial-gradient(circle farthest-side at 85% 25%, rgba(59, 130, 246, 0.75) 0%, rgba(59, 130, 246, 0) 45%),
+                radial-gradient(circle farthest-corner at 85% 75%, rgba(168, 85, 247, 0.85) 0%, rgba(168, 85, 247, 0) 55%),
+                radial-gradient(circle farthest-corner at 15% 75%, rgba(236, 72, 153, 0.65) 0%, rgba(236, 72, 153, 0) 50%),
+                radial-gradient(ellipse at center, rgba(59, 130, 246, 0.4) 0%, rgba(59, 130, 246, 0) 70%),
+                linear-gradient(135deg, rgba(249, 115, 22, 0.15) 0%, rgba(59, 130, 246, 0.15) 100%)
+              `,
+              filter: "blur(0.5px)"
             }}
             title="多巴胺模式 - 挑戰極限！"
           >
-            <Zap className="h-3 w-3 md:h-4 md:w-4 text-white drop-shadow-lg" />
+            <Zap className="h-3 w-3 md:h-4 md:w-4 text-white drop-shadow-lg shadow-md dark:shadow-none" style={{ filter: "drop-shadow(2px 2px 3px rgba(0,0,0,0.4))" }} />
           </Button>
         )}
 
