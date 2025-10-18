@@ -46,7 +46,7 @@ export const DatabaseDebug = () => {
         });
       }
 
-      setDebugInfo({
+      const debugData = {
         users: {
           data: users,
           error: usersError,
@@ -65,7 +65,44 @@ export const DatabaseDebug = () => {
           count: leaderboard?.length || 0
         },
         userStats: userStats
-      });
+      };
+
+      // 輸出到控制台供我查看
+      console.log('🔍 資料庫調試結果:', debugData);
+      
+      // 生成簡潔的報告
+      const report = {
+        summary: {
+          totalUsers: users?.length || 0,
+          totalGameRecords: gameRecords?.length || 0,
+          totalLeaderboardRecords: leaderboard?.length || 0,
+          hasModeColumn: gameRecords && gameRecords.length > 0 && gameRecords[0].hasOwnProperty('mode')
+        },
+        userStats: Object.keys(userStats).map(userId => {
+          const stats = userStats[userId];
+          const user = users?.find(u => u.id === userId);
+          return {
+            userName: user?.name || `用戶${userId.slice(0, 8)}`,
+            normal: {
+              count: stats.normal.length,
+              bestScore: stats.normal.length > 0 ? Math.max(...stats.normal.map(r => r.score)) : null
+            },
+            dopamine: {
+              count: stats.dopamine.length,
+              bestScore: stats.dopamine.length > 0 ? Math.max(...stats.dopamine.map(r => r.score)) : null
+            },
+            unknown: {
+              count: stats.unknown.length,
+              bestScore: stats.unknown.length > 0 ? Math.max(...stats.unknown.map(r => r.score)) : null
+            }
+          };
+        })
+      };
+      
+      console.log('📊 簡潔報告:', report);
+      console.log('📋 請將上述報告複製給我，特別是「簡潔報告」部分');
+
+      setDebugInfo(debugData);
     } catch (error) {
       console.error('Database check error:', error);
       setDebugInfo({ error: error.message });
