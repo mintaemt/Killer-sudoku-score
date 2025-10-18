@@ -57,7 +57,7 @@ export const AnimatedGradientBackground = ({ isDopamineMode = false }: AnimatedG
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setAnimationPhase(prev => (prev + 2) % 360); // 加快動畫速度
+      setAnimationPhase(prev => prev + 2); // 持續累積，不重置
     }, 50); // 減少間隔時間，提高更新頻率
 
     return () => clearInterval(interval);
@@ -82,7 +82,7 @@ export const AnimatedGradientBackground = ({ isDopamineMode = false }: AnimatedG
             radial-gradient(circle farthest-corner at ${80 + Math.sin(animationPhase * 0.025) * 18}% ${80 + Math.cos(animationPhase * 0.025) * 18}%, rgba(${green.r}, ${green.g}, ${green.b}, 0.5) 0%, rgba(${green.r}, ${green.g}, ${green.b}, 0) 40%),
             radial-gradient(circle farthest-corner at ${20 + Math.sin(animationPhase * 0.035) * 22}% ${80 + Math.cos(animationPhase * 0.035) * 22}%, rgba(${purple.r}, ${purple.g}, ${purple.b}, 0.3) 0%, rgba(${purple.r}, ${purple.g}, ${purple.b}, 0) 35%),
             radial-gradient(ellipse at ${50 + Math.sin(animationPhase * 0.015) * 10}% ${50 + Math.cos(animationPhase * 0.015) * 10}%, rgba(${pink.r}, ${pink.g}, ${pink.b}, 0.2) 0%, rgba(${pink.r}, ${pink.g}, ${pink.b}, 0) 60%),
-            linear-gradient(${animationPhase}deg, rgba(${teal.r}, ${teal.g}, ${teal.b}, 0.1) 0%, rgba(${purple.r}, ${purple.g}, ${purple.b}, 0.1) 50%, rgba(${pink.r}, ${pink.g}, ${pink.b}, 0.1) 100%)
+            linear-gradient(${animationPhase % 360}deg, rgba(${teal.r}, ${teal.g}, ${teal.b}, 0.1) 0%, rgba(${purple.r}, ${purple.g}, ${purple.b}, 0.1) 50%, rgba(${pink.r}, ${pink.g}, ${pink.b}, 0.1) 100%)
           `
         }}
       />
@@ -107,7 +107,7 @@ export const AnimatedGradientBackground = ({ isDopamineMode = false }: AnimatedG
           radial-gradient(circle farthest-corner at ${70 + Math.sin(animationPhase * 0.012) * 15}% ${70 + Math.cos(animationPhase * 0.012) * 15}%, rgba(${green.r}, ${green.g}, ${green.b}, 0.18) 0%, rgba(${green.r}, ${green.g}, ${green.b}, 0) 40%),
           radial-gradient(circle farthest-corner at ${30 + Math.sin(animationPhase * 0.016) * 18}% ${70 + Math.cos(animationPhase * 0.016) * 18}%, rgba(${purple.r}, ${purple.g}, ${purple.b}, 0.12) 0%, rgba(${purple.r}, ${purple.g}, ${purple.b}, 0) 35%),
           radial-gradient(ellipse at ${50 + Math.sin(animationPhase * 0.008) * 8}% ${50 + Math.cos(animationPhase * 0.008) * 8}%, rgba(${pink.r}, ${pink.g}, ${pink.b}, 0.08) 0%, rgba(${pink.r}, ${pink.g}, ${pink.b}, 0) 60%),
-          linear-gradient(${animationPhase}deg, rgba(${teal.r}, ${teal.g}, ${teal.b}, 0.03) 0%, rgba(${purple.r}, ${purple.g}, ${purple.b}, 0.03) 50%, rgba(${pink.r}, ${pink.g}, ${pink.b}, 0.03) 100%)
+          linear-gradient(${animationPhase % 360}deg, rgba(${teal.r}, ${teal.g}, ${teal.b}, 0.03) 0%, rgba(${purple.r}, ${purple.g}, ${purple.b}, 0.03) 50%, rgba(${pink.r}, ${pink.g}, ${pink.b}, 0.03) 100%)
         `
       }}
     />
