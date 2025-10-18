@@ -43,6 +43,13 @@ const translations = {
     returnToMain: 'Return to Main Menu',
     wellDone: 'WELL DONE',
     gameOver: 'GAME OVER',
+    
+    // 主題
+    currentTheme: 'Current theme',
+    clickToToggle: 'Click to toggle between light and dark',
+    
+    // 載入狀態
+    loadingStats: 'Loading stats...',
   },
   zh: {
     // 遊戲相關
@@ -84,6 +91,13 @@ const translations = {
     returnToMain: '返回主選單',
     wellDone: '太棒了',
     gameOver: '遊戲結束',
+    
+    // 主題
+    currentTheme: '當前主題',
+    clickToToggle: '點擊切換明暗模式',
+    
+    // 載入狀態
+    loadingStats: '載入統計中...',
   },
   ko: {
     // 遊戲相關
@@ -125,6 +139,13 @@ const translations = {
     returnToMain: '메인 메뉴로',
     wellDone: '잘했어요',
     gameOver: '게임 오버',
+    
+    // 테마
+    currentTheme: '현재 테마',
+    clickToToggle: '라이트/다크 모드 전환',
+    
+    // 로딩 상태
+    loadingStats: '통계 로딩 중...',
   },
   ja: {
     // ゲーム関連
@@ -166,6 +187,13 @@ const translations = {
     returnToMain: 'メインメニューに戻る',
     wellDone: 'よくできました',
     gameOver: 'ゲームオーバー',
+    
+    // テーマ
+    currentTheme: '現在のテーマ',
+    clickToToggle: 'ライト/ダークモード切り替え',
+    
+    // ローディング状態
+    loadingStats: '統計読み込み中...',
   },
 };
 

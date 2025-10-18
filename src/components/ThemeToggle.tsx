@@ -2,10 +2,12 @@ import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
+import { useLanguage } from "@/hooks/useLanguage";
 
 export const ThemeToggle = () => {
   const { theme, setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     setMounted(true);
@@ -40,7 +42,7 @@ export const ThemeToggle = () => {
       size="sm"
       onClick={toggleTheme}
       className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md"
-      title={`Current theme: ${resolvedTheme}. Click to toggle between light and dark`}
+      title={`${t('currentTheme')}: ${resolvedTheme}. ${t('clickToToggle')}`}
     >
       {getIcon()}
     </Button>

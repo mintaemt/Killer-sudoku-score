@@ -142,7 +142,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
                       <div className="space-y-2">
                         <div className="border-t pt-2">
                           <div className="flex items-center justify-between mb-2">
-                            <div className="text-xs font-medium text-muted-foreground">遊戲統計</div>
+                            <div className="text-xs font-medium text-muted-foreground">{t('viewStats')}</div>
                             <div className="flex gap-1">
                               <Button
                                 variant={viewMode === 'normal' ? 'default' : 'outline'}
@@ -233,7 +233,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
                     
                     {statsLoading && (
                       <div className="text-center text-xs text-muted-foreground">
-                        載入統計中...
+                        {t('loadingStats')}
                       </div>
                     )}
                     
