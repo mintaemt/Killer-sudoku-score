@@ -468,10 +468,10 @@ All colors MUST be HSL.
 /* 流動漸層動畫 - 平滑隨機暈染流動 */
 @keyframes gradient-flow {
   0% {
-    background-position: -300% -300%;
+    background-position: 300% -300%;
   }
   100% {
-    background-position: 300% 300%;
+    background-position: -300% 300%;
   }
 }
 
