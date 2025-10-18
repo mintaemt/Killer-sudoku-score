@@ -547,12 +547,12 @@ All colors MUST be HSL.
   }
 }
 
-/* 多巴胺資訊卡流動按鈕效果 - 基於CodePen效果 */
+/* 多巴胺資訊卡流動按鈕效果 - 藍、粉、紫、橘主題色 */
 .flowing-button {
   position: relative;
-  background: linear-gradient(45deg, #F472B6, #FB923C);
-  background-size: 200% 200%;
-  animation: flowing-button-bg 2s ease-in-out infinite;
+  background: linear-gradient(45deg, #3B82F6, #F472B6, #A855F7, #FB923C);
+  background-size: 300% 300%;
+  animation: flowing-button-bg 3s ease-in-out infinite;
   overflow: hidden;
 }
 
@@ -564,19 +564,25 @@ All colors MUST be HSL.
   width: 100%;
   height: 100%;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-  animation: flowing-shine 3s ease-in-out infinite;
+  animation: flowing-shine 4s ease-in-out infinite;
 }
 
 .flowing-button:hover::before {
-  animation-duration: 1s;
+  animation-duration: 1.5s;
 }
 
 @keyframes flowing-button-bg {
   0% {
     background-position: 0% 50%;
   }
+  25% {
+    background-position: 50% 0%;
+  }
   50% {
     background-position: 100% 50%;
+  }
+  75% {
+    background-position: 50% 100%;
   }
   100% {
     background-position: 0% 50%;

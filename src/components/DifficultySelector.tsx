@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Difficulty } from "@/lib/types";
+import { Difficulty, DopamineDifficulty } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { ChevronDown, Clock, AlertTriangle, Play, Pause, Zap } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
@@ -13,7 +13,7 @@ interface DifficultySelectorProps {
   time: number;
   isPaused: boolean;
   onTogglePause: () => void;
-  onDopamineMode?: () => void;
+  onDopamineMode?: (difficulty: DopamineDifficulty) => void;
 }
 
 const difficulties: { value: Difficulty; label: string }[] = [
@@ -153,9 +153,9 @@ export const DifficultySelector = ({
       <DopamineInfoModal
         isOpen={showDopamineInfo}
         onClose={() => setShowDopamineInfo(false)}
-        onStartChallenge={() => {
+        onStartChallenge={(difficulty) => {
           setShowDopamineInfo(false);
-          onDopamineMode?.();
+          onDopamineMode?.(difficulty);
         }}
       />
     </div>

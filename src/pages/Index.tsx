@@ -256,8 +256,8 @@ const Index = () => {
       // 使用 setTimeout 來避免阻塞 UI
       setTimeout(() => {
         if (isDopamineMode) {
-          // 多巴胺模式：重新生成多巴胺遊戲
-          const { data, difficulty: generatedDifficulty } = generateDopamineSudoku();
+          // 多巴胺模式：重新生成相同難度的多巴胺遊戲
+          const data = generateKillerSudoku(dopamineDifficulty);
           
           // 根據難度設定時間限制
           const timeLimits = {
@@ -268,12 +268,11 @@ const Index = () => {
             hell: 1200    // 20分鐘
           };
           
-          setDopamineDifficulty(generatedDifficulty);
-          setTimeLimit(timeLimits[generatedDifficulty]);
+          setTimeLimit(timeLimits[dopamineDifficulty]);
           setGameData(data);
           setMistakes(0);
           setSelectedCell(null);
-          setTime(timeLimits[generatedDifficulty]);
+          setTime(timeLimits[dopamineDifficulty]);
           setComboCount(0);
           setLastCorrectTime(0);
           setRemainingCells(81);
@@ -334,8 +333,8 @@ const Index = () => {
   };
 
   // 處理多巴胺模式啟動
-  const handleDopamineMode = () => {
-    const { data, difficulty: generatedDifficulty } = generateDopamineSudoku();
+  const handleDopamineMode = (difficulty: DopamineDifficulty) => {
+    const data = generateKillerSudoku(difficulty);
     
     // 根據難度設定時間限制
     const timeLimits = {
@@ -346,12 +345,12 @@ const Index = () => {
       hell: 1200    // 20分鐘
     };
     
-    setDopamineDifficulty(generatedDifficulty);
-    setTimeLimit(timeLimits[generatedDifficulty]);
+    setDopamineDifficulty(difficulty);
+    setTimeLimit(timeLimits[difficulty]);
     setGameData(data);
     setMistakes(0);
     setSelectedCell(null);
-    setTime(timeLimits[generatedDifficulty]);
+    setTime(timeLimits[difficulty]);
     setComboCount(0);
     setLastCorrectTime(0);
     setRemainingCells(81);

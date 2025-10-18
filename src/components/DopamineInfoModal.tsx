@@ -1,26 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { createPortal } from "react-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Zap, Crown, Star, AlertTriangle, Trophy, X, Users } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { DopamineDifficulty } from "@/lib/types";
 
 interface DopamineInfoModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onStartChallenge: () => void;
+  onStartChallenge: (difficulty: DopamineDifficulty) => void;
 }
 
-const difficultyInfo = [
-  { name: "Easy", probability: "54.2%", color: "bg-gray-500/20 text-gray-600 border-gray-500/30", description: "基礎成就感" },
-  { name: "Medium", probability: "40%", color: "bg-blue-500/20 text-blue-600 border-blue-500/30", description: "適度挑戰" },
-  { name: "Hard", probability: "5.5%", color: "bg-purple-500/20 text-purple-600 border-purple-500/30", description: "高成就感" },
-  { name: "Expert", probability: "0.2%", color: "bg-orange-500/20 text-orange-600 border-orange-500/30", description: "頂級挑戰" },
-  { name: "Hell", probability: "0.1% + 保底", color: "bg-red-500/20 text-red-600 border-red-500/30", description: "最高成就感" }
+const difficultyOptions: { value: DopamineDifficulty; label: string; description: string; color: string }[] = [
+  { value: "easy", label: "Easy", description: "基礎成就感", color: "bg-gray-500/20 text-gray-600 border-gray-500/30" },
+  { value: "medium", label: "Medium", description: "適度挑戰", color: "bg-blue-500/20 text-blue-600 border-blue-500/30" },
+  { value: "hard", label: "Hard", description: "高成就感", color: "bg-purple-500/20 text-purple-600 border-purple-500/30" },
+  { value: "expert", label: "Expert", description: "頂級挑戰", color: "bg-orange-500/20 text-orange-600 border-orange-500/30" },
+  { value: "hell", label: "Hell", description: "最高成就感", color: "bg-red-500/20 text-red-600 border-red-500/30" }
 ];
 
 export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge }: DopamineInfoModalProps) => {
+  const [selectedDifficulty, setSelectedDifficulty] = useState<DopamineDifficulty>("medium");
+  
   if (!isOpen) return null;
 
   return createPortal(
@@ -59,7 +62,7 @@ export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge }: Dopamin
                   模式特色
                 </h3>
                 <ul className="text-sm text-muted-foreground space-y-1">
-                  <li>• 隨機難度挑戰，每次都是全新體驗</li>
+                  <li>• 選擇難度挑戰，專注於特定難度</li>
                   <li>• 特殊計分系統，連擊與速度獎勵</li>
                 </ul>
               </div>
@@ -78,29 +81,38 @@ export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge }: Dopamin
               </div>
             </div>
 
-            {/* 難度機率表 */}
+            {/* 難度選擇 */}
             <div className="space-y-3">
               <h3 className="font-semibold flex items-center gap-2 text-sm">
                 <Crown className="h-4 w-4 text-yellow-500" />
-                難度稀有度與機率
+                選擇挑戰難度
               </h3>
               <div className="space-y-2">
-                {difficultyInfo.map((difficulty, index) => (
-                  <div key={difficulty.name} className={cn(
-                    "flex items-center justify-between p-3 rounded-lg border",
-                    difficulty.color
-                  )}>
+                {difficultyOptions.map((difficulty) => (
+                  <div 
+                    key={difficulty.value} 
+                    className={cn(
+                      "flex items-center justify-between p-3 rounded-lg border cursor-pointer transition-all duration-200",
+                      difficulty.color,
+                      selectedDifficulty === difficulty.value && "ring-2 ring-primary ring-offset-2"
+                    )}
+                    onClick={() => setSelectedDifficulty(difficulty.value)}
+                  >
                     <div className="flex items-center gap-3">
-                      <div>
-                        <div className="font-bold">{difficulty.name}</div>
-                        <div className="text-xs text-muted-foreground">{difficulty.description}</div>
+                      <div className="flex items-center gap-2">
+                        <input
+                          type="radio"
+                          name="difficulty"
+                          value={difficulty.value}
+                          checked={selectedDifficulty === difficulty.value}
+                          onChange={() => setSelectedDifficulty(difficulty.value)}
+                          className="w-4 h-4 text-primary"
+                        />
+                        <div>
+                          <div className="font-bold">{difficulty.label}</div>
+                          <div className="text-xs text-muted-foreground">{difficulty.description}</div>
+                        </div>
                       </div>
-                    </div>
-                    <div className="text-right">
-                      <div className="font-bold text-sm">{difficulty.probability}</div>
-                      {difficulty.name === "Hell" && (
-                        <div className="text-xs text-muted-foreground">每20次保底</div>
-                      )}
                     </div>
                   </div>
                 ))}
@@ -110,7 +122,7 @@ export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge }: Dopamin
             {/* 開始挑戰按鈕 */}
             <div className="pt-4">
               <Button 
-                onClick={onStartChallenge}
+                onClick={() => onStartChallenge(selectedDifficulty)}
                 className="w-full h-12 text-lg font-bold text-white shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden flowing-button"
               >
                 <Trophy className="mr-2 h-5 w-5" />
