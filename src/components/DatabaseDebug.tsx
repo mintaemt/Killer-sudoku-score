@@ -10,39 +10,61 @@ export const DatabaseDebug = () => {
   const checkDatabase = async () => {
     setLoading(true);
     try {
+      // 檢查用戶
+      const { data: users, error: usersError } = await supabase
+        .from('users')
+        .select('id, name, created_at')
+        .order('created_at', { ascending: false });
+
       // 檢查game_records表結構
       const { data: gameRecords, error: gameRecordsError } = await supabase
         .from('game_records')
         .select('*')
-        .limit(5);
+        .order('completed_at', { ascending: false });
 
       // 檢查leaderboard視圖
       const { data: leaderboard, error: leaderboardError } = await supabase
         .from('leaderboard')
         .select('*')
-        .limit(5);
+        .limit(10);
 
-      // 檢查用戶
-      const { data: users, error: usersError } = await supabase
-        .from('users')
-        .select('*')
-        .limit(5);
+      // 按用戶分組統計
+      let userStats = {};
+      if (gameRecords && gameRecords.length > 0) {
+        gameRecords.forEach(record => {
+          const userId = record.user_id;
+          if (!userStats[userId]) {
+            userStats[userId] = {
+              normal: [],
+              dopamine: [],
+              unknown: []
+            };
+          }
+          
+          const mode = record.mode || 'unknown';
+          userStats[userId][mode].push(record);
+        });
+      }
 
       setDebugInfo({
+        users: {
+          data: users,
+          error: usersError,
+          count: users?.length || 0
+        },
         gameRecords: {
           data: gameRecords,
           error: gameRecordsError,
-          hasModeColumn: gameRecords && gameRecords.length > 0 && gameRecords[0].hasOwnProperty('mode')
+          hasModeColumn: gameRecords && gameRecords.length > 0 && gameRecords[0].hasOwnProperty('mode'),
+          count: gameRecords?.length || 0
         },
         leaderboard: {
           data: leaderboard,
           error: leaderboardError,
-          hasModeColumn: leaderboard && leaderboard.length > 0 && leaderboard[0].hasOwnProperty('mode')
+          hasModeColumn: leaderboard && leaderboard.length > 0 && leaderboard[0].hasOwnProperty('mode'),
+          count: leaderboard?.length || 0
         },
-        users: {
-          data: users,
-          error: usersError
-        }
+        userStats: userStats
       });
     } catch (error) {
       console.error('Database check error:', error);
@@ -64,6 +86,64 @@ export const DatabaseDebug = () => {
         
         {debugInfo && (
           <div className="mt-4 space-y-4">
+            {/* 統計概覽 */}
+            <div className="grid grid-cols-3 gap-4 mb-4">
+              <div className="bg-blue-50 p-3 rounded">
+                <h4 className="font-bold text-blue-800">用戶總數</h4>
+                <p className="text-2xl font-bold text-blue-600">{debugInfo.users?.count || 0}</p>
+              </div>
+              <div className="bg-green-50 p-3 rounded">
+                <h4 className="font-bold text-green-800">遊戲記錄總數</h4>
+                <p className="text-2xl font-bold text-green-600">{debugInfo.gameRecords?.count || 0}</p>
+              </div>
+              <div className="bg-purple-50 p-3 rounded">
+                <h4 className="font-bold text-purple-800">排行榜記錄數</h4>
+                <p className="text-2xl font-bold text-purple-600">{debugInfo.leaderboard?.count || 0}</p>
+              </div>
+            </div>
+
+            {/* 用戶統計 */}
+            {debugInfo.userStats && Object.keys(debugInfo.userStats).length > 0 && (
+              <div>
+                <h3 className="font-bold text-lg mb-2">👥 用戶分數統計</h3>
+                {Object.keys(debugInfo.userStats).map(userId => {
+                  const stats = debugInfo.userStats[userId];
+                  const user = debugInfo.users?.data?.find(u => u.id === userId);
+                  const userName = user?.name || `用戶${userId.slice(0, 8)}`;
+                  
+                  return (
+                    <div key={userId} className="bg-gray-50 p-3 rounded mb-2">
+                      <h4 className="font-semibold">{userName}</h4>
+                      <div className="grid grid-cols-3 gap-2 text-sm">
+                        <div>
+                          <span className="text-blue-600">普通模式:</span>
+                          <br />
+                          記錄數: {stats.normal.length}
+                          <br />
+                          最高分: {stats.normal.length > 0 ? Math.max(...stats.normal.map(r => r.score)) : '無'}
+                        </div>
+                        <div>
+                          <span className="text-purple-600">多巴胺模式:</span>
+                          <br />
+                          記錄數: {stats.dopamine.length}
+                          <br />
+                          最高分: {stats.dopamine.length > 0 ? Math.max(...stats.dopamine.map(r => r.score)) : '無'}
+                        </div>
+                        <div>
+                          <span className="text-gray-600">未知模式:</span>
+                          <br />
+                          記錄數: {stats.unknown.length}
+                          <br />
+                          最高分: {stats.unknown.length > 0 ? Math.max(...stats.unknown.map(r => r.score)) : '無'}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+
+            {/* 詳細數據 */}
             <div>
               <h3 className="font-bold">game_records 表</h3>
               <p>有mode欄位: {debugInfo.gameRecords?.hasModeColumn ? '是' : '否'}</p>
