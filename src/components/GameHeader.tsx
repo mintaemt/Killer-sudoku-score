@@ -168,21 +168,21 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
                             <div className="grid grid-cols-2 gap-2 text-xs">
                               <div className="flex items-center space-x-1">
                                 <Trophy className="h-3 w-3 text-yellow-500" />
-                                <span>最佳分數</span>
+                                <span>{t('bestScore')}</span>
                               </div>
                               <div className="text-right font-medium">
                                 {stats.bestScore.toLocaleString()}
                               </div>
                               <div className="flex items-center space-x-1">
                                 <Clock className="h-3 w-3 text-blue-500" />
-                                <span>最佳時間</span>
+                                <span>{t('bestTime')}</span>
                               </div>
                               <div className="text-right font-medium">
                                 {Math.floor(stats.bestTime / 60)}:{(stats.bestTime % 60).toString().padStart(2, '0')}
                               </div>
                               <div className="flex items-center space-x-1">
                                 <User className="h-3 w-3 text-green-500" />
-                                <span>總遊戲數</span>
+                                <span>{t('totalGames')}</span>
                               </div>
                               <div className="text-right font-medium">
                                 {stats.totalGames}

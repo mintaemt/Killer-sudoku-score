@@ -5,6 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Info, X, Trophy, Clock, Target, Lightbulb, Calculator, BookOpen, Zap, Brain, Award } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useLanguage } from '@/hooks/useLanguage';
 
 interface GameRulesModalProps {
   isOpen: boolean;
@@ -13,6 +14,7 @@ interface GameRulesModalProps {
 
 export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
   const [activeTab, setActiveTab] = useState<string>("rules");
+  const { t } = useLanguage();
   
   if (!isOpen) return null;
 
@@ -25,7 +27,7 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
               <div>
                 <CardTitle className="flex items-center space-x-2">
                   <Info className="h-6 w-6 text-primary" />
-                  <span>遊戲規則與計分說明</span>
+                  <span>{t('gameRules')}與{t('scoringSystem')}說明</span>
                 </CardTitle>
               </div>
               <Button variant="outline" size="sm" onClick={onClose}>
@@ -37,9 +39,9 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
           <CardContent>
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
               <TabsList className="grid w-full grid-cols-3">
-                <TabsTrigger value="rules">遊戲規則</TabsTrigger>
+                <TabsTrigger value="rules">{t('rules')}</TabsTrigger>
                 <TabsTrigger value="tips">解題技巧</TabsTrigger>
-                <TabsTrigger value="scoring">計分規則</TabsTrigger>
+                <TabsTrigger value="scoring">{t('scoring')}規則</TabsTrigger>
               </TabsList>
 
               <TabsContent value="rules" className="mt-6">

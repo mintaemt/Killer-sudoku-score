@@ -63,6 +63,17 @@ const translations = {
     
     // 載入狀態
     loadingStats: 'Loading stats...',
+    
+    // 用戶統計
+    bestScore: 'Best Score',
+    bestTime: 'Best Time',
+    totalGames: 'Total Games',
+    
+    // 遊戲規則
+    gameRules: 'Game Rules',
+    scoringSystem: 'Scoring System',
+    rules: 'Rules',
+    scoring: 'Scoring',
   },
   zh: {
     // 遊戲相關
@@ -124,6 +135,17 @@ const translations = {
     
     // 載入狀態
     loadingStats: '載入統計中...',
+    
+    // 用戶統計
+    bestScore: '最佳分數',
+    bestTime: '最佳時間',
+    totalGames: '總遊戲數',
+    
+    // 遊戲規則
+    gameRules: '遊戲規則',
+    scoringSystem: '計分系統',
+    rules: '規則',
+    scoring: '計分',
   },
   ko: {
     // 遊戲相關
@@ -185,6 +207,17 @@ const translations = {
     
     // 로딩 상태
     loadingStats: '통계 로딩 중...',
+    
+    // 사용자 통계
+    bestScore: '최고 점수',
+    bestTime: '최고 시간',
+    totalGames: '총 게임 수',
+    
+    // 게임 규칙
+    gameRules: '게임 규칙',
+    scoringSystem: '점수 시스템',
+    rules: '규칙',
+    scoring: '점수',
   },
   ja: {
     // ゲーム関連
@@ -246,6 +279,17 @@ const translations = {
     
     // ローディング状態
     loadingStats: '統計読み込み中...',
+    
+    // ユーザー統計
+    bestScore: '最高スコア',
+    bestTime: '最高時間',
+    totalGames: '総ゲーム数',
+    
+    // ゲームルール
+    gameRules: 'ゲームルール',
+    scoringSystem: 'スコアシステム',
+    rules: 'ルール',
+    scoring: 'スコア',
   },
 };
 
