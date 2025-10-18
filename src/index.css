@@ -430,6 +430,13 @@ All colors MUST be HSL.
     z-index: -1;
   }
 
+  .dopamine-content {
+    position: relative;
+    z-index: 1;
+    background: hsl(var(--background));
+    border-radius: calc(1rem - 0.3rem);
+  }
+
   /* Glassmorphism 效果 */
   .glassmorphism {
     background: rgba(255, 255, 255, 0.1);

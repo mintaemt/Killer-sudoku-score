@@ -379,18 +379,20 @@ const Index = () => {
       "min-h-screen flex items-center justify-center p-2 md:p-4",
       isDopamineMode && "dopamine-mode-border"
     )} data-theme={currentTheme}>
-      {/* 動態漸層背景 */}
-      <AnimatedGradientBackground isDopamineMode={isDopamineMode} />
-      
-      {/* 多巴胺模式進度條 */}
-      <DopamineProgressBar
-        timeLeft={time}
-        remainingCells={remainingCells}
-        comboCount={comboCount}
-        isVisible={isDopamineMode}
-      />
-      
-      <div className="w-full max-w-6xl mx-auto animate-fade-in">
+      <div className={cn(
+        "w-full max-w-6xl mx-auto animate-fade-in",
+        isDopamineMode && "dopamine-content"
+      )}>
+        {/* 動態漸層背景 */}
+        <AnimatedGradientBackground isDopamineMode={isDopamineMode} />
+        
+        {/* 多巴胺模式進度條 */}
+        <DopamineProgressBar
+          timeLeft={time}
+          remainingCells={remainingCells}
+          comboCount={comboCount}
+          isVisible={isDopamineMode}
+        />
         {/* 移動裝置佈局 - 保持原有垂直佈局 */}
         <div className="block md:hidden space-y-4">
           <GameHeader 
@@ -568,6 +570,7 @@ const Index = () => {
         isOpen={showRules} 
         onClose={handleCloseRules} 
       />
+      </div>
     </div>
   );
 };
