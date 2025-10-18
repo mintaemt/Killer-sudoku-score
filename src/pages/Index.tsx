@@ -571,7 +571,6 @@ const Index = () => {
         isOpen={showRules} 
         onClose={handleCloseRules} 
       />
-      </div>
     </div>
   );
 };
