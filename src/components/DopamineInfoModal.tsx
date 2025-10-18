@@ -11,11 +11,11 @@ interface DopamineInfoModalProps {
 }
 
 const difficultyInfo = [
-  { level: "R", name: "Easy", probability: "54.2%", color: "bg-gray-500/20 text-gray-600 border-gray-500/30", description: "基礎成就感" },
-  { level: "SR", name: "Medium", probability: "40%", color: "bg-blue-500/20 text-blue-600 border-blue-500/30", description: "適度挑戰" },
-  { level: "SSR", name: "Hard", probability: "5.5%", color: "bg-purple-500/20 text-purple-600 border-purple-500/30", description: "高成就感" },
-  { level: "SSSR", name: "Expert", probability: "0.2%", color: "bg-orange-500/20 text-orange-600 border-orange-500/30", description: "頂級挑戰" },
-  { level: "UR", name: "Hell", probability: "0.1% + 保底", color: "bg-red-500/20 text-red-600 border-red-500/30", description: "最高成就感" }
+  { name: "Easy", probability: "54.2%", color: "bg-gray-500/20 text-gray-600 border-gray-500/30", description: "基礎成就感" },
+  { name: "Medium", probability: "40%", color: "bg-blue-500/20 text-blue-600 border-blue-500/30", description: "適度挑戰" },
+  { name: "Hard", probability: "5.5%", color: "bg-purple-500/20 text-purple-600 border-purple-500/30", description: "高成就感" },
+  { name: "Expert", probability: "0.2%", color: "bg-orange-500/20 text-orange-600 border-orange-500/30", description: "頂級挑戰" },
+  { name: "Hell", probability: "0.1% + 保底", color: "bg-red-500/20 text-red-600 border-red-500/30", description: "最高成就感" }
 ];
 
 export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge }: DopamineInfoModalProps) => {
@@ -86,14 +86,11 @@ export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge }: Dopamin
               </h3>
               <div className="space-y-2">
                 {difficultyInfo.map((difficulty, index) => (
-                  <div key={difficulty.level} className={cn(
+                  <div key={difficulty.name} className={cn(
                     "flex items-center justify-between p-3 rounded-lg border",
                     difficulty.color
                   )}>
                     <div className="flex items-center gap-3">
-                      <Badge variant="outline" className="font-bold text-xs">
-                        {difficulty.level}
-                      </Badge>
                       <div>
                         <div className="font-medium">{difficulty.name}</div>
                         <div className="text-xs text-muted-foreground">{difficulty.description}</div>
@@ -101,7 +98,7 @@ export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge }: Dopamin
                     </div>
                     <div className="text-right">
                       <div className="font-bold text-sm">{difficulty.probability}</div>
-                      {difficulty.level === "UR" && (
+                      {difficulty.name === "Hell" && (
                         <div className="text-xs text-muted-foreground">每20次保底</div>
                       )}
                     </div>
