@@ -42,7 +42,6 @@ export const NumberPad = ({
           disabled={disabled}
           className={cn(
             "w-full h-14 transition-smooth font-semibold",
-            "hover:scale-105 active:scale-95",
             "shadow-apple-sm hover:shadow-apple-md",
             themeColors.bg,
             themeColors.hover,
@@ -74,6 +73,7 @@ export const NumberPad = ({
                 "disabled:opacity-40 disabled:cursor-not-allowed",
                 "shadow-apple-sm hover:shadow-apple-md",
                 "bg-background/80 backdrop-blur-sm",
+                "text-foreground hover:text-foreground", // 確保文字在 hover 時保持前景色
                 "p-0 min-h-0" // 移除預設的 padding 和最小高度
               )}
             >
@@ -103,7 +103,8 @@ export const NumberPad = ({
                 "border hover:border-primary hover:bg-primary/10",
                 "hover:scale-105 active:scale-95",
                 "disabled:opacity-40 disabled:cursor-not-allowed",
-                "shadow-apple-sm hover:shadow-apple-md"
+                "shadow-apple-sm hover:shadow-apple-md",
+                "text-foreground hover:text-foreground" // 確保文字在 hover 時保持前景色
               )}
             >
               {num}
@@ -118,7 +119,6 @@ export const NumberPad = ({
           disabled={disabled}
           className={cn(
             "w-full h-14 transition-smooth font-semibold",
-            "hover:scale-105 active:scale-95",
             "shadow-apple-sm hover:shadow-apple-md",
             getThemeColors(currentTheme).bg,
             getThemeColors(currentTheme).hover,
