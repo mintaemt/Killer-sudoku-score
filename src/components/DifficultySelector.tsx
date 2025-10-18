@@ -113,12 +113,11 @@ export const DifficultySelector = ({
                 radial-gradient(circle farthest-corner at 15% 75%, rgba(236, 72, 153, 0.65) 0%, rgba(236, 72, 153, 0) 50%),
                 radial-gradient(ellipse at center, rgba(59, 130, 246, 0.4) 0%, rgba(59, 130, 246, 0) 70%),
                 linear-gradient(135deg, rgba(249, 115, 22, 0.15) 0%, rgba(59, 130, 246, 0.15) 100%)
-              `,
-              filter: "blur(0.5px)"
+              `
             }}
             title="多巴胺模式 - 挑戰極限！"
           >
-            <Zap className="h-3 w-3 md:h-4 md:w-4 text-white drop-shadow-lg shadow-md dark:shadow-none" style={{ filter: "drop-shadow(2px 2px 3px rgba(0,0,0,0.4))" }} />
+            <Zap className="h-3 w-3 md:h-4 md:w-4 text-white" style={{ textShadow: "2px 2px 4px rgba(0,0,0,0.5), 1px 1px 2px rgba(0,0,0,0.6)" }} />
           </Button>
         )}
 
