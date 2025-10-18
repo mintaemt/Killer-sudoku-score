@@ -12,6 +12,7 @@ import { formatTime, formatScore } from '@/lib/scoreCalculator';
 interface LeaderboardProps {
   currentUserId?: string;
   onClose?: () => void;
+  mode?: 'normal' | 'dopamine';
 }
 
 const difficultyLabels: Record<Difficulty, string> = {
@@ -69,7 +70,7 @@ const LeaderboardEntryItem = ({ entry, isCurrentUser }: { entry: LeaderboardEntr
   </div>
 );
 
-export const Leaderboard = ({ currentUserId, onClose }: LeaderboardProps) => {
+export const Leaderboard = ({ currentUserId, onClose, mode = 'normal' }: LeaderboardProps) => {
   const [activeTab, setActiveTab] = useState<string>("all");
   const selectedDifficulty = activeTab === "all" ? undefined : activeTab as Difficulty;
   const { leaderboard, loading, error, refetch } = useLeaderboard(selectedDifficulty);
@@ -82,7 +83,7 @@ export const Leaderboard = ({ currentUserId, onClose }: LeaderboardProps) => {
     return (
       <div className="flex items-center justify-center p-8">
         <Loader2 className="h-8 w-8 animate-spin" />
-        <span className="ml-2">載入排行榜中...</span>
+        <span className="ml-2">載入成就牆中...</span>
       </div>
     );
   }
@@ -102,10 +103,10 @@ export const Leaderboard = ({ currentUserId, onClose }: LeaderboardProps) => {
           <div>
             <CardTitle className="flex items-center space-x-2">
               <Trophy className="h-6 w-6" />
-              <span>排行榜</span>
+              <span>{mode === 'dopamine' ? '最高分展示' : '成就牆'}</span>
             </CardTitle>
             <CardDescription>
-              查看各難度的最佳成績
+              {mode === 'dopamine' ? '查看各難度的最高分記錄' : '查看各難度的最佳成績'}
             </CardDescription>
           </div>
           <div className="flex space-x-2">
@@ -136,7 +137,7 @@ export const Leaderboard = ({ currentUserId, onClose }: LeaderboardProps) => {
           <TabsContent value={activeTab} className="mt-6">
             {leaderboard.length === 0 ? (
               <div className="text-center py-8 text-muted-foreground">
-                暫無排行榜資料
+                暫無成就資料
               </div>
             ) : (
               <div className="space-y-2">

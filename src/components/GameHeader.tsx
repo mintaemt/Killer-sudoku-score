@@ -239,13 +239,14 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
                         variant="outline"
                         size="sm"
                         onClick={() => {
-                          onShowLeaderboard();
+                          const url = viewMode === 'normal' ? '/leaderboard' : '/leaderboard?mode=dopamine';
+                          window.open(url, '_blank');
                           setIsUserOpen(false);
                         }}
                         className="w-full text-xs"
                       >
                         <ListOrdered className="h-3 w-3 mr-1" />
-                        查看排行榜
+                        {viewMode === 'normal' ? '查看排行榜' : '查看最高分'}
                       </Button>
                     </div>
                   </div>
