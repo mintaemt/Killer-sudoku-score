@@ -9,6 +9,7 @@ interface DopamineWinModalProps {
   isOpen: boolean;
   onClose: () => void;
   onRestart: () => void;
+  onReturnToMain: () => void;
   score: number;
   timeLeft: number;
   difficulty: string;
@@ -22,6 +23,7 @@ export const DopamineWinModal = ({
   isOpen,
   onClose,
   onRestart,
+  onReturnToMain,
   score,
   timeLeft,
   difficulty,
@@ -172,7 +174,7 @@ export const DopamineWinModal = ({
                 <RotateCcw className="h-4 w-4 mr-2" />
                 再次挑戰
               </Button>
-              <Button variant="outline" onClick={onClose} className="flex-1 h-12">
+              <Button variant="outline" onClick={onReturnToMain} className="flex-1 h-12">
                 返回主選單
               </Button>
             </div>

@@ -9,6 +9,7 @@ interface DopamineGameOverModalProps {
   isOpen: boolean;
   onClose: () => void;
   onRestart: () => void;
+  onReturnToMain: () => void;
   score: number;
   timeLeft: number;
   difficulty: string;
@@ -25,6 +26,7 @@ export const DopamineGameOverModal = ({
   isOpen,
   onClose,
   onRestart,
+  onReturnToMain,
   score,
   timeLeft,
   difficulty,
@@ -99,12 +101,12 @@ export const DopamineGameOverModal = ({
           </div>
           
           <CardContent className="space-y-6">
-            {/* 多巴胺模式排行榜 */}
-            <div className="space-y-3">
-              <div className="flex items-center gap-2">
-                <Trophy className="h-5 w-5 text-yellow-500" />
-                <h3 className="text-lg font-semibold">多巴胺模式排行榜</h3>
-              </div>
+                   {/* 多巴胺模式成就牆 */}
+                   <div className="space-y-3">
+                     <div className="flex items-center gap-2">
+                       <Trophy className="h-5 w-5 text-yellow-500" />
+                       <h3 className="text-lg font-semibold">多巴胺模式成就牆</h3>
+                     </div>
               
               <div className="space-y-2">
                 <div className="flex items-center justify-between p-3 rounded-lg bg-card border">
@@ -132,7 +134,7 @@ export const DopamineGameOverModal = ({
                 <RotateCcw className="h-4 w-4 mr-2" />
                 再次挑戰
               </Button>
-              <Button variant="outline" onClick={onClose} className="flex-1 h-12">
+              <Button variant="outline" onClick={onReturnToMain} className="flex-1 h-12">
                 返回主選單
               </Button>
             </div>

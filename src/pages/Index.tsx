@@ -418,6 +418,23 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
     setIsPaused(true);
   };
 
+  // 返回主選單
+  const handleReturnToMain = () => {
+    setIsDopamineMode(false);
+    setShowDopamineWin(false);
+    setShowDopamineGameOver(false);
+    setComboCount(0);
+    setLastCorrectTime(0);
+    setRemainingCells(81);
+    setMistakes(0);
+    setTime(0);
+    setIsPaused(false);
+    setSelectedCell(null);
+    // 重置為普通模式
+    setDifficulty('easy');
+    setGameData(generateKillerSudoku('easy'));
+  };
+
   // 處理多巴胺模式 Win
   const handleDopamineWin = async () => {
     const score = calculateDopamineScore({
@@ -482,7 +499,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-2 md:p-4" data-theme={currentTheme}>
+    <div className={`min-h-screen flex items-center justify-center p-2 md:p-4 ${isDopamineMode ? 'pt-20 sm:pt-16' : ''}`} data-theme={currentTheme}>
       <div className="w-full max-w-6xl mx-auto animate-fade-in">
         {/* 動態漸層背景 */}
         <AnimatedGradientBackground isDopamineMode={isDopamineMode} />
@@ -653,6 +670,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
           isOpen={showDopamineWin}
           onClose={() => setShowDopamineWin(false)}
           onRestart={() => handleDopamineMode(dopamineDifficulty)}
+          onReturnToMain={handleReturnToMain}
           score={dopamineWinData.score}
           timeLeft={dopamineWinData.timeLeft}
           difficulty={dopamineWinData.difficulty}
@@ -669,6 +687,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
           isOpen={showDopamineGameOver}
           onClose={() => setShowDopamineGameOver(false)}
           onRestart={() => handleDopamineMode(dopamineDifficulty)}
+          onReturnToMain={handleReturnToMain}
           score={0}
           timeLeft={0}
           difficulty={dopamineGameOverData.difficulty}
