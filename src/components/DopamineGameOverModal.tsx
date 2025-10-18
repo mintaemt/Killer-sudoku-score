@@ -132,7 +132,7 @@ export const DopamineGameOverModal = ({
                 <RotateCcw className="h-4 w-4 mr-2" />
                 再次挑戰
               </Button>
-              <Button variant="outline" onClick={onClose} className="flex-1">
+              <Button variant="outline" onClick={onClose} className="flex-1 h-12">
                 返回主選單
               </Button>
             </div>

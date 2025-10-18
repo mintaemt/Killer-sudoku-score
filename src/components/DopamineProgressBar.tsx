@@ -4,6 +4,7 @@ interface DopamineProgressBarProps {
   timeLeft: number;
   remainingCells: number;
   comboCount: number;
+  currentScore: number;
   isVisible: boolean;
 }
 
@@ -11,6 +12,7 @@ export const DopamineProgressBar = ({
   timeLeft,
   remainingCells,
   comboCount,
+  currentScore,
   isVisible
 }: DopamineProgressBarProps) => {
   if (!isVisible) return null;
@@ -28,21 +30,31 @@ export const DopamineProgressBar = ({
       {/* 主要資訊欄 */}
       <div className="flex items-center justify-center px-4 py-2 text-white">
         <div className="flex items-center gap-6">
-          {comboCount > 0 && (
-            <div className="flex items-center gap-1 bg-yellow-400 text-black px-2 py-1 rounded-full text-xs font-bold">
-              <span>🔥</span>
-              <span>{comboCount}x COMBO</span>
-            </div>
-          )}
+          {/* 1. 現在分數 - 最重要 */}
+          <div className="flex items-center gap-2 bg-green-600 text-white px-3 py-1 rounded-lg">
+            <span className="text-sm opacity-90">分數:</span>
+            <span className="font-bold text-lg">{currentScore.toLocaleString()}</span>
+          </div>
           
-          <div className="flex items-center gap-2">
-            <span className="text-sm opacity-80">剩餘格子:</span>
+          {/* 2. 倒數計時器 */}
+          <div className="flex items-center gap-2 bg-red-600 text-white px-3 py-1 rounded-lg">
+            <span className="text-sm opacity-90">時間:</span>
+            <span className="font-mono font-bold text-lg">{formatTime(timeLeft)}</span>
+          </div>
+          
+          {/* 3. 剩餘格數 */}
+          <div className="flex items-center gap-2 bg-blue-600 text-white px-3 py-1 rounded-lg">
+            <span className="text-sm opacity-90">剩餘:</span>
             <span className="font-bold">{remainingCells}</span>
           </div>
           
-          <div className="text-lg font-mono font-bold">
-            {formatTime(timeLeft)}
-          </div>
+          {/* 4. COMBO數 */}
+          {comboCount > 0 && (
+            <div className="flex items-center gap-1 bg-yellow-500 text-black px-3 py-1 rounded-lg">
+              <span>🔥</span>
+              <span className="font-bold">{comboCount}x COMBO</span>
+            </div>
+          )}
         </div>
       </div>
       

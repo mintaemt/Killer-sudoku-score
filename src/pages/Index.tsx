@@ -225,8 +225,8 @@ const Index = () => {
               setComboCount(0);
             }
           } else if (isCorrect && num !== 0) {
-            // 正確答案時處理 Combo
-            if (isDopamineMode) {
+            // 正確答案時處理 Combo（只有當格子從空變為有值時才處理）
+            if (isDopamineMode && cell.value === null) {
               const currentTime = Date.now();
               if (currentTime - lastCorrectTime < 5000) { // 5秒內
                 setComboCount(prev => prev + 1);
@@ -406,6 +406,14 @@ const Index = () => {
           timeLeft={time}
           remainingCells={remainingCells}
           comboCount={comboCount}
+          currentScore={calculateDopamineScore({
+            difficulty: dopamineDifficulty,
+            timeLeft: time,
+            remainingCells,
+            comboCount,
+            mistakes,
+            completionTime: timeLimit - time
+          }).finalScore}
           isVisible={isDopamineMode}
         />
         
