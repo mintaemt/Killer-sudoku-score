@@ -301,6 +301,10 @@ const Index = () => {
     setShowRules(true);
   };
 
+  const handleCloseRules = () => {
+    setShowRules(false);
+  };
+
   // 處理多巴胺模式啟動
   const handleDopamineMode = () => {
     const { data, difficulty: generatedDifficulty } = generateDopamineSudoku();
