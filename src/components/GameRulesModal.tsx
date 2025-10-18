@@ -68,7 +68,6 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
                       </div>
                     </div>
                   </div>
-                </div>
               </TabsContent>
 
               <TabsContent value="tips" className="mt-6">
@@ -113,7 +112,6 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
                       </p>
                     </div>
                   </div>
-                </div>
               </TabsContent>
 
               <TabsContent value="scoring" className="mt-6">
