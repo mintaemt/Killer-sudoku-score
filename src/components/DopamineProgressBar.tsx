@@ -1,7 +1,6 @@
 import { cn } from "@/lib/utils";
 
 interface DopamineProgressBarProps {
-  timeLeft: number;
   remainingCells: number;
   comboCount: number;
   currentScore: number;
@@ -9,19 +8,12 @@ interface DopamineProgressBarProps {
 }
 
 export const DopamineProgressBar = ({
-  timeLeft,
   remainingCells,
   comboCount,
   currentScore,
   isVisible
 }: DopamineProgressBarProps) => {
   if (!isVisible) return null;
-
-  const formatTime = (seconds: number) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-  };
 
   const progressPercentage = ((81 - remainingCells) / 81) * 100;
 
@@ -36,19 +28,13 @@ export const DopamineProgressBar = ({
             <span className="font-bold text-lg">{currentScore.toLocaleString()}</span>
           </div>
           
-          {/* 2. 倒數計時器 */}
-          <div className="flex items-center gap-2 bg-red-600 text-white px-3 py-1 rounded-lg">
-            <span className="text-sm opacity-90">時間:</span>
-            <span className="font-mono font-bold text-lg">{formatTime(timeLeft)}</span>
-          </div>
-          
-          {/* 3. 剩餘格數 */}
+          {/* 2. 剩餘格數 */}
           <div className="flex items-center gap-2 bg-blue-600 text-white px-3 py-1 rounded-lg">
             <span className="text-sm opacity-90">剩餘:</span>
             <span className="font-bold">{remainingCells}</span>
           </div>
           
-          {/* 4. COMBO數 */}
+          {/* 3. COMBO數 */}
           {comboCount > 0 && (
             <div className="flex items-center gap-1 bg-yellow-500 text-black px-3 py-1 rounded-lg">
               <span>🔥</span>

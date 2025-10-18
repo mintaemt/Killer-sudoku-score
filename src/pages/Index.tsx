@@ -403,7 +403,6 @@ const Index = () => {
         
         {/* 多巴胺模式進度條 */}
         <DopamineProgressBar
-          timeLeft={time}
           remainingCells={remainingCells}
           comboCount={comboCount}
           currentScore={calculateDopamineScore({
@@ -564,7 +563,7 @@ const Index = () => {
         <DopamineWinModal
           isOpen={showDopamineWin}
           onClose={() => setShowDopamineWin(false)}
-          onRestart={handleDopamineMode}
+          onRestart={() => handleDopamineMode(dopamineDifficulty)}
           score={dopamineWinData.score}
           timeLeft={dopamineWinData.timeLeft}
           difficulty={dopamineWinData.difficulty}
@@ -579,7 +578,7 @@ const Index = () => {
         <DopamineGameOverModal
           isOpen={showDopamineGameOver}
           onClose={() => setShowDopamineGameOver(false)}
-          onRestart={handleDopamineMode}
+          onRestart={() => handleDopamineMode(dopamineDifficulty)}
           score={0}
           timeLeft={0}
           difficulty={dopamineGameOverData.difficulty}

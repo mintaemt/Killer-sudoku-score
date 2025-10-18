@@ -71,7 +71,7 @@ export const DifficultySelector = ({
             variant="outline"
             size="sm"
             onClick={() => setIsOpen(!isOpen)}
-            className="transition-smooth font-medium text-xs md:text-sm min-w-[80px] justify-between"
+            className="transition-smooth font-medium text-xs md:text-sm w-[90px] justify-between"
           >
             {currentDifficulty?.label}
             <ChevronDown className={cn("h-3 w-3 transition-transform", isOpen && "rotate-180")} />
