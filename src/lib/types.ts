@@ -21,6 +21,7 @@ export interface GameRecord {
 export interface LeaderboardEntry {
   name: string;
   difficulty: string;
+  mode: string;
   best_time: number;
   best_score: number;
   games_played: number;

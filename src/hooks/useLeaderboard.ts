@@ -27,9 +27,8 @@ export const useLeaderboard = (difficulty?: Difficulty, mode: 'normal' | 'dopami
         query = query.eq('difficulty', difficulty);
       }
 
-      // 如果mode欄位存在，則篩選該模式
-      // 注意：這裡需要檢查leaderboard視圖是否包含mode欄位
-      // 如果沒有，則獲取所有記錄（向後兼容）
+      // 篩選模式
+      query = query.eq('mode', mode);
 
       const { data, error: fetchError } = await query;
 
