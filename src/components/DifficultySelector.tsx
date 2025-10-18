@@ -12,14 +12,14 @@ interface DifficultySelectorProps {
   time: number;
   isPaused: boolean;
   onTogglePause: () => void;
+  onDopamineMode?: () => void;
 }
 
-const difficulties: { value: Difficulty; label: string; icon?: string; isDopamine?: boolean }[] = [
+const difficulties: { value: Difficulty; label: string }[] = [
   { value: "easy", label: "Easy" },
   { value: "medium", label: "Medium" },
   { value: "hard", label: "Hard" },
   { value: "expert", label: "Expert" },
-  { value: "dopamine", label: "⚡ Turbo", icon: "⚡", isDopamine: true },
 ];
 
 export const DifficultySelector = ({
@@ -29,6 +29,7 @@ export const DifficultySelector = ({
   time,
   isPaused,
   onTogglePause,
+  onDopamineMode,
 }: DifficultySelectorProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -68,7 +69,7 @@ export const DifficultySelector = ({
             variant="outline"
             size="sm"
             onClick={() => setIsOpen(!isOpen)}
-            className="transition-smooth font-medium text-xs md:text-sm min-w-[100px] justify-between"
+            className="transition-smooth font-medium text-xs md:text-sm min-w-[80px] justify-between"
           >
             {currentDifficulty?.label}
             <ChevronDown className={cn("h-3 w-3 transition-transform", isOpen && "rotate-180")} />
@@ -76,15 +77,7 @@ export const DifficultySelector = ({
           
           {isOpen && (
             <div className="absolute top-full left-0 mt-1 dropdown-glass rounded-md shadow-lg z-[9999] min-w-[120px] dropdown-menu">
-              {difficulties
-                .filter(diff => {
-                  // 多巴胺模式只對登入用戶可見
-                  if (diff.isDopamine) {
-                    return user && !isVisitorMode;
-                  }
-                  return true;
-                })
-                .map((diff) => (
+              {difficulties.map((diff) => (
                 <button
                   key={diff.value}
                   onClick={() => {
@@ -93,19 +86,28 @@ export const DifficultySelector = ({
                   }}
                   className={cn(
                     "w-full px-3 py-2 text-left text-xs md:text-sm transition-smooth hover:bg-muted/50 first:rounded-t-md last:rounded-b-md bg-background/80 backdrop-blur-sm",
-                    difficulty === diff.value && "bg-primary text-primary-foreground",
-                    diff.isDopamine && "bg-gradient-to-r from-purple-500/20 to-pink-500/20 hover:from-purple-500/30 hover:to-pink-500/30"
+                    difficulty === diff.value && "bg-primary text-primary-foreground"
                   )}
                 >
-                  <div className="flex items-center gap-2">
-                    {diff.icon && <span>{diff.icon}</span>}
-                    <span>{diff.label}</span>
-                  </div>
+                  {diff.label}
                 </button>
               ))}
             </div>
           )}
         </div>
+
+        {/* 多巴胺模式按鈕 - 只對登入用戶可見 */}
+        {user && !isVisitorMode && onDopamineMode && (
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={onDopamineMode}
+            className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md bg-gradient-to-r from-purple-500/10 to-pink-500/10 hover:from-purple-500/20 hover:to-pink-500/20 border-purple-500/30"
+            title="多巴胺模式 - 挑戰極限！"
+          >
+            <Zap className="h-3 w-3 md:h-4 md:w-4 text-purple-500" />
+          </Button>
+        )}
 
         {/* 時間顯示 */}
         <div className="flex items-center gap-2">

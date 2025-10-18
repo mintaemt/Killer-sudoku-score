@@ -35,7 +35,10 @@ export interface GameCompletionResult {
 }
 
 // 難度類型
-export type Difficulty = 'easy' | 'medium' | 'hard' | 'expert' | 'dopamine';
+export type Difficulty = 'easy' | 'medium' | 'hard' | 'expert';
+
+// 多巴胺模式難度類型
+export type DopamineDifficulty = 'easy' | 'medium' | 'hard' | 'expert' | 'hell';
 
 // 積分計算參數類型
 export interface ScoreCalculationParams {

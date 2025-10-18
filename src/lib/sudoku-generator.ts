@@ -1,4 +1,4 @@
-import { Difficulty } from "@/pages/Index";
+import { Difficulty, DopamineDifficulty } from "@/lib/types";
 
 export interface Cell {
   value: number | null;
@@ -396,6 +396,120 @@ export function generateKillerSudoku(difficulty: Difficulty): KillerSudokuData {
       puzzleId: 'fallback-' + Math.random().toString(36).substring(2)
     };
   }
+}
+
+/**
+ * 生成地獄難度數獨 - 極少提示數字
+ */
+function generateHellDifficultySudoku(): KillerSudokuData {
+  try {
+    const solvedGrid = generateRandomSolvedGrid();
+    const cages = generateCages(solvedGrid);
+    
+    // 地獄難度：只保留極少數的給定數字
+    const grid: Cell[][] = solvedGrid.map(row => 
+      row.map(cell => ({
+        value: null,
+        solution: cell,
+        given: false,
+      }))
+    );
+    
+    // 隨機選擇 8-12 個格子作為給定數字（極少提示）
+    const givenCount = Math.floor(Math.random() * 5) + 8; // 8-12個
+    const positions: { row: number; col: number }[] = [];
+    
+    // 確保每個3x3宮格至少有0-1個給定數字
+    for (let boxRow = 0; boxRow < 3; boxRow++) {
+      for (let boxCol = 0; boxCol < 3; boxCol++) {
+        const boxPositions: { row: number; col: number }[] = [];
+        for (let r = boxRow * 3; r < (boxRow + 1) * 3; r++) {
+          for (let c = boxCol * 3; c < (boxCol + 1) * 3; c++) {
+            boxPositions.push({ row: r, col: c });
+          }
+        }
+        
+        // 每個宮格隨機選擇0-1個位置
+        const selectedCount = Math.random() < 0.7 ? 0 : 1; // 70%機率沒有給定數字
+        const shuffled = boxPositions.sort(() => Math.random() - 0.5);
+        positions.push(...shuffled.slice(0, selectedCount));
+      }
+    }
+    
+    // 如果給定數字太少，隨機添加更多
+    while (positions.length < givenCount) {
+      const row = Math.floor(Math.random() * 9);
+      const col = Math.floor(Math.random() * 9);
+      if (!positions.some(p => p.row === row && p.col === col)) {
+        positions.push({ row, col });
+      }
+    }
+    
+    // 設置給定數字
+    positions.forEach(({ row, col }) => {
+      grid[row][col].value = solvedGrid[row][col];
+      grid[row][col].given = true;
+    });
+    
+    const puzzleId = 'hell-' + Math.random().toString(36).substring(2);
+    generatedPuzzles.add(puzzleId);
+    
+    return { grid, cages, puzzleId };
+  } catch (error) {
+    console.error('Error generating hell difficulty sudoku:', error);
+    
+    // 回退方案
+    const fallbackGrid: Cell[][] = Array(9).fill(null).map(() =>
+      Array(9).fill(null).map(() => ({
+        value: null,
+        solution: 1,
+        given: false,
+      }))
+    );
+    
+    const fallbackCages: Cage[] = [{
+      id: 0,
+      cells: [{ row: 0, col: 0 }],
+      sum: 1
+    }];
+    
+    return { 
+      grid: fallbackGrid, 
+      cages: fallbackCages, 
+      puzzleId: 'hell-fallback-' + Math.random().toString(36).substring(2)
+    };
+  }
+}
+
+/**
+ * 生成多巴胺模式數獨
+ */
+export function generateDopamineSudoku(): { data: KillerSudokuData; difficulty: DopamineDifficulty } {
+  // 隨機選擇難度，地獄模式有10%機率
+  const random = Math.random();
+  let difficulty: DopamineDifficulty;
+  
+  if (random < 0.1) {
+    difficulty = 'hell';
+  } else if (random < 0.3) {
+    difficulty = 'easy';
+  } else if (random < 0.6) {
+    difficulty = 'medium';
+  } else if (random < 0.9) {
+    difficulty = 'hard';
+  } else {
+    difficulty = 'expert';
+  }
+  
+  let data: KillerSudokuData;
+  
+  if (difficulty === 'hell') {
+    data = generateHellDifficultySudoku();
+  } else {
+    data = generateKillerSudoku(difficulty as Difficulty);
+  }
+  
+  return { data, difficulty };
 }
 
 // 獲取已生成題目數量（用於調試）

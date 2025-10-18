@@ -1,4 +1,4 @@
-import { Difficulty, ScoreCalculationParams } from './types';
+import { Difficulty, DopamineDifficulty, ScoreCalculationParams } from './types';
 
 // 分數計算詳細結果類型
 export interface ScoreCalculationDetails {
@@ -95,56 +95,59 @@ export const formatTime = (seconds: number): string => {
 
 // 多巴胺模式計分參數
 export interface DopamineScoreParams {
-  baseDifficulty: Difficulty; // 基礎難度 (easy/medium/hard/expert)
-  timeLeft: number;           // 剩餘時間
-  remainingCells: number;     // 剩餘格子數
-  comboCount: number;         // 連擊數
-  mistakes: number;           // 錯誤數
-  completionTime: number;     // 總完成時間
+  difficulty: DopamineDifficulty; // 多巴胺模式難度
+  timeLeft: number;               // 剩餘時間
+  remainingCells: number;         // 剩餘格子數
+  comboCount: number;             // 連擊數
+  mistakes: number;               // 錯誤數
+  completionTime: number;         // 總完成時間
 }
 
 /**
  * 多巴胺模式計分系統
  */
 export const calculateDopamineScore = ({
-  baseDifficulty,
+  difficulty,
   timeLeft,
   remainingCells,
   comboCount,
   mistakes,
   completionTime
 }: DopamineScoreParams): ScoreCalculationDetails => {
-  // 基礎分數 (更高)
-  const baseScore = {
-    easy: 200,    // 2倍
-    medium: 400,  // 2倍
-    hard: 600,    // 2倍
-    expert: 1000  // 2倍
+  // 基礎分數和時間限制
+  const difficultyConfig = {
+    easy: { baseScore: 200, timeLimit: 300 },      // 5分鐘
+    medium: { baseScore: 400, timeLimit: 240 },    // 4分鐘
+    hard: { baseScore: 600, timeLimit: 180 },      // 3分鐘
+    expert: { baseScore: 1000, timeLimit: 120 },   // 2分鐘
+    hell: { baseScore: 2000, timeLimit: 90 }       // 1.5分鐘
   };
 
+  const config = difficultyConfig[difficulty];
+  
   // 時間獎勵 (剩餘時間越多分數越高)
-  const timeBonus = timeLeft * 2; // 每秒2分
+  const timeBonus = timeLeft * (difficulty === 'hell' ? 5 : 3); // 地獄模式時間獎勵更高
 
   // Combo 獎勵 (指數增長)
-  const comboBonus = Math.pow(comboCount, 1.5) * 10;
+  const comboBonus = Math.pow(comboCount, 1.5) * (difficulty === 'hell' ? 20 : 10);
 
   // 速度獎勵 (完成越快分數越高)
-  const speedBonus = Math.max(0, (300 - completionTime) * 5);
+  const speedBonus = Math.max(0, (config.timeLimit - completionTime) * (difficulty === 'hell' ? 10 : 5));
 
   // 錯誤懲罰 (更嚴厲)
-  const mistakePenalty = mistakes * 50; // 每個錯誤50分
+  const mistakePenalty = mistakes * (difficulty === 'hell' ? 100 : 50);
 
-  const calculatedScore = baseScore[baseDifficulty] + timeBonus + comboBonus + speedBonus - mistakePenalty;
-  const finalScore = Math.max(baseScore[baseDifficulty] * 0.3, calculatedScore);
+  const calculatedScore = config.baseScore + timeBonus + comboBonus + speedBonus - mistakePenalty;
+  const finalScore = Math.max(config.baseScore * 0.3, calculatedScore);
 
   return {
-    baseScore: baseScore[baseDifficulty],
-    idealTime: 300, // 5分鐘
+    baseScore: config.baseScore,
+    idealTime: config.timeLimit,
     timeBonus,
     mistakePenalty,
     calculatedScore,
     finalScore: Math.round(finalScore),
-    calculationVersion: 'dopamine-v1.0'
+    calculationVersion: 'dopamine-v2.0'
   };
 };
 

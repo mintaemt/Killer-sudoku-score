@@ -4,15 +4,16 @@ import { NumberPad } from "@/components/NumberPad";
 import { GameHeader } from "@/components/GameHeader";
 import { DifficultySelector } from "@/components/DifficultySelector";
 import { DopamineProgressBar } from "@/components/DopamineProgressBar";
+import { DopamineGameOverModal } from "@/components/DopamineGameOverModal";
 import { UserNameInput } from "@/components/UserNameInput";
 import { GameCompleteModal } from "@/components/GameCompleteModal";
 import { GameRulesModal } from "@/components/GameRulesModal";
 import { Leaderboard } from "@/components/Leaderboard";
 import { LeaderboardDebug } from "@/components/LeaderboardDebug";
-import { generateKillerSudoku } from "@/lib/sudoku-generator";
+import { generateKillerSudoku, generateDopamineSudoku } from "@/lib/sudoku-generator";
 import { useUser } from "@/hooks/useUser";
 import { useGameRecord } from "@/hooks/useGameRecord";
-import { Difficulty, GameCompletionResult } from "@/lib/types";
+import { Difficulty, DopamineDifficulty, GameCompletionResult } from "@/lib/types";
 import { calculateScore, calculateDopamineScore } from "@/lib/scoreCalculator";
 
 const Index = () => {
@@ -26,10 +27,13 @@ const Index = () => {
   
   // 多巴胺模式狀態
   const [isDopamineMode, setIsDopamineMode] = useState(false);
-  const [timeLimit, setTimeLimit] = useState(300); // 5分鐘倒數
+  const [dopamineDifficulty, setDopamineDifficulty] = useState<DopamineDifficulty>('medium');
+  const [timeLimit, setTimeLimit] = useState(300); // 動態時間限制
   const [comboCount, setComboCount] = useState(0);
   const [lastCorrectTime, setLastCorrectTime] = useState(0);
   const [remainingCells, setRemainingCells] = useState(81);
+  const [showDopamineGameOver, setShowDopamineGameOver] = useState(false);
+  const [dopamineGameOverData, setDopamineGameOverData] = useState<any>(null);
   
   // 新增狀態
   const [showUserNameInput, setShowUserNameInput] = useState(false);
@@ -37,6 +41,9 @@ const Index = () => {
   const [showLeaderboard, setShowLeaderboard] = useState(false);
   const [showRules, setShowRules] = useState(false);
   const [gameCompletionResult, setGameCompletionResult] = useState<GameCompletionResult | null>(null);
+  
+  // 普通模式錯誤處理狀態
+  const [isDisqualified, setIsDisqualified] = useState(false);
   
   // Hooks
   const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisitorMode, isLoggedIn } = useUser();
@@ -76,7 +83,7 @@ const Index = () => {
     if (isDopamineMode) {
       // 多巴胺模式計分
       const dopamineScore = calculateDopamineScore({
-        baseDifficulty: 'medium', // 多巴胺模式基於中等難度
+        difficulty: dopamineDifficulty,
         timeLeft: time,
         remainingCells,
         comboCount,
@@ -84,6 +91,10 @@ const Index = () => {
         completionTime: timeLimit - time
       });
       score = dopamineScore.finalScore;
+      
+      // 多巴胺模式完成時顯示 Game Over 畫面
+      handleDopamineGameOver();
+      return;
     } else {
       // 普通模式計分
       score = calculateScore({ difficulty, completionTime: time, mistakes });
@@ -91,6 +102,17 @@ const Index = () => {
     
     // 訪客模式下不保存記錄，只顯示完成模態框
     if (isVisitorMode) {
+      setGameCompletionResult({ 
+        score, 
+        rank: null, 
+        isNewRecord: false 
+      });
+      setShowGameCompleteModal(true);
+      return;
+    }
+    
+    // 普通模式：如果失格則不保存記錄
+    if (!isDopamineMode && isDisqualified) {
       setGameCompletionResult({ 
         score, 
         rank: null, 
@@ -129,23 +151,15 @@ const Index = () => {
   useEffect(() => {
     try {
       setTimeout(() => {
-        const newGameData = generateKillerSudoku(difficulty === 'dopamine' ? 'medium' : difficulty);
+        const newGameData = generateKillerSudoku(difficulty);
         setGameData(newGameData);
         setMistakes(0);
         setSelectedCell(null);
         
-        // 設定多巴胺模式
-        const isDopamine = difficulty === 'dopamine';
-        setIsDopamineMode(isDopamine);
-        
-        if (isDopamine) {
-          setTime(timeLimit); // 倒數計時
-          setComboCount(0);
-          setLastCorrectTime(0);
-          setRemainingCells(81);
-        } else {
-          setTime(0); // 正數計時
-        }
+        // 重置多巴胺模式狀態
+        setIsDopamineMode(false);
+        setTime(0); // 正數計時
+        setIsDisqualified(false);
         
         setIsPaused(false);
       }, 0);
@@ -164,7 +178,7 @@ const Index = () => {
           const newTime = prev - 1;
           if (newTime <= 0) {
             // 時間到，遊戲結束
-            setIsPaused(true);
+            handleDopamineGameOver();
             return 0;
           }
           return newTime;
@@ -189,7 +203,18 @@ const Index = () => {
         if (i === row && j === col) {
           const isCorrect = cell.solution === num;
           if (!isCorrect && num !== 0) {
-            setMistakes((prev) => prev + 1);
+            setMistakes((prev) => {
+              const newMistakes = prev + 1;
+              // 多巴胺模式：錯誤滿3次直接 Game Over
+              if (isDopamineMode && newMistakes >= 3) {
+                handleDopamineGameOver();
+              }
+              // 普通模式：錯誤滿3次後標記為失格
+              if (!isDopamineMode && newMistakes >= 3) {
+                setIsDisqualified(true);
+              }
+              return newMistakes;
+            });
             // 錯誤時重置 Combo
             if (isDopamineMode) {
               setComboCount(0);
@@ -225,23 +250,19 @@ const Index = () => {
     try {
       // 使用 setTimeout 來避免阻塞 UI
       setTimeout(() => {
-        const newGameData = generateKillerSudoku(difficulty === 'dopamine' ? 'medium' : difficulty);
+        const newGameData = generateKillerSudoku(difficulty);
         setGameData(newGameData);
         setMistakes(0);
         setSelectedCell(null);
         
         // 重置多巴胺模式狀態
-        if (isDopamineMode) {
-          setTime(timeLimit);
-          setComboCount(0);
-          setLastCorrectTime(0);
-          setRemainingCells(81);
-        } else {
-          setTime(0);
-        }
+        setIsDopamineMode(false);
+        setTime(0);
+        setIsDisqualified(false);
         
         setIsPaused(false);
         setShowGameCompleteModal(false);
+        setShowDopamineGameOver(false);
         setGameCompletionResult(null);
       }, 0);
     } catch (error) {
@@ -252,6 +273,7 @@ const Index = () => {
       setTime(0);
       setIsPaused(false);
       setShowGameCompleteModal(false);
+      setShowDopamineGameOver(false);
       setGameCompletionResult(null);
     }
   };
@@ -279,8 +301,64 @@ const Index = () => {
     setShowRules(true);
   };
 
-  const handleCloseRules = () => {
-    setShowRules(false);
+  // 處理多巴胺模式啟動
+  const handleDopamineMode = () => {
+    const { data, difficulty: generatedDifficulty } = generateDopamineSudoku();
+    
+    // 根據難度設定時間限制
+    const timeLimits = {
+      easy: 300,    // 5分鐘
+      medium: 240,  // 4分鐘
+      hard: 180,    // 3分鐘
+      expert: 120,  // 2分鐘
+      hell: 90      // 1.5分鐘
+    };
+    
+    setDopamineDifficulty(generatedDifficulty);
+    setTimeLimit(timeLimits[generatedDifficulty]);
+    setGameData(data);
+    setMistakes(0);
+    setSelectedCell(null);
+    setTime(timeLimits[generatedDifficulty]);
+    setComboCount(0);
+    setLastCorrectTime(0);
+    setRemainingCells(81);
+    setIsDopamineMode(true);
+    setIsPaused(false);
+    setShowGameCompleteModal(false);
+    setShowDopamineGameOver(false);
+    setGameCompletionResult(null);
+  };
+
+  // 處理多巴胺模式 Game Over
+  const handleDopamineGameOver = () => {
+    const score = calculateDopamineScore({
+      difficulty: dopamineDifficulty,
+      timeLeft: time,
+      remainingCells,
+      comboCount,
+      mistakes,
+      completionTime: timeLimit - time
+    }).finalScore;
+
+    // 模擬排行榜數據（實際應用中應該從服務器獲取）
+    const mockTopScores = [
+      { score: 2500, time: 45, difficulty: 'hell' },
+      { score: 1800, time: 120, difficulty: 'expert' },
+      { score: 1200, time: 180, difficulty: 'hard' }
+    ];
+
+    setDopamineGameOverData({
+      score,
+      timeLeft: time,
+      difficulty: dopamineDifficulty,
+      comboCount,
+      mistakes,
+      topScores: mockTopScores
+    });
+    
+    setShowDopamineGameOver(true);
+    setIsPaused(true);
   };
 
   return (
@@ -311,6 +389,7 @@ const Index = () => {
             time={time}
             isPaused={isPaused}
             onTogglePause={handleTogglePause}
+            onDopamineMode={handleDopamineMode}
           />
 
           <div className="space-y-4">
@@ -368,6 +447,7 @@ const Index = () => {
                   time={time}
                   isPaused={isPaused}
                   onTogglePause={handleTogglePause}
+                  onDopamineMode={handleDopamineMode}
                 />
               </div>
 
@@ -432,6 +512,21 @@ const Index = () => {
             />
           </div>
         </div>
+      )}
+
+      {/* 多巴胺模式 Game Over 模態框 */}
+      {showDopamineGameOver && dopamineGameOverData && (
+        <DopamineGameOverModal
+          isOpen={showDopamineGameOver}
+          onClose={() => setShowDopamineGameOver(false)}
+          onRestart={handleDopamineMode}
+          score={dopamineGameOverData.score}
+          timeLeft={dopamineGameOverData.timeLeft}
+          difficulty={dopamineGameOverData.difficulty}
+          comboCount={dopamineGameOverData.comboCount}
+          mistakes={dopamineGameOverData.mistakes}
+          topScores={dopamineGameOverData.topScores}
+        />
       )}
 
       {/* 遊戲規則模態框 */}
