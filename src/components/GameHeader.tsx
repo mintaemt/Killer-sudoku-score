@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { useState, useRef, useEffect } from "react";
 import { useUser } from "@/hooks/useUser";
 import { useUserStats } from "@/hooks/useUserStats";
+import { useLanguage } from "@/hooks/useLanguage";
 
 interface GameHeaderProps {
   onNewGame: () => void;
@@ -32,6 +33,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
   const userDropdownRef = useRef<HTMLDivElement>(null);
   const { user, isLoggedIn, isVisitorMode } = useUser();
   const { stats, loading: statsLoading } = useUserStats(user?.id || null, viewMode);
+  const { t } = useLanguage();
 
   // Handle click outside to close dropdowns
   useEffect(() => {
@@ -59,8 +61,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
         {/* 左側：標題 */}
         <div className="flex items-center gap-2 md:gap-8">
           <div className="flex flex-col items-start">
-            <h1 className="text-lg md:text-2xl font-bold tracking-tight leading-tight">數獨</h1>
-            <h2 className="text-xs md:text-sm text-muted-foreground leading-tight">Killer Sudoku</h2>
+            <h1 className="text-lg md:text-2xl font-bold tracking-tight leading-tight">{t('gameTitle')}</h1>
           </div>
         </div>
 
@@ -72,7 +73,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
             size="sm"
             onClick={onShowRules}
             className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md"
-            title="遊戲規則"
+            title={t('gameRules')}
           >
             <Info className="h-3 w-3 md:h-4 md:w-4" />
           </Button>
@@ -149,7 +150,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
                                 onClick={() => setViewMode('normal')}
                                 className="h-6 px-2 text-xs"
                               >
-                                普通
+                                {t('normal')}
                               </Button>
                               <Button
                                 variant={viewMode === 'dopamine' ? 'default' : 'outline'}
@@ -157,7 +158,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
                                 onClick={() => setViewMode('dopamine')}
                                 className="h-6 px-2 text-xs"
                               >
-                                多巴胺
+                                {t('dopamine')}
                               </Button>
                             </div>
                           </div>
@@ -247,7 +248,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
                         className="w-full text-xs"
                       >
                         <ListOrdered className="h-3 w-3 mr-1" />
-                        {viewMode === 'normal' ? '查看排行榜' : '查看最高分'}
+                        {viewMode === 'normal' ? t('viewLeaderboard') : t('viewHighestScore')}
                       </Button>
                     </div>
                   </div>
@@ -262,7 +263,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
             size="sm"
             onClick={onNewGame}
             className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md"
-            title="新遊戲"
+            title={t('newGame')}
           >
             <RotateCcw className="h-3 w-3 md:h-4 md:w-4" />
           </Button>

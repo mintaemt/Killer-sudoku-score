@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { Globe } from 'lucide-react';
+import { Globe, Languages } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export type Language = 'en' | 'zh' | 'ko' | 'ja';
@@ -10,14 +10,14 @@ interface LanguageOption {
   code: Language;
   name: string;
   nativeName: string;
-  flag: string;
+  shortCode: string;
 }
 
 const languages: LanguageOption[] = [
-  { code: 'en', name: 'English', nativeName: 'English', flag: '🇺🇸' },
-  { code: 'zh', name: 'Chinese', nativeName: '中文', flag: '🇨🇳' },
-  { code: 'ko', name: 'Korean', nativeName: '한국어', flag: '🇰🇷' },
-  { code: 'ja', name: 'Japanese', nativeName: '日本語', flag: '🇯🇵' },
+  { code: 'en', name: 'English', nativeName: 'English', shortCode: 'EN' },
+  { code: 'zh', name: 'Chinese', nativeName: '中文', shortCode: 'TC' },
+  { code: 'ko', name: 'Korean', nativeName: '한국어', shortCode: 'KR' },
+  { code: 'ja', name: 'Japanese', nativeName: '日本語', shortCode: 'JP' },
 ];
 
 // 根據IP檢測默認語言
@@ -66,12 +66,12 @@ export const LanguageToggle = () => {
           variant="outline"
           size="sm"
           className={cn(
-            "h-8 w-8 p-0 transition-smooth hover:scale-105 active:scale-95",
+            "h-8 w-10 p-0 transition-smooth hover:scale-105 active:scale-95",
             "shadow-apple-sm hover:shadow-apple-md"
           )}
           title={`語言: ${currentLangData.nativeName}`}
         >
-          <span className="text-lg">{currentLangData.flag}</span>
+          <span className="text-xs font-medium">{currentLangData.shortCode}</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-48">
@@ -84,7 +84,7 @@ export const LanguageToggle = () => {
               currentLanguage === language.code && "bg-primary/10 text-primary"
             )}
           >
-            <span className="text-lg">{language.flag}</span>
+            <Languages className="h-4 w-4" />
             <div className="flex flex-col">
               <span className="font-medium">{language.nativeName}</span>
               <span className="text-xs text-muted-foreground">{language.name}</span>

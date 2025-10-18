@@ -5,6 +5,7 @@ import { ChevronDown, Clock, AlertTriangle, Play, Pause, Zap } from "lucide-reac
 import { useState, useRef, useEffect } from "react";
 import { useUser } from "@/hooks/useUser";
 import { DopamineInfoModal } from "./DopamineInfoModal";
+import { useLanguage } from "@/hooks/useLanguage";
 
 interface DifficultySelectorProps {
   difficulty: Difficulty;
@@ -16,11 +17,11 @@ interface DifficultySelectorProps {
   onDopamineMode?: (difficulty: DopamineDifficulty) => void;
 }
 
-const difficulties: { value: Difficulty; label: string }[] = [
-  { value: "easy", label: "Easy" },
-  { value: "medium", label: "Medium" },
-  { value: "hard", label: "Hard" },
-  { value: "expert", label: "Expert" },
+const difficulties: { value: Difficulty; label: string; translationKey: string }[] = [
+  { value: "easy", label: "Easy", translationKey: "easy" },
+  { value: "medium", label: "Medium", translationKey: "medium" },
+  { value: "hard", label: "Hard", translationKey: "hard" },
+  { value: "expert", label: "Expert", translationKey: "expert" },
 ];
 
 export const DifficultySelector = ({
@@ -36,6 +37,7 @@ export const DifficultySelector = ({
   const [showDopamineInfo, setShowDopamineInfo] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { user, isVisitorMode } = useUser();
+  const { t } = useLanguage();
 
   // Handle click outside to close dropdown
   useEffect(() => {
@@ -73,7 +75,7 @@ export const DifficultySelector = ({
             onClick={() => setIsOpen(!isOpen)}
             className="transition-smooth font-medium text-xs md:text-sm w-[90px] justify-between"
           >
-            {currentDifficulty?.label}
+            {currentDifficulty ? t(currentDifficulty.translationKey as any) : difficulty}
             <ChevronDown className={cn("h-3 w-3 transition-transform", isOpen && "rotate-180")} />
           </Button>
           
@@ -91,7 +93,7 @@ export const DifficultySelector = ({
                     difficulty === diff.value && "bg-primary text-primary-foreground"
                   )}
                 >
-                  {diff.label}
+                  {t(diff.translationKey as any)}
                 </button>
               ))}
             </div>
@@ -115,7 +117,7 @@ export const DifficultySelector = ({
                 linear-gradient(135deg, rgba(249, 115, 22, 0.15) 0%, rgba(59, 130, 246, 0.15) 100%)
               `
             }}
-            title="多巴胺模式 - 挑戰極限！"
+            title={`${t('dopamineMode')} - 挑戰極限！`}
           >
             <Zap className="h-3 w-3 md:h-4 md:w-4 text-white" style={{ textShadow: "2px 2px 4px rgba(0,0,0,0.5), 1px 1px 2px rgba(0,0,0,0.6)" }} />
           </Button>
