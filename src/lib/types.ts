@@ -10,7 +10,7 @@ export interface User {
 export interface GameRecord {
   id: string;
   user_id: string;
-  difficulty: 'easy' | 'medium' | 'hard' | 'expert';
+  difficulty: 'easy' | 'medium' | 'hard' | 'expert' | 'hell';
   completion_time: number; // 秒數
   mistakes: number;
   score: number;
@@ -35,7 +35,7 @@ export interface GameCompletionResult {
 }
 
 // 難度類型
-export type Difficulty = 'easy' | 'medium' | 'hard' | 'expert';
+export type Difficulty = 'easy' | 'medium' | 'hard' | 'expert' | 'hell';
 
 // 多巴胺模式難度類型
 export type DopamineDifficulty = 'easy' | 'medium' | 'hard' | 'expert' | 'hell';

@@ -372,7 +372,7 @@ const Index = () => {
   };
 
   // 處理多巴胺模式 Win
-  const handleDopamineWin = () => {
+  const handleDopamineWin = async () => {
     const score = calculateDopamineScore({
       difficulty: dopamineDifficulty,
       timeLeft: time,
@@ -381,6 +381,24 @@ const Index = () => {
       mistakes,
       completionTime: timeLimit - time
     }).finalScore;
+
+    // 保存多巴胺模式遊戲記錄
+    if (user && !isVisitorMode) {
+      try {
+        const result = await saveGameRecord(
+          user.id,
+          dopamineDifficulty, // 使用多巴胺難度
+          timeLimit - time,   // 完成時間
+          mistakes
+        );
+        
+        if (result) {
+          console.log('多巴胺模式遊戲記錄已保存:', result);
+        }
+      } catch (error) {
+        console.error('保存多巴胺模式遊戲記錄失敗:', error);
+      }
+    }
 
     setDopamineWinData({
       score,

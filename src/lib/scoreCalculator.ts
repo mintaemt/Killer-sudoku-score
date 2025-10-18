@@ -24,7 +24,8 @@ export const calculateScoreWithDetails = ({
     easy: 100,
     medium: 200,
     hard: 300,
-    expert: 500
+    expert: 500,
+    hell: 1000
   };
 
   // 理想完成時間
@@ -32,7 +33,8 @@ export const calculateScoreWithDetails = ({
     easy: 360,    // 6分鐘
     medium: 720,  // 12分鐘
     hard: 1080,   // 18分鐘
-    expert: 1440  // 24分鐘
+    expert: 1440, // 24分鐘
+    hell: 1200    // 20分鐘
   };
 
   const idealTime = idealTimes[difficulty];
