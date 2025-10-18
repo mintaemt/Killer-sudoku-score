@@ -393,6 +393,7 @@ const Index = () => {
           comboCount={comboCount}
           isVisible={isDopamineMode}
         />
+        
         {/* 移動裝置佈局 - 保持原有垂直佈局 */}
         <div className="block md:hidden space-y-4">
           <GameHeader 
