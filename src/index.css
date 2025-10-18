@@ -497,13 +497,13 @@ All colors MUST be HSL.
 @property --d1 {
   syntax: "<color>";
   inherits: true;
-  initial-value: #F97316;
+  initial-value: #FB923C;  /* 更亮的橘色 */
 }
 
 @property --d2 {
   syntax: "<color>";
   inherits: true;
-  initial-value: #3B82F6;
+  initial-value: #60A5FA;  /* 更亮的藍色 */
 }
 
 .d {
@@ -511,16 +511,16 @@ All colors MUST be HSL.
 }
 
 .d:hover {
-  animation: oxxo-d .5s infinite alternate;
+  animation: oxxo-d 1s infinite alternate;
 }
 
 @keyframes oxxo-d {
   0% {
-    --d1: #F97316;  /* 橘色 */
-    --d2: #3B82F6;  /* 藍色 */
+    --d1: #FB923C;  /* 更亮的橘色 */
+    --d2: #60A5FA;  /* 更亮的藍色 */
   }
   100% {
-    --d1: #A855F7;  /* 紫色 */
-    --d2: #EC4899;  /* 粉色 */
+    --d1: #C084FC;  /* 更亮的紫色 */
+    --d2: #F472B6;  /* 更亮的粉色 */
   }
 }
