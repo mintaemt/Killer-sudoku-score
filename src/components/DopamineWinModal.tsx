@@ -1,10 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Trophy, Clock, RotateCcw, X, Zap, Skull } from "lucide-react";
+import { Trophy, Clock, RotateCcw, X, Zap, CheckCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-interface DopamineGameOverModalProps {
+interface DopamineWinModalProps {
   isOpen: boolean;
   onClose: () => void;
   onRestart: () => void;
@@ -13,14 +13,10 @@ interface DopamineGameOverModalProps {
   difficulty: string;
   comboCount: number;
   mistakes: number;
-  topScores: Array<{
-    score: number;
-    time: number;
-    difficulty: string;
-  }>;
+  topScore?: number;
 }
 
-export const DopamineGameOverModal = ({
+export const DopamineWinModal = ({
   isOpen,
   onClose,
   onRestart,
@@ -29,8 +25,8 @@ export const DopamineGameOverModal = ({
   difficulty,
   comboCount,
   mistakes,
-  topScores
-}: DopamineGameOverModalProps) => {
+  topScore
+}: DopamineWinModalProps) => {
   if (!isOpen) return null;
 
   const formatTime = (seconds: number) => {
@@ -68,14 +64,14 @@ export const DopamineGameOverModal = ({
           <CardHeader>
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="p-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-500">
-                  <Skull className="h-6 w-6 text-white" />
+                <div className="p-2 rounded-full bg-gradient-to-r from-green-500 to-emerald-500">
+                  <CheckCircle className="h-6 w-6 text-white" />
                 </div>
                 <div>
                   <CardTitle className="flex items-center gap-2">
                     <span>多巴胺模式</span>
                   </CardTitle>
-                  <CardDescription>挑戰失敗，但你的努力值得讚賞！</CardDescription>
+                  <CardDescription>恭喜完成挑戰！</CardDescription>
                 </div>
               </div>
               <Button variant="outline" size="sm" onClick={onClose}>
@@ -84,22 +80,58 @@ export const DopamineGameOverModal = ({
             </div>
           </CardHeader>
           
-          {/* 大型 GAME OVER 標題 */}
+          {/* 大型 WIN 標題 */}
           <div className="text-center py-8">
             <div 
-              className="text-6xl md:text-8xl font-black text-red-600 animate-pulse"
+              className="text-6xl md:text-8xl font-black text-green-600 animate-pulse"
               style={{
                 fontFamily: 'Noto Sans CJK TC, sans-serif'
               }}
             >
-              GAME OVER
+              WIN
             </div>
             <div className="text-lg text-muted-foreground mt-2 font-semibold">
-              挑戰失敗！
+              挑戰成功！
             </div>
           </div>
           
           <CardContent className="space-y-6">
+            {/* 本次遊戲統計 */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="text-center p-3 rounded-lg bg-card border">
+                <div className="flex items-center justify-center gap-1 mb-1">
+                  <Trophy className="h-4 w-4 text-yellow-500" />
+                  <span className="text-sm font-medium">分數</span>
+                </div>
+                <div className="text-lg font-bold text-primary">{score.toLocaleString()}</div>
+              </div>
+              
+              <div className="text-center p-3 rounded-lg bg-card border">
+                <div className="flex items-center justify-center gap-1 mb-1">
+                  <Clock className="h-4 w-4 text-blue-500" />
+                  <span className="text-sm font-medium">剩餘時間</span>
+                </div>
+                <div className="text-lg font-bold text-primary">{formatTime(timeLeft)}</div>
+              </div>
+              
+              <div className="text-center p-3 rounded-lg bg-card border">
+                <div className="flex items-center justify-center gap-1 mb-1">
+                  <Zap className="h-4 w-4 text-purple-500" />
+                  <span className="text-sm font-medium">最高連擊</span>
+                </div>
+                <div className="text-lg font-bold text-primary">{comboCount}x</div>
+              </div>
+              
+              <div className="text-center p-3 rounded-lg bg-card border">
+                <div className="flex items-center justify-center gap-1 mb-1">
+                  <Badge variant="outline" className={cn("text-xs", getDifficultyColor(difficulty))}>
+                    {getDifficultyLabel(difficulty)}
+                  </Badge>
+                </div>
+                <div className="text-sm text-muted-foreground mt-1">難度</div>
+              </div>
+            </div>
+
             {/* 多巴胺模式排行榜 */}
             <div className="space-y-3">
               <div className="flex items-center gap-2">
@@ -114,7 +146,9 @@ export const DopamineGameOverModal = ({
                       1
                     </div>
                     <div>
-                      <div className="font-medium text-muted-foreground">暫無最高分資料</div>
+                      <div className="font-medium text-muted-foreground">
+                        {topScore ? `${topScore.toLocaleString()} 分` : '暫無最高分資料'}
+                      </div>
                       <div className="text-sm text-muted-foreground">
                         {getDifficultyLabel(difficulty)} 難度
                       </div>
@@ -128,7 +162,7 @@ export const DopamineGameOverModal = ({
             <div className="flex gap-3 pt-4">
               <Button
                 onClick={onRestart}
-                className="flex-1 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
+                className="flex-1 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600"
               >
                 <RotateCcw className="h-4 w-4 mr-2" />
                 再次挑戰

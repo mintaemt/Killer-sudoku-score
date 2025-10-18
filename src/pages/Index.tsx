@@ -5,6 +5,7 @@ import { GameHeader } from "@/components/GameHeader";
 import { DifficultySelector } from "@/components/DifficultySelector";
 import { DopamineProgressBar } from "@/components/DopamineProgressBar";
 import { DopamineGameOverModal } from "@/components/DopamineGameOverModal";
+import { DopamineWinModal } from "@/components/DopamineWinModal";
 import { AnimatedGradientBackground } from "@/components/AnimatedGradientBackground";
 import { UserNameInput } from "@/components/UserNameInput";
 import { GameCompleteModal } from "@/components/GameCompleteModal";
@@ -35,6 +36,8 @@ const Index = () => {
   const [remainingCells, setRemainingCells] = useState(81);
   const [showDopamineGameOver, setShowDopamineGameOver] = useState(false);
   const [dopamineGameOverData, setDopamineGameOverData] = useState<any>(null);
+  const [showDopamineWin, setShowDopamineWin] = useState(false);
+  const [dopamineWinData, setDopamineWinData] = useState<any>(null);
   
   // 新增狀態
   const [showUserNameInput, setShowUserNameInput] = useState(false);
@@ -93,8 +96,8 @@ const Index = () => {
       });
       score = dopamineScore.finalScore;
       
-      // 多巴胺模式完成時顯示 Game Over 畫面
-      handleDopamineGameOver();
+      // 多巴胺模式完成時顯示 Win 畫面
+      handleDopamineWin();
       return;
     } else {
       // 普通模式計分
@@ -264,6 +267,7 @@ const Index = () => {
         setIsPaused(false);
         setShowGameCompleteModal(false);
         setShowDopamineGameOver(false);
+        setShowDopamineWin(false);
         setGameCompletionResult(null);
       }, 0);
     } catch (error) {
@@ -337,6 +341,16 @@ const Index = () => {
 
   // 處理多巴胺模式 Game Over
   const handleDopamineGameOver = () => {
+    setDopamineGameOverData({
+      difficulty: dopamineDifficulty
+    });
+    
+    setShowDopamineGameOver(true);
+    setIsPaused(true);
+  };
+
+  // 處理多巴胺模式 Win
+  const handleDopamineWin = () => {
     const score = calculateDopamineScore({
       difficulty: dopamineDifficulty,
       timeLeft: time,
@@ -346,23 +360,16 @@ const Index = () => {
       completionTime: timeLimit - time
     }).finalScore;
 
-    // 模擬排行榜數據（實際應用中應該從服務器獲取）
-    const mockTopScores = [
-      { score: 2500, time: 45, difficulty: 'hell' },
-      { score: 1800, time: 120, difficulty: 'expert' },
-      { score: 1200, time: 180, difficulty: 'hard' }
-    ];
-
-    setDopamineGameOverData({
+    setDopamineWinData({
       score,
       timeLeft: time,
       difficulty: dopamineDifficulty,
       comboCount,
       mistakes,
-      topScores: mockTopScores
+      topScore: null // 目前沒有最高分資料
     });
     
-    setShowDopamineGameOver(true);
+    setShowDopamineWin(true);
     setIsPaused(true);
   };
 
@@ -522,18 +529,33 @@ const Index = () => {
         </div>
       )}
 
+      {/* 多巴胺模式 Win 模態框 */}
+      {showDopamineWin && dopamineWinData && (
+        <DopamineWinModal
+          isOpen={showDopamineWin}
+          onClose={() => setShowDopamineWin(false)}
+          onRestart={handleDopamineMode}
+          score={dopamineWinData.score}
+          timeLeft={dopamineWinData.timeLeft}
+          difficulty={dopamineWinData.difficulty}
+          comboCount={dopamineWinData.comboCount}
+          mistakes={dopamineWinData.mistakes}
+          topScore={dopamineWinData.topScore}
+        />
+      )}
+
       {/* 多巴胺模式 Game Over 模態框 */}
       {showDopamineGameOver && dopamineGameOverData && (
         <DopamineGameOverModal
           isOpen={showDopamineGameOver}
           onClose={() => setShowDopamineGameOver(false)}
           onRestart={handleDopamineMode}
-          score={dopamineGameOverData.score}
-          timeLeft={dopamineGameOverData.timeLeft}
+          score={0}
+          timeLeft={0}
           difficulty={dopamineGameOverData.difficulty}
-          comboCount={dopamineGameOverData.comboCount}
-          mistakes={dopamineGameOverData.mistakes}
-          topScores={dopamineGameOverData.topScores}
+          comboCount={0}
+          mistakes={0}
+          topScores={[]}
         />
       )}
 
