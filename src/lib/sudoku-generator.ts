@@ -521,6 +521,15 @@ const PITY_THRESHOLD = 20; // 20次保底
 
 /**
  * 生成多巴胺模式數獨
+ * 
+ * 稀有度設計理念：
+ * - Easy(R): 54.2% - 最常見，提供基礎成就感
+ * - Medium(SR): 40% - 次常見，適度挑戰
+ * - Hard(SSR): 5.5% - 稀有，高成就感
+ * - Expert(SSSR): 0.2% - 極稀有，頂級挑戰
+ * - Hell(UR): 0.1% + 保底 - 超稀有，最高成就感
+ * 
+ * 保底機制：每20次必定出現地獄模式，確保玩家能體驗最高難度
  */
 export function generateDopamineSudoku(): { data: KillerSudokuData; difficulty: DopamineDifficulty } {
   // 增加保底計數器
@@ -536,19 +545,19 @@ export function generateDopamineSudoku(): { data: KillerSudokuData; difficulty: 
     difficulty = 'hell';
     dopaminePityCounter = 0; // 重置計數器
   } else {
-    // 正常隨機生成，調整機率分佈
+    // 正常隨機生成，按照稀有度設計機率分佈
     const random = Math.random();
     
-    if (random < 0.15) {
-      difficulty = 'easy';      // 15% - 降低簡單機率
-    } else if (random < 0.35) {
-      difficulty = 'medium';    // 20% - 降低中等機率
-    } else if (random < 0.60) {
-      difficulty = 'hard';      // 25% - 降低困難機率
-    } else if (random < 0.80) {
-      difficulty = 'expert';    // 20% - 提高專家機率
+    if (random < 0.542) {
+      difficulty = 'easy';      // 54.2% - R級，最常見
+    } else if (random < 0.942) {
+      difficulty = 'medium';    // 40% - SR級，次常見
+    } else if (random < 0.997) {
+      difficulty = 'hard';      // 5.5% - SSR級，稀有
+    } else if (random < 0.999) {
+      difficulty = 'expert';    // 0.2% - SSSR級，極稀有
     } else {
-      difficulty = 'hell';      // 20% - 提高地獄機率（非保底）
+      difficulty = 'hell';      // 0.1% - UR級，超稀有（非保底）
       dopaminePityCounter = 0; // 如果隨機抽到地獄，也重置計數器
     }
   }
