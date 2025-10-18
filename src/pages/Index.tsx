@@ -12,6 +12,7 @@ import { GameCompleteModal } from "@/components/GameCompleteModal";
 import { GameRulesModal } from "@/components/GameRulesModal";
 import { Leaderboard } from "@/components/Leaderboard";
 import { LeaderboardDebug } from "@/components/LeaderboardDebug";
+import { DatabaseDebug } from "@/components/DatabaseDebug";
 import { generateKillerSudoku, generateDopamineSudoku } from "@/lib/sudoku-generator";
 import { useUser } from "@/hooks/useUser";
 import { useGameRecord } from "@/hooks/useGameRecord";
@@ -702,6 +703,13 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
         isOpen={showRules} 
         onClose={handleCloseRules} 
       />
+
+      {/* 資料庫調試組件 - 臨時使用 */}
+      {process.env.NODE_ENV === 'development' && (
+        <div className="fixed bottom-4 right-4 z-50">
+          <DatabaseDebug />
+        </div>
+      )}
     </div>
   );
 };

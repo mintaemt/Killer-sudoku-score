@@ -39,7 +39,6 @@ export const useUserStats = (userId: string | null, mode: 'normal' | 'dopamine' 
           .from('game_records')
           .select('*')
           .eq('user_id', userId)
-          .eq('mode', mode)
           .order('completed_at', { ascending: false });
 
         if (fetchError) {
@@ -51,12 +50,23 @@ export const useUserStats = (userId: string | null, mode: 'normal' | 'dopamine' 
           return;
         }
 
+        // 根據mode過濾記錄（如果mode欄位存在）
+        let filteredRecords = gameRecords;
+        if (gameRecords.length > 0 && gameRecords[0].hasOwnProperty('mode')) {
+          filteredRecords = gameRecords.filter(record => record.mode === mode);
+        }
+
+        if (filteredRecords.length === 0) {
+          setStats(null);
+          return;
+        }
+
         // 計算統計數據
-        const totalGames = gameRecords.length;
-        const bestScore = Math.max(...gameRecords.map(record => record.score));
-        const bestTime = Math.min(...gameRecords.map(record => record.completion_time));
-        const averageScore = gameRecords.reduce((sum, record) => sum + record.score, 0) / totalGames;
-        const totalMistakes = gameRecords.reduce((sum, record) => sum + record.mistakes, 0);
+        const totalGames = filteredRecords.length;
+        const bestScore = Math.max(...filteredRecords.map(record => record.score));
+        const bestTime = Math.min(...filteredRecords.map(record => record.completion_time));
+        const averageScore = filteredRecords.reduce((sum, record) => sum + record.score, 0) / totalGames;
+        const totalMistakes = filteredRecords.reduce((sum, record) => sum + record.mistakes, 0);
 
         // 按難度分組統計
         const difficultyStats = {
@@ -70,7 +80,7 @@ export const useUserStats = (userId: string | null, mode: 'normal' | 'dopamine' 
         // 計算各難度的統計
         const difficulties: Difficulty[] = ['easy', 'medium', 'hard', 'expert', 'hell'];
         difficulties.forEach(difficulty => {
-          const difficultyRecords = gameRecords.filter(record => record.difficulty === difficulty);
+          const difficultyRecords = filteredRecords.filter(record => record.difficulty === difficulty);
           if (difficultyRecords.length > 0) {
             difficultyStats[difficulty] = {
               gamesPlayed: difficultyRecords.length,

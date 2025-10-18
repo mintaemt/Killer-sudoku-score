@@ -73,7 +73,7 @@ const LeaderboardEntryItem = ({ entry, isCurrentUser }: { entry: LeaderboardEntr
 export const Leaderboard = ({ currentUserId, onClose, mode = 'normal' }: LeaderboardProps) => {
   const [activeTab, setActiveTab] = useState<string>("all");
   const selectedDifficulty = activeTab === "all" ? undefined : activeTab as Difficulty;
-  const { leaderboard, loading, error, refetch } = useLeaderboard(selectedDifficulty);
+  const { leaderboard, loading, error, refetch } = useLeaderboard(selectedDifficulty, mode);
 
   const handleRefresh = () => {
     refetch();

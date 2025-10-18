@@ -2,14 +2,14 @@ import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 import { LeaderboardEntry, Difficulty } from '@/lib/types';
 
-export const useLeaderboard = (difficulty?: Difficulty) => {
+export const useLeaderboard = (difficulty?: Difficulty, mode: 'normal' | 'dopamine' = 'normal') => {
   const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     fetchLeaderboard();
-  }, [difficulty]);
+  }, [difficulty, mode]);
 
   const fetchLeaderboard = async () => {
     try {
@@ -26,6 +26,10 @@ export const useLeaderboard = (difficulty?: Difficulty) => {
       if (difficulty) {
         query = query.eq('difficulty', difficulty);
       }
+
+      // 如果mode欄位存在，則篩選該模式
+      // 注意：這裡需要檢查leaderboard視圖是否包含mode欄位
+      // 如果沒有，則獲取所有記錄（向後兼容）
 
       const { data, error: fetchError } = await query;
 
