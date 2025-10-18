@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import { GameRecord, Difficulty, GameCompletionResult } from '@/lib/types';
-import { calculateScore } from '@/lib/scoreCalculator';
+import { calculateScore, calculateScoreWithDetails } from '@/lib/scoreCalculator';
 
 export const useGameRecord = () => {
   const [loading, setLoading] = useState(false);
@@ -18,12 +18,13 @@ export const useGameRecord = () => {
       setLoading(true);
       setError(null);
 
-      // 計算分數
-      const score = calculateScore({
+      // 計算分數和詳細計算過程
+      const scoreDetails = calculateScoreWithDetails({
         difficulty,
         completionTime,
         mistakes
       });
+      const score = scoreDetails.finalScore;
 
       // 儲存遊戲記錄到資料庫
       const { data: gameRecord, error: insertError } = await supabase
@@ -41,6 +42,29 @@ export const useGameRecord = () => {
 
       if (insertError) {
         throw insertError;
+      }
+
+      // 儲存分數計算日誌
+      const { error: logError } = await supabase
+        .from('score_calculation_logs')
+        .insert({
+          game_record_id: gameRecord.id,
+          user_id: userId,
+          difficulty,
+          completion_time: completionTime,
+          mistakes,
+          base_score: scoreDetails.baseScore,
+          ideal_time: scoreDetails.idealTime,
+          time_bonus: scoreDetails.timeBonus,
+          mistake_penalty: scoreDetails.mistakePenalty,
+          calculated_score: scoreDetails.calculatedScore,
+          final_score: scoreDetails.finalScore,
+          calculation_version: scoreDetails.calculationVersion
+        });
+
+      if (logError) {
+        console.error('Error saving score calculation log:', logError);
+        // 不拋出錯誤，因為主要記錄已成功保存
       }
 
       // 獲取用戶在該難度的排名
@@ -122,11 +146,39 @@ export const useGameRecord = () => {
     }
   };
 
+  // 獲取用戶的分數計算日誌
+  const getUserScoreLogs = async (userId: string, difficulty?: Difficulty) => {
+    try {
+      let query = supabase
+        .from('score_calculation_logs')
+        .select('*')
+        .eq('user_id', userId)
+        .order('created_at', { ascending: false });
+
+      if (difficulty) {
+        query = query.eq('difficulty', difficulty);
+      }
+
+      const { data, error } = await query;
+
+      if (error) {
+        console.error('Error getting user score logs:', error);
+        return null;
+      }
+
+      return data;
+    } catch (err) {
+      console.error('Error getting user score logs:', err);
+      return null;
+    }
+  };
+
   return {
     loading,
     error,
     saveGameRecord,
     getUserRank,
-    getUserBestScore
+    getUserBestScore,
+    getUserScoreLogs
   };
 };

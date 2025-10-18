@@ -1,10 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { RotateCcw, Palette, User, Trophy, Clock, ListOrdered } from "lucide-react";
+import { RotateCcw, Palette, User, Trophy, Clock, ListOrdered, Info } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { cn } from "@/lib/utils";
 import { useState, useRef, useEffect } from "react";
 import { useUser } from "@/hooks/useUser";
 import { useUserStats } from "@/hooks/useUserStats";
+import { GameRulesModal } from "@/components/GameRulesModal";
 
 interface GameHeaderProps {
   onNewGame: () => void;
@@ -25,6 +26,7 @@ const themes = [
 export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeaderboard }: GameHeaderProps) => {
   const [isThemeOpen, setIsThemeOpen] = useState(false);
   const [isUserOpen, setIsUserOpen] = useState(false);
+  const [isRulesOpen, setIsRulesOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const userDropdownRef = useRef<HTMLDivElement>(null);
   const { user, clearUser, isLoggedIn, isVisitorMode } = useUser();
@@ -179,6 +181,17 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
             </div>
           )}
 
+          {/* 遊戲規則按鈕 */}
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setIsRulesOpen(true)}
+            className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md"
+            title="遊戲規則"
+          >
+            <Info className="h-3 w-3 md:h-4 md:w-4" />
+          </Button>
+
           {/* 新遊戲按鈕 - 縮小版本 */}
           <Button
             variant="outline"
@@ -191,6 +204,12 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
           </Button>
         </div>
       </div>
+      
+      {/* 遊戲規則模態框 */}
+      <GameRulesModal 
+        isOpen={isRulesOpen} 
+        onClose={() => setIsRulesOpen(false)} 
+      />
     </div>
   );
 };

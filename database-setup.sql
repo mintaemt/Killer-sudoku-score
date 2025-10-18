@@ -20,6 +20,24 @@ CREATE TABLE IF NOT EXISTS game_records (
   completed_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
+-- 2.1. 創建分數計算日誌表
+CREATE TABLE IF NOT EXISTS score_calculation_logs (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  game_record_id UUID REFERENCES game_records(id) ON DELETE CASCADE,
+  user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+  difficulty VARCHAR(20) NOT NULL,
+  completion_time INTEGER NOT NULL,
+  mistakes INTEGER NOT NULL,
+  base_score INTEGER NOT NULL,
+  ideal_time INTEGER NOT NULL,
+  time_bonus DECIMAL(10,2) NOT NULL,
+  mistake_penalty INTEGER NOT NULL,
+  calculated_score DECIMAL(10,2) NOT NULL,
+  final_score INTEGER NOT NULL,
+  calculation_version VARCHAR(20) DEFAULT 'v1.0',
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
 -- 3. 創建排行榜視圖
 CREATE OR REPLACE VIEW leaderboard AS
 SELECT 
@@ -37,6 +55,7 @@ ORDER BY gr.difficulty, MAX(gr.score) DESC;
 -- 4. 啟用 Row Level Security (RLS)
 ALTER TABLE users ENABLE ROW LEVEL SECURITY;
 ALTER TABLE game_records ENABLE ROW LEVEL SECURITY;
+ALTER TABLE score_calculation_logs ENABLE ROW LEVEL SECURITY;
 
 -- 5. 創建 RLS 政策
 -- 允許所有人讀取排行榜
@@ -59,10 +78,21 @@ FOR INSERT WITH CHECK (true);
 CREATE POLICY "Allow update users" ON users
 FOR UPDATE USING (true);
 
+-- 允許讀取分數計算日誌
+CREATE POLICY "Allow read access to score logs" ON score_calculation_logs
+FOR SELECT USING (true);
+
+-- 允許插入分數計算日誌
+CREATE POLICY "Allow insert score logs" ON score_calculation_logs
+FOR INSERT WITH CHECK (true);
+
 -- 6. 創建索引以提高查詢效能
 CREATE INDEX IF NOT EXISTS idx_game_records_user_difficulty ON game_records(user_id, difficulty);
 CREATE INDEX IF NOT EXISTS idx_game_records_difficulty_score ON game_records(difficulty, score DESC);
 CREATE INDEX IF NOT EXISTS idx_users_name ON users(name);
+CREATE INDEX IF NOT EXISTS idx_score_logs_user_id ON score_calculation_logs(user_id);
+CREATE INDEX IF NOT EXISTS idx_score_logs_game_record_id ON score_calculation_logs(game_record_id);
+CREATE INDEX IF NOT EXISTS idx_score_logs_created_at ON score_calculation_logs(created_at DESC);
 
 -- 7. 創建函數來獲取用戶排名
 CREATE OR REPLACE FUNCTION get_user_rank(p_user_id UUID, p_difficulty VARCHAR)
