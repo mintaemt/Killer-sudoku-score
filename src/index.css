@@ -465,39 +465,102 @@ All colors MUST be HSL.
   );
 }
 
-/* 流動漸層動畫 - 平滑暈染流動 */
+/* 流動漸層動畫 - 隨機暈染流動 */
 @keyframes gradient-flow {
   0% {
-    background-position: 0% 0%;
-    filter: hue-rotate(0deg) brightness(1);
+    background: 
+      radial-gradient(circle at 20% 30%, #f97316 0%, transparent 40%),
+      radial-gradient(circle at 80% 20%, #ef4444 0%, transparent 35%),
+      radial-gradient(circle at 40% 80%, #22c55e 0%, transparent 45%),
+      radial-gradient(circle at 70% 60%, #a855f7 0%, transparent 30%),
+      radial-gradient(circle at 10% 70%, #ec4899 0%, transparent 50%),
+      radial-gradient(circle at 90% 80%, #14b8a6 0%, transparent 40%);
+    filter: hue-rotate(0deg) brightness(1) blur(0px);
+  }
+  12.5% {
+    background: 
+      radial-gradient(ellipse at 75% 15%, #f97316 0%, transparent 45%),
+      radial-gradient(circle at 25% 85%, #ef4444 0%, transparent 30%),
+      radial-gradient(ellipse at 60% 25%, #22c55e 0%, transparent 50%),
+      radial-gradient(circle at 15% 45%, #a855f7 0%, transparent 35%),
+      radial-gradient(ellipse at 85% 75%, #ec4899 0%, transparent 40%),
+      radial-gradient(circle at 45% 35%, #14b8a6 0%, transparent 55%);
+    filter: hue-rotate(8deg) brightness(1.05) blur(0.5px);
   }
   25% {
-    background-position: 100% 25%;
-    filter: hue-rotate(15deg) brightness(1.1);
+    background: 
+      radial-gradient(circle at 60% 70%, #f97316 0%, transparent 35%),
+      radial-gradient(ellipse at 30% 25%, #ef4444 0%, transparent 40%),
+      radial-gradient(circle at 80% 90%, #22c55e 0%, transparent 45%),
+      radial-gradient(ellipse at 10% 60%, #a855f7 0%, transparent 25%),
+      radial-gradient(circle at 50% 20%, #ec4899 0%, transparent 55%),
+      radial-gradient(ellipse at 90% 40%, #14b8a6 0%, transparent 50%);
+    filter: hue-rotate(15deg) brightness(1.1) blur(1px);
+  }
+  37.5% {
+    background: 
+      radial-gradient(ellipse at 40% 10%, #f97316 0%, transparent 50%),
+      radial-gradient(circle at 70% 80%, #ef4444 0%, transparent 30%),
+      radial-gradient(ellipse at 20% 50%, #22c55e 0%, transparent 40%),
+      radial-gradient(circle at 85% 30%, #a855f7 0%, transparent 35%),
+      radial-gradient(ellipse at 60% 85%, #ec4899 0%, transparent 45%),
+      radial-gradient(circle at 15% 70%, #14b8a6 0%, transparent 60%);
+    filter: hue-rotate(22deg) brightness(0.95) blur(0.8px);
   }
   50% {
-    background-position: 50% 100%;
-    filter: hue-rotate(30deg) brightness(0.9);
+    background: 
+      radial-gradient(circle at 80% 50%, #f97316 0%, transparent 40%),
+      radial-gradient(ellipse at 15% 35%, #ef4444 0%, transparent 35%),
+      radial-gradient(circle at 50% 15%, #22c55e 0%, transparent 50%),
+      radial-gradient(ellipse at 75% 85%, #a855f7 0%, transparent 30%),
+      radial-gradient(circle at 25% 60%, #ec4899 0%, transparent 45%),
+      radial-gradient(ellipse at 90% 25%, #14b8a6 0%, transparent 55%);
+    filter: hue-rotate(30deg) brightness(0.9) blur(1.2px);
+  }
+  62.5% {
+    background: 
+      radial-gradient(ellipse at 25% 75%, #f97316 0%, transparent 45%),
+      radial-gradient(circle at 85% 15%, #ef4444 0%, transparent 40%),
+      radial-gradient(ellipse at 70% 40%, #22c55e 0%, transparent 35%),
+      radial-gradient(circle at 40% 90%, #a855f7 0%, transparent 25%),
+      radial-gradient(ellipse at 10% 30%, #ec4899 0%, transparent 50%),
+      radial-gradient(circle at 60% 65%, #14b8a6 0%, transparent 40%);
+    filter: hue-rotate(22deg) brightness(1.0) blur(0.9px);
   }
   75% {
-    background-position: 25% 75%;
-    filter: hue-rotate(15deg) brightness(1.05);
+    background: 
+      radial-gradient(circle at 50% 25%, #f97316 0%, transparent 35%),
+      radial-gradient(ellipse at 80% 70%, #ef4444 0%, transparent 30%),
+      radial-gradient(circle at 30% 85%, #22c55e 0%, transparent 45%),
+      radial-gradient(ellipse at 65% 20%, #a855f7 0%, transparent 40%),
+      radial-gradient(circle at 90% 55%, #ec4899 0%, transparent 50%),
+      radial-gradient(ellipse at 20% 40%, #14b8a6 0%, transparent 35%);
+    filter: hue-rotate(15deg) brightness(1.05) blur(0.7px);
+  }
+  87.5% {
+    background: 
+      radial-gradient(ellipse at 70% 60%, #f97316 0%, transparent 40%),
+      radial-gradient(circle at 35% 45%, #ef4444 0%, transparent 35%),
+      radial-gradient(ellipse at 90% 10%, #22c55e 0%, transparent 50%),
+      radial-gradient(circle at 15% 75%, #a855f7 0%, transparent 30%),
+      radial-gradient(ellipse at 55% 90%, #ec4899 0%, transparent 45%),
+      radial-gradient(circle at 75% 35%, #14b8a6 0%, transparent 55%);
+    filter: hue-rotate(8deg) brightness(1.02) blur(0.3px);
   }
   100% {
-    background-position: 0% 0%;
-    filter: hue-rotate(0deg) brightness(1);
+    background: 
+      radial-gradient(circle at 20% 30%, #f97316 0%, transparent 40%),
+      radial-gradient(circle at 80% 20%, #ef4444 0%, transparent 35%),
+      radial-gradient(circle at 40% 80%, #22c55e 0%, transparent 45%),
+      radial-gradient(circle at 70% 60%, #a855f7 0%, transparent 30%),
+      radial-gradient(circle at 10% 70%, #ec4899 0%, transparent 50%),
+      radial-gradient(circle at 90% 80%, #14b8a6 0%, transparent 40%);
+    filter: hue-rotate(0deg) brightness(1) blur(0px);
   }
 }
 
 .gradient-flow {
-  background: 
-    radial-gradient(circle at 20% 30%, #f97316 0%, transparent 40%),
-    radial-gradient(circle at 80% 20%, #ef4444 0%, transparent 35%),
-    radial-gradient(circle at 40% 80%, #22c55e 0%, transparent 45%),
-    radial-gradient(circle at 70% 60%, #a855f7 0%, transparent 30%),
-    radial-gradient(circle at 10% 70%, #ec4899 0%, transparent 50%),
-    radial-gradient(circle at 90% 80%, #14b8a6 0%, transparent 40%);
-  background-size: 200% 200%;
-  animation: gradient-flow 8s ease-in-out infinite;
+  background-size: 100% 100%;
+  animation: gradient-flow 12s ease-in-out infinite;
 }
 }
