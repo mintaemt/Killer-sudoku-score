@@ -58,8 +58,6 @@ export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge }: Dopamin
                 </h3>
                 <ul className="text-sm text-muted-foreground space-y-1">
                   <li>• 隨機難度挑戰，每次都是全新體驗</li>
-                  <li>• 稀有度系統，越稀有越有成就感</li>
-                  <li>• 20次保底機制，確保體驗最高難度</li>
                   <li>• 特殊計分系統，連擊與速度獎勵</li>
                 </ul>
               </div>
