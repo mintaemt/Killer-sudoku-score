@@ -10,7 +10,7 @@ interface GameHeaderProps {
   onNewGame: () => void;
   onThemeChange: (theme: string) => void;
   currentTheme: string;
-  onShowLeaderboard: () => void;
+  onShowLeaderboard: (mode?: 'normal' | 'dopamine') => void;
   onShowRules: () => void;
 }
 
@@ -239,8 +239,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
                         variant="outline"
                         size="sm"
                         onClick={() => {
-                          const url = viewMode === 'normal' ? '/leaderboard' : '/leaderboard?mode=dopamine';
-                          window.open(url, '_blank');
+                          onShowLeaderboard(viewMode);
                           setIsUserOpen(false);
                         }}
                         className="w-full text-xs"

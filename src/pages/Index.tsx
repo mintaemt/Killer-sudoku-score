@@ -46,6 +46,7 @@ const Index = () => {
   const [showUserNameInput, setShowUserNameInput] = useState(false);
   const [showGameCompleteModal, setShowGameCompleteModal] = useState(false);
   const [showLeaderboard, setShowLeaderboard] = useState(false);
+  const [currentLeaderboardMode, setCurrentLeaderboardMode] = useState<'normal' | 'dopamine'>('normal');
   const [showRules, setShowRules] = useState(false);
   const [gameCompletionResult, setGameCompletionResult] = useState<GameCompletionResult | null>(null);
   
@@ -317,9 +318,11 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
   };
 
   // 處理排行榜顯示
-  const handleShowLeaderboard = () => {
+  const handleShowLeaderboard = (mode: 'normal' | 'dopamine' = 'normal') => {
     setShowLeaderboard(true);
     setShowGameCompleteModal(false);
+    // 設置當前查看的模式
+    setCurrentLeaderboardMode(mode);
   };
 
   const handleCloseLeaderboard = () => {
@@ -667,6 +670,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
             <Leaderboard
               currentUserId={user?.name}
               onClose={handleCloseLeaderboard}
+              mode={currentLeaderboardMode}
             />
           </div>
         </div>
