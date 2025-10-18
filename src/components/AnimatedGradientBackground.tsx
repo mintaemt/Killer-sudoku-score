@@ -57,8 +57,8 @@ export const AnimatedGradientBackground = ({ isDopamineMode = false }: AnimatedG
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setAnimationPhase(prev => (prev + 0.5) % 360); // 減慢動畫速度，減少閃爍
-    }, 100); // 增加間隔時間
+      setAnimationPhase(prev => (prev + 2) % 360); // 加快動畫速度
+    }, 50); // 減少間隔時間，提高更新頻率
 
     return () => clearInterval(interval);
   }, []);
@@ -77,11 +77,11 @@ export const AnimatedGradientBackground = ({ isDopamineMode = false }: AnimatedG
         className="fixed inset-0 -z-10"
         style={{
           background: `
-            radial-gradient(circle farthest-corner at ${20 + Math.sin(animationPhase * 0.01) * 20}% ${20 + Math.cos(animationPhase * 0.01) * 20}%, rgba(${orange.r}, ${orange.g}, ${orange.b}, 0.6) 0%, rgba(${orange.r}, ${orange.g}, ${orange.b}, 0) 50%),
-            radial-gradient(circle farthest-side at ${80 + Math.sin(animationPhase * 0.015) * 15}% ${20 + Math.cos(animationPhase * 0.015) * 15}%, rgba(${red.r}, ${red.g}, ${red.b}, 0.4) 0%, rgba(${red.r}, ${red.g}, ${red.b}, 0) 30%),
-            radial-gradient(circle farthest-corner at ${80 + Math.sin(animationPhase * 0.012) * 18}% ${80 + Math.cos(animationPhase * 0.012) * 18}%, rgba(${green.r}, ${green.g}, ${green.b}, 0.5) 0%, rgba(${green.r}, ${green.g}, ${green.b}, 0) 40%),
-            radial-gradient(circle farthest-corner at ${20 + Math.sin(animationPhase * 0.018) * 22}% ${80 + Math.cos(animationPhase * 0.018) * 22}%, rgba(${purple.r}, ${purple.g}, ${purple.b}, 0.3) 0%, rgba(${purple.r}, ${purple.g}, ${purple.b}, 0) 35%),
-            radial-gradient(ellipse at ${50 + Math.sin(animationPhase * 0.008) * 10}% ${50 + Math.cos(animationPhase * 0.008) * 10}%, rgba(${pink.r}, ${pink.g}, ${pink.b}, 0.2) 0%, rgba(${pink.r}, ${pink.g}, ${pink.b}, 0) 60%),
+            radial-gradient(circle farthest-corner at ${20 + Math.sin(animationPhase * 0.02) * 20}% ${20 + Math.cos(animationPhase * 0.02) * 20}%, rgba(${orange.r}, ${orange.g}, ${orange.b}, 0.6) 0%, rgba(${orange.r}, ${orange.g}, ${orange.b}, 0) 50%),
+            radial-gradient(circle farthest-side at ${80 + Math.sin(animationPhase * 0.03) * 15}% ${20 + Math.cos(animationPhase * 0.03) * 15}%, rgba(${red.r}, ${red.g}, ${red.b}, 0.4) 0%, rgba(${red.r}, ${red.g}, ${red.b}, 0) 30%),
+            radial-gradient(circle farthest-corner at ${80 + Math.sin(animationPhase * 0.025) * 18}% ${80 + Math.cos(animationPhase * 0.025) * 18}%, rgba(${green.r}, ${green.g}, ${green.b}, 0.5) 0%, rgba(${green.r}, ${green.g}, ${green.b}, 0) 40%),
+            radial-gradient(circle farthest-corner at ${20 + Math.sin(animationPhase * 0.035) * 22}% ${80 + Math.cos(animationPhase * 0.035) * 22}%, rgba(${purple.r}, ${purple.g}, ${purple.b}, 0.3) 0%, rgba(${purple.r}, ${purple.g}, ${purple.b}, 0) 35%),
+            radial-gradient(ellipse at ${50 + Math.sin(animationPhase * 0.015) * 10}% ${50 + Math.cos(animationPhase * 0.015) * 10}%, rgba(${pink.r}, ${pink.g}, ${pink.b}, 0.2) 0%, rgba(${pink.r}, ${pink.g}, ${pink.b}, 0) 60%),
             linear-gradient(${animationPhase}deg, rgba(${teal.r}, ${teal.g}, ${teal.b}, 0.1) 0%, rgba(${purple.r}, ${purple.g}, ${purple.b}, 0.1) 50%, rgba(${pink.r}, ${pink.g}, ${pink.b}, 0.1) 100%)
           `
         }}
@@ -102,12 +102,12 @@ export const AnimatedGradientBackground = ({ isDopamineMode = false }: AnimatedG
       className="fixed inset-0 -z-10"
       style={{
         background: `
-          radial-gradient(circle farthest-corner at ${30 + Math.sin(animationPhase * 0.005) * 10}% ${30 + Math.cos(animationPhase * 0.005) * 10}%, rgba(${orange.r}, ${orange.g}, ${orange.b}, 0.2) 0%, rgba(${orange.r}, ${orange.g}, ${orange.b}, 0) 50%),
-          radial-gradient(circle farthest-side at ${70 + Math.sin(animationPhase * 0.007) * 12}% ${30 + Math.cos(animationPhase * 0.007) * 12}%, rgba(${red.r}, ${red.g}, ${red.b}, 0.15) 0%, rgba(${red.r}, ${red.g}, ${red.b}, 0) 30%),
-          radial-gradient(circle farthest-corner at ${70 + Math.sin(animationPhase * 0.006) * 15}% ${70 + Math.cos(animationPhase * 0.006) * 15}%, rgba(${green.r}, ${green.g}, ${green.b}, 0.18) 0%, rgba(${green.r}, ${green.g}, ${green.b}, 0) 40%),
-          radial-gradient(circle farthest-corner at ${30 + Math.sin(animationPhase * 0.008) * 18}% ${70 + Math.cos(animationPhase * 0.008) * 18}%, rgba(${purple.r}, ${purple.g}, ${purple.b}, 0.12) 0%, rgba(${purple.r}, ${purple.g}, ${purple.b}, 0) 35%),
-          radial-gradient(ellipse at ${50 + Math.sin(animationPhase * 0.004) * 8}% ${50 + Math.cos(animationPhase * 0.004) * 8}%, rgba(${pink.r}, ${pink.g}, ${pink.b}, 0.08) 0%, rgba(${pink.r}, ${pink.g}, ${pink.b}, 0) 60%),
-          linear-gradient(${animationPhase * 0.5}deg, rgba(${teal.r}, ${teal.g}, ${teal.b}, 0.03) 0%, rgba(${purple.r}, ${purple.g}, ${purple.b}, 0.03) 50%, rgba(${pink.r}, ${pink.g}, ${pink.b}, 0.03) 100%)
+          radial-gradient(circle farthest-corner at ${30 + Math.sin(animationPhase * 0.01) * 10}% ${30 + Math.cos(animationPhase * 0.01) * 10}%, rgba(${orange.r}, ${orange.g}, ${orange.b}, 0.2) 0%, rgba(${orange.r}, ${orange.g}, ${orange.b}, 0) 50%),
+          radial-gradient(circle farthest-side at ${70 + Math.sin(animationPhase * 0.014) * 12}% ${30 + Math.cos(animationPhase * 0.014) * 12}%, rgba(${red.r}, ${red.g}, ${red.b}, 0.15) 0%, rgba(${red.r}, ${red.g}, ${red.b}, 0) 30%),
+          radial-gradient(circle farthest-corner at ${70 + Math.sin(animationPhase * 0.012) * 15}% ${70 + Math.cos(animationPhase * 0.012) * 15}%, rgba(${green.r}, ${green.g}, ${green.b}, 0.18) 0%, rgba(${green.r}, ${green.g}, ${green.b}, 0) 40%),
+          radial-gradient(circle farthest-corner at ${30 + Math.sin(animationPhase * 0.016) * 18}% ${70 + Math.cos(animationPhase * 0.016) * 18}%, rgba(${purple.r}, ${purple.g}, ${purple.b}, 0.12) 0%, rgba(${purple.r}, ${purple.g}, ${purple.b}, 0) 35%),
+          radial-gradient(ellipse at ${50 + Math.sin(animationPhase * 0.008) * 8}% ${50 + Math.cos(animationPhase * 0.008) * 8}%, rgba(${pink.r}, ${pink.g}, ${pink.b}, 0.08) 0%, rgba(${pink.r}, ${pink.g}, ${pink.b}, 0) 60%),
+          linear-gradient(${animationPhase}deg, rgba(${teal.r}, ${teal.g}, ${teal.b}, 0.03) 0%, rgba(${purple.r}, ${purple.g}, ${purple.b}, 0.03) 50%, rgba(${pink.r}, ${pink.g}, ${pink.b}, 0.03) 100%)
         `
       }}
     />
