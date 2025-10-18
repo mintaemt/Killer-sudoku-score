@@ -35,7 +35,7 @@ export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge }: Dopamin
                     <span>多巴胺模式</span>
                     <Badge 
                       variant="secondary" 
-                      className="text-white relative overflow-hidden d"
+                      className="text-white relative overflow-hidden flowing-button"
                     >
                       <Users className="h-3 w-3 mr-1" />
                       用戶限定
@@ -111,7 +111,7 @@ export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge }: Dopamin
             <div className="pt-4">
               <Button 
                 onClick={onStartChallenge}
-                className="w-full h-12 text-lg font-bold text-white shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden d"
+                className="w-full h-12 text-lg font-bold text-white shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden flowing-button"
               >
                 <Trophy className="mr-2 h-5 w-5" />
                 開始挑戰
