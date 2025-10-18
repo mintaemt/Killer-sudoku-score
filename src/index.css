@@ -464,4 +464,31 @@ All colors MUST be HSL.
     rgba(255, 255, 255, 0.1)
   );
 }
+
+/* 流動漸層動畫 */
+@keyframes gradient-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.gradient-flow {
+  background: linear-gradient(
+    45deg,
+    #f97316, /* orange-500 */
+    #ef4444, /* red-500 */
+    #22c55e, /* green-500 */
+    #a855f7, /* purple-500 */
+    #ec4899, /* pink-500 */
+    #14b8a6  /* teal-500 */
+  );
+  background-size: 300% 300%;
+  animation: gradient-flow 3s ease infinite;
+}
 }

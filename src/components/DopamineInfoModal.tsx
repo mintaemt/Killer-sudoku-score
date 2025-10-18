@@ -30,18 +30,15 @@ export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge }: Dopamin
           <CardHeader>
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="p-2 rounded-full bg-gradient-to-r from-orange-500 via-red-500 via-green-500 via-purple-500 via-pink-500 to-teal-500 animate-pulse">
-                  <Zap className="h-6 w-6 text-white" />
-                </div>
                 <div>
                   <CardTitle className="flex items-center gap-2">
                     <span>多巴胺模式</span>
-                    <Badge variant="secondary" className="bg-gradient-to-r from-orange-500 via-red-500 via-green-500 via-purple-500 via-pink-500 to-teal-500 text-white animate-pulse">
+                    <Badge variant="secondary" className="gradient-flow text-white">
                       <Users className="h-3 w-3 mr-1" />
                       用戶限定
                     </Badge>
                   </CardTitle>
-                  <CardDescription>超越普通模式的遊樂性與成就感</CardDescription>
+                  <CardDescription className="mt-2">超越普通模式的遊樂性與成就感</CardDescription>
                 </div>
               </div>
               <Button variant="outline" size="sm" onClick={onClose}>
@@ -111,7 +108,7 @@ export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge }: Dopamin
             <div className="pt-4">
               <Button 
                 onClick={onStartChallenge}
-                className="w-full h-12 text-lg font-bold bg-gradient-to-r from-orange-500 via-red-500 via-green-500 via-purple-500 via-pink-500 to-teal-500 text-white shadow-lg hover:shadow-xl transition-all duration-300 animate-pulse"
+                className="w-full h-12 text-lg font-bold gradient-flow text-white shadow-lg hover:shadow-xl transition-all duration-300"
               >
                 <Trophy className="mr-2 h-5 w-5" />
                 開始挑戰
