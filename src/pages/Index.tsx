@@ -17,6 +17,7 @@ import { useUser } from "@/hooks/useUser";
 import { useGameRecord } from "@/hooks/useGameRecord";
 import { Difficulty, DopamineDifficulty, GameCompletionResult } from "@/lib/types";
 import { calculateScore, calculateDopamineScore } from "@/lib/scoreCalculator";
+import { cn } from "@/lib/utils";
 
 const Index = () => {
   const [selectedCell, setSelectedCell] = useState<{ row: number; col: number } | null>(null);
@@ -374,7 +375,10 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-2 md:p-4" data-theme={currentTheme}>
+    <div className={cn(
+      "min-h-screen flex items-center justify-center p-2 md:p-4",
+      isDopamineMode && "dopamine-mode-border"
+    )} data-theme={currentTheme}>
       {/* 動態漸層背景 */}
       <AnimatedGradientBackground isDopamineMode={isDopamineMode} />
       

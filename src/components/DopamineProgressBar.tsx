@@ -26,25 +26,20 @@ export const DopamineProgressBar = ({
   return (
     <div className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/20 shadow-lg border-b border-white/10">
       {/* 主要資訊欄 */}
-      <div className="flex items-center justify-between px-4 py-2 text-white">
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-2">
-            <span className="text-lg">⚡</span>
-            <span className="font-bold text-sm">TURBO MODE</span>
-          </div>
+      <div className="flex items-center justify-center px-4 py-2 text-white">
+        <div className="flex items-center gap-6">
           {comboCount > 0 && (
             <div className="flex items-center gap-1 bg-yellow-400 text-black px-2 py-1 rounded-full text-xs font-bold">
               <span>🔥</span>
               <span>{comboCount}x COMBO</span>
             </div>
           )}
-        </div>
-        
-        <div className="flex items-center gap-4">
-          <div className="text-sm">
-            <span className="opacity-80">剩餘格子:</span>
-            <span className="font-bold ml-1">{remainingCells}</span>
+          
+          <div className="flex items-center gap-2">
+            <span className="text-sm opacity-80">剩餘格子:</span>
+            <span className="font-bold">{remainingCells}</span>
           </div>
+          
           <div className="text-lg font-mono font-bold">
             {formatTime(timeLeft)}
           </div>

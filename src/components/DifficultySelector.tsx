@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { ChevronDown, Clock, AlertTriangle, Play, Pause, Zap } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { useUser } from "@/hooks/useUser";
+import { DopamineInfoModal } from "./DopamineInfoModal";
 
 interface DifficultySelectorProps {
   difficulty: Difficulty;
@@ -32,6 +33,7 @@ export const DifficultySelector = ({
   onDopamineMode,
 }: DifficultySelectorProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [showDopamineInfo, setShowDopamineInfo] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { user, isVisitorMode } = useUser();
 
@@ -76,7 +78,7 @@ export const DifficultySelector = ({
           </Button>
           
           {isOpen && (
-            <div className="absolute top-full left-0 mt-1 dropdown-glass rounded-md shadow-lg z-[9999] min-w-[120px] dropdown-menu">
+            <div className="absolute top-full left-0 mt-1 glassmorphism rounded-md shadow-lg z-[9999] min-w-[120px] dropdown-menu">
               {difficulties.map((diff) => (
                 <button
                   key={diff.value}
@@ -101,7 +103,7 @@ export const DifficultySelector = ({
           <Button
             variant="outline"
             size="sm"
-            onClick={onDopamineMode}
+            onClick={() => setShowDopamineInfo(true)}
             className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md border-purple-500/30 hover:border-purple-500/50 text-purple-600 hover:text-purple-700 relative overflow-hidden"
             style={{
               background: `
@@ -146,6 +148,16 @@ export const DifficultySelector = ({
           </span>
         </div>
       </div>
+      
+      {/* 多巴胺模式資訊模態框 */}
+      <DopamineInfoModal
+        isOpen={showDopamineInfo}
+        onClose={() => setShowDopamineInfo(false)}
+        onStartChallenge={() => {
+          setShowDopamineInfo(false);
+          onDopamineMode?.();
+        }}
+      />
     </div>
   );
 };

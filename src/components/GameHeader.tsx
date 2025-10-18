@@ -89,7 +89,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
             </Button>
             
             {isThemeOpen && (
-              <div className="absolute top-full right-0 mt-1 dropdown-glass rounded-md shadow-lg z-[9999] p-2 min-w-[120px] dropdown-menu">
+              <div className="absolute top-full right-0 mt-1 glassmorphism rounded-md shadow-lg z-[9999] p-2 min-w-[120px] dropdown-menu">
                 <div className="grid grid-cols-3 gap-1">
                   {themes.map((theme) => (
                     <button

@@ -396,4 +396,50 @@ All colors MUST be HSL.
         0 0 30px currentColor;
     }
   }
+
+  /* 多巴胺模式彩虹邊框效果 */
+  @property --gradient-angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+  }
+
+  @keyframes rainbow-rotation {
+    0% {
+      --gradient-angle: 0deg;
+    }
+    100% {
+      --gradient-angle: 360deg;
+    }
+  }
+
+  .dopamine-mode-border {
+    position: relative;
+    background: linear-gradient(var(--gradient-angle), #ff0000, #ff8000, #ffff00, #80ff00, #00ff00, #00ff80, #00ffff, #0080ff, #0000ff, #8000ff, #ff00ff, #ff0080);
+    animation: rainbow-rotation 3s linear infinite;
+    border-radius: 1rem;
+    padding: 0.3rem;
+  }
+
+  .dopamine-mode-border::before {
+    content: "";
+    position: absolute;
+    inset: 0.3rem;
+    background: hsl(var(--background));
+    border-radius: calc(1rem - 0.3rem);
+    z-index: -1;
+  }
+
+  /* Glassmorphism 效果 */
+  .glassmorphism {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  }
+
+  .dark .glassmorphism {
+    background: rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
 }
