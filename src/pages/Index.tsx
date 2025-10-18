@@ -375,14 +375,8 @@ const Index = () => {
   };
 
   return (
-    <div className={cn(
-      "min-h-screen flex items-center justify-center p-2 md:p-4",
-      isDopamineMode && "dopamine-mode-border"
-    )} data-theme={currentTheme}>
-      <div className={cn(
-        "w-full max-w-6xl mx-auto animate-fade-in",
-        isDopamineMode && "dopamine-content"
-      )}>
+    <div className="min-h-screen flex items-center justify-center p-2 md:p-4" data-theme={currentTheme}>
+      <div className="w-full max-w-6xl mx-auto animate-fade-in">
         {/* 動態漸層背景 */}
         <AnimatedGradientBackground isDopamineMode={isDopamineMode} />
         
