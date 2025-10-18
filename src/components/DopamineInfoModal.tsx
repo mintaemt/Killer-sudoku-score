@@ -13,12 +13,12 @@ interface DopamineInfoModalProps {
   onStartChallenge: (difficulty: DopamineDifficulty) => void;
 }
 
-const difficultyOptions: { value: DopamineDifficulty; label: string; description: string; color: string; ringColor: string }[] = [
-  { value: "easy", label: "Easy", description: "基礎成就感", color: "bg-gray-500/20 text-gray-600 border-gray-500/30", ringColor: "ring-gray-500" },
-  { value: "medium", label: "Medium", description: "適度挑戰", color: "bg-blue-500/20 text-blue-600 border-blue-500/30", ringColor: "ring-blue-500" },
-  { value: "hard", label: "Hard", description: "高成就感", color: "bg-purple-500/20 text-purple-600 border-purple-500/30", ringColor: "ring-purple-500" },
-  { value: "expert", label: "Expert", description: "頂級挑戰", color: "bg-orange-500/20 text-orange-600 border-orange-500/30", ringColor: "ring-orange-500" },
-  { value: "hell", label: "Hell", description: "最高成就感", color: "bg-red-500/20 text-red-600 border-red-500/30", ringColor: "ring-red-500" }
+const difficultyOptions: { value: DopamineDifficulty; label: string; description: string; color: string; ringColor: string; radioColor: string }[] = [
+  { value: "easy", label: "Easy", description: "基礎成就感", color: "bg-gray-500/20 text-gray-600 border-gray-500/30", ringColor: "ring-gray-500", radioColor: "accent-gray-500" },
+  { value: "medium", label: "Medium", description: "適度挑戰", color: "bg-blue-500/20 text-blue-600 border-blue-500/30", ringColor: "ring-blue-500", radioColor: "accent-blue-500" },
+  { value: "hard", label: "Hard", description: "高成就感", color: "bg-purple-500/20 text-purple-600 border-purple-500/30", ringColor: "ring-purple-500", radioColor: "accent-purple-500" },
+  { value: "expert", label: "Expert", description: "頂級挑戰", color: "bg-orange-500/20 text-orange-600 border-orange-500/30", ringColor: "ring-orange-500", radioColor: "accent-orange-500" },
+  { value: "hell", label: "Hell", description: "最高成就感", color: "bg-red-500/20 text-red-600 border-red-500/30", ringColor: "ring-red-500", radioColor: "accent-red-500" }
 ];
 
 export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge }: DopamineInfoModalProps) => {
@@ -106,11 +106,7 @@ export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge }: Dopamin
                       onChange={() => setSelectedDifficulty(difficulty.value)}
                       className={cn(
                         "w-3 h-3 mb-1",
-                        difficulty.value === "easy" && "text-gray-500",
-                        difficulty.value === "medium" && "text-blue-500",
-                        difficulty.value === "hard" && "text-purple-500",
-                        difficulty.value === "expert" && "text-orange-500",
-                        difficulty.value === "hell" && "text-red-500"
+                        difficulty.radioColor
                       )}
                     />
                     <div className="text-xs font-bold">{difficulty.label}</div>
