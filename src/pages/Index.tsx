@@ -367,7 +367,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-2 md:p-4" data-theme={currentTheme}>
+    <div className="min-h-screen flex items-center justify-center p-2 md:p-4" data-theme={currentTheme}>
       {/* 動態漸層背景 */}
       <AnimatedGradientBackground isDopamineMode={isDopamineMode} />
       
