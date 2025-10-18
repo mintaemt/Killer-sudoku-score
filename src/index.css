@@ -213,9 +213,7 @@ All colors MUST be HSL.
     --cage-border: 0 0% 40%;
     --cage-sum: 0 0% 60%;
   }
-}
 
-@layer base {
   * {
     @apply border-border;
   }
