@@ -51,8 +51,8 @@ const Index = () => {
   const [isDisqualified, setIsDisqualified] = useState(false);
   
   // Hooks
-  const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisitorMode, isLoggedIn } = useUser();
-  const { saveGameRecord } = useGameRecord();
+const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisitorMode, isLoggedIn } = useUser();
+  const { saveGameRecord, getUserBestScore } = useGameRecord();
 
   // 檢查用戶是否已登入
   useEffect(() => {
@@ -382,6 +382,9 @@ const Index = () => {
       completionTime: timeLimit - time
     }).finalScore;
 
+    let topScore = null;
+    let isNewRecord = false;
+
     // 保存多巴胺模式遊戲記錄
     if (user && !isVisitorMode) {
       try {
@@ -394,6 +397,22 @@ const Index = () => {
         
         if (result) {
           console.log('多巴胺模式遊戲記錄已保存:', result);
+          
+          // 獲取該難度的最高分
+          const bestScore = await getUserBestScore(user.id, dopamineDifficulty);
+          
+          if (bestScore && bestScore.score === score) {
+            // 如果當前分數等於最佳分數，說明是新的最高分
+            topScore = score;
+            isNewRecord = true;
+          } else if (bestScore) {
+            // 如果有其他記錄，顯示最高分
+            topScore = bestScore.score;
+          } else {
+            // 如果沒有其他記錄，當前分數就是最高分
+            topScore = score;
+            isNewRecord = true;
+          }
         }
       } catch (error) {
         console.error('保存多巴胺模式遊戲記錄失敗:', error);
@@ -406,7 +425,8 @@ const Index = () => {
       difficulty: dopamineDifficulty,
       comboCount,
       mistakes,
-      topScore: null // 目前沒有最高分資料
+      topScore,
+      isNewRecord
     });
     
     setShowDopamineWin(true);
@@ -590,6 +610,7 @@ const Index = () => {
           comboCount={dopamineWinData.comboCount}
           mistakes={dopamineWinData.mistakes}
           topScore={dopamineWinData.topScore}
+          isNewRecord={dopamineWinData.isNewRecord}
         />
       )}
 

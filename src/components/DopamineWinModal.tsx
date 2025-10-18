@@ -15,6 +15,7 @@ interface DopamineWinModalProps {
   comboCount: number;
   mistakes: number;
   topScore?: number;
+  isNewRecord?: boolean;
 }
 
 export const DopamineWinModal = ({
@@ -26,7 +27,8 @@ export const DopamineWinModal = ({
   difficulty,
   comboCount,
   mistakes,
-  topScore
+  topScore,
+  isNewRecord = false
 }: DopamineWinModalProps) => {
   if (!isOpen) return null;
 
@@ -73,7 +75,7 @@ export const DopamineWinModal = ({
                       className="text-white relative overflow-hidden flowing-button"
                     >
                       <Zap className="h-3 w-3 mr-1" />
-                      WIN
+                      WELL DONE
                     </Badge>
                   </CardTitle>
                   <CardDescription className="mt-2">恭喜完成挑戰！</CardDescription>
@@ -85,15 +87,15 @@ export const DopamineWinModal = ({
             </div>
           </CardHeader>
           
-          {/* 大型 WIN 標題 */}
+          {/* 大型 WELL DONE 標題 */}
           <div className="text-center py-8">
             <div 
-              className="text-6xl md:text-8xl font-black text-green-600 animate-pulse"
+              className="text-6xl md:text-8xl font-black retro-pixel-text flowing-text-well-done"
               style={{
-                fontFamily: 'Huninn, sans-serif'
+                fontFamily: 'Pixelify Sans, Courier New, Monaco, Menlo, monospace'
               }}
             >
-              WIN
+              WELL DONE
             </div>
           </div>
           
@@ -149,7 +151,8 @@ export const DopamineWinModal = ({
                     </div>
                     <div>
                       <div className="font-medium text-muted-foreground">
-                        {topScore ? `${topScore.toLocaleString()} 分` : '暫無最高分資料'}
+                        {isNewRecord ? `${score.toLocaleString()} 分 (新紀錄!)` : 
+                         topScore ? `${topScore.toLocaleString()} 分` : '暫無最高分資料'}
                       </div>
                       <div className="text-sm text-muted-foreground">
                         {getDifficultyLabel(difficulty)} 難度

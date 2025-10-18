@@ -511,7 +511,29 @@ All colors MUST be HSL.
   animation: flowing-color 3s ease-in-out infinite;
 }
 
+/* Well Done 流動顏色效果 - 橘色和紫色搭配 */
+.flowing-text-well-done {
+  background: linear-gradient(90deg, #FB923C, #A855F7, #FB923C, #A855F7);
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: flowing-color-well-done 3s ease-in-out infinite;
+}
+
 @keyframes flowing-color {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes flowing-color-well-done {
   0% {
     background-position: 0% 50%;
   }
