@@ -39,7 +39,7 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
               <TabsList className="grid w-full grid-cols-3">
                 <TabsTrigger value="rules">遊戲規則</TabsTrigger>
                 <TabsTrigger value="tips">解題技巧</TabsTrigger>
-                <TabsTrigger value="scoring">排行榜計分規則</TabsTrigger>
+                <TabsTrigger value="scoring">計分規則</TabsTrigger>
               </TabsList>
 
               <TabsContent value="rules" className="mt-6">
@@ -120,7 +120,7 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
                   <div className="p-3 rounded-lg bg-card border">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-muted-foreground">
                       <div>• 排行榜按難度分類，顯示各難度的最佳成績</div>
-                      <div>• 排名依據：最高分數 → 最佳時間 → 遊戲次數</div>
+                      <div>• 排名依據：分數 → 最佳時間 → 遊戲次數</div>
                       <div>• 每次完成遊戲都會自動更新排行榜</div>
                       <div>• 分數計算過程會完整記錄，確保公平透明</div>
                     </div>
