@@ -413,6 +413,8 @@ const Index = () => {
             mistakes,
             completionTime: timeLimit - time
           }).finalScore}
+          timeLeft={time}
+          timeLimit={timeLimit}
           isVisible={isDopamineMode}
         />
         
