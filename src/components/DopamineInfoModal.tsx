@@ -38,12 +38,12 @@ export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge }: Dopamin
                       className="text-white relative overflow-hidden"
                       style={{
                         background: `
-                          radial-gradient(circle farthest-corner at 15% 25%, rgba(249, 115, 22, 0.95) 0%, rgba(249, 115, 22, 0) 50%),
-                          radial-gradient(circle farthest-side at 85% 25%, rgba(59, 130, 246, 0.75) 0%, rgba(59, 130, 246, 0) 45%),
-                          radial-gradient(circle farthest-corner at 85% 75%, rgba(168, 85, 247, 0.85) 0%, rgba(168, 85, 247, 0) 55%),
-                          radial-gradient(circle farthest-corner at 15% 75%, rgba(236, 72, 153, 0.65) 0%, rgba(236, 72, 153, 0) 50%),
-                          radial-gradient(ellipse at center, rgba(59, 130, 246, 0.4) 0%, rgba(59, 130, 246, 0) 70%),
-                          linear-gradient(135deg, rgba(249, 115, 22, 0.15) 0%, rgba(59, 130, 246, 0.15) 100%)
+                          radial-gradient(circle farthest-corner at 25% 25%, rgba(249, 115, 22, 0.95) 0%, rgba(249, 115, 22, 0) 60%),
+                          radial-gradient(circle farthest-side at 75% 25%, rgba(59, 130, 246, 0.75) 0%, rgba(59, 130, 246, 0) 50%),
+                          radial-gradient(circle farthest-corner at 75% 75%, rgba(168, 85, 247, 0.85) 0%, rgba(168, 85, 247, 0) 60%),
+                          radial-gradient(circle farthest-corner at 25% 75%, rgba(236, 72, 153, 0.65) 0%, rgba(236, 72, 153, 0) 60%),
+                          radial-gradient(ellipse at center, rgba(59, 130, 246, 0.3) 0%, rgba(59, 130, 246, 0) 80%),
+                          linear-gradient(135deg, rgba(249, 115, 22, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%)
                         `
                       }}
                     >
@@ -124,12 +124,12 @@ export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge }: Dopamin
                 className="w-full h-12 text-lg font-bold text-white shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden"
                 style={{
                   background: `
-                    radial-gradient(circle farthest-corner at 15% 25%, rgba(249, 115, 22, 0.95) 0%, rgba(249, 115, 22, 0) 50%),
-                    radial-gradient(circle farthest-side at 85% 25%, rgba(59, 130, 246, 0.75) 0%, rgba(59, 130, 246, 0) 45%),
-                    radial-gradient(circle farthest-corner at 85% 75%, rgba(168, 85, 247, 0.85) 0%, rgba(168, 85, 247, 0) 55%),
-                    radial-gradient(circle farthest-corner at 15% 75%, rgba(236, 72, 153, 0.65) 0%, rgba(236, 72, 153, 0) 50%),
-                    radial-gradient(ellipse at center, rgba(59, 130, 246, 0.4) 0%, rgba(59, 130, 246, 0) 70%),
-                    linear-gradient(135deg, rgba(249, 115, 22, 0.15) 0%, rgba(59, 130, 246, 0.15) 100%)
+                    radial-gradient(circle farthest-corner at 25% 25%, rgba(249, 115, 22, 0.95) 0%, rgba(249, 115, 22, 0) 60%),
+                    radial-gradient(circle farthest-side at 75% 25%, rgba(59, 130, 246, 0.75) 0%, rgba(59, 130, 246, 0) 50%),
+                    radial-gradient(circle farthest-corner at 75% 75%, rgba(168, 85, 247, 0.85) 0%, rgba(168, 85, 247, 0) 60%),
+                    radial-gradient(circle farthest-corner at 25% 75%, rgba(236, 72, 153, 0.65) 0%, rgba(236, 72, 153, 0) 60%),
+                    radial-gradient(ellipse at center, rgba(59, 130, 246, 0.3) 0%, rgba(59, 130, 246, 0) 80%),
+                    linear-gradient(135deg, rgba(249, 115, 22, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%)
                   `
                 }}
               >
