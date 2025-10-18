@@ -410,7 +410,7 @@ function generateHellDifficultySudoku(): KillerSudokuData {
     
     // 檢查單格 cage 數量，如果超過2個則重新生成
     let attempts = 0;
-    while (attempts < 10) {
+    while (attempts < 20) { // 增加嘗試次數
       const singleCageCount = cages.filter(cage => cage.cells.length === 1).length;
       if (singleCageCount <= 2) {
         break;
@@ -456,6 +456,27 @@ function generateHellDifficultySudoku(): KillerSudokuData {
       });
     }
     
+    // 確保所有格子都被分配到 cage 中
+    const usedCells = new Set<string>();
+    cages.forEach(cage => {
+      cage.cells.forEach(cell => {
+        usedCells.add(`${cell.row}-${cell.col}`);
+      });
+    });
+    
+    // 如果還有未分配的格子，創建額外的 cage
+    for (let row = 0; row < 9; row++) {
+      for (let col = 0; col < 9; col++) {
+        if (!usedCells.has(`${row}-${col}`)) {
+          cages.push({
+            id: cages.length,
+            cells: [{ row, col }],
+            sum: solvedGrid[row][col]
+          });
+        }
+      }
+    }
+    
     // 地獄難度：不提供任何給定數字
     const grid: Cell[][] = solvedGrid.map(row => 
       row.map(cell => ({
@@ -474,24 +495,21 @@ function generateHellDifficultySudoku(): KillerSudokuData {
   } catch (error) {
     console.error('Error generating hell difficulty sudoku:', error);
     
-    // 回退方案
-    const fallbackGrid: Cell[][] = Array(9).fill(null).map(() =>
-      Array(9).fill(null).map(() => ({
+    // 回退方案 - 生成一個完整的數獨
+    const solvedGrid = generateRandomSolvedGrid();
+    const cages = generateCages(solvedGrid);
+    
+    const grid: Cell[][] = solvedGrid.map(row => 
+      row.map(cell => ({
         value: null,
-        solution: 1,
+        solution: cell,
         given: false,
       }))
     );
     
-    const fallbackCages: Cage[] = [{
-      id: 0,
-      cells: [{ row: 0, col: 0 }],
-      sum: 1
-    }];
-    
     return { 
-      grid: fallbackGrid, 
-      cages: fallbackCages, 
+      grid, 
+      cages, 
       puzzleId: 'hell-fallback-' + Math.random().toString(36).substring(2)
     };
   }

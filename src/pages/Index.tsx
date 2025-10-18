@@ -312,11 +312,11 @@ const Index = () => {
     
     // 根據難度設定時間限制
     const timeLimits = {
-      easy: 300,    // 5分鐘
-      medium: 240,  // 4分鐘
-      hard: 180,    // 3分鐘
-      expert: 120,  // 2分鐘
-      hell: 90      // 1.5分鐘
+      easy: 600,    // 10分鐘
+      medium: 480,  // 8分鐘
+      hard: 360,    // 6分鐘
+      expert: 240,  // 4分鐘
+      hell: 900     // 15分鐘
     };
     
     setDopamineDifficulty(generatedDifficulty);

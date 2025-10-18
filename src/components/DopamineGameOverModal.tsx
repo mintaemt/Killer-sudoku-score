@@ -90,11 +90,11 @@ export const DopamineGameOverModal = ({
               className="text-6xl md:text-8xl font-black text-transparent bg-clip-text animate-pulse"
               style={{
                 background: `
-                  radial-gradient(circle farthest-corner at top left, rgba(255, 0, 0, 1) 0%, rgba(255, 0, 0, 0) 50%),
-                  radial-gradient(circle farthest-side at top right, rgba(255, 255, 0, 1) 0%, rgba(255, 255, 0, 0) 30%),
-                  radial-gradient(circle farthest-corner at bottom right, rgba(255, 0, 255, 1) 0%, rgba(255, 0, 255, 0) 40%),
-                  radial-gradient(circle farthest-corner at bottom left, rgba(0, 255, 255, 1) 0%, rgba(0, 255, 255, 0) 35%),
-                  linear-gradient(135deg, rgba(255, 0, 0, 0.8) 0%, rgba(255, 255, 0, 0.8) 50%, rgba(255, 0, 255, 0.8) 100%)
+                  radial-gradient(circle farthest-corner at top left, rgba(225, 243, 97, 1) 0%, rgba(225, 243, 97, 0) 50%),
+                  radial-gradient(circle farthest-side at top right, rgba(181, 176, 177, 1) 0%, rgba(181, 176, 177, 0) 30%),
+                  radial-gradient(circle farthest-corner at bottom right, rgba(204, 104, 119, 1) 0%, rgba(204, 104, 119, 0) 40%),
+                  radial-gradient(circle farthest-corner at bottom left, rgba(155, 221, 240, 1) 0%, rgba(155, 221, 240, 0) 35%),
+                  linear-gradient(135deg, rgba(225, 243, 97, 0.8) 0%, rgba(204, 104, 119, 0.8) 50%, rgba(155, 221, 240, 0.8) 100%)
                 `
               }}
             >
