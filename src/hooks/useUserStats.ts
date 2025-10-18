@@ -63,10 +63,11 @@ export const useUserStats = (userId: string | null) => {
           medium: { gamesPlayed: 0, bestScore: 0, bestTime: 0, averageScore: 0 },
           hard: { gamesPlayed: 0, bestScore: 0, bestTime: 0, averageScore: 0 },
           expert: { gamesPlayed: 0, bestScore: 0, bestTime: 0, averageScore: 0 },
+          hell: { gamesPlayed: 0, bestScore: 0, bestTime: 0, averageScore: 0 },
         };
 
         // 計算各難度的統計
-        const difficulties: Difficulty[] = ['easy', 'medium', 'hard', 'expert'];
+        const difficulties: Difficulty[] = ['easy', 'medium', 'hard', 'expert', 'hell'];
         difficulties.forEach(difficulty => {
           const difficultyRecords = gameRecords.filter(record => record.difficulty === difficulty);
           if (difficultyRecords.length > 0) {

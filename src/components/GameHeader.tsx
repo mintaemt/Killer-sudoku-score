@@ -26,6 +26,7 @@ const themes = [
 export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeaderboard, onShowRules }: GameHeaderProps) => {
   const [isThemeOpen, setIsThemeOpen] = useState(false);
   const [isUserOpen, setIsUserOpen] = useState(false);
+  const [viewMode, setViewMode] = useState<'normal' | 'dopamine'>('normal');
   const dropdownRef = useRef<HTMLDivElement>(null);
   const userDropdownRef = useRef<HTMLDivElement>(null);
   const { user, isLoggedIn, isVisitorMode } = useUser();
@@ -137,30 +138,92 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
                     {stats && (
                       <div className="space-y-2">
                         <div className="border-t pt-2">
-                          <div className="text-xs font-medium text-muted-foreground mb-2">遊戲統計</div>
-                          <div className="grid grid-cols-2 gap-2 text-xs">
-                            <div className="flex items-center space-x-1">
-                              <Trophy className="h-3 w-3 text-yellow-500" />
-                              <span>最佳分數</span>
-                            </div>
-                            <div className="text-right font-medium">
-                              {stats.bestScore.toLocaleString()}
-                            </div>
-                            <div className="flex items-center space-x-1">
-                              <Clock className="h-3 w-3 text-blue-500" />
-                              <span>最佳時間</span>
-                            </div>
-                            <div className="text-right font-medium">
-                              {Math.floor(stats.bestTime / 60)}:{(stats.bestTime % 60).toString().padStart(2, '0')}
-                            </div>
-                            <div className="flex items-center space-x-1">
-                              <User className="h-3 w-3 text-green-500" />
-                              <span>總遊戲數</span>
-                            </div>
-                            <div className="text-right font-medium">
-                              {stats.totalGames}
+                          <div className="flex items-center justify-between mb-2">
+                            <div className="text-xs font-medium text-muted-foreground">遊戲統計</div>
+                            <div className="flex gap-1">
+                              <Button
+                                variant={viewMode === 'normal' ? 'default' : 'outline'}
+                                size="sm"
+                                onClick={() => setViewMode('normal')}
+                                className="h-6 px-2 text-xs"
+                              >
+                                普通
+                              </Button>
+                              <Button
+                                variant={viewMode === 'dopamine' ? 'default' : 'outline'}
+                                size="sm"
+                                onClick={() => setViewMode('dopamine')}
+                                className="h-6 px-2 text-xs"
+                              >
+                                多巴胺
+                              </Button>
                             </div>
                           </div>
+                          
+                          {viewMode === 'normal' ? (
+                            // 普通模式統計
+                            <div className="grid grid-cols-2 gap-2 text-xs">
+                              <div className="flex items-center space-x-1">
+                                <Trophy className="h-3 w-3 text-yellow-500" />
+                                <span>最佳分數</span>
+                              </div>
+                              <div className="text-right font-medium">
+                                {stats.bestScore.toLocaleString()}
+                              </div>
+                              <div className="flex items-center space-x-1">
+                                <Clock className="h-3 w-3 text-blue-500" />
+                                <span>最佳時間</span>
+                              </div>
+                              <div className="text-right font-medium">
+                                {Math.floor(stats.bestTime / 60)}:{(stats.bestTime % 60).toString().padStart(2, '0')}
+                              </div>
+                              <div className="flex items-center space-x-1">
+                                <User className="h-3 w-3 text-green-500" />
+                                <span>總遊戲數</span>
+                              </div>
+                              <div className="text-right font-medium">
+                                {stats.totalGames}
+                              </div>
+                            </div>
+                          ) : (
+                            // 多巴胺模式統計
+                            <div className="space-y-2 text-xs">
+                              {(['easy', 'medium', 'hard', 'expert', 'hell'] as const).map(difficulty => {
+                                const diffStats = stats.difficultyStats[difficulty];
+                                if (diffStats.gamesPlayed === 0) return null;
+                                
+                                const difficultyLabels = {
+                                  easy: '簡單',
+                                  medium: '中等', 
+                                  hard: '困難',
+                                  expert: '專家',
+                                  hell: '地獄'
+                                };
+                                
+                                return (
+                                  <div key={difficulty} className="border rounded p-2">
+                                    <div className="font-medium text-xs mb-1">{difficultyLabels[difficulty]}</div>
+                                    <div className="grid grid-cols-2 gap-1">
+                                      <div className="flex items-center space-x-1">
+                                        <Trophy className="h-2 w-2 text-yellow-500" />
+                                        <span>最佳</span>
+                                      </div>
+                                      <div className="text-right font-medium">
+                                        {diffStats.bestScore.toLocaleString()}
+                                      </div>
+                                      <div className="flex items-center space-x-1">
+                                        <User className="h-2 w-2 text-green-500" />
+                                        <span>場數</span>
+                                      </div>
+                                      <div className="text-right font-medium">
+                                        {diffStats.gamesPlayed}
+                                      </div>
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          )}
                         </div>
                       </div>
                     )}

@@ -18,14 +18,16 @@ const difficultyLabels: Record<Difficulty, string> = {
   easy: '簡單',
   medium: '中等',
   hard: '困難',
-  expert: '專家'
+  expert: '專家',
+  hell: '地獄'
 };
 
 const difficultyColors: Record<Difficulty, string> = {
   easy: 'bg-green-100 text-green-800',
   medium: 'bg-yellow-100 text-yellow-800',
   hard: 'bg-orange-100 text-orange-800',
-  expert: 'bg-red-100 text-red-800'
+  expert: 'bg-red-100 text-red-800',
+  hell: 'bg-purple-100 text-purple-800'
 };
 
 const getRankIcon = (rank: number) => {
@@ -120,7 +122,7 @@ export const Leaderboard = ({ currentUserId, onClose }: LeaderboardProps) => {
       </CardHeader>
       <CardContent>
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-5">
+          <TabsList className="grid w-full grid-cols-6">
             <TabsTrigger value="all">
               全部
             </TabsTrigger>
