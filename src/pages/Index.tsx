@@ -13,7 +13,7 @@ import { GameRulesModal } from "@/components/GameRulesModal";
 import { Leaderboard } from "@/components/Leaderboard";
 import { LeaderboardDebug } from "@/components/LeaderboardDebug";
 import { DatabaseDebug } from "@/components/DatabaseDebug";
-import { checkSupabaseConnection } from "@/lib/connectionChecker";
+import { checkEnvironment, testSupabaseConnection } from "@/lib/envChecker";
 import { generateKillerSudoku, generateDopamineSudoku } from "@/lib/sudoku-generator";
 import { useUser } from "@/hooks/useUser";
 import { useGameRecord } from "@/hooks/useGameRecord";
@@ -419,6 +419,12 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
     setShowDopamineWin(true);
     setIsPaused(true);
   };
+
+  // 檢查環境變數
+  useEffect(() => {
+    checkEnvironment();
+    testSupabaseConnection();
+  }, []);
 
   // 返回主選單
   const handleReturnToMain = () => {
