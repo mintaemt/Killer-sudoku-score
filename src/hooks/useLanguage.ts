@@ -74,6 +74,12 @@ const translations = {
     scoringSystem: 'Scoring System',
     rules: 'Rules',
     scoring: 'Scoring',
+    tips: 'Tips',
+    basicRules: 'Basic Rules',
+    advancedRules: 'Advanced Rules',
+    timeBonus: 'Time Bonus',
+    mistakePenalty: 'Mistake Penalty',
+    finalScoreFormula: 'Final Score = max(Basic Score × 0.2, Basic Score + Time Bonus - Mistake Penalty)',
   },
   zh: {
     // 遊戲相關
@@ -146,6 +152,12 @@ const translations = {
     scoringSystem: '計分系統',
     rules: '規則',
     scoring: '計分',
+    tips: '解題技巧',
+    basicRules: '基礎規則',
+    advancedRules: '進階規則',
+    timeBonus: '時間獎勵',
+    mistakePenalty: '錯誤懲罰',
+    finalScoreFormula: '最終分數 = max(基礎分數 × 0.2, 基礎分數 + 時間獎勵 - 錯誤懲罰)',
   },
   ko: {
     // 遊戲相關
@@ -218,6 +230,12 @@ const translations = {
     scoringSystem: '점수 시스템',
     rules: '규칙',
     scoring: '점수',
+    tips: '해결 팁',
+    basicRules: '기본 규칙',
+    advancedRules: '고급 규칙',
+    timeBonus: '시간 보너스',
+    mistakePenalty: '실수 페널티',
+    finalScoreFormula: '최종 점수 = max(기본 점수 × 0.2, 기본 점수 + 시간 보너스 - 실수 페널티)',
   },
   ja: {
     // ゲーム関連
@@ -290,6 +308,12 @@ const translations = {
     scoringSystem: 'スコアシステム',
     rules: 'ルール',
     scoring: 'スコア',
+    tips: '解法のコツ',
+    basicRules: '基本ルール',
+    advancedRules: '上級ルール',
+    timeBonus: '時間ボーナス',
+    mistakePenalty: 'ミスペナルティ',
+    finalScoreFormula: '最終スコア = max(基本スコア × 0.2, 基本スコア + 時間ボーナス - ミスペナルティ)',
   },
 };
 

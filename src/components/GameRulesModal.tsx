@@ -40,7 +40,7 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
               <TabsList className="grid w-full grid-cols-3">
                 <TabsTrigger value="rules">{t('rules')}</TabsTrigger>
-                <TabsTrigger value="tips">解題技巧</TabsTrigger>
+                <TabsTrigger value="tips">{t('tips')}</TabsTrigger>
                 <TabsTrigger value="scoring">{t('scoring')}規則</TabsTrigger>
               </TabsList>
 
@@ -160,7 +160,7 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
                     <div className="p-3 rounded-lg bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-950/20 dark:to-blue-950/20 border">
                       <h4 className="font-semibold mb-2 flex items-center gap-2 text-sm">
                         <Clock className="h-4 w-4 text-blue-500" />
-                        時間獎勵
+                        {t('timeBonus')}
                       </h4>
                       <div className="space-y-1.5 text-xs text-muted-foreground">
                         <div className="flex items-center gap-1.5">
@@ -181,7 +181,7 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
                     <div className="p-3 rounded-lg bg-gradient-to-r from-red-50 to-orange-50 dark:from-red-950/20 dark:to-orange-950/20 border">
                       <h4 className="font-semibold mb-2 flex items-center gap-2 text-sm">
                         <Target className="h-4 w-4 text-red-500" />
-                        錯誤懲罰
+                        {t('mistakePenalty')}
                       </h4>
                       <div className="text-xs text-muted-foreground space-y-1">
                         <div className="flex items-center gap-1.5">
@@ -205,7 +205,7 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
                       </h4>
                       <div className="text-xs text-muted-foreground space-y-1">
                         <div className="font-mono bg-background/50 p-1.5 rounded text-xs">
-                          最終分數 = max(基礎分數 × 0.2, 基礎分數 + 時間獎勵 - 錯誤懲罰)
+                          {t('finalScoreFormula')}
                         </div>
                         <div className="text-xs text-muted-foreground">
                           <strong>範例：</strong>簡單模式，2分鐘完成，1次錯誤 = 100 + 240 - 20 = 320分
