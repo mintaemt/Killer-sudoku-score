@@ -90,9 +90,9 @@ export const DopamineWinModal = ({
           {/* 大型 WELL DONE 標題 */}
           <div className="text-center py-8">
             <div 
-              className="text-6xl md:text-8xl font-black retro-pixel-text flowing-text-well-done"
+              className="text-6xl md:text-8xl font-black flowing-text-well-done"
               style={{
-                fontFamily: 'Pixelify Sans, Courier New, Monaco, Menlo, monospace'
+                fontFamily: 'Huninn, sans-serif'
               }}
             >
               WELL DONE
@@ -136,11 +136,11 @@ export const DopamineWinModal = ({
               </div>
             </div>
 
-            {/* 多巴胺模式排行榜 */}
+            {/* 多巴胺模式成就牆 */}
             <div className="space-y-3">
               <div className="flex items-center gap-2">
                 <Trophy className="h-5 w-5 text-yellow-500" />
-                <h3 className="text-lg font-semibold">多巴胺模式排行榜</h3>
+                <h3 className="text-lg font-semibold">多巴胺模式成就牆</h3>
               </div>
               
               <div className="space-y-2">
