@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Difficulty } from "@/lib/types";
 import { cn } from "@/lib/utils";
-import { ChevronDown, Clock, AlertTriangle, Play, Pause, Zap, Info } from "lucide-react";
+import { ChevronDown, Clock, AlertTriangle, Play, Pause, Zap } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { useUser } from "@/hooks/useUser";
 import { DopamineInfoModal } from "./DopamineInfoModal";
@@ -98,40 +98,27 @@ export const DifficultySelector = ({
           )}
         </div>
 
-        {/* 多巴胺模式按鈕 - 只對登入用戶可見，直接啟動遊戲 */}
+        {/* 多巴胺模式按鈕 - 只對登入用戶可見 */}
         {user && !isVisitorMode && onDopamineMode && (
-          <div className="flex items-center gap-2">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={onDopamineMode}
-              className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md border-purple-500/30 hover:border-purple-500/50 text-purple-600 hover:text-purple-700 relative overflow-hidden"
-              style={{
-                background: `
-                  radial-gradient(circle farthest-corner at 15% 25%, rgba(249, 115, 22, 0.95) 0%, rgba(249, 115, 22, 0) 50%),
-                  radial-gradient(circle farthest-side at 85% 25%, rgba(59, 130, 246, 0.75) 0%, rgba(59, 130, 246, 0) 45%),
-                  radial-gradient(circle farthest-corner at 85% 75%, rgba(168, 85, 247, 0.85) 0%, rgba(168, 85, 247, 0) 55%),
-                  radial-gradient(circle farthest-corner at 15% 75%, rgba(236, 72, 153, 0.65) 0%, rgba(236, 72, 153, 0) 50%),
-                  radial-gradient(ellipse at center, rgba(59, 130, 246, 0.4) 0%, rgba(59, 130, 246, 0) 70%),
-                  linear-gradient(135deg, rgba(249, 115, 22, 0.15) 0%, rgba(59, 130, 246, 0.15) 100%)
-                `
-              }}
-              title="多巴胺模式 - 直接開始挑戰！"
-            >
-              <Zap className="h-3 w-3 md:h-4 md:w-4 text-white" style={{ textShadow: "2px 2px 4px rgba(0,0,0,0.5), 1px 1px 2px rgba(0,0,0,0.6)" }} />
-            </Button>
-            
-            {/* 多巴胺模式資訊按鈕 */}
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setShowDopamineInfo(true)}
-              className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md border-gray-300 hover:border-gray-400 text-gray-600 hover:text-gray-700"
-              title="多巴胺模式說明"
-            >
-              <Info className="h-3 w-3 md:h-4 md:w-4" />
-            </Button>
-          </div>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setShowDopamineInfo(true)}
+            className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md border-purple-500/30 hover:border-purple-500/50 text-purple-600 hover:text-purple-700 relative overflow-hidden"
+            style={{
+              background: `
+                radial-gradient(circle farthest-corner at 15% 25%, rgba(249, 115, 22, 0.95) 0%, rgba(249, 115, 22, 0) 50%),
+                radial-gradient(circle farthest-side at 85% 25%, rgba(59, 130, 246, 0.75) 0%, rgba(59, 130, 246, 0) 45%),
+                radial-gradient(circle farthest-corner at 85% 75%, rgba(168, 85, 247, 0.85) 0%, rgba(168, 85, 247, 0) 55%),
+                radial-gradient(circle farthest-corner at 15% 75%, rgba(236, 72, 153, 0.65) 0%, rgba(236, 72, 153, 0) 50%),
+                radial-gradient(ellipse at center, rgba(59, 130, 246, 0.4) 0%, rgba(59, 130, 246, 0) 70%),
+                linear-gradient(135deg, rgba(249, 115, 22, 0.15) 0%, rgba(59, 130, 246, 0.15) 100%)
+              `
+            }}
+            title="多巴胺模式 - 挑戰極限！"
+          >
+            <Zap className="h-3 w-3 md:h-4 md:w-4 text-white" style={{ textShadow: "2px 2px 4px rgba(0,0,0,0.5), 1px 1px 2px rgba(0,0,0,0.6)" }} />
+          </Button>
         )}
 
         {/* 時間顯示 */}
