@@ -1,8 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Trophy, Clock, RotateCcw, X, Zap, CheckCircle } from "lucide-react";
+import { Trophy, Clock, RotateCcw, X, Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { createPortal } from "react-dom";
 
 interface DopamineWinModalProps {
   isOpen: boolean;
@@ -57,24 +58,28 @@ export const DopamineWinModal = ({
     }
   };
 
-  return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-2 sm:p-4 z-50">
+  return createPortal(
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-2 sm:p-4 z-[9999]">
       <div className="w-full max-w-2xl max-h-[95vh] sm:max-h-[90vh] overflow-auto">
         <Card className="glass rounded-2xl shadow-apple-lg m-2 sm:m-0">
           <CardHeader>
-            <div className="flex items-center justify-between">
+            <div className="flex items-start justify-between">
               <div className="flex items-center gap-3">
-                <div className="p-2 rounded-full bg-gradient-to-r from-green-500 to-emerald-500">
-                  <CheckCircle className="h-6 w-6 text-white" />
-                </div>
                 <div>
                   <CardTitle className="flex items-center gap-2">
                     <span>多巴胺模式</span>
+                    <Badge 
+                      variant="secondary" 
+                      className="text-white relative overflow-hidden flowing-button"
+                    >
+                      <Zap className="h-3 w-3 mr-1" />
+                      WIN
+                    </Badge>
                   </CardTitle>
-                  <CardDescription>恭喜完成挑戰！</CardDescription>
+                  <CardDescription className="mt-2">恭喜完成挑戰！</CardDescription>
                 </div>
               </div>
-              <Button variant="outline" size="sm" onClick={onClose}>
+              <Button variant="outline" size="sm" onClick={onClose} className="mt-1">
                 <X className="h-4 w-4" />
               </Button>
             </div>
@@ -85,13 +90,10 @@ export const DopamineWinModal = ({
             <div 
               className="text-6xl md:text-8xl font-black text-green-600 animate-pulse"
               style={{
-                fontFamily: 'Noto Sans CJK TC, sans-serif'
+                fontFamily: 'Huninn, sans-serif'
               }}
             >
               WIN
-            </div>
-            <div className="text-lg text-muted-foreground mt-2 font-semibold">
-              挑戰成功！
             </div>
           </div>
           
@@ -162,18 +164,19 @@ export const DopamineWinModal = ({
             <div className="flex gap-3 pt-4">
               <Button
                 onClick={onRestart}
-                className="flex-1 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600"
+                className="flex-1 h-12 text-lg font-bold text-white shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden flowing-button"
               >
                 <RotateCcw className="h-4 w-4 mr-2" />
                 再次挑戰
               </Button>
-              <Button variant="outline" onClick={onClose} className="flex-1">
+              <Button variant="outline" onClick={onClose} className="flex-1 h-12">
                 返回主選單
               </Button>
             </div>
           </CardContent>
         </Card>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
