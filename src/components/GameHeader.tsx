@@ -63,8 +63,19 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
           </div>
         </div>
 
-        {/* 右側：主題切換、主題選擇器、用戶狀態和新遊戲按鈕 */}
+        {/* 右側：遊戲規則、主題切換、主題選擇器、用戶狀態和新遊戲按鈕 */}
         <div className="flex items-center gap-1 md:gap-2">
+          {/* 遊戲規則按鈕 */}
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setIsRulesOpen(true)}
+            className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md"
+            title="遊戲規則"
+          >
+            <Info className="h-3 w-3 md:h-4 md:w-4" />
+          </Button>
+
           <ThemeToggle />
           
           {/* 主題選擇器 */}
@@ -180,17 +191,6 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
               )}
             </div>
           )}
-
-          {/* 遊戲規則按鈕 */}
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => setIsRulesOpen(true)}
-            className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md"
-            title="遊戲規則"
-          >
-            <Info className="h-3 w-3 md:h-4 md:w-4" />
-          </Button>
 
           {/* 新遊戲按鈕 - 縮小版本 */}
           <Button

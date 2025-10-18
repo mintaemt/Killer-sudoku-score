@@ -15,9 +15,9 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-2 sm:p-4 z-50">
-      <div className="w-full max-w-4xl max-h-[95vh] sm:max-h-[90vh] overflow-auto">
+      <div className="w-full max-w-6xl max-h-[95vh] sm:max-h-[90vh] overflow-auto">
         <Card className="glass rounded-2xl shadow-apple-lg m-2 sm:m-0">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4 px-3 sm:px-6">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4 px-3 sm:px-6 sticky top-0 bg-background/80 backdrop-blur-sm z-10">
             <CardTitle className="flex items-center gap-2 text-lg sm:text-xl font-bold">
               <Info className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
               <span className="text-sm sm:text-base">遊戲規則與計分說明</span>
@@ -40,28 +40,32 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
                 <h3 className="text-base sm:text-lg font-semibold">遊戲規則</h3>
               </div>
               
-              <div className="space-y-3 text-xs sm:text-sm text-muted-foreground">
-                <div className="flex items-start gap-3">
-                  <Badge variant="outline" className="mt-0.5">1</Badge>
-                  <div>
-                    <strong className="text-foreground">基本規則：</strong>
-                    在9×9的格子中填入數字1-9，每行、每列、每個3×3宮格都不能重複。
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+                <div className="space-y-3 text-xs sm:text-sm text-muted-foreground">
+                  <div className="flex items-start gap-3">
+                    <Badge variant="outline" className="mt-0.5">1</Badge>
+                    <div>
+                      <strong className="text-foreground">基本規則：</strong>
+                      在9×9的格子中填入數字1-9，每行、每列、每個3×3宮格都不能重複。
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-3">
+                    <Badge variant="outline" className="mt-0.5">2</Badge>
+                    <div>
+                      <strong className="text-foreground">殺手數獨特色：</strong>
+                      虛線框內的數字必須相加等於左上角的數字，且框內數字不能重複。
+                    </div>
                   </div>
                 </div>
                 
-                <div className="flex items-start gap-3">
-                  <Badge variant="outline" className="mt-0.5">2</Badge>
-                  <div>
-                    <strong className="text-foreground">殺手數獨特色：</strong>
-                    虛線框內的數字必須相加等於左上角的數字，且框內數字不能重複。
-                  </div>
-                </div>
-                
-                <div className="flex items-start gap-3">
-                  <Badge variant="outline" className="mt-0.5">3</Badge>
-                  <div>
-                    <strong className="text-foreground">解題策略：</strong>
-                    先從只有一個可能數字的格子開始，逐步推理其他格子的數字。
+                <div className="space-y-3 text-xs sm:text-sm text-muted-foreground">
+                  <div className="flex items-start gap-3">
+                    <Badge variant="outline" className="mt-0.5">3</Badge>
+                    <div>
+                      <strong className="text-foreground">解題策略：</strong>
+                      先從只有一個可能數字的格子開始，逐步推理其他格子的數字。
+                    </div>
                   </div>
                 </div>
               </div>
@@ -74,7 +78,7 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
                 <h3 className="text-base sm:text-lg font-semibold">解題技巧</h3>
               </div>
               
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 <div className="space-y-3">
                   <div className="p-3 rounded-lg bg-muted/50">
                     <h4 className="font-medium text-xs sm:text-sm mb-2 flex items-center gap-2">
@@ -128,13 +132,13 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
                 <h3 className="text-base sm:text-lg font-semibold">計分規則</h3>
               </div>
               
-              <div className="space-y-4">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 <div className="p-4 rounded-lg bg-gradient-to-r from-blue-50 to-green-50 dark:from-blue-950/20 dark:to-green-950/20 border">
                   <h4 className="font-semibold text-xs sm:text-sm mb-3 flex items-center gap-2">
                     <Trophy className="h-4 w-4 text-yellow-500" />
                     基礎分數
                   </h4>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+                  <div className="grid grid-cols-2 gap-2 text-xs">
                     <div className="text-center p-2 rounded bg-background/50">
                       <div className="font-medium">簡單</div>
                       <div className="text-muted-foreground">100分</div>
