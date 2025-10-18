@@ -35,7 +35,7 @@ export interface GameCompletionResult {
 }
 
 // 難度類型
-export type Difficulty = 'easy' | 'medium' | 'hard' | 'expert';
+export type Difficulty = 'easy' | 'medium' | 'hard' | 'expert' | 'dopamine';
 
 // 積分計算參數類型
 export interface ScoreCalculationParams {

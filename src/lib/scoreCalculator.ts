@@ -93,6 +93,61 @@ export const formatTime = (seconds: number): string => {
   return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
 };
 
+// 多巴胺模式計分參數
+export interface DopamineScoreParams {
+  baseDifficulty: Difficulty; // 基礎難度 (easy/medium/hard/expert)
+  timeLeft: number;           // 剩餘時間
+  remainingCells: number;     // 剩餘格子數
+  comboCount: number;         // 連擊數
+  mistakes: number;           // 錯誤數
+  completionTime: number;     // 總完成時間
+}
+
+/**
+ * 多巴胺模式計分系統
+ */
+export const calculateDopamineScore = ({
+  baseDifficulty,
+  timeLeft,
+  remainingCells,
+  comboCount,
+  mistakes,
+  completionTime
+}: DopamineScoreParams): ScoreCalculationDetails => {
+  // 基礎分數 (更高)
+  const baseScore = {
+    easy: 200,    // 2倍
+    medium: 400,  // 2倍
+    hard: 600,    // 2倍
+    expert: 1000  // 2倍
+  };
+
+  // 時間獎勵 (剩餘時間越多分數越高)
+  const timeBonus = timeLeft * 2; // 每秒2分
+
+  // Combo 獎勵 (指數增長)
+  const comboBonus = Math.pow(comboCount, 1.5) * 10;
+
+  // 速度獎勵 (完成越快分數越高)
+  const speedBonus = Math.max(0, (300 - completionTime) * 5);
+
+  // 錯誤懲罰 (更嚴厲)
+  const mistakePenalty = mistakes * 50; // 每個錯誤50分
+
+  const calculatedScore = baseScore[baseDifficulty] + timeBonus + comboBonus + speedBonus - mistakePenalty;
+  const finalScore = Math.max(baseScore[baseDifficulty] * 0.3, calculatedScore);
+
+  return {
+    baseScore: baseScore[baseDifficulty],
+    idealTime: 300, // 5分鐘
+    timeBonus,
+    mistakePenalty,
+    calculatedScore,
+    finalScore: Math.round(finalScore),
+    calculationVersion: 'dopamine-v1.0'
+  };
+};
+
 /**
  * 格式化分數顯示（添加千分位逗號）
  */

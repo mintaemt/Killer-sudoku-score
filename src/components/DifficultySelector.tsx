@@ -1,8 +1,9 @@
 import { Button } from "@/components/ui/button";
-import { Difficulty } from "@/pages/Index";
+import { Difficulty } from "@/lib/types";
 import { cn } from "@/lib/utils";
-import { ChevronDown, Clock, AlertTriangle, Play, Pause } from "lucide-react";
+import { ChevronDown, Clock, AlertTriangle, Play, Pause, Zap } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
+import { useUser } from "@/hooks/useUser";
 
 interface DifficultySelectorProps {
   difficulty: Difficulty;
@@ -13,11 +14,12 @@ interface DifficultySelectorProps {
   onTogglePause: () => void;
 }
 
-const difficulties: { value: Difficulty; label: string }[] = [
+const difficulties: { value: Difficulty; label: string; icon?: string; isDopamine?: boolean }[] = [
   { value: "easy", label: "Easy" },
   { value: "medium", label: "Medium" },
   { value: "hard", label: "Hard" },
   { value: "expert", label: "Expert" },
+  { value: "dopamine", label: "⚡ Turbo", icon: "⚡", isDopamine: true },
 ];
 
 export const DifficultySelector = ({
@@ -30,6 +32,7 @@ export const DifficultySelector = ({
 }: DifficultySelectorProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const { user, isVisitorMode } = useUser();
 
   // Handle click outside to close dropdown
   useEffect(() => {
@@ -73,7 +76,15 @@ export const DifficultySelector = ({
           
           {isOpen && (
             <div className="absolute top-full left-0 mt-1 dropdown-glass rounded-md shadow-lg z-[9999] min-w-[120px] dropdown-menu">
-              {difficulties.map((diff) => (
+              {difficulties
+                .filter(diff => {
+                  // 多巴胺模式只對登入用戶可見
+                  if (diff.isDopamine) {
+                    return user && !isVisitorMode;
+                  }
+                  return true;
+                })
+                .map((diff) => (
                 <button
                   key={diff.value}
                   onClick={() => {
@@ -82,10 +93,14 @@ export const DifficultySelector = ({
                   }}
                   className={cn(
                     "w-full px-3 py-2 text-left text-xs md:text-sm transition-smooth hover:bg-muted/50 first:rounded-t-md last:rounded-b-md bg-background/80 backdrop-blur-sm",
-                    difficulty === diff.value && "bg-primary text-primary-foreground"
+                    difficulty === diff.value && "bg-primary text-primary-foreground",
+                    diff.isDopamine && "bg-gradient-to-r from-purple-500/20 to-pink-500/20 hover:from-purple-500/30 hover:to-pink-500/30"
                   )}
                 >
-                  {diff.label}
+                  <div className="flex items-center gap-2">
+                    {diff.icon && <span>{diff.icon}</span>}
+                    <span>{diff.label}</span>
+                  </div>
                 </button>
               ))}
             </div>

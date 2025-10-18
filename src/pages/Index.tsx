@@ -3,6 +3,7 @@ import { KillerSudokuGrid } from "@/components/KillerSudokuGrid";
 import { NumberPad } from "@/components/NumberPad";
 import { GameHeader } from "@/components/GameHeader";
 import { DifficultySelector } from "@/components/DifficultySelector";
+import { DopamineProgressBar } from "@/components/DopamineProgressBar";
 import { UserNameInput } from "@/components/UserNameInput";
 import { GameCompleteModal } from "@/components/GameCompleteModal";
 import { GameRulesModal } from "@/components/GameRulesModal";
@@ -12,7 +13,7 @@ import { generateKillerSudoku } from "@/lib/sudoku-generator";
 import { useUser } from "@/hooks/useUser";
 import { useGameRecord } from "@/hooks/useGameRecord";
 import { Difficulty, GameCompletionResult } from "@/lib/types";
-import { calculateScore } from "@/lib/scoreCalculator";
+import { calculateScore, calculateDopamineScore } from "@/lib/scoreCalculator";
 
 const Index = () => {
   const [selectedCell, setSelectedCell] = useState<{ row: number; col: number } | null>(null);
@@ -22,6 +23,13 @@ const Index = () => {
   const [time, setTime] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [currentTheme, setCurrentTheme] = useState("blue");
+  
+  // 多巴胺模式狀態
+  const [isDopamineMode, setIsDopamineMode] = useState(false);
+  const [timeLimit, setTimeLimit] = useState(300); // 5分鐘倒數
+  const [comboCount, setComboCount] = useState(0);
+  const [lastCorrectTime, setLastCorrectTime] = useState(0);
+  const [remainingCells, setRemainingCells] = useState(81);
   
   // 新增狀態
   const [showUserNameInput, setShowUserNameInput] = useState(false);
@@ -63,9 +71,26 @@ const Index = () => {
 
     setIsPaused(true);
     
+    let score: number;
+    
+    if (isDopamineMode) {
+      // 多巴胺模式計分
+      const dopamineScore = calculateDopamineScore({
+        baseDifficulty: 'medium', // 多巴胺模式基於中等難度
+        timeLeft: time,
+        remainingCells,
+        comboCount,
+        mistakes,
+        completionTime: timeLimit - time
+      });
+      score = dopamineScore.finalScore;
+    } else {
+      // 普通模式計分
+      score = calculateScore({ difficulty, completionTime: time, mistakes });
+    }
+    
     // 訪客模式下不保存記錄，只顯示完成模態框
     if (isVisitorMode) {
-      const score = calculateScore({ difficulty, completionTime: time, mistakes });
       setGameCompletionResult({ 
         score, 
         rank: null, 
@@ -104,11 +129,24 @@ const Index = () => {
   useEffect(() => {
     try {
       setTimeout(() => {
-        const newGameData = generateKillerSudoku(difficulty);
+        const newGameData = generateKillerSudoku(difficulty === 'dopamine' ? 'medium' : difficulty);
         setGameData(newGameData);
         setMistakes(0);
         setSelectedCell(null);
-        setTime(0);
+        
+        // 設定多巴胺模式
+        const isDopamine = difficulty === 'dopamine';
+        setIsDopamineMode(isDopamine);
+        
+        if (isDopamine) {
+          setTime(timeLimit); // 倒數計時
+          setComboCount(0);
+          setLastCorrectTime(0);
+          setRemainingCells(81);
+        } else {
+          setTime(0); // 正數計時
+        }
+        
         setIsPaused(false);
       }, 0);
     } catch (error) {
@@ -120,11 +158,25 @@ const Index = () => {
     if (isPaused) return;
     
     const interval = setInterval(() => {
-      setTime((prev) => prev + 1);
+      if (isDopamineMode) {
+        // 多巴胺模式：倒數計時
+        setTime((prev) => {
+          const newTime = prev - 1;
+          if (newTime <= 0) {
+            // 時間到，遊戲結束
+            setIsPaused(true);
+            return 0;
+          }
+          return newTime;
+        });
+      } else {
+        // 普通模式：正數計時
+        setTime((prev) => prev + 1);
+      }
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [isPaused]);
+  }, [isPaused, isDopamineMode]);
 
   const handleNumberInput = (num: number) => {
     if (!selectedCell) return;
@@ -138,6 +190,22 @@ const Index = () => {
           const isCorrect = cell.solution === num;
           if (!isCorrect && num !== 0) {
             setMistakes((prev) => prev + 1);
+            // 錯誤時重置 Combo
+            if (isDopamineMode) {
+              setComboCount(0);
+            }
+          } else if (isCorrect && num !== 0) {
+            // 正確答案時處理 Combo
+            if (isDopamineMode) {
+              const currentTime = Date.now();
+              if (currentTime - lastCorrectTime < 5000) { // 5秒內
+                setComboCount(prev => prev + 1);
+              } else {
+                setComboCount(1);
+              }
+              setLastCorrectTime(currentTime);
+              setRemainingCells(prev => prev - 1);
+            }
           }
           return { ...cell, value: num === 0 ? null : num, isError: !isCorrect && num !== 0 };
         }
@@ -157,11 +225,21 @@ const Index = () => {
     try {
       // 使用 setTimeout 來避免阻塞 UI
       setTimeout(() => {
-        const newGameData = generateKillerSudoku(difficulty);
+        const newGameData = generateKillerSudoku(difficulty === 'dopamine' ? 'medium' : difficulty);
         setGameData(newGameData);
         setMistakes(0);
         setSelectedCell(null);
-        setTime(0);
+        
+        // 重置多巴胺模式狀態
+        if (isDopamineMode) {
+          setTime(timeLimit);
+          setComboCount(0);
+          setLastCorrectTime(0);
+          setRemainingCells(81);
+        } else {
+          setTime(0);
+        }
+        
         setIsPaused(false);
         setShowGameCompleteModal(false);
         setGameCompletionResult(null);
@@ -207,6 +285,14 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-2 md:p-4" data-theme={currentTheme}>
+      {/* 多巴胺模式進度條 */}
+      <DopamineProgressBar
+        timeLeft={time}
+        remainingCells={remainingCells}
+        comboCount={comboCount}
+        isVisible={isDopamineMode}
+      />
+      
       <div className="w-full max-w-6xl mx-auto animate-fade-in">
         {/* 移動裝置佈局 - 保持原有垂直佈局 */}
         <div className="block md:hidden space-y-4">
