@@ -439,7 +439,8 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
           user.id,
           dopamineDifficulty, // 使用多巴胺難度
           timeLimit - time,   // 完成時間
-          mistakes
+          mistakes,
+          'dopamine'          // 多巴胺模式
         );
         
         if (result) {

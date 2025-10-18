@@ -12,7 +12,8 @@ export const useGameRecord = () => {
     userId: string,
     difficulty: Difficulty,
     completionTime: number,
-    mistakes: number
+    mistakes: number,
+    mode: 'normal' | 'dopamine' = 'normal'
   ): Promise<GameCompletionResult | null> => {
     try {
       setLoading(true);
@@ -35,6 +36,7 @@ export const useGameRecord = () => {
           completion_time: completionTime,
           mistakes,
           score,
+          mode,
           completed_at: new Date().toISOString()
         })
         .select()
@@ -53,6 +55,7 @@ export const useGameRecord = () => {
           difficulty,
           completion_time: completionTime,
           mistakes,
+          mode,
           base_score: scoreDetails.baseScore,
           ideal_time: scoreDetails.idealTime,
           time_bonus: scoreDetails.timeBonus,

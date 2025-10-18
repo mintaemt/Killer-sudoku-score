@@ -18,7 +18,7 @@ export interface UserStats {
   };
 }
 
-export const useUserStats = (userId: string | null) => {
+export const useUserStats = (userId: string | null, mode: 'normal' | 'dopamine' = 'normal') => {
   const [stats, setStats] = useState<UserStats | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -34,11 +34,12 @@ export const useUserStats = (userId: string | null) => {
       setError(null);
 
       try {
-        // 獲取用戶的所有遊戲記錄
+        // 獲取用戶的指定模式遊戲記錄
         const { data: gameRecords, error: fetchError } = await supabase
           .from('game_records')
           .select('*')
           .eq('user_id', userId)
+          .eq('mode', mode)
           .order('completed_at', { ascending: false });
 
         if (fetchError) {
@@ -98,7 +99,7 @@ export const useUserStats = (userId: string | null) => {
     };
 
     fetchUserStats();
-  }, [userId]);
+  }, [userId, mode]);
 
   return {
     stats,
