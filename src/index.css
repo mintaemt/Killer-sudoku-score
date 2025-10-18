@@ -488,7 +488,5 @@ All colors MUST be HSL.
     );
   background-size: 200% 100%;
   animation: gradient-flow 8s linear infinite;
-  filter: blur(2.5px);
-  backdrop-filter: blur(2.5px);
 }
 }
