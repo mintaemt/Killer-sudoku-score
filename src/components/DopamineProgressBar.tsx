@@ -24,7 +24,7 @@ export const DopamineProgressBar = ({
   const progressPercentage = ((81 - remainingCells) / 81) * 100;
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 glassmorphism shadow-lg border-b border-white/10">
+    <div className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/20 shadow-lg border-b border-white/10">
       {/* 主要資訊欄 */}
       <div className="flex items-center justify-center px-4 py-2 text-white">
         <div className="flex items-center gap-6">

@@ -24,7 +24,7 @@ export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge }: Dopamin
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-2 sm:p-4 z-[99999]">
       <div className="w-full max-w-2xl max-h-[95vh] sm:max-h-[90vh] overflow-auto">
-        <Card className="glassmorphism rounded-2xl shadow-apple-lg m-2 sm:m-0">
+        <Card className="bg-background/95 backdrop-blur-sm border rounded-2xl shadow-apple-lg m-2 sm:m-0">
           <CardHeader>
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">

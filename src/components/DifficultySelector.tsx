@@ -78,7 +78,7 @@ export const DifficultySelector = ({
           </Button>
           
           {isOpen && (
-            <div className="absolute top-full left-0 mt-1 glassmorphism rounded-md shadow-lg z-[9999] min-w-[120px] dropdown-menu">
+            <div className="absolute top-full left-0 mt-1 bg-background/95 backdrop-blur-sm border rounded-md shadow-lg z-[9999] min-w-[120px] dropdown-menu">
               {difficulties.map((diff) => (
                 <button
                   key={diff.value}
@@ -87,7 +87,7 @@ export const DifficultySelector = ({
                     setIsOpen(false);
                   }}
                   className={cn(
-                    "w-full px-3 py-2 text-left text-xs md:text-sm transition-smooth hover:bg-white/20 first:rounded-t-md last:rounded-b-md",
+                    "w-full px-3 py-2 text-left text-xs md:text-sm transition-smooth hover:bg-accent hover:text-accent-foreground first:rounded-t-md last:rounded-b-md",
                     difficulty === diff.value && "bg-primary text-primary-foreground"
                   )}
                 >
