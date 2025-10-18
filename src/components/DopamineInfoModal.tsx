@@ -1,3 +1,5 @@
+import React from "react";
+import { createPortal } from "react-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -21,8 +23,8 @@ const difficultyInfo = [
 export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge }: DopamineInfoModalProps) => {
   if (!isOpen) return null;
 
-  return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-2 sm:p-4 z-50">
+  return createPortal(
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-2 sm:p-4 z-[9999]">
       <div className="w-full max-w-2xl max-h-[95vh] sm:max-h-[90vh] overflow-auto">
         <Card className="glass rounded-2xl shadow-apple-lg m-2 sm:m-0">
           <CardHeader>
@@ -118,6 +120,7 @@ export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge }: Dopamin
           </CardContent>
         </Card>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
