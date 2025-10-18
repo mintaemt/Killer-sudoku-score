@@ -28,7 +28,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
   const [isUserOpen, setIsUserOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const userDropdownRef = useRef<HTMLDivElement>(null);
-  const { user, clearUser, isLoggedIn, isVisitorMode } = useUser();
+  const { user, isLoggedIn, isVisitorMode } = useUser();
   const { stats, loading: statsLoading } = useUserStats(user?.id || null);
 
   // Handle click outside to close dropdowns
