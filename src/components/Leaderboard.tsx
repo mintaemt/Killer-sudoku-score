@@ -75,6 +75,11 @@ export const Leaderboard = ({ currentUserId, onClose, mode = 'normal' }: Leaderb
   const selectedDifficulty = activeTab === "all" ? undefined : activeTab as Difficulty;
   const { leaderboard, loading, error, refetch } = useLeaderboard(selectedDifficulty, mode);
 
+  // 根據模式決定顯示的難度
+  const availableDifficulties = mode === 'normal' 
+    ? ['easy', 'medium', 'hard', 'expert'] as Difficulty[]
+    : ['easy', 'medium', 'hard', 'expert', 'hell'] as Difficulty[];
+
   const handleRefresh = () => {
     refetch();
   };
@@ -123,13 +128,13 @@ export const Leaderboard = ({ currentUserId, onClose, mode = 'normal' }: Leaderb
       </CardHeader>
       <CardContent>
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-6">
+          <TabsList className={`grid w-full grid-cols-${availableDifficulties.length + 1}`}>
             <TabsTrigger value="all">
               全部
             </TabsTrigger>
-            {Object.entries(difficultyLabels).map(([key, label]) => (
-              <TabsTrigger key={key} value={key}>
-                {label}
+            {availableDifficulties.map((difficulty) => (
+              <TabsTrigger key={difficulty} value={difficulty}>
+                {difficultyLabels[difficulty]}
               </TabsTrigger>
             ))}
           </TabsList>

@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { RotateCcw, Palette, User, Trophy, Clock, ListOrdered, Info } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { LanguageToggle } from "@/components/LanguageToggle";
 import { cn } from "@/lib/utils";
 import { useState, useRef, useEffect } from "react";
 import { useUser } from "@/hooks/useUser";
@@ -77,6 +78,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
           </Button>
 
           <ThemeToggle />
+          <LanguageToggle />
           
           {/* 主題選擇器 */}
           <div className="relative" ref={dropdownRef}>
