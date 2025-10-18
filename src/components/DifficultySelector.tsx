@@ -87,7 +87,7 @@ export const DifficultySelector = ({
                     setIsOpen(false);
                   }}
                   className={cn(
-                    "w-full px-3 py-2 text-left text-xs md:text-sm transition-smooth hover:bg-muted/50 first:rounded-t-md last:rounded-b-md bg-background/80 backdrop-blur-sm",
+                    "w-full px-3 py-2 text-left text-xs md:text-sm transition-smooth hover:bg-white/20 first:rounded-t-md last:rounded-b-md",
                     difficulty === diff.value && "bg-primary text-primary-foreground"
                   )}
                 >

@@ -125,7 +125,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
               </Button>
               
               {isUserOpen && (
-                <div className="absolute top-full right-0 mt-1 dropdown-glass rounded-md shadow-lg z-[9999] p-3 min-w-[200px] dropdown-menu">
+                <div className="absolute top-full right-0 mt-1 glassmorphism rounded-md shadow-lg z-[9999] p-3 min-w-[200px] dropdown-menu">
                   <div className="space-y-3">
                     <div className="text-center">
                       <div className="text-sm font-medium">{user?.name}</div>
