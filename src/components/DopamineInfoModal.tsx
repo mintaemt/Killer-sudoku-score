@@ -13,12 +13,12 @@ interface DopamineInfoModalProps {
   onStartChallenge: (difficulty: DopamineDifficulty) => void;
 }
 
-const difficultyOptions: { value: DopamineDifficulty; label: string; description: string; color: string }[] = [
-  { value: "easy", label: "Easy", description: "基礎成就感", color: "bg-gray-500/20 text-gray-600 border-gray-500/30" },
-  { value: "medium", label: "Medium", description: "適度挑戰", color: "bg-blue-500/20 text-blue-600 border-blue-500/30" },
-  { value: "hard", label: "Hard", description: "高成就感", color: "bg-purple-500/20 text-purple-600 border-purple-500/30" },
-  { value: "expert", label: "Expert", description: "頂級挑戰", color: "bg-orange-500/20 text-orange-600 border-orange-500/30" },
-  { value: "hell", label: "Hell", description: "最高成就感", color: "bg-red-500/20 text-red-600 border-red-500/30" }
+const difficultyOptions: { value: DopamineDifficulty; label: string; description: string; color: string; ringColor: string }[] = [
+  { value: "easy", label: "Easy", description: "基礎成就感", color: "bg-gray-500/20 text-gray-600 border-gray-500/30", ringColor: "ring-gray-500" },
+  { value: "medium", label: "Medium", description: "適度挑戰", color: "bg-blue-500/20 text-blue-600 border-blue-500/30", ringColor: "ring-blue-500" },
+  { value: "hard", label: "Hard", description: "高成就感", color: "bg-purple-500/20 text-purple-600 border-purple-500/30", ringColor: "ring-purple-500" },
+  { value: "expert", label: "Expert", description: "頂級挑戰", color: "bg-orange-500/20 text-orange-600 border-orange-500/30", ringColor: "ring-orange-500" },
+  { value: "hell", label: "Hell", description: "最高成就感", color: "bg-red-500/20 text-red-600 border-red-500/30", ringColor: "ring-red-500" }
 ];
 
 export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge }: DopamineInfoModalProps) => {
@@ -31,7 +31,7 @@ export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge }: Dopamin
       <div className="w-full max-w-2xl max-h-[95vh] sm:max-h-[90vh] overflow-auto">
         <Card className="glass rounded-2xl shadow-apple-lg m-2 sm:m-0">
           <CardHeader>
-            <div className="flex items-center justify-between">
+            <div className="flex items-start justify-between">
               <div className="flex items-center gap-3">
                 <div>
                   <CardTitle className="flex items-center gap-2">
@@ -47,7 +47,7 @@ export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge }: Dopamin
                   <CardDescription className="mt-2">超越普通模式的遊樂性與成就感</CardDescription>
                 </div>
               </div>
-              <Button variant="outline" size="sm" onClick={onClose}>
+              <Button variant="outline" size="sm" onClick={onClose} className="mt-1">
                 <X className="h-4 w-4" />
               </Button>
             </div>
@@ -94,7 +94,7 @@ export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge }: Dopamin
                     className={cn(
                       "flex flex-col items-center justify-center p-2 rounded-lg border cursor-pointer transition-all duration-200 text-center",
                       difficulty.color,
-                      selectedDifficulty === difficulty.value && "ring-2 ring-primary ring-offset-2"
+                      selectedDifficulty === difficulty.value && `ring-2 ${difficulty.ringColor} ring-offset-2`
                     )}
                     onClick={() => setSelectedDifficulty(difficulty.value)}
                   >
