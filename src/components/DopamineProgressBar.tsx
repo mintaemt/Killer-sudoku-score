@@ -26,15 +26,15 @@ export const DopamineProgressBar = ({
     <div className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/20 shadow-lg border-b border-white/10">
       {/* 主要資訊欄 */}
       <div className="flex items-center justify-center px-4 py-2 text-white">
-        <div className="flex items-center justify-between w-full max-w-4xl">
-          {/* 左邊：剩餘格數 */}
+        <div className="flex items-center justify-center w-full max-w-4xl gap-4">
+          {/* 左邊：剩餘格數 - 靠近分數 */}
           <div className="flex items-center gap-2 bg-muted/50 text-muted-foreground border border-border/50 px-3 py-1 rounded-lg">
             <span className="text-sm opacity-90">剩餘:</span>
             <span className="font-bold">{remainingCells}</span>
           </div>
           
-          {/* 中間：分數 - 較大 */}
-          <div className="flex items-center gap-2 bg-primary/20 text-primary border border-primary/30 px-4 py-2 rounded-lg">
+          {/* 中間：分數 - 較大，更不透明 */}
+          <div className="flex items-center gap-2 bg-primary/60 text-primary border border-primary/50 px-4 py-2 rounded-lg">
             <span className="text-sm opacity-90">分數:</span>
             <span className="font-bold text-xl">{currentScore.toLocaleString()}</span>
           </div>
