@@ -27,16 +27,20 @@ export const useLeaderboard = (difficulty?: Difficulty, mode: 'normal' | 'dopami
         query = query.eq('difficulty', difficulty);
       }
 
-      // 篩選模式
-      query = query.eq('mode', mode);
-
-      const { data, error: fetchError } = await query;
-
+      // 先獲取數據，然後在客戶端過濾mode
+      const { data: allData, error: fetchError } = await query;
+      
       if (fetchError) {
         throw fetchError;
       }
 
-      setLeaderboard(data || []);
+      // 檢查是否有mode欄位，如果有則過濾
+      let filteredData = allData || [];
+      if (allData && allData.length > 0 && allData[0].hasOwnProperty('mode')) {
+        filteredData = allData.filter(record => record.mode === mode);
+      }
+
+      setLeaderboard(filteredData);
     } catch (err) {
       console.error('Error fetching leaderboard:', err);
       setError('載入排行榜失敗');
