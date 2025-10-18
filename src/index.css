@@ -490,7 +490,7 @@ All colors MUST be HSL.
     );
   background-size: 200% 200%;
   background-repeat: repeat;
-  animation: gradient-flow 60s linear infinite;
+  animation: gradient-flow 90s linear infinite;
 }
 
 /* 多巴胺資訊卡hover效果 - 使用四個主題顏色 */
@@ -552,7 +552,7 @@ All colors MUST be HSL.
   position: relative;
   background: linear-gradient(45deg, #3B82F6, #14B8A6, #A855F7, #FB923C);
   background-size: 300% 300%;
-  animation: flowing-button-bg 3s ease-in-out infinite;
+  animation: flowing-button-bg 6s ease-in-out infinite;
   overflow: hidden;
 }
 
@@ -564,11 +564,11 @@ All colors MUST be HSL.
   width: 100%;
   height: 100%;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-  animation: flowing-shine 4s ease-in-out infinite;
+  animation: flowing-shine 8s ease-in-out infinite;
 }
 
 .flowing-button:hover::before {
-  animation-duration: 1.5s;
+  animation-duration: 3s;
 }
 
 @keyframes flowing-button-bg {

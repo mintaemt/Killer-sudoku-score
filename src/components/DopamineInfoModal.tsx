@@ -104,7 +104,14 @@ export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge }: Dopamin
                       value={difficulty.value}
                       checked={selectedDifficulty === difficulty.value}
                       onChange={() => setSelectedDifficulty(difficulty.value)}
-                      className="w-3 h-3 text-primary mb-1"
+                      className={cn(
+                        "w-3 h-3 mb-1",
+                        difficulty.value === "easy" && "text-gray-500",
+                        difficulty.value === "medium" && "text-blue-500",
+                        difficulty.value === "hard" && "text-purple-500",
+                        difficulty.value === "expert" && "text-orange-500",
+                        difficulty.value === "hell" && "text-red-500"
+                      )}
                     />
                     <div className="text-xs font-bold">{difficulty.label}</div>
                   </div>
