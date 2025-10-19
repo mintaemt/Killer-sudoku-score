@@ -345,11 +345,11 @@ const translations = {
     newGame: '新しいゲーム',
     gameRules: 'ゲームルール',
     difficulty: '難易度',
-    easy: '簡単',
-    medium: '普通',
-    hard: '難しい',
-    expert: 'エキスパート',
-    hell: '地獄',
+    easy: '初級',
+    medium: '中級',
+    hard: '上級',
+    expert: '達人級',
+    hell: '地獄級',
     
     // ドーパミンモード
     dopamineMode: 'ドーパミンモード',
