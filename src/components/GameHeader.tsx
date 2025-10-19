@@ -214,7 +214,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
                                         <div className="flex items-center justify-between">
                                           <div className="flex items-center space-x-2">
                                             <Trophy className="h-3 w-3 text-yellow-500" />
-                                            <span className="text-xs">最佳分數</span>
+                                            <span className="text-xs">{t('bestScore')}</span>
                                           </div>
                                           <span className="text-sm font-bold">
                                             {(diffStats?.bestScore || 0).toLocaleString()}
@@ -223,7 +223,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
                                         <div className="flex items-center justify-between">
                                           <div className="flex items-center space-x-2">
                                             <User className="h-3 w-3 text-green-500" />
-                                            <span className="text-xs">遊戲場數</span>
+                                            <span className="text-xs">{t('gamesPlayed')}</span>
                                           </div>
                                           <span className="text-sm font-bold">
                                             {diffStats?.gamesPlayed || 0}
