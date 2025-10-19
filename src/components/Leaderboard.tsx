@@ -39,7 +39,7 @@ const getRankIcon = (rank: number) => {
   return <Trophy className="h-4 w-4 text-muted-foreground" />;
 };
 
-const LeaderboardEntryItem = ({ entry, isCurrentUser }: { entry: LeaderboardEntry; isCurrentUser?: boolean }) => (
+const LeaderboardEntryItem = ({ entry, isCurrentUser, t }: { entry: LeaderboardEntry; isCurrentUser?: boolean; t: (key: string) => string }) => (
   <div className={`flex items-center justify-between p-3 rounded-lg border ${
     isCurrentUser ? 'bg-primary/5 border-primary' : 'bg-card'
   }`}>
@@ -153,6 +153,7 @@ export const Leaderboard = ({ currentUserId, onClose, mode = 'normal' }: Leaderb
                     key={`${entry.name}-${entry.difficulty}-${index}`}
                     entry={entry}
                     isCurrentUser={currentUserId === entry.name}
+                    t={t}
                   />
                 ))}
               </div>

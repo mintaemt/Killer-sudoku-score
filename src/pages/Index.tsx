@@ -585,7 +585,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
             </div>
 
             {/* 右側：垂直排列所有其他元件 - 統一間距系統 */}
-            <div className="flex flex-col w-[400px] h-[500px] space-y-3">
+            <div className="flex flex-col w-[500px] h-[500px] space-y-3">
               {/* GameHeader - 與九宮格上緣切齊 */}
               <div>
                 <GameHeader 
