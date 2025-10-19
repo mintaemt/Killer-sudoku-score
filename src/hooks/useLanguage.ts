@@ -41,7 +41,9 @@ const translations = {
     viewLeaderboard: 'View Leaderboard',
     viewHighestScore: 'View Highest Score',
     all: 'All',
+    gamesPlayed: 'Games Played',
     achievementWall: 'Achievement Wall',
+    noData: 'No Data',
     highestScoreDisplay: 'Highest Score Display',
     
     // 用戶相關
@@ -121,7 +123,9 @@ const translations = {
     viewLeaderboard: '查看排行榜',
     viewHighestScore: '查看最高分',
     all: '全部',
+    gamesPlayed: '場遊戲',
     achievementWall: '成就牆',
+    noData: '暫無成就資料',
     highestScoreDisplay: '最高分展示',
     
     // 用戶相關
@@ -201,7 +205,9 @@ const translations = {
     viewLeaderboard: '리더보드 보기',
     viewHighestScore: '최고 점수 보기',
     all: '전체',
+    gamesPlayed: '게임',
     achievementWall: '성취 벽',
+    noData: '데이터 없음',
     highestScoreDisplay: '최고 점수 표시',
     
     // 사용자 관련
@@ -281,7 +287,9 @@ const translations = {
     viewLeaderboard: 'リーダーボードを見る',
     viewHighestScore: '最高スコアを見る',
     all: '全て',
+    gamesPlayed: 'ゲーム',
     achievementWall: '実績ウォール',
+    noData: 'データなし',
     highestScoreDisplay: '最高スコア表示',
     
     // ユーザー関連

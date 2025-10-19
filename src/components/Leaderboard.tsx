@@ -58,7 +58,7 @@ const LeaderboardEntryItem = ({ entry, isCurrentUser }: { entry: LeaderboardEntr
           )}
         </div>
         <div className="text-sm text-muted-foreground">
-          {entry.games_played} 場遊戲
+          {entry.games_played} {t('gamesPlayed')}
         </div>
       </div>
     </div>
@@ -90,7 +90,7 @@ export const Leaderboard = ({ currentUserId, onClose, mode = 'normal' }: Leaderb
     return (
       <div className="flex items-center justify-center p-8">
         <Loader2 className="h-8 w-8 animate-spin" />
-        <span className="ml-2">載入成就牆中...</span>
+        <span className="ml-2">{t('loadingStats')}...</span>
       </div>
     );
   }
@@ -110,10 +110,10 @@ export const Leaderboard = ({ currentUserId, onClose, mode = 'normal' }: Leaderb
           <div>
             <CardTitle className="flex items-center space-x-2">
               <Trophy className="h-6 w-6" />
-              <span>{mode === 'dopamine' ? '最高分展示' : '成就牆'}</span>
+              <span>{mode === 'dopamine' ? t('highestScoreDisplay') : t('achievementWall')}</span>
             </CardTitle>
             <CardDescription>
-              {mode === 'dopamine' ? '查看各難度的最高分記錄' : '查看各難度的最佳成績'}
+              {mode === 'dopamine' ? t('highestScoreDisplay') : t('achievementWall')}
             </CardDescription>
           </div>
           <div className="flex space-x-2">
@@ -144,7 +144,7 @@ export const Leaderboard = ({ currentUserId, onClose, mode = 'normal' }: Leaderb
           <TabsContent value={activeTab} className="mt-6">
             {leaderboard.length === 0 ? (
               <div className="text-center py-8 text-muted-foreground">
-                暫無成就資料
+                {t('noData')}
               </div>
             ) : (
               <div className="space-y-2">
