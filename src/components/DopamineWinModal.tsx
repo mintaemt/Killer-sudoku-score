@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Trophy, Clock, RotateCcw, X, Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { createPortal } from "react-dom";
+import { useLanguage } from "@/hooks/useLanguage";
 
 interface DopamineWinModalProps {
   isOpen: boolean;
@@ -32,6 +33,8 @@ export const DopamineWinModal = ({
   topScore,
   isNewRecord = false
 }: DopamineWinModalProps) => {
+  const { t } = useLanguage();
+  
   if (!isOpen) return null;
 
   const formatTime = (seconds: number) => {
@@ -52,14 +55,7 @@ export const DopamineWinModal = ({
   };
 
   const getDifficultyLabel = (diff: string) => {
-    switch (diff) {
-      case 'easy': return '簡單';
-      case 'medium': return '中等';
-      case 'hard': return '困難';
-      case 'expert': return '專家';
-      case 'hell': return '地獄';
-      default: return diff;
-    }
+    return t(diff as any);
   };
 
   return createPortal(
@@ -71,16 +67,16 @@ export const DopamineWinModal = ({
               <div className="flex items-center gap-3">
                 <div>
                   <CardTitle className="flex items-center gap-2">
-                    <span>多巴胺模式</span>
+                    <span>{t('dopamineMode')}</span>
                     <Badge 
                       variant="secondary" 
                       className="text-white relative overflow-hidden flowing-button"
                     >
                       <Zap className="h-3 w-3 mr-1" />
-                      WELL DONE
+                      {t('wellDone')}
                     </Badge>
                   </CardTitle>
-                  <CardDescription className="mt-2">恭喜完成挑戰！</CardDescription>
+                  <CardDescription className="mt-2">{t('congratulations')}</CardDescription>
                 </div>
               </div>
               <Button variant="outline" size="sm" onClick={onClose} className="mt-1">
@@ -97,7 +93,7 @@ export const DopamineWinModal = ({
                 fontFamily: 'Huninn, sans-serif'
               }}
             >
-              WELL DONE
+              {t('wellDone')}
             </div>
           </div>
           
@@ -107,7 +103,7 @@ export const DopamineWinModal = ({
               <div className="text-center p-3 rounded-lg bg-card border">
                 <div className="flex items-center justify-center gap-1 mb-1">
                   <Trophy className="h-4 w-4 text-yellow-500" />
-                  <span className="text-sm font-medium">分數</span>
+                  <span className="text-sm font-medium">{t('score')}</span>
                 </div>
                 <div className="text-lg font-bold text-primary">{score.toLocaleString()}</div>
               </div>
@@ -115,7 +111,7 @@ export const DopamineWinModal = ({
               <div className="text-center p-3 rounded-lg bg-card border">
                 <div className="flex items-center justify-center gap-1 mb-1">
                   <Clock className="h-4 w-4 text-blue-500" />
-                  <span className="text-sm font-medium">剩餘時間</span>
+                  <span className="text-sm font-medium">{t('remainingTime')}</span>
                 </div>
                 <div className="text-lg font-bold text-primary">{formatTime(timeLeft)}</div>
               </div>
@@ -123,7 +119,7 @@ export const DopamineWinModal = ({
               <div className="text-center p-3 rounded-lg bg-card border">
                 <div className="flex items-center justify-center gap-1 mb-1">
                   <Zap className="h-4 w-4 text-purple-500" />
-                  <span className="text-sm font-medium">最高連擊</span>
+                  <span className="text-sm font-medium">{t('maxCombo')}</span>
                 </div>
                 <div className="text-lg font-bold text-primary">{comboCount}x</div>
               </div>
@@ -134,7 +130,7 @@ export const DopamineWinModal = ({
                     {getDifficultyLabel(difficulty)}
                   </Badge>
                 </div>
-                <div className="text-sm text-muted-foreground mt-1">難度</div>
+                <div className="text-sm text-muted-foreground mt-1">{t('difficulty')}</div>
               </div>
             </div>
 
@@ -142,7 +138,7 @@ export const DopamineWinModal = ({
             <div className="space-y-3">
               <div className="flex items-center gap-2">
                 <Trophy className="h-5 w-5 text-yellow-500" />
-                <h3 className="text-lg font-semibold">多巴胺模式成就牆</h3>
+                <h3 className="text-lg font-semibold">{t('dopamineAchievementWall')}</h3>
               </div>
               
               <div className="space-y-2">
@@ -153,11 +149,11 @@ export const DopamineWinModal = ({
                     </div>
                     <div>
                       <div className="font-medium text-muted-foreground">
-                        {isNewRecord ? `${score.toLocaleString()} 分 (新紀錄!)` : 
-                         topScore ? `${topScore.toLocaleString()} 分` : '暫無最高分資料'}
+                        {isNewRecord ? `${score.toLocaleString()} ${t('points')} (${t('newRecord')})` : 
+                         topScore ? `${topScore.toLocaleString()} ${t('points')}` : t('noTopScoreData')}
                       </div>
                       <div className="text-sm text-muted-foreground">
-                        {getDifficultyLabel(difficulty)} 難度
+                        {getDifficultyLabel(difficulty)} {t('difficultyLevel')}
                       </div>
                     </div>
                   </div>
@@ -172,10 +168,10 @@ export const DopamineWinModal = ({
                 className="flex-1 h-12 text-lg font-bold text-white shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden flowing-button"
               >
                 <RotateCcw className="h-4 w-4 mr-2" />
-                再次挑戰
+                {t('againChallenge')}
               </Button>
               <Button variant="outline" onClick={onReturnToMain} className="flex-1 h-12">
-                返回主選單
+                {t('returnToMainMenu')}
               </Button>
             </div>
           </CardContent>

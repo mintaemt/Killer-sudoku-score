@@ -37,16 +37,16 @@ export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge }: Dopamin
               <div className="flex items-center gap-3">
                 <div>
                   <CardTitle className="flex items-center gap-2">
-                    <span>多巴胺模式</span>
+                    <span>{t('dopamineMode')}</span>
                     <Badge 
                       variant="secondary" 
                       className="text-white relative overflow-hidden flowing-button"
                     >
                       <Users className="h-3 w-3 mr-1" />
-                      用戶限定
+                      {t('userLimited')}
                     </Badge>
                   </CardTitle>
-                  <CardDescription className="mt-2">超越普通模式的遊樂性與成就感</CardDescription>
+                  <CardDescription className="mt-2">{t('beyondNormalMode')}</CardDescription>
                 </div>
               </div>
               <Button variant="outline" size="sm" onClick={onClose} className="mt-1">
@@ -61,7 +61,7 @@ export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge }: Dopamin
               <div className="p-3 rounded-lg bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/20 dark:to-pink-950/20 border">
                 <h3 className="font-semibold mb-2 flex items-center gap-2 text-sm">
                   <Star className="h-4 w-4 text-purple-500" />
-                  模式特色
+                  {t('modeFeatures')}
                 </h3>
                 <ul className="text-sm text-muted-foreground space-y-1">
                   <li>• 選擇難度挑戰，專注於特定難度</li>
@@ -72,7 +72,7 @@ export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge }: Dopamin
               <div className="p-3 rounded-lg bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-950/20 border">
                 <h3 className="font-semibold mb-2 flex items-center gap-2 text-sm">
                   <AlertTriangle className="h-4 w-4 text-blue-500" />
-                  遊戲規則
+                  {t('gameRules')}
                 </h3>
                 <ul className="text-sm text-muted-foreground space-y-1">
                   <li>• 時間限制內完成數獨挑戰</li>
@@ -87,7 +87,7 @@ export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge }: Dopamin
             <div className="space-y-3">
               <h3 className="font-semibold flex items-center gap-2 text-sm">
                 <Crown className="h-4 w-4 text-yellow-500" />
-                選擇挑戰難度
+                {t('selectChallengeDifficulty')}
               </h3>
               <div className="grid grid-cols-5 gap-2">
                 {difficultyOptions.map((difficulty) => (
@@ -111,7 +111,7 @@ export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge }: Dopamin
                         difficulty.radioColor
                       )}
                     />
-                    <div className="text-xs font-bold">{difficulty.label}</div>
+                    <div className="text-xs font-bold">{t(difficulty.translationKey as any)}</div>
                   </div>
                 ))}
               </div>
@@ -124,7 +124,7 @@ export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge }: Dopamin
                 className="w-full h-12 text-lg font-bold text-white shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden flowing-button"
               >
                 <Trophy className="mr-2 h-5 w-5" />
-                開始挑戰
+                {t('startChallenge')}
               </Button>
             </div>
           </CardContent>

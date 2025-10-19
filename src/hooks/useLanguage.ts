@@ -450,6 +450,9 @@ const translations = {
     minimumScoreDescription: '基本スコアの20%',
     minimumScoreExamples: '（簡単20点、普通40点、困難60点、専門家100点）',
     scoringExample: '簡単モード、2分完了、1回ミス = 100 + 240 - 20 = 320点',
+    
+    // 多巴胺模式相關
+    dopamineMode: 'ドーパミンモード',
   },
 };
 

@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Trophy, Clock, RotateCcw, X, Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { createPortal } from "react-dom";
+import { useLanguage } from "@/hooks/useLanguage";
 
 interface DopamineGameOverModalProps {
   isOpen: boolean;
@@ -34,6 +35,8 @@ export const DopamineGameOverModal = ({
   mistakes,
   topScores
 }: DopamineGameOverModalProps) => {
+  const { t } = useLanguage();
+  
   if (!isOpen) return null;
 
   const formatTime = (seconds: number) => {
@@ -54,14 +57,7 @@ export const DopamineGameOverModal = ({
   };
 
   const getDifficultyLabel = (diff: string) => {
-    switch (diff) {
-      case 'easy': return '簡單';
-      case 'medium': return '中等';
-      case 'hard': return '困難';
-      case 'expert': return '專家';
-      case 'hell': return '地獄';
-      default: return diff;
-    }
+    return t(diff as any);
   };
 
   return createPortal(
@@ -73,16 +69,16 @@ export const DopamineGameOverModal = ({
               <div className="flex items-center gap-3">
                 <div>
                   <CardTitle className="flex items-center gap-2">
-                    <span>多巴胺模式</span>
+                    <span>{t('dopamineMode')}</span>
                     <Badge 
                       variant="secondary" 
                       className="text-white relative overflow-hidden flowing-button"
                     >
                       <Zap className="h-3 w-3 mr-1" />
-                      Game Over
+                      {t('gameOver')}
                     </Badge>
                   </CardTitle>
-                  <CardDescription className="mt-2">挑戰失敗，但你的努力值得讚賞！</CardDescription>
+                  <CardDescription className="mt-2">{t('challengeFailed')}</CardDescription>
                 </div>
               </div>
               <Button variant="outline" size="sm" onClick={onClose} className="mt-1">
@@ -96,7 +92,7 @@ export const DopamineGameOverModal = ({
             <div 
               className="text-6xl md:text-8xl font-black retro-pixel-text flowing-text"
             >
-              GAME OVER
+              {t('gameOver')}
             </div>
           </div>
           
@@ -105,7 +101,7 @@ export const DopamineGameOverModal = ({
                    <div className="space-y-3">
                      <div className="flex items-center gap-2">
                        <Trophy className="h-5 w-5 text-yellow-500" />
-                       <h3 className="text-lg font-semibold">多巴胺模式成就牆</h3>
+                       <h3 className="text-lg font-semibold">{t('dopamineAchievementWall')}</h3>
                      </div>
               
               <div className="space-y-2">
@@ -115,9 +111,9 @@ export const DopamineGameOverModal = ({
                       1
                     </div>
                     <div>
-                      <div className="font-medium text-muted-foreground">暫無最高分資料</div>
+                      <div className="font-medium text-muted-foreground">{t('noTopScoreData')}</div>
                       <div className="text-sm text-muted-foreground">
-                        {getDifficultyLabel(difficulty)} 難度
+                        {getDifficultyLabel(difficulty)} {t('difficultyLevel')}
                       </div>
                     </div>
                   </div>
@@ -132,10 +128,10 @@ export const DopamineGameOverModal = ({
                 className="flex-1 h-12 text-lg font-bold text-white shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden flowing-button"
               >
                 <RotateCcw className="h-4 w-4 mr-2" />
-                再次挑戰
+                {t('againChallenge')}
               </Button>
               <Button variant="outline" onClick={onReturnToMain} className="flex-1 h-12">
-                返回主選單
+                {t('returnToMainMenu')}
               </Button>
             </div>
           </CardContent>

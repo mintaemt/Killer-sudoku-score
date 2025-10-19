@@ -83,7 +83,7 @@ export const DopamineProgressBar = ({
           <div className="flex items-center justify-between gap-2">
             {/* 剩餘格數 */}
             <div className="flex items-center gap-2 bg-white/10 text-white border border-white/20 px-3 py-1 rounded-lg">
-              <span className="text-xs opacity-90">剩餘:</span>
+              <span className="text-xs opacity-90">{t('remaining')}:</span>
               <span className="font-bold text-sm">{remainingCells}</span>
             </div>
             
