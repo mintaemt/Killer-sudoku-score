@@ -153,10 +153,25 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
         setGameCompletionResult(result);
         setShowGameCompleteModal(true);
       } else {
-        console.log('❌ 記錄保存失敗');
+        console.log('❌ 記錄保存失敗，但仍顯示完成模態框');
+        // 即使保存失敗，也顯示獲勝資訊卡
+        setGameCompletionResult({ 
+          score, 
+          rank: null, 
+          isNewRecord: false 
+        });
+        setShowGameCompleteModal(true);
       }
     } catch (error) {
       console.error('❌ 處理遊戲完成時發生錯誤:', error);
+      // 即使發生錯誤，也顯示獲勝資訊卡
+      console.log('🔄 發生錯誤但仍顯示完成模態框');
+      setGameCompletionResult({ 
+        score, 
+        rank: null, 
+        isNewRecord: false 
+      });
+      setShowGameCompleteModal(true);
     }
   };
 
