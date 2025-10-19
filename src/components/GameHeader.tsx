@@ -189,42 +189,42 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
                               </div>
                             </div>
                           ) : (
-                            // 多巴胺模式統計
-                            <div className="space-y-2 text-xs">
-                              {(['easy', 'medium', 'hard', 'expert', 'hell'] as const).map(difficulty => {
-                                const diffStats = stats?.difficultyStats?.[difficulty];
-                                // 即使沒有遊戲記錄也要顯示，顯示 0 值
-                                
-                                const difficultyLabels = {
-                                  easy: t('easy'),
-                                  medium: t('medium'), 
-                                  hard: t('hard'),
-                                  expert: t('expert'),
-                                  hell: t('hell')
-                                };
-                                
-                                return (
-                                  <div key={difficulty} className="border rounded p-2">
-                                    <div className="font-medium text-xs mb-1">{difficultyLabels[difficulty]}</div>
-                                    <div className="grid grid-cols-2 gap-1">
-                                      <div className="flex items-center space-x-1">
-                                        <Trophy className="h-2 w-2 text-yellow-500" />
-                                        <span>最佳</span>
-                                      </div>
-                                      <div className="text-right font-medium">
-                                        {(diffStats?.bestScore || 0).toLocaleString()}
-                                      </div>
-                                      <div className="flex items-center space-x-1">
-                                        <User className="h-2 w-2 text-green-500" />
-                                        <span>場數</span>
-                                      </div>
-                                      <div className="text-right font-medium">
-                                        {diffStats?.gamesPlayed || 0}
+                            // 多巴胺模式統計 - 水平滑動佈局
+                            <div className="overflow-x-auto">
+                              <div className="flex gap-2 pb-2 text-xs min-w-max">
+                                {(['easy', 'medium', 'hard', 'expert', 'hell'] as const).map(difficulty => {
+                                  const diffStats = stats?.difficultyStats?.[difficulty];
+                                  // 即使沒有遊戲記錄也要顯示，顯示 0 值
+                                  
+                                  const difficultyLabels = {
+                                    easy: t('easy'),
+                                    medium: t('medium'), 
+                                    hard: t('hard'),
+                                    expert: t('expert'),
+                                    hell: t('hell')
+                                  };
+                                  
+                                  return (
+                                    <div key={difficulty} className="border rounded p-2 min-w-[80px] flex-shrink-0">
+                                      <div className="font-medium text-xs mb-1 text-center">{difficultyLabels[difficulty]}</div>
+                                      <div className="space-y-1">
+                                        <div className="flex items-center justify-between">
+                                          <Trophy className="h-2 w-2 text-yellow-500" />
+                                          <span className="text-xs font-medium">
+                                            {(diffStats?.bestScore || 0).toLocaleString()}
+                                          </span>
+                                        </div>
+                                        <div className="flex items-center justify-between">
+                                          <User className="h-2 w-2 text-green-500" />
+                                          <span className="text-xs font-medium">
+                                            {diffStats?.gamesPlayed || 0}
+                                          </span>
+                                        </div>
                                       </div>
                                     </div>
-                                  </div>
-                                );
-                              })}
+                                  );
+                                })}
+                              </div>
                             </div>
                           )}
                         </div>
