@@ -366,6 +366,17 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
     setGameCompletionResult(null);
   };
 
+  // 一鍵答題測試函數
+  const handleTestComplete = () => {
+    if (isDopamineMode) {
+      // 多巴胺模式：觸發勝利
+      handleDopamineWin();
+    } else {
+      // 普通模式：觸發完成
+      handleGameComplete();
+    }
+  };
+
   // 測試WIN資訊卡（用於測試）
   const handleTestWin = async () => {
     const score = calculateDopamineScore({
@@ -521,6 +532,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
             currentTheme={currentTheme}
             onShowLeaderboard={handleShowLeaderboard}
             onShowRules={handleShowRules}
+            onTestComplete={handleTestComplete}
           />
           
           <DifficultySelector 
@@ -575,6 +587,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
                   currentTheme={currentTheme}
                   onShowLeaderboard={handleShowLeaderboard}
                   onShowRules={handleShowRules}
+                  onTestComplete={handleTestComplete}
                 />
               </div>
 
