@@ -13,6 +13,8 @@ export const useLeaderboard = (difficulty?: Difficulty, mode: 'normal' | 'dopami
       setError(null);
 
       const viewName = mode === 'normal' ? 'normal_leaderboard' : 'dopamine_leaderboard';
+      console.log(`🔍 嘗試讀取視圖: ${viewName}, 難度: ${difficulty || 'all'}`);
+      
       let query = supabase.from(viewName).select('*');
 
       if (difficulty) {
@@ -22,13 +24,17 @@ export const useLeaderboard = (difficulty?: Difficulty, mode: 'normal' | 'dopami
       const { data, error } = await query;
 
       if (error) {
+        console.error(`❌ 讀取 ${viewName} 視圖失敗:`, error);
         throw error;
       }
 
+      console.log(`✅ 成功讀取 ${viewName} 視圖:`, data);
       setLeaderboard(data || []);
     } catch (err) {
       console.error('Error fetching leaderboard:', err);
-      setError(err instanceof Error ? err.message : 'Unknown error');
+      const errorMessage = err instanceof Error ? err.message : 'Unknown error';
+      console.error('詳細錯誤信息:', errorMessage);
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
