@@ -193,7 +193,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
                             <div className="space-y-2 text-xs">
                               {(['easy', 'medium', 'hard', 'expert', 'hell'] as const).map(difficulty => {
                                 const diffStats = stats?.difficultyStats?.[difficulty];
-                                if (!diffStats || diffStats.gamesPlayed === 0) return null;
+                                // 即使沒有遊戲記錄也要顯示，顯示 0 值
                                 
                                 const difficultyLabels = {
                                   easy: t('easy'),
@@ -212,14 +212,14 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
                                         <span>最佳</span>
                                       </div>
                                       <div className="text-right font-medium">
-                                        {diffStats.bestScore.toLocaleString()}
+                                        {(diffStats?.bestScore || 0).toLocaleString()}
                                       </div>
                                       <div className="flex items-center space-x-1">
                                         <User className="h-2 w-2 text-green-500" />
                                         <span>場數</span>
                                       </div>
                                       <div className="text-right font-medium">
-                                        {diffStats.gamesPlayed}
+                                        {diffStats?.gamesPlayed || 0}
                                       </div>
                                     </div>
                                   </div>
