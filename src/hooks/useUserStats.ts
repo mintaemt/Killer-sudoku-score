@@ -25,7 +25,21 @@ export const useUserStats = (userId: string | null, mode: 'normal' | 'dopamine' 
 
   useEffect(() => {
     if (!userId) {
-      setStats(null);
+      // 沒有用戶ID時，設置為空統計
+      setStats({
+        totalGames: 0,
+        bestScore: 0,
+        bestTime: 0,
+        averageScore: 0,
+        totalMistakes: 0,
+        difficultyStats: {
+          easy: { gamesPlayed: 0, bestScore: 0, bestTime: 0, averageScore: 0 },
+          medium: { gamesPlayed: 0, bestScore: 0, bestTime: 0, averageScore: 0 },
+          hard: { gamesPlayed: 0, bestScore: 0, bestTime: 0, averageScore: 0 },
+          expert: { gamesPlayed: 0, bestScore: 0, bestTime: 0, averageScore: 0 },
+          hell: { gamesPlayed: 0, bestScore: 0, bestTime: 0, averageScore: 0 },
+        },
+      });
       return;
     }
 
@@ -46,7 +60,21 @@ export const useUserStats = (userId: string | null, mode: 'normal' | 'dopamine' 
         }
 
         if (!gameRecords || gameRecords.length === 0) {
-          setStats(null);
+          // 沒有遊戲記錄時，設置為空統計
+          setStats({
+            totalGames: 0,
+            bestScore: 0,
+            bestTime: 0,
+            averageScore: 0,
+            totalMistakes: 0,
+            difficultyStats: {
+              easy: { gamesPlayed: 0, bestScore: 0, bestTime: 0, averageScore: 0 },
+              medium: { gamesPlayed: 0, bestScore: 0, bestTime: 0, averageScore: 0 },
+              hard: { gamesPlayed: 0, bestScore: 0, bestTime: 0, averageScore: 0 },
+              expert: { gamesPlayed: 0, bestScore: 0, bestTime: 0, averageScore: 0 },
+              hell: { gamesPlayed: 0, bestScore: 0, bestTime: 0, averageScore: 0 },
+            },
+          });
           return;
         }
 
@@ -57,8 +85,8 @@ export const useUserStats = (userId: string | null, mode: 'normal' | 'dopamine' 
         } else {
           // 如果沒有mode欄位，根據模式決定是否顯示記錄
           if (mode === 'dopamine') {
-            // 多巴胺模式：不顯示任何記錄（因為沒有多巴胺記錄）
-            filteredRecords = [];
+            // 多巴胺模式：顯示普通模式的記錄（因為多巴胺模式目前沒有獨立的記錄系統）
+            filteredRecords = gameRecords;
           } else {
             // 普通模式：顯示所有記錄
             filteredRecords = gameRecords;
@@ -66,7 +94,21 @@ export const useUserStats = (userId: string | null, mode: 'normal' | 'dopamine' 
         }
 
         if (filteredRecords.length === 0) {
-          setStats(null);
+          // 沒有記錄時，設置為空統計而不是 null
+          setStats({
+            totalGames: 0,
+            bestScore: 0,
+            bestTime: 0,
+            averageScore: 0,
+            totalMistakes: 0,
+            difficultyStats: {
+              easy: { gamesPlayed: 0, bestScore: 0, bestTime: 0, averageScore: 0 },
+              medium: { gamesPlayed: 0, bestScore: 0, bestTime: 0, averageScore: 0 },
+              hard: { gamesPlayed: 0, bestScore: 0, bestTime: 0, averageScore: 0 },
+              expert: { gamesPlayed: 0, bestScore: 0, bestTime: 0, averageScore: 0 },
+              hell: { gamesPlayed: 0, bestScore: 0, bestTime: 0, averageScore: 0 },
+            },
+          });
           return;
         }
 

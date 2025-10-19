@@ -171,29 +171,29 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
                                 <span>{t('bestScore')}</span>
                               </div>
                               <div className="text-right font-medium">
-                                {stats.bestScore.toLocaleString()}
+                                {stats?.bestScore?.toLocaleString() || '0'}
                               </div>
                               <div className="flex items-center space-x-1">
                                 <Clock className="h-3 w-3 text-blue-500" />
                                 <span>{t('bestTime')}</span>
                               </div>
                               <div className="text-right font-medium">
-                                {Math.floor(stats.bestTime / 60)}:{(stats.bestTime % 60).toString().padStart(2, '0')}
+                                {stats?.bestTime ? `${Math.floor(stats.bestTime / 60)}:${(stats.bestTime % 60).toString().padStart(2, '0')}` : '0:00'}
                               </div>
                               <div className="flex items-center space-x-1">
                                 <User className="h-3 w-3 text-green-500" />
                                 <span>{t('totalGames')}</span>
                               </div>
                               <div className="text-right font-medium">
-                                {stats.totalGames}
+                                {stats?.totalGames || 0}
                               </div>
                             </div>
                           ) : (
                             // 多巴胺模式統計
                             <div className="space-y-2 text-xs">
                               {(['easy', 'medium', 'hard', 'expert', 'hell'] as const).map(difficulty => {
-                                const diffStats = stats.difficultyStats[difficulty];
-                                if (diffStats.gamesPlayed === 0) return null;
+                                const diffStats = stats?.difficultyStats?.[difficulty];
+                                if (!diffStats || diffStats.gamesPlayed === 0) return null;
                                 
                                 const difficultyLabels = {
                                   easy: t('easy'),
