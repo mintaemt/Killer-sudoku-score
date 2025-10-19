@@ -39,47 +39,73 @@ export async function checkSupabaseConnection() {
       });
     }
     
-    // 獲取遊戲記錄
-    const { data: gameRecords, error: recordsError } = await supabase
-      .from('game_records')
+    // 獲取普通模式遊戲記錄
+    const { data: normalRecords, error: normalRecordsError } = await supabase
+      .from('normal_records')
       .select('*')
       .order('completed_at', { ascending: false });
     
-    if (recordsError) {
-      console.error('❌ 獲取遊戲記錄失敗:', recordsError);
+    if (normalRecordsError) {
+      console.error('❌ 獲取普通模式記錄失敗:', normalRecordsError);
     } else {
-      console.log(`🎮 遊戲記錄數量: ${gameRecords.length}`);
-      
-      if (gameRecords.length > 0) {
-        const hasModeColumn = gameRecords[0].hasOwnProperty('mode');
-        console.log(`📋 有mode欄位: ${hasModeColumn ? '是' : '否'}`);
-        
-        // 按用戶分組
-        const userStats = {};
-        gameRecords.forEach(record => {
-          const userId = record.user_id;
-          if (!userStats[userId]) {
-            userStats[userId] = { normal: [], dopamine: [], unknown: [] };
-          }
-          const mode = record.mode || 'unknown';
-          userStats[userId][mode].push(record);
-        });
-        
-        console.log('\n👥 用戶分數統計:');
-        Object.keys(userStats).forEach(userId => {
-          const stats = userStats[userId];
-          const user = users.find(u => u.id === userId);
-          const userName = user?.name || `用戶${userId.slice(0, 8)}`;
-          
-          console.log(`\n   ${userName}:`);
-          console.log(`     普通模式: ${stats.normal.length} 筆, 最高分: ${stats.normal.length > 0 ? Math.max(...stats.normal.map(r => r.score)) : '無'}`);
-          console.log(`     多巴胺模式: ${stats.dopamine.length} 筆, 最高分: ${stats.dopamine.length > 0 ? Math.max(...stats.dopamine.map(r => r.score)) : '無'}`);
-          console.log(`     未知模式: ${stats.unknown.length} 筆, 最高分: ${stats.unknown.length > 0 ? Math.max(...stats.unknown.map(r => r.score)) : '無'}`);
-        });
-      }
+      console.log(`🎮 普通模式記錄數量: ${normalRecords.length}`);
     }
     
-    return { success: true, users, gameRecords };
+    // 獲取多巴胺模式遊戲記錄
+    const { data: dopamineRecords, error: dopamineRecordsError } = await supabase
+      .from('dopamine_records')
+      .select('*')
+      .order('completed_at', { ascending: false });
+    
+    if (dopamineRecordsError) {
+      console.error('❌ 獲取多巴胺模式記錄失敗:', dopamineRecordsError);
+    } else {
+      console.log(`🎮 多巴胺模式記錄數量: ${dopamineRecords.length}`);
+    }
+    
+    // 合併統計
+    const totalRecords = (normalRecords?.length || 0) + (dopamineRecords?.length || 0);
+    console.log(`📊 總遊戲記錄數量: ${totalRecords}`);
+    
+    if (totalRecords > 0) {
+      // 按用戶分組統計
+      const userStats = {};
+      
+      // 處理普通模式記錄
+      if (normalRecords) {
+        normalRecords.forEach(record => {
+          const userId = record.user_id;
+          if (!userStats[userId]) {
+            userStats[userId] = { normal: [], dopamine: [] };
+          }
+          userStats[userId].normal.push(record);
+        });
+      }
+      
+      // 處理多巴胺模式記錄
+      if (dopamineRecords) {
+        dopamineRecords.forEach(record => {
+          const userId = record.user_id;
+          if (!userStats[userId]) {
+            userStats[userId] = { normal: [], dopamine: [] };
+          }
+          userStats[userId].dopamine.push(record);
+        });
+      }
+      
+      console.log('\n👥 用戶分數統計:');
+      Object.keys(userStats).forEach(userId => {
+        const stats = userStats[userId];
+        const user = users.find(u => u.id === userId);
+        const userName = user?.name || `用戶${userId.slice(0, 8)}`;
+        
+        console.log(`\n   ${userName}:`);
+        console.log(`     普通模式: ${stats.normal.length} 筆, 最高分: ${stats.normal.length > 0 ? Math.max(...stats.normal.map(r => r.score)) : '無'}`);
+        console.log(`     多巴胺模式: ${stats.dopamine.length} 筆, 最高分: ${stats.dopamine.length > 0 ? Math.max(...stats.dopamine.map(r => r.score)) : '無'}`);
+      });
+    }
+    
+    return { success: true, users, normalRecords, dopamineRecords };
     
   } catch (error) {
     console.error('❌ 檢查過程中發生錯誤:', error);

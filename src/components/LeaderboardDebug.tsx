@@ -16,9 +16,16 @@ export const LeaderboardDebug = () => {
       <h3 className="text-lg font-bold">排行榜調試信息</h3>
       
       <div>
-        <h4 className="font-semibold">遊戲記錄 (game_records):</h4>
+        <h4 className="font-semibold">普通模式記錄 (normal_records):</h4>
         <pre className="bg-gray-100 p-2 rounded text-xs overflow-auto">
-          {JSON.stringify(debugInfo.gameRecords, null, 2)}
+          {JSON.stringify(debugInfo.normalRecords, null, 2)}
+        </pre>
+      </div>
+
+      <div>
+        <h4 className="font-semibold">多巴胺模式記錄 (dopamine_records):</h4>
+        <pre className="bg-gray-100 p-2 rounded text-xs overflow-auto">
+          {JSON.stringify(debugInfo.dopamineRecords, null, 2)}
         </pre>
       </div>
 
@@ -30,16 +37,16 @@ export const LeaderboardDebug = () => {
       </div>
 
       <div>
-        <h4 className="font-semibold">排行榜視圖 (leaderboard):</h4>
+        <h4 className="font-semibold">普通模式排行榜 (normal_leaderboard):</h4>
         <pre className="bg-gray-100 p-2 rounded text-xs overflow-auto">
-          {JSON.stringify(debugInfo.leaderboard, null, 2)}
+          {JSON.stringify(debugInfo.normalLeaderboard, null, 2)}
         </pre>
       </div>
 
       <div>
-        <h4 className="font-semibold">簡單模式排行榜:</h4>
+        <h4 className="font-semibold">多巴胺模式排行榜 (dopamine_leaderboard):</h4>
         <pre className="bg-gray-100 p-2 rounded text-xs overflow-auto">
-          {JSON.stringify(debugInfo.easyLeaderboard, null, 2)}
+          {JSON.stringify(debugInfo.dopamineLeaderboard, null, 2)}
         </pre>
       </div>
     </div>

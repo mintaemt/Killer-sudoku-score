@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/hooks/useLanguage";
 
 // 主題顏色映射
 const getThemeColors = (theme: string) => {
@@ -31,6 +32,8 @@ export const NumberPad = ({
   showNumbersOnly = false,
   currentTheme = "blue"
 }: NumberPadProps) => {
+  const { t } = useLanguage();
+  
   // 如果只顯示 clear 按鈕
   if (showClearOnly) {
     const themeColors = getThemeColors(currentTheme);
@@ -49,7 +52,7 @@ export const NumberPad = ({
             "border-0"
           )}
         >
-          Clear
+          {t('clear')}
         </Button>
       </div>
     );
@@ -126,7 +129,7 @@ export const NumberPad = ({
             "border-0"
           )}
         >
-          Clear
+          {t('clear')}
         </Button>
       </div>
     </div>

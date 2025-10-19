@@ -93,6 +93,7 @@ const translations = {
     back: 'Back',
     restart: 'Restart',
     returnToMain: 'Return to Main Menu',
+    clear: 'Clear',
     
     // 主題
     currentTheme: 'Current theme',
@@ -240,6 +241,7 @@ const translations = {
     back: '返回',
     restart: '再次挑戰',
     returnToMain: '返回主選單',
+    clear: '清除',
     
     // 主題
     currentTheme: '當前主題',
@@ -387,6 +389,7 @@ const translations = {
     back: '뒤로',
     restart: '다시 도전',
     returnToMain: '메인 메뉴로',
+    clear: '지우기',
     
     // 테마
     currentTheme: '현재 테마',
@@ -534,6 +537,7 @@ const translations = {
     back: '戻る',
     restart: '再挑戦',
     returnToMain: 'メインメニューに戻る',
+    clear: 'クリア',
     
     // テーマ
     currentTheme: '現在のテーマ',
