@@ -175,20 +175,16 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
                           <div className="text-xs font-medium text-muted-foreground mb-1 break-words">{t('idealTime')}:</div>
                           <div className="grid grid-cols-2 gap-1 text-xs">
                             <div className="text-center p-1.5 rounded bg-background/50">
-                              <div className="font-medium break-words">{t('easy')}</div>
-                              <div className="text-muted-foreground">6{t('minutes')}</div>
+                              <div className="break-words">{t('easy')}: 6{t('minutes')}</div>
                             </div>
                             <div className="text-center p-1.5 rounded bg-background/50">
-                              <div className="font-medium break-words">{t('medium')}</div>
-                              <div className="text-muted-foreground">12{t('minutes')}</div>
+                              <div className="break-words">{t('medium')}: 12{t('minutes')}</div>
                             </div>
                             <div className="text-center p-1.5 rounded bg-background/50">
-                              <div className="font-medium break-words">{t('hard')}</div>
-                              <div className="text-muted-foreground">18{t('minutes')}</div>
+                              <div className="break-words">{t('hard')}: 18{t('minutes')}</div>
                             </div>
                             <div className="text-center p-1.5 rounded bg-background/50">
-                              <div className="font-medium break-words">{t('expert')}</div>
-                              <div className="text-muted-foreground">24{t('minutes')}</div>
+                              <div className="break-words">{t('expert')}: 24{t('minutes')}</div>
                             </div>
                           </div>
                         </div>
@@ -200,30 +196,24 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
                       <h4 className="font-semibold mb-2 flex items-center gap-2 text-sm">
                         <Target className="h-4 w-4 text-red-500 flex-shrink-0" />
                         <span className="break-words">{t('mistakePenalty')}</span>
+                        <Badge variant="destructive" className="text-xs px-1 py-0.5 flex-shrink-0">{t('mistake')}</Badge>
+                        <span className="text-xs text-muted-foreground break-words">{t('mistakePenaltyDescription')}</span>
                       </h4>
                       <div className="space-y-1.5 text-xs text-muted-foreground">
-                        <div className="flex items-center gap-1.5">
-                          <Badge variant="destructive" className="text-xs px-1 py-0.5 flex-shrink-0">{t('mistake')}</Badge>
-                          <span className="break-words">{t('mistakePenaltyDescription')}</span>
-                        </div>
                         <div className="mt-2">
                           <div className="text-xs font-medium text-muted-foreground mb-1 break-words">{t('minimumScore')}:</div>
                           <div className="grid grid-cols-2 gap-1 text-xs">
                             <div className="text-center p-1.5 rounded bg-background/50">
-                              <div className="font-medium break-words">{t('easy')}</div>
-                              <div className="text-muted-foreground">20{t('points')}</div>
+                              <div className="break-words">{t('easy')}: 20{t('points')}</div>
                             </div>
                             <div className="text-center p-1.5 rounded bg-background/50">
-                              <div className="font-medium break-words">{t('medium')}</div>
-                              <div className="text-muted-foreground">40{t('points')}</div>
+                              <div className="break-words">{t('medium')}: 40{t('points')}</div>
                             </div>
                             <div className="text-center p-1.5 rounded bg-background/50">
-                              <div className="font-medium break-words">{t('hard')}</div>
-                              <div className="text-muted-foreground">60{t('points')}</div>
+                              <div className="break-words">{t('hard')}: 60{t('points')}</div>
                             </div>
                             <div className="text-center p-1.5 rounded bg-background/50">
-                              <div className="font-medium break-words">{t('expert')}</div>
-                              <div className="text-muted-foreground">100{t('points')}</div>
+                              <div className="break-words">{t('expert')}: 100{t('points')}</div>
                             </div>
                           </div>
                         </div>
