@@ -38,7 +38,7 @@ export const NumberPad = ({
   if (showClearOnly) {
     const themeColors = getThemeColors(currentTheme);
     return (
-      <div className="glass rounded-2xl p-2 shadow-apple-lg">
+      <div className="glass rounded-2xl p-3 shadow-apple-lg">
         <Button
           size="lg"
           onClick={onClear}
@@ -90,7 +90,7 @@ export const NumberPad = ({
 
   // 預設顯示模式（移動裝置）
   return (
-    <div className="glass rounded-2xl p-4 md:p-6 shadow-apple-lg w-full">
+    <div className="glass rounded-2xl p-3 md:p-3 shadow-apple-lg w-full">
       <div className="space-y-3">
         {/* Numbers 1-9 in a single row on mobile */}
         <div className="grid grid-cols-9 gap-1 md:gap-2">
