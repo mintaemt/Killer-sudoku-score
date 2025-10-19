@@ -101,7 +101,7 @@ export const Leaderboard = ({ currentUserId, onClose, mode = 'normal' }: Leaderb
 
   return (
     <div className="w-full">
-      <div className="px-6 py-4 border-b">
+      <div className="px-4 py-3 border-b">
         <div className="flex items-center justify-between">
           <div>
             <h3 className="text-lg font-semibold flex items-center space-x-2">
@@ -121,7 +121,7 @@ export const Leaderboard = ({ currentUserId, onClose, mode = 'normal' }: Leaderb
           </div>
         </div>
       </div>
-      <div className="px-6 py-4">
+      <div className="px-4 py-3">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className={`inline-flex w-auto ${mode === 'normal' ? 'grid-cols-5' : 'grid-cols-6'}`}>
             <TabsTrigger value="all" className="px-3 py-1.5 text-xs">
@@ -134,7 +134,7 @@ export const Leaderboard = ({ currentUserId, onClose, mode = 'normal' }: Leaderb
             ))}
           </TabsList>
 
-          <TabsContent value={activeTab} className="mt-6">
+          <TabsContent value={activeTab} className="mt-4">
             {leaderboard.length === 0 ? (
               <div className="text-center py-8 text-muted-foreground">
                 {t('noData')}
