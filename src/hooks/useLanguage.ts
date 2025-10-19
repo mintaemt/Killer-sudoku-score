@@ -117,7 +117,7 @@ const translations = {
   },
   zh: {
     // 遊戲相關
-    gameTitle: '數獨',
+    gameTitle: '殺手數獨',
     newGame: '新遊戲',
     gameRules: '遊戲規則',
     difficulty: '難度',
@@ -229,7 +229,7 @@ const translations = {
   },
   ko: {
     // 遊戲相關
-    gameTitle: '수도쿠',
+    gameTitle: '킬러 스도쿠',
     newGame: '새 게임',
     gameRules: '게임 규칙',
     difficulty: '난이도',
@@ -341,7 +341,7 @@ const translations = {
   },
   ja: {
     // ゲーム関連
-    gameTitle: '数独',
+    gameTitle: 'キラー数独',
     newGame: '新しいゲーム',
     gameRules: 'ゲームルール',
     difficulty: '難易度',
