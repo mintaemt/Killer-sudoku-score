@@ -67,7 +67,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
         </div>
 
         {/* 右側：遊戲規則、主題切換、主題選擇器、用戶狀態和新遊戲按鈕 */}
-        <div className="flex items-center gap-1 md:gap-2 flex-shrink-0">
+        <div className="flex items-center gap-2 md:gap-3 flex-shrink-0">
           {/* 遊戲規則按鈕 */}
           <Button
             variant="outline"
