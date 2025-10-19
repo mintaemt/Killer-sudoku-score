@@ -131,12 +131,12 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
                   {/* 計分規則 - 優化為更緊湊的佈局 */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {/* 基礎分數 */}
-                    <div className="p-3 rounded-lg bg-gradient-to-r from-blue-50 to-green-50 dark:from-blue-950/20 dark:to-green-950/20 border">
+                    <div className="p-3 rounded-lg bg-gradient-to-r from-blue-50 to-green-50 dark:from-blue-950/20 dark:to-green-950/20 border flex flex-col">
                       <h4 className="font-semibold mb-2 flex items-center gap-2 text-sm">
                         <Trophy className="h-4 w-4 text-yellow-500 flex-shrink-0" />
                         <span className="break-words">{t('basicScore')}</span>
                       </h4>
-                      <div className="space-y-1.5 text-xs text-muted-foreground">
+                      <div className="space-y-1.5 text-xs text-muted-foreground flex-1 flex flex-col justify-center">
                         <div className="mt-2">
                           <div className="grid grid-cols-2 gap-2 text-xs">
                             <div className="text-center p-2 rounded bg-background/50 flex items-center justify-center min-h-[2.5rem]">
