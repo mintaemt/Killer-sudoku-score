@@ -89,8 +89,14 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
   // 處理遊戲完成
   const handleGameComplete = async () => {
     console.log('🚀 handleGameComplete 被調用');
-    if (!user && !isVisitorMode) return;
+    console.log('👤 用戶狀態:', { user: !!user, isVisitorMode, isDopamineMode });
+    
+    if (!user && !isVisitorMode) {
+      console.log('❌ 用戶未登入且非訪客模式，退出');
+      return;
+    }
 
+    console.log('✅ 通過用戶檢查，繼續處理');
     setIsPaused(true);
     
     let score: number;
@@ -117,6 +123,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
     
     // 訪客模式下不保存記錄，只顯示完成模態框
     if (isVisitorMode) {
+      console.log('👤 訪客模式，顯示完成模態框');
       setGameCompletionResult({ 
         score, 
         rank: null, 
@@ -128,6 +135,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
     
     // 普通模式：如果失格則不保存記錄
     if (!isDopamineMode && isDisqualified) {
+      console.log('❌ 普通模式失格，顯示完成模態框但不保存記錄');
       setGameCompletionResult({ 
         score, 
         rank: null, 
@@ -138,13 +146,17 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
     }
     
     try {
+      console.log('💾 開始保存普通模式記錄');
       const result = await saveNormalGameRecord(user!.id, difficulty, time, mistakes);
       if (result) {
+        console.log('✅ 記錄保存成功，顯示完成模態框');
         setGameCompletionResult(result);
         setShowGameCompleteModal(true);
+      } else {
+        console.log('❌ 記錄保存失敗');
       }
     } catch (error) {
-      console.error('Error handling game completion:', error);
+      console.error('❌ 處理遊戲完成時發生錯誤:', error);
     }
   };
 
@@ -401,6 +413,13 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
       if (isDopamineMode) {
         handleDopamineWin();
       } else {
+        // 普通模式：先設置基本結果，然後調用處理函數
+        console.log('🔧 設置基本遊戲完成結果');
+        setGameCompletionResult({ 
+          score: calculateScore({ difficulty, completionTime: time, mistakes }),
+          rank: null, 
+          isNewRecord: false 
+        });
         handleGameComplete();
       }
     }, 100); // 短暫延遲確保狀態更新
@@ -670,18 +689,18 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
       )}
 
       {/* 遊戲完成模態框 */}
-      {showGameCompleteModal && gameCompletionResult && (
+      {showGameCompleteModal && (
         <GameCompleteModal
           isOpen={showGameCompleteModal}
           onClose={() => setShowGameCompleteModal(false)}
           onNewGame={handleNewGame}
           onShowLeaderboard={handleShowLeaderboard}
-          score={gameCompletionResult.score}
+          score={gameCompletionResult?.score || 0}
           completionTime={time}
           mistakes={mistakes}
           difficulty={difficulty}
-          rank={gameCompletionResult.rank}
-          isNewRecord={gameCompletionResult.isNewRecord}
+          rank={gameCompletionResult?.rank}
+          isNewRecord={gameCompletionResult?.isNewRecord || false}
           currentUserId={user?.id}
         />
       )}
