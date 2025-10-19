@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { RotateCcw, Palette, User, Trophy, Clock, ListOrdered, Info } from "lucide-react";
+import { RotateCcw, Palette, User, Trophy, Clock, ListOrdered, Info, ChevronLeft, ChevronRight } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { LanguageToggle } from "@/components/LanguageToggle";
 import { cn } from "@/lib/utils";
@@ -29,6 +29,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
   const [isThemeOpen, setIsThemeOpen] = useState(false);
   const [isUserOpen, setIsUserOpen] = useState(false);
   const [viewMode, setViewMode] = useState<'normal' | 'dopamine'>('normal');
+  const [currentDifficultyIndex, setCurrentDifficultyIndex] = useState(0);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const userDropdownRef = useRef<HTMLDivElement>(null);
   const { user, isLoggedIn, isVisitorMode } = useUser();
@@ -189,12 +190,14 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
                               </div>
                             </div>
                           ) : (
-                            // 多巴胺模式統計 - 水平滑動佈局
-                            <div className="overflow-x-auto">
-                              <div className="flex gap-2 pb-2 text-xs min-w-max">
-                                {(['easy', 'medium', 'hard', 'expert', 'hell'] as const).map(difficulty => {
-                                  const diffStats = stats?.difficultyStats?.[difficulty];
-                                  // 即使沒有遊戲記錄也要顯示，顯示 0 值
+                            // 多巴胺模式統計 - 單張卡片滑動模式
+                            <div className="space-y-3">
+                              {/* 當前難度卡片 */}
+                              <div className="border rounded p-3 text-xs">
+                                {(() => {
+                                  const difficulties = ['easy', 'medium', 'hard', 'expert', 'hell'] as const;
+                                  const currentDifficulty = difficulties[currentDifficultyIndex];
+                                  const diffStats = stats?.difficultyStats?.[currentDifficulty];
                                   
                                   const difficultyLabels = {
                                     easy: t('easy'),
@@ -205,25 +208,68 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
                                   };
                                   
                                   return (
-                                    <div key={difficulty} className="border rounded p-2 min-w-[80px] flex-shrink-0">
-                                      <div className="font-medium text-xs mb-1 text-center">{difficultyLabels[difficulty]}</div>
-                                      <div className="space-y-1">
+                                    <>
+                                      <div className="font-medium text-sm mb-2 text-center">{difficultyLabels[currentDifficulty]}</div>
+                                      <div className="space-y-2">
                                         <div className="flex items-center justify-between">
-                                          <Trophy className="h-2 w-2 text-yellow-500" />
-                                          <span className="text-xs font-medium">
+                                          <div className="flex items-center space-x-2">
+                                            <Trophy className="h-3 w-3 text-yellow-500" />
+                                            <span className="text-xs">最佳分數</span>
+                                          </div>
+                                          <span className="text-sm font-bold">
                                             {(diffStats?.bestScore || 0).toLocaleString()}
                                           </span>
                                         </div>
                                         <div className="flex items-center justify-between">
-                                          <User className="h-2 w-2 text-green-500" />
-                                          <span className="text-xs font-medium">
+                                          <div className="flex items-center space-x-2">
+                                            <User className="h-3 w-3 text-green-500" />
+                                            <span className="text-xs">遊戲場數</span>
+                                          </div>
+                                          <span className="text-sm font-bold">
                                             {diffStats?.gamesPlayed || 0}
                                           </span>
                                         </div>
                                       </div>
-                                    </div>
+                                    </>
                                   );
-                                })}
+                                })()}
+                              </div>
+                              
+                              {/* 滑動控制 */}
+                              <div className="flex items-center justify-between">
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  onClick={() => setCurrentDifficultyIndex(prev => prev > 0 ? prev - 1 : 4)}
+                                  className="h-6 w-6 p-0"
+                                >
+                                  <ChevronLeft className="h-3 w-3" />
+                                </Button>
+                                
+                                {/* 點點指示器 */}
+                                <div className="flex space-x-1">
+                                  {[0, 1, 2, 3, 4].map(index => (
+                                    <button
+                                      key={index}
+                                      onClick={() => setCurrentDifficultyIndex(index)}
+                                      className={cn(
+                                        "w-2 h-2 rounded-full transition-colors",
+                                        index === currentDifficultyIndex 
+                                          ? "bg-primary" 
+                                          : "bg-muted-foreground/30 hover:bg-muted-foreground/50"
+                                      )}
+                                    />
+                                  ))}
+                                </div>
+                                
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  onClick={() => setCurrentDifficultyIndex(prev => prev < 4 ? prev + 1 : 0)}
+                                  className="h-6 w-6 p-0"
+                                >
+                                  <ChevronRight className="h-3 w-3" />
+                                </Button>
                               </div>
                             </div>
                           )}
