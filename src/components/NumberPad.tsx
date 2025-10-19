@@ -41,22 +41,65 @@ export const NumberPad = ({
   const longPressThreshold = 2000; // 2秒長按
 
   // 長按處理函數
-  const handleLongPressStart = () => {
+  const handleLongPressStart = (e: React.MouseEvent | React.TouchEvent) => {
     if (process.env.NODE_ENV === 'development' && onTestComplete) {
+      console.log('🔥 長按開始');
+      e.preventDefault(); // 防止默認行為
+      e.stopPropagation(); // 阻止事件冒泡
       setIsLongPressing(true);
       longPressTimer.current = setTimeout(() => {
+        console.log('⚡ 長按完成，觸發一鍵獲勝');
         onTestComplete();
         setIsLongPressing(false);
       }, longPressThreshold);
     }
   };
 
-  const handleLongPressEnd = () => {
+  const handleLongPressEnd = (e: React.MouseEvent | React.TouchEvent) => {
+    console.log('🛑 長按結束');
+    e.preventDefault();
+    e.stopPropagation();
     if (longPressTimer.current) {
       clearTimeout(longPressTimer.current);
       longPressTimer.current = null;
     }
     setIsLongPressing(false);
+  };
+
+  // 防止觸控選擇
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (process.env.NODE_ENV === 'development' && onTestComplete) {
+      e.preventDefault();
+      handleLongPressStart(e);
+    }
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (process.env.NODE_ENV === 'development' && onTestComplete) {
+      e.preventDefault();
+      handleLongPressEnd(e);
+    }
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (process.env.NODE_ENV === 'development' && onTestComplete) {
+      e.preventDefault();
+      handleLongPressStart(e);
+    }
+  };
+
+  const handleMouseUp = (e: React.MouseEvent) => {
+    if (process.env.NODE_ENV === 'development' && onTestComplete) {
+      e.preventDefault();
+      handleLongPressEnd(e);
+    }
+  };
+
+  const handleMouseLeave = (e: React.MouseEvent) => {
+    if (process.env.NODE_ENV === 'development' && onTestComplete) {
+      e.preventDefault();
+      handleLongPressEnd(e);
+    }
   };
 
   // 清理定時器
@@ -75,11 +118,11 @@ export const NumberPad = ({
         <Button
           size="lg"
           onClick={onClear}
-          onMouseDown={handleLongPressStart}
-          onMouseUp={handleLongPressEnd}
-          onMouseLeave={handleLongPressEnd}
-          onTouchStart={handleLongPressStart}
-          onTouchEnd={handleLongPressEnd}
+          onMouseDown={handleMouseDown}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseLeave}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
           disabled={disabled}
           className={cn(
             "w-full h-12 transition-smooth font-bold text-lg",
@@ -88,8 +131,10 @@ export const NumberPad = ({
             themeColors.hover,
             themeColors.text,
             "border-0",
-            isLongPressing && "bg-yellow-500 hover:bg-yellow-600 animate-pulse"
+            isLongPressing && "bg-yellow-500 hover:bg-yellow-600 animate-pulse",
+            "select-none" // 防止文字選擇
           )}
+          style={{ userSelect: 'none', WebkitUserSelect: 'none' }} // 額外的防止選擇樣式
         >
           {isLongPressing ? "⚡ 長按中..." : t('clear')}
         </Button>
@@ -158,11 +203,11 @@ export const NumberPad = ({
         <Button
           size="lg"
           onClick={onClear}
-          onMouseDown={handleLongPressStart}
-          onMouseUp={handleLongPressEnd}
-          onMouseLeave={handleLongPressEnd}
-          onTouchStart={handleLongPressStart}
-          onTouchEnd={handleLongPressEnd}
+          onMouseDown={handleMouseDown}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseLeave}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
           disabled={disabled}
           className={cn(
             "w-full h-12 transition-smooth font-bold text-lg",
@@ -171,8 +216,10 @@ export const NumberPad = ({
             getThemeColors(currentTheme).hover,
             getThemeColors(currentTheme).text,
             "border-0",
-            isLongPressing && "bg-yellow-500 hover:bg-yellow-600 animate-pulse"
+            isLongPressing && "bg-yellow-500 hover:bg-yellow-600 animate-pulse",
+            "select-none" // 防止文字選擇
           )}
+          style={{ userSelect: 'none', WebkitUserSelect: 'none' }} // 額外的防止選擇樣式
         >
           {isLongPressing ? "⚡ 長按中..." : t('clear')}
         </Button>
