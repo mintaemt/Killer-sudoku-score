@@ -10,9 +10,16 @@ export const useLeaderboardDebug = () => {
       try {
         setLoading(true);
 
-        // 檢查 game_records 表
-        const { data: gameRecords, error: gameRecordsError } = await supabase
-          .from('game_records')
+        // 檢查 normal_records 表
+        const { data: normalRecords, error: normalRecordsError } = await supabase
+          .from('normal_records')
+          .select('*')
+          .order('completed_at', { ascending: false })
+          .limit(10);
+
+        // 檢查 dopamine_records 表
+        const { data: dopamineRecords, error: dopamineRecordsError } = await supabase
+          .from('dopamine_records')
           .select('*')
           .order('completed_at', { ascending: false })
           .limit(10);
@@ -23,24 +30,24 @@ export const useLeaderboardDebug = () => {
           .select('*')
           .limit(10);
 
-        // 檢查 leaderboard 視圖
-        const { data: leaderboard, error: leaderboardError } = await supabase
-          .from('leaderboard')
+        // 檢查 normal_leaderboard 視圖
+        const { data: normalLeaderboard, error: normalLeaderboardError } = await supabase
+          .from('normal_leaderboard')
           .select('*')
           .limit(10);
 
-        // 檢查簡單模式的排行榜
-        const { data: easyLeaderboard, error: easyError } = await supabase
-          .from('leaderboard')
+        // 檢查 dopamine_leaderboard 視圖
+        const { data: dopamineLeaderboard, error: dopamineLeaderboardError } = await supabase
+          .from('dopamine_leaderboard')
           .select('*')
-          .eq('difficulty', 'easy')
           .limit(10);
 
         setDebugInfo({
-          gameRecords: { data: gameRecords, error: gameRecordsError },
+          normalRecords: { data: normalRecords, error: normalRecordsError },
+          dopamineRecords: { data: dopamineRecords, error: dopamineRecordsError },
           users: { data: users, error: usersError },
-          leaderboard: { data: leaderboard, error: leaderboardError },
-          easyLeaderboard: { data: easyLeaderboard, error: easyError }
+          normalLeaderboard: { data: normalLeaderboard, error: normalLeaderboardError },
+          dopamineLeaderboard: { data: dopamineLeaderboard, error: dopamineLeaderboardError }
         });
 
       } catch (err) {

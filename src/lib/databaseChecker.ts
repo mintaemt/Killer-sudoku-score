@@ -22,49 +22,79 @@ export async function checkDatabaseStatus() {
       return { error: '獲取用戶失敗', details: usersError };
     }
 
-    // 2. 檢查遊戲記錄
-    const { data: gameRecords, error: recordsError } = await supabase
-      .from('game_records')
+    // 2. 檢查普通模式記錄
+    const { data: normalRecords, error: normalRecordsError } = await supabase
+      .from('normal_records')
       .select('*')
       .order('completed_at', { ascending: false });
 
-    if (recordsError) {
-      console.error('❌ 獲取遊戲記錄失敗:', recordsError);
-      return { error: '獲取遊戲記錄失敗', details: recordsError };
+    if (normalRecordsError) {
+      console.error('❌ 獲取普通模式記錄失敗:', normalRecordsError);
+      return { error: '獲取普通模式記錄失敗', details: normalRecordsError };
     }
 
-    // 3. 檢查排行榜
-    const { data: leaderboard, error: leaderboardError } = await supabase
-      .from('leaderboard')
+    // 3. 檢查多巴胺模式記錄
+    const { data: dopamineRecords, error: dopamineRecordsError } = await supabase
+      .from('dopamine_records')
+      .select('*')
+      .order('completed_at', { ascending: false });
+
+    if (dopamineRecordsError) {
+      console.error('❌ 獲取多巴胺模式記錄失敗:', dopamineRecordsError);
+      return { error: '獲取多巴胺模式記錄失敗', details: dopamineRecordsError };
+    }
+
+    // 4. 檢查普通模式排行榜
+    const { data: normalLeaderboard, error: normalLeaderboardError } = await supabase
+      .from('normal_leaderboard')
       .select('*')
       .limit(10);
 
-    // 4. 分析數據
-    const hasModeColumn = gameRecords.length > 0 && gameRecords[0].hasOwnProperty('mode');
-    
-    // 按用戶分組統計
-    const userStats = {};
-    gameRecords.forEach(record => {
-      const userId = record.user_id;
-      if (!userStats[userId]) {
-        userStats[userId] = {
-          normal: [],
-          dopamine: [],
-          unknown: []
-        };
-      }
-      
-      const mode = record.mode || 'unknown';
-      userStats[userId][mode].push(record);
-    });
+    // 5. 檢查多巴胺模式排行榜
+    const { data: dopamineLeaderboard, error: dopamineLeaderboardError } = await supabase
+      .from('dopamine_leaderboard')
+      .select('*')
+      .limit(10);
 
-    // 5. 生成報告
+    // 6. 按用戶分組統計
+    const userStats = {};
+    
+    // 處理普通模式記錄
+    if (normalRecords) {
+      normalRecords.forEach(record => {
+        const userId = record.user_id;
+        if (!userStats[userId]) {
+          userStats[userId] = {
+            normal: [],
+            dopamine: []
+          };
+        }
+        userStats[userId].normal.push(record);
+      });
+    }
+
+    // 處理多巴胺模式記錄
+    if (dopamineRecords) {
+      dopamineRecords.forEach(record => {
+        const userId = record.user_id;
+        if (!userStats[userId]) {
+          userStats[userId] = {
+            normal: [],
+            dopamine: []
+          };
+        }
+        userStats[userId].dopamine.push(record);
+      });
+    }
+
+    // 7. 生成報告
     const report = {
       summary: {
         totalUsers: users.length,
-        totalGameRecords: gameRecords.length,
-        totalLeaderboardRecords: leaderboard?.length || 0,
-        hasModeColumn: hasModeColumn
+        totalNormalRecords: normalRecords?.length || 0,
+        totalDopamineRecords: dopamineRecords?.length || 0,
+        totalNormalLeaderboardRecords: normalLeaderboard?.length || 0,
+        totalDopamineLeaderboardRecords: dopamineLeaderboard?.length || 0
       },
       users: users.map(user => ({
         id: user.id,
@@ -84,17 +114,15 @@ export async function checkDatabaseStatus() {
           dopamine: {
             count: stats.dopamine.length,
             bestScore: stats.dopamine.length > 0 ? Math.max(...stats.dopamine.map(r => r.score)) : null
-          },
-          unknown: {
-            count: stats.unknown.length,
-            bestScore: stats.unknown.length > 0 ? Math.max(...stats.unknown.map(r => r.score)) : null
           }
         };
       }),
       errors: {
         users: usersError,
-        gameRecords: recordsError,
-        leaderboard: leaderboardError
+        normalRecords: normalRecordsError,
+        dopamineRecords: dopamineRecordsError,
+        normalLeaderboard: normalLeaderboardError,
+        dopamineLeaderboard: dopamineLeaderboardError
       }
     };
 

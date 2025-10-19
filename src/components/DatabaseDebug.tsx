@@ -16,33 +16,55 @@ export const DatabaseDebug = () => {
         .select('id, name, created_at')
         .order('created_at', { ascending: false });
 
-      // 檢查game_records表結構
-      const { data: gameRecords, error: gameRecordsError } = await supabase
-        .from('game_records')
+      // 檢查 normal_records 表
+      const { data: normalRecords, error: normalRecordsError } = await supabase
+        .from('normal_records')
         .select('*')
         .order('completed_at', { ascending: false });
 
-      // 檢查leaderboard視圖
-      const { data: leaderboard, error: leaderboardError } = await supabase
-        .from('leaderboard')
+      // 檢查 dopamine_records 表
+      const { data: dopamineRecords, error: dopamineRecordsError } = await supabase
+        .from('dopamine_records')
+        .select('*')
+        .order('completed_at', { ascending: false });
+
+      // 檢查 normal_leaderboard 視圖
+      const { data: normalLeaderboard, error: normalLeaderboardError } = await supabase
+        .from('normal_leaderboard')
+        .select('*')
+        .limit(10);
+
+      // 檢查 dopamine_leaderboard 視圖
+      const { data: dopamineLeaderboard, error: dopamineLeaderboardError } = await supabase
+        .from('dopamine_leaderboard')
         .select('*')
         .limit(10);
 
       // 按用戶分組統計
       let userStats = {};
-      if (gameRecords && gameRecords.length > 0) {
-        gameRecords.forEach(record => {
+      if (normalRecords && normalRecords.length > 0) {
+        normalRecords.forEach(record => {
           const userId = record.user_id;
           if (!userStats[userId]) {
             userStats[userId] = {
               normal: [],
-              dopamine: [],
-              unknown: []
+              dopamine: []
             };
           }
-          
-          const mode = record.mode || 'unknown';
-          userStats[userId][mode].push(record);
+          userStats[userId].normal.push(record);
+        });
+      }
+
+      if (dopamineRecords && dopamineRecords.length > 0) {
+        dopamineRecords.forEach(record => {
+          const userId = record.user_id;
+          if (!userStats[userId]) {
+            userStats[userId] = {
+              normal: [],
+              dopamine: []
+            };
+          }
+          userStats[userId].dopamine.push(record);
         });
       }
 
@@ -52,17 +74,25 @@ export const DatabaseDebug = () => {
           error: usersError,
           count: users?.length || 0
         },
-        gameRecords: {
-          data: gameRecords,
-          error: gameRecordsError,
-          hasModeColumn: gameRecords && gameRecords.length > 0 && gameRecords[0].hasOwnProperty('mode'),
-          count: gameRecords?.length || 0
+        normalRecords: {
+          data: normalRecords,
+          error: normalRecordsError,
+          count: normalRecords?.length || 0
         },
-        leaderboard: {
-          data: leaderboard,
-          error: leaderboardError,
-          hasModeColumn: leaderboard && leaderboard.length > 0 && leaderboard[0].hasOwnProperty('mode'),
-          count: leaderboard?.length || 0
+        dopamineRecords: {
+          data: dopamineRecords,
+          error: dopamineRecordsError,
+          count: dopamineRecords?.length || 0
+        },
+        normalLeaderboard: {
+          data: normalLeaderboard,
+          error: normalLeaderboardError,
+          count: normalLeaderboard?.length || 0
+        },
+        dopamineLeaderboard: {
+          data: dopamineLeaderboard,
+          error: dopamineLeaderboardError,
+          count: dopamineLeaderboard?.length || 0
         },
         userStats: userStats
       };
@@ -74,9 +104,10 @@ export const DatabaseDebug = () => {
       const report = {
         summary: {
           totalUsers: users?.length || 0,
-          totalGameRecords: gameRecords?.length || 0,
-          totalLeaderboardRecords: leaderboard?.length || 0,
-          hasModeColumn: gameRecords && gameRecords.length > 0 && gameRecords[0].hasOwnProperty('mode')
+          totalNormalRecords: normalRecords?.length || 0,
+          totalDopamineRecords: dopamineRecords?.length || 0,
+          totalNormalLeaderboardRecords: normalLeaderboard?.length || 0,
+          totalDopamineLeaderboardRecords: dopamineLeaderboard?.length || 0
         },
         userStats: Object.keys(userStats).map(userId => {
           const stats = userStats[userId];
@@ -90,10 +121,6 @@ export const DatabaseDebug = () => {
             dopamine: {
               count: stats.dopamine.length,
               bestScore: stats.dopamine.length > 0 ? Math.max(...stats.dopamine.map(r => r.score)) : null
-            },
-            unknown: {
-              count: stats.unknown.length,
-              bestScore: stats.unknown.length > 0 ? Math.max(...stats.unknown.map(r => r.score)) : null
             }
           };
         })
@@ -124,18 +151,26 @@ export const DatabaseDebug = () => {
         {debugInfo && (
           <div className="mt-4 space-y-4">
             {/* 統計概覽 */}
-            <div className="grid grid-cols-3 gap-4 mb-4">
+            <div className="grid grid-cols-5 gap-4 mb-4">
               <div className="bg-blue-50 p-3 rounded">
                 <h4 className="font-bold text-blue-800">用戶總數</h4>
                 <p className="text-2xl font-bold text-blue-600">{debugInfo.users?.count || 0}</p>
               </div>
               <div className="bg-green-50 p-3 rounded">
-                <h4 className="font-bold text-green-800">遊戲記錄總數</h4>
-                <p className="text-2xl font-bold text-green-600">{debugInfo.gameRecords?.count || 0}</p>
+                <h4 className="font-bold text-green-800">普通模式記錄</h4>
+                <p className="text-2xl font-bold text-green-600">{debugInfo.normalRecords?.count || 0}</p>
               </div>
               <div className="bg-purple-50 p-3 rounded">
-                <h4 className="font-bold text-purple-800">排行榜記錄數</h4>
-                <p className="text-2xl font-bold text-purple-600">{debugInfo.leaderboard?.count || 0}</p>
+                <h4 className="font-bold text-purple-800">多巴胺模式記錄</h4>
+                <p className="text-2xl font-bold text-purple-600">{debugInfo.dopamineRecords?.count || 0}</p>
+              </div>
+              <div className="bg-orange-50 p-3 rounded">
+                <h4 className="font-bold text-orange-800">普通排行榜</h4>
+                <p className="text-2xl font-bold text-orange-600">{debugInfo.normalLeaderboard?.count || 0}</p>
+              </div>
+              <div className="bg-pink-50 p-3 rounded">
+                <h4 className="font-bold text-pink-800">多巴胺排行榜</h4>
+                <p className="text-2xl font-bold text-pink-600">{debugInfo.dopamineLeaderboard?.count || 0}</p>
               </div>
             </div>
 
@@ -151,7 +186,7 @@ export const DatabaseDebug = () => {
                   return (
                     <div key={userId} className="bg-gray-50 p-3 rounded mb-2">
                       <h4 className="font-semibold">{userName}</h4>
-                      <div className="grid grid-cols-3 gap-2 text-sm">
+                      <div className="grid grid-cols-2 gap-2 text-sm">
                         <div>
                           <span className="text-blue-600">普通模式:</span>
                           <br />
@@ -166,13 +201,6 @@ export const DatabaseDebug = () => {
                           <br />
                           最高分: {stats.dopamine.length > 0 ? Math.max(...stats.dopamine.map(r => r.score)) : '無'}
                         </div>
-                        <div>
-                          <span className="text-gray-600">未知模式:</span>
-                          <br />
-                          記錄數: {stats.unknown.length}
-                          <br />
-                          最高分: {stats.unknown.length > 0 ? Math.max(...stats.unknown.map(r => r.score)) : '無'}
-                        </div>
                       </div>
                     </div>
                   );
@@ -182,20 +210,34 @@ export const DatabaseDebug = () => {
 
             {/* 詳細數據 */}
             <div>
-              <h3 className="font-bold">game_records 表</h3>
-              <p>有mode欄位: {debugInfo.gameRecords?.hasModeColumn ? '是' : '否'}</p>
-              <p>錯誤: {debugInfo.gameRecords?.error?.message || '無'}</p>
+              <h3 className="font-bold">normal_records 表</h3>
+              <p>錯誤: {debugInfo.normalRecords?.error?.message || '無'}</p>
               <pre className="bg-gray-100 p-2 rounded text-xs overflow-auto max-h-40">
-                {JSON.stringify(debugInfo.gameRecords?.data, null, 2)}
+                {JSON.stringify(debugInfo.normalRecords?.data, null, 2)}
               </pre>
             </div>
             
             <div>
-              <h3 className="font-bold">leaderboard 視圖</h3>
-              <p>有mode欄位: {debugInfo.leaderboard?.hasModeColumn ? '是' : '否'}</p>
-              <p>錯誤: {debugInfo.leaderboard?.error?.message || '無'}</p>
+              <h3 className="font-bold">dopamine_records 表</h3>
+              <p>錯誤: {debugInfo.dopamineRecords?.error?.message || '無'}</p>
               <pre className="bg-gray-100 p-2 rounded text-xs overflow-auto max-h-40">
-                {JSON.stringify(debugInfo.leaderboard?.data, null, 2)}
+                {JSON.stringify(debugInfo.dopamineRecords?.data, null, 2)}
+              </pre>
+            </div>
+            
+            <div>
+              <h3 className="font-bold">normal_leaderboard 視圖</h3>
+              <p>錯誤: {debugInfo.normalLeaderboard?.error?.message || '無'}</p>
+              <pre className="bg-gray-100 p-2 rounded text-xs overflow-auto max-h-40">
+                {JSON.stringify(debugInfo.normalLeaderboard?.data, null, 2)}
+              </pre>
+            </div>
+            
+            <div>
+              <h3 className="font-bold">dopamine_leaderboard 視圖</h3>
+              <p>錯誤: {debugInfo.dopamineLeaderboard?.error?.message || '無'}</p>
+              <pre className="bg-gray-100 p-2 rounded text-xs overflow-auto max-h-40">
+                {JSON.stringify(debugInfo.dopamineLeaderboard?.data, null, 2)}
               </pre>
             </div>
             
