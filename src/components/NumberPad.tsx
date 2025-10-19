@@ -42,7 +42,7 @@ export const NumberPad = ({
 
   // 長按處理函數
   const handleLongPressStart = (e: React.MouseEvent | React.TouchEvent) => {
-    if (process.env.NODE_ENV === 'development' && onTestComplete) {
+    if (onTestComplete) {
       console.log('🔥 長按開始');
       e.preventDefault(); // 防止默認行為
       e.stopPropagation(); // 阻止事件冒泡
@@ -68,35 +68,35 @@ export const NumberPad = ({
 
   // 防止觸控選擇
   const handleTouchStart = (e: React.TouchEvent) => {
-    if (process.env.NODE_ENV === 'development' && onTestComplete) {
+    if (onTestComplete) {
       e.preventDefault();
       handleLongPressStart(e);
     }
   };
 
   const handleTouchEnd = (e: React.TouchEvent) => {
-    if (process.env.NODE_ENV === 'development' && onTestComplete) {
+    if (onTestComplete) {
       e.preventDefault();
       handleLongPressEnd(e);
     }
   };
 
   const handleMouseDown = (e: React.MouseEvent) => {
-    if (process.env.NODE_ENV === 'development' && onTestComplete) {
+    if (onTestComplete) {
       e.preventDefault();
       handleLongPressStart(e);
     }
   };
 
   const handleMouseUp = (e: React.MouseEvent) => {
-    if (process.env.NODE_ENV === 'development' && onTestComplete) {
+    if (onTestComplete) {
       e.preventDefault();
       handleLongPressEnd(e);
     }
   };
 
   const handleMouseLeave = (e: React.MouseEvent) => {
-    if (process.env.NODE_ENV === 'development' && onTestComplete) {
+    if (onTestComplete) {
       e.preventDefault();
       handleLongPressEnd(e);
     }
@@ -132,11 +132,18 @@ export const NumberPad = ({
             themeColors.text,
             "border-0",
             isLongPressing && "bg-yellow-500 hover:bg-yellow-600 animate-pulse",
-            "select-none" // 防止文字選擇
+            "select-none", // 防止文字選擇
+            "relative" // 為提示文字添加定位
           )}
           style={{ userSelect: 'none', WebkitUserSelect: 'none' }} // 額外的防止選擇樣式
         >
           {isLongPressing ? "⚡ 長按中..." : t('clear')}
+          {/* 長按提示 */}
+          {!isLongPressing && onTestComplete && (
+            <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 text-xs text-muted-foreground whitespace-nowrap">
+              長按測試
+            </div>
+          )}
         </Button>
       </div>
     );
@@ -217,11 +224,18 @@ export const NumberPad = ({
             getThemeColors(currentTheme).text,
             "border-0",
             isLongPressing && "bg-yellow-500 hover:bg-yellow-600 animate-pulse",
-            "select-none" // 防止文字選擇
+            "select-none", // 防止文字選擇
+            "relative" // 為提示文字添加定位
           )}
           style={{ userSelect: 'none', WebkitUserSelect: 'none' }} // 額外的防止選擇樣式
         >
           {isLongPressing ? "⚡ 長按中..." : t('clear')}
+          {/* 長按提示 */}
+          {!isLongPressing && onTestComplete && (
+            <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 text-xs text-muted-foreground whitespace-nowrap">
+              長按測試
+            </div>
+          )}
         </Button>
       </div>
     </div>
