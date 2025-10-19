@@ -507,6 +507,29 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
     setGameData(generateKillerSudoku('easy'));
   };
 
+  // 處理多巴胺模式 Game Over
+  const handleDopamineGameOver = () => {
+    console.log('💀 多巴胺模式 Game Over');
+    
+    setDopamineGameOverData({
+      difficulty: dopamineDifficulty,
+      score: calculateDopamineScore({
+        difficulty: dopamineDifficulty,
+        timeLeft: time,
+        remainingCells,
+        comboCount,
+        mistakes,
+        completionTime: timeLimit - time
+      }).finalScore,
+      timeLeft: time,
+      comboCount,
+      mistakes
+    });
+    
+    setShowDopamineGameOver(true);
+    setIsPaused(true);
+  };
+
   // 處理多巴胺模式 Win
   const handleDopamineWin = async () => {
     const score = calculateDopamineScore({
