@@ -7,7 +7,6 @@ interface AnimatedGradientBackgroundProps {
 // 主題顏色定義 (HSL to RGB 轉換)
 const themeColors = {
   orange: { h: 25, s: 100, l: 50 },    // hsl(25, 100%, 50%)
-  red: { h: 0, s: 84, l: 60 },         // hsl(0, 84%, 60%)
   green: { h: 142, s: 76, l: 36 },     // hsl(142, 76%, 36%)
   purple: { h: 262, s: 83, l: 58 },    // hsl(262, 83%, 58%)
   pink: { h: 330, s: 81, l: 60 },      // hsl(330, 81%, 60%)
@@ -66,7 +65,6 @@ export const AnimatedGradientBackground = ({ isDopamineMode = false }: AnimatedG
   if (isDopamineMode) {
     // 多巴胺模式：使用主題顏色的動態漸層
     const orange = getThemeColorRgb('orange');
-    const red = getThemeColorRgb('red');
     const green = getThemeColorRgb('green');
     const purple = getThemeColorRgb('purple');
     const pink = getThemeColorRgb('pink');
@@ -78,7 +76,6 @@ export const AnimatedGradientBackground = ({ isDopamineMode = false }: AnimatedG
         style={{
           background: `
             radial-gradient(circle farthest-corner at ${20 + Math.sin(animationPhase * 0.02) * 20}% ${20 + Math.cos(animationPhase * 0.02) * 20}%, rgba(${orange.r}, ${orange.g}, ${orange.b}, 0.6) 0%, rgba(${orange.r}, ${orange.g}, ${orange.b}, 0) 50%),
-            radial-gradient(circle farthest-side at ${80 + Math.sin(animationPhase * 0.03) * 15}% ${20 + Math.cos(animationPhase * 0.03) * 15}%, rgba(${red.r}, ${red.g}, ${red.b}, 0.4) 0%, rgba(${red.r}, ${red.g}, ${red.b}, 0) 30%),
             radial-gradient(circle farthest-corner at ${80 + Math.sin(animationPhase * 0.025) * 18}% ${80 + Math.cos(animationPhase * 0.025) * 18}%, rgba(${green.r}, ${green.g}, ${green.b}, 0.5) 0%, rgba(${green.r}, ${green.g}, ${green.b}, 0) 40%),
             radial-gradient(circle farthest-corner at ${20 + Math.sin(animationPhase * 0.035) * 22}% ${80 + Math.cos(animationPhase * 0.035) * 22}%, rgba(${purple.r}, ${purple.g}, ${purple.b}, 0.3) 0%, rgba(${purple.r}, ${purple.g}, ${purple.b}, 0) 35%),
             radial-gradient(ellipse at ${50 + Math.sin(animationPhase * 0.015) * 10}% ${50 + Math.cos(animationPhase * 0.015) * 10}%, rgba(${pink.r}, ${pink.g}, ${pink.b}, 0.2) 0%, rgba(${pink.r}, ${pink.g}, ${pink.b}, 0) 60%),
@@ -91,7 +88,6 @@ export const AnimatedGradientBackground = ({ isDopamineMode = false }: AnimatedG
 
   // 普通模式：使用主題顏色的柔和漸層
   const orange = getThemeColorRgb('orange');
-  const red = getThemeColorRgb('red');
   const green = getThemeColorRgb('green');
   const purple = getThemeColorRgb('purple');
   const pink = getThemeColorRgb('pink');
@@ -103,7 +99,6 @@ export const AnimatedGradientBackground = ({ isDopamineMode = false }: AnimatedG
       style={{
         background: `
           radial-gradient(circle farthest-corner at ${30 + Math.sin(animationPhase * 0.01) * 10}% ${30 + Math.cos(animationPhase * 0.01) * 10}%, rgba(${orange.r}, ${orange.g}, ${orange.b}, 0.2) 0%, rgba(${orange.r}, ${orange.g}, ${orange.b}, 0) 50%),
-          radial-gradient(circle farthest-side at ${70 + Math.sin(animationPhase * 0.014) * 12}% ${30 + Math.cos(animationPhase * 0.014) * 12}%, rgba(${red.r}, ${red.g}, ${red.b}, 0.15) 0%, rgba(${red.r}, ${red.g}, ${red.b}, 0) 30%),
           radial-gradient(circle farthest-corner at ${70 + Math.sin(animationPhase * 0.012) * 15}% ${70 + Math.cos(animationPhase * 0.012) * 15}%, rgba(${green.r}, ${green.g}, ${green.b}, 0.18) 0%, rgba(${green.r}, ${green.g}, ${green.b}, 0) 40%),
           radial-gradient(circle farthest-corner at ${30 + Math.sin(animationPhase * 0.016) * 18}% ${70 + Math.cos(animationPhase * 0.016) * 18}%, rgba(${purple.r}, ${purple.g}, ${purple.b}, 0.12) 0%, rgba(${purple.r}, ${purple.g}, ${purple.b}, 0) 35%),
           radial-gradient(ellipse at ${50 + Math.sin(animationPhase * 0.008) * 8}% ${50 + Math.cos(animationPhase * 0.008) * 8}%, rgba(${pink.r}, ${pink.g}, ${pink.b}, 0.08) 0%, rgba(${pink.r}, ${pink.g}, ${pink.b}, 0) 60%),

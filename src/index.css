@@ -105,13 +105,6 @@ All colors MUST be HSL.
     --cell-highlighted: 25 100% 95%;
   }
 
-  [data-theme="red"] {
-    --primary: 0 84% 60%;
-    --accent: 0 84% 60%;
-    --ring: 0 84% 60%;
-    --cell-selected: 0 100% 92%;
-    --cell-highlighted: 0 100% 95%;
-  }
 
   [data-theme="green"] {
     --primary: 142 76% 36%;
