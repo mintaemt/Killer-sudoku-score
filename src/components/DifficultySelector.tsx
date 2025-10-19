@@ -117,7 +117,7 @@ export const DifficultySelector = ({
                 linear-gradient(135deg, rgba(249, 115, 22, 0.15) 0%, rgba(59, 130, 246, 0.15) 100%)
               `
             }}
-            title={`${t('dopamineMode')} - 挑戰極限！`}
+            title={`${t('dopamineMode')} - ${t('challengeYourLimits')}!`}
           >
             <Zap className="h-3 w-3 md:h-4 md:w-4 text-white" style={{ textShadow: "2px 2px 4px rgba(0,0,0,0.5), 1px 1px 2px rgba(0,0,0,0.6)" }} />
           </Button>

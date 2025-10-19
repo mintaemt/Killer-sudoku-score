@@ -34,6 +34,7 @@ const translations = {
     highestAchievement: 'Highest Achievement',
     selectDifficulty: 'Select Difficulty',
     startDopamineChallenge: 'Start Challenge',
+    challengeYourLimits: 'Challenge Your Limits',
     
     // 排行榜
     leaderboard: 'Leaderboard',
@@ -113,6 +114,7 @@ const translations = {
     highestAchievement: '最高成就感',
     selectDifficulty: '選擇難度',
     startDopamineChallenge: '開始挑戰',
+    challengeYourLimits: '挑戰極限',
     
     // 排行榜
     leaderboard: '排行榜',
@@ -192,6 +194,7 @@ const translations = {
     highestAchievement: '최고 성취감',
     selectDifficulty: '난이도 선택',
     startDopamineChallenge: '도전 시작',
+    challengeYourLimits: '한계에 도전',
     
     // 리더보드
     leaderboard: '리더보드',
@@ -271,6 +274,7 @@ const translations = {
     highestAchievement: '最高達成感',
     selectDifficulty: '難易度選択',
     startDopamineChallenge: 'チャレンジ開始',
+    challengeYourLimits: '限界に挑戦',
     
     // リーダーボード
     leaderboard: 'リーダーボード',

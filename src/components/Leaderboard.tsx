@@ -6,6 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Loader2, Trophy, Medal, Award, Crown, RefreshCw, X } from 'lucide-react';
 import { useLeaderboard } from '@/hooks/useLeaderboard';
+import { useLanguage } from '@/hooks/useLanguage';
 import { Difficulty, LeaderboardEntry } from '@/lib/types';
 import { formatTime, formatScore } from '@/lib/scoreCalculator';
 
@@ -74,6 +75,7 @@ export const Leaderboard = ({ currentUserId, onClose, mode = 'normal' }: Leaderb
   const [activeTab, setActiveTab] = useState<string>("all");
   const selectedDifficulty = activeTab === "all" ? undefined : activeTab as Difficulty;
   const { leaderboard, loading, error, refetch } = useLeaderboard(selectedDifficulty, mode);
+  const { t } = useLanguage();
 
   // 根據模式決定顯示的難度
   const availableDifficulties = mode === 'normal' 
