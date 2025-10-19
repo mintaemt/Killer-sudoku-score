@@ -76,6 +76,14 @@ const translations = {
     
     // 用戶相關
     welcome: 'Welcome',
+    welcomeToKillerSudoku: 'Welcome to Killer Sudoku',
+    enterNameToStart: 'Please enter your name to start playing and participate in the leaderboard',
+    enterYourName: 'Please enter your name',
+    processing: 'Processing...',
+    startGame: 'Start Game',
+    visitorMode: 'Visitor Mode',
+    visitorModeDescription: 'Visitor mode does not score and does not participate in leaderboard',
+    checkNetworkConnection: 'Please check your network connection or try again later. If the problem persists, please contact the administrator.',
     viewStats: 'View Stats',
     normal: 'Normal',
     dopamine: 'Dopamine',
@@ -215,6 +223,14 @@ const translations = {
     
     // 用戶相關
     welcome: '歡迎',
+    welcomeToKillerSudoku: '歡迎來到 Killer Sudoku',
+    enterNameToStart: '請輸入您的名稱以開始遊戲並參與排行榜',
+    enterYourName: '請輸入您的名稱',
+    processing: '處理中...',
+    startGame: '開始遊戲',
+    visitorMode: '訪客模式',
+    visitorModeDescription: '訪客模式不計分，不參與排行榜',
+    checkNetworkConnection: '請檢查網路連接或稍後再試。如果問題持續，請聯繫管理員。',
     viewStats: '查看統計',
     normal: '普通',
     dopamine: '多巴胺',
@@ -354,6 +370,14 @@ const translations = {
     
     // 사용자 관련
     welcome: '환영합니다',
+    welcomeToKillerSudoku: 'Killer Sudoku에 오신 것을 환영합니다',
+    enterNameToStart: '게임을 시작하고 리더보드에 참여하려면 이름을 입력하세요',
+    enterYourName: '이름을 입력하세요',
+    processing: '처리 중...',
+    startGame: '게임 시작',
+    visitorMode: '방문자 모드',
+    visitorModeDescription: '방문자 모드는 점수가 기록되지 않으며 리더보드에 참여하지 않습니다',
+    checkNetworkConnection: '네트워크 연결을 확인하거나 나중에 다시 시도해주세요. 문제가 지속되면 관리자에게 문의하세요.',
     viewStats: '통계 보기',
     normal: '일반',
     dopamine: '도파민',
@@ -493,6 +517,14 @@ const translations = {
     
     // ユーザー関連
     welcome: 'ようこそ',
+    welcomeToKillerSudoku: 'Killer Sudokuへようこそ',
+    enterNameToStart: 'ゲームを開始し、リーダーボードに参加するために名前を入力してください',
+    enterYourName: '名前を入力してください',
+    processing: '処理中...',
+    startGame: 'ゲーム開始',
+    visitorMode: 'ゲストモード',
+    visitorModeDescription: 'ゲストモードはスコアが記録されず、リーダーボードに参加しません',
+    checkNetworkConnection: 'ネットワーク接続を確認するか、後でもう一度お試しください。問題が続く場合は、管理者にお問い合わせください。',
     viewStats: '統計を見る',
     normal: '通常',
     dopamine: 'ドーパミン',

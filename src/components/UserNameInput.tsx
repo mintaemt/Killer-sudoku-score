@@ -5,6 +5,7 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Loader2, User, UserX } from 'lucide-react';
+import { useLanguage } from '@/hooks/useLanguage';
 
 interface UserNameInputProps {
   onSubmit: (name: string) => Promise<void>;
@@ -15,6 +16,7 @@ interface UserNameInputProps {
 
 export const UserNameInput = ({ onSubmit, onVisitorMode, loading = false, error }: UserNameInputProps) => {
   const [name, setName] = useState('');
+  const { t } = useLanguage();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,9 +32,9 @@ export const UserNameInput = ({ onSubmit, onVisitorMode, loading = false, error 
           <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
             <User className="h-6 w-6 text-primary" />
           </div>
-          <CardTitle className="text-2xl">歡迎來到 Killer Sudoku</CardTitle>
+          <CardTitle className="text-2xl">{t('welcomeToKillerSudoku')}</CardTitle>
           <CardDescription>
-            請輸入您的名稱以開始遊戲並參與排行榜
+            {t('enterNameToStart')}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -42,7 +44,7 @@ export const UserNameInput = ({ onSubmit, onVisitorMode, loading = false, error 
                 id="user-name-input"
                 name="userName"
                 type="text"
-                placeholder="請輸入您的名稱"
+                placeholder={t('enterYourName')}
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 disabled={loading}
@@ -58,7 +60,7 @@ export const UserNameInput = ({ onSubmit, onVisitorMode, loading = false, error 
                   {error}
                   <br />
                   <small className="text-xs mt-1 block">
-                    請檢查網路連接或稍後再試。如果問題持續，請聯繫管理員。
+                    {t('checkNetworkConnection')}
                   </small>
                 </AlertDescription>
               </Alert>
@@ -73,12 +75,12 @@ export const UserNameInput = ({ onSubmit, onVisitorMode, loading = false, error 
                 {loading ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    處理中...
+                    {t('processing')}
                   </>
                 ) : (
                   <>
                     <User className="mr-2 h-4 w-4" />
-                    開始遊戲
+                    {t('startGame')}
                   </>
                 )}
               </Button>
@@ -93,12 +95,12 @@ export const UserNameInput = ({ onSubmit, onVisitorMode, loading = false, error 
                 onClick={onVisitorMode}
               >
                 <UserX className="mr-2 h-4 w-4" />
-                訪客模式
+                {t('visitorMode')}
               </Button>
             </div>
             
             <div className="text-xs text-muted-foreground text-center">
-              訪客模式不計分，不參與排行榜
+              {t('visitorModeDescription')}
             </div>
           </form>
         </CardContent>
