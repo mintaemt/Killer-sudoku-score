@@ -47,7 +47,7 @@ export const GameCompleteModal = ({
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-      <div className="w-full max-w-6xl max-h-[90vh] overflow-auto">
+      <div className="w-full max-w-4xl max-h-[90vh] overflow-auto">
         <Card className="relative">
           <Button
             variant="ghost"
@@ -59,7 +59,7 @@ export const GameCompleteModal = ({
           </Button>
           
           {/* 上半部分：遊戲完成資訊 */}
-          <CardHeader className="text-center">
+          <CardHeader className="text-center pb-4">
             <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
               <Trophy className="h-8 w-8 text-primary" />
             </div>
@@ -69,76 +69,64 @@ export const GameCompleteModal = ({
             </CardDescription>
           </CardHeader>
           
-          <CardContent className="space-y-6">
-            {/* 成績統計 */}
-            <div className="space-y-4">
-              <div className="grid grid-cols-2 gap-3">
-                {/* 左上：目前排名 */}
-                {rank && (
-                  <div className="flex items-center justify-between p-3 bg-primary/5 rounded-lg border border-primary/20">
-                    <div className="flex items-center space-x-2 min-w-0 flex-1">
-                      <Trophy className="h-4 w-4 text-primary flex-shrink-0" />
-                      <span className="text-sm font-medium whitespace-nowrap">{t('currentRank')}</span>
-                    </div>
-                    <span className="text-lg font-bold text-primary flex-shrink-0 ml-2">#{rank}</span>
-                  </div>
-                )}
+          <CardContent className="px-6 pb-0">
+            {/* 成績統計 - 單排並列 */}
+            <div className="flex gap-4 mb-6">
+              {/* 時間 */}
+              <div className="flex-1 flex flex-col items-center p-4 bg-muted/50 rounded-lg">
+                <Clock className="h-5 w-5 text-primary mb-2" />
+                <span className="text-sm text-muted-foreground mb-1">{t('completionTime')}</span>
+                <span className="text-lg font-semibold">{formatTime(completionTime)}</span>
+              </div>
 
-                {/* 右上：總分數 */}
-                <div className="flex items-center justify-between p-3 bg-primary/5 rounded-lg border border-primary/20">
-                  <div className="flex items-center space-x-2 min-w-0 flex-1">
-                    <Star className="h-4 w-4 text-primary flex-shrink-0" />
-                      <span className="text-sm font-medium whitespace-nowrap">{t('totalScore')}</span>
+              {/* 分數 */}
+              <div className="flex-1 flex flex-col items-center p-4 bg-primary/5 rounded-lg border border-primary/20">
+                <Star className="h-5 w-5 text-primary mb-2" />
+                <span className="text-sm text-muted-foreground mb-1">{t('totalScore')}</span>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-primary">
+                    {formatScore(score)}
                   </div>
-                  <div className="text-right flex flex-col items-end flex-shrink-0 ml-2">
-                    <div className="text-lg font-bold text-primary">
-                      {formatScore(score)}
-                    </div>
-                    {isNewRecord && (
-                      <Badge variant="secondary" className="text-xs mt-1">
-                        {t('newRecord')}
-                      </Badge>
-                    )}
-                  </div>
+                  {isNewRecord && (
+                    <Badge variant="secondary" className="text-xs mt-1">
+                      {t('newRecord')}
+                    </Badge>
+                  )}
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
-                {/* 左下：完成時間 */}
-                <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
-                  <div className="flex items-center space-x-2 min-w-0 flex-1">
-                    <Clock className="h-4 w-4 text-primary flex-shrink-0" />
-                    <span className="text-sm whitespace-nowrap">{t('completionTime')}</span>
-                  </div>
-                  <span className="font-semibold flex-shrink-0 ml-2">{formatTime(completionTime)}</span>
-                </div>
-
-                {/* 右下：錯誤次數 */}
-                <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
-                  <div className="flex items-center space-x-2 min-w-0 flex-1">
-                    <Target className="h-4 w-4 text-primary flex-shrink-0" />
-                    <span className="text-sm whitespace-nowrap">{t('errorCount')}</span>
-                  </div>
-                  <span className="font-semibold flex-shrink-0 ml-2">{mistakes}</span>
-                </div>
+              {/* 錯誤次數 */}
+              <div className="flex-1 flex flex-col items-center p-4 bg-muted/50 rounded-lg">
+                <Target className="h-5 w-5 text-primary mb-2" />
+                <span className="text-sm text-muted-foreground mb-1">{t('errorCount')}</span>
+                <span className="text-lg font-semibold">{mistakes}</span>
               </div>
             </div>
 
+            {/* 目前排名 - 如果有排名 */}
+            {rank && (
+              <div className="flex items-center justify-center p-3 bg-primary/5 rounded-lg border border-primary/20 mb-6">
+                <Trophy className="h-4 w-4 text-primary mr-2" />
+                <span className="text-sm font-medium">{t('currentRank')}</span>
+                <span className="text-lg font-bold text-primary ml-2">#{rank}</span>
+              </div>
+            )}
+
             {/* 按鈕區域 */}
-            <div className="flex gap-3">
+            <div className="flex justify-center mb-6">
               <Button 
                 onClick={onNewGame} 
-                className="flex-1"
                 size="lg"
+                className="px-8 py-3 text-base font-semibold"
               >
-                <RotateCcw className="mr-2 h-4 w-4" />
+                <RotateCcw className="mr-2 h-5 w-5" />
                 {t('playAgain')}
               </Button>
             </div>
           </CardContent>
           
-          {/* 下半部分：排行榜 */}
-          <div className="border-t">
+          {/* 下半部分：排行榜 - 直接貼到獲勝資訊卡底部 */}
+          <div className="border-t-0">
             <Leaderboard 
               currentUserId={currentUserId}
               mode="normal"

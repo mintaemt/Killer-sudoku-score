@@ -100,14 +100,14 @@ export const Leaderboard = ({ currentUserId, onClose, mode = 'normal' }: Leaderb
   }
 
   return (
-    <Card className="w-full max-w-4xl mx-auto">
-      <CardHeader>
+    <div className="w-full">
+      <div className="px-6 py-4 border-b">
         <div className="flex items-center justify-between">
           <div>
-            <CardTitle className="flex items-center space-x-2">
-              <Trophy className="h-6 w-6" />
+            <h3 className="text-lg font-semibold flex items-center space-x-2">
+              <Trophy className="h-5 w-5" />
               <span>{mode === 'dopamine' ? t('highestScoreDisplay') : t('leaderboard')}</span>
-            </CardTitle>
+            </h3>
           </div>
           <div className="flex space-x-2">
             <Button variant="outline" size="sm" onClick={handleRefresh}>
@@ -120,8 +120,8 @@ export const Leaderboard = ({ currentUserId, onClose, mode = 'normal' }: Leaderb
             )}
           </div>
         </div>
-      </CardHeader>
-      <CardContent>
+      </div>
+      <div className="px-6 py-4">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className={`grid w-full ${mode === 'normal' ? 'grid-cols-5' : 'grid-cols-6'}`}>
             <TabsTrigger value="all">
@@ -153,7 +153,7 @@ export const Leaderboard = ({ currentUserId, onClose, mode = 'normal' }: Leaderb
             )}
           </TabsContent>
         </Tabs>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 };
