@@ -19,6 +19,7 @@ import { useGameRecord } from "@/hooks/useGameRecord";
 import { Difficulty, DopamineDifficulty, GameCompletionResult } from "@/lib/types";
 import { calculateScore, calculateDopamineScore } from "@/lib/scoreCalculator";
 import { cn } from "@/lib/utils";
+import { supabase } from "@/lib/supabase";
 
 const Index = () => {
   const [selectedCell, setSelectedCell] = useState<{ row: number; col: number } | null>(null);
@@ -365,14 +366,26 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
     setGameCompletionResult(null);
   };
 
-  // 處理多巴胺模式 Game Over
-  const handleDopamineGameOver = () => {
-    setDopamineGameOverData({
-      difficulty: dopamineDifficulty
-    });
-    
-    setShowDopamineGameOver(true);
-    setIsPaused(true);
+  // 獲取所有用戶在特定難度的最高分
+  const getAllUsersTopScore = async (difficulty: DopamineDifficulty) => {
+    try {
+      const { data, error } = await supabase
+        .from('game_records')
+        .select('score, completion_time, difficulty')
+        .eq('difficulty', difficulty)
+        .order('score', { ascending: false })
+        .limit(1)
+        .single();
+
+      if (error || !data) {
+        return [];
+      }
+
+      return [data];
+    } catch (err) {
+      console.error('Error getting all users top score:', err);
+      return [];
+    }
   };
 
   // 測試WIN資訊卡（用於測試）
@@ -386,7 +399,6 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
       completionTime: timeLimit - time
     }).finalScore;
 
-    let topScore = null;
     let isNewRecord = false;
 
     // 獲取該難度的最高分
@@ -395,12 +407,6 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
         const bestScore = await getUserBestScore(user.id, dopamineDifficulty);
         
         if (bestScore && bestScore.score === score) {
-          topScore = score;
-          isNewRecord = true;
-        } else if (bestScore) {
-          topScore = bestScore.score;
-        } else {
-          topScore = score;
           isNewRecord = true;
         }
       } catch (error) {
@@ -408,13 +414,16 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
       }
     }
 
+    // 獲取所有用戶在該難度的最高分
+    const topScores = await getAllUsersTopScore(dopamineDifficulty);
+
     setDopamineWinData({
       score,
       timeLeft: time,
       difficulty: dopamineDifficulty,
       comboCount,
       mistakes,
-      topScore,
+      topScores,
       isNewRecord
     });
     
@@ -456,7 +465,6 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
       completionTime: timeLimit - time
     }).finalScore;
 
-    let topScore = null;
     let isNewRecord = false;
 
     // 保存多巴胺模式遊戲記錄
@@ -478,14 +486,6 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
           
           if (bestScore && bestScore.score === score) {
             // 如果當前分數等於最佳分數，說明是新的最高分
-            topScore = score;
-            isNewRecord = true;
-          } else if (bestScore) {
-            // 如果有其他記錄，顯示最高分
-            topScore = bestScore.score;
-          } else {
-            // 如果沒有其他記錄，當前分數就是最高分
-            topScore = score;
             isNewRecord = true;
           }
         }
@@ -494,13 +494,16 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
       }
     }
 
+    // 獲取所有用戶在該難度的最高分
+    const topScores = await getAllUsersTopScore(dopamineDifficulty);
+
     setDopamineWinData({
       score,
       timeLeft: time,
       difficulty: dopamineDifficulty,
       comboCount,
       mistakes,
-      topScore,
+      topScores,
       isNewRecord
     });
     
@@ -687,7 +690,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
           difficulty={dopamineWinData.difficulty}
           comboCount={dopamineWinData.comboCount}
           mistakes={dopamineWinData.mistakes}
-          topScore={dopamineWinData.topScore}
+          topScores={dopamineWinData.topScores}
           isNewRecord={dopamineWinData.isNewRecord}
         />
       )}

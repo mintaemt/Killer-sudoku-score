@@ -16,7 +16,11 @@ interface DopamineWinModalProps {
   difficulty: string;
   comboCount: number;
   mistakes: number;
-  topScore?: number;
+  topScores: Array<{
+    score: number;
+    time: number;
+    difficulty: string;
+  }>;
   isNewRecord?: boolean;
 }
 
@@ -30,7 +34,7 @@ export const DopamineWinModal = ({
   difficulty,
   comboCount,
   mistakes,
-  topScore,
+  topScores,
   isNewRecord = false
 }: DopamineWinModalProps) => {
   const { t } = useLanguage();
@@ -149,8 +153,9 @@ export const DopamineWinModal = ({
                     </div>
                     <div>
                       <div className="font-medium text-muted-foreground">
-                        {isNewRecord ? `${score.toLocaleString()} ${t('points')} (${t('newRecord')})` : 
-                         topScore ? `${topScore.toLocaleString()} ${t('points')}` : t('noTopScoreData')}
+                        {topScores.length > 0 ? 
+                          `${topScores[0].score.toLocaleString()} ${t('points')}` : 
+                          t('noTopScoreData')}
                       </div>
                       <div className="text-sm text-muted-foreground">
                         {getDifficultyLabel(difficulty)} {t('difficultyLevel')}
