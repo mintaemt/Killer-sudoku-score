@@ -138,20 +138,16 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
                       </h4>
                       <div className="grid grid-cols-2 gap-1 text-xs">
                         <div className="text-center p-1.5 rounded bg-background/50">
-                          <div className="font-medium break-words">{t('easy')}</div>
-                          <div className="text-muted-foreground">100{t('points')}</div>
+                          <div className="break-words">{t('easy')}: 100{t('points')}</div>
                         </div>
                         <div className="text-center p-1.5 rounded bg-background/50">
-                          <div className="font-medium break-words">{t('medium')}</div>
-                          <div className="text-muted-foreground">200{t('points')}</div>
+                          <div className="break-words">{t('medium')}: 200{t('points')}</div>
                         </div>
                         <div className="text-center p-1.5 rounded bg-background/50">
-                          <div className="font-medium break-words">{t('hard')}</div>
-                          <div className="text-muted-foreground">300{t('points')}</div>
+                          <div className="break-words">{t('hard')}: 300{t('points')}</div>
                         </div>
                         <div className="text-center p-1.5 rounded bg-background/50">
-                          <div className="font-medium break-words">{t('expert')}</div>
-                          <div className="text-muted-foreground">500{t('points')}</div>
+                          <div className="break-words">{t('expert')}: 500{t('points')}</div>
                         </div>
                       </div>
                     </div>
