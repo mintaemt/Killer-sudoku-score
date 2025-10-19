@@ -55,7 +55,7 @@ const Index = () => {
   
   // Hooks
 const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisitorMode, isLoggedIn } = useUser();
-  const { saveGameRecord, getUserBestScore } = useGameRecord();
+  const { saveNormalGameRecord, saveDopamineGameRecord, getNormalUserBestScore, getDopamineUserBestScore, getAllDopamineUsersTopScore } = useGameRecord();
 
   // 檢查用戶是否已登入
   useEffect(() => {
@@ -131,7 +131,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
     }
     
     try {
-      const result = await saveGameRecord(user!.id, difficulty, time, mistakes);
+      const result = await saveNormalGameRecord(user!.id, difficulty, time, mistakes);
       if (result) {
         setGameCompletionResult(result);
         setShowGameCompleteModal(true);
@@ -366,11 +366,11 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
     setGameCompletionResult(null);
   };
 
-  // 獲取所有用戶在特定難度的最高分
-  const getAllUsersTopScore = async (difficulty: DopamineDifficulty) => {
+  // 獲取所有用戶在特定難度的最高分（多巴胺模式）
+  const getAllDopamineUsersTopScore = async (difficulty: DopamineDifficulty) => {
     try {
       const { data, error } = await supabase
-        .from('game_records')
+        .from('dopamine_records')
         .select('score, completion_time, difficulty')
         .eq('difficulty', difficulty)
         .order('score', { ascending: false })
@@ -383,7 +383,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
 
       return [data];
     } catch (err) {
-      console.error('Error getting all users top score:', err);
+      console.error('Error getting all dopamine users top score:', err);
       return [];
     }
   };
@@ -404,7 +404,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
     // 獲取該難度的最高分
     if (user && !isVisitorMode) {
       try {
-        const bestScore = await getUserBestScore(user.id, dopamineDifficulty);
+        const bestScore = await getDopamineUserBestScore(user.id, dopamineDifficulty);
         
         if (bestScore && bestScore.score === score) {
           isNewRecord = true;
@@ -415,7 +415,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
     }
 
     // 獲取所有用戶在該難度的最高分
-    const topScores = await getAllUsersTopScore(dopamineDifficulty);
+    const topScores = await getAllDopamineUsersTopScore(dopamineDifficulty);
 
     setDopamineWinData({
       score,
@@ -470,19 +470,19 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
     // 保存多巴胺模式遊戲記錄
     if (user && !isVisitorMode) {
       try {
-        const result = await saveGameRecord(
+        const result = await saveDopamineGameRecord(
           user.id,
           dopamineDifficulty, // 使用多巴胺難度
           timeLimit - time,   // 完成時間
           mistakes,
-          'dopamine'          // 多巴胺模式
+          comboCount
         );
         
         if (result) {
           console.log('多巴胺模式遊戲記錄已保存:', result);
           
           // 獲取該難度的最高分
-          const bestScore = await getUserBestScore(user.id, dopamineDifficulty);
+          const bestScore = await getDopamineUserBestScore(user.id, dopamineDifficulty);
           
           if (bestScore && bestScore.score === score) {
             // 如果當前分數等於最佳分數，說明是新的最高分
@@ -495,7 +495,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
     }
 
     // 獲取所有用戶在該難度的最高分
-    const topScores = await getAllUsersTopScore(dopamineDifficulty);
+    const topScores = await getAllDopamineUsersTopScore(dopamineDifficulty);
 
     setDopamineWinData({
       score,

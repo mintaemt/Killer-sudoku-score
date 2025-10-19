@@ -4,67 +4,55 @@ import { LeaderboardEntry, Difficulty } from '@/lib/types';
 
 export const useLeaderboard = (difficulty?: Difficulty, mode: 'normal' | 'dopamine' = 'normal') => {
   const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    fetchLeaderboard();
-  }, [difficulty, mode]);
 
   const fetchLeaderboard = async () => {
     try {
       setLoading(true);
       setError(null);
 
-      let query = supabase
-        .from('leaderboard')
-        .select('*')
-        .order('best_score', { ascending: false })
-        .limit(50);
+      const viewName = mode === 'normal' ? 'normal_leaderboard' : 'dopamine_leaderboard';
+      let query = supabase.from(viewName).select('*');
 
-      // 如果指定了難度，則篩選該難度
       if (difficulty) {
         query = query.eq('difficulty', difficulty);
       }
 
-      // 先獲取數據，然後在客戶端過濾mode
-      const { data: allData, error: fetchError } = await query;
-      
-      if (fetchError) {
-        throw fetchError;
+      const { data, error } = await query;
+
+      if (error) {
+        throw error;
       }
 
-      // 檢查是否有mode欄位，如果有則過濾
-      let filteredData = allData || [];
-      if (allData && allData.length > 0 && allData[0].hasOwnProperty('mode')) {
-        filteredData = allData.filter(record => record.mode === mode);
-      }
-
-      setLeaderboard(filteredData);
+      setLeaderboard(data || []);
     } catch (err) {
       console.error('Error fetching leaderboard:', err);
-      setError('載入排行榜失敗');
+      setError(err instanceof Error ? err.message : 'Unknown error');
     } finally {
       setLoading(false);
     }
   };
 
+  useEffect(() => {
+    fetchLeaderboard();
+  }, [difficulty, mode]);
+
   // 獲取用戶在特定難度的排名
   const getUserRank = async (userId: string, difficulty: Difficulty): Promise<number | null> => {
     try {
-      const { data, error } = await supabase
-        .from('leaderboard')
-        .select('rank')
-        .eq('user_id', userId)
-        .eq('difficulty', difficulty)
-        .single();
+      const functionName = mode === 'normal' ? 'get_normal_user_rank' : 'get_dopamine_user_rank';
+      const { data, error } = await supabase.rpc(functionName, {
+        p_user_id: userId,
+        p_difficulty: difficulty
+      });
 
       if (error) {
         console.error('Error getting user rank:', error);
         return null;
       }
 
-      return data?.rank || null;
+      return data;
     } catch (err) {
       console.error('Error getting user rank:', err);
       return null;
@@ -74,11 +62,14 @@ export const useLeaderboard = (difficulty?: Difficulty, mode: 'normal' | 'dopami
   // 獲取用戶的最佳成績
   const getUserBestScore = async (userId: string, difficulty: Difficulty): Promise<LeaderboardEntry | null> => {
     try {
+      const tableName = mode === 'normal' ? 'normal_records' : 'dopamine_records';
       const { data, error } = await supabase
-        .from('leaderboard')
+        .from(tableName)
         .select('*')
         .eq('user_id', userId)
         .eq('difficulty', difficulty)
+        .order('score', { ascending: false })
+        .limit(1)
         .single();
 
       if (error) {
