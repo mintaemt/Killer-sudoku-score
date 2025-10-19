@@ -375,6 +375,8 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
 
   // 一鍵答題測試函數 - 自動填入所有答案
   const handleTestComplete = () => {
+    console.log('⚡ 一鍵解題開始');
+    
     // 自動填入所有答案
     const newGrid = gameData.grid.map((row) =>
       row.map((cell) => ({
@@ -393,8 +395,15 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
       setComboCount(0); // 重置combo
     }
     
-    // 觸發遊戲完成檢查 - 讓 useEffect 自動檢測並觸發完成
-    // 不需要手動調用 handleGameComplete，因為 useEffect 會自動檢測到遊戲完成
+    // 直接觸發遊戲完成，像多巴胺模式一樣
+    setTimeout(() => {
+      console.log(`🎯 觸發遊戲完成 - 模式: ${isDopamineMode ? '多巴胺' : '普通'}`);
+      if (isDopamineMode) {
+        handleDopamineWin();
+      } else {
+        handleGameComplete();
+      }
+    }, 100); // 短暫延遲確保狀態更新
   };
 
   // 測試WIN資訊卡（用於測試）
