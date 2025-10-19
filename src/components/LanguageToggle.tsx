@@ -66,7 +66,7 @@ export const LanguageToggle = () => {
           variant="outline"
           size="sm"
           className={cn(
-            "h-8 w-8 p-0 transition-smooth hover:scale-105 active:scale-95",
+            "transition-smooth hover:scale-105 active:scale-95",
             "shadow-apple-sm hover:shadow-apple-md flex-shrink-0"
           )}
           title={`語言: ${currentLangData.nativeName}`}

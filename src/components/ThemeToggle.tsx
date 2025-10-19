@@ -41,7 +41,7 @@ export const ThemeToggle = () => {
       variant="outline"
       size="sm"
       onClick={toggleTheme}
-      className="h-8 w-8 p-0 transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md flex-shrink-0"
+      className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md flex-shrink-0"
       title={`${t('currentTheme')}: ${resolvedTheme}. ${t('clickToToggle')}`}
     >
       {getIcon()}
