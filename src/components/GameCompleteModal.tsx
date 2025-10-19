@@ -44,7 +44,7 @@ export const GameCompleteModal = ({
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-      <Card className="w-full max-w-md relative">
+      <Card className="w-full max-w-lg relative">
         <Button
           variant="ghost"
           size="sm"
@@ -69,21 +69,21 @@ export const GameCompleteModal = ({
               {/* 左上：目前排名 */}
               {rank && (
                 <div className="flex items-center justify-between p-3 bg-primary/5 rounded-lg border border-primary/20">
-                  <div className="flex items-center space-x-2">
-                    <Trophy className="h-4 w-4 text-primary" />
-                    <span className="text-sm font-medium">{t('currentRank')}</span>
+                  <div className="flex items-center space-x-2 min-w-0 flex-1">
+                    <Trophy className="h-4 w-4 text-primary flex-shrink-0" />
+                    <span className="text-sm font-medium whitespace-nowrap">{t('currentRank')}</span>
                   </div>
-                  <span className="text-lg font-bold text-primary">#{rank}</span>
+                  <span className="text-lg font-bold text-primary flex-shrink-0 ml-2">#{rank}</span>
                 </div>
               )}
 
               {/* 右上：總分數 */}
               <div className="flex items-center justify-between p-3 bg-primary/5 rounded-lg border border-primary/20">
-                <div className="flex items-center space-x-2">
-                  <Star className="h-4 w-4 text-primary" />
-                    <span className="text-sm font-medium">{t('totalScore')}</span>
+                <div className="flex items-center space-x-2 min-w-0 flex-1">
+                  <Star className="h-4 w-4 text-primary flex-shrink-0" />
+                    <span className="text-sm font-medium whitespace-nowrap">{t('totalScore')}</span>
                 </div>
-                <div className="text-right flex flex-col items-end">
+                <div className="text-right flex flex-col items-end flex-shrink-0 ml-2">
                   <div className="text-lg font-bold text-primary">
                     {formatScore(score)}
                   </div>
@@ -99,20 +99,20 @@ export const GameCompleteModal = ({
             <div className="grid grid-cols-2 gap-3">
               {/* 左下：完成時間 */}
               <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
-                <div className="flex items-center space-x-2">
-                  <Clock className="h-4 w-4 text-primary" />
-                  <span className="text-sm">{t('completionTime')}</span>
+                <div className="flex items-center space-x-2 min-w-0 flex-1">
+                  <Clock className="h-4 w-4 text-primary flex-shrink-0" />
+                  <span className="text-sm whitespace-nowrap">{t('completionTime')}</span>
                 </div>
-                <span className="font-semibold">{formatTime(completionTime)}</span>
+                <span className="font-semibold flex-shrink-0 ml-2">{formatTime(completionTime)}</span>
               </div>
 
               {/* 右下：錯誤次數 */}
               <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
-                <div className="flex items-center space-x-2">
-                  <Target className="h-4 w-4 text-primary" />
-                  <span className="text-sm">{t('errorCount')}</span>
+                <div className="flex items-center space-x-2 min-w-0 flex-1">
+                  <Target className="h-4 w-4 text-primary flex-shrink-0" />
+                  <span className="text-sm whitespace-nowrap">{t('errorCount')}</span>
                 </div>
-                <span className="font-semibold">{mistakes}</span>
+                <span className="font-semibold flex-shrink-0 ml-2">{mistakes}</span>
               </div>
             </div>
           </div>
