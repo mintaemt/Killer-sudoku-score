@@ -166,8 +166,6 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
                         <div className="flex items-center gap-1.5">
                           <Badge variant="secondary" className="text-xs px-1 py-0.5 flex-shrink-0">{t('earlyBonus')}</Badge>
                           <span className="break-words">{t('earlyBonusDescription')}</span>
-                        </div>
-                        <div className="flex items-center gap-1.5">
                           <Badge variant="secondary" className="text-xs px-1 py-0.5 flex-shrink-0">{t('overtimePenalty')}</Badge>
                           <span className="break-words">{t('overtimePenaltyDescription')}</span>
                         </div>
