@@ -83,12 +83,12 @@ export const GameCompleteModal = ({
                   <Star className="h-4 w-4 text-primary" />
                     <span className="text-sm font-medium">{t('totalScore')}</span>
                 </div>
-                <div className="text-right">
+                <div className="text-right flex flex-col items-end">
                   <div className="text-lg font-bold text-primary">
                     {formatScore(score)}
                   </div>
                   {isNewRecord && (
-                    <Badge variant="secondary" className="text-xs">
+                    <Badge variant="secondary" className="text-xs mt-1">
                       {t('newRecord')}
                     </Badge>
                   )}

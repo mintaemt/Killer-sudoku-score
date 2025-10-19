@@ -106,10 +106,10 @@ export const Leaderboard = ({ currentUserId, onClose, mode = 'normal' }: Leaderb
           <div>
             <CardTitle className="flex items-center space-x-2">
               <Trophy className="h-6 w-6" />
-              <span>{mode === 'dopamine' ? t('highestScoreDisplay') : t('achievementWall')}</span>
+              <span>{mode === 'dopamine' ? t('highestScoreDisplay') : t('leaderboard')}</span>
             </CardTitle>
             <CardDescription>
-              {mode === 'dopamine' ? t('highestScoreDisplay') : t('achievementWall')}
+              {mode === 'dopamine' ? t('highestScoreDisplay') : t('leaderboard')}
             </CardDescription>
           </div>
           <div className="flex space-x-2">
