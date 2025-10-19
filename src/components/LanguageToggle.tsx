@@ -67,11 +67,15 @@ export const LanguageToggle = () => {
           size="sm"
           className={cn(
             "transition-smooth hover:scale-105 active:scale-95",
-            "shadow-apple-sm hover:shadow-apple-md flex-shrink-0"
+            "shadow-apple-sm hover:shadow-apple-md flex-shrink-0",
+            isOpen && "bg-primary/10 border-primary/30 shadow-apple-md"
           )}
           title={`語言: ${currentLangData.nativeName}`}
         >
-          <Globe className="h-3 w-3 md:h-4 md:w-4" />
+          <Globe className={cn(
+            "h-3 w-3 md:h-4 md:w-4 transition-colors",
+            isOpen && "text-primary"
+          )} />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-48">
