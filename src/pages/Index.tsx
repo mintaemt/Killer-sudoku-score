@@ -552,7 +552,6 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
             currentTheme={currentTheme}
             onShowLeaderboard={handleShowLeaderboard}
             onShowRules={handleShowRules}
-            onTestComplete={handleTestComplete}
           />
           
           <DifficultySelector 
@@ -578,6 +577,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
               onClear={handleClear}
               disabled={!selectedCell}
               currentTheme={currentTheme}
+              onTestComplete={handleTestComplete}
             />
           </div>
         </div>
@@ -607,7 +607,6 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
                   currentTheme={currentTheme}
                   onShowLeaderboard={handleShowLeaderboard}
                   onShowRules={handleShowRules}
-                  onTestComplete={handleTestComplete}
                 />
               </div>
 
@@ -633,6 +632,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
                   disabled={!selectedCell}
                   showClearOnly={true}
                   currentTheme={currentTheme}
+                  onTestComplete={handleTestComplete}
                 />
               </div>
 
@@ -644,6 +644,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
                   disabled={!selectedCell}
                   showNumbersOnly={true}
                   currentTheme={currentTheme}
+                  onTestComplete={handleTestComplete}
                 />
               </div>
             </div>

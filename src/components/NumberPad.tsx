@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/hooks/useLanguage";
+import { useState, useRef } from "react";
 
 // 主題顏色映射
 const getThemeColors = (theme: string) => {
@@ -22,6 +23,7 @@ interface NumberPadProps {
   showClearOnly?: boolean;
   showNumbersOnly?: boolean;
   currentTheme?: string;
+  onTestComplete?: () => void;
 }
 
 export const NumberPad = ({ 
@@ -30,9 +32,40 @@ export const NumberPad = ({
   disabled, 
   showClearOnly = false, 
   showNumbersOnly = false,
-  currentTheme = "blue"
+  currentTheme = "blue",
+  onTestComplete
 }: NumberPadProps) => {
   const { t } = useLanguage();
+  const [isLongPressing, setIsLongPressing] = useState(false);
+  const longPressTimer = useRef<NodeJS.Timeout | null>(null);
+  const longPressThreshold = 2000; // 2秒長按
+
+  // 長按處理函數
+  const handleLongPressStart = () => {
+    if (process.env.NODE_ENV === 'development' && onTestComplete) {
+      setIsLongPressing(true);
+      longPressTimer.current = setTimeout(() => {
+        onTestComplete();
+        setIsLongPressing(false);
+      }, longPressThreshold);
+    }
+  };
+
+  const handleLongPressEnd = () => {
+    if (longPressTimer.current) {
+      clearTimeout(longPressTimer.current);
+      longPressTimer.current = null;
+    }
+    setIsLongPressing(false);
+  };
+
+  // 清理定時器
+  const cleanup = () => {
+    if (longPressTimer.current) {
+      clearTimeout(longPressTimer.current);
+      longPressTimer.current = null;
+    }
+  };
   
   // 如果只顯示 clear 按鈕
   if (showClearOnly) {
@@ -42,6 +75,11 @@ export const NumberPad = ({
         <Button
           size="lg"
           onClick={onClear}
+          onMouseDown={handleLongPressStart}
+          onMouseUp={handleLongPressEnd}
+          onMouseLeave={handleLongPressEnd}
+          onTouchStart={handleLongPressStart}
+          onTouchEnd={handleLongPressEnd}
           disabled={disabled}
           className={cn(
             "w-full h-12 transition-smooth font-bold text-lg",
@@ -49,10 +87,11 @@ export const NumberPad = ({
             themeColors.bg,
             themeColors.hover,
             themeColors.text,
-            "border-0"
+            "border-0",
+            isLongPressing && "bg-yellow-500 hover:bg-yellow-600 animate-pulse"
           )}
         >
-          {t('clear')}
+          {isLongPressing ? "⚡ 長按中..." : t('clear')}
         </Button>
       </div>
     );
@@ -119,6 +158,11 @@ export const NumberPad = ({
         <Button
           size="lg"
           onClick={onClear}
+          onMouseDown={handleLongPressStart}
+          onMouseUp={handleLongPressEnd}
+          onMouseLeave={handleLongPressEnd}
+          onTouchStart={handleLongPressStart}
+          onTouchEnd={handleLongPressEnd}
           disabled={disabled}
           className={cn(
             "w-full h-12 transition-smooth font-bold text-lg",
@@ -126,10 +170,11 @@ export const NumberPad = ({
             getThemeColors(currentTheme).bg,
             getThemeColors(currentTheme).hover,
             getThemeColors(currentTheme).text,
-            "border-0"
+            "border-0",
+            isLongPressing && "bg-yellow-500 hover:bg-yellow-600 animate-pulse"
           )}
         >
-          {t('clear')}
+          {isLongPressing ? "⚡ 長按中..." : t('clear')}
         </Button>
       </div>
     </div>

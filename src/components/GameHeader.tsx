@@ -14,7 +14,6 @@ interface GameHeaderProps {
   currentTheme: string;
   onShowLeaderboard: (mode?: 'normal' | 'dopamine') => void;
   onShowRules: () => void;
-  onTestComplete?: () => void;
 }
 
 const themes = [
@@ -26,7 +25,7 @@ const themes = [
   { name: "teal", label: "Teal", color: "#14b8a6" },
 ];
 
-export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeaderboard, onShowRules, onTestComplete }: GameHeaderProps) => {
+export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeaderboard, onShowRules }: GameHeaderProps) => {
   const [isThemeOpen, setIsThemeOpen] = useState(false);
   const [isUserOpen, setIsUserOpen] = useState(false);
   const [viewMode, setViewMode] = useState<'normal' | 'dopamine'>('normal');
@@ -60,20 +59,10 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
   return (
     <div className="glass rounded-2xl px-3 md:px-4 py-2 md:py-3 shadow-apple-md relative z-20 w-full max-w-7xl mx-auto">
       <div className="flex items-center justify-between">
-        {/* 左側：標題 - 改為一鍵獲勝按鈕 */}
+        {/* 左側：標題 */}
         <div className="flex items-center gap-2 md:gap-8 flex-1 min-w-0">
           <div className="flex flex-col items-start">
-            {process.env.NODE_ENV === 'development' && onTestComplete ? (
-              <button
-                onClick={onTestComplete}
-                className="text-sm md:text-lg font-bold tracking-tight leading-tight bg-yellow-500/10 hover:bg-yellow-500/20 border border-yellow-500/20 hover:border-yellow-500/40 px-3 py-1 rounded-lg transition-all duration-200 hover:scale-105 active:scale-95"
-                title="一鍵獲勝測試"
-              >
-                ⚡ 一鍵獲勝
-              </button>
-            ) : (
-              <h1 className="text-sm md:text-lg font-bold tracking-tight leading-tight truncate">{t('gameTitle')}</h1>
-            )}
+            <h1 className="text-sm md:text-lg font-bold tracking-tight leading-tight truncate">{t('gameTitle')}</h1>
           </div>
         </div>
 
