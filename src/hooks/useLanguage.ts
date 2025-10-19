@@ -45,6 +45,21 @@ const translations = {
     errorCountAffectsScore: 'Error count affects final score',
     consecutiveCorrectReward: 'Consecutive correct filling can get combo reward',
     speedCompletionBonus: 'Faster completion gives higher score bonus',
+    challengeFailed: 'Challenge Failed',
+    dopamineAchievementWall: 'Dopamine Achievement Wall',
+    noTopScoreData: 'No Top Score Data',
+    difficultyLevel: 'Difficulty Level',
+    againChallenge: 'Challenge Again',
+    returnToMainMenu: 'Return to Main Menu',
+    congratulationsComplete: 'Congratulations Complete',
+    successfullyCompletedGame: 'You have successfully completed the game',
+    currentRank: 'Current Rank',
+    totalScore: 'Total Score',
+    newRecord: 'New Record!',
+    completionTime: 'Completion Time',
+    errorCount: 'Error Count',
+    playAgain: 'Play Again',
+    viewLeaderboardButton: 'View Leaderboard',
     
     // 排行榜
     leaderboard: 'Leaderboard',
@@ -68,7 +83,6 @@ const translations = {
     restart: 'Restart',
     returnToMain: 'Return to Main Menu',
     wellDone: 'WELL DONE',
-    gameOver: 'GAME OVER',
     
     // 主題
     currentTheme: 'Current theme',
@@ -168,6 +182,21 @@ const translations = {
     errorCountAffectsScore: '錯誤次數影響最終分數',
     consecutiveCorrectReward: '連續正確填寫可獲得連擊獎勵',
     speedCompletionBonus: '完成速度越快，分數加成越高',
+    challengeFailed: '挑戰失敗',
+    dopamineAchievementWall: '多巴胺成就牆',
+    noTopScoreData: '暫無最高分數據',
+    difficultyLevel: '難度等級',
+    againChallenge: '再次挑戰',
+    returnToMainMenu: '返回主選單',
+    congratulationsComplete: '恭喜完成',
+    successfullyCompletedGame: '您成功完成了遊戲',
+    currentRank: '目前排名',
+    totalScore: '總分數',
+    newRecord: '新紀錄！',
+    completionTime: '完成時間',
+    errorCount: '錯誤次數',
+    playAgain: '再玩一次',
+    viewLeaderboardButton: '查看排行榜',
     
     // 排行榜
     leaderboard: '排行榜',
@@ -191,7 +220,6 @@ const translations = {
     restart: '再次挑戰',
     returnToMain: '返回主選單',
     wellDone: '太棒了',
-    gameOver: '遊戲結束',
     
     // 主題
     currentTheme: '當前主題',
@@ -291,6 +319,21 @@ const translations = {
     errorCountAffectsScore: '오류 횟수가 최종 점수에 영향',
     consecutiveCorrectReward: '연속 정확한 입력으로 콤보 보상 획득',
     speedCompletionBonus: '완료 속도가 빠를수록 높은 점수 보너스',
+    challengeFailed: '도전 실패',
+    dopamineAchievementWall: '도파민 성취 벽',
+    noTopScoreData: '최고 점수 데이터 없음',
+    difficultyLevel: '난이도 레벨',
+    againChallenge: '다시 도전',
+    returnToMainMenu: '메인 메뉴로 돌아가기',
+    congratulationsComplete: '축하합니다 완료',
+    successfullyCompletedGame: '게임을 성공적으로 완료했습니다',
+    currentRank: '현재 순위',
+    totalScore: '총 점수',
+    newRecord: '새 기록!',
+    completionTime: '완료 시간',
+    errorCount: '오류 횟수',
+    playAgain: '다시 플레이',
+    viewLeaderboardButton: '리더보드 보기',
     
     // 리더보드
     leaderboard: '리더보드',
@@ -314,7 +357,6 @@ const translations = {
     restart: '다시 도전',
     returnToMain: '메인 메뉴로',
     wellDone: '잘했어요',
-    gameOver: '게임 오버',
     
     // 테마
     currentTheme: '현재 테마',
@@ -414,6 +456,21 @@ const translations = {
     errorCountAffectsScore: 'エラー回数が最終スコアに影響',
     consecutiveCorrectReward: '連続正解入力でコンボ報酬獲得',
     speedCompletionBonus: '完了速度が速いほど高いスコアボーナス',
+    challengeFailed: 'チャレンジ失敗',
+    dopamineAchievementWall: 'ドーパミン実績ウォール',
+    noTopScoreData: '最高スコアデータなし',
+    difficultyLevel: '難易度レベル',
+    againChallenge: '再チャレンジ',
+    returnToMainMenu: 'メインメニューに戻る',
+    congratulationsComplete: 'おめでとうございます 完了',
+    successfullyCompletedGame: 'ゲームを正常に完了しました',
+    currentRank: '現在のランク',
+    totalScore: '総スコア',
+    newRecord: '新記録！',
+    completionTime: '完了時間',
+    errorCount: 'エラー回数',
+    playAgain: 'もう一度プレイ',
+    viewLeaderboardButton: 'リーダーボードを見る',
     
     // リーダーボード
     leaderboard: 'リーダーボード',
@@ -437,7 +494,6 @@ const translations = {
     restart: '再挑戦',
     returnToMain: 'メインメニューに戻る',
     wellDone: 'よくできました',
-    gameOver: 'ゲームオーバー',
     
     // テーマ
     currentTheme: '現在のテーマ',

@@ -75,7 +75,7 @@ export const DopamineGameOverModal = ({
                       className="text-white relative overflow-hidden flowing-button"
                     >
                       <Zap className="h-3 w-3 mr-1" />
-                      {t('gameOver')}
+                      GAME OVER
                     </Badge>
                   </CardTitle>
                   <CardDescription className="mt-2">{t('challengeFailed')}</CardDescription>
@@ -92,7 +92,7 @@ export const DopamineGameOverModal = ({
             <div 
               className="text-6xl md:text-8xl font-black retro-pixel-text flowing-text"
             >
-              {t('gameOver')}
+              GAME OVER
             </div>
           </div>
           

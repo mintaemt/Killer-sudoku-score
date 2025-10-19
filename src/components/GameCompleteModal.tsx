@@ -4,6 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import { Trophy, Clock, Target, Star, RotateCcw, BarChart3, X } from 'lucide-react';
 import { formatTime, formatScore } from '@/lib/scoreCalculator';
 import { Difficulty } from '@/lib/types';
+import { useLanguage } from '@/hooks/useLanguage';
 
 interface GameCompleteModalProps {
   isOpen: boolean;
@@ -17,13 +18,6 @@ interface GameCompleteModalProps {
   rank?: number;
   isNewRecord?: boolean;
 }
-
-const difficultyLabels: Record<Difficulty, string> = {
-  easy: '簡單',
-  medium: '中等',
-  hard: '困難',
-  expert: '專家'
-};
 
 const difficultyColors: Record<Difficulty, string> = {
   easy: 'bg-green-100 text-green-800',
@@ -44,6 +38,8 @@ export const GameCompleteModal = ({
   rank,
   isNewRecord = false
 }: GameCompleteModalProps) => {
+  const { t } = useLanguage();
+  
   if (!isOpen) return null;
 
   return (
@@ -61,9 +57,9 @@ export const GameCompleteModal = ({
           <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
             <Trophy className="h-8 w-8 text-primary" />
           </div>
-          <CardTitle className="text-2xl text-primary">恭喜完成</CardTitle>
+          <CardTitle className="text-2xl text-primary">{t('congratulationsComplete')}</CardTitle>
           <CardDescription>
-            您成功完成了「{difficultyLabels[difficulty]}」難度的遊戲
+            {t('successfullyCompletedGame')}
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -75,7 +71,7 @@ export const GameCompleteModal = ({
                 <div className="flex items-center justify-between p-3 bg-primary/5 rounded-lg border border-primary/20">
                   <div className="flex items-center space-x-2">
                     <Trophy className="h-4 w-4 text-primary" />
-                    <span className="text-sm font-medium">目前排名</span>
+                    <span className="text-sm font-medium">{t('currentRank')}</span>
                   </div>
                   <span className="text-lg font-bold text-primary">#{rank}</span>
                 </div>
@@ -85,7 +81,7 @@ export const GameCompleteModal = ({
               <div className="flex items-center justify-between p-3 bg-primary/5 rounded-lg border border-primary/20">
                 <div className="flex items-center space-x-2">
                   <Star className="h-4 w-4 text-primary" />
-                  <span className="text-sm font-medium">總分數</span>
+                    <span className="text-sm font-medium">{t('totalScore')}</span>
                 </div>
                 <div className="text-right">
                   <div className="text-lg font-bold text-primary">
@@ -93,7 +89,7 @@ export const GameCompleteModal = ({
                   </div>
                   {isNewRecord && (
                     <Badge variant="secondary" className="text-xs">
-                      新紀錄！
+                      {t('newRecord')}
                     </Badge>
                   )}
                 </div>
@@ -105,7 +101,7 @@ export const GameCompleteModal = ({
               <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
                 <div className="flex items-center space-x-2">
                   <Clock className="h-4 w-4 text-primary" />
-                  <span className="text-sm">完成時間</span>
+                  <span className="text-sm">{t('completionTime')}</span>
                 </div>
                 <span className="font-semibold">{formatTime(completionTime)}</span>
               </div>
@@ -114,7 +110,7 @@ export const GameCompleteModal = ({
               <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
                 <div className="flex items-center space-x-2">
                   <Target className="h-4 w-4 text-primary" />
-                  <span className="text-sm">錯誤次數</span>
+                  <span className="text-sm">{t('errorCount')}</span>
                 </div>
                 <span className="font-semibold">{mistakes}</span>
               </div>
@@ -129,7 +125,7 @@ export const GameCompleteModal = ({
               size="lg"
             >
               <RotateCcw className="mr-2 h-4 w-4" />
-              再玩一次
+              {t('playAgain')}
             </Button>
             
             <Button 
@@ -138,7 +134,7 @@ export const GameCompleteModal = ({
               className="w-full hover:bg-muted/50 hover:text-foreground"
             >
               <BarChart3 className="mr-2 h-4 w-4" />
-              查看排行榜
+              {t('viewLeaderboardButton')}
             </Button>
           </div>
         </CardContent>
