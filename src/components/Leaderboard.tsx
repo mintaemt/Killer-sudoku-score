@@ -16,12 +16,8 @@ interface LeaderboardProps {
   mode?: 'normal' | 'dopamine';
 }
 
-const difficultyLabels: Record<Difficulty, string> = {
-  easy: '簡單',
-  medium: '中等',
-  hard: '困難',
-  expert: '專家',
-  hell: '地獄'
+const getDifficultyLabel = (difficulty: Difficulty, t: (key: string) => string): string => {
+  return t(difficulty);
 };
 
 const difficultyColors: Record<Difficulty, string> = {
@@ -130,13 +126,13 @@ export const Leaderboard = ({ currentUserId, onClose, mode = 'normal' }: Leaderb
       </CardHeader>
       <CardContent>
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-6">
+          <TabsList className={`grid w-full ${mode === 'normal' ? 'grid-cols-5' : 'grid-cols-6'}`}>
             <TabsTrigger value="all">
               {t('all')}
             </TabsTrigger>
             {availableDifficulties.map((difficulty) => (
               <TabsTrigger key={difficulty} value={difficulty}>
-                {difficultyLabels[difficulty]}
+                {getDifficultyLabel(difficulty, t)}
               </TabsTrigger>
             ))}
           </TabsList>
