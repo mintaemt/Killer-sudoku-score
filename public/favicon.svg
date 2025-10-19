@@ -1,0 +1,54 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background with multiple radial gradients -->
+  <defs>
+    <!-- Orange gradient -->
+    <radialGradient id="orange" cx="15%" cy="25%" r="50%">
+      <stop offset="0%" stop-color="#F97316" stop-opacity="0.95"/>
+      <stop offset="50%" stop-color="#F97316" stop-opacity="0"/>
+    </radialGradient>
+    
+    <!-- Blue gradient -->
+    <radialGradient id="blue" cx="85%" cy="25%" r="45%">
+      <stop offset="0%" stop-color="#3B82F6" stop-opacity="0.75"/>
+      <stop offset="45%" stop-color="#3B82F6" stop-opacity="0"/>
+    </radialGradient>
+    
+    <!-- Purple gradient -->
+    <radialGradient id="purple" cx="85%" cy="75%" r="55%">
+      <stop offset="0%" stop-color="#A855F7" stop-opacity="0.85"/>
+      <stop offset="55%" stop-color="#A855F7" stop-opacity="0"/>
+    </radialGradient>
+    
+    <!-- Pink gradient -->
+    <radialGradient id="pink" cx="15%" cy="75%" r="50%">
+      <stop offset="0%" stop-color="#EC4899" stop-opacity="0.65"/>
+      <stop offset="50%" stop-color="#EC4899" stop-opacity="0"/>
+    </radialGradient>
+    
+    <!-- Center blue gradient -->
+    <radialGradient id="centerBlue" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#3B82F6" stop-opacity="0.4"/>
+      <stop offset="70%" stop-color="#3B82F6" stop-opacity="0"/>
+    </radialGradient>
+    
+    <!-- Linear gradient overlay -->
+    <linearGradient id="overlay" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F97316" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#3B82F6" stop-opacity="0.15"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background layers -->
+  <rect width="32" height="32" rx="6" fill="url(#orange)"/>
+  <rect width="32" height="32" rx="6" fill="url(#blue)"/>
+  <rect width="32" height="32" rx="6" fill="url(#purple)"/>
+  <rect width="32" height="32" rx="6" fill="url(#pink)"/>
+  <rect width="32" height="32" rx="6" fill="url(#centerBlue)"/>
+  <rect width="32" height="32" rx="6" fill="url(#overlay)"/>
+  
+  <!-- Border -->
+  <rect x="1" y="1" width="30" height="30" rx="5" stroke="#A855F7" stroke-width="1" stroke-opacity="0.3" fill="none"/>
+  
+  <!-- Lightning bolt icon -->
+  <path d="M16 6L12 14H16L14 26L20 18H16L18 6H16Z" fill="white" stroke="black" stroke-width="0.5" stroke-opacity="0.3"/>
+</svg>
