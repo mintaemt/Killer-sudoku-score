@@ -39,6 +39,7 @@ const translations = {
     leaderboard: 'Leaderboard',
     viewLeaderboard: 'View Leaderboard',
     viewHighestScore: 'View Highest Score',
+    all: 'All',
     achievementWall: 'Achievement Wall',
     highestScoreDisplay: 'Highest Score Display',
     
@@ -117,6 +118,7 @@ const translations = {
     leaderboard: '排行榜',
     viewLeaderboard: '查看排行榜',
     viewHighestScore: '查看最高分',
+    all: '全部',
     achievementWall: '成就牆',
     highestScoreDisplay: '最高分展示',
     
@@ -195,6 +197,7 @@ const translations = {
     leaderboard: '리더보드',
     viewLeaderboard: '리더보드 보기',
     viewHighestScore: '최고 점수 보기',
+    all: '전체',
     achievementWall: '성취 벽',
     highestScoreDisplay: '최고 점수 표시',
     
@@ -273,6 +276,7 @@ const translations = {
     leaderboard: 'リーダーボード',
     viewLeaderboard: 'リーダーボードを見る',
     viewHighestScore: '最高スコアを見る',
+    all: '全て',
     achievementWall: '実績ウォール',
     highestScoreDisplay: '最高スコア表示',
     

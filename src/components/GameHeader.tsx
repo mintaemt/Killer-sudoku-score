@@ -196,11 +196,11 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
                                 if (diffStats.gamesPlayed === 0) return null;
                                 
                                 const difficultyLabels = {
-                                  easy: '簡單',
-                                  medium: '中等', 
-                                  hard: '困難',
-                                  expert: '專家',
-                                  hell: '地獄'
+                                  easy: t('easy'),
+                                  medium: t('medium'), 
+                                  hard: t('hard'),
+                                  expert: t('expert'),
+                                  hell: t('hell')
                                 };
                                 
                                 return (
@@ -232,7 +232,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
                     )}
                     
                     {statsLoading && (
-                      <div className="text-center text-xs text-muted-foreground">
+                      <div className="text-center text-xs text-muted-foreground p-4">
                         {t('loadingStats')}
                       </div>
                     )}

@@ -128,9 +128,9 @@ export const Leaderboard = ({ currentUserId, onClose, mode = 'normal' }: Leaderb
       </CardHeader>
       <CardContent>
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className={`grid w-full grid-cols-${availableDifficulties.length + 1}`}>
+          <TabsList className="grid w-full grid-cols-6">
             <TabsTrigger value="all">
-              全部
+              {t('all')}
             </TabsTrigger>
             {availableDifficulties.map((difficulty) => (
               <TabsTrigger key={difficulty} value={difficulty}>
