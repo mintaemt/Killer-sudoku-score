@@ -20,7 +20,7 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-2 sm:p-4 z-50">
-      <div className="w-full max-w-7xl max-h-[95vh] sm:max-h-[90vh] overflow-auto">
+      <div className="w-full max-w-[1000px] max-h-[95vh] sm:max-h-[90vh] overflow-auto">
         <Card className="glass rounded-2xl shadow-apple-lg m-2 sm:m-0">
           <CardHeader>
             <div className="flex items-center justify-between">
@@ -129,7 +129,7 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
                   </div>
 
                   {/* 計分規則 - 優化為更緊湊的佈局 */}
-                  <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-3">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {/* 基礎分數 */}
                     <div className="p-3 rounded-lg bg-gradient-to-r from-blue-50 to-green-50 dark:from-blue-950/20 dark:to-green-950/20 border">
                       <h4 className="font-semibold mb-2 flex items-center gap-2 text-sm">
