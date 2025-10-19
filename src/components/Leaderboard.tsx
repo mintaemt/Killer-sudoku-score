@@ -108,9 +108,6 @@ export const Leaderboard = ({ currentUserId, onClose, mode = 'normal' }: Leaderb
               <Trophy className="h-6 w-6" />
               <span>{mode === 'dopamine' ? t('highestScoreDisplay') : t('leaderboard')}</span>
             </CardTitle>
-            <CardDescription>
-              {mode === 'dopamine' ? t('highestScoreDisplay') : t('leaderboard')}
-            </CardDescription>
           </div>
           <div className="flex space-x-2">
             <Button variant="outline" size="sm" onClick={handleRefresh}>
