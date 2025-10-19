@@ -61,7 +61,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
         {/* 左側：標題 */}
         <div className="flex items-center gap-2 md:gap-8 flex-1 min-w-0">
           <div className="flex flex-col items-start">
-            <h1 className="text-lg md:text-2xl font-bold tracking-tight leading-tight truncate">{t('gameTitle')}</h1>
+            <h1 className="text-lg md:text-xl font-bold tracking-tight leading-tight truncate">{t('gameTitle')}</h1>
           </div>
         </div>
 
