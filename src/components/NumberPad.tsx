@@ -38,7 +38,7 @@ export const NumberPad = ({
   const { t } = useLanguage();
   const [isLongPressing, setIsLongPressing] = useState(false);
   const longPressTimer = useRef<NodeJS.Timeout | null>(null);
-  const longPressThreshold = 2000; // 2秒長按
+  const longPressThreshold = 3000; // 3秒長按
 
   // 長按處理函數
   const handleLongPressStart = (e: React.MouseEvent | React.TouchEvent) => {
@@ -223,19 +223,11 @@ export const NumberPad = ({
             getThemeColors(currentTheme).hover,
             getThemeColors(currentTheme).text,
             "border-0",
-            isLongPressing && "bg-yellow-500 hover:bg-yellow-600 animate-pulse",
-            "select-none", // 防止文字選擇
-            "relative" // 為提示文字添加定位
+            "select-none" // 防止文字選擇
           )}
           style={{ userSelect: 'none', WebkitUserSelect: 'none' }} // 額外的防止選擇樣式
         >
-          {isLongPressing ? "⚡ 長按中..." : t('clear')}
-          {/* 長按提示 */}
-          {!isLongPressing && onTestComplete && (
-            <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 text-xs text-muted-foreground whitespace-nowrap">
-              長按測試
-            </div>
-          )}
+          {t('clear')}
         </Button>
       </div>
     </div>
