@@ -1,11 +1,5 @@
 // 資料庫狀態檢查API
-import { createClient } from '@supabase/supabase-js';
-
-// 您需要提供這些值
-const supabaseUrl = process.env.VITE_SUPABASE_URL || 'YOUR_SUPABASE_URL';
-const supabaseKey = process.env.VITE_SUPABASE_ANON_KEY || 'YOUR_SUPABASE_KEY';
-
-const supabase = createClient(supabaseUrl, supabaseKey);
+import { supabase } from './supabase';
 
 export async function checkDatabaseStatus() {
   try {

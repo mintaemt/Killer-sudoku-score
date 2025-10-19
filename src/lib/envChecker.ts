@@ -1,4 +1,6 @@
 // 環境變數檢查工具
+import { supabase } from './supabase';
+
 export function checkEnvironment() {
   console.log('🔍 檢查環境變數...');
   
@@ -25,17 +27,6 @@ export async function testSupabaseConnection() {
   console.log('🔗 測試Supabase連接...');
   
   try {
-    const { createClient } = await import('@supabase/supabase-js');
-    
-    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-    const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-    
-    if (!supabaseUrl || !supabaseKey) {
-      throw new Error('環境變數未設置');
-    }
-    
-    const supabase = createClient(supabaseUrl, supabaseKey);
-    
     // 測試連接
     const { data, error } = await supabase
       .from('users')
