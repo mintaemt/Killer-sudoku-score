@@ -122,6 +122,11 @@ export const KillerSudokuGrid = ({
           )}
         </div>
       </div>
+      
+      {/* Dark mode blur effect for bottom border */}
+      <div className="absolute inset-0 pointer-events-none z-40 dark:block hidden">
+        <div className="absolute bottom-0 left-0 right-0 h-[0.3rem] bg-gradient-to-t from-black/20 to-transparent blur-[0.3rem]"></div>
+      </div>
     </div>
   );
 };
