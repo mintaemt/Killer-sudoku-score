@@ -66,14 +66,14 @@ export const DifficultySelector = ({
 
   return (
     <div className="glass rounded-2xl px-3 md:px-4 py-3 shadow-apple-md relative z-10 w-full max-w-7xl mx-auto">
-      <div className="flex items-center justify-between gap-3">
+      <div className="flex items-center justify-between gap-4">
         {/* 難度選擇器 */}
         <div className="relative" ref={dropdownRef}>
           <Button
             variant="outline"
             size="sm"
             onClick={() => setIsOpen(!isOpen)}
-            className="transition-smooth font-medium text-xs md:text-sm w-[100px] justify-between"
+            className="transition-smooth font-medium text-xs md:text-sm w-[150px] justify-between"
           >
             {currentDifficulty ? t(currentDifficulty.translationKey as any) : difficulty}
             <ChevronDown className={cn("h-3 w-3 transition-transform", isOpen && "rotate-180")} />
