@@ -76,7 +76,7 @@ const translations = {
     
     // 用戶相關
     welcome: 'Welcome',
-    welcomeToKillerSudoku: 'Welcome to Killer Sudoku',
+    welcomeToKillerSudoku: 'Welcome to Sudoku',
     enterNameToStart: 'Please enter your name to start playing and participate in the leaderboard',
     enterYourName: 'Please enter your name',
     processing: 'Processing...',
@@ -223,7 +223,7 @@ const translations = {
     
     // 用戶相關
     welcome: '歡迎',
-    welcomeToKillerSudoku: '歡迎來到 Killer Sudoku',
+    welcomeToKillerSudoku: '歡迎來到殺手數獨',
     enterNameToStart: '請輸入您的名稱以開始遊戲並參與排行榜',
     enterYourName: '請輸入您的名稱',
     processing: '處理中...',
@@ -370,7 +370,7 @@ const translations = {
     
     // 사용자 관련
     welcome: '환영합니다',
-    welcomeToKillerSudoku: 'Killer Sudoku에 오신 것을 환영합니다',
+    welcomeToKillerSudoku: '킬러 스도쿠에 오신 것을 환영합니다',
     enterNameToStart: '게임을 시작하고 리더보드에 참여하려면 이름을 입력하세요',
     enterYourName: '이름을 입력하세요',
     processing: '처리 중...',
@@ -517,7 +517,7 @@ const translations = {
     
     // ユーザー関連
     welcome: 'ようこそ',
-    welcomeToKillerSudoku: 'Killer Sudokuへようこそ',
+    welcomeToKillerSudoku: 'キラー数独へようこそ',
     enterNameToStart: 'ゲームを開始し、リーダーボードに参加するために名前を入力してください',
     enterYourName: '名前を入力してください',
     processing: '処理中...',

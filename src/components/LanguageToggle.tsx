@@ -66,12 +66,12 @@ export const LanguageToggle = () => {
           variant="outline"
           size="sm"
           className={cn(
-            "h-8 w-10 p-0 transition-smooth hover:scale-105 active:scale-95",
+            "h-8 w-8 p-0 transition-smooth hover:scale-105 active:scale-95",
             "shadow-apple-sm hover:shadow-apple-md"
           )}
           title={`語言: ${currentLangData.nativeName}`}
         >
-          <span className="text-xs font-medium">{currentLangData.shortCode}</span>
+          <Globe className="h-3 w-3 md:h-4 md:w-4" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-48">
