@@ -48,9 +48,12 @@ export const useUserStats = (userId: string | null, mode: 'normal' | 'dopamine' 
       setError(null);
 
       try {
+        // 根據模式選擇正確的表格
+        const tableName = mode === 'normal' ? 'normal_records' : 'dopamine_records';
+        
         // 獲取用戶的指定模式遊戲記錄
         const { data: gameRecords, error: fetchError } = await supabase
-          .from('game_records')
+          .from(tableName)
           .select('*')
           .eq('user_id', userId)
           .order('completed_at', { ascending: false });
@@ -78,20 +81,8 @@ export const useUserStats = (userId: string | null, mode: 'normal' | 'dopamine' 
           return;
         }
 
-        // 根據mode過濾記錄（如果mode欄位存在）
-        let filteredRecords = gameRecords;
-        if (gameRecords.length > 0 && gameRecords[0].hasOwnProperty('mode')) {
-          filteredRecords = gameRecords.filter(record => record.mode === mode);
-        } else {
-          // 如果沒有mode欄位，根據模式決定是否顯示記錄
-          if (mode === 'dopamine') {
-            // 多巴胺模式：顯示普通模式的記錄（因為多巴胺模式目前沒有獨立的記錄系統）
-            filteredRecords = gameRecords;
-          } else {
-            // 普通模式：顯示所有記錄
-            filteredRecords = gameRecords;
-          }
-        }
+        // 直接使用獲取的記錄（已經根據模式選擇了正確的表格）
+        const filteredRecords = gameRecords;
 
         if (filteredRecords.length === 0) {
           // 沒有記錄時，設置為空統計而不是 null
