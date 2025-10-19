@@ -366,28 +366,6 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
     setGameCompletionResult(null);
   };
 
-  // 獲取所有用戶在特定難度的最高分（多巴胺模式）
-  const getAllDopamineUsersTopScore = async (difficulty: DopamineDifficulty) => {
-    try {
-      const { data, error } = await supabase
-        .from('dopamine_records')
-        .select('score, completion_time, difficulty')
-        .eq('difficulty', difficulty)
-        .order('score', { ascending: false })
-        .limit(1)
-        .single();
-
-      if (error || !data) {
-        return [];
-      }
-
-      return [data];
-    } catch (err) {
-      console.error('Error getting all dopamine users top score:', err);
-      return [];
-    }
-  };
-
   // 測試WIN資訊卡（用於測試）
   const handleTestWin = async () => {
     const score = calculateDopamineScore({
