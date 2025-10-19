@@ -723,12 +723,14 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
       {/* 排行榜模態框 */}
       {showLeaderboard && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-          <div className="w-full max-w-6xl max-h-[90vh] overflow-auto">
-            <Leaderboard
-              currentUserId={user?.name}
-              onClose={handleCloseLeaderboard}
-              mode={currentLeaderboardMode}
-            />
+          <div className="w-full max-w-[400px] max-h-[90vh] overflow-auto">
+            <Card className="bg-background">
+              <Leaderboard
+                currentUserId={user?.name}
+                onClose={handleCloseLeaderboard}
+                mode={currentLeaderboardMode}
+              />
+            </Card>
           </div>
         </div>
       )}
