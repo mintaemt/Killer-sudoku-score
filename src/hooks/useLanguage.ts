@@ -60,6 +60,9 @@ const translations = {
     errorCount: 'Error Count',
     playAgain: 'Play Again',
     viewLeaderboardButton: 'View Leaderboard',
+    congratulations: 'Congratulations',
+    remainingTime: 'Remaining Time',
+    maxCombo: 'Max Combo',
     
     // 排行榜
     leaderboard: 'Leaderboard',
@@ -82,7 +85,6 @@ const translations = {
     back: 'Back',
     restart: 'Restart',
     returnToMain: 'Return to Main Menu',
-    wellDone: 'WELL DONE',
     
     // 主題
     currentTheme: 'Current theme',
@@ -197,6 +199,9 @@ const translations = {
     errorCount: '錯誤次數',
     playAgain: '再玩一次',
     viewLeaderboardButton: '查看排行榜',
+    congratulations: '恭喜',
+    remainingTime: '剩餘時間',
+    maxCombo: '最大連擊',
     
     // 排行榜
     leaderboard: '排行榜',
@@ -219,7 +224,6 @@ const translations = {
     back: '返回',
     restart: '再次挑戰',
     returnToMain: '返回主選單',
-    wellDone: '太棒了',
     
     // 主題
     currentTheme: '當前主題',
@@ -334,6 +338,9 @@ const translations = {
     errorCount: '오류 횟수',
     playAgain: '다시 플레이',
     viewLeaderboardButton: '리더보드 보기',
+    congratulations: '축하합니다',
+    remainingTime: '남은 시간',
+    maxCombo: '최대 콤보',
     
     // 리더보드
     leaderboard: '리더보드',
@@ -356,7 +363,6 @@ const translations = {
     back: '뒤로',
     restart: '다시 도전',
     returnToMain: '메인 메뉴로',
-    wellDone: '잘했어요',
     
     // 테마
     currentTheme: '현재 테마',
@@ -471,6 +477,9 @@ const translations = {
     errorCount: 'エラー回数',
     playAgain: 'もう一度プレイ',
     viewLeaderboardButton: 'リーダーボードを見る',
+    congratulations: 'おめでとうございます',
+    remainingTime: '残り時間',
+    maxCombo: '最大コンボ',
     
     // リーダーボード
     leaderboard: 'リーダーボード',
@@ -493,7 +502,6 @@ const translations = {
     back: '戻る',
     restart: '再挑戦',
     returnToMain: 'メインメニューに戻る',
-    wellDone: 'よくできました',
     
     // テーマ
     currentTheme: '現在のテーマ',

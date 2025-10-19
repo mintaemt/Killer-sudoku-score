@@ -73,7 +73,7 @@ export const DopamineWinModal = ({
                       className="text-white relative overflow-hidden flowing-button"
                     >
                       <Zap className="h-3 w-3 mr-1" />
-                      {t('wellDone')}
+                      WELL DONE
                     </Badge>
                   </CardTitle>
                   <CardDescription className="mt-2">{t('congratulations')}</CardDescription>
@@ -93,7 +93,7 @@ export const DopamineWinModal = ({
                 fontFamily: 'Huninn, sans-serif'
               }}
             >
-              {t('wellDone')}
+              WELL DONE
             </div>
           </div>
           
