@@ -36,31 +36,31 @@ const getRankIcon = (rank: number) => {
 };
 
 const LeaderboardEntryItem = ({ entry, isCurrentUser, t }: { entry: LeaderboardEntry; isCurrentUser?: boolean; t: (key: string) => string }) => (
-  <div className={`flex items-center justify-between p-3 rounded-lg border ${
+  <div className={`flex items-center justify-between p-2.5 rounded-lg border ${
     isCurrentUser ? 'bg-primary/5 border-primary' : 'bg-card'
   }`}>
-    <div className="flex items-center space-x-3">
-      <div className="flex items-center space-x-2">
+    <div className="flex items-center space-x-2.5">
+      <div className="flex items-center space-x-1.5">
         {getRankIcon(entry.rank)}
-        <span className="font-semibold text-lg">#{entry.rank}</span>
+        <span className="font-semibold text-base">#{entry.rank}</span>
       </div>
       <div>
-        <div className="flex items-center space-x-2">
-          <span className="font-medium">{entry.name}</span>
+        <div className="flex items-center space-x-1.5">
+          <span className="font-medium text-sm">{entry.name}</span>
           {isCurrentUser && (
-            <Badge variant="secondary" className="text-xs">
+            <Badge variant="secondary" className="text-xs px-1.5 py-0.5">
               您
             </Badge>
           )}
         </div>
-        <div className="text-sm text-muted-foreground">
+        <div className="text-xs text-muted-foreground">
           {entry.games_played} {t('gamesPlayed')}
         </div>
       </div>
     </div>
     <div className="text-right">
-      <div className="font-bold text-lg">{formatScore(entry.best_score)}</div>
-      <div className="text-sm text-muted-foreground">
+      <div className="font-bold text-base">{formatScore(entry.best_score)}</div>
+      <div className="text-xs text-muted-foreground">
         {formatTime(entry.best_time)}
       </div>
     </div>
@@ -123,12 +123,12 @@ export const Leaderboard = ({ currentUserId, onClose, mode = 'normal' }: Leaderb
       </div>
       <div className="px-6 py-4">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className={`grid w-full ${mode === 'normal' ? 'grid-cols-5' : 'grid-cols-6'}`}>
-            <TabsTrigger value="all">
+          <TabsList className={`inline-flex w-auto ${mode === 'normal' ? 'grid-cols-5' : 'grid-cols-6'}`}>
+            <TabsTrigger value="all" className="px-3 py-1.5 text-xs">
               {t('all')}
             </TabsTrigger>
             {availableDifficulties.map((difficulty) => (
-              <TabsTrigger key={difficulty} value={difficulty}>
+              <TabsTrigger key={difficulty} value={difficulty} className="px-3 py-1.5 text-xs">
                 {getDifficultyLabel(difficulty, t)}
               </TabsTrigger>
             ))}

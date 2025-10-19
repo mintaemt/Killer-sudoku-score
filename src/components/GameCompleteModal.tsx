@@ -80,7 +80,7 @@ export const GameCompleteModal = ({
               </div>
 
               {/* 分數 */}
-              <div className="flex-1 flex flex-col items-center p-4 bg-primary/5 rounded-lg border border-primary/20">
+              <div className="flex-1 flex flex-col items-center p-4 bg-primary/10 rounded-lg border border-primary/30">
                 <Star className="h-5 w-5 text-primary mb-2" />
                 <span className="text-sm text-muted-foreground mb-1">{t('totalScore')}</span>
                 <div className="text-center">
@@ -99,7 +99,9 @@ export const GameCompleteModal = ({
               <div className="flex-1 flex flex-col items-center p-4 bg-muted/50 rounded-lg">
                 <Target className="h-5 w-5 text-primary mb-2" />
                 <span className="text-sm text-muted-foreground mb-1">{t('errorCount')}</span>
-                <span className="text-lg font-semibold">{mistakes}</span>
+                <div className="text-center">
+                  <span className="text-lg font-semibold">{mistakes}</span>
+                </div>
               </div>
             </div>
 
@@ -117,9 +119,9 @@ export const GameCompleteModal = ({
               <Button 
                 onClick={onNewGame} 
                 size="lg"
-                className="px-8 py-3 text-base font-semibold"
+                className="px-6 py-2.5 text-sm font-medium h-11"
               >
-                <RotateCcw className="mr-2 h-5 w-5" />
+                <RotateCcw className="mr-2 h-4 w-4" />
                 {t('playAgain')}
               </Button>
             </div>
