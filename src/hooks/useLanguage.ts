@@ -100,6 +100,7 @@ const translations = {
     minimumScore: 'Minimum Score',
     example: 'Example',
     points: 'pts',
+    minutes: 'min',
     basicRulesDescription: 'Fill numbers 1-9 in a 9×9 grid. Each row, column, and 3×3 box must contain unique numbers.',
     killerSudokuFeaturesDescription: 'Numbers in dashed boxes must sum to the number in the top-left corner, and cannot repeat within the box.',
     solvingStrategyDescription: 'Start with cells that have only one possible number, then gradually deduce other cells.',
@@ -212,6 +213,7 @@ const translations = {
     minimumScore: '最低分數',
     example: '範例',
     points: '分',
+    minutes: '分',
     basicRulesDescription: '在9×9的格子中填入數字1-9，每行、每列、每個3×3宮格都不能重複。',
     killerSudokuFeaturesDescription: '虛線框內的數字必須相加等於左上角的數字，且框內數字不能重複。',
     solvingStrategyDescription: '先從只有一個可能數字的格子開始，逐步推理其他格子的數字。',
@@ -324,6 +326,7 @@ const translations = {
     minimumScore: '최소 점수',
     example: '예시',
     points: '점',
+    minutes: '분',
     basicRulesDescription: '9×9 격자에 1-9 숫자를 채우세요. 각 행, 열, 3×3 박스는 고유한 숫자를 포함해야 합니다.',
     killerSudokuFeaturesDescription: '점선 상자 안의 숫자는 왼쪽 상단 숫자의 합과 같아야 하며, 상자 내에서 반복될 수 없습니다.',
     solvingStrategyDescription: '가능한 숫자가 하나뿐인 셀부터 시작하여 다른 셀을 점진적으로 추론하세요.',
@@ -436,6 +439,7 @@ const translations = {
     minimumScore: '最低スコア',
     example: '例',
     points: '点',
+    minutes: '分',
     basicRulesDescription: '9×9のグリッドに1-9の数字を埋めてください。各行、列、3×3ボックスは一意の数字を含む必要があります。',
     killerSudokuFeaturesDescription: '破線ボックス内の数字は左上の数字の合計と等しく、ボックス内で重複してはいけません。',
     solvingStrategyDescription: '可能な数字が1つしかないセルから始めて、他のセルを段階的に推論してください。',
@@ -450,9 +454,6 @@ const translations = {
     minimumScoreDescription: '基本スコアの20%',
     minimumScoreExamples: '（簡単20点、普通40点、困難60点、専門家100点）',
     scoringExample: '簡単モード、2分完了、1回ミス = 100 + 240 - 20 = 320点',
-    
-    // 多巴胺模式相關
-    dopamineMode: 'ドーパミンモード',
   },
 };
 
