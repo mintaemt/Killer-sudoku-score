@@ -73,17 +73,22 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
     if (isGameComplete()) {
       handleGameComplete();
     }
-  }, [gameData]);
+  }, [gameData, user, isVisitorMode, isDopamineMode]);
 
   // 檢查遊戲是否完成
   const isGameComplete = (): boolean => {
-    return gameData.grid.every(row => 
+    const completed = gameData.grid.every(row => 
       row.every(cell => cell.value === cell.solution)
     );
+    if (completed) {
+      console.log('🎉 遊戲完成檢查通過！');
+    }
+    return completed;
   };
 
   // 處理遊戲完成
   const handleGameComplete = async () => {
+    console.log('🚀 handleGameComplete 被調用');
     if (!user && !isVisitorMode) return;
 
     setIsPaused(true);
@@ -388,14 +393,8 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
       setComboCount(0); // 重置combo
     }
     
-    // 觸發遊戲完成檢查
-    setTimeout(() => {
-      if (isDopamineMode) {
-        handleDopamineWin();
-      } else {
-        handleGameComplete();
-      }
-    }, 100); // 短暫延遲確保狀態更新
+    // 觸發遊戲完成檢查 - 讓 useEffect 自動檢測並觸發完成
+    // 不需要手動調用 handleGameComplete，因為 useEffect 會自動檢測到遊戲完成
   };
 
   // 測試WIN資訊卡（用於測試）
