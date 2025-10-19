@@ -64,8 +64,8 @@ export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge }: Dopamin
                   {t('modeFeatures')}
                 </h3>
                 <ul className="text-sm text-muted-foreground space-y-1">
-                  <li>• 選擇難度挑戰，專注於特定難度</li>
-                  <li>• 特殊計分系統，連擊與速度獎勵</li>
+                  <li>• {t('chooseDifficultyChallenge')}</li>
+                  <li>• {t('specialScoringSystem')}</li>
                 </ul>
               </div>
 
@@ -75,10 +75,10 @@ export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge }: Dopamin
                   {t('gameRules')}
                 </h3>
                 <ul className="text-sm text-muted-foreground space-y-1">
-                  <li>• 時間限制內完成數獨挑戰</li>
-                  <li>• 錯誤次數影響最終分數</li>
-                  <li>• 連續正確填寫可獲得連擊獎勵</li>
-                  <li>• 完成速度越快，分數加成越高</li>
+                  <li>• {t('timeLimitChallenge')}</li>
+                  <li>• {t('errorCountAffectsScore')}</li>
+                  <li>• {t('consecutiveCorrectReward')}</li>
+                  <li>• {t('speedCompletionBonus')}</li>
                 </ul>
               </div>
             </div>
