@@ -136,17 +136,17 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
                         <Trophy className="h-4 w-4 text-yellow-500 flex-shrink-0" />
                         <span className="break-words">{t('basicScore')}</span>
                       </h4>
-                      <div className="grid grid-cols-2 gap-2 text-xs">
-                        <div className="text-center p-2 rounded bg-background/50 flex items-center justify-center min-h-[2.5rem]">
+                      <div className="grid grid-cols-2 gap-2 text-xs h-full">
+                        <div className="text-center p-2 rounded bg-background/50 flex items-center justify-center min-h-[2.5rem] flex-1">
                           <div className="break-words">{t('easy')}: 100{t('points')}</div>
                         </div>
-                        <div className="text-center p-2 rounded bg-background/50 flex items-center justify-center min-h-[2.5rem]">
+                        <div className="text-center p-2 rounded bg-background/50 flex items-center justify-center min-h-[2.5rem] flex-1">
                           <div className="break-words">{t('medium')}: 200{t('points')}</div>
                         </div>
-                        <div className="text-center p-2 rounded bg-background/50 flex items-center justify-center min-h-[2.5rem]">
+                        <div className="text-center p-2 rounded bg-background/50 flex items-center justify-center min-h-[2.5rem] flex-1">
                           <div className="break-words">{t('hard')}: 300{t('points')}</div>
                         </div>
-                        <div className="text-center p-2 rounded bg-background/50 flex items-center justify-center min-h-[2.5rem]">
+                        <div className="text-center p-2 rounded bg-background/50 flex items-center justify-center min-h-[2.5rem] flex-1">
                           <div className="break-words">{t('expert')}: 500{t('points')}</div>
                         </div>
                       </div>
@@ -167,20 +167,20 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
                         </div>
                         <div className="mt-2">
                           <div className="text-xs font-medium text-muted-foreground mb-1 break-words">{t('idealTime')}:</div>
-                          <div className="grid grid-cols-2 gap-2 text-xs">
-                            <div className="text-center p-2 rounded bg-background/50 flex items-center justify-center min-h-[2.5rem]">
+                          <div className="grid grid-cols-2 gap-2 text-xs h-full">
+                            <div className="text-center p-2 rounded bg-background/50 flex items-center justify-center min-h-[2.5rem] flex-1">
                               <div className="break-words">{t('easy')}: 6{t('minutes')}</div>
                             </div>
-                            <div className="text-center p-2 rounded bg-background/50 flex items-center justify-center min-h-[2.5rem]">
+                            <div className="text-center p-2 rounded bg-background/50 flex items-center justify-center min-h-[2.5rem] flex-1">
                               <div className="break-words">{t('medium')}: 12{t('minutes')}</div>
                             </div>
-                            <div className="text-center p-2 rounded bg-background/50 flex items-center justify-center min-h-[2.5rem]">
+                            <div className="text-center p-2 rounded bg-background/50 flex items-center justify-center min-h-[2.5rem] flex-1">
                               <div className="break-words">{t('hard')}: 18{t('minutes')}</div>
                             </div>
-                            <div className="text-center p-2 rounded bg-background/50 flex items-center justify-center min-h-[2.5rem]">
+                            <div className="text-center p-2 rounded bg-background/50 flex items-center justify-center min-h-[2.5rem] flex-1">
                               <div className="break-words">{t('expert')}: 24{t('minutes')}</div>
                             </div>
-                          </div>
+                        </div>
                         </div>
                       </div>
                     </div>
@@ -196,20 +196,20 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
                       <div className="space-y-1.5 text-xs text-muted-foreground">
                         <div className="mt-2">
                           <div className="text-xs font-medium text-muted-foreground mb-1 break-words">{t('minimumScore')}:</div>
-                          <div className="grid grid-cols-2 gap-2 text-xs">
-                            <div className="text-center p-2 rounded bg-background/50 flex items-center justify-center min-h-[2.5rem]">
+                          <div className="grid grid-cols-2 gap-2 text-xs h-full">
+                            <div className="text-center p-2 rounded bg-background/50 flex items-center justify-center min-h-[2.5rem] flex-1">
                               <div className="break-words">{t('easy')}: 20{t('points')}</div>
                             </div>
-                            <div className="text-center p-2 rounded bg-background/50 flex items-center justify-center min-h-[2.5rem]">
+                            <div className="text-center p-2 rounded bg-background/50 flex items-center justify-center min-h-[2.5rem] flex-1">
                               <div className="break-words">{t('medium')}: 40{t('points')}</div>
                             </div>
-                            <div className="text-center p-2 rounded bg-background/50 flex items-center justify-center min-h-[2.5rem]">
+                            <div className="text-center p-2 rounded bg-background/50 flex items-center justify-center min-h-[2.5rem] flex-1">
                               <div className="break-words">{t('hard')}: 60{t('points')}</div>
                             </div>
-                            <div className="text-center p-2 rounded bg-background/50 flex items-center justify-center min-h-[2.5rem]">
+                            <div className="text-center p-2 rounded bg-background/50 flex items-center justify-center min-h-[2.5rem] flex-1">
                               <div className="break-words">{t('expert')}: 100{t('points')}</div>
-                            </div>
-                          </div>
+                        </div>
+                        </div>
                         </div>
                       </div>
                     </div>
