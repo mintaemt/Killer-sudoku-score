@@ -368,15 +368,34 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
     setGameCompletionResult(null);
   };
 
-  // 一鍵答題測試函數
+  // 一鍵答題測試函數 - 自動填入所有答案
   const handleTestComplete = () => {
+    // 自動填入所有答案
+    const newGrid = gameData.grid.map((row) =>
+      row.map((cell) => ({
+        ...cell,
+        value: cell.solution, // 填入正確答案
+        isCorrect: true, // 標記為正確
+        isGiven: cell.given // 保持原始給定狀態
+      }))
+    );
+    
+    setGameData({ ...gameData, grid: newGrid });
+    
+    // 更新多巴胺模式相關狀態
     if (isDopamineMode) {
-      // 多巴胺模式：觸發勝利
-      handleDopamineWin();
-    } else {
-      // 普通模式：觸發完成
-      handleGameComplete();
+      setRemainingCells(0); // 所有格子都填完了
+      setComboCount(0); // 重置combo
     }
+    
+    // 觸發遊戲完成檢查
+    setTimeout(() => {
+      if (isDopamineMode) {
+        handleDopamineWin();
+      } else {
+        handleGameComplete();
+      }
+    }, 100); // 短暫延遲確保狀態更新
   };
 
   // 測試WIN資訊卡（用於測試）
@@ -556,7 +575,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
                   className="bg-yellow-500/10 border-yellow-500/20 hover:bg-yellow-500/20 text-yellow-700 hover:text-yellow-800"
                 >
                   <Zap className="h-4 w-4 mr-2" />
-                  一鍵答題測試
+                  一鍵填入答案
                 </Button>
               </div>
             )}
@@ -592,7 +611,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
                     className="bg-yellow-500/10 border-yellow-500/20 hover:bg-yellow-500/20 text-yellow-700 hover:text-yellow-800"
                   >
                     <Zap className="h-4 w-4 mr-2" />
-                    一鍵答題測試
+                    一鍵填入答案
                   </Button>
                 </div>
               )}
