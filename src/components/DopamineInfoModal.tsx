@@ -36,11 +36,11 @@ export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge }: Dopamin
             <div className="flex items-start justify-between">
               <div className="flex items-center gap-3">
                 <div>
-                  <CardTitle className="flex items-center gap-2">
-                    <span>{t('dopamineMode')}</span>
+                  <CardTitle className="flex items-center gap-2 flex-wrap">
+                    <span className="whitespace-nowrap">{t('dopamineMode')}</span>
                     <Badge 
                       variant="secondary" 
-                      className="text-white relative overflow-hidden flowing-button"
+                      className="text-white relative overflow-hidden flowing-button flex-shrink-0"
                     >
                       <Users className="h-3 w-3 mr-1" />
                       {t('userLimited')}
