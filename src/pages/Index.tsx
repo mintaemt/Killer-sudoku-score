@@ -13,6 +13,7 @@ import { GameRulesModal } from "@/components/GameRulesModal";
 import { Leaderboard } from "@/components/Leaderboard";
 import { LeaderboardDebug } from "@/components/LeaderboardDebug";
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import { Zap } from "lucide-react";
 import { checkEnvironment, testSupabaseConnection } from "@/lib/envChecker";
 import { generateKillerSudoku, generateDopamineSudoku } from "@/lib/sudoku-generator";
