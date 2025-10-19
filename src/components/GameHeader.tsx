@@ -14,7 +14,6 @@ interface GameHeaderProps {
   currentTheme: string;
   onShowLeaderboard: (mode?: 'normal' | 'dopamine') => void;
   onShowRules: () => void;
-  onTestComplete?: () => void;
 }
 
 const themes = [
@@ -26,7 +25,7 @@ const themes = [
   { name: "teal", label: "Teal", color: "#14b8a6" },
 ];
 
-export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeaderboard, onShowRules, onTestComplete }: GameHeaderProps) => {
+export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeaderboard, onShowRules }: GameHeaderProps) => {
   const [isThemeOpen, setIsThemeOpen] = useState(false);
   const [isUserOpen, setIsUserOpen] = useState(false);
   const [viewMode, setViewMode] = useState<'normal' | 'dopamine'>('normal');
@@ -302,19 +301,6 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
                 </div>
               )}
             </div>
-          )}
-
-          {/* 測試按鈕 - 僅在開發環境顯示 */}
-          {process.env.NODE_ENV === 'development' && onTestComplete && (
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={onTestComplete}
-              className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md bg-yellow-500/10 border-yellow-500/20 hover:bg-yellow-500/20"
-              title="一鍵答題測試"
-            >
-              <Zap className="h-3 w-3 md:h-4 md:w-4" />
-            </Button>
           )}
 
           {/* 新遊戲按鈕 - 縮小版本 */}

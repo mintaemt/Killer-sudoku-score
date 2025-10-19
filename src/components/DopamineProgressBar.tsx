@@ -8,7 +8,6 @@ interface DopamineProgressBarProps {
   timeLeft: number;
   timeLimit: number;
   isVisible: boolean;
-  onTestWin?: () => void;
 }
 
 export const DopamineProgressBar = ({
@@ -17,8 +16,7 @@ export const DopamineProgressBar = ({
   currentScore,
   timeLeft,
   timeLimit,
-  isVisible,
-  onTestWin
+  isVisible
 }: DopamineProgressBarProps) => {
   const { t } = useLanguage();
   
@@ -45,7 +43,7 @@ export const DopamineProgressBar = ({
             <span className="font-bold text-xl">{currentScore.toLocaleString()}</span>
           </div>
           
-          {/* 右邊：COMBO數和測試按鈕 */}
+          {/* 右邊：COMBO數 */}
           <div className="flex items-center gap-2">
             {comboCount > 0 ? (
               <div className="flex items-center gap-1 bg-white/10 text-white border border-white/20 px-3 py-1 rounded-lg">
@@ -54,17 +52,6 @@ export const DopamineProgressBar = ({
               </div>
             ) : (
               <div className="w-[120px]"></div>
-            )}
-            
-            {/* 測試按鈕 */}
-            {onTestWin && (
-              <button
-                onClick={onTestWin}
-                className="bg-red-500/80 hover:bg-red-500 text-white px-3 py-1 rounded-lg text-xs font-bold transition-all duration-200 hover:scale-105 active:scale-95"
-                title="測試WIN資訊卡"
-              >
-                TEST WIN
-              </button>
             )}
           </div>
         </div>
@@ -93,17 +80,6 @@ export const DopamineProgressBar = ({
                 <span>🔥</span>
                 <span className="font-bold text-sm">{comboCount}x</span>
               </div>
-            )}
-            
-            {/* 測試按鈕 */}
-            {onTestWin && (
-              <button
-                onClick={onTestWin}
-                className="bg-red-500/80 hover:bg-red-500 text-white px-2 py-1 rounded text-xs font-bold transition-all duration-200 hover:scale-105 active:scale-95"
-                title="測試WIN資訊卡"
-              >
-                TEST
-              </button>
             )}
           </div>
         </div>

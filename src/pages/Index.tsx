@@ -12,6 +12,8 @@ import { GameCompleteModal } from "@/components/GameCompleteModal";
 import { GameRulesModal } from "@/components/GameRulesModal";
 import { Leaderboard } from "@/components/Leaderboard";
 import { LeaderboardDebug } from "@/components/LeaderboardDebug";
+import { Button } from "@/components/ui/button";
+import { Zap } from "lucide-react";
 import { checkEnvironment, testSupabaseConnection } from "@/lib/envChecker";
 import { generateKillerSudoku, generateDopamineSudoku } from "@/lib/sudoku-generator";
 import { useUser } from "@/hooks/useUser";
@@ -521,7 +523,6 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
           timeLeft={time}
           timeLimit={timeLimit}
           isVisible={isDopamineMode}
-          onTestWin={handleTestWin}
         />
         
         {/* 移動裝置佈局 - 保持原有垂直佈局 */}
@@ -532,7 +533,6 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
             currentTheme={currentTheme}
             onShowLeaderboard={handleShowLeaderboard}
             onShowRules={handleShowRules}
-            onTestComplete={handleTestComplete}
           />
           
           <DifficultySelector 
@@ -546,6 +546,21 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
           />
 
           <div className="space-y-4">
+            {/* 測試按鈕 - 僅在開發環境顯示 */}
+            {process.env.NODE_ENV === 'development' && (
+              <div className="flex justify-center">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleTestComplete}
+                  className="bg-yellow-500/10 border-yellow-500/20 hover:bg-yellow-500/20 text-yellow-700 hover:text-yellow-800"
+                >
+                  <Zap className="h-4 w-4 mr-2" />
+                  一鍵答題測試
+                </Button>
+              </div>
+            )}
+
             <KillerSudokuGrid
               grid={gameData.grid}
               cages={gameData.cages}
@@ -567,6 +582,21 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
           <div className="flex items-center justify-center gap-6 h-[500px]">
             {/* 左側：九宮格 - 使用固定尺寸確保大小合適 */}
             <div className="flex-shrink-0">
+              {/* 測試按鈕 - 僅在開發環境顯示 */}
+              {process.env.NODE_ENV === 'development' && (
+                <div className="flex justify-center mb-4">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={handleTestComplete}
+                    className="bg-yellow-500/10 border-yellow-500/20 hover:bg-yellow-500/20 text-yellow-700 hover:text-yellow-800"
+                  >
+                    <Zap className="h-4 w-4 mr-2" />
+                    一鍵答題測試
+                  </Button>
+                </div>
+              )}
+              
               <div className="w-[500px] h-[500px]">
                 <KillerSudokuGrid
                   grid={gameData.grid}
@@ -587,7 +617,6 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
                   currentTheme={currentTheme}
                   onShowLeaderboard={handleShowLeaderboard}
                   onShowRules={handleShowRules}
-                  onTestComplete={handleTestComplete}
                 />
               </div>
 
