@@ -26,11 +26,11 @@ async function updateLeaderboardViews() {
       GROUP BY u.id, u.name, nr.difficulty
       ORDER BY 
         CASE nr.difficulty 
-          WHEN 'easy' THEN 1
-          WHEN 'medium' THEN 2
+          WHEN 'hell' THEN 1
+          WHEN 'expert' THEN 2
           WHEN 'hard' THEN 3
-          WHEN 'expert' THEN 4
-          WHEN 'hell' THEN 5
+          WHEN 'medium' THEN 4
+          WHEN 'easy' THEN 5
           ELSE 6
         END, 
         MAX(nr.score) DESC;
@@ -62,11 +62,11 @@ async function updateLeaderboardViews() {
       GROUP BY u.id, u.name, dr.difficulty
       ORDER BY 
         CASE dr.difficulty 
-          WHEN 'easy' THEN 1
-          WHEN 'medium' THEN 2
+          WHEN 'hell' THEN 1
+          WHEN 'expert' THEN 2
           WHEN 'hard' THEN 3
-          WHEN 'expert' THEN 4
-          WHEN 'hell' THEN 5
+          WHEN 'medium' THEN 4
+          WHEN 'easy' THEN 5
           ELSE 6
         END, 
         MAX(dr.score) DESC;
