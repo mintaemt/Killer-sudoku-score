@@ -124,7 +124,7 @@ export const DifficultySelector = ({
             
             {/* ON/OFF Badge */}
             {showNotes && (
-              <div className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-[8px] md:text-[10px] font-bold px-1 py-0.5 rounded-full min-w-[16px] h-4 flex items-center justify-center z-10">
+              <div className="absolute -top-1 -right-1 bg-white text-primary text-[8px] md:text-[10px] font-bold px-1 py-0.5 rounded-full min-w-[16px] h-4 flex items-center justify-center z-10 border border-primary/20 shadow-sm">
                 ON
               </div>
             )}
