@@ -75,7 +75,16 @@ SELECT
 FROM users u
 JOIN normal_records nr ON u.id = nr.user_id
 GROUP BY u.id, u.name, nr.difficulty
-ORDER BY nr.difficulty, MAX(nr.score) DESC;
+ORDER BY 
+  CASE nr.difficulty 
+    WHEN 'easy' THEN 1
+    WHEN 'medium' THEN 2
+    WHEN 'hard' THEN 3
+    WHEN 'expert' THEN 4
+    WHEN 'hell' THEN 5
+    ELSE 6
+  END, 
+  MAX(nr.score) DESC;
 
 -- 6. 創建多巴胺模式排行榜視圖
 CREATE OR REPLACE VIEW dopamine_leaderboard AS
@@ -89,7 +98,16 @@ SELECT
 FROM users u
 JOIN dopamine_records dr ON u.id = dr.user_id
 GROUP BY u.id, u.name, dr.difficulty
-ORDER BY dr.difficulty, MAX(dr.score) DESC;
+ORDER BY 
+  CASE dr.difficulty 
+    WHEN 'easy' THEN 1
+    WHEN 'medium' THEN 2
+    WHEN 'hard' THEN 3
+    WHEN 'expert' THEN 4
+    WHEN 'hell' THEN 5
+    ELSE 6
+  END, 
+  MAX(dr.score) DESC;
 
 -- 7. 創建普通模式排名函數
 CREATE OR REPLACE FUNCTION get_normal_user_rank(p_user_id UUID, p_difficulty VARCHAR)
