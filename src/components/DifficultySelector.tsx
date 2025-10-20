@@ -70,9 +70,9 @@ export const DifficultySelector = ({
 
   return (
     <div className="glass rounded-2xl px-3 md:px-4 py-3 shadow-apple-md relative z-10 w-full max-w-7xl mx-auto">
-      <div className="flex items-center w-full" style={{ gap: 'calc((100% - 280px) / 4)' }}>
-        {/* 1. 難度選擇器 */}
-        <div className="relative flex-shrink-0" ref={dropdownRef}>
+      <div className="flex items-center justify-between w-full">
+        {/* 左側：難度選擇器 */}
+        <div className="relative" ref={dropdownRef}>
           <Button
             variant="outline"
             size="sm"
@@ -104,36 +104,37 @@ export const DifficultySelector = ({
           )}
         </div>
 
-        {/* 2. 註解按鈕 */}
-        {onToggleNotes && (
-          <div className="relative flex-shrink-0">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={onToggleNotes}
-              className={cn(
-                "transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md w-9 h-9 p-0",
-                showNotes 
-                  ? "bg-primary text-primary-foreground border-primary/30 shadow-apple-md" 
-                  : "border-border/50 hover:bg-muted/50"
+        {/* 中間：註解按鈕和多巴胺按鈕 */}
+        <div className="flex items-center gap-1 md:gap-2">
+          {/* 註解按鈕 */}
+          {onToggleNotes && (
+            <div className="relative">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={onToggleNotes}
+                className={cn(
+                  "transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md w-9 h-9 p-0",
+                  showNotes 
+                    ? "bg-primary text-primary-foreground border-primary/30 shadow-apple-md" 
+                    : "border-border/50 hover:bg-muted/50"
+                )}
+                title={showNotes ? t('notesModeOff') : t('notesModeOn')}
+              >
+                <Pencil className="h-4 w-4" />
+              </Button>
+              
+              {/* ON/OFF Badge */}
+              {showNotes && (
+                <div className="absolute -top-1 -right-1 bg-white text-primary text-[8px] md:text-[10px] font-bold px-1 py-0.5 rounded-full min-w-[16px] h-4 flex items-center justify-center z-10 border border-primary/20 shadow-sm">
+                  ON
+                </div>
               )}
-              title={showNotes ? t('notesModeOff') : t('notesModeOn')}
-            >
-              <Pencil className="h-4 w-4" />
-            </Button>
-            
-            {/* ON/OFF Badge */}
-            {showNotes && (
-              <div className="absolute -top-1 -right-1 bg-white text-primary text-[8px] md:text-[10px] font-bold px-1 py-0.5 rounded-full min-w-[16px] h-4 flex items-center justify-center z-10 border border-primary/20 shadow-sm">
-                ON
-              </div>
-            )}
-          </div>
-        )}
+            </div>
+          )}
 
-        {/* 3. 多巴胺模式按鈕 - 只對登入用戶可見 */}
-        {user && !isVisitorMode && onDopamineMode && (
-          <div className="flex-shrink-0">
+          {/* 多巴胺模式按鈕 - 只對登入用戶可見 */}
+          {user && !isVisitorMode && onDopamineMode && (
             <Button
               variant="outline"
               size="sm"
@@ -153,34 +154,37 @@ export const DifficultySelector = ({
             >
               <Zap className="h-4 w-4 text-white" style={{ textShadow: "2px 2px 4px rgba(0,0,0,0.5), 1px 1px 2px rgba(0,0,0,0.6)" }} />
             </Button>
-          </div>
-        )}
-
-        {/* 4. 計時元件（內部間距獨立） */}
-        <div className="flex items-center gap-1 flex-shrink-0">
-          <Clock className="h-3 w-3 md:h-4 md:w-4 text-muted-foreground" />
-          <span className="text-xs md:text-sm font-bold bg-muted/50 px-2 md:px-3 py-1 rounded-md min-w-[50px] md:min-w-[60px] text-center">
-            {formatTime(time)}
-          </span>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={onTogglePause}
-            className="h-9 w-9 p-0 transition-smooth hover:scale-105 hover:bg-muted/50 border-border/50"
-          >
-            {isPaused ? <Play className="h-4 w-4" /> : <Pause className="h-4 w-4" />}
-          </Button>
+          )}
         </div>
 
-        {/* 5. 錯誤顯示元件 */}
-        <div className="flex items-center gap-1 flex-shrink-0">
-          <AlertTriangle className="h-3 w-3 md:h-4 md:w-4 text-muted-foreground" />
-          <span className={cn(
-            "text-xs md:text-sm font-bold transition-smooth px-2 md:px-3 py-1 rounded-md min-w-[40px] md:min-w-[50px] text-center",
-            mistakes > 0 ? "text-destructive bg-destructive/10" : "text-foreground bg-muted/50"
-          )}>
-            {mistakes}/3
-          </span>
+        {/* 右側：時間和錯誤顯示 */}
+        <div className="flex items-center gap-1 md:gap-2">
+          {/* 時間顯示 */}
+          <div className="flex items-center gap-1">
+            <Clock className="h-3 w-3 md:h-4 md:w-4 text-muted-foreground" />
+            <span className="text-xs md:text-sm font-bold bg-muted/50 px-2 md:px-3 py-1 rounded-md min-w-[50px] md:min-w-[60px] text-center">
+              {formatTime(time)}
+            </span>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={onTogglePause}
+              className="h-9 w-9 p-0 transition-smooth hover:scale-105 hover:bg-muted/50 border-border/50"
+            >
+              {isPaused ? <Play className="h-4 w-4" /> : <Pause className="h-4 w-4" />}
+            </Button>
+          </div>
+
+          {/* 錯誤顯示 */}
+          <div className="flex items-center gap-1">
+            <AlertTriangle className="h-3 w-3 md:h-4 md:w-4 text-muted-foreground" />
+            <span className={cn(
+              "text-xs md:text-sm font-bold transition-smooth px-2 md:px-3 py-1 rounded-md min-w-[40px] md:min-w-[50px] text-center",
+              mistakes > 0 ? "text-destructive bg-destructive/10" : "text-foreground bg-muted/50"
+            )}>
+              {mistakes}/3
+            </span>
+          </div>
         </div>
       </div>
       
