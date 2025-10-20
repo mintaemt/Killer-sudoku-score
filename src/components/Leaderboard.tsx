@@ -35,7 +35,7 @@ const getRankIcon = (rank: number) => {
   return <Trophy className="h-4 w-4 text-muted-foreground" />;
 };
 
-const LeaderboardEntryItem = ({ entry, isCurrentUser, t }: { entry: LeaderboardEntry; isCurrentUser?: boolean; t: (key: string) => string }) => (
+const LeaderboardEntryItem = ({ entry, isCurrentUser, t, showDifficulty = false }: { entry: LeaderboardEntry; isCurrentUser?: boolean; t: (key: string) => string; showDifficulty?: boolean }) => (
   <div className={`flex items-center justify-between p-2.5 rounded-lg border ${
     isCurrentUser ? 'bg-primary/5 border-primary' : 'bg-card'
   }`}>
@@ -53,8 +53,15 @@ const LeaderboardEntryItem = ({ entry, isCurrentUser, t }: { entry: LeaderboardE
             </Badge>
           )}
         </div>
-        <div className="text-xs text-muted-foreground">
-          {entry.games_played} {t('gamesPlayed')}
+        <div className="flex items-center space-x-2">
+          <span className="text-xs text-muted-foreground">
+            {entry.games_played} {t('gamesPlayed')}
+          </span>
+          {showDifficulty && (
+            <Badge variant="outline" className="text-xs px-1.5 py-0.5">
+              {getDifficultyLabel(entry.difficulty, t)}
+            </Badge>
+          )}
         </div>
       </div>
     </div>
@@ -152,6 +159,7 @@ export const Leaderboard = ({ currentUserId, onClose, mode = 'normal' }: Leaderb
                     entry={entry}
                     isCurrentUser={currentUserId === entry.name}
                     t={t}
+                    showDifficulty={activeTab === "all"}
                   />
                 ))}
                 {leaderboard.length > 10 && (
