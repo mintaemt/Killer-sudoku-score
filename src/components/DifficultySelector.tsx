@@ -155,7 +155,7 @@ export const DifficultySelector = ({
         )}
 
         {/* 4. 計時元件 */}
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1.5">
           <Clock className="h-3 w-3 md:h-4 md:w-4 text-muted-foreground" />
           <span className="text-xs md:text-sm font-bold bg-muted/50 px-2 md:px-3 py-1 rounded-md min-w-[50px] md:min-w-[60px] text-center">
             {formatTime(time)}
@@ -171,7 +171,7 @@ export const DifficultySelector = ({
         </div>
 
         {/* 5. 錯誤顯示元件 */}
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1.5">
           <AlertTriangle className="h-3 w-3 md:h-4 md:w-4 text-muted-foreground" />
           <span className={cn(
             "text-xs md:text-sm font-bold transition-smooth px-2 md:px-3 py-1 rounded-md min-w-[40px] md:min-w-[50px] text-center",
