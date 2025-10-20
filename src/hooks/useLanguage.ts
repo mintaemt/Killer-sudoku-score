@@ -26,9 +26,11 @@ const translations = {
     showNotes: 'Show Notes',
     hideNotes: 'Hide Notes',
     notes: 'Notes',
-    clearNotes: 'Clear Notes',
-    cancel: 'Cancel',
-    save: 'Save',
+    notesOn: 'Notes ON',
+    notesOff: 'Notes OFF',
+    notesModeOn: 'Enable Notes Mode',
+    notesModeOff: 'Disable Notes Mode',
+    candidateNumbers: 'Candidate Numbers',
     
     // 多巴胺資訊卡
     dopamineInfoTitle: 'Dopamine Mode',
@@ -182,9 +184,11 @@ const translations = {
     showNotes: '顯示註解',
     hideNotes: '隱藏註解',
     notes: '註解',
-    clearNotes: '清除註解',
-    cancel: '取消',
-    save: '儲存',
+    notesOn: '註解開',
+    notesOff: '註解關',
+    notesModeOn: '開啟註解模式',
+    notesModeOff: '關閉註解模式',
+    candidateNumbers: '候選數字',
     
     // 多巴胺資訊卡
     dopamineInfoTitle: '多巴胺模式',

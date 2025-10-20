@@ -111,14 +111,14 @@ export const DifficultySelector = ({
             size="sm"
             onClick={onToggleNotes}
             className={cn(
-              "transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md h-6 w-6 md:h-7 md:w-7 p-0",
+              "transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md px-3 py-1 text-xs font-medium",
               showNotes 
                 ? "bg-primary text-primary-foreground border-primary/30 shadow-apple-md" 
                 : "border-border/50 hover:bg-muted/50"
             )}
-            title={showNotes ? t('hideNotes') : t('showNotes')}
+            title={showNotes ? t('notesModeOff') : t('notesModeOn')}
           >
-            <StickyNote className="h-3 w-3 md:h-4 md:w-4" />
+            {showNotes ? t('notesOff') : t('notesOn')}
           </Button>
         )}
 

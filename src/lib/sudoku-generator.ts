@@ -5,6 +5,7 @@ export interface Cell {
   solution: number;
   given: boolean;
   isError?: boolean;
+  candidates?: number[]; // 候選數字陣列
 }
 
 export interface Cage {

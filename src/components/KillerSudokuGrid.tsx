@@ -6,6 +6,7 @@ interface KillerSudokuGridProps {
   cages: Cage[];
   selectedCell: { row: number; col: number } | null;
   onCellSelect: (cell: { row: number; col: number }) => void;
+  notesMode?: boolean; // 是否處於註解模式
 }
 
 export const KillerSudokuGrid = ({
@@ -13,6 +14,7 @@ export const KillerSudokuGrid = ({
   cages,
   selectedCell,
   onCellSelect,
+  notesMode = false,
 }: KillerSudokuGridProps) => {
   // Find which cage a cell belongs to
   const getCageForCell = (row: number, col: number) => {
@@ -113,8 +115,17 @@ export const KillerSudokuGrid = ({
                       {cage.sum}
                     </div>
                   )}
-                  {cell.value && (
+                  
+                  {/* 主要數字顯示 */}
+                  {cell.value && !notesMode && (
                     <span className="select-none">{cell.value}</span>
+                  )}
+                  
+                  {/* 候選數字顯示 */}
+                  {notesMode && cell.candidates && cell.candidates.length > 0 && (
+                    <div className="absolute bottom-0.5 right-0.5 text-[8px] md:text-[10px] text-red-500 font-medium z-30 leading-none">
+                      {cell.candidates.sort((a, b) => a - b).join('')}
+                    </div>
                   )}
                 </div>
               );

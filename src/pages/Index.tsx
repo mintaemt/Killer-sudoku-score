@@ -12,7 +12,6 @@ import { GameCompleteModal } from "@/components/GameCompleteModal";
 import { GameRulesModal } from "@/components/GameRulesModal";
 import { Leaderboard } from "@/components/Leaderboard";
 import { LeaderboardDebug } from "@/components/LeaderboardDebug";
-import { NotesPanel } from "@/components/NotesPanel";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Zap } from "lucide-react";
@@ -59,7 +58,6 @@ const Index = () => {
   
   // 註解功能狀態
   const [showNotes, setShowNotes] = useState(false);
-  const [gameNotes, setGameNotes] = useState('');
   
   // Hooks
 const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisitorMode, isLoggedIn } = useUser();
@@ -244,6 +242,26 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
     if (!selectedCell) return;
 
     const { row, col } = selectedCell;
+    
+    // 註解模式：添加或移除候選數字
+    if (showNotes) {
+      const newGrid = gameData.grid.map((r, i) =>
+        r.map((cell, j) => {
+          if (i === row && j === col) {
+            const currentCandidates = cell.candidates || [];
+            const newCandidates = currentCandidates.includes(num)
+              ? currentCandidates.filter(c => c !== num) // 移除數字
+              : [...currentCandidates, num]; // 添加數字
+            return { ...cell, candidates: newCandidates };
+          }
+          return cell;
+        })
+      );
+      setGameData({ ...gameData, grid: newGrid });
+      return;
+    }
+
+    // 正常模式：輸入數字
     if (gameData.grid[row][col].given) return;
 
     const newGrid = gameData.grid.map((r, i) =>
@@ -291,6 +309,23 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
 
   const handleClear = () => {
     if (!selectedCell) return;
+    
+    // 註解模式：清除所有候選數字
+    if (showNotes) {
+      const { row, col } = selectedCell;
+      const newGrid = gameData.grid.map((r, i) =>
+        r.map((cell, j) => {
+          if (i === row && j === col) {
+            return { ...cell, candidates: [] };
+          }
+          return cell;
+        })
+      );
+      setGameData({ ...gameData, grid: newGrid });
+      return;
+    }
+    
+    // 正常模式：清除數字
     handleNumberInput(0);
   };
 
@@ -298,20 +333,6 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
   const handleToggleNotes = () => {
     setShowNotes(!showNotes);
   };
-
-  const handleSaveNotes = (notes: string) => {
-    setGameNotes(notes);
-    // 可以將註解儲存到 localStorage 或發送到後端
-    localStorage.setItem('sudoku-notes', notes);
-  };
-
-  // 載入儲存的註解
-  useEffect(() => {
-    const savedNotes = localStorage.getItem('sudoku-notes');
-    if (savedNotes) {
-      setGameNotes(savedNotes);
-    }
-  }, []);
 
   const handleNewGame = () => {
     try {
@@ -662,6 +683,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
               cages={gameData.cages}
               selectedCell={selectedCell}
               onCellSelect={setSelectedCell}
+              notesMode={showNotes}
             />
 
             <NumberPad
@@ -680,12 +702,13 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
             {/* 左側：九宮格 - 使用固定尺寸確保大小合適 */}
             <div className="flex-shrink-0">
               <div className="w-[500px] h-[500px]">
-                <KillerSudokuGrid
-                  grid={gameData.grid}
-                  cages={gameData.cages}
-                  selectedCell={selectedCell}
-                  onCellSelect={setSelectedCell}
-                />
+              <KillerSudokuGrid
+                grid={gameData.grid}
+                cages={gameData.cages}
+                selectedCell={selectedCell}
+                onCellSelect={setSelectedCell}
+                notesMode={showNotes}
+              />
               </div>
             </div>
 
@@ -826,13 +849,6 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
         onClose={handleCloseRules} 
       />
 
-      {/* 註解面板 */}
-      <NotesPanel
-        isOpen={showNotes}
-        onClose={() => setShowNotes(false)}
-        initialNotes={gameNotes}
-        onSaveNotes={handleSaveNotes}
-      />
     </div>
   );
 };
