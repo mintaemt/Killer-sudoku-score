@@ -70,7 +70,7 @@ export const DifficultySelector = ({
 
   return (
     <div className="glass rounded-2xl px-3 md:px-4 py-3 shadow-apple-md relative z-10 w-full max-w-7xl mx-auto">
-      <div className="flex items-center justify-between gap-1 md:gap-4 flex-wrap">
+      <div className="flex items-center justify-between gap-2 md:gap-4 flex-wrap">
         {/* 難度選擇器 */}
         <div className="relative" ref={dropdownRef}>
           <Button
@@ -106,7 +106,7 @@ export const DifficultySelector = ({
 
         {/* 註解按鈕 */}
         {onToggleNotes && (
-          <div className="relative">
+          <div className="relative mr-1">
             <Button
               variant="outline"
               size="sm"
@@ -124,7 +124,7 @@ export const DifficultySelector = ({
             
             {/* ON/OFF Badge */}
             {showNotes && (
-              <div className="absolute -top-1 -right-1 bg-green-500 text-white text-[8px] md:text-[10px] font-bold px-1 py-0.5 rounded-full min-w-[16px] h-4 flex items-center justify-center">
+              <div className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-[8px] md:text-[10px] font-bold px-1 py-0.5 rounded-full min-w-[16px] h-4 flex items-center justify-center z-10">
                 ON
               </div>
             )}
@@ -137,7 +137,7 @@ export const DifficultySelector = ({
             variant="outline"
             size="sm"
             onClick={() => setShowDopamineInfo(true)}
-            className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md border-purple-500/30 hover:border-purple-500/50 text-purple-600 hover:text-purple-700 relative overflow-hidden"
+            className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md border-purple-500/30 hover:border-purple-500/50 text-purple-600 hover:text-purple-700 relative overflow-hidden h-6 w-6 md:h-7 md:w-7 p-0"
             style={{
               background: `
                 radial-gradient(circle farthest-corner at 15% 25%, rgba(249, 115, 22, 0.95) 0%, rgba(249, 115, 22, 0) 50%),
