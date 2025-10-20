@@ -71,88 +71,91 @@ export const DifficultySelector = ({
   return (
     <div className="glass rounded-2xl px-3 md:px-4 py-3 shadow-apple-md relative z-10 w-full max-w-7xl mx-auto">
       <div className="flex items-center justify-between gap-2 md:gap-4 flex-wrap">
-        {/* 難度選擇器 */}
-        <div className="relative" ref={dropdownRef}>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => setIsOpen(!isOpen)}
-            className="transition-smooth font-medium text-xs md:text-sm w-[70px] md:w-[75px] justify-between"
-          >
-            {currentDifficulty ? t(currentDifficulty.translationKey as any) : difficulty}
-            <ChevronDown className={cn("h-3 w-3 transition-transform", isOpen && "rotate-180")} />
-          </Button>
-          
-          {isOpen && (
-            <div className="absolute top-full left-0 mt-1 bg-background/95 backdrop-blur-sm border rounded-md shadow-lg z-[9999] min-w-[120px] dropdown-menu">
-              {difficulties.map((diff) => (
-                <button
-                  key={diff.value}
-                  onClick={() => {
-                    onDifficultyChange(diff.value);
-                    setIsOpen(false);
-                  }}
-                  className={cn(
-                    "w-full px-3 py-2 text-left text-xs md:text-sm transition-smooth hover:bg-accent hover:text-accent-foreground first:rounded-t-md last:rounded-b-md",
-                    difficulty === diff.value && "bg-primary text-primary-foreground"
-                  )}
-                >
-                  {t(diff.translationKey as any)}
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
-
-        {/* 註解按鈕 */}
-        {onToggleNotes && (
-          <div className="relative mr-1">
+        {/* 左側：難度選擇器和功能按鈕組 */}
+        <div className="flex items-center gap-1 md:gap-2">
+          {/* 難度選擇器 */}
+          <div className="relative" ref={dropdownRef}>
             <Button
               variant="outline"
               size="sm"
-              onClick={onToggleNotes}
-              className={cn(
-                "transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md h-6 w-6 md:h-7 md:w-7 p-0",
-                showNotes 
-                  ? "bg-primary text-primary-foreground border-primary/30 shadow-apple-md" 
-                  : "border-border/50 hover:bg-muted/50"
-              )}
-              title={showNotes ? t('notesModeOff') : t('notesModeOn')}
+              onClick={() => setIsOpen(!isOpen)}
+              className="transition-smooth font-medium text-xs md:text-sm w-[70px] md:w-[75px] justify-between"
             >
-              <Pencil className="h-3 w-3 md:h-4 md:w-4" />
+              {currentDifficulty ? t(currentDifficulty.translationKey as any) : difficulty}
+              <ChevronDown className={cn("h-3 w-3 transition-transform", isOpen && "rotate-180")} />
             </Button>
             
-            {/* ON/OFF Badge */}
-            {showNotes && (
-              <div className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-[8px] md:text-[10px] font-bold px-1 py-0.5 rounded-full min-w-[16px] h-4 flex items-center justify-center z-10">
-                ON
+            {isOpen && (
+              <div className="absolute top-full left-0 mt-1 bg-background/95 backdrop-blur-sm border rounded-md shadow-lg z-[9999] min-w-[120px] dropdown-menu">
+                {difficulties.map((diff) => (
+                  <button
+                    key={diff.value}
+                    onClick={() => {
+                      onDifficultyChange(diff.value);
+                      setIsOpen(false);
+                    }}
+                    className={cn(
+                      "w-full px-3 py-2 text-left text-xs md:text-sm transition-smooth hover:bg-accent hover:text-accent-foreground first:rounded-t-md last:rounded-b-md",
+                      difficulty === diff.value && "bg-primary text-primary-foreground"
+                    )}
+                  >
+                    {t(diff.translationKey as any)}
+                  </button>
+                ))}
               </div>
             )}
           </div>
-        )}
 
-        {/* 多巴胺模式按鈕 - 只對登入用戶可見 */}
-        {user && !isVisitorMode && onDopamineMode && (
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => setShowDopamineInfo(true)}
-            className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md border-purple-500/30 hover:border-purple-500/50 text-purple-600 hover:text-purple-700 relative overflow-hidden h-6 w-6 md:h-7 md:w-7 p-0"
-            style={{
-              background: `
-                radial-gradient(circle farthest-corner at 15% 25%, rgba(249, 115, 22, 0.95) 0%, rgba(249, 115, 22, 0) 50%),
-                radial-gradient(circle farthest-side at 85% 25%, rgba(59, 130, 246, 0.75) 0%, rgba(59, 130, 246, 0) 45%),
-                radial-gradient(circle farthest-corner at 85% 75%, rgba(168, 85, 247, 0.85) 0%, rgba(168, 85, 247, 0) 55%),
-                radial-gradient(circle farthest-corner at 15% 75%, rgba(236, 72, 153, 0.65) 0%, rgba(236, 72, 153, 0) 50%),
-                radial-gradient(ellipse at center, rgba(59, 130, 246, 0.4) 0%, rgba(59, 130, 246, 0) 70%),
-                linear-gradient(135deg, rgba(249, 115, 22, 0.15) 0%, rgba(59, 130, 246, 0.15) 100%)
-              `
-            }}
-            title={`${t('dopamineMode')} - ${t('challengeYourLimits')}!`}
-          >
-            <Zap className="h-3 w-3 md:h-4 md:w-4 text-white" style={{ textShadow: "2px 2px 4px rgba(0,0,0,0.5), 1px 1px 2px rgba(0,0,0,0.6)" }} />
-          </Button>
-        )}
+          {/* 註解按鈕 */}
+          {onToggleNotes && (
+            <div className="relative">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={onToggleNotes}
+                className={cn(
+                  "transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md h-6 w-6 md:h-7 md:w-7 p-0",
+                  showNotes 
+                    ? "bg-primary text-primary-foreground border-primary/30 shadow-apple-md" 
+                    : "border-border/50 hover:bg-muted/50"
+                )}
+                title={showNotes ? t('notesModeOff') : t('notesModeOn')}
+              >
+                <Pencil className="h-3 w-3 md:h-4 md:w-4" />
+              </Button>
+              
+              {/* ON/OFF Badge */}
+              {showNotes && (
+                <div className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-[8px] md:text-[10px] font-bold px-1 py-0.5 rounded-full min-w-[16px] h-4 flex items-center justify-center z-10">
+                  ON
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* 多巴胺模式按鈕 - 只對登入用戶可見 */}
+          {user && !isVisitorMode && onDopamineMode && (
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setShowDopamineInfo(true)}
+              className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md border-purple-500/30 hover:border-purple-500/50 text-purple-600 hover:text-purple-700 relative overflow-hidden h-6 w-6 md:h-7 md:w-7 p-0"
+              style={{
+                background: `
+                  radial-gradient(circle farthest-corner at 15% 25%, rgba(249, 115, 22, 0.95) 0%, rgba(249, 115, 22, 0) 50%),
+                  radial-gradient(circle farthest-side at 85% 25%, rgba(59, 130, 246, 0.75) 0%, rgba(59, 130, 246, 0) 45%),
+                  radial-gradient(circle farthest-corner at 85% 75%, rgba(168, 85, 247, 0.85) 0%, rgba(168, 85, 247, 0) 55%),
+                  radial-gradient(circle farthest-corner at 15% 75%, rgba(236, 72, 153, 0.65) 0%, rgba(236, 72, 153, 0) 50%),
+                  radial-gradient(ellipse at center, rgba(59, 130, 246, 0.4) 0%, rgba(59, 130, 246, 0) 70%),
+                  linear-gradient(135deg, rgba(249, 115, 22, 0.15) 0%, rgba(59, 130, 246, 0.15) 100%)
+                `
+              }}
+              title={`${t('dopamineMode')} - ${t('challengeYourLimits')}!`}
+            >
+              <Zap className="h-3 w-3 md:h-4 md:w-4 text-white" style={{ textShadow: "2px 2px 4px rgba(0,0,0,0.5), 1px 1px 2px rgba(0,0,0,0.6)" }} />
+            </Button>
+          )}
+        </div>
 
         {/* 時間顯示 */}
         <div className="flex items-center gap-1 md:gap-2">
