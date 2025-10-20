@@ -70,7 +70,7 @@ export const DifficultySelector = ({
 
   return (
     <div className="glass rounded-2xl px-3 md:px-4 py-3 shadow-apple-md relative z-10 w-full max-w-7xl mx-auto">
-      <div className="flex items-center justify-between gap-2 md:gap-4 flex-wrap">
+      <div className="flex items-center justify-between gap-1 md:gap-2 flex-wrap">
         {/* 左側：難度選擇器和功能按鈕組 */}
         <div className="flex items-center gap-1 md:gap-2">
           {/* 難度選擇器 */}
@@ -157,31 +157,34 @@ export const DifficultySelector = ({
           )}
         </div>
 
-        {/* 時間顯示 */}
-        <div className="flex items-center gap-1 md:gap-2">
-          <Clock className="h-3 w-3 md:h-4 md:w-4 text-muted-foreground" />
-          <span className="text-xs md:text-sm font-bold bg-muted/50 px-2 md:px-3 py-1 rounded-md min-w-[50px] md:min-w-[60px] text-center">
-            {formatTime(time)}
-          </span>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={onTogglePause}
-            className="h-6 w-6 md:h-7 md:w-7 p-0 transition-smooth hover:scale-105 hover:bg-muted/50 border-border/50"
-          >
-            {isPaused ? <Play className="h-3 w-3 md:h-4 md:w-4" /> : <Pause className="h-3 w-3 md:h-4 md:w-4" />}
-          </Button>
-        </div>
+        {/* 右側：時間和錯誤顯示組 */}
+        <div className="flex items-center gap-1">
+          {/* 時間顯示 */}
+          <div className="flex items-center gap-1">
+            <Clock className="h-3 w-3 md:h-4 md:w-4 text-muted-foreground" />
+            <span className="text-xs md:text-sm font-bold bg-muted/50 px-2 md:px-3 py-1 rounded-md min-w-[50px] md:min-w-[60px] text-center">
+              {formatTime(time)}
+            </span>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={onTogglePause}
+              className="h-6 w-6 md:h-7 md:w-7 p-0 transition-smooth hover:scale-105 hover:bg-muted/50 border-border/50"
+            >
+              {isPaused ? <Play className="h-3 w-3 md:h-4 md:w-4" /> : <Pause className="h-3 w-3 md:h-4 md:w-4" />}
+            </Button>
+          </div>
 
-        {/* 錯誤顯示 */}
-        <div className="flex items-center gap-1 md:gap-2">
-          <AlertTriangle className="h-3 w-3 md:h-4 md:w-4 text-muted-foreground" />
-          <span className={cn(
-            "text-xs md:text-sm font-bold transition-smooth px-2 md:px-3 py-1 rounded-md min-w-[40px] md:min-w-[50px] text-center",
-            mistakes > 0 ? "text-destructive bg-destructive/10" : "text-foreground bg-muted/50"
-          )}>
-            {mistakes}/3
-          </span>
+          {/* 錯誤顯示 */}
+          <div className="flex items-center gap-1">
+            <AlertTriangle className="h-3 w-3 md:h-4 md:w-4 text-muted-foreground" />
+            <span className={cn(
+              "text-xs md:text-sm font-bold transition-smooth px-2 md:px-3 py-1 rounded-md min-w-[40px] md:min-w-[50px] text-center",
+              mistakes > 0 ? "text-destructive bg-destructive/10" : "text-foreground bg-muted/50"
+            )}>
+              {mistakes}/3
+            </span>
+          </div>
         </div>
       </div>
       
