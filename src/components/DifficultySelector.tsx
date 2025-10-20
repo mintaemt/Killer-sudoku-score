@@ -70,7 +70,7 @@ export const DifficultySelector = ({
 
   return (
     <div className="glass rounded-2xl px-3 md:px-4 py-3 shadow-apple-md relative z-10 w-full max-w-7xl mx-auto">
-      <div className="flex items-center gap-1 flex-wrap">
+      <div className="flex items-center gap-1 md:gap-2 flex-wrap">
         {/* 難度選擇器 */}
         <div className="relative" ref={dropdownRef}>
           <Button
