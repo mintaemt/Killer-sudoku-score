@@ -21,6 +21,9 @@ export const useLeaderboard = (difficulty?: Difficulty, mode: 'normal' | 'dopami
         query = query.eq('difficulty', difficulty);
       }
 
+      // 限制顯示筆數，提升效能
+      query = query.limit(50);
+
       const { data, error } = await query;
 
       if (error) {

@@ -106,7 +106,10 @@ export const Leaderboard = ({ currentUserId, onClose, mode = 'normal' }: Leaderb
           <div>
             <h3 className="text-lg font-semibold flex items-center space-x-2">
               <Trophy className="h-5 w-5" />
-              <span>{mode === 'dopamine' ? t('highestScoreDisplay') : t('leaderboard')}</span>
+              <span>{t('leaderboard')}</span>
+              {mode === 'dopamine' && (
+                <span className="text-sm text-muted-foreground ml-2">({t('dopamine')})</span>
+              )}
             </h3>
           </div>
           <div className="flex space-x-2">
@@ -142,7 +145,7 @@ export const Leaderboard = ({ currentUserId, onClose, mode = 'normal' }: Leaderb
                 {t('noData')}
               </div>
             ) : (
-              <div className="space-y-2">
+              <div className="max-h-[400px] overflow-y-auto space-y-2 pr-2">
                 {leaderboard.map((entry, index) => (
                   <LeaderboardEntryItem
                     key={`${entry.name}-${entry.difficulty}-${index}`}
@@ -151,6 +154,11 @@ export const Leaderboard = ({ currentUserId, onClose, mode = 'normal' }: Leaderb
                     t={t}
                   />
                 ))}
+                {leaderboard.length > 10 && (
+                  <div className="text-center py-2 text-xs text-muted-foreground border-t">
+                    顯示前 {Math.min(leaderboard.length, 50)} 名，共 {leaderboard.length} 名玩家
+                  </div>
+                )}
               </div>
             )}
           </TabsContent>

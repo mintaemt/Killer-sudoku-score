@@ -294,7 +294,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
                         className="w-full text-xs"
                       >
                         <ListOrdered className="h-3 w-3 mr-1" />
-                        {viewMode === 'normal' ? t('viewLeaderboard') : t('viewHighestScore')}
+{t('viewLeaderboard')}
                       </Button>
                     </div>
                   </div>
