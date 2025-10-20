@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 import { User } from '@/lib/types';
+import { useLanguage } from './useLanguage';
 
 const USER_STORAGE_KEY = 'killer-sudoku-user';
 
@@ -8,6 +9,7 @@ export const useUser = () => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const { t } = useLanguage();
   const [isVisitorMode, setIsVisitorMode] = useState(false);
 
   // 從 localStorage 載入用戶資料
@@ -40,19 +42,19 @@ export const useUser = () => {
     loadUserFromStorage();
   }, []);
 
-  // 創建或更新用戶
+  // 創建新用戶（禁止重複用戶名稱）
   const createOrUpdateUser = async (name: string): Promise<User | null> => {
     try {
       setLoading(true);
       setError(null);
 
-      console.log('開始創建/更新用戶:', name);
+      console.log('開始創建新用戶:', name);
 
-      // 檢查是否已存在相同名稱的用戶
+      // 檢查是否已存在相同名稱的用戶（不區分大小寫）
       const { data: existingUsers, error: searchError } = await supabase
         .from('users')
         .select('*')
-        .eq('name', name)
+        .ilike('name', name)  // 使用 ilike 進行不區分大小寫的比較
         .limit(1);
 
       if (searchError) {
@@ -62,46 +64,35 @@ export const useUser = () => {
 
       console.log('搜尋結果:', existingUsers);
 
-      let userData: User;
-
+      // 如果找到重複的用戶名稱，拋出錯誤
       if (existingUsers && existingUsers.length > 0) {
-        console.log('找到現有用戶，更新最後登入時間');
-        // 更新現有用戶的最後登入時間
-        const { data: updatedUser, error: updateError } = await supabase
-          .from('users')
-          .update({ last_login: new Date().toISOString() })
-          .eq('id', existingUsers[0].id)
-          .select()
-          .single();
-
-        if (updateError) {
-          console.error('更新用戶時發生錯誤:', updateError);
-          throw updateError;
-        }
-
-        userData = updatedUser;
-        console.log('用戶更新成功:', userData);
-      } else {
-        console.log('創建新用戶');
-        // 創建新用戶
-        const { data: newUser, error: insertError } = await supabase
-          .from('users')
-          .insert({
-            name,
-            created_at: new Date().toISOString(),
-            last_login: new Date().toISOString()
-          })
-          .select()
-          .single();
-
-        if (insertError) {
-          console.error('創建用戶時發生錯誤:', insertError);
-          throw insertError;
-        }
-
-        userData = newUser;
-        console.log('新用戶創建成功:', userData);
+        console.log('用戶名稱已存在:', existingUsers[0].name);
+        throw new Error(t('usernameAlreadyExists'));
       }
+
+      console.log('用戶名稱可用，創建新用戶');
+      // 創建新用戶
+      const { data: newUser, error: insertError } = await supabase
+        .from('users')
+        .insert({
+          name: name.trim(),  // 去除前後空格
+          created_at: new Date().toISOString(),
+          last_login: new Date().toISOString()
+        })
+        .select()
+        .single();
+
+      if (insertError) {
+        console.error('創建用戶時發生錯誤:', insertError);
+        // 檢查是否是唯一約束違反錯誤
+        if (insertError.code === '23505') {
+          throw new Error(t('usernameAlreadyExists'));
+        }
+        throw insertError;
+      }
+
+      const userData = newUser;
+      console.log('新用戶創建成功:', userData);
 
       // 儲存到 localStorage
       localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(userData));
