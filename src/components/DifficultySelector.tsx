@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Difficulty, DopamineDifficulty } from "@/lib/types";
 import { cn } from "@/lib/utils";
-import { ChevronDown, Clock, AlertTriangle, Play, Pause, Zap } from "lucide-react";
+import { ChevronDown, Clock, AlertTriangle, Play, Pause, Zap, StickyNote } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { useUser } from "@/hooks/useUser";
 import { DopamineInfoModal } from "./DopamineInfoModal";
@@ -15,6 +15,8 @@ interface DifficultySelectorProps {
   isPaused: boolean;
   onTogglePause: () => void;
   onDopamineMode?: (difficulty: DopamineDifficulty) => void;
+  onToggleNotes?: () => void;
+  showNotes?: boolean;
 }
 
 const difficulties: { value: Difficulty; label: string; translationKey: string }[] = [
@@ -32,6 +34,8 @@ export const DifficultySelector = ({
   isPaused,
   onTogglePause,
   onDopamineMode,
+  onToggleNotes,
+  showNotes = false,
 }: DifficultySelectorProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [showDopamineInfo, setShowDopamineInfo] = useState(false);
@@ -73,7 +77,7 @@ export const DifficultySelector = ({
             variant="outline"
             size="sm"
             onClick={() => setIsOpen(!isOpen)}
-            className="transition-smooth font-medium text-xs md:text-sm w-[105px] md:w-[100px] justify-between"
+            className="transition-smooth font-medium text-xs md:text-sm w-[70px] md:w-[75px] justify-between"
           >
             {currentDifficulty ? t(currentDifficulty.translationKey as any) : difficulty}
             <ChevronDown className={cn("h-3 w-3 transition-transform", isOpen && "rotate-180")} />
@@ -99,6 +103,24 @@ export const DifficultySelector = ({
             </div>
           )}
         </div>
+
+        {/* 註解按鈕 */}
+        {onToggleNotes && (
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={onToggleNotes}
+            className={cn(
+              "transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md h-6 w-6 md:h-7 md:w-7 p-0",
+              showNotes 
+                ? "bg-primary text-primary-foreground border-primary/30 shadow-apple-md" 
+                : "border-border/50 hover:bg-muted/50"
+            )}
+            title={showNotes ? t('hideNotes') : t('showNotes')}
+          >
+            <StickyNote className="h-3 w-3 md:h-4 md:w-4" />
+          </Button>
+        )}
 
         {/* 多巴胺模式按鈕 - 只對登入用戶可見 */}
         {user && !isVisitorMode && onDopamineMode && (

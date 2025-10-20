@@ -12,6 +12,7 @@ import { GameCompleteModal } from "@/components/GameCompleteModal";
 import { GameRulesModal } from "@/components/GameRulesModal";
 import { Leaderboard } from "@/components/Leaderboard";
 import { LeaderboardDebug } from "@/components/LeaderboardDebug";
+import { NotesPanel } from "@/components/NotesPanel";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Zap } from "lucide-react";
@@ -55,6 +56,10 @@ const Index = () => {
   
   // 普通模式錯誤處理狀態
   const [isDisqualified, setIsDisqualified] = useState(false);
+  
+  // 註解功能狀態
+  const [showNotes, setShowNotes] = useState(false);
+  const [gameNotes, setGameNotes] = useState('');
   
   // Hooks
 const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisitorMode, isLoggedIn } = useUser();
@@ -288,6 +293,25 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
     if (!selectedCell) return;
     handleNumberInput(0);
   };
+
+  // 註解功能處理函數
+  const handleToggleNotes = () => {
+    setShowNotes(!showNotes);
+  };
+
+  const handleSaveNotes = (notes: string) => {
+    setGameNotes(notes);
+    // 可以將註解儲存到 localStorage 或發送到後端
+    localStorage.setItem('sudoku-notes', notes);
+  };
+
+  // 載入儲存的註解
+  useEffect(() => {
+    const savedNotes = localStorage.getItem('sudoku-notes');
+    if (savedNotes) {
+      setGameNotes(savedNotes);
+    }
+  }, []);
 
   const handleNewGame = () => {
     try {
@@ -628,6 +652,8 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
             isPaused={isPaused}
             onTogglePause={handleTogglePause}
             onDopamineMode={handleDopamineMode}
+            onToggleNotes={handleToggleNotes}
+            showNotes={showNotes}
           />
 
           <div className="space-y-4">
@@ -687,6 +713,8 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
                   isPaused={isPaused}
                   onTogglePause={handleTogglePause}
                   onDopamineMode={handleDopamineMode}
+                  onToggleNotes={handleToggleNotes}
+                  showNotes={showNotes}
                 />
               </div>
 
@@ -796,6 +824,14 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
       <GameRulesModal 
         isOpen={showRules} 
         onClose={handleCloseRules} 
+      />
+
+      {/* 註解面板 */}
+      <NotesPanel
+        isOpen={showNotes}
+        onClose={() => setShowNotes(false)}
+        initialNotes={gameNotes}
+        onSaveNotes={handleSaveNotes}
       />
     </div>
   );

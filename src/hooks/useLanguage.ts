@@ -22,6 +22,14 @@ const translations = {
     score: 'Score',
     combo: 'COMBO',
     
+    // 註解功能
+    showNotes: 'Show Notes',
+    hideNotes: 'Hide Notes',
+    notes: 'Notes',
+    clearNotes: 'Clear Notes',
+    cancel: 'Cancel',
+    save: 'Save',
+    
     // 多巴胺資訊卡
     dopamineInfoTitle: 'Dopamine Mode',
     dopamineInfoSubtitle: 'Challenge Your Limits!',
@@ -169,6 +177,14 @@ const translations = {
     remaining: '剩餘',
     score: '分數',
     combo: 'COMBO',
+    
+    // 註解功能
+    showNotes: '顯示註解',
+    hideNotes: '隱藏註解',
+    notes: '註解',
+    clearNotes: '清除註解',
+    cancel: '取消',
+    save: '儲存',
     
     // 多巴胺資訊卡
     dopamineInfoTitle: '多巴胺模式',
