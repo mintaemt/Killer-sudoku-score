@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Difficulty, DopamineDifficulty } from "@/lib/types";
 import { cn } from "@/lib/utils";
-import { ChevronDown, Clock, AlertTriangle, Play, Pause, Zap, StickyNote } from "lucide-react";
+import { ChevronDown, Clock, AlertTriangle, Play, Pause, Zap, Pencil } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { useUser } from "@/hooks/useUser";
 import { DopamineInfoModal } from "./DopamineInfoModal";
@@ -106,20 +106,29 @@ export const DifficultySelector = ({
 
         {/* 註解按鈕 */}
         {onToggleNotes && (
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={onToggleNotes}
-            className={cn(
-              "transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md px-3 py-1 text-xs font-medium",
-              showNotes 
-                ? "bg-primary text-primary-foreground border-primary/30 shadow-apple-md" 
-                : "border-border/50 hover:bg-muted/50"
+          <div className="relative">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={onToggleNotes}
+              className={cn(
+                "transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md h-6 w-6 md:h-7 md:w-7 p-0",
+                showNotes 
+                  ? "bg-primary text-primary-foreground border-primary/30 shadow-apple-md" 
+                  : "border-border/50 hover:bg-muted/50"
+              )}
+              title={showNotes ? t('notesModeOff') : t('notesModeOn')}
+            >
+              <Pencil className="h-3 w-3 md:h-4 md:w-4" />
+            </Button>
+            
+            {/* ON/OFF Badge */}
+            {showNotes && (
+              <div className="absolute -top-1 -right-1 bg-green-500 text-white text-[8px] md:text-[10px] font-bold px-1 py-0.5 rounded-full min-w-[16px] h-4 flex items-center justify-center">
+                ON
+              </div>
             )}
-            title={showNotes ? t('notesModeOff') : t('notesModeOn')}
-          >
-            {showNotes ? t('notesOff') : t('notesOn')}
-          </Button>
+          </div>
         )}
 
         {/* 多巴胺模式按鈕 - 只對登入用戶可見 */}

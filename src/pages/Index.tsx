@@ -683,7 +683,6 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
               cages={gameData.cages}
               selectedCell={selectedCell}
               onCellSelect={setSelectedCell}
-              notesMode={showNotes}
             />
 
             <NumberPad
@@ -707,7 +706,6 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
                 cages={gameData.cages}
                 selectedCell={selectedCell}
                 onCellSelect={setSelectedCell}
-                notesMode={showNotes}
               />
               </div>
             </div>
