@@ -26,11 +26,11 @@ export const FeatureHintModal = ({ isOpen, onClose, onBecomeUser }: FeatureHintM
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-[650px] max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-[630px] max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2 text-2xl">
             <Star className="h-6 w-6 text-yellow-500" />
-            註冊用戶，解鎖更多功能！
+            註冊用戶，解鎖更多！
           </DialogTitle>
         </DialogHeader>
 
@@ -41,7 +41,7 @@ export const FeatureHintModal = ({ isOpen, onClose, onBecomeUser }: FeatureHintM
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* 多巴胺模式 */}
               <Card className="border-purple-200 dark:border-purple-800 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/30">
-                <CardHeader className="pb-3">
+                <CardHeader className="pb-2 px-3 pt-3">
                   <CardTitle className="text-lg flex items-center gap-2 text-purple-700 dark:text-purple-300">
                     <Zap className="h-5 w-5 text-purple-600 dark:text-purple-400" />
                     多巴胺挑戰模式
@@ -50,7 +50,7 @@ export const FeatureHintModal = ({ isOpen, onClose, onBecomeUser }: FeatureHintM
                     </Badge>
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-4">
+                <CardContent className="space-y-4 px-3 pb-3">
                   <div className="grid grid-cols-2 gap-x-2 gap-y-2">
                     <div className="flex items-start gap-1">
                       <span className="text-xs text-muted-foreground dark:text-muted-foreground">•</span>
@@ -82,13 +82,13 @@ export const FeatureHintModal = ({ isOpen, onClose, onBecomeUser }: FeatureHintM
 
               {/* 排行榜競爭 */}
               <Card className="border-yellow-200 dark:border-yellow-800 bg-gradient-to-br from-yellow-50 to-orange-50 dark:from-yellow-950/30 dark:to-orange-950/30">
-                <CardHeader className="pb-3">
+                <CardHeader className="pb-2 px-3 pt-3">
                   <CardTitle className="text-lg flex items-center gap-2 text-yellow-700 dark:text-yellow-300">
                     <Trophy className="h-5 w-5 text-yellow-600 dark:text-yellow-400" />
                     全球排行榜競爭
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-4">
+                <CardContent className="space-y-4 px-3 pb-3">
                   <div className="grid grid-cols-2 gap-x-2 gap-y-2">
                     <div className="flex items-start gap-1">
                       <span className="text-xs text-muted-foreground dark:text-muted-foreground">•</span>
@@ -122,13 +122,13 @@ export const FeatureHintModal = ({ isOpen, onClose, onBecomeUser }: FeatureHintM
 
           {/* 註冊要求 */}
           <Card className="border-green-200 dark:border-green-800 bg-green-50/50 dark:bg-green-950/30">
-            <CardHeader className="pb-3">
+            <CardHeader className="pb-2 px-3 pt-3">
               <CardTitle className="text-lg flex items-center gap-2 text-green-700 dark:text-green-300">
                 <Users className="h-5 w-5 text-green-600 dark:text-green-400" />
                 如何成為註冊用戶？
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-3">
+            <CardContent className="space-y-3 px-3 pb-3">
               <div className="grid grid-cols-2 gap-x-2 gap-y-3">
                 <div className="flex items-start gap-2">
                   <div className="flex-shrink-0 w-5 h-5 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center">
