@@ -100,10 +100,10 @@ export const KillerSudokuGrid = ({
                     <div 
                       className={cn(
                         "absolute inset-[1.5px] pointer-events-none z-20",
-                        borders.top && "border-t border-t-[hsl(var(--cage-border))] border-dashed md:border-t-2",
-                        borders.right && "border-r border-r-[hsl(var(--cage-border))] border-dashed md:border-r-2",
-                        borders.bottom && "border-b border-b-[hsl(var(--cage-border))] border-dashed md:border-b-2",
-                        borders.left && "border-l border-l-[hsl(var(--cage-border))] border-dashed md:border-l-2"
+                        borders.top && "border-t border-t-foreground/90 border-dashed md:border-t-2",
+                        borders.right && "border-r border-r-foreground/90 border-dashed md:border-r-2",
+                        borders.bottom && "border-b border-b-foreground/90 border-dashed md:border-b-2",
+                        borders.left && "border-l border-l-foreground/90 border-dashed md:border-l-2"
                       )}
                     />
                   )}
