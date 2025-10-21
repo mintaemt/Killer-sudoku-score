@@ -136,7 +136,7 @@ BEGIN
   
   RETURN rank_position;
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public;
 
 -- 8. 創建多巴胺模式排名函數
 CREATE OR REPLACE FUNCTION get_dopamine_user_rank(p_user_id UUID, p_difficulty VARCHAR)
@@ -161,7 +161,7 @@ BEGIN
   
   RETURN rank_position;
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public;
 
 -- 9. 啟用 Row Level Security (RLS)
 ALTER TABLE normal_records ENABLE ROW LEVEL SECURITY;
