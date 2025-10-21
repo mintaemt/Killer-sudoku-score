@@ -1,4 +1,19 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://your-domain.com/sitemap.xml
+# Sitemap
+Sitemap: https://killer-sudoku-score.onrender.com/sitemap.xml
+
+# Crawl-delay for better server performance
+Crawl-delay: 1
+
+# Block admin or sensitive areas (if any)
+# Disallow: /admin/
+# Disallow: /api/
+
+# Allow all game content
+Allow: /src/
+Allow: /assets/
+Allow: /favicon.svg
+Allow: /favicon-cat.svg
+Allow: /favicon-puzzle.svg
