@@ -184,6 +184,20 @@ FOR INSERT WITH CHECK (true);
 CREATE POLICY "Allow insert dopamine_records" ON dopamine_records
 FOR INSERT WITH CHECK (true);
 
+-- 允許讀取分數日誌（用於調試和分析）
+CREATE POLICY "Allow read access to normal_score_logs" ON normal_score_logs
+FOR SELECT USING (true);
+
+CREATE POLICY "Allow read access to dopamine_score_logs" ON dopamine_score_logs
+FOR SELECT USING (true);
+
+-- 允許插入分數日誌記錄
+CREATE POLICY "Allow insert normal_score_logs" ON normal_score_logs
+FOR INSERT WITH CHECK (true);
+
+CREATE POLICY "Allow insert dopamine_score_logs" ON dopamine_score_logs
+FOR INSERT WITH CHECK (true);
+
 -- 11. 創建索引以提高查詢效能
 CREATE INDEX IF NOT EXISTS idx_normal_records_user_difficulty ON normal_records(user_id, difficulty);
 CREATE INDEX IF NOT EXISTS idx_dopamine_records_user_difficulty ON dopamine_records(user_id, difficulty);
