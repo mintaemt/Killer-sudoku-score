@@ -38,13 +38,13 @@ export const AdBanner: React.FC<AdBannerProps> = ({
   const getAdDimensions = () => {
     switch (size) {
       case 'mobile-banner':
-        return 'w-full h-[50px]';
+        return 'w-full h-[65px]'; // 從 50px 增加到 65px
       case 'desktop-banner':
-        return 'w-[728px] h-[90px]';
+        return 'w-[950px] h-[90px]'; // 從 728px 調整為 950px，參照九宮格+右側元件總寬度
       case 'floating-square':
         return 'w-[120px] h-[120px]';
       default:
-        return 'w-full h-[50px]';
+        return 'w-full h-[65px]';
     }
   };
 
