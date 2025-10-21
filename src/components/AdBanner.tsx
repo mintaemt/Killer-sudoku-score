@@ -38,13 +38,13 @@ export const AdBanner: React.FC<AdBannerProps> = ({
   const getAdDimensions = () => {
     switch (size) {
       case 'mobile-banner':
-        return 'w-full h-[65px]'; // 從 50px 增加到 65px
+        return 'w-full min-h-[50px] max-h-[80px]'; // 自適應高度，最小50px，最大80px
       case 'desktop-banner':
-        return 'w-[950px] h-[90px]'; // 從 728px 調整為 950px，參照九宮格+右側元件總寬度
+        return 'w-full min-w-[728px] max-w-[950px] min-h-[90px]'; // 自適應寬度，最小728px，最大950px
       case 'floating-square':
-        return 'w-[120px] h-[120px]';
+        return 'w-[120px] h-[120px]'; // 浮動廣告保持固定尺寸
       default:
-        return 'w-full h-[65px]';
+        return 'w-full min-h-[50px] max-h-[80px]';
     }
   };
 
@@ -79,6 +79,7 @@ export const AdBanner: React.FC<AdBannerProps> = ({
         data-ad-slot={adSlotId}
         data-ad-format="auto"
         data-full-width-responsive="true"
+        data-ad-layout="in-article"
       />
     </div>
   );
