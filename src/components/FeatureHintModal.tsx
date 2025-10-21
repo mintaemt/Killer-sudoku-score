@@ -1,4 +1,4 @@
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -32,6 +32,9 @@ export const FeatureHintModal = ({ isOpen, onClose, onBecomeUser }: FeatureHintM
             <Star className="h-6 w-6 text-yellow-500" />
             註冊用戶，解鎖更多！
           </DialogTitle>
+          <DialogDescription>
+            註冊用戶以解鎖多巴胺挑戰模式和全球排行榜競爭功能
+          </DialogDescription>
         </DialogHeader>
 
         <div className="space-y-4">
