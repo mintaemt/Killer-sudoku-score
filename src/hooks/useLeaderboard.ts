@@ -8,6 +8,9 @@ export const useLeaderboard = (difficulty?: Difficulty, mode: 'normal' | 'dopami
   const [error, setError] = useState<string | null>(null);
 
   const fetchLeaderboard = async () => {
+    // 防止重複請求
+    if (loading) return;
+    
     try {
       setLoading(true);
       setError(null);
