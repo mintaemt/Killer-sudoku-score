@@ -61,23 +61,23 @@ export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge, onShowFea
           <CardContent className="space-y-6">
             {/* 模式介紹 */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="p-3 rounded-lg bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/20 dark:to-pink-950/20 border">
-                <h3 className="font-semibold mb-2 flex items-center gap-2 text-sm">
+              <div className="p-3 rounded-lg bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/20 dark:to-pink-950/20 border border-purple-200/50 dark:border-purple-800/50">
+                <h3 className="font-semibold mb-2 flex items-center gap-2 text-sm text-purple-700 dark:text-purple-300">
                   <Star className="h-4 w-4 text-purple-500" />
                   {t('modeFeatures')}
                 </h3>
-                <ul className="text-sm text-muted-foreground space-y-1">
+                <ul className="text-sm text-muted-foreground dark:text-muted-foreground space-y-1">
                   <li>• {t('chooseDifficultyChallenge')}</li>
                   <li>• {t('specialScoringSystem')}</li>
                 </ul>
               </div>
 
-              <div className="p-3 rounded-lg bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-950/20 border">
-                <h3 className="font-semibold mb-2 flex items-center gap-2 text-sm">
+              <div className="p-3 rounded-lg bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-950/20 border border-blue-200/50 dark:border-blue-800/50">
+                <h3 className="font-semibold mb-2 flex items-center gap-2 text-sm text-blue-700 dark:text-blue-300">
                   <AlertTriangle className="h-4 w-4 text-blue-500" />
                   {t('gameRules')}
                 </h3>
-                <ul className="text-sm text-muted-foreground space-y-1">
+                <ul className="text-sm text-muted-foreground dark:text-muted-foreground space-y-1">
                   <li>• {t('timeLimitChallenge')}</li>
                   <li>• {t('errorCountAffectsScore')}</li>
                   <li>• {t('consecutiveCorrectReward')}</li>

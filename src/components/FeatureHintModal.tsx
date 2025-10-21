@@ -30,26 +30,11 @@ export const FeatureHintModal = ({ isOpen, onClose, onBecomeUser }: FeatureHintM
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2 text-2xl">
             <Crown className="h-6 w-6 text-yellow-500" />
-            成為註冊用戶，解鎖更多功能！
+            註冊用戶，解鎖更多功能！
           </DialogTitle>
         </DialogHeader>
 
         <div className="space-y-6">
-          {/* 當前狀態 */}
-          <Card className="border-orange-200 bg-orange-50/50">
-            <CardHeader className="pb-3">
-              <CardTitle className="text-lg flex items-center gap-2">
-                <Users className="h-5 w-5" />
-                目前狀態：訪客模式
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground">
-                您目前以訪客身份遊玩，可以享受基本的殺手數獨遊戲體驗。
-              </p>
-            </CardContent>
-          </Card>
-
           {/* 註冊用戶專屬功能 */}
           <div>
             <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
@@ -159,12 +144,15 @@ export const FeatureHintModal = ({ isOpen, onClose, onBecomeUser }: FeatureHintM
           </Card>
 
           {/* 行動按鈕 */}
-          <div className="flex gap-3 pt-4">
-            <Button onClick={onBecomeUser} className="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700">
-              <Crown className="h-4 w-4 mr-2" />
+          <div className="pt-4">
+            <Button 
+              onClick={onBecomeUser}
+              className="w-full h-12 text-lg font-bold text-white shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden flowing-button"
+            >
+              <Crown className="mr-2 h-5 w-5" />
               立即成為註冊用戶
             </Button>
-            <Button variant="outline" onClick={onClose} className="px-6">
+            <Button variant="outline" onClick={onClose} className="w-full mt-3">
               繼續訪客模式
             </Button>
           </div>

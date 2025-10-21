@@ -12,6 +12,7 @@ import { GameCompleteModal } from "@/components/GameCompleteModal";
 import { GameRulesModal } from "@/components/GameRulesModal";
 import { Leaderboard } from "@/components/Leaderboard";
 import { LeaderboardDebug } from "@/components/LeaderboardDebug";
+import { FeatureHintModal } from "@/components/FeatureHintModal";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Zap } from "lucide-react";
@@ -19,6 +20,7 @@ import { checkEnvironment, testSupabaseConnection } from "@/lib/envChecker";
 import { generateKillerSudoku, generateDopamineSudoku } from "@/lib/sudoku-generator";
 import { useUser } from "@/hooks/useUser";
 import { useGameRecord } from "@/hooks/useGameRecord";
+import { useFeatureHint } from "@/hooks/useFeatureHint";
 import { Difficulty, DopamineDifficulty, GameCompletionResult } from "@/lib/types";
 import { calculateScore, calculateDopamineScore } from "@/lib/scoreCalculator";
 import { cn } from "@/lib/utils";
@@ -59,8 +61,12 @@ const Index = () => {
   // 註解功能狀態
   const [showNotes, setShowNotes] = useState(false);
   
+  // 功能提示狀態
+  const [showFeatureHint, setShowFeatureHint] = useState(false);
+  
   // Hooks
 const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisitorMode, isLoggedIn } = useUser();
+  const { shouldShowHint, dismissHint } = useFeatureHint();
   const { saveNormalGameRecord, saveDopamineGameRecord, getNormalUserBestScore, getDopamineUserBestScore, getAllDopamineUsersTopScore } = useGameRecord();
 
   // 檢查用戶是否已登入
@@ -134,6 +140,11 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
         isNewRecord: false 
       });
       setShowGameCompleteModal(true);
+      
+      // 檢查是否應該顯示功能提示
+      if (shouldShowHint) {
+        setShowFeatureHint(true);
+      }
       return;
     }
     
@@ -192,6 +203,17 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
   const handleVisitorMode = () => {
     enterVisitorMode();
     setShowUserNameInput(false);
+  };
+
+  // 處理功能提示相關
+  const handleFeatureHintClose = () => {
+    setShowFeatureHint(false);
+    dismissHint(); // 記錄用戶選擇繼續訪客模式
+  };
+
+  const handleBecomeUser = () => {
+    setShowFeatureHint(false);
+    setShowUserNameInput(true); // 跳轉到用戶註冊頁面
   };
 
   useEffect(() => {
@@ -675,6 +697,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
             onDopamineMode={handleDopamineMode}
             onToggleNotes={handleToggleNotes}
             showNotes={showNotes}
+            onBecomeUser={handleBecomeUser}
           />
 
           <div className="space-y-4">
@@ -736,6 +759,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
                   onDopamineMode={handleDopamineMode}
                   onToggleNotes={handleToggleNotes}
                   showNotes={showNotes}
+                  onBecomeUser={handleBecomeUser}
                 />
               </div>
 
@@ -845,6 +869,13 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
       <GameRulesModal 
         isOpen={showRules} 
         onClose={handleCloseRules} 
+      />
+
+      {/* 功能提示模態框 */}
+      <FeatureHintModal
+        isOpen={showFeatureHint}
+        onClose={handleFeatureHintClose}
+        onBecomeUser={handleBecomeUser}
       />
 
     </div>
