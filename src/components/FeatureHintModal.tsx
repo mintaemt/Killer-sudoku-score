@@ -50,7 +50,7 @@ export const FeatureHintModal = ({ isOpen, onClose, onBecomeUser }: FeatureHintM
                     </Badge>
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-2">
+                <CardContent className="space-y-3">
                   <p className="text-sm text-muted-foreground dark:text-muted-foreground">
                     • 限時挑戰，測試你的極限
                   </p>
@@ -74,7 +74,7 @@ export const FeatureHintModal = ({ isOpen, onClose, onBecomeUser }: FeatureHintM
                     全球排行榜競爭
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-2">
+                <CardContent className="space-y-3">
                   <p className="text-sm text-muted-foreground dark:text-muted-foreground">
                     • 與全球玩家競爭排名
                   </p>
@@ -106,7 +106,7 @@ export const FeatureHintModal = ({ isOpen, onClose, onBecomeUser }: FeatureHintM
                   <span className="text-xs font-bold text-green-600 dark:text-green-400">1</span>
                 </div>
                 <div>
-                  <p className="font-medium text-foreground dark:text-foreground">輸入唯一用戶名稱</p>
+                  <p className="font-medium text-foreground dark:text-foreground">輸入用戶名稱</p>
                   <p className="text-sm text-muted-foreground dark:text-muted-foreground">
                     選擇一個獨特的用戶名稱，將成為你在排行榜上的身份
                   </p>
