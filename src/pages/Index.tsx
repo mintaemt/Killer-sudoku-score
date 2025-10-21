@@ -13,6 +13,7 @@ import { GameRulesModal } from "@/components/GameRulesModal";
 import { Leaderboard } from "@/components/Leaderboard";
 import { LeaderboardDebug } from "@/components/LeaderboardDebug";
 import { FeatureHintModal } from "@/components/FeatureHintModal";
+import { AdBanner } from "@/components/AdBanner";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Zap } from "lucide-react";
@@ -677,49 +678,61 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
           isVisible={isDopamineMode}
         />
         
-        {/* 移動裝置佈局 - 保持原有垂直佈局 */}
-        <div className="block md:hidden space-y-4">
-          <GameHeader 
-            onNewGame={handleNewGame}
-            onThemeChange={handleThemeChange}
-            currentTheme={currentTheme}
-            onShowLeaderboard={handleShowLeaderboard}
-            onShowRules={handleShowRules}
-          />
+        {/* 移動裝置佈局 - 優化間距並添加廣告 */}
+        <div className="block md:hidden">
+          {/* 頂部廣告 */}
+          <div className="mb-2">
+            <AdBanner adSlotId="mobile-top-banner" size="mobile-banner" />
+          </div>
           
-          <DifficultySelector 
-            difficulty={difficulty} 
-            onDifficultyChange={setDifficulty}
-            mistakes={mistakes}
-            time={time}
-            isPaused={isPaused}
-            onTogglePause={handleTogglePause}
-            onDopamineMode={handleDopamineMode}
-            onToggleNotes={handleToggleNotes}
-            showNotes={showNotes}
-            onBecomeUser={handleBecomeUser}
-          />
-
-          <div className="space-y-4">
-            <KillerSudokuGrid
-              grid={gameData.grid}
-              cages={gameData.cages}
-              selectedCell={selectedCell}
-              onCellSelect={setSelectedCell}
-            />
-
-            <NumberPad
-              onNumberSelect={handleNumberInput}
-              onClear={handleClear}
-              disabled={!selectedCell}
+          <div className="space-y-1">
+            <GameHeader 
+              onNewGame={handleNewGame}
+              onThemeChange={handleThemeChange}
               currentTheme={currentTheme}
-              onTestComplete={handleTestComplete}
+              onShowLeaderboard={handleShowLeaderboard}
+              onShowRules={handleShowRules}
             />
+            
+            <DifficultySelector 
+              difficulty={difficulty} 
+              onDifficultyChange={setDifficulty}
+              mistakes={mistakes}
+              time={time}
+              isPaused={isPaused}
+              onTogglePause={handleTogglePause}
+              onDopamineMode={handleDopamineMode}
+              onToggleNotes={handleToggleNotes}
+              showNotes={showNotes}
+              onBecomeUser={handleBecomeUser}
+            />
+
+            <div className="space-y-1">
+              <KillerSudokuGrid
+                grid={gameData.grid}
+                cages={gameData.cages}
+                selectedCell={selectedCell}
+                onCellSelect={setSelectedCell}
+              />
+
+              <NumberPad
+                onNumberSelect={handleNumberInput}
+                onClear={handleClear}
+                disabled={!selectedCell}
+                currentTheme={currentTheme}
+                onTestComplete={handleTestComplete}
+              />
+            </div>
           </div>
         </div>
 
         {/* 桌面/平板佈局 - 根據 wireframe 設計 */}
         <div className="hidden md:block">
+          {/* 桌面版頂部廣告 */}
+          <div className="mb-4 flex justify-center">
+            <AdBanner adSlotId="desktop-top-banner" size="desktop-banner" />
+          </div>
+          
           <div className="flex items-center justify-center gap-6 h-[500px]">
             {/* 左側：九宮格 - 使用固定尺寸確保大小合適 */}
             <div className="flex-shrink-0">
@@ -877,6 +890,11 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
         onClose={handleFeatureHintClose}
         onBecomeUser={handleBecomeUser}
       />
+
+      {/* 浮動廣告 - 右下角 */}
+      <div className="fixed bottom-4 right-4 z-30 hidden md:block">
+        <AdBanner adSlotId="floating-square" size="floating-square" />
+      </div>
 
     </div>
   );
