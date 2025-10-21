@@ -102,6 +102,9 @@ export const KillerSudokuGrid = ({
                         "absolute inset-[1.5px] pointer-events-none z-20",
                         // iOS Safari 修復：確保邊框正確渲染
                         "transform-gpu",
+                        // iOS Safari 邊框渲染修復
+                        "will-change-transform",
+                        "backface-visibility-hidden",
                         borders.top && "border-t border-t-foreground/90 border-dashed md:border-t-[1.5px]",
                         borders.right && "border-r border-r-foreground/90 border-dashed md:border-r-[1.5px]",
                         borders.bottom && "border-b border-b-foreground/90 border-dashed md:border-b-[1.5px]",
