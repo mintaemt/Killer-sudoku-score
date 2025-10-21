@@ -43,7 +43,7 @@ All colors MUST be HSL.
     --cell-highlighted: 211 30% 18%;
     --cell-error: 0 50% 20%;
     --cell-given: 0 0% 18%;
-    --cage-border: 0 0% 50%;
+    --cage-border: 0 0% 18%;
     --cage-sum: 0 0% 60%;
 
     --radius: 0.75rem;
@@ -92,7 +92,7 @@ All colors MUST be HSL.
     --cell-highlighted: 211 100% 95%;
     --cell-error: 0 100% 92%;
     --cell-given: 0 0% 97%;
-    --cage-border: 0 0% 70%;
+    --cage-border: 0 0% 97%;
     --cage-sum: 0 0% 50%;
   }
 
@@ -203,7 +203,7 @@ All colors MUST be HSL.
     --cell-highlighted: 211 30% 18%;
     --cell-error: 0 50% 20%;
     --cell-given: 0 0% 18%;
-    --cage-border: 0 0% 50%;
+    --cage-border: 0 0% 18%;
     --cage-sum: 0 0% 60%;
   }
 
