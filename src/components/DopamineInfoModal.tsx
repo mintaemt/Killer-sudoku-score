@@ -109,6 +109,7 @@ export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge, onShowFea
                       value={difficulty.value}
                       checked={selectedDifficulty === difficulty.value}
                       onChange={() => setSelectedDifficulty(difficulty.value)}
+                      autoComplete="off"
                       className={cn(
                         "w-3 h-3 mb-1",
                         difficulty.radioColor

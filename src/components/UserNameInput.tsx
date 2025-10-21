@@ -50,6 +50,7 @@ export const UserNameInput = ({ onSubmit, onVisitorMode, loading = false, error 
                 disabled={loading}
                 maxLength={50}
                 required
+                autoComplete="username"
                 className="text-center"
               />
             </div>
