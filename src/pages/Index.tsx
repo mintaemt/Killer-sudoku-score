@@ -738,13 +738,13 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
             <AdBanner adSlotId="desktop-top-banner" size="desktop-banner" />
           </div>
           
-          {/* 左側廣告 - 放在容器外面避免被遮擋 */}
-          <div className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10">
+          {/* 左側廣告 - 放在螢幕最左邊，完全避開遊戲區域 */}
+          <div className="fixed left-0 top-1/2 transform -translate-y-1/2 z-20">
             <AdBanner adSlotId="desktop-left-sidebar" size="sidebar-banner" />
           </div>
           
-          {/* 右側廣告 - 放在容器外面避免被遮擋 */}
-          <div className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10">
+          {/* 右側廣告 - 放在螢幕最右邊，完全避開遊戲區域 */}
+          <div className="fixed right-0 top-1/2 transform -translate-y-1/2 z-20">
             <AdBanner adSlotId="desktop-right-sidebar" size="sidebar-banner" />
           </div>
           
