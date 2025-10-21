@@ -3,7 +3,7 @@ import React from 'react';
 interface AdBannerProps {
   adSlotId: string;
   className?: string;
-  size?: 'mobile-banner' | 'desktop-banner' | 'floating-square';
+  size?: 'mobile-banner' | 'desktop-banner' | 'floating-square' | 'sidebar-banner';
 }
 
 export const AdBanner: React.FC<AdBannerProps> = ({ 
@@ -43,6 +43,8 @@ export const AdBanner: React.FC<AdBannerProps> = ({
         return 'w-full min-w-[728px] max-w-[950px] min-h-[90px]'; // 自適應寬度，最小728px，最大950px
       case 'floating-square':
         return 'w-[120px] h-[120px]'; // 浮動廣告保持固定尺寸
+      case 'sidebar-banner':
+        return 'w-[160px] h-[600px]'; // 側邊欄廣告：160x600 (Wide Skyscraper)
       default:
         return 'w-full min-h-[50px] max-h-[80px]';
     }

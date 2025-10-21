@@ -678,7 +678,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
           isVisible={isDopamineMode}
         />
         
-        {/* 移動裝置佈局 - 優化間距並添加廣告 */}
+        {/* 移動裝置佈局 - 最大化廣告空間但不影響操作 */}
         <div className="block md:hidden">
           {/* 頂部廣告 */}
           <div className="mb-2">
@@ -724,16 +724,30 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
               />
             </div>
           </div>
+          
+          {/* 底部廣告 - 在 NumberPad 下方 */}
+          <div className="mt-2">
+            <AdBanner adSlotId="mobile-bottom-banner" size="mobile-banner" />
+          </div>
         </div>
 
-        {/* 桌面/平板佈局 - 根據 wireframe 設計 */}
+        {/* 桌面/平板佈局 - 最大化廣告空間但不影響操作 */}
         <div className="hidden md:block">
           {/* 桌面版頂部廣告 */}
           <div className="mb-4 flex justify-center">
             <AdBanner adSlotId="desktop-top-banner" size="desktop-banner" />
           </div>
           
-          <div className="flex items-center justify-center gap-6 h-[500px]">
+          <div className="flex items-center justify-center gap-6 h-[500px] relative">
+            {/* 左側廣告 */}
+            <div className="absolute left-0 top-1/2 transform -translate-y-1/2">
+              <AdBanner adSlotId="desktop-left-sidebar" size="sidebar-banner" />
+            </div>
+            
+            {/* 右側廣告 */}
+            <div className="absolute right-0 top-1/2 transform -translate-y-1/2">
+              <AdBanner adSlotId="desktop-right-sidebar" size="sidebar-banner" />
+            </div>
             {/* 左側：九宮格 - 使用固定尺寸確保大小合適 */}
             <div className="flex-shrink-0">
               <div className="w-[500px] h-[500px]">
