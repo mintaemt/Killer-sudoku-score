@@ -26,7 +26,7 @@ export const FeatureHintModal = ({ isOpen, onClose, onBecomeUser }: FeatureHintM
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="w-[90vw] md:w-[650px] !max-w-none max-h-[90vh] overflow-y-auto">
+      <DialogContent className="w-[85vw] md:w-[600px] !max-w-none max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2 text-2xl">
             <Star className="h-6 w-6 text-yellow-500" />
