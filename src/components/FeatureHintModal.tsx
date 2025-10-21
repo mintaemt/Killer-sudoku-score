@@ -26,15 +26,12 @@ export const FeatureHintModal = ({ isOpen, onClose, onBecomeUser }: FeatureHintM
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="w-[90vw] max-h-[90vh] overflow-y-auto">
+      <DialogContent className="w-[90vw] !max-w-none max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2 text-2xl">
             <Star className="h-6 w-6 text-yellow-500" />
             註冊用戶，解鎖更多！
           </DialogTitle>
-          <DialogDescription>
-            註冊用戶以解鎖多巴胺挑戰模式和全球排行榜競爭功能
-          </DialogDescription>
         </DialogHeader>
 
         <div className="space-y-4">
