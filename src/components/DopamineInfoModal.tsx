@@ -7,11 +7,13 @@ import { Zap, Crown, Star, AlertTriangle, Trophy, X, Users } from "lucide-react"
 import { cn } from "@/lib/utils";
 import { DopamineDifficulty } from "@/lib/types";
 import { useLanguage } from "@/hooks/useLanguage";
+import { useUser } from "@/hooks/useUser";
 
 interface DopamineInfoModalProps {
   isOpen: boolean;
   onClose: () => void;
   onStartChallenge: (difficulty: DopamineDifficulty) => void;
+  onShowFeatureHint?: () => void;
 }
 
 const difficultyOptions: { value: DopamineDifficulty; label: string; description: string; color: string; ringColor: string; radioColor: string; translationKey: string }[] = [
@@ -22,9 +24,10 @@ const difficultyOptions: { value: DopamineDifficulty; label: string; description
   { value: "hell", label: "Hell", description: "最高成就感", color: "bg-red-500/20 text-red-600 border-red-500/30", ringColor: "ring-red-500", radioColor: "accent-red-500", translationKey: "hell" }
 ];
 
-export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge }: DopamineInfoModalProps) => {
+export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge, onShowFeatureHint }: DopamineInfoModalProps) => {
   const [selectedDifficulty, setSelectedDifficulty] = useState<DopamineDifficulty>("medium");
   const { t } = useLanguage();
+  const { user, isVisitorMode } = useUser();
   
   if (!isOpen) return null;
 
@@ -120,11 +123,20 @@ export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge }: Dopamin
             {/* 開始挑戰按鈕 */}
             <div className="pt-4">
               <Button 
-                onClick={() => onStartChallenge(selectedDifficulty)}
+                onClick={() => {
+                  if (user && !isVisitorMode) {
+                    // 註冊用戶：開始挑戰
+                    onStartChallenge(selectedDifficulty);
+                  } else {
+                    // 訪客：顯示註冊提示
+                    onClose();
+                    onShowFeatureHint?.();
+                  }
+                }}
                 className="w-full h-12 text-lg font-bold text-white shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden flowing-button"
               >
                 <Trophy className="mr-2 h-5 w-5" />
-                {t('startChallenge')}
+                {user && !isVisitorMode ? t('startChallenge') : '請先註冊用戶'}
               </Button>
             </div>
           </CardContent>

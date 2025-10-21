@@ -5,6 +5,7 @@ import { ChevronDown, Clock, AlertTriangle, Play, Pause, Zap, Pencil } from "luc
 import { useState, useRef, useEffect } from "react";
 import { useUser } from "@/hooks/useUser";
 import { DopamineInfoModal } from "./DopamineInfoModal";
+import { FeatureHintModal } from "./FeatureHintModal";
 import { useLanguage } from "@/hooks/useLanguage";
 
 interface DifficultySelectorProps {
@@ -17,6 +18,7 @@ interface DifficultySelectorProps {
   onDopamineMode?: (difficulty: DopamineDifficulty) => void;
   onToggleNotes?: () => void;
   showNotes?: boolean;
+  onBecomeUser?: () => void;
 }
 
 const difficulties: { value: Difficulty; label: string; translationKey: string }[] = [
@@ -36,9 +38,11 @@ export const DifficultySelector = ({
   onDopamineMode,
   onToggleNotes,
   showNotes = false,
+  onBecomeUser,
 }: DifficultySelectorProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [showDopamineInfo, setShowDopamineInfo] = useState(false);
+  const [showFeatureHint, setShowFeatureHint] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { user, isVisitorMode } = useUser();
   const { t } = useLanguage();
@@ -131,12 +135,20 @@ export const DifficultySelector = ({
           </div>
         )}
 
-        {/* 3. 多巴胺模式按鈕 - 只對登入用戶可見 */}
-        {user && !isVisitorMode && onDopamineMode && (
+        {/* 3. 多巴胺模式按鈕 - 所有人都可見 */}
+        {onDopamineMode && (
           <Button
             variant="outline"
             size="sm"
-            onClick={() => setShowDopamineInfo(true)}
+            onClick={() => {
+              if (user && !isVisitorMode) {
+                // 註冊用戶：直接顯示多巴胺模式選項
+                setShowDopamineInfo(true);
+              } else {
+                // 訪客：顯示功能提示
+                setShowFeatureHint(true);
+              }
+            }}
             className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md border-purple-500/30 hover:border-purple-500/50 text-purple-600 hover:text-purple-700 relative overflow-hidden w-9 h-9 p-0"
             style={{
               background: `
@@ -148,7 +160,7 @@ export const DifficultySelector = ({
                 linear-gradient(135deg, rgba(249, 115, 22, 0.15) 0%, rgba(59, 130, 246, 0.15) 100%)
               `
             }}
-            title={`${t('dopamineMode')} - ${t('challengeYourLimits')}!`}
+            title={user && !isVisitorMode ? `${t('dopamineMode')} - ${t('challengeYourLimits')}!` : '多巴胺模式 - 註冊用戶專屬功能'}
           >
             <Zap className="h-4 w-4 text-white" style={{ textShadow: "2px 2px 4px rgba(0,0,0,0.5), 1px 1px 2px rgba(0,0,0,0.6)" }} />
           </Button>
@@ -189,6 +201,17 @@ export const DifficultySelector = ({
         onStartChallenge={(difficulty) => {
           setShowDopamineInfo(false);
           onDopamineMode?.(difficulty);
+        }}
+        onShowFeatureHint={() => setShowFeatureHint(true)}
+      />
+
+      {/* 功能提示模態框 */}
+      <FeatureHintModal
+        isOpen={showFeatureHint}
+        onClose={() => setShowFeatureHint(false)}
+        onBecomeUser={() => {
+          setShowFeatureHint(false);
+          onBecomeUser?.();
         }}
       />
     </div>
