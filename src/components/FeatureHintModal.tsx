@@ -51,29 +51,31 @@ export const FeatureHintModal = ({ isOpen, onClose, onBecomeUser }: FeatureHintM
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <div className="flex items-start gap-2">
-                    <span className="text-sm text-muted-foreground dark:text-muted-foreground">•</span>
-                    <p className="text-sm text-muted-foreground dark:text-muted-foreground">
-                      限時挑戰，測試你的極限
-                    </p>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <span className="text-sm text-muted-foreground dark:text-muted-foreground">•</span>
-                    <p className="text-sm text-muted-foreground dark:text-muted-foreground">
-                      連擊系統，連續正確獲得獎勵
-                    </p>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <span className="text-sm text-muted-foreground dark:text-muted-foreground">•</span>
-                    <p className="text-sm text-muted-foreground dark:text-muted-foreground">
-                      5 種難度等級，包含地獄模式
-                    </p>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <span className="text-sm text-muted-foreground dark:text-muted-foreground">•</span>
-                    <p className="text-sm text-muted-foreground dark:text-muted-foreground">
-                      專屬計分系統和排行榜
-                    </p>
+                  <div className="grid grid-cols-2 gap-x-2 gap-y-2">
+                    <div className="flex items-start gap-1">
+                      <span className="text-xs text-muted-foreground dark:text-muted-foreground">•</span>
+                      <p className="text-xs text-muted-foreground dark:text-muted-foreground">
+                        限時挑戰
+                      </p>
+                    </div>
+                    <div className="flex items-start gap-1">
+                      <span className="text-xs text-muted-foreground dark:text-muted-foreground">•</span>
+                      <p className="text-xs text-muted-foreground dark:text-muted-foreground">
+                        連擊系統
+                      </p>
+                    </div>
+                    <div className="flex items-start gap-1">
+                      <span className="text-xs text-muted-foreground dark:text-muted-foreground">•</span>
+                      <p className="text-xs text-muted-foreground dark:text-muted-foreground">
+                        5 種難度
+                      </p>
+                    </div>
+                    <div className="flex items-start gap-1">
+                      <span className="text-xs text-muted-foreground dark:text-muted-foreground">•</span>
+                      <p className="text-xs text-muted-foreground dark:text-muted-foreground">
+                        專屬計分
+                      </p>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
@@ -87,29 +89,31 @@ export const FeatureHintModal = ({ isOpen, onClose, onBecomeUser }: FeatureHintM
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <div className="flex items-start gap-2">
-                    <span className="text-sm text-muted-foreground dark:text-muted-foreground">•</span>
-                    <p className="text-sm text-muted-foreground dark:text-muted-foreground">
-                      與全球玩家競爭排名
-                    </p>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <span className="text-sm text-muted-foreground dark:text-muted-foreground">•</span>
-                    <p className="text-sm text-muted-foreground dark:text-muted-foreground">
-                      按難度和模式分類排行
-                    </p>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <span className="text-sm text-muted-foreground dark:text-muted-foreground">•</span>
-                    <p className="text-sm text-muted-foreground dark:text-muted-foreground">
-                      個人最佳成績追蹤
-                    </p>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <span className="text-sm text-muted-foreground dark:text-muted-foreground">•</span>
-                    <p className="text-sm text-muted-foreground dark:text-muted-foreground">
-                      遊戲記錄永久保存
-                    </p>
+                  <div className="grid grid-cols-2 gap-x-2 gap-y-2">
+                    <div className="flex items-start gap-1">
+                      <span className="text-xs text-muted-foreground dark:text-muted-foreground">•</span>
+                      <p className="text-xs text-muted-foreground dark:text-muted-foreground">
+                        全球競爭
+                      </p>
+                    </div>
+                    <div className="flex items-start gap-1">
+                      <span className="text-xs text-muted-foreground dark:text-muted-foreground">•</span>
+                      <p className="text-xs text-muted-foreground dark:text-muted-foreground">
+                        分類排行
+                      </p>
+                    </div>
+                    <div className="flex items-start gap-1">
+                      <span className="text-xs text-muted-foreground dark:text-muted-foreground">•</span>
+                      <p className="text-xs text-muted-foreground dark:text-muted-foreground">
+                        成績追蹤
+                      </p>
+                    </div>
+                    <div className="flex items-start gap-1">
+                      <span className="text-xs text-muted-foreground dark:text-muted-foreground">•</span>
+                      <p className="text-xs text-muted-foreground dark:text-muted-foreground">
+                        記錄保存
+                      </p>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
@@ -125,39 +129,41 @@ export const FeatureHintModal = ({ isOpen, onClose, onBecomeUser }: FeatureHintM
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
-              <div className="flex items-start gap-3">
-                <div className="flex-shrink-0 w-6 h-6 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center">
-                  <span className="text-xs font-bold text-green-600 dark:text-green-400">1</span>
+              <div className="grid grid-cols-2 gap-x-2 gap-y-3">
+                <div className="flex items-start gap-2">
+                  <div className="flex-shrink-0 w-5 h-5 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center">
+                    <span className="text-xs font-bold text-green-600 dark:text-green-400">1</span>
+                  </div>
+                  <div>
+                    <p className="text-xs font-medium text-foreground dark:text-foreground">輸入用戶名稱</p>
+                    <p className="text-xs text-muted-foreground dark:text-muted-foreground">
+                      選擇獨特名稱
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <p className="font-medium text-foreground dark:text-foreground">輸入用戶名稱</p>
-                  <p className="text-sm text-muted-foreground dark:text-muted-foreground">
-                    選擇一個獨特的用戶名稱，將成為你在排行榜上的身份
-                  </p>
+                
+                <div className="flex items-start gap-2">
+                  <div className="flex-shrink-0 w-5 h-5 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center">
+                    <span className="text-xs font-bold text-green-600 dark:text-green-400">2</span>
+                  </div>
+                  <div>
+                    <p className="text-xs font-medium text-foreground dark:text-foreground">立即開始遊戲</p>
+                    <p className="text-xs text-muted-foreground dark:text-muted-foreground">
+                      無需驗證流程
+                    </p>
+                  </div>
                 </div>
-              </div>
-              
-              <div className="flex items-start gap-3">
-                <div className="flex-shrink-0 w-6 h-6 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center">
-                  <span className="text-xs font-bold text-green-600 dark:text-green-400">2</span>
-                </div>
-                <div>
-                  <p className="font-medium text-foreground dark:text-foreground">立即開始遊戲</p>
-                  <p className="text-sm text-muted-foreground dark:text-muted-foreground">
-                    無需郵箱驗證，無需複雜註冊流程，立即享受完整功能
-                  </p>
-                </div>
-              </div>
-              
-              <div className="flex items-start gap-3">
-                <div className="flex-shrink-0 w-6 h-6 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center">
-                  <span className="text-xs font-bold text-green-600 dark:text-green-400">3</span>
-                </div>
-                <div>
-                  <p className="font-medium text-foreground dark:text-foreground">數據自動同步</p>
-                  <p className="text-sm text-muted-foreground dark:text-muted-foreground">
-                    遊戲記錄和統計數據會自動保存到雲端，隨時隨地存取
-                  </p>
+                
+                <div className="flex items-start gap-2 col-span-2">
+                  <div className="flex-shrink-0 w-5 h-5 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center">
+                    <span className="text-xs font-bold text-green-600 dark:text-green-400">3</span>
+                  </div>
+                  <div>
+                    <p className="text-xs font-medium text-foreground dark:text-foreground">數據自動同步</p>
+                    <p className="text-xs text-muted-foreground dark:text-muted-foreground">
+                      遊戲記錄自動保存到雲端
+                    </p>
+                  </div>
                 </div>
               </div>
             </CardContent>
