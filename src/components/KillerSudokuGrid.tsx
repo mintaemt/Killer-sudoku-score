@@ -59,7 +59,7 @@ export const KillerSudokuGrid = ({
   return (
     <div className="glass rounded-2xl p-3 md:p-6 shadow-apple-lg relative z-0 h-full w-full">
       <div className="aspect-square w-full h-full">
-        <div className="grid grid-cols-9 gap-0 bg-background shadow-apple-md relative h-full w-full">
+        <div className="grid grid-cols-9 gap-0 bg-background shadow-apple-md relative h-full w-full border-2 md:border-[3px] border-foreground/40">
           {grid.map((row, rowIndex) =>
             row.map((cell, colIndex) => {
               const cage = getCageForCell(rowIndex, colIndex);
@@ -83,11 +83,11 @@ export const KillerSudokuGrid = ({
                     // Text color
                     cell.given && "text-foreground font-semibold",
                     !cell.given && "text-primary",
-                    // Thick borders for 3x3 boxes (2px dark)
-                    (rowIndex % 3 === 0 || rowIndex === 0) && "border-t-2 border-t-foreground/40",
-                    (colIndex % 3 === 0 || colIndex === 0) && "border-l-2 border-l-foreground/40",
-                    rowIndex === 8 && "border-b-2 border-b-foreground/40",
-                    colIndex === 8 && "border-r-2 border-r-foreground/40",
+                    // Thick borders for 3x3 boxes (2px dark) - skip outer edges as they're handled by the outer frame
+                    rowIndex % 3 === 0 && rowIndex !== 0 && "border-t-2 border-t-foreground/40",
+                    colIndex % 3 === 0 && colIndex !== 0 && "border-l-2 border-l-foreground/40",
+                    rowIndex % 3 === 2 && rowIndex !== 8 && "border-b-2 border-b-foreground/40",
+                    colIndex % 3 === 2 && colIndex !== 8 && "border-r-2 border-r-foreground/40",
                     // Light borders only where there's no 3x3 border
                     !(rowIndex % 3 === 0 || rowIndex === 0) && "border-t border-t-border/30",
                     !(colIndex % 3 === 0 || colIndex === 0) && "border-l border-l-border/30",
