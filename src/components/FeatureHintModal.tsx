@@ -26,7 +26,7 @@ export const FeatureHintModal = ({ isOpen, onClose, onBecomeUser }: FeatureHintM
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-[630px] max-h-[90vh] overflow-y-auto">
+      <DialogContent className="w-[320px] sm:w-[400px] md:max-w-[650px] max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2 text-2xl">
             <Star className="h-6 w-6 text-yellow-500" />
@@ -129,7 +129,7 @@ export const FeatureHintModal = ({ isOpen, onClose, onBecomeUser }: FeatureHintM
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-3 px-3 pb-3">
-              <div className="grid grid-cols-2 gap-x-2 gap-y-3">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-x-2 gap-y-3">
                 <div className="flex items-start gap-2">
                   <div className="flex-shrink-0 w-5 h-5 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center">
                     <span className="text-xs font-bold text-green-600 dark:text-green-400">1</span>
@@ -154,14 +154,14 @@ export const FeatureHintModal = ({ isOpen, onClose, onBecomeUser }: FeatureHintM
                   </div>
                 </div>
                 
-                <div className="flex items-start gap-2 col-span-2">
+                <div className="flex items-start gap-2">
                   <div className="flex-shrink-0 w-5 h-5 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center">
                     <span className="text-xs font-bold text-green-600 dark:text-green-400">3</span>
                   </div>
                   <div>
                     <p className="text-xs font-medium text-foreground dark:text-foreground">數據自動同步</p>
                     <p className="text-xs text-muted-foreground dark:text-muted-foreground">
-                      遊戲記錄自動保存到雲端，隨時隨地存取
+                      遊戲記錄自動保存到雲端
                     </p>
                   </div>
                 </div>
