@@ -105,10 +105,10 @@ export const KillerSudokuGrid = ({
                         // iOS Safari 邊框渲染修復
                         "will-change-transform",
                         "backface-visibility-hidden",
-                        borders.top && "border-t border-t-foreground/90 border-dashed md:border-t-[1.5px]",
-                        borders.right && "border-r border-r-foreground/90 border-dashed md:border-r-[1.5px]",
-                        borders.bottom && "border-b border-b-foreground/90 border-dashed md:border-b-[1.5px]",
-                        borders.left && "border-l border-l-foreground/90 border-dashed md:border-l-[1.5px]"
+                        borders.top && "border-t border-t-foreground/85 border-dashed md:border-t-[1.5px]",
+                        borders.right && "border-r border-r-foreground/85 border-dashed md:border-r-[1.5px]",
+                        borders.bottom && "border-b border-b-foreground/85 border-dashed md:border-b-[1.5px]",
+                        borders.left && "border-l border-l-foreground/85 border-dashed md:border-l-[1.5px]"
                       )}
                     />
                   )}
