@@ -11,13 +11,26 @@
 - 新增 `handleDopamineGameOver` 函數以處理多巴胺模式遊戲結束
 - 重新撰寫完整的 README.md 文件，包含詳細的專案介紹和使用指南
 - 新增 CHANGELOG.md 檔案以追蹤專案變更歷史
+- 新增註解按鈕功能，支援候選數字標記
+- 新增用戶名稱唯一性檢查（不區分大小寫）
 
 ### 變更
 - 移除重複和過時的 SQL 設定檔案
 - 清理專案中不再使用的文件
+- 優化 DifficultySelector 元件佈局和間距
+- 統一按鈕尺寸和主題色彩應用
+- 改進排行榜排序邏輯（從困難到簡單）
 
 ### 修復
 - 修復 TypeScript 錯誤：`handleDopamineGameOver` 函數未定義的問題
+- 修復多語系按鈕主題色彩顯示問題
+- 修復 Dopamine 用戶統計多語系文字不變換問題
+- 修復排行榜「全部」頁籤顯示問題
+- 修復 Supabase Database Advisor 警告
+  - 修正視圖 security_invoker 設定
+  - 修正函數 search_path 參數
+  - 修正分數日誌表 RLS 政策
+- 修正用字規範，確保使用台灣正體中文
 
 ## [1.0.0] - 2025-10-20
 
