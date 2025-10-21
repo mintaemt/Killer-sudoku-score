@@ -50,7 +50,7 @@ export const FeatureHintModal = ({ isOpen, onClose, onBecomeUser }: FeatureHintM
                     </Badge>
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-3">
+                <CardContent className="space-y-4">
                   <div className="flex items-start gap-2">
                     <span className="text-sm text-muted-foreground dark:text-muted-foreground">•</span>
                     <p className="text-sm text-muted-foreground dark:text-muted-foreground">
@@ -86,7 +86,7 @@ export const FeatureHintModal = ({ isOpen, onClose, onBecomeUser }: FeatureHintM
                     全球排行榜競爭
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-3">
+                <CardContent className="space-y-4">
                   <div className="flex items-start gap-2">
                     <span className="text-sm text-muted-foreground dark:text-muted-foreground">•</span>
                     <p className="text-sm text-muted-foreground dark:text-muted-foreground">
