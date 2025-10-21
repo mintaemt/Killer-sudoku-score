@@ -105,6 +105,7 @@ export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge, onShowFea
                   >
                     <input
                       type="radio"
+                      id={`difficulty-${difficulty.value}`}
                       name="difficulty"
                       value={difficulty.value}
                       checked={selectedDifficulty === difficulty.value}
