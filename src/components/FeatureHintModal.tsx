@@ -55,25 +55,25 @@ export const FeatureHintModal = ({ isOpen, onClose, onBecomeUser }: FeatureHintM
                     <div className="flex items-start gap-1">
                       <span className="text-xs text-muted-foreground dark:text-muted-foreground">•</span>
                       <p className="text-xs text-muted-foreground dark:text-muted-foreground">
-                        限時挑戰
+                        限時挑戰模式
                       </p>
                     </div>
                     <div className="flex items-start gap-1">
                       <span className="text-xs text-muted-foreground dark:text-muted-foreground">•</span>
                       <p className="text-xs text-muted-foreground dark:text-muted-foreground">
-                        連擊系統
+                        連擊獎勵系統
                       </p>
                     </div>
                     <div className="flex items-start gap-1">
                       <span className="text-xs text-muted-foreground dark:text-muted-foreground">•</span>
                       <p className="text-xs text-muted-foreground dark:text-muted-foreground">
-                        5 種難度
+                        魔王級地獄難度
                       </p>
                     </div>
                     <div className="flex items-start gap-1">
                       <span className="text-xs text-muted-foreground dark:text-muted-foreground">•</span>
                       <p className="text-xs text-muted-foreground dark:text-muted-foreground">
-                        專屬計分
+                        專屬計分排行榜
                       </p>
                     </div>
                   </div>
@@ -93,25 +93,25 @@ export const FeatureHintModal = ({ isOpen, onClose, onBecomeUser }: FeatureHintM
                     <div className="flex items-start gap-1">
                       <span className="text-xs text-muted-foreground dark:text-muted-foreground">•</span>
                       <p className="text-xs text-muted-foreground dark:text-muted-foreground">
-                        全球競爭
+                        與全球玩家競爭
                       </p>
                     </div>
                     <div className="flex items-start gap-1">
                       <span className="text-xs text-muted-foreground dark:text-muted-foreground">•</span>
                       <p className="text-xs text-muted-foreground dark:text-muted-foreground">
-                        分類排行
+                        按難度分類排行
                       </p>
                     </div>
                     <div className="flex items-start gap-1">
                       <span className="text-xs text-muted-foreground dark:text-muted-foreground">•</span>
                       <p className="text-xs text-muted-foreground dark:text-muted-foreground">
-                        成績追蹤
+                        個人最佳成績
                       </p>
                     </div>
                     <div className="flex items-start gap-1">
                       <span className="text-xs text-muted-foreground dark:text-muted-foreground">•</span>
                       <p className="text-xs text-muted-foreground dark:text-muted-foreground">
-                        記錄保存
+                        遊戲記錄永久保存
                       </p>
                     </div>
                   </div>
@@ -137,7 +137,7 @@ export const FeatureHintModal = ({ isOpen, onClose, onBecomeUser }: FeatureHintM
                   <div>
                     <p className="text-xs font-medium text-foreground dark:text-foreground">輸入用戶名稱</p>
                     <p className="text-xs text-muted-foreground dark:text-muted-foreground">
-                      選擇獨特名稱
+                      選擇獨特的用戶名稱
                     </p>
                   </div>
                 </div>
@@ -149,7 +149,7 @@ export const FeatureHintModal = ({ isOpen, onClose, onBecomeUser }: FeatureHintM
                   <div>
                     <p className="text-xs font-medium text-foreground dark:text-foreground">立即開始遊戲</p>
                     <p className="text-xs text-muted-foreground dark:text-muted-foreground">
-                      無需驗證流程
+                      無需複雜驗證流程
                     </p>
                   </div>
                 </div>
@@ -161,7 +161,7 @@ export const FeatureHintModal = ({ isOpen, onClose, onBecomeUser }: FeatureHintM
                   <div>
                     <p className="text-xs font-medium text-foreground dark:text-foreground">數據自動同步</p>
                     <p className="text-xs text-muted-foreground dark:text-muted-foreground">
-                      遊戲記錄自動保存到雲端
+                      遊戲記錄自動保存到雲端，隨時隨地存取
                     </p>
                   </div>
                 </div>
