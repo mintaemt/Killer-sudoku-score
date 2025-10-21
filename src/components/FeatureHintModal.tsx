@@ -51,18 +51,30 @@ export const FeatureHintModal = ({ isOpen, onClose, onBecomeUser }: FeatureHintM
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
-                  <p className="text-sm text-muted-foreground dark:text-muted-foreground">
-                    • 限時挑戰，測試你的極限
-                  </p>
-                  <p className="text-sm text-muted-foreground dark:text-muted-foreground">
-                    • 連擊系統，連續正確獲得獎勵
-                  </p>
-                  <p className="text-sm text-muted-foreground dark:text-muted-foreground">
-                    • 5 種難度等級，包含地獄模式
-                  </p>
-                  <p className="text-sm text-muted-foreground dark:text-muted-foreground">
-                    • 專屬計分系統和排行榜
-                  </p>
+                  <div className="flex items-start gap-2">
+                    <span className="text-sm text-muted-foreground dark:text-muted-foreground">•</span>
+                    <p className="text-sm text-muted-foreground dark:text-muted-foreground">
+                      限時挑戰，測試你的極限
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="text-sm text-muted-foreground dark:text-muted-foreground">•</span>
+                    <p className="text-sm text-muted-foreground dark:text-muted-foreground">
+                      連擊系統，連續正確獲得獎勵
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="text-sm text-muted-foreground dark:text-muted-foreground">•</span>
+                    <p className="text-sm text-muted-foreground dark:text-muted-foreground">
+                      5 種難度等級，包含地獄模式
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="text-sm text-muted-foreground dark:text-muted-foreground">•</span>
+                    <p className="text-sm text-muted-foreground dark:text-muted-foreground">
+                      專屬計分系統和排行榜
+                    </p>
+                  </div>
                 </CardContent>
               </Card>
 
@@ -75,18 +87,30 @@ export const FeatureHintModal = ({ isOpen, onClose, onBecomeUser }: FeatureHintM
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
-                  <p className="text-sm text-muted-foreground dark:text-muted-foreground">
-                    • 與全球玩家競爭排名
-                  </p>
-                  <p className="text-sm text-muted-foreground dark:text-muted-foreground">
-                    • 按難度和模式分類排行
-                  </p>
-                  <p className="text-sm text-muted-foreground dark:text-muted-foreground">
-                    • 個人最佳成績追蹤
-                  </p>
-                  <p className="text-sm text-muted-foreground dark:text-muted-foreground">
-                    • 遊戲記錄永久保存
-                  </p>
+                  <div className="flex items-start gap-2">
+                    <span className="text-sm text-muted-foreground dark:text-muted-foreground">•</span>
+                    <p className="text-sm text-muted-foreground dark:text-muted-foreground">
+                      與全球玩家競爭排名
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="text-sm text-muted-foreground dark:text-muted-foreground">•</span>
+                    <p className="text-sm text-muted-foreground dark:text-muted-foreground">
+                      按難度和模式分類排行
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="text-sm text-muted-foreground dark:text-muted-foreground">•</span>
+                    <p className="text-sm text-muted-foreground dark:text-muted-foreground">
+                      個人最佳成績追蹤
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="text-sm text-muted-foreground dark:text-muted-foreground">•</span>
+                    <p className="text-sm text-muted-foreground dark:text-muted-foreground">
+                      遊戲記錄永久保存
+                    </p>
+                  </div>
                 </CardContent>
               </Card>
             </div>
