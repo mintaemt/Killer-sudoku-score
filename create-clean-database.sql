@@ -64,7 +64,9 @@ CREATE TABLE IF NOT EXISTS dopamine_score_logs (
 );
 
 -- 5. 創建普通模式排行榜視圖
-CREATE OR REPLACE VIEW normal_leaderboard AS
+CREATE OR REPLACE VIEW normal_leaderboard
+WITH (security_invoker=on)
+AS
 SELECT 
   u.name,
   nr.difficulty,
@@ -87,7 +89,9 @@ ORDER BY
   MAX(nr.score) DESC;
 
 -- 6. 創建多巴胺模式排行榜視圖
-CREATE OR REPLACE VIEW dopamine_leaderboard AS
+CREATE OR REPLACE VIEW dopamine_leaderboard
+WITH (security_invoker=on)
+AS
 SELECT 
   u.name,
   dr.difficulty,
@@ -132,7 +136,7 @@ BEGIN
   
   RETURN rank_position;
 END;
-$$ LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
 
 -- 8. 創建多巴胺模式排名函數
 CREATE OR REPLACE FUNCTION get_dopamine_user_rank(p_user_id UUID, p_difficulty VARCHAR)
@@ -157,7 +161,7 @@ BEGIN
   
   RETURN rank_position;
 END;
-$$ LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
 
 -- 9. 啟用 Row Level Security (RLS)
 ALTER TABLE normal_records ENABLE ROW LEVEL SECURITY;
