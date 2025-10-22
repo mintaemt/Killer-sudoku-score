@@ -894,6 +894,8 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
           <span>•</span>
           <a href="/privacy-policy.html" className="hover:text-muted-foreground transition-colors">Privacy</a>
           <span>•</span>
+          <a href="/cookie-policy.html" className="hover:text-muted-foreground transition-colors">Cookies</a>
+          <span>•</span>
           <a href="/contact.html" className="hover:text-muted-foreground transition-colors">Contact</a>
         </div>
       </footer>
