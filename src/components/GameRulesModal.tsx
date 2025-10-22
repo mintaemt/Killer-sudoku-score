@@ -117,45 +117,20 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
               </TabsContent>
 
               <TabsContent value="scoring" className="mt-6">
-                <div className="space-y-4">
-                  {/* 排行榜說明 */}
-                  <div className="p-3 rounded-lg bg-card border">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-muted-foreground">
-                      <div className="break-words">• {t('leaderboardDescription')}</div>
-                      <div className="break-words">• {t('rankingCriteria')}</div>
-                      <div className="break-words">• {t('autoUpdate')}</div>
-                      <div className="break-words">• {t('transparentScoring')}</div>
-                    </div>
-                  </div>
-
-                  {/* 計分規則 - 保持 2x2 佈局，左窄右寬 */}
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                    {/* 基礎分數 - 較窄 */}
-                    <div className="md:col-span-1 p-3 rounded-lg bg-gradient-to-r from-blue-50 to-green-50 dark:from-blue-950/20 dark:to-green-950/20 border flex flex-col">
-                      <h4 className="font-semibold mb-2 flex items-center gap-2 text-sm">
-                        <Trophy className="h-4 w-4 text-yellow-500 flex-shrink-0" />
-                        <span className="break-words">{t('basicScore')}</span>
-                      </h4>
-                      <div className="text-xs text-muted-foreground flex-1 flex flex-col justify-center">
-                        <div className="grid grid-cols-2 gap-1 text-xs h-full">
-                          <div className="text-center p-1 rounded bg-background/50 flex items-center justify-center">
-                            <div className="break-words text-[10px]">{t('easy')}: 100{t('points')}</div>
-                          </div>
-                          <div className="text-center p-1 rounded bg-background/50 flex items-center justify-center">
-                            <div className="break-words text-[10px]">{t('medium')}: 200{t('points')}</div>
-                          </div>
-                          <div className="text-center p-1 rounded bg-background/50 flex items-center justify-center">
-                            <div className="break-words text-[10px]">{t('hard')}: 300{t('points')}</div>
-                          </div>
-                          <div className="text-center p-1 rounded bg-background/50 flex items-center justify-center">
-                            <div className="break-words text-[10px]">{t('expert')}: 500{t('points')}</div>
-                          </div>
-                        </div>
+                {/* 計分規則 - 1/1/2/1 排列 */}
+                <div className="space-y-3">
+                    {/* 排行榜說明 - 全寬 */}
+                    <div className="p-3 rounded-lg bg-card border">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-muted-foreground">
+                        <div className="break-words">• {t('leaderboardDescription')}</div>
+                        <div className="break-words">• {t('rankingCriteria')}</div>
+                        <div className="break-words">• {t('autoUpdate')}</div>
+                        <div className="break-words">• {t('transparentScoring')}</div>
                       </div>
                     </div>
 
-                    {/* 時間獎勵 - 較寬 */}
-                    <div className="md:col-span-2 p-3 rounded-lg bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-950/20 dark:to-blue-950/20 border">
+                    {/* 時間獎勵 - 全寬 */}
+                    <div className="p-3 rounded-lg bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-950/20 dark:to-blue-950/20 border">
                       <h4 className="font-semibold mb-2 flex items-center gap-2 text-sm">
                         <Clock className="h-4 w-4 text-blue-500 flex-shrink-0" />
                         <span className="break-words">{t('timeBonus')}</span>
@@ -187,37 +162,64 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
                       </div>
                     </div>
 
-                    {/* 錯誤懲罰 - 較窄 */}
-                    <div className="md:col-span-1 p-3 rounded-lg bg-gradient-to-r from-red-50 to-orange-50 dark:from-red-950/20 dark:to-orange-950/20 border">
-                      <h4 className="font-semibold mb-2 flex items-center gap-2 text-sm">
-                        <Target className="h-4 w-4 text-red-500 flex-shrink-0" />
-                        <span className="break-words">{t('mistakePenalty')}</span>
-                        <Badge variant="destructive" className="text-xs px-1 py-0.5 flex-shrink-0">{t('mistake')}</Badge>
-                        <span className="text-xs text-muted-foreground break-words">{t('mistakePenaltyDescription')}</span>
-                      </h4>
-                      <div className="space-y-1.5 text-xs text-muted-foreground">
-                        <div className="mt-2">
-                          <div className="text-xs font-medium text-muted-foreground mb-1 break-words">{t('minimumScore')}:</div>
-                          <div className="grid grid-cols-2 gap-1 text-xs">
-                            <div className="text-center p-1 rounded bg-background/50 flex items-center justify-center min-h-[2rem]">
-                              <div className="break-words text-[10px]">{t('easy')}: 20{t('points')}</div>
+                    {/* 基礎分數 + 錯誤懲罰 - 並排 */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      {/* 基礎分數 */}
+                      <div className="p-3 rounded-lg bg-gradient-to-r from-blue-50 to-green-50 dark:from-blue-950/20 dark:to-green-950/20 border flex flex-col">
+                        <h4 className="font-semibold mb-2 flex items-center gap-2 text-sm">
+                          <Trophy className="h-4 w-4 text-yellow-500 flex-shrink-0" />
+                          <span className="break-words">{t('basicScore')}</span>
+                        </h4>
+                        <div className="text-xs text-muted-foreground flex-1 flex flex-col justify-center">
+                          <div className="grid grid-cols-2 gap-1 text-xs h-full">
+                            <div className="text-center p-1 rounded bg-background/50 flex items-center justify-center">
+                              <div className="break-words text-[10px]">{t('easy')}: 100{t('points')}</div>
                             </div>
-                            <div className="text-center p-1 rounded bg-background/50 flex items-center justify-center min-h-[2rem]">
-                              <div className="break-words text-[10px]">{t('medium')}: 40{t('points')}</div>
+                            <div className="text-center p-1 rounded bg-background/50 flex items-center justify-center">
+                              <div className="break-words text-[10px]">{t('medium')}: 200{t('points')}</div>
                             </div>
-                            <div className="text-center p-1 rounded bg-background/50 flex items-center justify-center min-h-[2rem]">
-                              <div className="break-words text-[10px]">{t('hard')}: 60{t('points')}</div>
+                            <div className="text-center p-1 rounded bg-background/50 flex items-center justify-center">
+                              <div className="break-words text-[10px]">{t('hard')}: 300{t('points')}</div>
                             </div>
-                            <div className="text-center p-1 rounded bg-background/50 flex items-center justify-center min-h-[2rem]">
-                              <div className="break-words text-[10px]">{t('expert')}: 100{t('points')}</div>
+                            <div className="text-center p-1 rounded bg-background/50 flex items-center justify-center">
+                              <div className="break-words text-[10px]">{t('expert')}: 500{t('points')}</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* 錯誤懲罰 */}
+                      <div className="p-3 rounded-lg bg-gradient-to-r from-red-50 to-orange-50 dark:from-red-950/20 dark:to-orange-950/20 border">
+                        <h4 className="font-semibold mb-2 flex items-center gap-2 text-sm">
+                          <Target className="h-4 w-4 text-red-500 flex-shrink-0" />
+                          <span className="break-words">{t('mistakePenalty')}</span>
+                          <Badge variant="destructive" className="text-xs px-1 py-0.5 flex-shrink-0">{t('mistake')}</Badge>
+                          <span className="text-xs text-muted-foreground break-words">{t('mistakePenaltyDescription')}</span>
+                        </h4>
+                        <div className="space-y-1.5 text-xs text-muted-foreground">
+                          <div className="mt-2">
+                            <div className="text-xs font-medium text-muted-foreground mb-1 break-words">{t('minimumScore')}:</div>
+                            <div className="grid grid-cols-2 gap-1 text-xs">
+                              <div className="text-center p-1 rounded bg-background/50 flex items-center justify-center min-h-[2rem]">
+                                <div className="break-words text-[10px]">{t('easy')}: 20{t('points')}</div>
+                              </div>
+                              <div className="text-center p-1 rounded bg-background/50 flex items-center justify-center min-h-[2rem]">
+                                <div className="break-words text-[10px]">{t('medium')}: 40{t('points')}</div>
+                              </div>
+                              <div className="text-center p-1 rounded bg-background/50 flex items-center justify-center min-h-[2rem]">
+                                <div className="break-words text-[10px]">{t('hard')}: 60{t('points')}</div>
+                              </div>
+                              <div className="text-center p-1 rounded bg-background/50 flex items-center justify-center min-h-[2rem]">
+                                <div className="break-words text-[10px]">{t('expert')}: 100{t('points')}</div>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
 
-                    {/* 分數計算公式 - 較寬 */}
-                    <div className="md:col-span-2 p-3 rounded-lg bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/20 dark:to-pink-950/20 border">
+                    {/* 分數計算公式 - 全寬 */}
+                    <div className="p-3 rounded-lg bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/20 dark:to-pink-950/20 border">
                       <h4 className="font-semibold mb-2 flex items-center gap-2 text-sm">
                         <Calculator className="h-4 w-4 text-purple-500 flex-shrink-0" />
                         <span className="break-words">{t('calculationFormula')}</span>
