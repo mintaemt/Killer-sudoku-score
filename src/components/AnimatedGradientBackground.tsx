@@ -101,6 +101,7 @@ export const AnimatedGradientBackground = ({ isDopamineMode = false }: AnimatedG
   }
 
   // 普通模式：根據light/dark mode調整透明度
+  const blue = getThemeColorRgb('blue');
   const orange = getThemeColorRgb('orange');
   const green = getThemeColorRgb('green');
   const purple = getThemeColorRgb('purple');
@@ -108,6 +109,7 @@ export const AnimatedGradientBackground = ({ isDopamineMode = false }: AnimatedG
   const teal = getThemeColorRgb('teal');
   
   // 調整到30%透明度
+  const blueOpacity = 0.3; // 30%透明度
   const orangeOpacity = 0.3; // 30%透明度
   const greenOpacity = 0.25;
   const purpleOpacity = 0.2;
@@ -122,6 +124,7 @@ export const AnimatedGradientBackground = ({ isDopamineMode = false }: AnimatedG
       className="fixed inset-0 -z-10"
       style={{
         background: `
+          radial-gradient(circle farthest-corner at ${20 + Math.sin(animationPhase * 0.008) * 12}% ${20 + Math.cos(animationPhase * 0.008) * 12}%, rgba(${blue.r}, ${blue.g}, ${blue.b}, ${blueOpacity}) 0%, rgba(${blue.r}, ${blue.g}, ${blue.b}, 0) 50%),
           radial-gradient(circle farthest-corner at ${30 + Math.sin(animationPhase * 0.01) * 10}% ${30 + Math.cos(animationPhase * 0.01) * 10}%, rgba(${orange.r}, ${orange.g}, ${orange.b}, ${orangeOpacity}) 0%, rgba(${orange.r}, ${orange.g}, ${orange.b}, 0) 50%),
           radial-gradient(circle farthest-corner at ${70 + Math.sin(animationPhase * 0.012) * 15}% ${70 + Math.cos(animationPhase * 0.012) * 15}%, rgba(${green.r}, ${green.g}, ${green.b}, ${greenOpacity}) 0%, rgba(${green.r}, ${green.g}, ${green.b}, 0) 40%),
           radial-gradient(circle farthest-corner at ${30 + Math.sin(animationPhase * 0.016) * 18}% ${70 + Math.cos(animationPhase * 0.016) * 18}%, rgba(${purple.r}, ${purple.g}, ${purple.b}, ${purpleOpacity}) 0%, rgba(${purple.r}, ${purple.g}, ${purple.b}, 0) 35%),
