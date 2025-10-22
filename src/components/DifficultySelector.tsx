@@ -126,10 +126,10 @@ export const DifficultySelector = ({
               className={cn(
                 "transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md w-9 h-9 p-0",
                 hintCount > 0 && selectedCell
-                  ? "bg-primary text-primary-foreground border-primary/30 shadow-apple-md"
+                  ? "bg-primary text-primary-foreground hover:text-primary-foreground border-primary/30 shadow-apple-md"
                   : hintCount > 0
-                  ? "border-border/50 hover:bg-muted/50 text-foreground"
-                  : "border-border/30 hover:bg-muted/30 text-muted-foreground"
+                  ? "border-border/50 hover:bg-muted/50 text-foreground hover:text-foreground"
+                  : "border-border/30 hover:bg-muted/30 text-muted-foreground hover:text-muted-foreground"
               )}
               title={hintCount > 0 ? "提示" : "提示次數已用完"}
             >
