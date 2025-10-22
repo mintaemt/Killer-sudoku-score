@@ -188,7 +188,7 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
 
                     {/* 分數計算公式 - 全寬 */}
                     <div className="p-3 rounded-lg bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/20 dark:to-pink-950/20 border">
-                      <h4 className="font-semibold mb-2 flex items-center gap-2 text-sm">
+                      <h4 className="font-semibold mb-2 flex items-center justify-center gap-2 text-sm">
                         <Calculator className="h-4 w-4 text-purple-500 flex-shrink-0" />
                         <span className="break-words">{t('calculationFormula')}</span>
                         <span className="text-xs text-muted-foreground break-words">最終分數 = max(基礎分數 × 0.2, 基礎分數 + 時間獎勵 - 錯誤懲罰)</span>
