@@ -929,8 +929,8 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
 
         {/* 行動版：兩行佈局 */}
         <div className="block md:hidden">
-          {/* 第一行：法律文件連結居中，GitHub icon 在右 */}
-          <div className="flex items-center justify-center relative mb-2">
+          {/* 第一行：法律文件連結居中 */}
+          <div className="text-center mb-2">
             <div className="text-xs text-muted-foreground/60 space-x-3">
               <a href="/terms-of-service.html" className="hover:text-muted-foreground transition-colors">Terms</a>
               <span>•</span>
@@ -939,6 +939,13 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
               <a href="/cookie-policy.html" className="hover:text-muted-foreground transition-colors">Cookies</a>
               <span>•</span>
               <a href="/contact.html" className="hover:text-muted-foreground transition-colors">Contact</a>
+            </div>
+          </div>
+          
+          {/* 第二行：版權資訊居中，GitHub icon 在右 */}
+          <div className="flex items-center justify-center relative">
+            <div className="text-xs text-muted-foreground/50">
+              © 2025 mintae. All rights reserved.
             </div>
             <div className="absolute right-0 text-xs">
               <a 
@@ -953,11 +960,6 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
                 </svg>
               </a>
             </div>
-          </div>
-          
-          {/* 第二行：版權資訊居中 */}
-          <div className="text-center text-xs text-muted-foreground/50">
-            © 2025 mintae. All rights reserved.
           </div>
         </div>
       </div>
