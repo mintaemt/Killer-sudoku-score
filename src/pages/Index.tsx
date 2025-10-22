@@ -945,6 +945,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
         isOpen={showHintAdModal}
         onClose={() => setShowHintAdModal(false)}
         onWatchAd={handleWatchAd}
+        currentTheme={currentTheme}
       />
 
     </div>
