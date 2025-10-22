@@ -461,6 +461,15 @@
                 const button = document.querySelector(`button[onclick*="showTab('${tabName}')"]`);
                 if (button) {
                     button.classList.add('active');
+                    console.log('Found and activated button for tab:', tabName); // 調試用
+                } else {
+                    console.log('Button not found for tab:', tabName); // 調試用
+                    // 嘗試其他選擇器
+                    const altButton = document.querySelector(`button[onclick*="${tabName}"]`);
+                    if (altButton) {
+                        altButton.classList.add('active');
+                        console.log('Found button with alternative selector:', tabName);
+                    }
                 }
             }
         }
@@ -469,18 +478,23 @@
         function checkUrlParams() {
             const urlParams = new URLSearchParams(window.location.search);
             const tab = urlParams.get('tab');
+            console.log('URL tab parameter:', tab); // 調試用
             if (tab && ['terms', 'privacy', 'cookie', 'contact'].includes(tab)) {
                 // 延遲執行，確保DOM完全載入和翻譯完成
                 setTimeout(() => {
+                    console.log('Calling showTab for:', tab); // 調試用
                     showTab(tab);
                     // 再次確保按鈕狀態正確
                     setTimeout(() => {
                         const button = document.querySelector(`button[onclick*="showTab('${tab}')"]`);
                         if (button) {
                             button.classList.add('active');
+                            console.log('Manually activated button for:', tab); // 調試用
+                        } else {
+                            console.log('Failed to find button for:', tab); // 調試用
                         }
-                    }, 50);
-                }, 200);
+                    }, 100);
+                }, 300);
             }
         }
 
