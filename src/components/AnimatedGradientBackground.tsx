@@ -67,7 +67,16 @@ export const AnimatedGradientBackground = ({ isDopamineMode = false }: AnimatedG
   // 檢測系統主題
   useEffect(() => {
     const checkTheme = () => {
-      setIsDarkMode(window.matchMedia('(prefers-color-scheme: dark)').matches);
+      // 檢測系統主題偏好
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      // 檢測HTML根元素的data-theme屬性
+      const htmlTheme = document.documentElement.getAttribute('data-theme');
+      // 檢測是否有dark類名
+      const hasDarkClass = document.documentElement.classList.contains('dark');
+      
+      // 綜合判斷是否為dark mode
+      const isDark = prefersDark || hasDarkClass || htmlTheme === 'dark';
+      setIsDarkMode(isDark);
     };
     
     checkTheme();
@@ -109,16 +118,13 @@ export const AnimatedGradientBackground = ({ isDopamineMode = false }: AnimatedG
   const pink = getThemeColorRgb('pink');
   const teal = getThemeColorRgb('teal');
   
-  // 調整到30%透明度
-  const blueOpacity = 0.3; // 30%透明度
-  const orangeOpacity = 0.3; // 30%透明度
-  const greenOpacity = 0.25;
-  const purpleOpacity = 0.2;
-  const pinkOpacity = 0.15;
-  const linearOpacity = 0.1;
-  
-  // 調試：檢查主題檢測
-  console.log('isDarkMode:', isDarkMode, 'orangeOpacity:', orangeOpacity);
+  // 根據主題模式調整透明度
+  const blueOpacity = isDarkMode ? 0.12 : 0.3; // light mode 30%透明度
+  const orangeOpacity = isDarkMode ? 0.15 : 0.3;
+  const greenOpacity = isDarkMode ? 0.12 : 0.25;
+  const purpleOpacity = isDarkMode ? 0.08 : 0.2;
+  const pinkOpacity = isDarkMode ? 0.05 : 0.15;
+  const linearOpacity = isDarkMode ? 0.01 : 0.1;
   
   return (
     <div 
