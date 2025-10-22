@@ -36,7 +36,12 @@ const Index = () => {
   const [gameData, setGameData] = useState(generateKillerSudoku(difficulty));
   const [time, setTime] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [currentTheme, setCurrentTheme] = useState("blue");
+  const [currentTheme, setCurrentTheme] = useState(() => {
+    const savedTheme = localStorage.getItem('killer-sudoku-theme');
+    return savedTheme && ['blue', 'orange', 'green', 'purple', 'pink', 'teal'].includes(savedTheme) 
+      ? savedTheme 
+      : 'blue';
+  });
   
   // 多巴胺模式狀態
   const [isDopamineMode, setIsDopamineMode] = useState(false);
@@ -470,6 +475,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
   const handleThemeChange = (theme: string) => {
     setCurrentTheme(theme);
     document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('killer-sudoku-theme', theme);
   };
 
   // 處理排行榜顯示
@@ -604,11 +610,13 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
     setIsPaused(true);
   };
 
-  // 檢查環境變數
+  // 檢查環境變數和初始化主題
   useEffect(() => {
     checkEnvironment();
     testSupabaseConnection();
-  }, []);
+    // 應用保存的主題
+    document.documentElement.setAttribute('data-theme', currentTheme);
+  }, [currentTheme]);
 
   // 返回主選單
   const handleReturnToMain = () => {

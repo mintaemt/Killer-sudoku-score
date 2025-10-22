@@ -397,10 +397,13 @@
         // 檢測並應用主題
         function detectAndApplyTheme() {
             const savedTheme = localStorage.getItem('killer-sudoku-theme');
+            console.log('Detected theme:', savedTheme); // 調試用
             if (savedTheme && ['blue', 'orange', 'green', 'purple', 'pink', 'teal'].includes(savedTheme)) {
                 document.documentElement.setAttribute('data-theme', savedTheme);
+                console.log('Applied theme:', savedTheme); // 調試用
             } else {
                 document.documentElement.setAttribute('data-theme', 'blue');
+                console.log('Applied default theme: blue'); // 調試用
             }
         }
 
