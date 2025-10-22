@@ -64,7 +64,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
           <div className="flex flex-col items-start">
             <h1 
               className="font-bold tracking-tight leading-tight text-sm md:text-lg"
-              style={isVisitorMode ? { fontSize: '20px' } : {}}
+              style={isVisitorMode ? { fontSize: '24px' } : {}}
             >
               {t('gameTitle')}
             </h1>
