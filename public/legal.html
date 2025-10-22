@@ -38,9 +38,14 @@
             background-color: var(--bg-color);
             color: var(--text-color);
         }
+        .header-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
         .language-selector { 
-            text-align: center; 
-            margin-bottom: 20px; 
+            margin: 0;
         }
         .language-selector select { 
             padding: 8px 16px; 
@@ -74,7 +79,7 @@
             color: var(--primary-hover);
         }
         .content-section {
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             padding: 16px;
             border: 1px solid var(--border-light);
             border-radius: 6px;
@@ -83,7 +88,6 @@
         .nav-tabs {
             display: flex;
             gap: 8px;
-            margin-bottom: 16px;
         }
         .nav-tab {
             padding: 8px 16px;
@@ -125,20 +129,22 @@
     </style>
 </head>
 <body>
-    <div class="language-selector">
-        <select id="langSelect" onchange="setLanguage(this.value)">
-            <option value="en">English</option>
-            <option value="zh">中文</option>
-            <option value="ko">한국어</option>
-            <option value="ja">日本語</option>
-        </select>
-    </div>
-
-    <div class="nav-tabs">
-        <button class="nav-tab active" onclick="showTab('terms')" data-i18n="terms"></button>
-        <button class="nav-tab" onclick="showTab('privacy')" data-i18n="privacy"></button>
-        <button class="nav-tab" onclick="showTab('cookie')" data-i18n="cookies"></button>
-        <button class="nav-tab" onclick="showTab('contact')" data-i18n="contact"></button>
+    <div class="header-section">
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showTab('terms')" data-i18n="terms"></button>
+            <button class="nav-tab" onclick="showTab('privacy')" data-i18n="privacy"></button>
+            <button class="nav-tab" onclick="showTab('cookie')" data-i18n="cookies"></button>
+            <button class="nav-tab" onclick="showTab('contact')" data-i18n="contact"></button>
+        </div>
+        
+        <div class="language-selector">
+            <select id="langSelect" onchange="setLanguage(this.value)">
+                <option value="en">English</option>
+                <option value="zh">中文</option>
+                <option value="ko">한국어</option>
+                <option value="ja">日本語</option>
+            </select>
+        </div>
     </div>
 
     <!-- Terms of Service Tab -->
