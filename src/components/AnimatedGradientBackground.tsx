@@ -53,6 +53,7 @@ const getThemeColorRgb = (themeKey: keyof typeof themeColors) => {
 
 export const AnimatedGradientBackground = ({ isDopamineMode = false }: AnimatedGradientBackgroundProps) => {
   const [animationPhase, setAnimationPhase] = useState(0);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -60,6 +61,19 @@ export const AnimatedGradientBackground = ({ isDopamineMode = false }: AnimatedG
     }, 50); // 減少間隔時間，提高更新頻率
 
     return () => clearInterval(interval);
+  }, []);
+
+  // 檢測系統主題
+  useEffect(() => {
+    const checkTheme = () => {
+      setIsDarkMode(window.matchMedia('(prefers-color-scheme: dark)').matches);
+    };
+    
+    checkTheme();
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    mediaQuery.addEventListener('change', checkTheme);
+    
+    return () => mediaQuery.removeEventListener('change', checkTheme);
   }, []);
 
   if (isDopamineMode) {
@@ -86,23 +100,31 @@ export const AnimatedGradientBackground = ({ isDopamineMode = false }: AnimatedG
     );
   }
 
-  // 普通模式：使用主題顏色的柔和漸層
+  // 普通模式：根據light/dark mode調整透明度
   const orange = getThemeColorRgb('orange');
   const green = getThemeColorRgb('green');
   const purple = getThemeColorRgb('purple');
   const pink = getThemeColorRgb('pink');
   const teal = getThemeColorRgb('teal');
   
+  // 根據主題模式調整透明度
+  const opacityMultiplier = isDarkMode ? 1.5 : 1; // dark mode更明顯，light mode更淡
+  const orangeOpacity = isDarkMode ? 0.15 : 0.25; // light mode增加透明度
+  const greenOpacity = isDarkMode ? 0.12 : 0.2;
+  const purpleOpacity = isDarkMode ? 0.08 : 0.15;
+  const pinkOpacity = isDarkMode ? 0.05 : 0.1;
+  const linearOpacity = isDarkMode ? 0.01 : 0.02;
+  
   return (
     <div 
       className="fixed inset-0 -z-10"
       style={{
         background: `
-          radial-gradient(circle farthest-corner at ${30 + Math.sin(animationPhase * 0.01) * 10}% ${30 + Math.cos(animationPhase * 0.01) * 10}%, rgba(${orange.r}, ${orange.g}, ${orange.b}, 0.1) 0%, rgba(${orange.r}, ${orange.g}, ${orange.b}, 0) 50%),
-          radial-gradient(circle farthest-corner at ${70 + Math.sin(animationPhase * 0.012) * 15}% ${70 + Math.cos(animationPhase * 0.012) * 15}%, rgba(${green.r}, ${green.g}, ${green.b}, 0.08) 0%, rgba(${green.r}, ${green.g}, ${green.b}, 0) 40%),
-          radial-gradient(circle farthest-corner at ${30 + Math.sin(animationPhase * 0.016) * 18}% ${70 + Math.cos(animationPhase * 0.016) * 18}%, rgba(${purple.r}, ${purple.g}, ${purple.b}, 0.05) 0%, rgba(${purple.r}, ${purple.g}, ${purple.b}, 0) 35%),
-          radial-gradient(ellipse at ${50 + Math.sin(animationPhase * 0.008) * 8}% ${50 + Math.cos(animationPhase * 0.008) * 8}%, rgba(${pink.r}, ${pink.g}, ${pink.b}, 0.02) 0%, rgba(${pink.r}, ${pink.g}, ${pink.b}, 0) 60%),
-          linear-gradient(${animationPhase % 360}deg, rgba(${teal.r}, ${teal.g}, ${teal.b}, 0.005) 0%, rgba(${purple.r}, ${purple.g}, ${purple.b}, 0.005) 50%, rgba(${pink.r}, ${pink.g}, ${pink.b}, 0.005) 100%)
+          radial-gradient(circle farthest-corner at ${30 + Math.sin(animationPhase * 0.01) * 10}% ${30 + Math.cos(animationPhase * 0.01) * 10}%, rgba(${orange.r}, ${orange.g}, ${orange.b}, ${orangeOpacity}) 0%, rgba(${orange.r}, ${orange.g}, ${orange.b}, 0) 50%),
+          radial-gradient(circle farthest-corner at ${70 + Math.sin(animationPhase * 0.012) * 15}% ${70 + Math.cos(animationPhase * 0.012) * 15}%, rgba(${green.r}, ${green.g}, ${green.b}, ${greenOpacity}) 0%, rgba(${green.r}, ${green.g}, ${green.b}, 0) 40%),
+          radial-gradient(circle farthest-corner at ${30 + Math.sin(animationPhase * 0.016) * 18}% ${70 + Math.cos(animationPhase * 0.016) * 18}%, rgba(${purple.r}, ${purple.g}, ${purple.b}, ${purpleOpacity}) 0%, rgba(${purple.r}, ${purple.g}, ${purple.b}, 0) 35%),
+          radial-gradient(ellipse at ${50 + Math.sin(animationPhase * 0.008) * 8}% ${50 + Math.cos(animationPhase * 0.008) * 8}%, rgba(${pink.r}, ${pink.g}, ${pink.b}, ${pinkOpacity}) 0%, rgba(${pink.r}, ${pink.g}, ${pink.b}, 0) 60%),
+          linear-gradient(${animationPhase % 360}deg, rgba(${teal.r}, ${teal.g}, ${teal.b}, ${linearOpacity}) 0%, rgba(${purple.r}, ${purple.g}, ${purple.b}, ${linearOpacity}) 50%, rgba(${pink.r}, ${pink.g}, ${pink.b}, ${linearOpacity}) 100%)
         `
       }}
     />
