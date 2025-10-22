@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal Documents - Killer Sudoku Score</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            max-width: 800px; 
+            margin: 0 auto; 
+            padding: 20px; 
+            line-height: 1.6; 
+        }
+        .language-selector { 
+            text-align: center; 
+            margin-bottom: 30px; 
+        }
+        .language-selector select { 
+            padding: 8px 16px; 
+            border: 1px solid #ccc; 
+            background: #f9f9f9; 
+            cursor: pointer; 
+            font-size: 16px;
+        }
+        h1 { 
+            color: #333; 
+            border-bottom: 2px solid #007bff; 
+            padding-bottom: 10px; 
+        }
+        h2 { 
+            color: #666; 
+            margin-top: 30px; 
+        }
+        .back-link { 
+            text-align: center; 
+            margin-top: 30px; 
+        }
+        .back-link a { 
+            color: #007bff; 
+            text-decoration: none; 
+        }
+        .content-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+        }
+        .nav-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .nav-tab {
+            padding: 10px 20px;
+            background: #f0f0f0;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .nav-tab.active {
+            background: #007bff;
+            color: white;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="language-selector">
+        <select id="langSelect" onchange="setLanguage(this.value)">
+            <option value="en">English</option>
+            <option value="zh">中文</option>
+            <option value="ko">한국어</option>
+            <option value="ja">日本語</option>
+        </select>
+    </div>
+
+    <div class="nav-tabs">
+        <button class="nav-tab active" onclick="showTab('privacy')" data-i18n="privacy"></button>
+        <button class="nav-tab" onclick="showTab('terms')" data-i18n="terms"></button>
+        <button class="nav-tab" onclick="showTab('cookie')" data-i18n="cookies"></button>
+        <button class="nav-tab" onclick="showTab('contact')" data-i18n="contact"></button>
+    </div>
+
+    <!-- Privacy Policy Tab -->
+    <div id="privacy" class="tab-content active">
+        <h1 data-i18n="privacy_title"></h1>
+        <p><em data-i18n="last_updated"></em></p>
+        
+        <div class="content-section">
+            <h2 data-i18n="privacy_intro_title"></h2>
+            <p data-i18n="privacy_intro_content"></p>
+        </div>
+        
+        <div class="content-section">
+            <h2 data-i18n="privacy_collect_title"></h2>
+            <p data-i18n="privacy_collect_content"></p>
+        </div>
+        
+        <div class="content-section">
+            <h2 data-i18n="privacy_use_title"></h2>
+            <p data-i18n="privacy_use_content"></p>
+        </div>
+        
+        <div class="content-section">
+            <h2 data-i18n="privacy_storage_title"></h2>
+            <p data-i18n="privacy_storage_content"></p>
+        </div>
+        
+        <div class="content-section">
+            <h2 data-i18n="privacy_cookies_title"></h2>
+            <p data-i18n="privacy_cookies_content"></p>
+        </div>
+        
+        <div class="content-section">
+            <h2 data-i18n="privacy_rights_title"></h2>
+            <p data-i18n="privacy_rights_content"></p>
+        </div>
+        
+        <div class="content-section">
+            <h2 data-i18n="privacy_changes_title"></h2>
+            <p data-i18n="privacy_changes_content"></p>
+        </div>
+        
+        <div class="content-section">
+            <h2 data-i18n="privacy_contact_title"></h2>
+            <p data-i18n="privacy_contact_content"></p>
+        </div>
+    </div>
+
+    <!-- Terms of Service Tab -->
+    <div id="terms" class="tab-content">
+        <h1 data-i18n="terms_title"></h1>
+        <p><em data-i18n="last_updated"></em></p>
+        
+        <div class="content-section">
+            <h2 data-i18n="terms_intro_title"></h2>
+            <p data-i18n="terms_intro_content"></p>
+        </div>
+        
+        <div class="content-section">
+            <h2 data-i18n="terms_accept_title"></h2>
+            <p data-i18n="terms_accept_content"></p>
+        </div>
+        
+        <div class="content-section">
+            <h2 data-i18n="terms_license_title"></h2>
+            <p data-i18n="terms_license_content"></p>
+        </div>
+        
+        <div class="content-section">
+            <h2 data-i18n="terms_restrictions_title"></h2>
+            <p data-i18n="terms_restrictions_content"></p>
+        </div>
+        
+        <div class="content-section">
+            <h2 data-i18n="terms_conduct_title"></h2>
+            <p data-i18n="terms_conduct_content"></p>
+        </div>
+        
+        <div class="content-section">
+            <h2 data-i18n="terms_privacy_title"></h2>
+            <p data-i18n="terms_privacy_content"></p>
+        </div>
+        
+        <div class="content-section">
+            <h2 data-i18n="terms_modifications_title"></h2>
+            <p data-i18n="terms_modifications_content"></p>
+        </div>
+        
+        <div class="content-section">
+            <h2 data-i18n="terms_termination_title"></h2>
+            <p data-i18n="terms_termination_content"></p>
+        </div>
+        
+        <div class="content-section">
+            <h2 data-i18n="terms_contact_title"></h2>
+            <p data-i18n="terms_contact_content"></p>
+        </div>
+    </div>
+
+    <!-- Cookie Policy Tab -->
+    <div id="cookie" class="tab-content">
+        <h1 data-i18n="cookie_title"></h1>
+        <p><em data-i18n="last_updated"></em></p>
+        
+        <div class="content-section">
+            <h2 data-i18n="cookie_intro_title"></h2>
+            <p data-i18n="cookie_intro_content"></p>
+        </div>
+        
+        <div class="content-section">
+            <h2 data-i18n="cookie_what_title"></h2>
+            <p data-i18n="cookie_what_content"></p>
+        </div>
+        
+        <div class="content-section">
+            <h2 data-i18n="cookie_types_title"></h2>
+            <p data-i18n="cookie_types_content"></p>
+        </div>
+        
+        <div class="content-section">
+            <h2 data-i18n="cookie_storage_title"></h2>
+            <p data-i18n="cookie_storage_content"></p>
+        </div>
+        
+        <div class="content-section">
+            <h2 data-i18n="cookie_manage_title"></h2>
+            <p data-i18n="cookie_manage_content"></p>
+        </div>
+        
+        <div class="content-section">
+            <h2 data-i18n="cookie_third_title"></h2>
+            <p data-i18n="cookie_third_content"></p>
+        </div>
+        
+        <div class="content-section">
+            <h2 data-i18n="cookie_contact_title"></h2>
+            <p data-i18n="cookie_contact_content"></p>
+        </div>
+    </div>
+
+    <!-- Contact Tab -->
+    <div id="contact" class="tab-content">
+        <h1 data-i18n="contact_title"></h1>
+        
+        <div class="content-section">
+            <h2 data-i18n="contact_email_title"></h2>
+            <p data-i18n="contact_email_content"></p>
+            <p><strong>mintae@example.com</strong></p>
+            <p data-i18n="contact_email_response"></p>
+        </div>
+        
+        <div class="content-section">
+            <h2 data-i18n="contact_issues_title"></h2>
+            <p data-i18n="contact_issues_content"></p>
+        </div>
+        
+        <div class="content-section">
+            <h2 data-i18n="contact_suggestions_title"></h2>
+            <p data-i18n="contact_suggestions_content"></p>
+        </div>
+        
+        <div class="content-section">
+            <h2 data-i18n="contact_github_title"></h2>
+            <p data-i18n="contact_github_content"></p>
+            <p><a href="https://github.com/mintaemt/Killer-sudoku-score" target="_blank">https://github.com/mintaemt/Killer-sudoku-score</a></p>
+        </div>
+        
+        <div class="content-section">
+            <h2 data-i18n="contact_faq_title"></h2>
+            <p><strong data-i18n="contact_faq_q1"></strong></p>
+            <p data-i18n="contact_faq_a1"></p>
+            
+            <p><strong data-i18n="contact_faq_q2"></strong></p>
+            <p data-i18n="contact_faq_a2"></p>
+            
+            <p><strong data-i18n="contact_faq_q3"></strong></p>
+            <p data-i18n="contact_faq_a3"></p>
+        </div>
+    </div>
+
+    <div class="back-link">
+        <a href="/" data-i18n="back_home"></a>
+    </div>
+
+    <script>
+        // 檢測用戶語言
+        function detectLanguage() {
+            const saved = localStorage.getItem('killer-sudoku-language');
+            if (saved && ['en', 'zh', 'ko', 'ja'].includes(saved)) return saved;
+            
+            const browserLang = navigator.language.toLowerCase();
+            if (browserLang.startsWith('zh')) return 'zh';
+            if (browserLang.startsWith('ko')) return 'ko';
+            if (browserLang.startsWith('ja')) return 'ja';
+            return 'en';
+        }
+
+        // 設置語言
+        function setLanguage(lang) {
+            localStorage.setItem('killer-sudoku-language', lang);
+            document.getElementById('langSelect').value = lang;
+            loadTranslations(lang);
+        }
+
+        // 載入翻譯
+        function loadTranslations(lang) {
+            fetch(`/lang/${lang}.json`)
+                .then(res => res.json())
+                .then(data => {
+                    document.querySelectorAll("[data-i18n]").forEach(el => {
+                        const key = el.getAttribute("data-i18n");
+                        if (data[key]) {
+                            el.textContent = data[key];
+                        }
+                    });
+                })
+                .catch(err => {
+                    console.error('Failed to load translations:', err);
+                    // 如果載入失敗，使用英文作為備用
+                    if (lang !== 'en') {
+                        loadTranslations('en');
+                    }
+                });
+        }
+
+        // 顯示標籤頁
+        function showTab(tabName) {
+            // 隱藏所有標籤頁內容
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // 移除所有標籤按鈕的active狀態
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // 顯示選中的標籤頁
+            document.getElementById(tabName).classList.add('active');
+            
+            // 設置對應按鈕為active
+            event.target.classList.add('active');
+        }
+
+        // 初始化
+        const currentLang = detectLanguage();
+        document.getElementById('langSelect').value = currentLang;
+        loadTranslations(currentLang);
+    </script>
+</body>
+</html>
