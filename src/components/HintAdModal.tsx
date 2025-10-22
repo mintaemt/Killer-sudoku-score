@@ -23,7 +23,7 @@ export const HintAdModal: React.FC<HintAdModalProps> = ({
             觀看廣告獲得提示
           </DialogTitle>
           <DialogDescription>
-            您的免費提示次數已用完，觀看廣告後可獲得額外提示
+            免費提示次數已用完，觀看廣告獲得額外提示
           </DialogDescription>
         </DialogHeader>
         
