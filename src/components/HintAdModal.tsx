@@ -28,11 +28,11 @@ export const HintAdModal: React.FC<HintAdModalProps> = ({
         </DialogHeader>
         
         <div className="space-y-4">
-          <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
-            <h3 className="font-semibold text-blue-800 dark:text-blue-200 mb-2">
+          <div className="bg-blue-100 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800 p-4 rounded-lg">
+            <h3 className="font-semibold text-blue-900 dark:text-blue-100 mb-2">
               提示功能說明
             </h3>
-            <ul className="text-sm text-blue-700 dark:text-blue-300 space-y-1">
+            <ul className="text-sm text-blue-800 dark:text-blue-200 space-y-1">
               <li>• 每次遊戲有 3 次免費提示</li>
               <li>• 提示會自動填入選中格子的正確答案</li>
               <li>• 觀看廣告可獲得額外提示次數</li>
