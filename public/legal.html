@@ -131,10 +131,10 @@
 <body>
     <div class="header-section">
         <div class="nav-tabs">
-            <button class="nav-tab active" onclick="showTab('terms')" data-i18n="terms"></button>
-            <button class="nav-tab" onclick="showTab('privacy')" data-i18n="privacy"></button>
-            <button class="nav-tab" onclick="showTab('cookie')" data-i18n="cookies"></button>
-            <button class="nav-tab" onclick="showTab('contact')" data-i18n="contact"></button>
+            <button class="nav-tab active" onclick="showTab('terms', this)" data-i18n="terms"></button>
+            <button class="nav-tab" onclick="showTab('privacy', this)" data-i18n="privacy"></button>
+            <button class="nav-tab" onclick="showTab('cookie', this)" data-i18n="cookies"></button>
+            <button class="nav-tab" onclick="showTab('contact', this)" data-i18n="contact"></button>
         </div>
         
         <div class="language-selector">
@@ -371,7 +371,7 @@
         }
 
         // 顯示標籤頁
-        function showTab(tabName) {
+        function showTab(tabName, clickedButton = null) {
             // 隱藏所有標籤頁內容
             document.querySelectorAll('.tab-content').forEach(tab => {
                 tab.classList.remove('active');
@@ -386,7 +386,15 @@
             document.getElementById(tabName).classList.add('active');
             
             // 設置對應按鈕為active
-            event.target.classList.add('active');
+            if (clickedButton) {
+                clickedButton.classList.add('active');
+            } else {
+                // 如果沒有點擊事件，通過按鈕的onclick屬性找到對應按鈕
+                const button = document.querySelector(`button[onclick*="showTab('${tabName}')"]`);
+                if (button) {
+                    button.classList.add('active');
+                }
+            }
         }
 
         // 檢查URL參數並跳轉到對應標籤頁
