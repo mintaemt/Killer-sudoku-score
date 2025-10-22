@@ -13,7 +13,6 @@ import { GameRulesModal } from "@/components/GameRulesModal";
 import { Leaderboard } from "@/components/Leaderboard";
 import { LeaderboardDebug } from "@/components/LeaderboardDebug";
 import { FeatureHintModal } from "@/components/FeatureHintModal";
-import { AdBanner } from "@/components/AdBanner";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Zap } from "lucide-react";
@@ -683,13 +682,8 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
           isVisible={isDopamineMode}
         />
         
-        {/* 移動裝置佈局 - 最大化廣告空間但不影響操作 */}
+        {/* 移動裝置佈局 */}
         <div className="block md:hidden">
-          {/* 頂部廣告 */}
-          <div className="mb-2">
-            <AdBanner adSlotId="mobile-top-banner" size="mobile-banner" />
-          </div>
-          
           <div className="space-y-1">
             <GameHeader 
               onNewGame={handleNewGame}
@@ -728,32 +722,12 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
                 currentTheme={currentTheme}
                 onTestComplete={handleTestComplete}
               />
-            </div>
-          </div>
-          
-          {/* 底部廣告 - 在 NumberPad 下方 */}
-          <div className="mt-2">
-            <AdBanner adSlotId="mobile-bottom-banner" size="mobile-banner" />
           </div>
         </div>
+        </div>
 
-        {/* 桌面/平板佈局 - 最大化廣告空間但不影響操作 */}
+        {/* 桌面/平板佈局 */}
         <div className="hidden md:block relative">
-          {/* 桌面版頂部廣告 */}
-          <div className="mb-4 flex justify-center">
-            <AdBanner adSlotId="desktop-top-banner" size="desktop-banner" />
-          </div>
-          
-          {/* 左側廣告 - 放在螢幕最左邊，完全避開遊戲區域 */}
-          <div className="fixed left-0 top-1/2 transform -translate-y-1/2 z-20">
-            <AdBanner adSlotId="desktop-left-sidebar" size="sidebar-banner" />
-          </div>
-          
-          {/* 右側廣告 - 放在螢幕最右邊，完全避開遊戲區域 */}
-          <div className="fixed right-0 top-1/2 transform -translate-y-1/2 z-20">
-            <AdBanner adSlotId="desktop-right-sidebar" size="sidebar-banner" />
-          </div>
-          
           <div className="flex items-center justify-center gap-6 h-[500px]">
             {/* 左側：九宮格 - 使用固定尺寸確保大小合適 */}
             <div className="flex-shrink-0">
@@ -913,10 +887,6 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
         onBecomeUser={handleBecomeUser}
       />
 
-      {/* 浮動廣告 - 右下角 */}
-      <div className="fixed bottom-4 right-4 z-30 hidden md:block">
-        <AdBanner adSlotId="floating-square" size="floating-square" />
-      </div>
 
     </div>
   );
