@@ -950,7 +950,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
                 href="https://github.com/mintaemt/Killer-sudoku-score" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-muted-foreground/60 hover:text-muted-foreground transition-colors ml-1"
+                className="text-muted-foreground/60 hover:text-muted-foreground transition-colors ml-2"
                 title="GitHub Repository"
               >
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
