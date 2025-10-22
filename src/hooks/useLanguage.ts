@@ -165,7 +165,7 @@ const translations = {
     // Footer Legal Links
     terms: 'Terms',
     privacy: 'Privacy',
-    cookies: 'Cookies',
+    cookies: 'Cookie',
     contact: 'Contact',
     
     // Legal Documents
