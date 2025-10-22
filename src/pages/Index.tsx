@@ -904,7 +904,6 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
         © 2025 mintae. All rights reserved.
       </div>
     </footer>
-  );
 };
 
 export default Index;
