@@ -887,20 +887,20 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
         onBecomeUser={handleBecomeUser}
       />
 
-      {/* 簡潔 Footer */}
-      <footer className="mt-8 py-3 text-center">
-        <div className="text-xs text-muted-foreground/60 space-x-3">
-          <a href="/terms-of-service.html" className="hover:text-muted-foreground transition-colors">Terms</a>
-          <span>•</span>
-          <a href="/privacy-policy.html" className="hover:text-muted-foreground transition-colors">Privacy</a>
-          <span>•</span>
-          <a href="/cookie-policy.html" className="hover:text-muted-foreground transition-colors">Cookies</a>
-          <span>•</span>
-          <a href="/contact.html" className="hover:text-muted-foreground transition-colors">Contact</a>
-        </div>
-      </footer>
-
     </div>
+
+    {/* 簡潔 Footer - 放在主容器外 */}
+    <footer className="py-3 text-center bg-background/50 backdrop-blur-sm">
+      <div className="text-xs text-muted-foreground/60 space-x-3">
+        <a href="/terms-of-service.html" className="hover:text-muted-foreground transition-colors">Terms</a>
+        <span>•</span>
+        <a href="/privacy-policy.html" className="hover:text-muted-foreground transition-colors">Privacy</a>
+        <span>•</span>
+        <a href="/cookie-policy.html" className="hover:text-muted-foreground transition-colors">Cookies</a>
+        <span>•</span>
+        <a href="/contact.html" className="hover:text-muted-foreground transition-colors">Contact</a>
+      </div>
+    </footer>
   );
 };
 
