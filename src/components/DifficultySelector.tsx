@@ -127,7 +127,7 @@ export const DifficultySelector = ({
                   ? "bg-primary text-primary-foreground border-primary/30 shadow-apple-md" 
                   : hintCount > 0
                   ? "border-border/50 hover:bg-muted/50 text-foreground"
-                  : "border-border/30 hover:bg-muted/30 opacity-60 text-muted-foreground"
+                  : "border-border/30 hover:bg-muted/30 text-muted-foreground"
               )}
               title={hintCount > 0 ? "提示" : "提示次數已用完"}
             >

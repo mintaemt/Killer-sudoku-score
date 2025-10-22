@@ -362,15 +362,18 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
   };
 
   const handleHint = () => {
+    console.log('handleHint called, hintCount:', hintCount, 'selectedCell:', selectedCell);
     if (hintCount > 0) {
       // 有剩餘提示次數，提供提示
       if (selectedCell) {
         const { row, col } = selectedCell;
         const cell = gameData.grid[row][col];
+        console.log('Selected cell:', cell);
         
         if (!cell.given && !cell.value) {
           // 使用 cell.solution 獲取正確答案
           const solution = cell.solution;
+          console.log('Solution:', solution);
           if (solution) {
             // 填入正確答案
             const newGrid = gameData.grid.map((row, rowIndex) =>
@@ -380,6 +383,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
                   : cell
               )
             );
+            console.log('New grid cell:', newGrid[row][col]);
             setGameData({ ...gameData, grid: newGrid });
             
             // 減少提示次數
@@ -388,7 +392,11 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
             // 清除選擇
             setSelectedCell(null);
           }
+        } else {
+          console.log('Cell is given or has value:', cell.given, cell.value);
         }
+      } else {
+        console.log('No selected cell');
       }
     } else {
       // 沒有剩餘提示次數，顯示廣告模態框
