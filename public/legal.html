@@ -102,9 +102,9 @@
             background: var(--border-light);
         }
         .nav-tab.active {
-            background: var(--primary-color);
-            color: white;
-            border-color: var(--primary-color);
+            background: var(--primary-color) !important;
+            color: white !important;
+            border-color: var(--primary-color) !important;
         }
         .tab-content {
             display: none;
@@ -383,7 +383,10 @@
             });
             
             // 顯示選中的標籤頁
-            document.getElementById(tabName).classList.add('active');
+            const targetTab = document.getElementById(tabName);
+            if (targetTab) {
+                targetTab.classList.add('active');
+            }
             
             // 設置對應按鈕為active
             if (clickedButton) {
@@ -402,7 +405,10 @@
             const urlParams = new URLSearchParams(window.location.search);
             const tab = urlParams.get('tab');
             if (tab && ['terms', 'privacy', 'cookie', 'contact'].includes(tab)) {
-                showTab(tab);
+                // 延遲執行，確保DOM完全載入
+                setTimeout(() => {
+                    showTab(tab);
+                }, 100);
             }
         }
 
