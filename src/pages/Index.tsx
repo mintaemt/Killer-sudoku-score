@@ -729,7 +729,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
         
         {/* 移動裝置佈局 */}
         <div className="block md:hidden">
-          <div className="space-y-1">
+          <div className="space-y-2">
             <GameHeader 
               onNewGame={handleNewGame}
               onThemeChange={handleThemeChange}
@@ -753,7 +753,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
               hintCount={hintCount}
             />
 
-            <div className="space-y-1">
+            <div className="space-y-2">
               <KillerSudokuGrid
                 grid={gameData.grid}
                 cages={gameData.cages}
