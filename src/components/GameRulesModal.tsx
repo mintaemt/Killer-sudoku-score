@@ -49,24 +49,24 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
                     <div className="flex items-start gap-3 p-3 rounded-lg bg-card border">
                       <Badge variant="outline" className="mt-0.5 flex-shrink-0">1</Badge>
                       <div className="min-w-0">
-                        <strong className="text-foreground">{t('basicRules')}:</strong>
-                        <span className="text-muted-foreground"> {t('basicRulesDescription')}</span>
+                        <strong className="text-foreground text-sm">{t('basicRules')}:</strong>
+                        <span className="text-muted-foreground text-sm"> {t('basicRulesDescription')}</span>
                       </div>
                     </div>
                     
                     <div className="flex items-start gap-3 p-3 rounded-lg bg-card border">
                       <Badge variant="outline" className="mt-0.5 flex-shrink-0">2</Badge>
                       <div className="min-w-0">
-                        <strong className="text-foreground">{t('killerSudokuFeatures')}:</strong>
-                        <span className="text-muted-foreground"> {t('killerSudokuFeaturesDescription')}</span>
+                        <strong className="text-foreground text-sm">{t('killerSudokuFeatures')}:</strong>
+                        <span className="text-muted-foreground text-sm"> {t('killerSudokuFeaturesDescription')}</span>
                       </div>
                     </div>
                     
                     <div className="flex items-start gap-3 p-3 rounded-lg bg-card border">
                       <Badge variant="outline" className="mt-0.5 flex-shrink-0">3</Badge>
                       <div className="min-w-0">
-                        <strong className="text-foreground">{t('solvingStrategy')}:</strong>
-                        <span className="text-muted-foreground"> {t('solvingStrategyDescription')}</span>
+                        <strong className="text-foreground text-sm">{t('solvingStrategy')}:</strong>
+                        <span className="text-muted-foreground text-sm"> {t('solvingStrategyDescription')}</span>
                       </div>
                     </div>
                   </div>
