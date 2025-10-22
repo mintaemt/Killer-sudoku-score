@@ -366,21 +366,21 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
       // 有剩餘提示次數，提供提示
       if (selectedCell) {
         const { row, col } = selectedCell;
-        const cell = grid[row][col];
+        const cell = gameData.grid[row][col];
         
         if (!cell.given && !cell.value) {
-          // 找到這個格子的正確答案
-          const solution = solutionGrid[row][col];
+          // 使用 cell.solution 獲取正確答案
+          const solution = cell.solution;
           if (solution) {
             // 填入正確答案
-            const newGrid = grid.map((row, rowIndex) =>
+            const newGrid = gameData.grid.map((row, rowIndex) =>
               row.map((cell, colIndex) =>
                 rowIndex === row && colIndex === col
                   ? { ...cell, value: solution, candidates: [] }
                   : cell
               )
             );
-            setGrid(newGrid);
+            setGameData({ ...gameData, grid: newGrid });
             
             // 減少提示次數
             setHintCount(hintCount - 1);
@@ -750,6 +750,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
               onBecomeUser={handleBecomeUser}
               onHint={handleHint}
               hintCount={hintCount}
+              selectedCell={selectedCell}
             />
 
             <div className="space-y-2">
@@ -815,6 +816,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
                   onBecomeUser={handleBecomeUser}
                   onHint={handleHint}
                   hintCount={hintCount}
+                  selectedCell={selectedCell}
                 />
               </div>
 

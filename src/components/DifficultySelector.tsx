@@ -21,6 +21,7 @@ interface DifficultySelectorProps {
   onBecomeUser?: () => void;
   onHint?: () => void;
   hintCount?: number; // 新增提示次數
+  selectedCell?: { row: number; col: number } | null; // 新增選中格子狀態
 }
 
 const difficulties: { value: Difficulty; label: string; translationKey: string }[] = [
@@ -43,6 +44,7 @@ export const DifficultySelector = ({
   onBecomeUser,
   onHint,
   hintCount = 0,
+  selectedCell = null,
 }: DifficultySelectorProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [showDopamineInfo, setShowDopamineInfo] = useState(false);
@@ -121,8 +123,10 @@ export const DifficultySelector = ({
               onClick={onHint}
               className={cn(
                 "transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md w-9 h-9 p-0",
-                hintCount > 0 
-                  ? "border-border/50 hover:bg-muted/50 text-foreground" 
+                hintCount > 0 && selectedCell
+                  ? "bg-primary text-primary-foreground border-primary/30 shadow-apple-md" 
+                  : hintCount > 0
+                  ? "border-border/50 hover:bg-muted/50 text-foreground"
                   : "border-border/30 hover:bg-muted/30 opacity-60 text-muted-foreground"
               )}
               title={hintCount > 0 ? "提示" : "提示次數已用完"}
