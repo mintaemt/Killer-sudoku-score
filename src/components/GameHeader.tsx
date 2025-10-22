@@ -64,8 +64,8 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
           <div className="flex flex-col items-start">
             <h1 className={cn(
               "font-bold tracking-tight leading-tight truncate",
-              // 行動裝置：訪客模式時自動調整字級，確保與遊戲規則按鈕保持10px間距
-              isVisitorMode ? "text-xs sm:text-sm" : "text-sm md:text-lg"
+              // 訪客模式：按鈕少一個，標題可以變大填補空位，保持10px安全間距
+              isVisitorMode ? "text-base sm:text-lg md:text-xl" : "text-sm md:text-lg"
             )}>{t('gameTitle')}</h1>
           </div>
         </div>
