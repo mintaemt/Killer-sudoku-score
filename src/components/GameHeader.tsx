@@ -64,9 +64,9 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
           <div className="flex flex-col items-start">
             <h1 
               className="font-bold tracking-tight leading-tight text-sm md:text-lg"
-              style={isVisitorMode ? { fontSize: '20px', color: 'red' } : {}}
+              style={isVisitorMode ? { fontSize: '20px' } : {}}
             >
-              {t('gameTitle')} {isVisitorMode ? '(訪客)' : '(登入)'}
+              {t('gameTitle')}
             </h1>
           </div>
         </div>
