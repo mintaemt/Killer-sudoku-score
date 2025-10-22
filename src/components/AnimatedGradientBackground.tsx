@@ -67,16 +67,12 @@ export const AnimatedGradientBackground = ({ isDopamineMode = false }: AnimatedG
   // 檢測系統主題
   useEffect(() => {
     const checkTheme = () => {
-      // 檢測系統主題偏好
+      // 只檢測系統主題偏好，不檢測HTML屬性（因為HTML屬性是用戶選擇的主題，不是系統主題）
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      // 檢測HTML根元素的data-theme屬性
-      const htmlTheme = document.documentElement.getAttribute('data-theme');
-      // 檢測是否有dark類名
-      const hasDarkClass = document.documentElement.classList.contains('dark');
+      setIsDarkMode(prefersDark);
       
-      // 綜合判斷是否為dark mode
-      const isDark = prefersDark || hasDarkClass || htmlTheme === 'dark';
-      setIsDarkMode(isDark);
+      // 調試：檢查檢測結果
+      console.log('System prefers dark:', prefersDark, 'Setting isDarkMode to:', prefersDark);
     };
     
     checkTheme();
