@@ -233,7 +233,6 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
                         </div>
                       </div>
                     </div>
-                  </div>
                 </div>
               </TabsContent>
             </Tabs>
