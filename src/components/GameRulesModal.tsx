@@ -20,7 +20,7 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-2 sm:p-4 z-50">
-      <div className="w-full max-w-[900px] max-h-[95vh] sm:max-h-[90vh] overflow-auto">
+      <div className="w-full max-w-[650px] max-h-[95vh] sm:max-h-[90vh] overflow-auto">
         <Card className="glass rounded-2xl shadow-apple-lg m-2 sm:m-0">
           <CardHeader>
             <div className="flex items-center justify-between">
