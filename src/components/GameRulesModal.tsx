@@ -136,15 +136,15 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
                         <span className="break-words">{t('timeBonus')}</span>
                       </h4>
                       
-                      {/* 提前獎勵和超時懲罰 - 上下排版 */}
-                      <div className="space-y-2">
+                      {/* 提前獎勵和超時懲罰 - 響應式排版 */}
+                      <div className="space-y-2 md:space-y-0 md:flex md:gap-4">
                         <div className="flex items-center gap-2">
-                          <Badge variant="secondary" className="text-xs px-1 py-0.5 flex-shrink-0">{t('earlyBonus')}</Badge>
-                          <span className="text-xs text-muted-foreground break-words">{t('earlyBonusDescription')}</span>
+                          <Badge variant="secondary" className="text-sm px-1 py-0.5 flex-shrink-0">{t('earlyBonus')}</Badge>
+                          <span className="text-sm text-muted-foreground break-words">{t('earlyBonusDescription')}</span>
                         </div>
                         <div className="flex items-center gap-2">
-                          <Badge variant="secondary" className="text-xs px-1 py-0.5 flex-shrink-0">{t('overtimePenalty')}</Badge>
-                          <span className="text-xs text-muted-foreground break-words">{t('overtimePenaltyDescription')}</span>
+                          <Badge variant="secondary" className="text-sm px-1 py-0.5 flex-shrink-0">{t('overtimePenalty')}</Badge>
+                          <span className="text-sm text-muted-foreground break-words">{t('overtimePenaltyDescription')}</span>
                         </div>
                       </div>
                       <div className="space-y-1.5 text-xs text-muted-foreground">
@@ -173,11 +173,11 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
                       <h4 className="font-semibold mb-2 flex items-center gap-2 text-sm">
                         <Trophy className="h-4 w-4 text-yellow-500 flex-shrink-0" />
                         <span className="break-words">{t('basicScore')}</span>
-                        <Badge variant="destructive" className="text-xs px-1 py-0.5 flex-shrink-0">{t('mistake')}</Badge>
-                        <span className="text-xs text-muted-foreground break-words">{t('mistakePenaltyDescription')}</span>
+                        <Badge variant="destructive" className="text-sm px-1 py-0.5 flex-shrink-0">{t('mistake')}</Badge>
+                        <span className="text-sm text-muted-foreground break-words">{t('mistakePenaltyDescription')}</span>
                       </h4>
-                      <div className="text-xs text-muted-foreground">
-                        <div className="grid grid-cols-2 gap-2 text-xs">
+                      <div className="text-sm text-muted-foreground">
+                        <div className="grid grid-cols-2 gap-2 text-sm">
                           <div className="text-center p-2 rounded bg-background/50 flex items-center justify-center min-h-[2.5rem]">
                             <div className="break-words">{t('easy')}: 100{t('points')}</div>
                           </div>
@@ -199,7 +199,7 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
                       <h4 className="font-semibold flex items-center gap-2 text-sm">
                         <Calculator className="h-4 w-4 text-purple-500 flex-shrink-0" />
                         <span className="break-words">{t('calculationFormula')}</span>
-                        <span className="text-xs text-muted-foreground break-words">{t('finalScoreFormula')}</span>
+                        <span className="text-sm text-muted-foreground break-words">{t('finalScoreFormula')}</span>
                       </h4>
                     </div>
                 </div>
