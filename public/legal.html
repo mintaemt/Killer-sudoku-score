@@ -81,60 +81,14 @@
     </div>
 
     <div class="nav-tabs">
-        <button class="nav-tab active" onclick="showTab('privacy')" data-i18n="privacy"></button>
-        <button class="nav-tab" onclick="showTab('terms')" data-i18n="terms"></button>
+        <button class="nav-tab active" onclick="showTab('terms')" data-i18n="terms"></button>
+        <button class="nav-tab" onclick="showTab('privacy')" data-i18n="privacy"></button>
         <button class="nav-tab" onclick="showTab('cookie')" data-i18n="cookies"></button>
         <button class="nav-tab" onclick="showTab('contact')" data-i18n="contact"></button>
     </div>
 
-    <!-- Privacy Policy Tab -->
-    <div id="privacy" class="tab-content active">
-        <h1 data-i18n="privacy_title"></h1>
-        <p><em data-i18n="last_updated"></em></p>
-        
-        <div class="content-section">
-            <h2 data-i18n="privacy_intro_title"></h2>
-            <p data-i18n="privacy_intro_content"></p>
-        </div>
-        
-        <div class="content-section">
-            <h2 data-i18n="privacy_collect_title"></h2>
-            <p data-i18n="privacy_collect_content"></p>
-        </div>
-        
-        <div class="content-section">
-            <h2 data-i18n="privacy_use_title"></h2>
-            <p data-i18n="privacy_use_content"></p>
-        </div>
-        
-        <div class="content-section">
-            <h2 data-i18n="privacy_storage_title"></h2>
-            <p data-i18n="privacy_storage_content"></p>
-        </div>
-        
-        <div class="content-section">
-            <h2 data-i18n="privacy_cookies_title"></h2>
-            <p data-i18n="privacy_cookies_content"></p>
-        </div>
-        
-        <div class="content-section">
-            <h2 data-i18n="privacy_rights_title"></h2>
-            <p data-i18n="privacy_rights_content"></p>
-        </div>
-        
-        <div class="content-section">
-            <h2 data-i18n="privacy_changes_title"></h2>
-            <p data-i18n="privacy_changes_content"></p>
-        </div>
-        
-        <div class="content-section">
-            <h2 data-i18n="privacy_contact_title"></h2>
-            <p data-i18n="privacy_contact_content"></p>
-        </div>
-    </div>
-
     <!-- Terms of Service Tab -->
-    <div id="terms" class="tab-content">
+    <div id="terms" class="tab-content active">
         <h1 data-i18n="terms_title"></h1>
         <p><em data-i18n="last_updated"></em></p>
         
@@ -181,6 +135,52 @@
         <div class="content-section">
             <h2 data-i18n="terms_contact_title"></h2>
             <p data-i18n="terms_contact_content"></p>
+        </div>
+    </div>
+
+    <!-- Privacy Policy Tab -->
+    <div id="privacy" class="tab-content">
+        <h1 data-i18n="privacy_title"></h1>
+        <p><em data-i18n="last_updated"></em></p>
+        
+        <div class="content-section">
+            <h2 data-i18n="privacy_intro_title"></h2>
+            <p data-i18n="privacy_intro_content"></p>
+        </div>
+        
+        <div class="content-section">
+            <h2 data-i18n="privacy_collect_title"></h2>
+            <p data-i18n="privacy_collect_content"></p>
+        </div>
+        
+        <div class="content-section">
+            <h2 data-i18n="privacy_use_title"></h2>
+            <p data-i18n="privacy_use_content"></p>
+        </div>
+        
+        <div class="content-section">
+            <h2 data-i18n="privacy_storage_title"></h2>
+            <p data-i18n="privacy_storage_content"></p>
+        </div>
+        
+        <div class="content-section">
+            <h2 data-i18n="privacy_cookies_title"></h2>
+            <p data-i18n="privacy_cookies_content"></p>
+        </div>
+        
+        <div class="content-section">
+            <h2 data-i18n="privacy_rights_title"></h2>
+            <p data-i18n="privacy_rights_content"></p>
+        </div>
+        
+        <div class="content-section">
+            <h2 data-i18n="privacy_changes_title"></h2>
+            <p data-i18n="privacy_changes_content"></p>
+        </div>
+        
+        <div class="content-section">
+            <h2 data-i18n="privacy_contact_title"></h2>
+            <p data-i18n="privacy_contact_content"></p>
         </div>
     </div>
 
@@ -329,10 +329,20 @@
             event.target.classList.add('active');
         }
 
+        // 檢查URL參數並跳轉到對應標籤頁
+        function checkUrlParams() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const tab = urlParams.get('tab');
+            if (tab && ['terms', 'privacy', 'cookie', 'contact'].includes(tab)) {
+                showTab(tab);
+            }
+        }
+
         // 初始化
         const currentLang = detectLanguage();
         document.getElementById('langSelect').value = currentLang;
         loadTranslations(currentLang);
+        checkUrlParams();
     </script>
 </body>
 </html>

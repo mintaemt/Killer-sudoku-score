@@ -964,13 +964,13 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
           
           {/* 法律文件連結 */}
           <div className="text-xs text-muted-foreground/60 space-x-3">
-            <a href="/legal.html" className="hover:text-muted-foreground transition-colors">{t('terms')}</a>
+            <a href="/legal.html?tab=terms" className="hover:text-muted-foreground transition-colors">{t('terms')}</a>
             <span>•</span>
-            <a href="/legal.html" className="hover:text-muted-foreground transition-colors">{t('privacy')}</a>
+            <a href="/legal.html?tab=privacy" className="hover:text-muted-foreground transition-colors">{t('privacy')}</a>
             <span>•</span>
-            <a href="/legal.html" className="hover:text-muted-foreground transition-colors">{t('cookies')}</a>
+            <a href="/legal.html?tab=cookie" className="hover:text-muted-foreground transition-colors">{t('cookies')}</a>
             <span>•</span>
-            <a href="/legal.html" className="hover:text-muted-foreground transition-colors">{t('contact')}</a>
+            <a href="/legal.html?tab=contact" className="hover:text-muted-foreground transition-colors">{t('contact')}</a>
           </div>
           
           {/* GitHub icon */}
@@ -994,13 +994,13 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
           {/* 第一行：法律文件連結居中 */}
           <div className="text-center mb-2">
             <div className="text-xs text-muted-foreground/60 space-x-3">
-              <a href="/legal.html" className="hover:text-muted-foreground transition-colors">{t('terms')}</a>
+              <a href="/legal.html?tab=terms" className="hover:text-muted-foreground transition-colors">{t('terms')}</a>
               <span>•</span>
-              <a href="/legal.html" className="hover:text-muted-foreground transition-colors">{t('privacy')}</a>
+              <a href="/legal.html?tab=privacy" className="hover:text-muted-foreground transition-colors">{t('privacy')}</a>
               <span>•</span>
-              <a href="/legal.html" className="hover:text-muted-foreground transition-colors">{t('cookies')}</a>
+              <a href="/legal.html?tab=cookie" className="hover:text-muted-foreground transition-colors">{t('cookies')}</a>
               <span>•</span>
-              <a href="/legal.html" className="hover:text-muted-foreground transition-colors">{t('contact')}</a>
+              <a href="/legal.html?tab=contact" className="hover:text-muted-foreground transition-colors">{t('contact')}</a>
             </div>
           </div>
           
