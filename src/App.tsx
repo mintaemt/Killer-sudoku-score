@@ -11,6 +11,7 @@ import { PrivacyPolicy } from "./components/PrivacyPolicy";
 import { TermsOfService } from "./components/TermsOfService";
 import { CookiePolicy } from "./components/CookiePolicy";
 import { Contact } from "./components/Contact";
+import { TestRoute } from "./components/TestRoute";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +25,8 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/leaderboard" element={<LeaderboardPage />} />
+            {/* Test Route */}
+            <Route path="/test" element={<TestRoute />} />
             {/* Legal Documents */}
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
