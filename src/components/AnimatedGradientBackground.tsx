@@ -107,12 +107,12 @@ export const AnimatedGradientBackground = ({ isDopamineMode = false }: AnimatedG
   const pink = getThemeColorRgb('pink');
   const teal = getThemeColorRgb('teal');
   
-  // 測試：直接調到100%透明度看顏色
-  const orangeOpacity = 1.0; // 100%透明度測試
-  const greenOpacity = 1.0;
-  const purpleOpacity = 1.0;
-  const pinkOpacity = 1.0;
-  const linearOpacity = 1.0;
+  // 根據主題模式調整透明度
+  const orangeOpacity = isDarkMode ? 0.15 : 0.6; // light mode 60%透明度
+  const greenOpacity = isDarkMode ? 0.12 : 0.5;
+  const purpleOpacity = isDarkMode ? 0.08 : 0.4;
+  const pinkOpacity = isDarkMode ? 0.05 : 0.3;
+  const linearOpacity = isDarkMode ? 0.01 : 0.2;
   
   return (
     <div 
