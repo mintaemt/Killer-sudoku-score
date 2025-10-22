@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Difficulty, DopamineDifficulty } from "@/lib/types";
 import { cn } from "@/lib/utils";
-import { ChevronDown, Clock, AlertTriangle, Play, Pause, Zap, Pencil } from "lucide-react";
+import { ChevronDown, Clock, AlertTriangle, Play, Pause, Zap, Pencil, Lightbulb } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { useUser } from "@/hooks/useUser";
 import { DopamineInfoModal } from "./DopamineInfoModal";
@@ -19,6 +19,7 @@ interface DifficultySelectorProps {
   onToggleNotes?: () => void;
   showNotes?: boolean;
   onBecomeUser?: () => void;
+  onHint?: () => void;
 }
 
 const difficulties: { value: Difficulty; label: string; translationKey: string }[] = [
@@ -39,6 +40,7 @@ export const DifficultySelector = ({
   onToggleNotes,
   showNotes = false,
   onBecomeUser,
+  onHint,
 }: DifficultySelectorProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [showDopamineInfo, setShowDopamineInfo] = useState(false);
@@ -108,7 +110,20 @@ export const DifficultySelector = ({
           )}
         </div>
 
-        {/* 2. 註解按鈕 */}
+        {/* 2. 提示按鈕 */}
+        {onHint && (
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={onHint}
+            className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md w-9 h-9 p-0 border-yellow-500/30 hover:border-yellow-500/50 text-yellow-600 hover:text-yellow-700"
+            title="提示"
+          >
+            <Lightbulb className="h-4 w-4" />
+          </Button>
+        )}
+
+        {/* 3. 註解按鈕 */}
         {onToggleNotes && (
           <div className="relative">
             <Button
@@ -135,7 +150,7 @@ export const DifficultySelector = ({
           </div>
         )}
 
-        {/* 3. 多巴胺模式按鈕 - 所有人都可見 */}
+        {/* 4. 多巴胺模式按鈕 - 所有人都可見 */}
         {onDopamineMode && (
           <Button
             variant="outline"
@@ -166,23 +181,26 @@ export const DifficultySelector = ({
           </Button>
         )}
 
-        {/* 4. 計時元件 */}
-        <div className="flex items-center gap-2">
-          <Clock className="h-3 w-3 md:h-4 md:w-4 text-muted-foreground" />
-          <span className="text-xs md:text-sm font-bold bg-muted/50 px-2 md:px-3 py-1 rounded-md min-w-[50px] md:min-w-[60px] text-center">
-            {formatTime(time)}
-          </span>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={onTogglePause}
-            className="h-9 w-9 p-0 transition-smooth hover:scale-105 hover:bg-muted/50 border-border/50"
-          >
-            {isPaused ? <Play className="h-4 w-4" /> : <Pause className="h-4 w-4" />}
-          </Button>
+        {/* 5. 計時元件 - 整合暫停功能 */}
+        <div className="relative">
+          <div className="flex items-center gap-2">
+            <Clock className="h-3 w-3 md:h-4 md:w-4 text-muted-foreground" />
+            <span 
+              className="text-xs md:text-sm font-bold bg-muted/50 px-2 md:px-3 py-1 rounded-md min-w-[50px] md:min-w-[60px] text-center cursor-pointer transition-smooth hover:bg-muted/70"
+              onClick={onTogglePause}
+              title={isPaused ? "點擊繼續" : "點擊暫停"}
+            >
+              {formatTime(time)}
+            </span>
+          </div>
+          
+          {/* Play/Pause Badge */}
+          <div className="absolute -top-1 -right-1 bg-white text-primary text-[8px] md:text-[10px] font-bold px-1 py-0.5 rounded-full min-w-[16px] h-4 flex items-center justify-center z-10 border border-primary/20 shadow-sm">
+            {isPaused ? "PAUSE" : "PLAY"}
+          </div>
         </div>
 
-        {/* 5. 錯誤顯示元件 */}
+        {/* 6. 錯誤顯示元件 */}
         <div className="flex items-center gap-2">
           <AlertTriangle className="h-3 w-3 md:h-4 md:w-4 text-muted-foreground" />
           <span className={cn(

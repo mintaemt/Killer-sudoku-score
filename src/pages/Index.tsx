@@ -357,6 +357,11 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
     setShowNotes(!showNotes);
   };
 
+  const handleHint = () => {
+    // TODO: 實現提示功能
+    console.log('提示功能');
+  };
+
   const handleNewGame = () => {
     try {
       // 使用 setTimeout 來避免阻塞 UI
@@ -705,6 +710,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
               onToggleNotes={handleToggleNotes}
               showNotes={showNotes}
               onBecomeUser={handleBecomeUser}
+              onHint={handleHint}
             />
 
             <div className="space-y-1">
@@ -788,6 +794,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
                   onToggleNotes={handleToggleNotes}
                   showNotes={showNotes}
                   onBecomeUser={handleBecomeUser}
+                  onHint={handleHint}
                 />
               </div>
 
