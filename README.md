@@ -178,6 +178,10 @@ VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
 
 **MINTAE feat. Cursor / Grok / Lovable**
 
+📧 **聯絡方式**: [mintae.tw@gmail.com](mailto:mintae.tw@gmail.com)  
+🐙 **GitHub**: [@mintaemt](https://github.com/mintaemt)  
+💼 **LinkedIn**: [mintae7](https://www.linkedin.com/in/mintae7)
+
 ## 致謝
 
 感謝所有開源專案和工具的貢獻者，讓這個專案得以實現。
