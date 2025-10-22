@@ -953,14 +953,14 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
     {/* 簡潔 Footer - 放在主容器外 */}
     <footer className="py-3 bg-background/20 backdrop-blur-sm">
       <div className="max-w-6xl mx-auto px-4">
-        {/* 桌面版：三欄佈局 */}
-        <div className="hidden md:flex items-center justify-center relative">
-          {/* 左邊：版權資訊 */}
-          <div className="absolute left-4 text-xs text-muted-foreground/50">
+        {/* 桌面版：法律文件居中，版權和GitHub靠攏 */}
+        <div className="hidden md:flex items-center justify-center">
+          {/* 版權資訊 */}
+          <div className="text-xs text-muted-foreground/50 mr-5">
             © 2025 mintae. All rights reserved.
           </div>
           
-          {/* 中間：法律文件連結 */}
+          {/* 法律文件連結 */}
           <div className="text-xs text-muted-foreground/60 space-x-3">
             <a href="/terms-of-service.html" className="hover:text-muted-foreground transition-colors">Terms</a>
             <span>•</span>
@@ -971,8 +971,8 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
             <a href="/contact.html" className="hover:text-muted-foreground transition-colors">Contact</a>
           </div>
           
-          {/* 右邊：GitHub icon */}
-          <div className="absolute right-4 text-xs">
+          {/* GitHub icon */}
+          <div className="text-xs ml-5">
             <a 
               href="https://github.com/mintaemt/Killer-sudoku-score" 
               target="_blank" 
