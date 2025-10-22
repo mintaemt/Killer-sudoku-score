@@ -368,6 +368,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
         const { row, col } = selectedCell;
         const cell = gameData.grid[row][col];
         
+        // 防呆機制：只有空白格子才能使用提示
         if (!cell.given && !cell.value) {
           // 使用 cell.solution 獲取正確答案
           const solution = cell.solution;
@@ -389,6 +390,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
             setSelectedCell(null);
           }
         }
+        // 如果格子已有值，不執行任何操作（防呆機制）
       }
     } else {
       // 沒有剩餘提示次數，顯示廣告模態框

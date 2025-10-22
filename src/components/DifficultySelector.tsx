@@ -127,7 +127,7 @@ export const DifficultySelector = ({
                 "transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md w-9 h-9 p-0",
                 hintCount > 0 && selectedCell
                   ? currentTheme === "light" 
-                    ? "bg-primary text-white border-primary/30 shadow-apple-md"
+                    ? "bg-primary text-black border-primary/30 shadow-apple-md"
                     : "bg-primary text-primary-foreground border-primary/30 shadow-apple-md"
                   : hintCount > 0
                   ? "border-border/50 hover:bg-muted/50 text-foreground"
