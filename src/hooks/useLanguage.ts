@@ -306,7 +306,7 @@ const translations = {
     example: '範例',
     points: '分',
     minutes: '分',
-    basicRulesDescription: '在9×9的格子中填入數字1-9，每行、每列、每個3×3宮格都不能重複。',
+    basicRulesDescription: '在格子中填入數字1-9，每行、每列、每個9宮格都不能重複。',
     killerSudokuFeaturesDescription: '虛線框內的數字必須相加等於左上角數字，框內數字不能重複。',
     solvingStrategyDescription: '先從只有一個可能數字的格子開始，逐步推理其他格子的數字。',
     uniqueCandidateDescription: '在行、列或宮格中，如果某個數字只有一個可能位置，那就是答案。',
