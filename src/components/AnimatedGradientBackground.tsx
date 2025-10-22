@@ -98,11 +98,11 @@ export const AnimatedGradientBackground = ({ isDopamineMode = false }: AnimatedG
       className="fixed inset-0 -z-10"
       style={{
         background: `
-          radial-gradient(circle farthest-corner at ${30 + Math.sin(animationPhase * 0.01) * 10}% ${30 + Math.cos(animationPhase * 0.01) * 10}%, rgba(${orange.r}, ${orange.g}, ${orange.b}, 0.15) 0%, rgba(${orange.r}, ${orange.g}, ${orange.b}, 0) 50%),
-          radial-gradient(circle farthest-corner at ${70 + Math.sin(animationPhase * 0.012) * 15}% ${70 + Math.cos(animationPhase * 0.012) * 15}%, rgba(${green.r}, ${green.g}, ${green.b}, 0.13) 0%, rgba(${green.r}, ${green.g}, ${green.b}, 0) 40%),
-          radial-gradient(circle farthest-corner at ${30 + Math.sin(animationPhase * 0.016) * 18}% ${70 + Math.cos(animationPhase * 0.016) * 18}%, rgba(${purple.r}, ${purple.g}, ${purple.b}, 0.07) 0%, rgba(${purple.r}, ${purple.g}, ${purple.b}, 0) 35%),
-          radial-gradient(ellipse at ${50 + Math.sin(animationPhase * 0.008) * 8}% ${50 + Math.cos(animationPhase * 0.008) * 8}%, rgba(${pink.r}, ${pink.g}, ${pink.b}, 0.03) 0%, rgba(${pink.r}, ${pink.g}, ${pink.b}, 0) 60%),
-          linear-gradient(${animationPhase % 360}deg, rgba(${teal.r}, ${teal.g}, ${teal.b}, 0.01) 0%, rgba(${purple.r}, ${purple.g}, ${purple.b}, 0.01) 50%, rgba(${pink.r}, ${pink.g}, ${pink.b}, 0.01) 100%)
+          radial-gradient(circle farthest-corner at ${30 + Math.sin(animationPhase * 0.01) * 10}% ${30 + Math.cos(animationPhase * 0.01) * 10}%, rgba(${orange.r}, ${orange.g}, ${orange.b}, 0.1) 0%, rgba(${orange.r}, ${orange.g}, ${orange.b}, 0) 50%),
+          radial-gradient(circle farthest-corner at ${70 + Math.sin(animationPhase * 0.012) * 15}% ${70 + Math.cos(animationPhase * 0.012) * 15}%, rgba(${green.r}, ${green.g}, ${green.b}, 0.08) 0%, rgba(${green.r}, ${green.g}, ${green.b}, 0) 40%),
+          radial-gradient(circle farthest-corner at ${30 + Math.sin(animationPhase * 0.016) * 18}% ${70 + Math.cos(animationPhase * 0.016) * 18}%, rgba(${purple.r}, ${purple.g}, ${purple.b}, 0.05) 0%, rgba(${purple.r}, ${purple.g}, ${purple.b}, 0) 35%),
+          radial-gradient(ellipse at ${50 + Math.sin(animationPhase * 0.008) * 8}% ${50 + Math.cos(animationPhase * 0.008) * 8}%, rgba(${pink.r}, ${pink.g}, ${pink.b}, 0.02) 0%, rgba(${pink.r}, ${pink.g}, ${pink.b}, 0) 60%),
+          linear-gradient(${animationPhase % 360}deg, rgba(${teal.r}, ${teal.g}, ${teal.b}, 0.005) 0%, rgba(${purple.r}, ${purple.g}, ${purple.b}, 0.005) 50%, rgba(${pink.r}, ${pink.g}, ${pink.b}, 0.005) 100%)
         `
       }}
     />

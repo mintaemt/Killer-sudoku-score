@@ -486,6 +486,12 @@
 
         // 初始化
         detectAndApplyTheme(); // 先應用主題
+        
+        // 強制重新應用主題（確保生效）
+        setTimeout(() => {
+            detectAndApplyTheme();
+        }, 100);
+        
         const currentLang = detectLanguage();
         document.getElementById('langSelect').value = currentLang;
         loadTranslations(currentLang);
