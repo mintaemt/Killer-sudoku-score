@@ -20,6 +20,7 @@ interface DifficultySelectorProps {
   showNotes?: boolean;
   onBecomeUser?: () => void;
   onHint?: () => void;
+  hintCount?: number; // 新增提示次數
 }
 
 const difficulties: { value: Difficulty; label: string; translationKey: string }[] = [
@@ -41,6 +42,7 @@ export const DifficultySelector = ({
   showNotes = false,
   onBecomeUser,
   onHint,
+  hintCount = 0,
 }: DifficultySelectorProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [showDopamineInfo, setShowDopamineInfo] = useState(false);
@@ -112,15 +114,24 @@ export const DifficultySelector = ({
 
         {/* 2. 提示按鈕 */}
         {onHint && (
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={onHint}
-            className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md w-9 h-9 p-0 border-yellow-500/30 hover:border-yellow-500/50 text-yellow-600 hover:text-yellow-700"
-            title="提示"
-          >
-            <Lightbulb className="h-4 w-4" />
-          </Button>
+          <div className="relative">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={onHint}
+              className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md w-9 h-9 p-0 border-border/50 hover:bg-muted/50"
+              title="提示"
+            >
+              <Lightbulb className="h-4 w-4" />
+            </Button>
+            
+            {/* 提示次數 Badge */}
+            {hintCount > 0 && (
+              <div className="absolute -top-1 -right-1 bg-gradient-to-br from-blue-500 to-blue-600 text-white text-[8px] md:text-[10px] font-bold px-1 py-0.5 rounded-full min-w-[16px] h-4 flex items-center justify-center z-10 shadow-lg border border-blue-400/30">
+                <div className="drop-shadow-sm">{hintCount}</div>
+              </div>
+            )}
+          </div>
         )}
 
         {/* 3. 註解按鈕 */}
@@ -143,8 +154,8 @@ export const DifficultySelector = ({
             
             {/* ON/OFF Badge */}
             {showNotes && (
-              <div className="absolute -top-1 -right-1 bg-white text-primary text-[8px] md:text-[10px] font-bold px-1 py-0.5 rounded-full min-w-[16px] h-4 flex items-center justify-center z-10 border border-primary/20 shadow-sm">
-                ON
+              <div className="absolute -top-1 -right-1 bg-gradient-to-br from-green-500 to-green-600 text-white text-[8px] md:text-[10px] font-bold px-1 py-0.5 rounded-full min-w-[16px] h-4 flex items-center justify-center z-10 shadow-lg border border-green-400/30">
+                <div className="drop-shadow-sm">ON</div>
               </div>
             )}
           </div>
@@ -195,9 +206,9 @@ export const DifficultySelector = ({
           </div>
           
           {/* Play/Pause Badge */}
-          <div className="absolute -top-2 -right-2 bg-white border border-primary/20 rounded-full w-4 h-4 md:w-5 md:h-5 flex items-center justify-center z-10 shadow-sm">
+          <div className="absolute -top-2 -right-2 bg-gradient-to-br from-purple-500 to-purple-600 border border-purple-400/30 rounded-full w-4 h-4 md:w-5 md:h-5 flex items-center justify-center z-10 shadow-lg">
             <div className="flex items-center justify-center w-full h-full">
-              {isPaused ? <Play className="h-2.5 w-2.5 md:h-3 md:w-3 text-primary fill-primary" /> : <Pause className="h-2.5 w-2.5 md:h-3 md:w-3 text-primary fill-primary" />}
+              {isPaused ? <Play className="h-2.5 w-2.5 md:h-3 md:w-3 text-white fill-white drop-shadow-sm" /> : <Pause className="h-2.5 w-2.5 md:h-3 md:w-3 text-white fill-white drop-shadow-sm" />}
             </div>
           </div>
         </div>

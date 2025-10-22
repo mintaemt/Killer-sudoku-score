@@ -13,6 +13,7 @@ import { GameRulesModal } from "@/components/GameRulesModal";
 import { Leaderboard } from "@/components/Leaderboard";
 import { LeaderboardDebug } from "@/components/LeaderboardDebug";
 import { FeatureHintModal } from "@/components/FeatureHintModal";
+import { HintAdModal } from "@/components/HintAdModal";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Zap } from "lucide-react";
@@ -60,6 +61,10 @@ const Index = () => {
   
   // 註解功能狀態
   const [showNotes, setShowNotes] = useState(false);
+  
+  // 提示功能狀態
+  const [hintCount, setHintCount] = useState(3);
+  const [showHintAdModal, setShowHintAdModal] = useState(false);
   
   // 功能提示狀態
   const [showFeatureHint, setShowFeatureHint] = useState(false);
@@ -357,8 +362,45 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
   };
 
   const handleHint = () => {
-    // TODO: 實現提示功能
-    console.log('提示功能');
+    if (hintCount > 0) {
+      // 有剩餘提示次數，提供提示
+      const selectedCell = selectedCellPosition;
+      if (selectedCell) {
+        const { row, col } = selectedCell;
+        const cell = grid[row][col];
+        
+        if (!cell.given && !cell.value) {
+          // 找到這個格子的正確答案
+          const solution = solutionGrid[row][col];
+          if (solution) {
+            // 填入正確答案
+            const newGrid = grid.map((row, rowIndex) =>
+              row.map((cell, colIndex) =>
+                rowIndex === row && colIndex === col
+                  ? { ...cell, value: solution, candidates: [] }
+                  : cell
+              )
+            );
+            setGrid(newGrid);
+            
+            // 減少提示次數
+            setHintCount(hintCount - 1);
+            
+            // 清除選擇
+            setSelectedCellPosition(null);
+          }
+        }
+      }
+    } else {
+      // 沒有剩餘提示次數，顯示廣告模態框
+      setShowHintAdModal(true);
+    }
+  };
+
+  const handleWatchAd = () => {
+    // 觀看廣告後獲得額外提示次數
+    setHintCount(hintCount + 3);
+    setShowHintAdModal(false);
   };
 
   const handleNewGame = () => {
@@ -386,6 +428,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
           setComboCount(0);
           setLastCorrectTime(0);
           setRemainingCells(81);
+          setHintCount(3);
         } else {
           // 普通模式：重新生成普通遊戲
           const newGameData = generateKillerSudoku(difficulty);
@@ -393,6 +436,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
           setMistakes(0);
           setSelectedCell(null);
           setTime(0);
+          setHintCount(3);
         }
         
         setIsDisqualified(false);
@@ -706,6 +750,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
               showNotes={showNotes}
               onBecomeUser={handleBecomeUser}
               onHint={handleHint}
+              hintCount={hintCount}
             />
 
             <div className="space-y-1">
@@ -770,6 +815,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
                   showNotes={showNotes}
                   onBecomeUser={handleBecomeUser}
                   onHint={handleHint}
+                  hintCount={hintCount}
                 />
               </div>
 
@@ -888,6 +934,13 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
         onBecomeUser={handleBecomeUser}
       />
 
+      {/* 提示廣告模態框 */}
+      <HintAdModal
+        isOpen={showHintAdModal}
+        onClose={() => setShowHintAdModal(false)}
+        onWatchAd={handleWatchAd}
+      />
+
     </div>
 
     {/* 簡潔 Footer - 放在主容器外 */}
@@ -950,7 +1003,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
                 href="https://github.com/mintaemt/Killer-sudoku-score" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-muted-foreground/60 hover:text-muted-foreground transition-colors ml-2"
+                className="text-muted-foreground/60 hover:text-muted-foreground transition-colors ml-[9px]"
                 title="GitHub Repository"
               >
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
