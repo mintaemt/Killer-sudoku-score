@@ -375,8 +375,8 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
           const solution = cell.solution;
           if (solution) {
             // 填入正確答案
-            const newGrid = gameData.grid.map((row, rowIndex) =>
-              row.map((cell, colIndex) =>
+            const newGrid = gameData.grid.map((gridRow, rowIndex) =>
+              gridRow.map((cell, colIndex) =>
                 rowIndex === row && colIndex === col
                   ? { ...cell, value: solution, candidates: [] }
                   : cell
