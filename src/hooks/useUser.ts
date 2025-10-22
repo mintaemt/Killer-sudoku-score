@@ -22,18 +22,25 @@ export const useUser = () => {
           // 驗證用戶資料格式
           if (userData && userData.id && userData.name) {
             setUser(userData);
+            setIsVisitorMode(false);
             console.log('用戶資料已從本地儲存載入:', userData.name);
           } else {
             // 如果資料格式不正確，清除它
             localStorage.removeItem(USER_STORAGE_KEY);
-            console.log('清除無效的用戶資料');
+            setIsVisitorMode(true); // 沒有有效用戶資料時設為訪客模式
+            console.log('清除無效的用戶資料，進入訪客模式');
           }
+        } else {
+          // 沒有儲存的用戶資料，設為訪客模式
+          setIsVisitorMode(true);
+          console.log('沒有用戶資料，進入訪客模式');
         }
       } catch (err) {
         console.error('Error loading user from storage:', err);
         setError('載入用戶資料失敗');
         // 清除可能損壞的資料
         localStorage.removeItem(USER_STORAGE_KEY);
+        setIsVisitorMode(true); // 錯誤時也設為訪客模式
       } finally {
         setLoading(false);
       }
