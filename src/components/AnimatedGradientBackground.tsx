@@ -6,6 +6,7 @@ interface AnimatedGradientBackgroundProps {
 
 // 主題顏色定義 (HSL to RGB 轉換)
 const themeColors = {
+  blue: { h: 210, s: 100, l: 50 },     // hsl(210, 100%, 50%)
   orange: { h: 25, s: 100, l: 50 },    // hsl(25, 100%, 50%)
   green: { h: 142, s: 76, l: 36 },     // hsl(142, 76%, 36%)
   purple: { h: 262, s: 83, l: 58 },    // hsl(262, 83%, 58%)
