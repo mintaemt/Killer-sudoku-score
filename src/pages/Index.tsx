@@ -900,6 +900,9 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
         <span>•</span>
         <a href="/contact.html" className="hover:text-muted-foreground transition-colors">Contact</a>
       </div>
+      <div className="text-xs text-muted-foreground/50 mt-2">
+        © 2025 mintae. All rights reserved.
+      </div>
     </footer>
   );
 };
