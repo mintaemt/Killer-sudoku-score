@@ -134,11 +134,19 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
                       <h4 className="font-semibold mb-2 flex items-center gap-2 text-sm">
                         <Clock className="h-4 w-4 text-blue-500 flex-shrink-0" />
                         <span className="break-words">{t('timeBonus')}</span>
-                        <Badge variant="secondary" className="text-xs px-1 py-0.5 flex-shrink-0">{t('earlyBonus')}</Badge>
-                        <span className="text-xs text-muted-foreground break-words">{t('earlyBonusDescription')}</span>
-                        <Badge variant="secondary" className="text-xs px-1 py-0.5 flex-shrink-0">{t('overtimePenalty')}</Badge>
-                        <span className="text-xs text-muted-foreground break-words">{t('overtimePenaltyDescription')}</span>
                       </h4>
+                      
+                      {/* 提前獎勵和超時懲罰 - 上下排版 */}
+                      <div className="space-y-2">
+                        <div className="flex items-center gap-2">
+                          <Badge variant="secondary" className="text-xs px-1 py-0.5 flex-shrink-0">{t('earlyBonus')}</Badge>
+                          <span className="text-xs text-muted-foreground break-words">{t('earlyBonusDescription')}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Badge variant="secondary" className="text-xs px-1 py-0.5 flex-shrink-0">{t('overtimePenalty')}</Badge>
+                          <span className="text-xs text-muted-foreground break-words">{t('overtimePenaltyDescription')}</span>
+                        </div>
+                      </div>
                       <div className="space-y-1.5 text-xs text-muted-foreground">
                         <div className="mt-2">
                           <div className="text-xs font-medium text-muted-foreground mb-1 break-words">{t('idealTime')}:</div>
