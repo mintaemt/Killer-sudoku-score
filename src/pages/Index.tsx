@@ -891,10 +891,10 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
     </div>
 
     {/* 簡潔 Footer - 放在主容器外 */}
-    <footer className="py-3 bg-background/50 backdrop-blur-sm">
-      <div className="max-w-6xl mx-auto px-4 flex items-center justify-between">
+    <footer className="py-3 bg-background/20 backdrop-blur-sm">
+      <div className="max-w-6xl mx-auto px-4 flex items-center justify-center relative">
         {/* 左邊：版權資訊 */}
-        <div className="text-xs text-muted-foreground/50">
+        <div className="absolute left-4 text-xs text-muted-foreground/50">
           © 2025 mintae. All rights reserved.
         </div>
         
@@ -910,7 +910,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
         </div>
         
         {/* 右邊：GitHub icon */}
-        <div className="text-xs">
+        <div className="absolute right-4 text-xs">
           <a 
             href="https://github.com/mintaemt/Killer-sudoku-score" 
             target="_blank" 
