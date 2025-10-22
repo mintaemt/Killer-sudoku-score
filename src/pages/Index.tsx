@@ -942,17 +942,15 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
             </div>
           </div>
           
-          {/* 第二行：版權資訊居中，GitHub icon 在右 */}
-          <div className="flex items-center justify-center relative">
-            <div className="text-xs text-muted-foreground/50">
+          {/* 第二行：版權資訊居中，GitHub icon 在句尾 */}
+          <div className="text-center">
+            <div className="text-xs text-muted-foreground/50 inline-flex items-center">
               © 2025 mintae. All rights reserved.
-            </div>
-            <div className="absolute right-0 text-xs">
               <a 
                 href="https://github.com/mintaemt/Killer-sudoku-score" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-muted-foreground/60 hover:text-muted-foreground transition-colors"
+                className="text-muted-foreground/60 hover:text-muted-foreground transition-colors ml-1"
                 title="GitHub Repository"
               >
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
