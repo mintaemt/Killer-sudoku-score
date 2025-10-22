@@ -361,6 +361,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
     setShowNotes(!showNotes);
   };
 
+  // 提示功能處理函數 - 包含防呆機制
   const handleHint = () => {
     if (hintCount > 0) {
       // 有剩餘提示次數，提供提示
