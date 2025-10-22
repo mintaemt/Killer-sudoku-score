@@ -96,12 +96,12 @@ export const AnimatedGradientBackground = ({ isDopamineMode = false }: AnimatedG
         className="fixed inset-0 -z-10"
         style={{
           background: `
-            radial-gradient(circle farthest-corner at ${15 + Math.sin(animationPhase * 0.018) * 15}% ${15 + Math.cos(animationPhase * 0.018) * 15}%, rgba(${blue.r}, ${blue.g}, ${blue.b}, 0.7) 0%, rgba(${blue.r}, ${blue.g}, ${blue.b}, 0) 50%),
-            radial-gradient(circle farthest-corner at ${20 + Math.sin(animationPhase * 0.02) * 20}% ${20 + Math.cos(animationPhase * 0.02) * 20}%, rgba(${orange.r}, ${orange.g}, ${orange.b}, 0.6) 0%, rgba(${orange.r}, ${orange.g}, ${orange.b}, 0) 50%),
-            radial-gradient(circle farthest-corner at ${80 + Math.sin(animationPhase * 0.025) * 18}% ${80 + Math.cos(animationPhase * 0.025) * 18}%, rgba(${green.r}, ${green.g}, ${green.b}, 0.5) 0%, rgba(${green.r}, ${green.g}, ${green.b}, 0) 40%),
-            radial-gradient(circle farthest-corner at ${20 + Math.sin(animationPhase * 0.035) * 22}% ${80 + Math.cos(animationPhase * 0.035) * 22}%, rgba(${purple.r}, ${purple.g}, ${purple.b}, 0.3) 0%, rgba(${purple.r}, ${purple.g}, ${purple.b}, 0) 35%),
-            radial-gradient(ellipse at ${50 + Math.sin(animationPhase * 0.015) * 10}% ${50 + Math.cos(animationPhase * 0.015) * 10}%, rgba(${pink.r}, ${pink.g}, ${pink.b}, 0.2) 0%, rgba(${pink.r}, ${pink.g}, ${pink.b}, 0) 60%),
-            linear-gradient(${animationPhase % 360}deg, rgba(${teal.r}, ${teal.g}, ${teal.b}, 0.1) 0%, rgba(${purple.r}, ${purple.g}, ${purple.b}, 0.1) 50%, rgba(${pink.r}, ${pink.g}, ${pink.b}, 0.1) 100%)
+            radial-gradient(circle farthest-corner at ${15 + Math.sin(animationPhase * 0.018) * 15}% ${15 + Math.cos(animationPhase * 0.018) * 15}%, rgba(${blue.r}, ${blue.g}, ${blue.b}, 0.525) 0%, rgba(${blue.r}, ${blue.g}, ${blue.b}, 0) 50%),
+            radial-gradient(circle farthest-corner at ${20 + Math.sin(animationPhase * 0.02) * 20}% ${20 + Math.cos(animationPhase * 0.02) * 20}%, rgba(${orange.r}, ${orange.g}, ${orange.b}, 0.45) 0%, rgba(${orange.r}, ${orange.g}, ${orange.b}, 0) 50%),
+            radial-gradient(circle farthest-corner at ${80 + Math.sin(animationPhase * 0.025) * 18}% ${80 + Math.cos(animationPhase * 0.025) * 18}%, rgba(${green.r}, ${green.g}, ${green.b}, 0.375) 0%, rgba(${green.r}, ${green.g}, ${green.b}, 0) 40%),
+            radial-gradient(circle farthest-corner at ${20 + Math.sin(animationPhase * 0.035) * 22}% ${80 + Math.cos(animationPhase * 0.035) * 22}%, rgba(${purple.r}, ${purple.g}, ${purple.b}, 0.225) 0%, rgba(${purple.r}, ${purple.g}, ${purple.b}, 0) 35%),
+            radial-gradient(ellipse at ${50 + Math.sin(animationPhase * 0.015) * 10}% ${50 + Math.cos(animationPhase * 0.015) * 10}%, rgba(${pink.r}, ${pink.g}, ${pink.b}, 0.15) 0%, rgba(${pink.r}, ${pink.g}, ${pink.b}, 0) 60%),
+            linear-gradient(${animationPhase % 360}deg, rgba(${teal.r}, ${teal.g}, ${teal.b}, 0.075) 0%, rgba(${purple.r}, ${purple.g}, ${purple.b}, 0.075) 50%, rgba(${pink.r}, ${pink.g}, ${pink.b}, 0.075) 100%)
           `
         }}
       />
@@ -117,12 +117,12 @@ export const AnimatedGradientBackground = ({ isDopamineMode = false }: AnimatedG
   const teal = getThemeColorRgb('teal');
   
   // 根據主題模式調整透明度
-  const blueOpacity = isDarkMode ? 0.12 : 0.3; // light mode 30%透明度
-  const orangeOpacity = isDarkMode ? 0.15 : 0.3;
-  const greenOpacity = isDarkMode ? 0.12 : 0.25;
-  const purpleOpacity = isDarkMode ? 0.08 : 0.2;
-  const pinkOpacity = isDarkMode ? 0.05 : 0.15;
-  const linearOpacity = isDarkMode ? 0.01 : 0.1;
+  const blueOpacity = isDarkMode ? 0.12 : 0.6; // light mode 60%透明度（上調一倍）
+  const orangeOpacity = isDarkMode ? 0.15 : 0.6;
+  const greenOpacity = isDarkMode ? 0.12 : 0.5;
+  const purpleOpacity = isDarkMode ? 0.08 : 0.4;
+  const pinkOpacity = isDarkMode ? 0.05 : 0.3;
+  const linearOpacity = isDarkMode ? 0.01 : 0.2;
   
   return (
     <div 
