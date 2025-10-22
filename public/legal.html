@@ -16,6 +16,32 @@
             --section-bg: #f9f9f9;
         }
 
+        /* 主題顏色定義 */
+        [data-theme="blue"] {
+            --primary-color: #007bff;
+            --primary-hover: #0056b3;
+        }
+        [data-theme="orange"] {
+            --primary-color: #ff6b35;
+            --primary-hover: #e55a2b;
+        }
+        [data-theme="green"] {
+            --primary-color: #28a745;
+            --primary-hover: #1e7e34;
+        }
+        [data-theme="purple"] {
+            --primary-color: #6f42c1;
+            --primary-hover: #5a32a3;
+        }
+        [data-theme="pink"] {
+            --primary-color: #e83e8c;
+            --primary-hover: #d91a72;
+        }
+        [data-theme="teal"] {
+            --primary-color: #20c997;
+            --primary-hover: #1aa179;
+        }
+
         @media (prefers-color-scheme: dark) {
             :root {
                 --bg-color: #1a1a1a;
@@ -26,6 +52,32 @@
                 --primary-color: #4a9eff;
                 --primary-hover: #66b3ff;
                 --section-bg: #2a2a2a;
+            }
+            
+            /* Dark mode主題顏色 */
+            [data-theme="blue"] {
+                --primary-color: #4a9eff;
+                --primary-hover: #66b3ff;
+            }
+            [data-theme="orange"] {
+                --primary-color: #ff8c69;
+                --primary-hover: #ff7a52;
+            }
+            [data-theme="green"] {
+                --primary-color: #4caf50;
+                --primary-hover: #66bb6a;
+            }
+            [data-theme="purple"] {
+                --primary-color: #9c27b0;
+                --primary-hover: #ba68c8;
+            }
+            [data-theme="pink"] {
+                --primary-color: #e91e63;
+                --primary-hover: #f06292;
+            }
+            [data-theme="teal"] {
+                --primary-color: #26a69a;
+                --primary-hover: #4db6ac;
             }
         }
 
@@ -342,6 +394,16 @@
             return 'en';
         }
 
+        // 檢測並應用主題
+        function detectAndApplyTheme() {
+            const savedTheme = localStorage.getItem('killer-sudoku-theme');
+            if (savedTheme && ['blue', 'orange', 'green', 'purple', 'pink', 'teal'].includes(savedTheme)) {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            } else {
+                document.documentElement.setAttribute('data-theme', 'blue');
+            }
+        }
+
         // 設置語言
         function setLanguage(lang) {
             localStorage.setItem('killer-sudoku-language', lang);
@@ -405,14 +467,22 @@
             const urlParams = new URLSearchParams(window.location.search);
             const tab = urlParams.get('tab');
             if (tab && ['terms', 'privacy', 'cookie', 'contact'].includes(tab)) {
-                // 延遲執行，確保DOM完全載入
+                // 延遲執行，確保DOM完全載入和翻譯完成
                 setTimeout(() => {
                     showTab(tab);
-                }, 100);
+                    // 再次確保按鈕狀態正確
+                    setTimeout(() => {
+                        const button = document.querySelector(`button[onclick*="showTab('${tab}')"]`);
+                        if (button) {
+                            button.classList.add('active');
+                        }
+                    }, 50);
+                }, 200);
             }
         }
 
         // 初始化
+        detectAndApplyTheme(); // 先應用主題
         const currentLang = detectLanguage();
         document.getElementById('langSelect').value = currentLang;
         loadTranslations(currentLang);
