@@ -122,8 +122,8 @@ export const DifficultySelector = ({
               className={cn(
                 "transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md w-9 h-9 p-0",
                 hintCount > 0 
-                  ? "border-border/50 hover:bg-muted/50" 
-                  : "border-border/30 hover:bg-muted/30 opacity-60"
+                  ? "border-border/50 hover:bg-muted/50 text-foreground" 
+                  : "border-border/30 hover:bg-muted/30 opacity-60 text-muted-foreground"
               )}
               title={hintCount > 0 ? "提示" : "提示次數已用完"}
             >

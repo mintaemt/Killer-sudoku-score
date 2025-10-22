@@ -364,7 +364,6 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
   const handleHint = () => {
     if (hintCount > 0) {
       // 有剩餘提示次數，提供提示
-      const selectedCell = selectedCellPosition;
       if (selectedCell) {
         const { row, col } = selectedCell;
         const cell = grid[row][col];
@@ -387,7 +386,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
             setHintCount(hintCount - 1);
             
             // 清除選擇
-            setSelectedCellPosition(null);
+            setSelectedCell(null);
           }
         }
       }
