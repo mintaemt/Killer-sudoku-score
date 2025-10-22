@@ -1,8 +1,0 @@
-services:
-  - type: web
-    name: killer-sudoku
-    env: node
-    buildCommand: npm run build
-    startCommand: npm start
-    plan: free
-
