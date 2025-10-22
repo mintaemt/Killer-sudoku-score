@@ -962,13 +962,13 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
           
           {/* 法律文件連結 */}
           <div className="text-xs text-muted-foreground/60 space-x-3">
-            <a href="/terms-of-service.html" className="hover:text-muted-foreground transition-colors">Terms</a>
+            <a href="/terms-of-service" className="hover:text-muted-foreground transition-colors">Terms</a>
             <span>•</span>
-            <a href="/privacy-policy.html" className="hover:text-muted-foreground transition-colors">Privacy</a>
+            <a href="/privacy-policy" className="hover:text-muted-foreground transition-colors">Privacy</a>
             <span>•</span>
-            <a href="/cookie-policy.html" className="hover:text-muted-foreground transition-colors">Cookies</a>
+            <a href="/cookie-policy" className="hover:text-muted-foreground transition-colors">Cookies</a>
             <span>•</span>
-            <a href="/contact.html" className="hover:text-muted-foreground transition-colors">Contact</a>
+            <a href="/contact" className="hover:text-muted-foreground transition-colors">Contact</a>
           </div>
           
           {/* GitHub icon */}
@@ -992,13 +992,13 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
           {/* 第一行：法律文件連結居中 */}
           <div className="text-center mb-2">
             <div className="text-xs text-muted-foreground/60 space-x-3">
-              <a href="/terms-of-service.html" className="hover:text-muted-foreground transition-colors">Terms</a>
+              <a href="/terms-of-service" className="hover:text-muted-foreground transition-colors">Terms</a>
               <span>•</span>
-              <a href="/privacy-policy.html" className="hover:text-muted-foreground transition-colors">Privacy</a>
+              <a href="/privacy-policy" className="hover:text-muted-foreground transition-colors">Privacy</a>
               <span>•</span>
-              <a href="/cookie-policy.html" className="hover:text-muted-foreground transition-colors">Cookies</a>
+              <a href="/cookie-policy" className="hover:text-muted-foreground transition-colors">Cookies</a>
               <span>•</span>
-              <a href="/contact.html" className="hover:text-muted-foreground transition-colors">Contact</a>
+              <a href="/contact" className="hover:text-muted-foreground transition-colors">Contact</a>
             </div>
           </div>
           
