@@ -128,16 +128,16 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
                     </div>
                   </div>
 
-                  {/* 計分規則 - 優化為更緊湊的佈局 */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    {/* 基礎分數 */}
-                    <div className="p-3 rounded-lg bg-gradient-to-r from-blue-50 to-green-50 dark:from-blue-950/20 dark:to-green-950/20 border flex flex-col">
+                  {/* 計分規則 - 優化為不對稱佈局 */}
+                  <div className="grid grid-cols-1 md:grid-cols-5 gap-3">
+                    {/* 基礎分數 - 較窄 */}
+                    <div className="md:col-span-1 p-3 rounded-lg bg-gradient-to-r from-blue-50 to-green-50 dark:from-blue-950/20 dark:to-green-950/20 border flex flex-col">
                       <h4 className="font-semibold mb-2 flex items-center gap-2 text-sm">
                         <Trophy className="h-4 w-4 text-yellow-500 flex-shrink-0" />
                         <span className="break-words">{t('basicScore')}</span>
                       </h4>
                       <div className="text-xs text-muted-foreground flex-1 flex flex-col justify-center">
-                        <div className="grid grid-cols-2 gap-2 text-xs h-full">
+                        <div className="grid grid-cols-1 gap-2 text-xs h-full">
                           <div className="text-center p-2 rounded bg-background/50 flex items-center justify-center">
                             <div className="break-words">{t('easy')}: 100{t('points')}</div>
                           </div>
@@ -154,8 +154,8 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
                       </div>
                     </div>
 
-                    {/* 時間獎勵 */}
-                    <div className="p-3 rounded-lg bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-950/20 dark:to-blue-950/20 border">
+                    {/* 時間獎勵 - 較寬 */}
+                    <div className="md:col-span-2 p-3 rounded-lg bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-950/20 dark:to-blue-950/20 border">
                       <h4 className="font-semibold mb-2 flex items-center gap-2 text-sm">
                         <Clock className="h-4 w-4 text-blue-500 flex-shrink-0" />
                         <span className="break-words">{t('timeBonus')}</span>
@@ -187,8 +187,8 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
                       </div>
                     </div>
 
-                    {/* 錯誤懲罰 */}
-                    <div className="p-3 rounded-lg bg-gradient-to-r from-red-50 to-orange-50 dark:from-red-950/20 dark:to-orange-950/20 border">
+                    {/* 錯誤懲罰 - 較窄 */}
+                    <div className="md:col-span-1 p-3 rounded-lg bg-gradient-to-r from-red-50 to-orange-50 dark:from-red-950/20 dark:to-orange-950/20 border">
                       <h4 className="font-semibold mb-2 flex items-center gap-2 text-sm">
                         <Target className="h-4 w-4 text-red-500 flex-shrink-0" />
                         <span className="break-words">{t('mistakePenalty')}</span>
@@ -198,7 +198,7 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
                       <div className="space-y-1.5 text-xs text-muted-foreground">
                         <div className="mt-2">
                           <div className="text-xs font-medium text-muted-foreground mb-1 break-words">{t('minimumScore')}:</div>
-                          <div className="grid grid-cols-2 gap-2 text-xs">
+                          <div className="grid grid-cols-1 gap-2 text-xs">
                             <div className="text-center p-2 rounded bg-background/50 flex items-center justify-center min-h-[2.5rem]">
                               <div className="break-words">{t('easy')}: 20{t('points')}</div>
                             </div>
@@ -216,8 +216,8 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
                       </div>
                     </div>
 
-                    {/* 分數計算公式 */}
-                    <div className="p-3 rounded-lg bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/20 dark:to-pink-950/20 border">
+                    {/* 分數計算公式 - 較寬 */}
+                    <div className="md:col-span-2 p-3 rounded-lg bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/20 dark:to-pink-950/20 border">
                       <h4 className="font-semibold mb-2 flex items-center gap-2 text-sm">
                         <Calculator className="h-4 w-4 text-purple-500 flex-shrink-0" />
                         <span className="break-words">{t('calculationFormula')}</span>
