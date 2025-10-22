@@ -191,15 +191,8 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
                       <h4 className="font-semibold mb-2 flex items-center gap-2 text-sm">
                         <Calculator className="h-4 w-4 text-purple-500 flex-shrink-0" />
                         <span className="break-words">{t('calculationFormula')}</span>
+                        <span className="text-xs text-muted-foreground break-words">最終分數 = max(基礎分數 × 0.2, 基礎分數 + 時間獎勵 - 錯誤懲罰)</span>
                       </h4>
-                      <div className="text-xs text-muted-foreground space-y-1">
-                        <div className="font-mono bg-background/50 p-1.5 rounded text-xs break-words">
-                          {t('finalScoreFormula')}
-                        </div>
-                        <div className="text-xs text-muted-foreground break-words">
-                          <strong>{t('example')}:</strong> {t('scoringExample')}
-                        </div>
-                      </div>
                     </div>
                 </div>
               </TabsContent>
