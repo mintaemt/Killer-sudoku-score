@@ -58,16 +58,12 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
 
   return (
     <div className="glass rounded-2xl px-3 md:px-4 py-2 md:py-3 shadow-apple-md relative z-20 w-full max-w-7xl mx-auto">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center">
         {/* 左側：標題 */}
-        <div className={cn(
-          "flex items-center gap-2 md:gap-8",
-          // 訪客模式時給標題更多空間
-          isVisitorMode ? "flex-1" : "flex-1 min-w-0"
-        )}>
+        <div className="flex items-center gap-2 md:gap-8 flex-1">
           <div className="flex flex-col items-start">
             <h1 className={cn(
-              "font-bold tracking-tight leading-tight truncate",
+              "font-bold tracking-tight leading-tight",
               // 訪客模式：桌面22px，行動裝置20px
               isVisitorMode ? "text-xl md:text-2xl" : "text-sm md:text-lg"
             )}>{t('gameTitle')}</h1>
