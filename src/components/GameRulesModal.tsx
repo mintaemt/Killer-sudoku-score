@@ -128,8 +128,8 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
                     </div>
                   </div>
 
-                  {/* 計分規則 - 優化為不對稱佈局 */}
-                  <div className="grid grid-cols-1 md:grid-cols-5 gap-3">
+                  {/* 計分規則 - 保持 2x2 佈局，左窄右寬 */}
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                     {/* 基礎分數 - 較窄 */}
                     <div className="md:col-span-1 p-3 rounded-lg bg-gradient-to-r from-blue-50 to-green-50 dark:from-blue-950/20 dark:to-green-950/20 border flex flex-col">
                       <h4 className="font-semibold mb-2 flex items-center gap-2 text-sm">
