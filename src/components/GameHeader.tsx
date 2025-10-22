@@ -65,7 +65,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
             <h1 className={cn(
               "font-bold tracking-tight leading-tight truncate",
               // 訪客模式：按鈕少一個，標題可以變大填補空位，保持10px安全間距
-              isVisitorMode ? "text-base sm:text-lg md:text-xl" : "text-sm md:text-lg"
+              isVisitorMode ? "text-lg sm:text-xl md:text-2xl" : "text-sm md:text-lg"
             )}>{t('gameTitle')}</h1>
           </div>
         </div>

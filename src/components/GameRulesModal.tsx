@@ -135,9 +135,9 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
                         <Clock className="h-4 w-4 text-blue-500 flex-shrink-0" />
                         <span className="break-words">{t('timeBonus')}</span>
                         <Badge variant="secondary" className="text-xs px-1 py-0.5 flex-shrink-0">{t('earlyBonus')}</Badge>
-                        <span className="text-xs text-muted-foreground break-words">每提前1秒+0.5分（最多500分）</span>
+                        <span className="text-xs text-muted-foreground break-words">{t('earlyBonusDescription')}</span>
                         <Badge variant="secondary" className="text-xs px-1 py-0.5 flex-shrink-0">{t('overtimePenalty')}</Badge>
-                        <span className="text-xs text-muted-foreground break-words">每超時1秒-0.1分（最少0分）</span>
+                        <span className="text-xs text-muted-foreground break-words">{t('overtimePenaltyDescription')}</span>
                       </h4>
                       <div className="space-y-1.5 text-xs text-muted-foreground">
                         <div className="mt-2">
@@ -166,7 +166,7 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
                         <Trophy className="h-4 w-4 text-yellow-500 flex-shrink-0" />
                         <span className="break-words">{t('basicScore')}</span>
                         <Badge variant="destructive" className="text-xs px-1 py-0.5 flex-shrink-0">{t('mistake')}</Badge>
-                        <span className="text-xs text-muted-foreground break-words">每個錯誤扣除20分</span>
+                        <span className="text-xs text-muted-foreground break-words">{t('mistakePenaltyDescription')}</span>
                       </h4>
                       <div className="text-xs text-muted-foreground">
                         <div className="grid grid-cols-2 gap-2 text-xs">
@@ -191,7 +191,7 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
                       <h4 className="font-semibold flex items-center gap-2 text-sm">
                         <Calculator className="h-4 w-4 text-purple-500 flex-shrink-0" />
                         <span className="break-words">{t('calculationFormula')}</span>
-                        <span className="text-xs text-muted-foreground break-words">最終分數 = max(基礎分數 × 0.2, 基礎分數 + 時間獎勵 - 錯誤懲罰)</span>
+                        <span className="text-xs text-muted-foreground break-words">{t('finalScoreFormula')}</span>
                       </h4>
                     </div>
                 </div>
