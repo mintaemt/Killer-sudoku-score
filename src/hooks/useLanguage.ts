@@ -1052,7 +1052,23 @@ const translations = {
 };
 
 export const useLanguage = () => {
-  const [language, setLanguage] = useState<Language>('en');
+  // 初始化語言 - 直接從localStorage讀取，避免useEffect延遲
+  const getInitialLanguage = (): Language => {
+    const savedLanguage = localStorage.getItem('killer-sudoku-language') as Language;
+    if (savedLanguage && ['en', 'zh', 'ko', 'ja'].includes(savedLanguage)) {
+      return savedLanguage;
+    }
+    
+    // 如果沒有保存的語言，根據瀏覽器語言檢測
+    const browserLang = navigator.language.toLowerCase();
+    if (browserLang.startsWith('zh')) return 'zh';
+    if (browserLang.startsWith('ko')) return 'ko';
+    if (browserLang.startsWith('ja')) return 'ja';
+    
+    return 'en';
+  };
+
+  const [language, setLanguage] = useState<Language>(getInitialLanguage);
 
   useEffect(() => {
     // 監聽語言變更事件
@@ -1061,12 +1077,6 @@ export const useLanguage = () => {
     };
 
     window.addEventListener('languageChange', handleLanguageChange as EventListener);
-    
-    // 初始化語言
-    const savedLanguage = localStorage.getItem('killer-sudoku-language') as Language;
-    if (savedLanguage && ['en', 'zh', 'ko', 'ja'].includes(savedLanguage)) {
-      setLanguage(savedLanguage);
-    }
 
     return () => {
       window.removeEventListener('languageChange', handleLanguageChange as EventListener);
