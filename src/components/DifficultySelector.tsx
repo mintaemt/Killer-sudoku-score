@@ -127,7 +127,7 @@ export const DifficultySelector = ({
             
             {/* 提示次數 Badge */}
             {hintCount > 0 && (
-              <div className="absolute -top-1 -right-1 bg-gradient-to-br from-blue-500 to-blue-600 text-white text-[8px] md:text-[10px] font-bold px-1 py-0.5 rounded-full min-w-[16px] h-4 flex items-center justify-center z-10 shadow-lg border border-blue-400/30">
+              <div className="absolute -top-1 -right-1 bg-gradient-to-br from-gray-700 to-gray-800 text-white text-[8px] md:text-[10px] font-bold px-1 py-0.5 rounded-full min-w-[16px] h-4 flex items-center justify-center z-10 shadow-lg border border-gray-600/30">
                 <div className="drop-shadow-sm">{hintCount}</div>
               </div>
             )}
@@ -154,7 +154,7 @@ export const DifficultySelector = ({
             
             {/* ON/OFF Badge */}
             {showNotes && (
-              <div className="absolute -top-1 -right-1 bg-gradient-to-br from-green-500 to-green-600 text-white text-[8px] md:text-[10px] font-bold px-1 py-0.5 rounded-full min-w-[16px] h-4 flex items-center justify-center z-10 shadow-lg border border-green-400/30">
+              <div className="absolute -top-1 -right-1 bg-gradient-to-br from-gray-700 to-gray-800 text-white text-[8px] md:text-[10px] font-bold px-1 py-0.5 rounded-full min-w-[16px] h-4 flex items-center justify-center z-10 shadow-lg border border-gray-600/30">
                 <div className="drop-shadow-sm">ON</div>
               </div>
             )}
@@ -206,7 +206,7 @@ export const DifficultySelector = ({
           </div>
           
           {/* Play/Pause Badge */}
-          <div className="absolute -top-2 -right-2 bg-gradient-to-br from-purple-500 to-purple-600 border border-purple-400/30 rounded-full w-4 h-4 md:w-5 md:h-5 flex items-center justify-center z-10 shadow-lg">
+          <div className="absolute -top-2 -right-2 bg-gradient-to-br from-gray-700 to-gray-800 border border-gray-600/30 rounded-full w-4 h-4 md:w-5 md:h-5 flex items-center justify-center z-10 shadow-lg">
             <div className="flex items-center justify-center w-full h-full">
               {isPaused ? <Play className="h-2.5 w-2.5 md:h-3 md:w-3 text-white fill-white drop-shadow-sm" /> : <Pause className="h-2.5 w-2.5 md:h-3 md:w-3 text-white fill-white drop-shadow-sm" />}
             </div>
