@@ -39,9 +39,9 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
           <CardContent>
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
               <TabsList className="grid w-full grid-cols-3">
-                <TabsTrigger value="rules">{t('rules')}</TabsTrigger>
-                <TabsTrigger value="tips">{t('tips')}</TabsTrigger>
-                <TabsTrigger value="scoring">{t('scoring')}</TabsTrigger>
+                <TabsTrigger value="rules" className="data-[state=active]:font-bold">{t('rules')}</TabsTrigger>
+                <TabsTrigger value="tips" className="data-[state=active]:font-bold">{t('tips')}</TabsTrigger>
+                <TabsTrigger value="scoring" className="data-[state=active]:font-bold">{t('scoring')}</TabsTrigger>
               </TabsList>
 
               <TabsContent value="rules" className="mt-6">
