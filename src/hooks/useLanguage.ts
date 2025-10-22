@@ -162,6 +162,12 @@ const translations = {
     minimumScoreExamples: '(Easy 20pts, Medium 40pts, Hard 60pts, Expert 100pts)',
     scoringExample: 'Easy mode, 2 minutes, 1 mistake = 100 + 240 - 20 = 320 points',
     
+    // Footer Legal Links
+    terms: 'Terms',
+    privacy: 'Privacy',
+    cookies: 'Cookies',
+    contact: 'Contact',
+    
     // Legal Documents
     legal: {
       privacyPolicy: {
@@ -423,6 +429,12 @@ const translations = {
     minimumScoreExamples: '（簡20分、中40分、難60分、專100分）',
     scoringExample: '簡單模式，2分鐘完成，1次錯誤 = 100 + 240 - 20 = 320分',
     
+    // Footer Legal Links
+    terms: '條款',
+    privacy: '隱私',
+    cookies: 'Cookie',
+    contact: '聯絡',
+    
     // 法律文件
     legal: {
       privacyPolicy: {
@@ -672,6 +684,12 @@ const translations = {
     minimumScoreDescription: '기본 점수의 20%',
     minimumScoreExamples: '(쉬움 20점, 보통 40점, 어려움 60점, 전문가 100점)',
     scoringExample: '쉬움 모드, 2분 완료, 1회 실수 = 100 + 240 - 20 = 320점',
+    
+    // Footer Legal Links
+    terms: '약관',
+    privacy: '개인정보',
+    cookies: '쿠키',
+    contact: '문의',
     
     // 법적 문서
     legal: {
@@ -923,6 +941,12 @@ const translations = {
     minimumScoreExamples: '（簡単20点、普通40点、困難60点、専門家100点）',
     scoringExample: '簡単モード、2分完了、1回ミス = 100 + 240 - 20 = 320点',
     
+    // Footer Legal Links
+    terms: '規約',
+    privacy: 'プライバシー',
+    cookies: 'Cookie',
+    contact: 'お問い合わせ',
+    
     // 法的文書
     legal: {
       privacyPolicy: {
@@ -1050,6 +1074,32 @@ export const useLanguage = () => {
   }, []);
 
   const t = (key: keyof typeof translations.en | string) => {
+    // 支援嵌套鍵值，如 'legal.privacyPolicy.title'
+    if (typeof key === 'string' && key.includes('.')) {
+      const keys = key.split('.');
+      let value: any = translations[language];
+      
+      for (const k of keys) {
+        if (value && typeof value === 'object' && k in value) {
+          value = value[k];
+        } else {
+          // 如果找不到，回退到英文
+          value = translations.en;
+          for (const fallbackKey of keys) {
+            if (value && typeof value === 'object' && fallbackKey in value) {
+              value = value[fallbackKey];
+            } else {
+              return key; // 如果都找不到，返回原始鍵值
+            }
+          }
+          break;
+        }
+      }
+      
+      return typeof value === 'string' ? value : key;
+    }
+    
+    // 原有的單層鍵值處理
     return translations[language][key as keyof typeof translations.en] || translations.en[key as keyof typeof translations.en] || key;
   };
 
