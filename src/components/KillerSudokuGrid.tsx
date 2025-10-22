@@ -121,7 +121,10 @@ export const KillerSudokuGrid = ({
                   
                   {/* 主要數字顯示 */}
                   {cell.value && (
-                    <span className="select-none text-foreground">{cell.value}</span>
+                    <span className={cn(
+                      "select-none",
+                      cell.given ? "text-foreground font-semibold" : "text-primary font-medium"
+                    )}>{cell.value}</span>
                   )}
                   
                   {/* 候選數字顯示 */}
