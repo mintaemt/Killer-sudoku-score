@@ -195,7 +195,7 @@ export const DifficultySelector = ({
           </div>
           
           {/* Play/Pause Badge */}
-          <div className="absolute -top-1 -right-1 bg-white border border-primary/20 rounded-full w-5 h-5 flex items-center justify-center z-10 shadow-sm">
+          <div className="absolute -top-2 -right-2 bg-white border border-primary/20 rounded-full w-5 h-5 flex items-center justify-center z-10 shadow-sm">
             {isPaused ? <Play className="h-3 w-3 text-primary fill-primary" /> : <Pause className="h-3 w-3 text-primary fill-primary" />}
           </div>
         </div>
