@@ -64,22 +64,32 @@ export const AnimatedGradientBackground = ({ isDopamineMode = false }: AnimatedG
     return () => clearInterval(interval);
   }, []);
 
-  // 檢測系統主題
+  // 檢測實際主題（HTML屬性）
   useEffect(() => {
     const checkTheme = () => {
-      // 只檢測系統主題偏好，不檢測HTML屬性（因為HTML屬性是用戶選擇的主題，不是系統主題）
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      setIsDarkMode(prefersDark);
+      // 檢測HTML的實際主題屬性，而不是系統偏好
+      const htmlElement = document.documentElement;
+      const hasDarkClass = htmlElement.classList.contains('dark');
+      const hasDarkAttribute = htmlElement.getAttribute('data-theme') === 'dark';
+      
+      // 如果HTML有dark class或data-theme="dark"，則為dark mode
+      const isDark = hasDarkClass || hasDarkAttribute;
+      setIsDarkMode(isDark);
       
       // 調試：檢查檢測結果
-      console.log('System prefers dark:', prefersDark, 'Setting isDarkMode to:', prefersDark);
+      console.log('HTML dark class:', hasDarkClass, 'HTML dark attribute:', hasDarkAttribute, 'Setting isDarkMode to:', isDark);
     };
     
     checkTheme();
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    mediaQuery.addEventListener('change', checkTheme);
     
-    return () => mediaQuery.removeEventListener('change', checkTheme);
+    // 監聽HTML屬性變化
+    const observer = new MutationObserver(checkTheme);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class', 'data-theme']
+    });
+    
+    return () => observer.disconnect();
   }, []);
 
   if (isDopamineMode) {
