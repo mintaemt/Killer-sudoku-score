@@ -42,23 +42,22 @@
             --primary-hover: #248B7A;
         }
 
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg-color: #1a1a1a;
-                --text-color: #e0e0e0;
-                --text-muted: #a0a0a0;
-                --border-color: #404040;
-                --border-light: #2a2a2a;
-                --primary-color: #4a9eff;
-                --primary-hover: #66b3ff;
-                --section-bg: #2a2a2a;
-            }
-            
-            /* Dark mode主題顏色 */
-            [data-theme="blue"] {
-                --primary-color: #4a9eff;
-                --primary-hover: #66b3ff;
-            }
+        .dark {
+            --bg-color: #1a1a1a;
+            --text-color: #e0e0e0;
+            --text-muted: #a0a0a0;
+            --border-color: #404040;
+            --border-light: #2a2a2a;
+            --primary-color: #4a9eff;
+            --primary-hover: #66b3ff;
+            --section-bg: #2a2a2a;
+        }
+        
+        /* Dark mode主題顏色 */
+        .dark [data-theme="blue"] {
+            --primary-color: #4a9eff;
+            --primary-hover: #66b3ff;
+        }
             [data-theme="orange"] {
                 --primary-color: #FF8C69;
                 --primary-hover: #FF7A52;
@@ -482,6 +481,22 @@
             } else {
                 document.documentElement.setAttribute('data-theme', 'blue');
                 console.log('Applied default theme: blue'); // 調試用
+            }
+            
+            // 檢測並應用 light/dark mode
+            const htmlElement = document.documentElement;
+            const hasDarkClass = htmlElement.classList.contains('dark');
+            const hasDarkAttribute = htmlElement.getAttribute('data-theme') === 'dark';
+            
+            // 如果HTML有dark class或data-theme="dark"，則為dark mode
+            const isDark = hasDarkClass || hasDarkAttribute;
+            
+            if (isDark) {
+                htmlElement.classList.add('dark');
+                console.log('Applied dark mode'); // 調試用
+            } else {
+                htmlElement.classList.remove('dark');
+                console.log('Applied light mode'); // 調試用
             }
         }
 
