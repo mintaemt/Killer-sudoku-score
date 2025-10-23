@@ -181,10 +181,37 @@
             color: #000000;
             margin-bottom: 4px;
         }
-        .faq-answer {
-            font-family: 'Huninn', sans-serif;
-            color: #666666;
-            margin-bottom: 12px;
+        .email-container {
+            position: relative;
+            display: inline-block;
+            background: var(--section-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: var(--text-color);
+        }
+        .copy-btn {
+            position: absolute;
+            top: 50%;
+            right: 8px;
+            transform: translateY(-50%);
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 4px 6px;
+            cursor: pointer;
+            font-size: 12px;
+            opacity: 0.8;
+            transition: opacity 0.2s ease;
+        }
+        .copy-btn:hover {
+            opacity: 1;
+        }
+        .copy-btn.copied {
+            background: #22c55e;
         }
         .back-link { 
             text-align: center; 
@@ -410,7 +437,10 @@
         <div class="content-section">
             <h2 data-i18n="contact_email_title"></h2>
             <p data-i18n="contact_email_content"></p>
-            <p><strong>mintae.tw@gmail.com</strong></p>
+            <div class="email-container">
+                <span id="email-text">mintae.tw@gmail.com</span>
+                <button class="copy-btn" onclick="copyEmail()" title="複製郵箱地址">📋</button>
+            </div>
             <p data-i18n="contact_email_response"></p>
         </div>
         
@@ -489,6 +519,41 @@
                 htmlElement.classList.remove('dark');
                 console.log('Applied light mode'); // 調試用
             }
+        }
+
+        // 複製郵箱地址
+        function copyEmail() {
+            const emailText = document.getElementById('email-text').textContent;
+            const copyBtn = document.querySelector('.copy-btn');
+            
+            navigator.clipboard.writeText(emailText).then(() => {
+                // 複製成功
+                copyBtn.textContent = '✓';
+                copyBtn.classList.add('copied');
+                
+                // 2秒後恢復原狀
+                setTimeout(() => {
+                    copyBtn.textContent = '📋';
+                    copyBtn.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                // 複製失敗，使用備用方法
+                const textArea = document.createElement('textarea');
+                textArea.value = emailText;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                // 顯示成功狀態
+                copyBtn.textContent = '✓';
+                copyBtn.classList.add('copied');
+                
+                setTimeout(() => {
+                    copyBtn.textContent = '📋';
+                    copyBtn.classList.remove('copied');
+                }, 2000);
+            });
         }
 
         // 載入翻譯
