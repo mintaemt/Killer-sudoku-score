@@ -102,7 +102,7 @@
         }
         .header-section {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start;
             align-items: center;
             margin-bottom: 20px;
         }
@@ -133,18 +133,10 @@
 
         /* 手機版響應式設計 */
         @media (max-width: 768px) {
-            .header-section {
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-                gap: 4px;
-            }
-            
             .nav-tabs {
                 display: flex;
                 gap: 4px;
                 justify-content: flex-start;
-                flex: 1;
                 flex-wrap: nowrap;
             }
             
@@ -165,76 +157,13 @@
                 align-items: center;
                 justify-content: center;
             }
-            
-            .language-selector {
-                flex-shrink: 0;
-            }
-            
-        }
-        .language-selector { 
-            margin: 0;
-            position: relative;
-        }
-        .lang-icon-btn {
-            font-family: 'Huninn', sans-serif;
-            padding: 6px 6px;
-            background: var(--section-bg);
-            color: var(--text-color);
-            border: 1px solid var(--border-color);
-            cursor: pointer;
-            border-radius: 4px;
-            height: 32px;
-            line-height: 1.2;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            transition: all 0.2s ease;
-            width: 32px;
-        }
-        .globe-icon {
-            width: 16px;
-            height: 16px;
-        }
-        .lang-icon-btn:hover {
-            background: var(--border-light);
-        }
-        .language-dropdown {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background: var(--section-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            z-index: 1000;
-            display: none;
-            min-width: 120px;
-        }
-        .language-dropdown button {
-            font-family: 'Huninn', sans-serif;
-            width: 100%;
-            padding: 8px 12px;
-            background: transparent;
-            color: var(--text-color);
-            border: none;
-            cursor: pointer;
-            text-align: left;
-            transition: background 0.2s ease;
-        }
-        .language-dropdown button:hover {
-            background: var(--border-light);
-        }
-        .language-dropdown.show {
-            display: block;
-        }
         h1 { 
             font-family: 'Huninn', sans-serif;
             font-weight: bold;
             color: var(--text-color); 
             border-bottom: 2px solid var(--primary-color); 
             padding-bottom: 8px; 
-            margin-bottom: 16px;
+            margin-bottom: 24px;
         }
         h2 { 
             font-family: 'Huninn', sans-serif;
@@ -270,7 +199,7 @@
         }
         .content-section {
             margin-bottom: 16px;
-            padding: 16px;
+            padding: 14px;
             border: 1px solid var(--border-light);
             border-radius: 6px;
             background-color: var(--section-bg);
@@ -333,22 +262,6 @@
             <button class="nav-tab" onclick="showTab('privacy', this)" data-i18n="privacy"></button>
             <button class="nav-tab" onclick="showTab('cookie', this)" data-i18n="cookies"></button>
             <button class="nav-tab" onclick="showTab('contact', this)" data-i18n="contact"></button>
-        </div>
-        
-        <div class="language-selector">
-            <button class="lang-icon-btn" onclick="toggleLanguageDropdown()">
-                <svg class="globe-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="10"/>
-                    <path d="M2 12h20"/>
-                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-                </svg>
-            </button>
-            <div class="language-dropdown" id="languageDropdown">
-                <button onclick="setLanguage('en')">English</button>
-                <button onclick="setLanguage('zh')">中文</button>
-                <button onclick="setLanguage('ko')">한국어</button>
-                <button onclick="setLanguage('ja')">日本語</button>
-            </div>
         </div>
     </div>
 
@@ -577,33 +490,6 @@
                 console.log('Applied light mode'); // 調試用
             }
         }
-
-        // 設置語言
-        function setLanguage(lang) {
-            localStorage.setItem('killer-sudoku-language', lang);
-            loadTranslations(lang);
-            hideLanguageDropdown();
-        }
-        
-        // 切換語言下拉選單
-        function toggleLanguageDropdown() {
-            const dropdown = document.getElementById('languageDropdown');
-            dropdown.classList.toggle('show');
-        }
-        
-        // 隱藏語言下拉選單
-        function hideLanguageDropdown() {
-            const dropdown = document.getElementById('languageDropdown');
-            dropdown.classList.remove('show');
-        }
-        
-        // 點擊外部關閉下拉選單
-        document.addEventListener('click', function(event) {
-            const languageSelector = document.querySelector('.language-selector');
-            if (!languageSelector.contains(event.target)) {
-                hideLanguageDropdown();
-            }
-        });
 
         // 載入翻譯
         function loadTranslations(lang) {
