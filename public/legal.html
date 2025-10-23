@@ -198,22 +198,17 @@
             top: 50%;
             right: 8px;
             transform: translateY(-50%);
-            background: #666666;
-            color: white;
+            background: transparent;
+            color: var(--text-muted);
             border: none;
-            border-radius: 4px;
-            padding: 4px 6px;
+            padding: 4px;
             cursor: pointer;
-            font-size: 12px;
-            opacity: 0.8;
-            transition: all 0.2s ease;
+            font-size: 16px;
+            opacity: 0.7;
+            transition: opacity 0.2s ease;
         }
         .copy-btn:hover {
             opacity: 1;
-            background: #555555;
-        }
-        .copy-btn.copied {
-            background: #888888;
         }
         .back-link { 
             text-align: center; 
@@ -441,7 +436,12 @@
             <p data-i18n="contact_email_content"></p>
             <div class="email-container">
                 <span id="email-text">mintae.tw@gmail.com</span>
-                <button class="copy-btn" onclick="copyEmail()" title="複製郵箱地址">📋</button>
+                <button class="copy-btn" onclick="copyEmail()" title="複製郵箱地址">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
             </div>
             <p data-i18n="contact_email_response"></p>
         </div>
@@ -529,14 +529,21 @@
             const copyBtn = document.querySelector('.copy-btn');
             
             navigator.clipboard.writeText(emailText).then(() => {
-                // 複製成功
-                copyBtn.textContent = '✓';
-                copyBtn.classList.add('copied');
+                // 複製成功，變為打勾
+                copyBtn.innerHTML = `
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 6L9 17l-5-5"></path>
+                    </svg>
+                `;
                 
                 // 2秒後恢復原狀
                 setTimeout(() => {
-                    copyBtn.textContent = '📋';
-                    copyBtn.classList.remove('copied');
+                    copyBtn.innerHTML = `
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                    `;
                 }, 2000);
             }).catch(err => {
                 // 複製失敗，使用備用方法
@@ -548,12 +555,19 @@
                 document.body.removeChild(textArea);
                 
                 // 顯示成功狀態
-                copyBtn.textContent = '✓';
-                copyBtn.classList.add('copied');
+                copyBtn.innerHTML = `
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 6L9 17l-5-5"></path>
+                    </svg>
+                `;
                 
                 setTimeout(() => {
-                    copyBtn.textContent = '📋';
-                    copyBtn.classList.remove('copied');
+                    copyBtn.innerHTML = `
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                    `;
                 }, 2000);
             });
         }
