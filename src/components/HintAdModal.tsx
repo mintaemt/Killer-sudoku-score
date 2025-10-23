@@ -32,38 +32,15 @@ export const HintAdModal: React.FC<HintAdModalProps> = ({
 }) => {
   const themeColors = getThemeColors(currentTheme);
 
-  // AdSense 廣告觸發函數
+  // 暫時禁用廣告功能 - 直接給予提示
   const handleWatchAd = () => {
-    // 檢查 AdSense 是否已載入
-    if (typeof window !== 'undefined' && (window as any).adsbygoogle) {
-      try {
-        // 觸發 AdSense 動態廣告
-        const adElement = document.querySelector('.adsbygoogle');
-        if (adElement) {
-          // 顯示廣告
-          adElement.style.display = 'block';
-          // 觸發 AdSense 廣告
-          ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
-        }
-        
-        // 廣告觀看完成後的回調
-        setTimeout(() => {
-          onWatchAd(); // 增加提示次數
-          onClose(); // 關閉模態框
-        }, 30000); // 假設廣告時長 30 秒
-        
-      } catch (error) {
-        console.error('AdSense 廣告觸發失敗:', error);
-        // 如果廣告失敗，直接給提示
-        onWatchAd();
-        onClose();
-      }
-    } else {
-      // AdSense 未載入，直接給提示
-      console.warn('AdSense 未載入，直接給予提示');
-      onWatchAd();
-      onClose();
-    }
+    console.log('廣告功能暫時禁用，直接給予提示');
+    
+    // 模擬廣告載入時間（1秒）
+    setTimeout(() => {
+      onWatchAd(); // 增加提示次數
+      onClose(); // 關閉模態框
+    }, 1000);
   };
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
