@@ -717,6 +717,16 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
 
   return (
     <>
+    {/* AdSense 廣告容器 - 隱藏狀態 */}
+    <div 
+      className="adsbygoogle" 
+      style={{ display: 'none' }}
+      data-ad-client="ca-pub-7317171958452167" 
+      data-ad-slot="xxxxxxxxxx"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></div>
+    
     <div className={`min-h-screen flex items-center justify-center p-2 md:p-4 bg-transparent ${isDopamineMode ? 'pt-20 sm:pt-16' : ''}`} data-theme={currentTheme}>
       <div className="w-full max-w-6xl mx-auto animate-fade-in bg-transparent">
         {/* 動態漸層背景 */}

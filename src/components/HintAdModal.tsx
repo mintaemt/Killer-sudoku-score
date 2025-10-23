@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Play } from "lucide-react";
@@ -31,6 +31,40 @@ export const HintAdModal: React.FC<HintAdModalProps> = ({
   currentTheme = "blue",
 }) => {
   const themeColors = getThemeColors(currentTheme);
+
+  // AdSense 廣告觸發函數
+  const handleWatchAd = () => {
+    // 檢查 AdSense 是否已載入
+    if (typeof window !== 'undefined' && (window as any).adsbygoogle) {
+      try {
+        // 觸發 AdSense 動態廣告
+        const adElement = document.querySelector('.adsbygoogle');
+        if (adElement) {
+          // 顯示廣告
+          adElement.style.display = 'block';
+          // 觸發 AdSense 廣告
+          ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
+        }
+        
+        // 廣告觀看完成後的回調
+        setTimeout(() => {
+          onWatchAd(); // 增加提示次數
+          onClose(); // 關閉模態框
+        }, 30000); // 假設廣告時長 30 秒
+        
+      } catch (error) {
+        console.error('AdSense 廣告觸發失敗:', error);
+        // 如果廣告失敗，直接給提示
+        onWatchAd();
+        onClose();
+      }
+    } else {
+      // AdSense 未載入，直接給提示
+      console.warn('AdSense 未載入，直接給予提示');
+      onWatchAd();
+      onClose();
+    }
+  };
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="w-[90vw] md:w-[500px] !max-w-none max-h-[90vh] overflow-y-auto">
@@ -59,7 +93,7 @@ export const HintAdModal: React.FC<HintAdModalProps> = ({
           
           <div className="flex gap-3">
             <Button
-              onClick={onWatchAd}
+              onClick={handleWatchAd}
               className={cn(
                 "flex-1",
                 themeColors.bg,
