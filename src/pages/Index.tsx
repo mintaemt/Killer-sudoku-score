@@ -725,6 +725,8 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
       data-ad-slot="xxxxxxxxxx"
       data-ad-format="auto"
       data-full-width-responsive="true"
+      data-ad-layout="in-article"
+      data-ad-layout-key="-6t+ed+2i-1n-4w"
     ></div>
     
     <div className={`min-h-screen flex items-center justify-center p-2 md:p-4 bg-transparent ${isDopamineMode ? 'pt-20 sm:pt-16' : ''}`} data-theme={currentTheme}>
