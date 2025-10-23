@@ -82,12 +82,16 @@
 
         body { 
             font-family: Arial, sans-serif; 
-            max-width: 800px !important; 
-            margin: 0 auto !important; 
-            padding: 20px !important; 
-            line-height: 1.6;
+            margin: 0;
+            padding: 0;
             background-color: var(--bg-color);
             color: var(--text-color);
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
         }
         .header-section {
             display: flex;
@@ -257,7 +261,8 @@
     </style>
 </head>
 <body>
-    <div class="header-section">
+    <div class="container">
+        <div class="header-section">
         <div class="nav-tabs">
             <button class="nav-tab active" onclick="showTab('terms', this)" data-i18n="terms"></button>
             <button class="nav-tab" onclick="showTab('privacy', this)" data-i18n="privacy"></button>
@@ -451,6 +456,7 @@
             <p><strong data-i18n="contact_faq_q3"></strong></p>
             <p data-i18n="contact_faq_a3"></p>
         </div>
+    </div>
     </div>
 
     <!-- 浮動返回按鈕 -->
