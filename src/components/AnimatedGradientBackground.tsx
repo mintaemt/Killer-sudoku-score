@@ -127,12 +127,12 @@ export const AnimatedGradientBackground = ({ isDopamineMode = false }: AnimatedG
   const teal = getThemeColorRgb('teal');
   
   // 根據主題模式調整透明度
-  const blueOpacity = isDarkMode ? 0.12 : 0.45; // light mode 複製多巴胺模式後降低15%
-  const orangeOpacity = isDarkMode ? 0.15 : 0.38;
-  const greenOpacity = isDarkMode ? 0.12 : 0.32;
-  const purpleOpacity = isDarkMode ? 0.08 : 0.19;
-  const pinkOpacity = isDarkMode ? 0.05 : 0.13;
-  const linearOpacity = isDarkMode ? 0.01 : 0.06;
+  const blueOpacity = isDarkMode ? 0.12 : 0.4; // light mode 比多巴胺模式淺5-10%
+  const orangeOpacity = isDarkMode ? 0.15 : 0.35;
+  const greenOpacity = isDarkMode ? 0.12 : 0.3;
+  const purpleOpacity = isDarkMode ? 0.08 : 0.17;
+  const pinkOpacity = isDarkMode ? 0.05 : 0.12;
+  const linearOpacity = isDarkMode ? 0.01 : 0.05;
   
   return (
     <div 
