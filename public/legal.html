@@ -110,6 +110,7 @@
         /* 浮動返回按鈕 */
         .floating-back-btn {
             font-family: 'Huninn', sans-serif;
+            font-weight: bold;
             position: fixed;
             bottom: 20px;
             right: 20px;
@@ -120,7 +121,7 @@
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 14ㄑpx;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             transition: all 0.3s ease;
         }
@@ -146,6 +147,7 @@
             
             .nav-tab {
                 font-family: 'Huninn', sans-serif;
+                font-weight: bold;
                 flex: 0 1 auto;
                 padding: 6px 3px;
                 font-size: 11px;
@@ -166,36 +168,62 @@
                 justify-content: center;
             }
             
-            .language-selector select {
-                font-family: 'Huninn', sans-serif;
-                padding: 6px 8px;
-                font-size: 12px;
-                height: 36px;
-                border-radius: 4px;
-                border: 1px solid var(--border-color);
-                background: var(--section-bg);
-                color: var(--text-color);
-                line-height: 1.2;
-                min-width: 100px;
-            }
         }
         .language-selector { 
             margin: 0;
+            position: relative;
         }
-        .language-selector select { 
+        .lang-icon-btn {
             font-family: 'Huninn', sans-serif;
-            padding: 8px 16px; 
-            border: 1px solid var(--border-color); 
-            background: var(--section-bg); 
+            padding: 8px 12px;
+            background: var(--section-bg);
             color: var(--text-color);
-            cursor: pointer; 
-            font-size: 16px;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
             border-radius: 4px;
             height: 40px;
             line-height: 1.2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: all 0.2s ease;
+        }
+        .lang-icon-btn:hover {
+            background: var(--border-light);
+        }
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--section-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            display: none;
+            min-width: 120px;
+        }
+        .language-dropdown button {
+            font-family: 'Huninn', sans-serif;
+            width: 100%;
+            padding: 8px 12px;
+            background: transparent;
+            color: var(--text-color);
+            border: none;
+            cursor: pointer;
+            text-align: left;
+            transition: background 0.2s ease;
+        }
+        .language-dropdown button:hover {
+            background: var(--border-light);
+        }
+        .language-dropdown.show {
+            display: block;
         }
         h1 { 
             font-family: 'Huninn', sans-serif;
+            font-weight: bold;
             color: var(--text-color); 
             border-bottom: 2px solid var(--primary-color); 
             padding-bottom: 8px; 
@@ -203,6 +231,7 @@
         }
         h2 { 
             font-family: 'Huninn', sans-serif;
+            font-weight: bold;
             color: var(--text-muted); 
             margin-top: 8px; 
             margin-bottom: 8px;
@@ -234,6 +263,7 @@
         }
         .nav-tab {
             font-family: 'Huninn', sans-serif;
+            font-weight: bold;
             padding: 8px 16px;
             background: var(--section-bg);
             color: var(--text-color);
@@ -288,12 +318,15 @@
         </div>
         
         <div class="language-selector">
-            <select id="langSelect" onchange="setLanguage(this.value)">
-                <option value="en">English</option>
-                <option value="zh">中文</option>
-                <option value="ko">한국어</option>
-                <option value="ja">日本語</option>
-            </select>
+            <button class="lang-icon-btn" onclick="toggleLanguageDropdown()">
+                🌍
+            </button>
+            <div class="language-dropdown" id="languageDropdown">
+                <button onclick="setLanguage('en')">English</button>
+                <button onclick="setLanguage('zh')">中文</button>
+                <button onclick="setLanguage('ko')">한국어</button>
+                <button onclick="setLanguage('ja')">日本語</button>
+            </div>
         </div>
     </div>
 
@@ -526,9 +559,29 @@
         // 設置語言
         function setLanguage(lang) {
             localStorage.setItem('killer-sudoku-language', lang);
-            document.getElementById('langSelect').value = lang;
             loadTranslations(lang);
+            hideLanguageDropdown();
         }
+        
+        // 切換語言下拉選單
+        function toggleLanguageDropdown() {
+            const dropdown = document.getElementById('languageDropdown');
+            dropdown.classList.toggle('show');
+        }
+        
+        // 隱藏語言下拉選單
+        function hideLanguageDropdown() {
+            const dropdown = document.getElementById('languageDropdown');
+            dropdown.classList.remove('show');
+        }
+        
+        // 點擊外部關閉下拉選單
+        document.addEventListener('click', function(event) {
+            const languageSelector = document.querySelector('.language-selector');
+            if (!languageSelector.contains(event.target)) {
+                hideLanguageDropdown();
+            }
+        });
 
         // 載入翻譯
         function loadTranslations(lang) {
@@ -623,7 +676,6 @@
         }, 100);
         
         const currentLang = detectLanguage();
-        document.getElementById('langSelect').value = currentLang;
         loadTranslations(currentLang);
         checkUrlParams();
     </script>
