@@ -100,32 +100,33 @@
         /* 手機版響應式設計 */
         @media (max-width: 768px) {
             .header-section {
-                flex-direction: column;
-                gap: 16px;
-                align-items: stretch;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                gap: 8px;
             }
             
             .nav-tabs {
-                justify-content: center;
-                flex-wrap: wrap;
-                gap: 6px;
+                flex: 1;
+                gap: 4px;
             }
             
             .nav-tab {
                 flex: 1;
-                min-width: calc(50% - 3px);
+                padding: 6px 8px;
+                font-size: 12px;
                 text-align: center;
-                padding: 10px 8px;
-                font-size: 14px;
+                white-space: nowrap;
             }
             
             .language-selector {
-                display: flex;
-                justify-content: center;
+                flex-shrink: 0;
             }
             
             .language-selector select {
-                min-width: 120px;
+                padding: 6px 8px;
+                font-size: 12px;
+                min-width: 80px;
             }
         }
         .language-selector { 
