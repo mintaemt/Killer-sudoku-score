@@ -27,9 +27,55 @@ import { calculateScore, calculateDopamineScore } from "@/lib/scoreCalculator";
 import { cn } from "@/lib/utils";
 import { supabase } from "@/lib/supabase";
 import { useLanguage } from "@/hooks/useLanguage";
+import { useEffect } from "react";
 
 const Index = () => {
   const { t } = useLanguage();
+  
+  // 動態設置頁面標題和 meta 標籤
+  useEffect(() => {
+    // 設置頁面標題
+    document.title = t('app_title');
+    
+    // 設置 meta description
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', t('app_description'));
+    }
+    
+    // 設置 Open Graph 標題
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) {
+      ogTitle.setAttribute('content', t('app_title'));
+    }
+    
+    // 設置 Open Graph 描述
+    const ogDescription = document.querySelector('meta[property="og:description"]');
+    if (ogDescription) {
+      ogDescription.setAttribute('content', t('app_description'));
+    }
+    
+    // 設置 Twitter 標題
+    const twitterTitle = document.querySelector('meta[name="twitter:title"]');
+    if (twitterTitle) {
+      twitterTitle.setAttribute('content', t('app_title'));
+    }
+    
+    // 設置 Twitter 描述
+    const twitterDescription = document.querySelector('meta[name="twitter:description"]');
+    if (twitterDescription) {
+      twitterDescription.setAttribute('content', t('app_description'));
+    }
+    
+    // 設置結構化數據
+    const structuredData = document.querySelector('script[type="application/ld+json"]');
+    if (structuredData) {
+      const data = JSON.parse(structuredData.textContent || '{}');
+      data.name = t('app_title').split(' | ')[0]; // 只取主標題部分
+      data.description = t('app_description');
+      structuredData.textContent = JSON.stringify(data);
+    }
+  }, [t]);
   const [selectedCell, setSelectedCell] = useState<{ row: number; col: number } | null>(null);
   const [difficulty, setDifficulty] = useState<Difficulty>("easy");
   const [mistakes, setMistakes] = useState(0);
