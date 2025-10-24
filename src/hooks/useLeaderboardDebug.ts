@@ -1,8 +1,45 @@
+/**
+ * 排行榜除錯 Hook
+ * 用於開發階段檢查排行榜資料與視圖狀態
+ */
+
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
+import { PostgrestError } from '@supabase/supabase-js';
 
-export const useLeaderboardDebug = () => {
-  const [debugInfo, setDebugInfo] = useState<any>(null);
+/**
+ * 資料查詢結果介面
+ */
+interface DataResult<T> {
+  data: T | null;
+  error: PostgrestError | null;
+}
+
+/**
+ * 除錯資訊介面
+ */
+interface DebugInfo {
+  normalRecords: DataResult<any[]>;
+  dopamineRecords: DataResult<any[]>;
+  users: DataResult<any[]>;
+  normalLeaderboard: DataResult<any[]>;
+  dopamineLeaderboard: DataResult<any[]>;
+}
+
+/**
+ * Hook 返回值介面
+ */
+interface UseLeaderboardDebugReturn {
+  debugInfo: DebugInfo | null;
+  loading: boolean;
+}
+
+/**
+ * 排行榜除錯 Hook
+ * @returns 除錯資訊與載入狀態
+ */
+export const useLeaderboardDebug = (): UseLeaderboardDebugReturn => {
+  const [debugInfo, setDebugInfo] = useState<DebugInfo | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

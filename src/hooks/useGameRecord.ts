@@ -1,9 +1,45 @@
+/**
+ * 遊戲記錄管理 Hook
+ * 處理普通模式與多巴胺模式的遊戲記錄保存、查詢與排名
+ */
+
 import { useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import { GameRecord, Difficulty, GameCompletionResult } from '@/lib/types';
 import { calculateScore, calculateScoreWithDetails } from '@/lib/scoreCalculator';
 
-export const useGameRecord = () => {
+/**
+ * Hook 返回值介面
+ */
+interface UseGameRecordReturn {
+  loading: boolean;
+  error: string | null;
+  saveNormalGameRecord: (
+    userId: string,
+    difficulty: Difficulty,
+    completionTime: number,
+    mistakes: number
+  ) => Promise<GameCompletionResult | null>;
+  saveDopamineGameRecord: (
+    userId: string,
+    difficulty: Difficulty,
+    completionTime: number,
+    mistakes: number,
+    comboCount: number
+  ) => Promise<GameCompletionResult | null>;
+  getNormalUserRank: (userId: string, difficulty: Difficulty) => Promise<number | null>;
+  getDopamineUserRank: (userId: string, difficulty: Difficulty) => Promise<number | null>;
+  getNormalUserBestScore: (userId: string, difficulty: Difficulty) => Promise<GameRecord | null>;
+  getDopamineUserBestScore: (userId: string, difficulty: Difficulty) => Promise<GameRecord | null>;
+  getAllNormalUsersTopScore: (difficulty: Difficulty) => Promise<any[]>;
+  getAllDopamineUsersTopScore: (difficulty: Difficulty) => Promise<any[]>;
+}
+
+/**
+ * 遊戲記錄管理 Hook
+ * @returns 記錄操作函數與狀態
+ */
+export const useGameRecord = (): UseGameRecordReturn => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -138,7 +174,7 @@ export const useGameRecord = () => {
           ideal_time: scoreDetails.idealTime,
           time_bonus: scoreDetails.timeBonus,
           mistake_penalty: scoreDetails.mistakePenalty,
-          combo_bonus: scoreDetails.comboBonus || 0,
+          combo_bonus: scoreDetails.comboBonus ?? 0,
           calculated_score: scoreDetails.calculatedScore,
           final_score: scoreDetails.finalScore,
           calculation_version: scoreDetails.calculationVersion,

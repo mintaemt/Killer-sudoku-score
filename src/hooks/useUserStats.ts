@@ -1,24 +1,50 @@
+/**
+ * 使用者統計資料 Hook
+ * 提供使用者在不同難度與模式下的遊戲統計資訊
+ */
+
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 import { Difficulty } from '@/lib/types';
 
+/**
+ * 使用者統計資料介面
+ */
 export interface UserStats {
-  totalGames: number;
-  bestScore: number;
-  bestTime: number;
-  averageScore: number;
-  totalMistakes: number;
-  difficultyStats: {
+  totalGames: number;           // 總遊戲數
+  bestScore: number;            // 最佳分數
+  bestTime: number;             // 最佳時間（秒）
+  averageScore: number;         // 平均分數
+  totalMistakes: number;        // 總錯誤數
+  difficultyStats: {            // 各難度統計
     [key in Difficulty]: {
-      gamesPlayed: number;
-      bestScore: number;
-      bestTime: number;
-      averageScore: number;
+      gamesPlayed: number;      // 遊戲數量
+      bestScore: number;        // 最佳分數
+      bestTime: number;         // 最佳時間（秒）
+      averageScore: number;     // 平均分數
     };
   };
 }
 
-export const useUserStats = (userId: string | null, mode: 'normal' | 'dopamine' = 'normal') => {
+/**
+ * Hook 返回值介面
+ */
+interface UseUserStatsReturn {
+  stats: UserStats | null;      // 統計資料
+  loading: boolean;             // 載入狀態
+  error: string | null;         // 錯誤訊息
+}
+
+/**
+ * 使用者統計資料 Hook
+ * @param userId 使用者 ID（null 表示未登入）
+ * @param mode 模式（普通或多巴胺）
+ * @returns 統計資料與狀態
+ */
+export const useUserStats = (
+  userId: string | null,
+  mode: 'normal' | 'dopamine' = 'normal'
+): UseUserStatsReturn => {
   const [stats, setStats] = useState<UserStats | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);

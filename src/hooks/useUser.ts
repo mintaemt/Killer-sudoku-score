@@ -1,11 +1,35 @@
+/**
+ * 使用者管理 Hook
+ * 處理使用者身份驗證、本地儲存與訪客模式
+ */
+
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 import { User } from '@/lib/types';
 import { useLanguage } from './useLanguage';
 
+/** 本地儲存的使用者資料鍵名 */
 const USER_STORAGE_KEY = 'killer-sudoku-user';
 
-export const useUser = () => {
+/**
+ * Hook 返回值介面
+ */
+interface UseUserReturn {
+  user: User | null;                                      // 當前使用者資料
+  loading: boolean;                                       // 載入狀態
+  error: string | null;                                   // 錯誤訊息
+  isVisitorMode: boolean;                                 // 是否為訪客模式
+  createOrUpdateUser: (name: string) => Promise<User | null>;  // 建立或更新使用者
+  clearUser: () => void;                                  // 清除使用者資料
+  enterVisitorMode: () => void;                           // 進入訪客模式
+  isLoggedIn: boolean;                                    // 是否已登入（包含訪客模式）
+}
+
+/**
+ * 使用者管理 Hook
+ * @returns 使用者狀態與操作函數
+ */
+export const useUser = (): UseUserReturn => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);

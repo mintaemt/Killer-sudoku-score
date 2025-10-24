@@ -1,28 +1,50 @@
+/**
+ * Killer Sudoku 遊戲盤面組件
+ * 渲染 9x9 數獨網格，包含 cage 邊框、總和提示與候選數字
+ */
+
 import { Cell, Cage } from "@/lib/sudoku-generator";
 import { cn } from "@/lib/utils";
 
+/**
+ * 組件 Props 介面
+ */
 interface KillerSudokuGridProps {
-  grid: Cell[][];
-  cages: Cage[];
-  selectedCell: { row: number; col: number } | null;
-  onCellSelect: (cell: { row: number; col: number }) => void;
+  grid: Cell[][];                                        // 9x9 遊戲格子陣列
+  cages: Cage[];                                         // Cage 配置列表
+  selectedCell: { row: number; col: number } | null;     // 當前選中的格子
+  onCellSelect: (cell: { row: number; col: number }) => void;  // 格子選擇回調
 }
 
+/**
+ * Killer Sudoku 遊戲盤面組件
+ */
 export const KillerSudokuGrid = ({
   grid,
   cages,
   selectedCell,
   onCellSelect,
 }: KillerSudokuGridProps) => {
-  // Find which cage a cell belongs to
-  const getCageForCell = (row: number, col: number) => {
+  /**
+   * 查找格子所屬的 cage
+   * @param row 行索引
+   * @param col 列索引
+   * @returns 格子所屬的 cage（如果存在）
+   */
+  const getCageForCell = (row: number, col: number): Cage | undefined => {
     return cages.find((cage) =>
       cage.cells.some((c) => c.row === row && c.col === col)
     );
   };
 
-  // Check if cell is first in cage (for sum display)
-  const isFirstInCage = (row: number, col: number, cage: Cage) => {
+  /**
+   * 檢查格子是否為 cage 中的第一個格子（用於顯示總和）
+   * @param row 行索引
+   * @param col 列索引
+   * @param cage 目標 cage
+   * @returns 是否為第一個格子
+   */
+  const isFirstInCage = (row: number, col: number, cage: Cage): boolean => {
     const sorted = [...cage.cells].sort((a, b) => {
       if (a.row !== b.row) return a.row - b.row;
       return a.col - b.col;
@@ -30,9 +52,15 @@ export const KillerSudokuGrid = ({
     return sorted[0].row === row && sorted[0].col === col;
   };
 
-  // Get cage border styles
+  /**
+   * 獲取 cage 邊框樣式
+   * @param row 行索引
+   * @param col 列索引
+   * @param cage 目標 cage
+   * @returns 邊框配置物件
+   */
   const getCageBorders = (row: number, col: number, cage: Cage) => {
-    const isInCage = (r: number, c: number) =>
+    const isInCage = (r: number, c: number): boolean =>
       cage.cells.some((cell) => cell.row === r && cell.col === c);
 
     return {
@@ -43,10 +71,16 @@ export const KillerSudokuGrid = ({
     };
   };
 
-  const isSelected = (row: number, col: number) =>
+  /**
+   * 檢查格子是否被選中
+   */
+  const isSelected = (row: number, col: number): boolean =>
     selectedCell?.row === row && selectedCell?.col === col;
 
-  const isHighlighted = (row: number, col: number) => {
+  /**
+   * 檢查格子是否應該高亮顯示（同行、同列或同宮格）
+   */
+  const isHighlighted = (row: number, col: number): boolean => {
     if (!selectedCell) return false;
     return (
       selectedCell.row === row ||
