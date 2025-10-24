@@ -162,6 +162,18 @@ const translations = {
     minimumScoreExamples: '(Easy 20pts, Medium 40pts, Hard 60pts, Expert 100pts)',
     scoringExample: 'Easy mode, 2 minutes, 1 mistake = 100 + 240 - 20 = 320 points',
     
+    // SEO 相關
+    app_title: 'Killer Sudoku - Free Online Puzzle Game | Killer Sudoku Puzzle Game',
+    app_description: 'Free Killer Sudoku game! 5 difficulty levels, dopamine mode, global leaderboard. No download required, play now! Perfect for students, office workers, and seniors.',
+    app_keywords: 'killer sudoku,sudoku,puzzle game,free game,online game,sudoku game,free puzzle game,brain game,dopamine sudoku,leaderboard,english,sudoku challenge,sudoku puzzle,free puzzle,brain training',
+    app_name: 'Killer Sudoku',
+    game_category: 'Puzzle Game',
+    game_genre: 'Sudoku',
+    game_platform: 'Web Game',
+    audience_type: 'Students, Office Workers, Seniors',
+    game_image_alt: 'Killer Sudoku Game Screenshot',
+    og_locale: 'en_US',
+    
     // Footer Legal Links
     terms: 'Terms',
     privacy: 'Privacy',
@@ -429,6 +441,18 @@ const translations = {
     minimumScoreExamples: '（簡20分、中40分、難60分、專100分）',
     scoringExample: '簡單模式，2分鐘完成，1次錯誤 = 100 + 240 - 20 = 320分',
     
+    // SEO 相關
+    app_title: '殺手數獨 - 免費線上益智小遊戲 | Killer Sudoku 數獨遊戲',
+    app_description: '免費殺手數獨遊戲！5種難度挑戰、多巴胺模式、全球排行榜。無需下載，立即遊玩！適合學生、上班族、銀髮族的益智小遊戲。',
+    app_keywords: '殺手數獨,數獨,益智遊戲,免費遊戲,小遊戲,線上遊戲,數獨遊戲,免費小遊戲,益智小遊戲,多巴胺數獨,排行榜,繁體中文,數獨挑戰,數獨解謎,免費益智,腦力遊戲',
+    app_name: '殺手數獨',
+    game_category: '益智遊戲',
+    game_genre: '數獨',
+    game_platform: '網頁遊戲',
+    audience_type: '學生、上班族、銀髮族',
+    game_image_alt: '殺手數獨遊戲截圖',
+    og_locale: 'zh_TW',
+    
     // Footer Legal Links
     terms: '條款',
     privacy: '隱私',
@@ -685,6 +709,18 @@ const translations = {
     minimumScoreExamples: '(쉬움 20점, 보통 40점, 어려움 60점, 전문가 100점)',
     scoringExample: '쉬움 모드, 2분 완료, 1회 실수 = 100 + 240 - 20 = 320점',
     
+    // SEO 相關
+    app_title: '킬러 스도쿠 - 무료 온라인 퍼즐 게임 | 킬러 스도쿠 퍼즐 게임',
+    app_description: '무료 킬러 스도쿠 게임! 5가지 난이도, 도파민 모드, 글로벌 리더보드. 다운로드 없이 바로 플레이! 학생, 직장인, 시니어에게 완벽한 게임.',
+    app_keywords: '킬러 스도쿠,스도쿠,퍼즐 게임,무료 게임,온라인 게임,스도쿠 게임,무료 퍼즐 게임,두뇌 게임,도파민 스도쿠,리더보드,한국어,스도쿠 챌린지,스도쿠 퍼즐,무료 퍼즐,두뇌 훈련',
+    app_name: '킬러 스도쿠',
+    game_category: '퍼즐 게임',
+    game_genre: '스도쿠',
+    game_platform: '웹 게임',
+    audience_type: '학생, 직장인, 시니어',
+    game_image_alt: '킬러 스도쿠 게임 스크린샷',
+    og_locale: 'ko_KR',
+    
     // Footer Legal Links
     terms: '약관',
     privacy: '개인정보',
@@ -940,6 +976,18 @@ const translations = {
     minimumScoreDescription: '基本スコアの20%',
     minimumScoreExamples: '（簡単20点、普通40点、困難60点、専門家100点）',
     scoringExample: '簡単モード、2分完了、1回ミス = 100 + 240 - 20 = 320点',
+    
+    // SEO 相關
+    app_title: 'キラー数独 - 無料オンラインパズルゲーム | キラー数独パズルゲーム',
+    app_description: '無料キラー数独ゲーム！5つの難易度、ドーパミンモード、グローバルリーダーボード。ダウンロード不要で今すぐプレイ！学生、会社員、シニアに最適。',
+    app_keywords: 'キラー数独,数独,パズルゲーム,無料ゲーム,オンラインゲーム,数独ゲーム,無料パズルゲーム,脳トレゲーム,ドーパミン数独,リーダーボード,日本語,数独チャレンジ,数独パズル,無料パズル,脳力トレーニング',
+    app_name: 'キラー数独',
+    game_category: 'パズルゲーム',
+    game_genre: '数独',
+    game_platform: 'ウェブゲーム',
+    audience_type: '学生、会社員、シニア',
+    game_image_alt: 'キラー数独ゲームスクリーンショット',
+    og_locale: 'ja_JP',
     
     // Footer Legal Links
     terms: '規約',

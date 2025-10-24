@@ -43,6 +43,39 @@ const Index = () => {
       metaDescription.setAttribute('content', t('app_description'));
     }
     
+    // 設置 meta keywords
+    const metaKeywords = document.querySelector('meta[name="keywords"]');
+    if (metaKeywords) {
+      metaKeywords.setAttribute('content', t('app_keywords'));
+    }
+    
+    // 設置 application name
+    const appName = document.querySelector('meta[name="application-name"]');
+    if (appName) {
+      appName.setAttribute('content', t('app_name'));
+    }
+    
+    const appleAppTitle = document.querySelector('meta[name="apple-mobile-web-app-title"]');
+    if (appleAppTitle) {
+      appleAppTitle.setAttribute('content', t('app_name'));
+    }
+    
+    // 設置遊戲相關 meta 標籤
+    const gameCategory = document.querySelector('meta[name="game:category"]');
+    if (gameCategory) {
+      gameCategory.setAttribute('content', t('game_category'));
+    }
+    
+    const gameGenre = document.querySelector('meta[name="game:genre"]');
+    if (gameGenre) {
+      gameGenre.setAttribute('content', t('game_genre'));
+    }
+    
+    const gamePlatform = document.querySelector('meta[name="game:platform"]');
+    if (gamePlatform) {
+      gamePlatform.setAttribute('content', t('game_platform'));
+    }
+    
     // 設置 Open Graph 標題
     const ogTitle = document.querySelector('meta[property="og:title"]');
     if (ogTitle) {
@@ -53,6 +86,21 @@ const Index = () => {
     const ogDescription = document.querySelector('meta[property="og:description"]');
     if (ogDescription) {
       ogDescription.setAttribute('content', t('app_description'));
+    }
+    
+    const ogLocale = document.querySelector('meta[property="og:locale"]');
+    if (ogLocale) {
+      ogLocale.setAttribute('content', t('og_locale'));
+    }
+    
+    const ogSiteName = document.querySelector('meta[property="og:site_name"]');
+    if (ogSiteName) {
+      ogSiteName.setAttribute('content', t('app_name'));
+    }
+    
+    const ogImageAlt = document.querySelector('meta[property="og:image:alt"]');
+    if (ogImageAlt) {
+      ogImageAlt.setAttribute('content', t('game_image_alt'));
     }
     
     // 設置 Twitter 標題
@@ -67,12 +115,24 @@ const Index = () => {
       twitterDescription.setAttribute('content', t('app_description'));
     }
     
+    const twitterImageAlt = document.querySelector('meta[name="twitter:image:alt"]');
+    if (twitterImageAlt) {
+      twitterImageAlt.setAttribute('content', t('game_image_alt'));
+    }
+    
     // 設置結構化數據
     const structuredData = document.querySelector('script[type="application/ld+json"]');
     if (structuredData) {
       const data = JSON.parse(structuredData.textContent || '{}');
       data.name = t('app_title').split(' | ')[0]; // 只取主標題部分
       data.description = t('app_description');
+      data.keywords = t('app_keywords');
+      data.genre = t('game_genre');
+      data.inLanguage = t('og_locale');
+      data.audience = {
+        '@type': 'Audience',
+        audienceType: t('audience_type')
+      };
       structuredData.textContent = JSON.stringify(data);
     }
   }, [t]);
