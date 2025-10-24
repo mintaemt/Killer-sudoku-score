@@ -100,7 +100,9 @@ const Index = () => {
     
     const ogImage = document.querySelector('meta[property="og:image"]');
     if (ogImage) {
-      ogImage.setAttribute('content', `https://killer-sudoku-score.onrender.com/og-image.svg`);
+      // 根據語言選擇對應的分享圖片
+      const imageUrl = `https://killer-sudoku-score.onrender.com/og-image-${language}.png`;
+      ogImage.setAttribute('content', imageUrl);
     }
     
     const ogImageAlt = document.querySelector('meta[property="og:image:alt"]');
@@ -122,7 +124,9 @@ const Index = () => {
     
     const twitterImage = document.querySelector('meta[name="twitter:image"]');
     if (twitterImage) {
-      twitterImage.setAttribute('content', `https://killer-sudoku-score.onrender.com/og-image.svg`);
+      // 根據語言選擇對應的分享圖片
+      const imageUrl = `https://killer-sudoku-score.onrender.com/og-image-${language}.png`;
+      twitterImage.setAttribute('content', imageUrl);
     }
     
     const twitterImageAlt = document.querySelector('meta[name="twitter:image:alt"]');
