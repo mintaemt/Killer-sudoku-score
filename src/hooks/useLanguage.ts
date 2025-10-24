@@ -32,6 +32,18 @@ const translations = {
     notesModeOff: 'Disable Notes Mode',
     candidateNumbers: 'Candidate Numbers',
     
+    // 提示功能
+    hint: 'Hint',
+    hintCountUsedUp: 'Hint count used up',
+    
+    // 遊戲控制
+    clickToResume: 'Click to resume',
+    clickToPause: 'Click to pause',
+    dopamineModeVisitorOnly: 'Dopamine Mode - Registered users only',
+    
+    // 其他
+    githubRepository: 'GitHub Repository',
+    
     // 多巴胺資訊卡
     dopamineInfoTitle: 'Dopamine Mode',
     dopamineInfoSubtitle: 'Challenge Your Limits!',
@@ -311,6 +323,18 @@ const translations = {
     notesModeOff: '關閉註解模式',
     candidateNumbers: '候選數字',
     
+    // 提示功能
+    hint: '提示',
+    hintCountUsedUp: '提示次數已用完',
+    
+    // 遊戲控制
+    clickToResume: '點擊繼續',
+    clickToPause: '點擊暫停',
+    dopamineModeVisitorOnly: '多巴胺模式 - 註冊用戶專屬功能',
+    
+    // 其他
+    githubRepository: 'GitHub 儲存庫',
+    
     // 多巴胺資訊卡
     dopamineInfoTitle: '多巴胺模式',
     dopamineInfoSubtitle: '挑戰你的極限！',
@@ -580,6 +604,28 @@ const translations = {
     score: '점수',
     combo: 'COMBO',
     
+    // 註解功能
+    showNotes: '표시',
+    hideNotes: '숨기기',
+    notes: '메모',
+    notesOn: '메모 ON',
+    notesOff: '메모 OFF',
+    notesModeOn: '메모 모드 활성화',
+    notesModeOff: '메모 모드 비활성화',
+    candidateNumbers: '후보 숫자',
+    
+    // 提示功能
+    hint: '힌트',
+    hintCountUsedUp: '힌트 횟수가 모두 사용되었습니다',
+    
+    // 遊戲控制
+    clickToResume: '클릭하여 재개',
+    clickToPause: '클릭하여 일시정지',
+    dopamineModeVisitorOnly: '도파민 모드 - 등록된 사용자만',
+    
+    // 其他
+    githubRepository: 'GitHub 저장소',
+    
     // 도파민 정보 카드
     dopamineInfoTitle: '도파민 모드',
     dopamineInfoSubtitle: '한계에 도전하세요!',
@@ -847,6 +893,28 @@ const translations = {
     remaining: '残り',
     score: 'スコア',
     combo: 'COMBO',
+    
+    // 註解功能
+    showNotes: '表示',
+    hideNotes: '非表示',
+    notes: 'メモ',
+    notesOn: 'メモON',
+    notesOff: 'メモOFF',
+    notesModeOn: 'メモモード有効',
+    notesModeOff: 'メモモード無効',
+    candidateNumbers: '候補数字',
+    
+    // 提示功能
+    hint: 'ヒント',
+    hintCountUsedUp: 'ヒント回数が使い切れました',
+    
+    // 遊戲控制
+    clickToResume: 'クリックして再開',
+    clickToPause: 'クリックして一時停止',
+    dopamineModeVisitorOnly: 'ドーパミンモード - 登録ユーザーのみ',
+    
+    // 其他
+    githubRepository: 'GitHub リポジトリ',
     
     // ドーパミン情報カード
     dopamineInfoTitle: 'ドーパミンモード',

@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Globe, Languages } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useLanguage } from '@/hooks/useLanguage';
 
 export type Language = 'en' | 'zh' | 'ko' | 'ja';
 
@@ -35,6 +36,7 @@ const detectDefaultLanguage = (): Language => {
 export const LanguageToggle = () => {
   const [currentLanguage, setCurrentLanguage] = useState<Language>('en');
   const [isOpen, setIsOpen] = useState(false);
+  const { t } = useLanguage();
 
   // 初始化語言
   useEffect(() => {
@@ -70,7 +72,7 @@ export const LanguageToggle = () => {
             "shadow-apple-sm hover:shadow-apple-md flex-shrink-0",
             isOpen && "bg-accent text-accent-foreground border-primary/30 shadow-apple-md"
           )}
-          title={`語言: ${currentLangData.nativeName}`}
+          title={`${t('language')}: ${currentLangData.nativeName}`}
         >
           <Globe className="h-3 w-3 md:h-4 md:w-4" />
         </Button>

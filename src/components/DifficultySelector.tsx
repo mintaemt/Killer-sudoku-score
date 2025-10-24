@@ -131,7 +131,7 @@ export const DifficultySelector = ({
                   ? "border-border/50 hover:bg-muted/50 text-foreground hover:text-foreground"
                   : "border-border/30 hover:bg-muted/30 text-muted-foreground hover:text-muted-foreground"
               )}
-              title={hintCount > 0 ? "提示" : "提示次數已用完"}
+              title={hintCount > 0 ? t('hint') : t('hintCountUsedUp')}
             >
               <Lightbulb className="h-4 w-4" />
             </Button>
@@ -197,7 +197,7 @@ export const DifficultySelector = ({
                 linear-gradient(135deg, rgba(249, 115, 22, 0.15) 0%, rgba(59, 130, 246, 0.15) 100%)
               `
             }}
-            title={user && !isVisitorMode ? `${t('dopamineMode')} - ${t('challengeYourLimits')}!` : '多巴胺模式 - 註冊用戶專屬功能'}
+            title={user && !isVisitorMode ? `${t('dopamineMode')} - ${t('challengeYourLimits')}!` : t('dopamineModeVisitorOnly')}
           >
             <Zap className="h-4 w-4 text-white" style={{ textShadow: "2px 2px 4px rgba(0,0,0,0.5), 1px 1px 2px rgba(0,0,0,0.6)" }} />
           </Button>
@@ -210,7 +210,7 @@ export const DifficultySelector = ({
             <span 
               className="text-xs md:text-sm font-bold bg-muted/50 px-2 md:px-3 py-1 rounded-md min-w-[50px] md:min-w-[60px] text-center cursor-pointer transition-smooth hover:bg-muted/70"
               onClick={onTogglePause}
-              title={isPaused ? "點擊繼續" : "點擊暫停"}
+              title={isPaused ? t('clickToResume') : t('clickToPause')}
             >
               {formatTime(time)}
             </span>
