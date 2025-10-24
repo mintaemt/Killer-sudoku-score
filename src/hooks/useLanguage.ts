@@ -13,7 +13,7 @@ const translations = {
     medium: 'MID',
     hard: 'HARD',
     expert: 'XPR',
-    hell: 'Hell',
+    hell: 'HELL',
     
     // 多巴胺模式
     dopamineMode: 'Dopamine Mode',
