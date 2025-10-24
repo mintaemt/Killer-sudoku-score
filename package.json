@@ -15,8 +15,11 @@
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
+    "lint:html": "node scripts/validate-html-css.js",
     "type-check": "tsc --noEmit",
-    "preview": "vite preview"
+    "validate": "npm run type-check && npm run lint && npm run lint:html",
+    "preview": "vite preview",
+    "precommit": "npm run validate"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
