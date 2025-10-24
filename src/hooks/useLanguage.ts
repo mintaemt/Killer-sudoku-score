@@ -9,10 +9,10 @@ const translations = {
     newGame: 'New Game',
     gameRules: 'Game Rules',
     difficulty: 'Difficulty',
-    easy: 'Easy',
-    medium: 'Medium',
-    hard: 'Hard',
-    expert: 'Expert',
+    easy: 'EASY',
+    medium: 'MID',
+    hard: 'HARD',
+    expert: 'XPR',
     hell: 'Hell',
     
     // 多巴胺模式
@@ -168,11 +168,11 @@ const translations = {
     speedImprovementDescription: 'With practice, consider multiple constraints simultaneously to improve solving speed.',
     earlyBonusDescription: '+0.5 points per second early (max 500 points)',
     overtimePenaltyDescription: '-0.1 points per second overtime (min 0 points)',
-    idealTimeDescription: 'Easy 6min, Medium 12min, Hard 18min, Expert 24min',
+    idealTimeDescription: 'EASY 6min, MID 12min, HARD 18min, XPR 24min',
     mistakePenaltyDescription: '20 points deducted per mistake',
     minimumScoreDescription: '20% of basic score',
-    minimumScoreExamples: '(Easy 20pts, Medium 40pts, Hard 60pts, Expert 100pts)',
-    scoringExample: 'Easy mode, 2 minutes, 1 mistake = 100 + 240 - 20 = 320 points',
+    minimumScoreExamples: '(EASY 20pts, MID 40pts, HARD 60pts, XPR 100pts)',
+    scoringExample: 'EASY mode, 2 minutes, 1 mistake = 100 + 240 - 20 = 320 points',
     
     // SEO 相關
     app_title: 'Killer Sudoku - Free Online Puzzle Game | Killer Sudoku Puzzle Game',
@@ -884,7 +884,7 @@ const translations = {
     easy: '初級',
     medium: '中級',
     hard: '上級',
-    expert: '達人級',
+    expert: '達人',
     hell: '地獄級',
     
     // ドーパミンモード
