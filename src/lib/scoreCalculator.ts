@@ -1,14 +1,19 @@
 import { Difficulty, DopamineDifficulty, ScoreCalculationParams } from './types';
 
-// 分數計算詳細結果類型
+/**
+ * 分數計算詳細結果類型
+ * 記錄完整的計分過程，用於透明化計分邏輯
+ */
 export interface ScoreCalculationDetails {
-  baseScore: number;
-  idealTime: number;
-  timeBonus: number;
-  mistakePenalty: number;
-  calculatedScore: number;
-  finalScore: number;
-  calculationVersion: string;
+  baseScore: number;          // 基礎分數（根據難度）
+  idealTime: number;           // 理想完成時間（秒）
+  timeBonus: number;           // 時間獎勵分數
+  mistakePenalty: number;      // 錯誤懲罰分數
+  comboBonus?: number;         // 連擊獎勵分數（多巴胺模式）
+  speedBonus?: number;         // 速度獎勵分數（多巴胺模式）
+  calculatedScore: number;     // 計算後的分數（未經最低分限制）
+  finalScore: number;          // 最終分數（經過最低分限制）
+  calculationVersion: string;  // 計算版本號
 }
 
 /**
@@ -19,22 +24,20 @@ export const calculateScoreWithDetails = ({
   completionTime,
   mistakes
 }: ScoreCalculationParams): ScoreCalculationDetails => {
-  // 基礎分數設定
-  const baseScore = {
+  // 基礎分數設定（普通模式，不包含地獄難度）
+  const baseScore: Record<Difficulty, number> = {
     easy: 100,
     medium: 200,
     hard: 300,
-    expert: 500,
-    hell: 1000
+    expert: 500
   };
 
-  // 理想完成時間
-  const idealTimes = {
+  // 理想完成時間（普通模式，不包含地獄難度）
+  const idealTimes: Record<Difficulty, number> = {
     easy: 360,    // 6分鐘
     medium: 720,  // 12分鐘
     hard: 1080,   // 18分鐘
-    expert: 1440, // 24分鐘
-    hell: 1200    // 20分鐘
+    expert: 1440  // 24分鐘
   };
 
   const idealTime = idealTimes[difficulty];
@@ -147,6 +150,8 @@ export const calculateDopamineScore = ({
     idealTime: config.timeLimit,
     timeBonus,
     mistakePenalty,
+    comboBonus,
+    speedBonus,
     calculatedScore,
     finalScore: Math.round(finalScore),
     calculationVersion: 'dopamine-v2.0'

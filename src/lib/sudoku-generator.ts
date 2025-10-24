@@ -407,7 +407,7 @@ function generateHellDifficultySudoku(): KillerSudokuData {
     const solvedGrid = generateRandomSolvedGrid();
     
     // 生成 cage，但限制單格 cage 數量
-    let cages = generateCages(solvedGrid);
+    let cages = generateRandomCages(solvedGrid);
     
     // 檢查單格 cage 數量，如果超過2個則重新生成
     let attempts = 0;
@@ -418,7 +418,7 @@ function generateHellDifficultySudoku(): KillerSudokuData {
       }
       
       // 重新生成 cage
-      cages = generateCages(solvedGrid);
+      cages = generateRandomCages(solvedGrid);
       attempts++;
     }
     
@@ -498,7 +498,7 @@ function generateHellDifficultySudoku(): KillerSudokuData {
     
     // 回退方案 - 生成一個完整的數獨
     const solvedGrid = generateRandomSolvedGrid();
-    const cages = generateCages(solvedGrid);
+    const cages = generateRandomCages(solvedGrid);
     
     const grid: Cell[][] = solvedGrid.map(row => 
       row.map(cell => ({

@@ -1,8 +1,34 @@
+/**
+ * 排行榜資料管理 Hook
+ * 處理普通模式與多巴胺模式的排行榜查詢與使用者排名
+ */
+
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 import { LeaderboardEntry, Difficulty } from '@/lib/types';
 
-export const useLeaderboard = (difficulty?: Difficulty, mode: 'normal' | 'dopamine' = 'normal') => {
+/**
+ * Hook 返回值介面
+ */
+interface UseLeaderboardReturn {
+  leaderboard: LeaderboardEntry[];                       // 排行榜資料
+  loading: boolean;                                      // 載入狀態
+  error: string | null;                                  // 錯誤訊息
+  refetch: () => Promise<void>;                          // 重新載入排行榜
+  getUserRank: (userId: string, difficulty: Difficulty) => Promise<number | null>;  // 獲取使用者排名
+  getUserBestScore: (userId: string, difficulty: Difficulty) => Promise<LeaderboardEntry | null>;  // 獲取使用者最佳成績
+}
+
+/**
+ * 排行榜資料管理 Hook
+ * @param difficulty 難度（可選）
+ * @param mode 模式（普通或多巴胺）
+ * @returns 排行榜資料與操作函數
+ */
+export const useLeaderboard = (
+  difficulty?: Difficulty,
+  mode: 'normal' | 'dopamine' = 'normal'
+): UseLeaderboardReturn => {
   const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);

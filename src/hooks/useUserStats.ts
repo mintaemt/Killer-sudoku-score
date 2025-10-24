@@ -1,24 +1,51 @@
+/**
+ * 使用者統計資料 Hook
+ * 提供使用者在不同難度與模式下的遊戲統計資訊
+ */
+
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
-import { Difficulty } from '@/lib/types';
+import { DopamineDifficulty } from '@/lib/types';
 
+/**
+ * 使用者統計資料介面
+ * 注意：使用 DopamineDifficulty 以支援所有可能的難度（包括多巴胺模式的 hell）
+ */
 export interface UserStats {
-  totalGames: number;
-  bestScore: number;
-  bestTime: number;
-  averageScore: number;
-  totalMistakes: number;
-  difficultyStats: {
-    [key in Difficulty]: {
-      gamesPlayed: number;
-      bestScore: number;
-      bestTime: number;
-      averageScore: number;
+  totalGames: number;           // 總遊戲數
+  bestScore: number;            // 最佳分數
+  bestTime: number;             // 最佳時間（秒）
+  averageScore: number;         // 平均分數
+  totalMistakes: number;        // 總錯誤數
+  difficultyStats: {            // 各難度統計（包含所有可能的難度）
+    [key in DopamineDifficulty]: {
+      gamesPlayed: number;      // 遊戲數量
+      bestScore: number;        // 最佳分數
+      bestTime: number;         // 最佳時間（秒）
+      averageScore: number;     // 平均分數
     };
   };
 }
 
-export const useUserStats = (userId: string | null, mode: 'normal' | 'dopamine' = 'normal') => {
+/**
+ * Hook 返回值介面
+ */
+interface UseUserStatsReturn {
+  stats: UserStats | null;      // 統計資料
+  loading: boolean;             // 載入狀態
+  error: string | null;         // 錯誤訊息
+}
+
+/**
+ * 使用者統計資料 Hook
+ * @param userId 使用者 ID（null 表示未登入）
+ * @param mode 模式（普通或多巴胺）
+ * @returns 統計資料與狀態
+ */
+export const useUserStats = (
+  userId: string | null,
+  mode: 'normal' | 'dopamine' = 'normal'
+): UseUserStatsReturn => {
   const [stats, setStats] = useState<UserStats | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -119,8 +146,8 @@ export const useUserStats = (userId: string | null, mode: 'normal' | 'dopamine' 
           hell: { gamesPlayed: 0, bestScore: 0, bestTime: 0, averageScore: 0 },
         };
 
-        // 計算各難度的統計
-        const difficulties: Difficulty[] = ['easy', 'medium', 'hard', 'expert', 'hell'];
+        // 計算各難度的統計（包含所有可能的難度）
+        const difficulties: DopamineDifficulty[] = ['easy', 'medium', 'hard', 'expert', 'hell'];
         difficulties.forEach(difficulty => {
           const difficultyRecords = filteredRecords.filter(record => record.difficulty === difficulty);
           if (difficultyRecords.length > 0) {

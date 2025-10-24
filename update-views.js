@@ -1,9 +1,21 @@
 // 更新排行榜視圖的排序邏輯
+// 
+// 使用方法：
+// 1. 設置環境變數：VITE_SUPABASE_URL 和 VITE_SUPABASE_ANON_KEY
+// 2. 執行：node update-views.js
+//
+// 安全提示：請勿在程式碼中硬編碼 API Key！
 const { createClient } = require('@supabase/supabase-js');
 
-// 從環境變量或直接設置 Supabase 配置
-const supabaseUrl = 'https://mintaemt.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1pbnRhZW10Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ5NzQwMjcsImV4cCI6MjA1MDU1MDAyN30.VJ4xJ4xJ4xJ4xJ4xJ4xJ4xJ4xJ4xJ4xJ4xJ4xJ4xJ4';
+// 從環境變數讀取 Supabase 配置
+const supabaseUrl = process.env.VITE_SUPABASE_URL;
+const supabaseKey = process.env.VITE_SUPABASE_ANON_KEY;
+
+if (!supabaseUrl || !supabaseKey) {
+  console.error('❌ 錯誤：請設置環境變數 VITE_SUPABASE_URL 和 VITE_SUPABASE_ANON_KEY');
+  console.error('   或使用 .env 檔案');
+  process.exit(1);
+}
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
@@ -12,6 +24,7 @@ async function updateLeaderboardViews() {
     console.log('🔄 開始更新排行榜視圖...');
 
     // 更新普通模式排行榜視圖
+    // 注意：普通模式只包含 4 個難度（不含 hell）
     const normalViewSQL = `
       CREATE OR REPLACE VIEW normal_leaderboard AS
       SELECT 
@@ -26,12 +39,11 @@ async function updateLeaderboardViews() {
       GROUP BY u.id, u.name, nr.difficulty
       ORDER BY 
         CASE nr.difficulty 
-          WHEN 'hell' THEN 1
-          WHEN 'expert' THEN 2
-          WHEN 'hard' THEN 3
-          WHEN 'medium' THEN 4
-          WHEN 'easy' THEN 5
-          ELSE 6
+          WHEN 'expert' THEN 1
+          WHEN 'hard' THEN 2
+          WHEN 'medium' THEN 3
+          WHEN 'easy' THEN 4
+          ELSE 5
         END, 
         MAX(nr.score) DESC;
     `;

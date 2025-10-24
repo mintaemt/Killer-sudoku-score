@@ -64,6 +64,7 @@ CREATE TABLE IF NOT EXISTS dopamine_score_logs (
 );
 
 -- 5. 創建普通模式排行榜視圖
+-- 注意：普通模式只包含 4 個難度（不含 hell）
 CREATE OR REPLACE VIEW normal_leaderboard
 WITH (security_invoker=on)
 AS
@@ -79,12 +80,11 @@ JOIN normal_records nr ON u.id = nr.user_id
 GROUP BY u.id, u.name, nr.difficulty
 ORDER BY 
   CASE nr.difficulty 
-    WHEN 'hell' THEN 1
-    WHEN 'expert' THEN 2
-    WHEN 'hard' THEN 3
-    WHEN 'medium' THEN 4
-    WHEN 'easy' THEN 5
-    ELSE 6
+    WHEN 'expert' THEN 1
+    WHEN 'hard' THEN 2
+    WHEN 'medium' THEN 3
+    WHEN 'easy' THEN 4
+    ELSE 5
   END, 
   MAX(nr.score) DESC;
 

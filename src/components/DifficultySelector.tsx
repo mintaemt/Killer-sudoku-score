@@ -155,8 +155,8 @@ export const DifficultySelector = ({
               className={cn(
                 "transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md w-9 h-9 p-0",
                 showNotes 
-                  ? "bg-primary text-primary-foreground border-primary/30 shadow-apple-md" 
-                  : "border-border/50 hover:bg-muted/50"
+                  ? "bg-primary text-primary-foreground hover:text-primary-foreground border-primary/30 shadow-apple-md" 
+                  : "border-border/50 hover:bg-muted/50 text-foreground hover:text-foreground"
               )}
               title={showNotes ? t('notesModeOff') : t('notesModeOn')}
             >

@@ -511,19 +511,29 @@
             }
             
             // 檢測並應用 light/dark mode
-            const htmlElement = document.documentElement;
-            const hasDarkClass = htmlElement.classList.contains('dark');
-            const hasDarkAttribute = htmlElement.getAttribute('data-theme') === 'dark';
+            const savedDarkMode = localStorage.getItem('theme');
+            console.log('Detected dark mode setting:', savedDarkMode); // 調試用
             
-            // 如果HTML有dark class或data-theme="dark"，則為dark mode
-            const isDark = hasDarkClass || hasDarkAttribute;
-            
-            if (isDark) {
-                htmlElement.classList.add('dark');
+            // next-themes 會保存 'light', 'dark', 或 'system'
+            if (savedDarkMode === 'dark') {
+                document.documentElement.classList.add('dark');
                 console.log('Applied dark mode'); // 調試用
-            } else {
-                htmlElement.classList.remove('dark');
+            } else if (savedDarkMode === 'light') {
+                document.documentElement.classList.remove('dark');
                 console.log('Applied light mode'); // 調試用
+            } else if (savedDarkMode === 'system') {
+                // 系統模式：根據系統偏好自動檢測
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    document.documentElement.classList.add('dark');
+                    console.log('Applied system dark mode'); // 調試用
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    console.log('Applied system light mode'); // 調試用
+                }
+            } else {
+                // 預設為 light 模式
+                document.documentElement.classList.remove('dark');
+                console.log('Applied default light mode'); // 調試用
             }
         }
 
@@ -667,6 +677,22 @@
         setTimeout(() => {
             detectAndApplyTheme();
         }, 100);
+        
+        // 監聽 localStorage 變化，響應主題切換
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'theme' || e.key === 'killer-sudoku-theme') {
+                console.log('Theme changed, reapplying...', e.key, e.newValue);
+                detectAndApplyTheme();
+            }
+        });
+        
+        // 監聽來自主頁面的主題變化消息
+        window.addEventListener('message', (e) => {
+            if (e.data && e.data.type === 'theme-change') {
+                console.log('Received theme change message:', e.data);
+                detectAndApplyTheme();
+            }
+        });
         
         const currentLang = detectLanguage();
         loadTranslations(currentLang);

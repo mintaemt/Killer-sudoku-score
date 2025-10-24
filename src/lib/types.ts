@@ -6,11 +6,14 @@ export interface User {
   last_login: string;
 }
 
-// 遊戲記錄類型
+/**
+ * 遊戲記錄類型
+ * 注意：difficulty 包含所有可能的難度（包括多巴胺模式的 hell）
+ */
 export interface GameRecord {
   id: string;
   user_id: string;
-  difficulty: 'easy' | 'medium' | 'hard' | 'expert' | 'hell';
+  difficulty: Difficulty | DopamineDifficulty; // 支援普通與多巴胺模式的所有難度
   completion_time: number; // 秒數
   mistakes: number;
   score: number;
@@ -35,10 +38,16 @@ export interface GameCompletionResult {
   isNewRecord?: boolean;
 }
 
-// 難度類型
-export type Difficulty = 'easy' | 'medium' | 'hard' | 'expert' | 'hell';
+/**
+ * 普通模式難度類型
+ * 注意：普通模式不包含地獄難度（hell）
+ */
+export type Difficulty = 'easy' | 'medium' | 'hard' | 'expert';
 
-// 多巴胺模式難度類型
+/**
+ * 多巴胺模式難度類型
+ * 包含地獄難度（hell），提供更高難度挑戰
+ */
 export type DopamineDifficulty = 'easy' | 'medium' | 'hard' | 'expert' | 'hell';
 
 // 積分計算參數類型
