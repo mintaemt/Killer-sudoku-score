@@ -150,7 +150,7 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
                       <div className="space-y-1.5 text-sm text-muted-foreground">
                         <div className="mt-2">
                           <div className="text-sm font-medium text-muted-foreground mb-1 break-words">{t('idealTime')}:</div>
-                          <div className="grid grid-cols-2 gap-2 text-sm">
+                          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm">
                             <div className="text-center p-2 rounded bg-background/50 flex items-center justify-center min-h-[2.5rem]">
                               <div className="break-words">{t('easy')}: 6{t('minutes')}</div>
                             </div>
@@ -177,7 +177,7 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
                         <span className="text-sm text-muted-foreground break-words">{t('mistakePenaltyDescription')}</span>
                       </h4>
                       <div className="text-sm text-muted-foreground">
-                        <div className="grid grid-cols-2 gap-2 text-sm">
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm">
                           <div className="text-center p-2 rounded bg-background/50 flex items-center justify-center min-h-[2.5rem]">
                             <div className="break-words">{t('easy')}: 100{t('points')}</div>
                           </div>
