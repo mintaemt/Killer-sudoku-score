@@ -98,6 +98,11 @@ const Index = () => {
       ogSiteName.setAttribute('content', t('app_name'));
     }
     
+    const ogImage = document.querySelector('meta[property="og:image"]');
+    if (ogImage) {
+      ogImage.setAttribute('content', `https://killer-sudoku-score.onrender.com/og-image.svg`);
+    }
+    
     const ogImageAlt = document.querySelector('meta[property="og:image:alt"]');
     if (ogImageAlt) {
       ogImageAlt.setAttribute('content', t('game_image_alt'));
@@ -113,6 +118,11 @@ const Index = () => {
     const twitterDescription = document.querySelector('meta[name="twitter:description"]');
     if (twitterDescription) {
       twitterDescription.setAttribute('content', t('app_description'));
+    }
+    
+    const twitterImage = document.querySelector('meta[name="twitter:image"]');
+    if (twitterImage) {
+      twitterImage.setAttribute('content', `https://killer-sudoku-score.onrender.com/og-image.svg`);
     }
     
     const twitterImageAlt = document.querySelector('meta[name="twitter:image:alt"]');
