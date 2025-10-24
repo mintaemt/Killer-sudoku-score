@@ -101,7 +101,15 @@ const Index = () => {
     const ogImage = document.querySelector('meta[property="og:image"]');
     if (ogImage) {
       // 根據語言選擇對應的分享圖片
-      const imageUrl = `https://killer-sudoku-score.onrender.com/og-image-${language}.png`;
+      let imageFileName = '';
+      switch(language) {
+        case 'zh': imageFileName = 'og-image-zh.png'; break;
+        case 'en': imageFileName = 'og-image-en.png'; break;
+        case 'ja': imageFileName = 'og-image-jp.png'; break;
+        case 'ko': imageFileName = 'og-image-kr.png'; break;
+        default: imageFileName = 'og-image-en.png'; break;
+      }
+      const imageUrl = `https://killer-sudoku-score.onrender.com/${imageFileName}`;
       ogImage.setAttribute('content', imageUrl);
     }
     
@@ -125,7 +133,15 @@ const Index = () => {
     const twitterImage = document.querySelector('meta[name="twitter:image"]');
     if (twitterImage) {
       // 根據語言選擇對應的分享圖片
-      const imageUrl = `https://killer-sudoku-score.onrender.com/og-image-${language}.png`;
+      let imageFileName = '';
+      switch(language) {
+        case 'zh': imageFileName = 'og-image-zh.png'; break;
+        case 'en': imageFileName = 'og-image-en.png'; break;
+        case 'ja': imageFileName = 'og-image-jp.png'; break;
+        case 'ko': imageFileName = 'og-image-kr.png'; break;
+        default: imageFileName = 'og-image-en.png'; break;
+      }
+      const imageUrl = `https://killer-sudoku-score.onrender.com/${imageFileName}`;
       twitterImage.setAttribute('content', imageUrl);
     }
     
