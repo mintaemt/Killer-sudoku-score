@@ -30,7 +30,7 @@ import { useLanguage } from "@/hooks/useLanguage";
 import { useEffect } from "react";
 
 const Index = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   
   // 動態設置頁面標題和 meta 標籤
   useEffect(() => {
