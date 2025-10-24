@@ -5,10 +5,11 @@
 
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
-import { Difficulty } from '@/lib/types';
+import { DopamineDifficulty } from '@/lib/types';
 
 /**
  * 使用者統計資料介面
+ * 注意：使用 DopamineDifficulty 以支援所有可能的難度（包括多巴胺模式的 hell）
  */
 export interface UserStats {
   totalGames: number;           // 總遊戲數
@@ -16,8 +17,8 @@ export interface UserStats {
   bestTime: number;             // 最佳時間（秒）
   averageScore: number;         // 平均分數
   totalMistakes: number;        // 總錯誤數
-  difficultyStats: {            // 各難度統計
-    [key in Difficulty]: {
+  difficultyStats: {            // 各難度統計（包含所有可能的難度）
+    [key in DopamineDifficulty]: {
       gamesPlayed: number;      // 遊戲數量
       bestScore: number;        // 最佳分數
       bestTime: number;         // 最佳時間（秒）
@@ -145,8 +146,8 @@ export const useUserStats = (
           hell: { gamesPlayed: 0, bestScore: 0, bestTime: 0, averageScore: 0 },
         };
 
-        // 計算各難度的統計
-        const difficulties: Difficulty[] = ['easy', 'medium', 'hard', 'expert', 'hell'];
+        // 計算各難度的統計（包含所有可能的難度）
+        const difficulties: DopamineDifficulty[] = ['easy', 'medium', 'hard', 'expert', 'hell'];
         difficulties.forEach(difficulty => {
           const difficultyRecords = filteredRecords.filter(record => record.difficulty === difficulty);
           if (difficultyRecords.length > 0) {
