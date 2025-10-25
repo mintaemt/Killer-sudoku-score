@@ -343,7 +343,8 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
     const userData = await createOrUpdateUser(name);
     if (userData) {
       setShowUserNameInput(false);
-      // 用戶狀態會自動更新，不需要重新載入頁面
+      // 重新載入頁面以確保用戶按鈕正確顯示
+      window.location.reload();
     }
   };
 
