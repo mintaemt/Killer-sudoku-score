@@ -15,5 +15,3 @@ Crawl-delay: 1
 Allow: /src/
 Allow: /assets/
 Allow: /favicon.svg
-Allow: /favicon-cat.svg
-Allow: /favicon-puzzle.svg
