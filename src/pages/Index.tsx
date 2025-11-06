@@ -27,6 +27,7 @@ import { calculateScore, calculateDopamineScore } from "@/lib/scoreCalculator";
 import { cn } from "@/lib/utils";
 import { supabase } from "@/lib/supabase";
 import { useLanguage } from "@/hooks/useLanguage";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   const { t, language } = useLanguage();
@@ -1120,13 +1121,11 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
           
           {/* 法律與內容導覽連結 */}
           <div className="text-xs text-muted-foreground/60 space-x-3">
-            <a href="/about" className="hover:text-muted-foreground transition-colors">{t('footer.about')}</a>
+            <Link to="/about" className="hover:text-muted-foreground transition-colors">{t('footer.about')}</Link>
             <span>•</span>
-            <a href="/how-to-play" className="hover:text-muted-foreground transition-colors">{t('footer.howToPlay')}</a>
+            <Link to="/how-to-play" className="hover:text-muted-foreground transition-colors">{t('footer.howToPlay')}</Link>
             <span>•</span>
-            <a href="/strategy" className="hover:text-muted-foreground transition-colors">{t('footer.strategy')}</a>
-            <span>•</span>
-            <a href="/faq" className="hover:text-muted-foreground transition-colors">{t('footer.faq')}</a>
+            <Link to="/strategy" className="hover:text-muted-foreground transition-colors">{t('footer.strategy')}</Link>
             <span>•</span>
             <a href="/legal.html?tab=terms" className="hover:text-muted-foreground transition-colors">{t('terms')}</a>
             <span>•</span>
@@ -1158,13 +1157,11 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
           {/* 第一行：內容導覽 + 法律文件連結居中 */}
           <div className="text-center mb-2">
             <div className="text-xs text-muted-foreground/60 space-x-3">
-              <a href="/about" className="hover:text-muted-foreground transition-colors">{t('footer.about')}</a>
+              <Link to="/about" className="hover:text-muted-foreground transition-colors">{t('footer.about')}</Link>
               <span>•</span>
-              <a href="/how-to-play" className="hover:text-muted-foreground transition-colors">{t('footer.howToPlay')}</a>
+              <Link to="/how-to-play" className="hover:text-muted-foreground transition-colors">{t('footer.howToPlay')}</Link>
               <span>•</span>
-              <a href="/strategy" className="hover:text-muted-foreground transition-colors">{t('footer.strategy')}</a>
-              <span>•</span>
-              <a href="/faq" className="hover:text-muted-foreground transition-colors">{t('footer.faq')}</a>
+              <Link to="/strategy" className="hover:text-muted-foreground transition-colors">{t('footer.strategy')}</Link>
               <span>•</span>
               <a href="/legal.html?tab=terms" className="hover:text-muted-foreground transition-colors">{t('terms')}</a>
               <span>•</span>
