@@ -1120,13 +1120,13 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
           
           {/* 法律與內容導覽連結 */}
           <div className="text-xs text-muted-foreground/60 space-x-3">
-            <a href="/about" className="hover:text-muted-foreground transition-colors">關於我們</a>
+            <a href="/about" className="hover:text-muted-foreground transition-colors">{t('footer.about')}</a>
             <span>•</span>
-            <a href="/how-to-play" className="hover:text-muted-foreground transition-colors">如何遊玩</a>
+            <a href="/how-to-play" className="hover:text-muted-foreground transition-colors">{t('footer.howToPlay')}</a>
             <span>•</span>
-            <a href="/strategy" className="hover:text-muted-foreground transition-colors">解題策略</a>
+            <a href="/strategy" className="hover:text-muted-foreground transition-colors">{t('footer.strategy')}</a>
             <span>•</span>
-            <a href="/faq" className="hover:text-muted-foreground transition-colors">常見問題</a>
+            <a href="/faq" className="hover:text-muted-foreground transition-colors">{t('footer.faq')}</a>
             <span>•</span>
             <a href="/legal.html?tab=terms" className="hover:text-muted-foreground transition-colors">{t('terms')}</a>
             <span>•</span>
@@ -1158,13 +1158,13 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
           {/* 第一行：內容導覽 + 法律文件連結居中 */}
           <div className="text-center mb-2">
             <div className="text-xs text-muted-foreground/60 space-x-3">
-              <a href="/about" className="hover:text-muted-foreground transition-colors">關於我們</a>
+              <a href="/about" className="hover:text-muted-foreground transition-colors">{t('footer.about')}</a>
               <span>•</span>
-              <a href="/how-to-play" className="hover:text-muted-foreground transition-colors">如何遊玩</a>
+              <a href="/how-to-play" className="hover:text-muted-foreground transition-colors">{t('footer.howToPlay')}</a>
               <span>•</span>
-              <a href="/strategy" className="hover:text-muted-foreground transition-colors">解題策略</a>
+              <a href="/strategy" className="hover:text-muted-foreground transition-colors">{t('footer.strategy')}</a>
               <span>•</span>
-              <a href="/faq" className="hover:text-muted-foreground transition-colors">常見問題</a>
+              <a href="/faq" className="hover:text-muted-foreground transition-colors">{t('footer.faq')}</a>
               <span>•</span>
               <a href="/legal.html?tab=terms" className="hover:text-muted-foreground transition-colors">{t('terms')}</a>
               <span>•</span>

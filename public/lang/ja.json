@@ -150,5 +150,10 @@
   "strategy.seoTitle": "キラー数独の攻略 | 発展概念とよくあるミス",
   "strategy.seoDescription": "基本テクニック、発展的な考え方、よくあるミスをまとめて効率化。",
   "faq.seoTitle": "よくある質問 | キラー数独スコア",
-  "faq.seoDescription": "ルール、スコア、モバイル対応、ログイン要否、オフライン可否に回答。"
+  "faq.seoDescription": "ルール、スコア、モバイル対応、ログイン要否、オフライン可否に回答。",
+
+  "footer.about": "私たちについて",
+  "footer.howToPlay": "遊び方",
+  "footer.strategy": "攻略",
+  "footer.faq": "よくある質問"
 }

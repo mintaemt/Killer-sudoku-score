@@ -150,5 +150,9 @@
   "strategy.seoTitle": "殺手數獨解題策略 | 進階觀念與常見錯誤",
   "strategy.seoDescription": "常見拆解法則、進階觀念與常見錯誤，強化推理與時間管理，提升解題效率。",
   "faq.seoTitle": "常見問題 | 殺手數獨分數",
-  "faq.seoDescription": "關於殺手數獨的常見問答：規則、計分、行動裝置支援、登入需求與離線能力。"
+  "faq.seoDescription": "關於殺手數獨的常見問答：規則、計分、行動裝置支援、登入需求與離線能力。",
+  "footer.about": "關於我們",
+  "footer.howToPlay": "如何遊玩",
+  "footer.strategy": "解題策略",
+  "footer.faq": "常見問題"
 }

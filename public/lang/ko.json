@@ -150,5 +150,9 @@
   "strategy.seoTitle": "전략 | 고급 개념과 흔한 실수",
   "strategy.seoDescription": "일반 테크닉, 고급 추론, 흔한 실수를 정리해 효율을 높입니다.",
   "faq.seoTitle": "자주 묻는 질문 | 킬러 스도쿠 스코어",
-  "faq.seoDescription": "규칙, 점수, 모바일 지원, 로그인 필요 여부, 오프라인 가능 여부 안내."
+  "faq.seoDescription": "규칙, 점수, 모바일 지원, 로그인 필요 여부, 오프라인 가능 여부 안내.",
+  "footer.about": "소개",
+  "footer.howToPlay": "플레이 방법",
+  "footer.strategy": "전략",
+  "footer.faq": "FAQ"
 }
