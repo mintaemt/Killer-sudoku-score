@@ -20,4 +20,30 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Content Pages -->
+  <url>
+    <loc>https://killer-sudoku-score.onrender.com/about</loc>
+    <lastmod>2025-11-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://killer-sudoku-score.onrender.com/how-to-play</loc>
+    <lastmod>2025-11-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://killer-sudoku-score.onrender.com/strategy</loc>
+    <lastmod>2025-11-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://killer-sudoku-score.onrender.com/faq</loc>
+    <lastmod>2025-11-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
 </urlset>

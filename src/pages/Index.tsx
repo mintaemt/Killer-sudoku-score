@@ -27,7 +27,6 @@ import { calculateScore, calculateDopamineScore } from "@/lib/scoreCalculator";
 import { cn } from "@/lib/utils";
 import { supabase } from "@/lib/supabase";
 import { useLanguage } from "@/hooks/useLanguage";
-import { useEffect } from "react";
 
 const Index = () => {
   const { t, language } = useLanguage();
@@ -1112,15 +1111,23 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
     {/* 簡潔 Footer - 放在主容器外 */}
     <footer className="py-3 bg-background/20 backdrop-blur-sm">
       <div className="max-w-6xl mx-auto px-4">
-        {/* 桌面版：法律文件居中，版權和GitHub靠攏 */}
+        {/* 桌面版：法律與內容導覽居中，版權和GitHub靠攏 */}
         <div className="hidden md:flex items-center justify-center">
           {/* 版權資訊 */}
           <div className="text-xs text-muted-foreground/50 mr-5">
             © 2025 mintae. All rights reserved.
           </div>
           
-          {/* 法律文件連結 */}
+          {/* 法律與內容導覽連結 */}
           <div className="text-xs text-muted-foreground/60 space-x-3">
+            <a href="/about" className="hover:text-muted-foreground transition-colors">關於我們</a>
+            <span>•</span>
+            <a href="/how-to-play" className="hover:text-muted-foreground transition-colors">如何遊玩</a>
+            <span>•</span>
+            <a href="/strategy" className="hover:text-muted-foreground transition-colors">解題策略</a>
+            <span>•</span>
+            <a href="/faq" className="hover:text-muted-foreground transition-colors">常見問題</a>
+            <span>•</span>
             <a href="/legal.html?tab=terms" className="hover:text-muted-foreground transition-colors">{t('terms')}</a>
             <span>•</span>
             <a href="/legal.html?tab=privacy" className="hover:text-muted-foreground transition-colors">{t('privacy')}</a>
@@ -1148,9 +1155,17 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
 
         {/* 行動版：兩行佈局 */}
         <div className="block md:hidden">
-          {/* 第一行：法律文件連結居中 */}
+          {/* 第一行：內容導覽 + 法律文件連結居中 */}
           <div className="text-center mb-2">
             <div className="text-xs text-muted-foreground/60 space-x-3">
+              <a href="/about" className="hover:text-muted-foreground transition-colors">關於我們</a>
+              <span>•</span>
+              <a href="/how-to-play" className="hover:text-muted-foreground transition-colors">如何遊玩</a>
+              <span>•</span>
+              <a href="/strategy" className="hover:text-muted-foreground transition-colors">解題策略</a>
+              <span>•</span>
+              <a href="/faq" className="hover:text-muted-foreground transition-colors">常見問題</a>
+              <span>•</span>
               <a href="/legal.html?tab=terms" className="hover:text-muted-foreground transition-colors">{t('terms')}</a>
               <span>•</span>
               <a href="/legal.html?tab=privacy" className="hover:text-muted-foreground transition-colors">{t('privacy')}</a>
