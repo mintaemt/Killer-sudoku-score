@@ -921,17 +921,6 @@ const translations = {
 
     // Footer Legal Links
     footer: {
-      about: '소개',
-      howToPlay: '게임 방법',
-      strategy: '공략',
-      terms: '이용약관',
-      privacy: '개인정보처리방침',
-      cookies: '쿠키 정책',
-      contact: '문의하기',
-    },
-
-    // Content Pages
-    about: {
       seoTitle: '킬러 스도쿠 소개 - 최고의 온라인 퍼즐 게임',
       seoDescription: '킬러 스도쿠에 대해 알아보고, 최고의 무료 온라인 퍼즐 경험을 제공하려는 우리의 사명과 매일의 두뇌 훈련을 위해 우리를 선택해야 하는 이유를 확인하세요.',
       title: '소개',

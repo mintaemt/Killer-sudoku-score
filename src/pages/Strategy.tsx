@@ -1,5 +1,4 @@
 import React from "react";
-import { Lightbulb } from "lucide-react";
 import { useLanguage } from "@/hooks/useLanguage";
 import { ContentPageLayout } from "@/components/layout/ContentPageLayout";
 
@@ -11,7 +10,6 @@ const Strategy: React.FC = () => {
       title={t('strategy.title')}
       seoTitle={t('strategy.seoTitle')}
       seoDescription={t('strategy.seoDescription')}
-      icon={<Lightbulb className="w-6 h-6 text-primary" />}
     >
       <section className="mb-8">
         <h2 className="text-2xl font-semibold mb-4 text-foreground/90">{t('strategy.common.title')}</h2>

@@ -1,5 +1,4 @@
 import React from "react";
-import { Info } from "lucide-react";
 import { useLanguage } from "@/hooks/useLanguage";
 import { ContentPageLayout } from "@/components/layout/ContentPageLayout";
 
@@ -11,7 +10,6 @@ const About: React.FC = () => {
       title={t('about.title')}
       seoTitle={t('about.seoTitle')}
       seoDescription={t('about.seoDescription')}
-      icon={<Info className="w-6 h-6 text-primary" />}
     >
       <section className="mb-8">
         <h2 className="text-2xl font-semibold mb-4 text-foreground/90">{t('about.whatWeDo.title')}</h2>

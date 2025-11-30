@@ -1,5 +1,4 @@
 import React from "react";
-import { BookOpen } from "lucide-react";
 import { useLanguage } from "@/hooks/useLanguage";
 import { ContentPageLayout } from "@/components/layout/ContentPageLayout";
 
@@ -11,7 +10,6 @@ const HowToPlay: React.FC = () => {
       title={t('howToPlay.title')}
       seoTitle={t('howToPlay.seoTitle')}
       seoDescription={t('howToPlay.seoDescription')}
-      icon={<BookOpen className="w-6 h-6 text-primary" />}
     >
       <section className="mb-8">
         <h2 className="text-2xl font-semibold mb-4 text-foreground/90">{t('howToPlay.rules.title')}</h2>
