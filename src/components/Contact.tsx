@@ -30,7 +30,7 @@ export const Contact: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold mb-4 text-primary">{t('legal.contact.waysToContact')}</h2>
+          <h2 className="text-xl font-semibold mb-4 text-foreground">{t('legal.contact.waysToContact')}</h2>
           <div className="grid md:grid-cols-2 gap-4">
             {/* Email Card */}
             <div className="p-4 rounded-xl bg-background/50 border border-border/50 flex flex-col h-full">
@@ -92,7 +92,7 @@ export const Contact: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold mb-3 text-primary">
+          <h2 className="text-xl font-semibold mb-3 text-foreground">
             {t('legal.contact.responseTime')}
           </h2>
           <p className="text-muted-foreground leading-relaxed">
@@ -101,7 +101,7 @@ export const Contact: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold mb-4 text-primary">{t('legal.contact.typesOfInquiries')}</h2>
+          <h2 className="text-xl font-semibold mb-4 text-foreground">{t('legal.contact.typesOfInquiries')}</h2>
           <div className="space-y-4">
             <div className="p-4 rounded-xl bg-background/50 border border-border/50">
               <h3 className="font-medium text-primary mb-2">1. {t('legal.contact.technicalSupport')}</h3>
@@ -123,7 +123,7 @@ export const Contact: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold mb-3 text-primary">
+          <h2 className="text-xl font-semibold mb-3 text-foreground">
             {t('legal.contact.beforeContacting')}
           </h2>
           <p className="text-muted-foreground leading-relaxed">
@@ -132,7 +132,7 @@ export const Contact: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold mb-3 text-primary">
+          <h2 className="text-xl font-semibold mb-3 text-foreground">
             {t('legal.contact.privacyNote')}
           </h2>
           <p className="text-muted-foreground leading-relaxed">
