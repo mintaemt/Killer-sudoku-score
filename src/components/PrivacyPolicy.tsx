@@ -20,7 +20,7 @@ export const PrivacyPolicy: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold mb-3 text-primary">
+          <h2 className="text-xl font-semibold mb-3 text-foreground">
             {t('legal.privacyPolicy.informationCollection')}
           </h2>
           <p className="text-muted-foreground leading-relaxed">
@@ -29,7 +29,7 @@ export const PrivacyPolicy: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold mb-3 text-primary">
+          <h2 className="text-xl font-semibold mb-3 text-foreground">
             {t('legal.privacyPolicy.informationUse')}
           </h2>
           <p className="text-muted-foreground leading-relaxed">
@@ -38,7 +38,7 @@ export const PrivacyPolicy: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold mb-3 text-primary">
+          <h2 className="text-xl font-semibold mb-3 text-foreground">
             {t('legal.privacyPolicy.dataStorage')}
           </h2>
           <p className="text-muted-foreground leading-relaxed">
@@ -47,7 +47,7 @@ export const PrivacyPolicy: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold mb-3 text-primary">
+          <h2 className="text-xl font-semibold mb-3 text-foreground">
             {t('legal.privacyPolicy.cookies')}
           </h2>
           <p className="text-muted-foreground leading-relaxed">
@@ -56,7 +56,7 @@ export const PrivacyPolicy: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold mb-3 text-primary">
+          <h2 className="text-xl font-semibold mb-3 text-foreground">
             {t('legal.privacyPolicy.userRights')}
           </h2>
           <p className="text-muted-foreground leading-relaxed">
@@ -65,7 +65,7 @@ export const PrivacyPolicy: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold mb-3 text-primary">
+          <h2 className="text-xl font-semibold mb-3 text-foreground">
             {t('legal.privacyPolicy.changes')}
           </h2>
           <p className="text-muted-foreground leading-relaxed">
@@ -74,7 +74,7 @@ export const PrivacyPolicy: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold mb-3 text-primary">
+          <h2 className="text-xl font-semibold mb-3 text-foreground">
             {t('legal.privacyPolicy.contact')}
           </h2>
           <p className="text-muted-foreground leading-relaxed">

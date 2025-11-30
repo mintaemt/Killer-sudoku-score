@@ -30,11 +30,15 @@ import { supabase } from "@/lib/supabase";
 import { useLanguage } from "@/hooks/useLanguage";
 import { Link } from "react-router-dom";
 
+import { useThemeColor } from "@/contexts/ThemeColorContext";
+
 const Index = () => {
   const { t, language } = useLanguage();
+  const { theme: currentTheme, setTheme: setCurrentTheme } = useThemeColor();
 
   // 動態設置頁面標題和 meta 標籤
   useEffect(() => {
+    // ... (keep existing useEffect content)
     // 設置頁面標題
     document.title = t('app_title');
 
@@ -173,12 +177,7 @@ const Index = () => {
   const [gameData, setGameData] = useState(generateKillerSudoku(difficulty));
   const [time, setTime] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [currentTheme, setCurrentTheme] = useState(() => {
-    const savedTheme = localStorage.getItem('killer-sudoku-theme');
-    return savedTheme && ['blue', 'orange', 'green', 'purple', 'pink', 'teal'].includes(savedTheme)
-      ? savedTheme
-      : 'blue';
-  });
+  // Removed local currentTheme state
 
   // 多巴胺模式狀態
   const [isDopamineMode, setIsDopamineMode] = useState(false);
@@ -610,10 +609,8 @@ const Index = () => {
     setIsPaused((prev) => !prev);
   };
 
-  const handleThemeChange = (theme: string) => {
+  const handleThemeChange = (theme: any) => {
     setCurrentTheme(theme);
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('killer-sudoku-theme', theme);
   };
 
   // 處理排行榜顯示

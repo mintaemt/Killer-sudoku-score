@@ -20,7 +20,7 @@ export const CookiePolicy: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold mb-3 text-primary">
+          <h2 className="text-xl font-semibold mb-3 text-foreground">
             {t('legal.cookiePolicy.whatAreCookies')}
           </h2>
           <p className="text-muted-foreground leading-relaxed">
@@ -29,7 +29,7 @@ export const CookiePolicy: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold mb-3 text-primary">
+          <h2 className="text-xl font-semibold mb-3 text-foreground">
             {t('legal.cookiePolicy.howWeUseCookies')}
           </h2>
           <p className="text-muted-foreground leading-relaxed">
@@ -38,7 +38,7 @@ export const CookiePolicy: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold mb-3 text-primary">
+          <h2 className="text-xl font-semibold mb-3 text-foreground">
             {t('legal.cookiePolicy.typesOfCookies')}
           </h2>
           <div className="space-y-4">
@@ -58,7 +58,7 @@ export const CookiePolicy: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold mb-3 text-primary">
+          <h2 className="text-xl font-semibold mb-3 text-foreground">
             {t('legal.cookiePolicy.managingCookies')}
           </h2>
           <p className="text-muted-foreground leading-relaxed">
@@ -67,7 +67,7 @@ export const CookiePolicy: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold mb-3 text-primary">
+          <h2 className="text-xl font-semibold mb-3 text-foreground">
             {t('legal.cookiePolicy.thirdPartyCookies')}
           </h2>
           <p className="text-muted-foreground leading-relaxed">
@@ -76,7 +76,7 @@ export const CookiePolicy: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold mb-3 text-primary">
+          <h2 className="text-xl font-semibold mb-3 text-foreground">
             {t('legal.cookiePolicy.updates')}
           </h2>
           <p className="text-muted-foreground leading-relaxed">
@@ -85,7 +85,7 @@ export const CookiePolicy: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold mb-3 text-primary">
+          <h2 className="text-xl font-semibold mb-3 text-foreground">
             {t('legal.cookiePolicy.contact')}
           </h2>
           <p className="text-muted-foreground leading-relaxed">

@@ -14,7 +14,7 @@ export const TermsOfService: React.FC = () => {
     >
       <div className="space-y-8">
         <section>
-          <h2 className="text-xl font-semibold mb-3 text-primary">
+          <h2 className="text-xl font-semibold mb-3 text-foreground">
             {t('legal.termsOfService.acceptance')}
           </h2>
           <p className="text-muted-foreground leading-relaxed">
@@ -23,7 +23,7 @@ export const TermsOfService: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold mb-3 text-primary">
+          <h2 className="text-xl font-semibold mb-3 text-foreground">
             {t('legal.termsOfService.serviceDescription')}
           </h2>
           <p className="text-muted-foreground leading-relaxed">
@@ -32,7 +32,7 @@ export const TermsOfService: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold mb-3 text-primary">
+          <h2 className="text-xl font-semibold mb-3 text-foreground">
             {t('legal.termsOfService.userConduct')}
           </h2>
           <p className="text-muted-foreground leading-relaxed">
@@ -41,7 +41,7 @@ export const TermsOfService: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold mb-3 text-primary">
+          <h2 className="text-xl font-semibold mb-3 text-foreground">
             {t('legal.termsOfService.intellectualProperty')}
           </h2>
           <p className="text-muted-foreground leading-relaxed">
@@ -50,7 +50,7 @@ export const TermsOfService: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold mb-3 text-primary">
+          <h2 className="text-xl font-semibold mb-3 text-foreground">
             {t('legal.termsOfService.privacy')}
           </h2>
           <p className="text-muted-foreground leading-relaxed">
@@ -59,7 +59,7 @@ export const TermsOfService: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold mb-3 text-primary">
+          <h2 className="text-xl font-semibold mb-3 text-foreground">
             {t('legal.termsOfService.serviceAvailability')}
           </h2>
           <p className="text-muted-foreground leading-relaxed">
@@ -68,7 +68,7 @@ export const TermsOfService: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold mb-3 text-primary">
+          <h2 className="text-xl font-semibold mb-3 text-foreground">
             {t('legal.termsOfService.disclaimer')}
           </h2>
           <p className="text-muted-foreground leading-relaxed">
@@ -77,7 +77,7 @@ export const TermsOfService: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold mb-3 text-primary">
+          <h2 className="text-xl font-semibold mb-3 text-foreground">
             {t('legal.termsOfService.limitationOfLiability')}
           </h2>
           <p className="text-muted-foreground leading-relaxed">
@@ -86,7 +86,7 @@ export const TermsOfService: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold mb-3 text-primary">
+          <h2 className="text-xl font-semibold mb-3 text-foreground">
             {t('legal.termsOfService.termination')}
           </h2>
           <p className="text-muted-foreground leading-relaxed">
@@ -95,7 +95,7 @@ export const TermsOfService: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold mb-3 text-primary">
+          <h2 className="text-xl font-semibold mb-3 text-foreground">
             {t('legal.termsOfService.changes')}
           </h2>
           <p className="text-muted-foreground leading-relaxed">
@@ -104,7 +104,7 @@ export const TermsOfService: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold mb-3 text-primary">
+          <h2 className="text-xl font-semibold mb-3 text-foreground">
             {t('legal.termsOfService.governingLaw')}
           </h2>
           <p className="text-muted-foreground leading-relaxed">
@@ -113,7 +113,7 @@ export const TermsOfService: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold mb-3 text-primary">
+          <h2 className="text-xl font-semibold mb-3 text-foreground">
             {t('legal.termsOfService.contact')}
           </h2>
           <p className="text-muted-foreground leading-relaxed">
