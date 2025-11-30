@@ -19,7 +19,7 @@ interface GameHeaderProps {
 const themes = [
   { name: "blue", label: "Blue", color: "#3b82f6" },
   { name: "orange", label: "Orange", color: "#ff7710" },
-  { name: "green", label: "Green", color: "#22c55e" },
+  { name: "green", label: "Lime", color: "#bef264" },
   { name: "purple", label: "Purple", color: "#a855f7" },
   { name: "pink", label: "Pink", color: "#ec4899" },
   { name: "teal", label: "Teal", color: "#14b8a6" },
@@ -62,10 +62,10 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
         {/* 左側：標題 */}
         <div className="flex items-center gap-2 md:gap-8 flex-1">
           <div className="flex flex-col items-start">
-            <h1 
+            <h1
               className="font-bold tracking-tight leading-tight text-sm md:text-lg"
-              style={isVisitorMode ? { 
-                fontSize: window.innerWidth >= 768 ? '26px' : '23px' 
+              style={isVisitorMode ? {
+                fontSize: window.innerWidth >= 768 ? '26px' : '23px'
               } : {}}
             >
               {t('gameTitle')}
@@ -88,7 +88,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
 
           <ThemeToggle />
           <LanguageToggle />
-          
+
           {/* 主題選擇器 */}
           <div className="relative" ref={dropdownRef}>
             <Button
@@ -99,7 +99,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
             >
               <Palette className="h-3 w-3 md:h-4 md:w-4" />
             </Button>
-            
+
             {isThemeOpen && (
               <div className="absolute top-full right-0 mt-1 bg-background/95 backdrop-blur-sm border rounded-md shadow-lg z-[9999] p-2 min-w-[120px] dropdown-menu">
                 <div className="grid grid-cols-3 gap-1">
@@ -135,7 +135,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
               >
                 <User className="h-3 w-3 md:h-4 md:w-4" />
               </Button>
-              
+
               {isUserOpen && (
                 <div className="absolute top-full right-0 mt-1 bg-background/95 backdrop-blur-sm border rounded-md shadow-lg z-[9999] p-3 min-w-[200px] dropdown-menu">
                   <div className="space-y-3">
@@ -145,7 +145,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
                         ID: {user?.id?.slice(0, 8)}...
                       </div>
                     </div>
-                    
+
                     {stats && (
                       <div className="space-y-2">
                         <div className="border-t pt-2">
@@ -170,7 +170,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
                               </Button>
                             </div>
                           </div>
-                          
+
                           {viewMode === 'normal' ? (
                             // 普通模式統計
                             <div className="grid grid-cols-2 gap-2 text-xs">
@@ -205,15 +205,15 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
                                   const difficulties = ['easy', 'medium', 'hard', 'expert', 'hell'] as const;
                                   const currentDifficulty = difficulties[currentDifficultyIndex];
                                   const diffStats = stats?.difficultyStats?.[currentDifficulty];
-                                  
+
                                   const difficultyLabels = {
                                     easy: t('easy'),
-                                    medium: t('medium'), 
+                                    medium: t('medium'),
                                     hard: t('hard'),
                                     expert: t('expert'),
                                     hell: t('hell')
                                   };
-                                  
+
                                   return (
                                     <>
                                       <div className="font-medium text-sm mb-2 text-center">{difficultyLabels[currentDifficulty]}</div>
@@ -241,7 +241,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
                                   );
                                 })()}
                               </div>
-                              
+
                               {/* 滑動控制 */}
                               <div className="flex items-center justify-between">
                                 <Button
@@ -252,7 +252,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
                                 >
                                   <ChevronLeft className="h-3 w-3" />
                                 </Button>
-                                
+
                                 {/* 點點指示器 */}
                                 <div className="flex space-x-1">
                                   {[0, 1, 2, 3, 4].map(index => (
@@ -261,14 +261,14 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
                                       onClick={() => setCurrentDifficultyIndex(index)}
                                       className={cn(
                                         "w-2 h-2 rounded-full transition-colors",
-                                        index === currentDifficultyIndex 
-                                          ? "bg-primary" 
+                                        index === currentDifficultyIndex
+                                          ? "bg-primary"
                                           : "bg-muted-foreground/30 hover:bg-muted-foreground/50"
                                       )}
                                     />
                                   ))}
                                 </div>
-                                
+
                                 <Button
                                   variant="outline"
                                   size="sm"
@@ -283,13 +283,13 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
                         </div>
                       </div>
                     )}
-                    
+
                     {statsLoading && (
                       <div className="text-center text-xs text-muted-foreground p-4">
                         {t('loadingStats')}
                       </div>
                     )}
-                    
+
                     <div className="border-t pt-2">
                       <Button
                         variant="outline"
@@ -301,7 +301,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
                         className="w-full text-xs"
                       >
                         <ListOrdered className="h-3 w-3 mr-1" />
-{t('viewLeaderboard')}
+                        {t('viewLeaderboard')}
                       </Button>
                     </div>
                   </div>

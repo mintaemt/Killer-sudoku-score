@@ -8,7 +8,7 @@ interface AnimatedGradientBackgroundProps {
 const themeColors = {
   blue: { h: 210, s: 100, l: 50 },     // hsl(210, 100%, 50%)
   orange: { h: 25, s: 100, l: 50 },    // hsl(25, 100%, 50%)
-  green: { h: 142, s: 76, l: 36 },     // hsl(142, 76%, 36%)
+  green: { h: 80, s: 100, l: 50 },     // hsl(80, 100%, 50%) - Lime
   purple: { h: 262, s: 83, l: 58 },    // hsl(262, 83%, 58%)
   pink: { h: 330, s: 81, l: 60 },      // hsl(330, 81%, 60%)
   teal: { h: 173, s: 80, l: 40 }       // hsl(173, 80%, 40%)
@@ -19,26 +19,26 @@ const hslToRgb = (h: number, s: number, l: number) => {
   h = h / 360;
   s = s / 100;
   l = l / 100;
-  
+
   const c = (1 - Math.abs(2 * l - 1)) * s;
   const x = c * (1 - Math.abs((h * 6) % 2 - 1));
   const m = l - c / 2;
-  
+
   let r, g, b;
-  if (h < 1/6) {
+  if (h < 1 / 6) {
     r = c; g = x; b = 0;
-  } else if (h < 2/6) {
+  } else if (h < 2 / 6) {
     r = x; g = c; b = 0;
-  } else if (h < 3/6) {
+  } else if (h < 3 / 6) {
     r = 0; g = c; b = x;
-  } else if (h < 4/6) {
+  } else if (h < 4 / 6) {
     r = 0; g = x; b = c;
-  } else if (h < 5/6) {
+  } else if (h < 5 / 6) {
     r = x; g = 0; b = c;
   } else {
     r = c; g = 0; b = x;
   }
-  
+
   return {
     r: Math.round((r + m) * 255),
     g: Math.round((g + m) * 255),
@@ -71,24 +71,24 @@ export const AnimatedGradientBackground = ({ isDopamineMode = false }: AnimatedG
       const htmlElement = document.documentElement;
       const hasDarkClass = htmlElement.classList.contains('dark');
       const hasDarkAttribute = htmlElement.getAttribute('data-theme') === 'dark';
-      
+
       // 如果HTML有dark class或data-theme="dark"，則為dark mode
       const isDark = hasDarkClass || hasDarkAttribute;
       setIsDarkMode(isDark);
-      
+
       // 調試：檢查檢測結果
       console.log('HTML dark class:', hasDarkClass, 'HTML dark attribute:', hasDarkAttribute, 'Setting isDarkMode to:', isDark);
     };
-    
+
     checkTheme();
-    
+
     // 監聽HTML屬性變化
     const observer = new MutationObserver(checkTheme);
     observer.observe(document.documentElement, {
       attributes: true,
       attributeFilter: ['class', 'data-theme']
     });
-    
+
     return () => observer.disconnect();
   }, []);
 
@@ -100,9 +100,9 @@ export const AnimatedGradientBackground = ({ isDopamineMode = false }: AnimatedG
     const purple = getThemeColorRgb('purple');
     const pink = getThemeColorRgb('pink');
     const teal = getThemeColorRgb('teal');
-    
+
     return (
-      <div 
+      <div
         className="fixed inset-0 -z-10"
         style={{
           background: `
@@ -125,7 +125,7 @@ export const AnimatedGradientBackground = ({ isDopamineMode = false }: AnimatedG
   const purple = getThemeColorRgb('purple');
   const pink = getThemeColorRgb('pink');
   const teal = getThemeColorRgb('teal');
-  
+
   // 根據主題模式調整透明度
   const blueOpacity = isDarkMode ? 0.12 : 0.4; // light mode 比多巴胺模式淺5-10%
   const orangeOpacity = isDarkMode ? 0.15 : 0.35;
@@ -133,9 +133,9 @@ export const AnimatedGradientBackground = ({ isDopamineMode = false }: AnimatedG
   const purpleOpacity = isDarkMode ? 0.08 : 0.17;
   const pinkOpacity = isDarkMode ? 0.05 : 0.12;
   const linearOpacity = isDarkMode ? 0.01 : 0.05;
-  
+
   return (
-    <div 
+    <div
       className="fixed inset-0 -z-10"
       style={{
         background: `

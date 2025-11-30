@@ -1,6 +1,5 @@
 import React from 'react';
 import { useLanguage } from '@/hooks/useLanguage';
-import { Cookie, Info, Settings, BarChart, Globe, RefreshCw, Mail } from 'lucide-react';
 import { ContentPageLayout } from '@/components/layout/ContentPageLayout';
 
 export const CookiePolicy: React.FC = () => {
@@ -12,7 +11,6 @@ export const CookiePolicy: React.FC = () => {
       lastUpdated={t('legal.cookiePolicy.lastUpdated')}
       seoTitle={t('legal.cookiePolicy.title')}
       seoDescription={t('legal.cookiePolicy.introduction')}
-      icon={<Cookie className="h-6 w-6 text-primary" />}
     >
       <div className="space-y-8">
         <section>
@@ -22,8 +20,7 @@ export const CookiePolicy: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold mb-3 flex items-center gap-2 text-foreground/90">
-            <Info className="h-5 w-5 text-blue-500" />
+          <h2 className="text-xl font-semibold mb-3 text-primary">
             {t('legal.cookiePolicy.whatAreCookies')}
           </h2>
           <p className="text-muted-foreground leading-relaxed">
@@ -32,8 +29,7 @@ export const CookiePolicy: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold mb-3 flex items-center gap-2 text-foreground/90">
-            <Settings className="h-5 w-5 text-green-500" />
+          <h2 className="text-xl font-semibold mb-3 text-primary">
             {t('legal.cookiePolicy.howWeUseCookies')}
           </h2>
           <p className="text-muted-foreground leading-relaxed">
@@ -42,8 +38,7 @@ export const CookiePolicy: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold mb-3 flex items-center gap-2 text-foreground/90">
-            <Cookie className="h-5 w-5 text-orange-500" />
+          <h2 className="text-xl font-semibold mb-3 text-primary">
             {t('legal.cookiePolicy.typesOfCookies')}
           </h2>
           <div className="space-y-4">
@@ -63,8 +58,7 @@ export const CookiePolicy: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold mb-3 flex items-center gap-2 text-foreground/90">
-            <Settings className="h-5 w-5 text-purple-500" />
+          <h2 className="text-xl font-semibold mb-3 text-primary">
             {t('legal.cookiePolicy.managingCookies')}
           </h2>
           <p className="text-muted-foreground leading-relaxed">
@@ -73,8 +67,7 @@ export const CookiePolicy: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold mb-3 flex items-center gap-2 text-foreground/90">
-            <Globe className="h-5 w-5 text-indigo-500" />
+          <h2 className="text-xl font-semibold mb-3 text-primary">
             {t('legal.cookiePolicy.thirdPartyCookies')}
           </h2>
           <p className="text-muted-foreground leading-relaxed">
@@ -83,8 +76,7 @@ export const CookiePolicy: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold mb-3 flex items-center gap-2 text-foreground/90">
-            <RefreshCw className="h-5 w-5 text-teal-500" />
+          <h2 className="text-xl font-semibold mb-3 text-primary">
             {t('legal.cookiePolicy.updates')}
           </h2>
           <p className="text-muted-foreground leading-relaxed">
@@ -93,8 +85,7 @@ export const CookiePolicy: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold mb-3 flex items-center gap-2 text-foreground/90">
-            <Mail className="h-5 w-5 text-red-500" />
+          <h2 className="text-xl font-semibold mb-3 text-primary">
             {t('legal.cookiePolicy.contact')}
           </h2>
           <p className="text-muted-foreground leading-relaxed">

@@ -8,7 +8,7 @@ const getThemeColors = (theme: string) => {
   const themeColors: Record<string, { bg: string; hover: string; text: string }> = {
     blue: { bg: "bg-blue-500", hover: "hover:bg-blue-600", text: "text-white" },
     orange: { bg: "bg-orange-500", hover: "hover:bg-orange-600", text: "text-white" },
-    green: { bg: "bg-green-500", hover: "hover:bg-green-600", text: "text-white" },
+    green: { bg: "bg-lime-400", hover: "hover:bg-lime-500", text: "text-black" },
     purple: { bg: "bg-purple-500", hover: "hover:bg-purple-600", text: "text-white" },
     pink: { bg: "bg-pink-500", hover: "hover:bg-pink-600", text: "text-white" },
     teal: { bg: "bg-teal-500", hover: "hover:bg-teal-600", text: "text-white" },
@@ -26,11 +26,11 @@ interface NumberPadProps {
   onTestComplete?: () => void;
 }
 
-export const NumberPad = ({ 
-  onNumberSelect, 
-  onClear, 
-  disabled, 
-  showClearOnly = false, 
+export const NumberPad = ({
+  onNumberSelect,
+  onClear,
+  disabled,
+  showClearOnly = false,
   showNumbersOnly = false,
   currentTheme = "blue",
   onTestComplete
@@ -109,7 +109,7 @@ export const NumberPad = ({
       longPressTimer.current = null;
     }
   };
-  
+
   // 如果只顯示 clear 按鈕
   if (showClearOnly) {
     const themeColors = getThemeColors(currentTheme);
@@ -197,7 +197,7 @@ export const NumberPad = ({
             </Button>
           ))}
         </div>
-        
+
         {/* Clear button below */}
         <Button
           size="lg"

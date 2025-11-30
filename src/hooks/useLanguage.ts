@@ -560,7 +560,7 @@ const translations = {
       strategy: '策略技巧',
       terms: '服務條款',
       privacy: '隱私政策',
-      cookies: 'Cookie政策',
+      cookies: 'Cookie',
       contact: '聯絡我們',
     },
 

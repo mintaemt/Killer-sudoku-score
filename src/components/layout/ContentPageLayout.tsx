@@ -55,10 +55,10 @@ export const ContentPageLayout: React.FC<ContentPageLayoutProps> = ({
                 <div className="flex flex-col gap-6 mb-10 animate-fade-in">
                     <div className="flex items-center justify-between">
                         <Button
-                            variant="outline"
+                            variant="ghost"
                             size="sm"
                             onClick={() => navigate('/')}
-                            className="flex items-center gap-2 border-primary/20 hover:bg-primary/10 hover:text-primary transition-colors duration-300"
+                            className="flex items-center gap-2 text-muted-foreground hover:text-primary hover:bg-primary/5 transition-colors duration-300"
                         >
                             <ArrowLeft className="h-4 w-4" />
                             {t('back')}
