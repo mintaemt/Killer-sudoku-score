@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 export const Contact: React.FC = () => {
   const { t } = useLanguage();
   const [copied, setCopied] = useState(false);
-  const email = 'mintaemt@gmail.com';
+  const email = 'awesimefree@gmail.com';
   const githubUrl = 'https://github.com/mintaemt/Killer-sudoku-score';
 
   const copyEmail = () => {

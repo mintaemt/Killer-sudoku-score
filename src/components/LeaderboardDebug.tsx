@@ -4,17 +4,17 @@ export const LeaderboardDebug = () => {
   const { debugInfo, loading } = useLeaderboardDebug();
 
   if (loading) {
-    return <div>載入調試信息中...</div>;
+    return <div>載入測試訊息中...</div>;
   }
 
   if (!debugInfo) {
-    return <div>無法載入調試信息</div>;
+    return <div>無法載入測試訊息</div>;
   }
 
   return (
     <div className="p-4 space-y-4">
-      <h3 className="text-lg font-bold">排行榜調試信息</h3>
-      
+      <h3 className="text-lg font-bold">排行榜測試訊息</h3>
+
       <div>
         <h4 className="font-semibold">普通模式記錄 (normal_records):</h4>
         <pre className="bg-gray-100 p-2 rounded text-xs overflow-auto">
