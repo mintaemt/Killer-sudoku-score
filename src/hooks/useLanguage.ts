@@ -14,14 +14,14 @@ const translations = {
     hard: 'HARD',
     expert: 'XPR',
     hell: 'HELL',
-    
+
     // 多巴胺模式
     dopamineMode: 'Dopamine Mode',
     startChallenge: 'Start Challenge',
     remaining: 'Remaining',
     score: 'Score',
     combo: 'COMBO',
-    
+
     // 註解功能
     showNotes: 'Show Notes',
     hideNotes: 'Hide Notes',
@@ -31,19 +31,19 @@ const translations = {
     notesModeOn: 'Enable Notes Mode',
     notesModeOff: 'Disable Notes Mode',
     candidateNumbers: 'Candidate Numbers',
-    
+
     // 提示功能
     hint: 'Hint',
     hintCountUsedUp: 'Hint count used up',
-    
+
     // 遊戲控制
     clickToResume: 'Click to resume',
     clickToPause: 'Click to pause',
     dopamineModeVisitorOnly: 'Dopamine Mode - Registered users only',
-    
+
     // 其他
     githubRepository: 'GitHub Repository',
-    
+
     // 多巴胺資訊卡
     dopamineInfoTitle: 'Dopamine Mode',
     dopamineInfoSubtitle: 'Challenge Your Limits!',
@@ -85,7 +85,7 @@ const translations = {
     congratulations: 'Congratulations',
     remainingTime: 'Remaining Time',
     maxCombo: 'Max Combo',
-    
+
     // 排行榜
     leaderboard: 'Leaderboard',
     viewLeaderboard: 'View Leaderboard',
@@ -95,7 +95,7 @@ const translations = {
     achievementWall: 'Achievement Wall',
     noData: 'No Data',
     highestScoreDisplay: 'Highest Score Display',
-    
+
     // 用戶相關
     welcome: 'Welcome',
     welcomeToKillerSudoku: 'Welcome to Sudoku',
@@ -110,26 +110,26 @@ const translations = {
     viewStats: 'View Stats',
     normal: 'Normal',
     dopamine: 'Dopamine',
-    
+
     // 通用
     close: 'Close',
     back: 'Back',
     restart: 'Restart',
     returnToMain: 'Return to Main Menu',
     clear: 'Clear',
-    
+
     // 主題
     currentTheme: 'Current theme',
     clickToToggle: 'Click to toggle between light and dark',
-    
+
     // 載入狀態
     loadingStats: 'Loading stats...',
-    
+
     // 用戶統計
     bestScore: 'Best Score',
     bestTime: 'Best Time',
     totalGames: 'Total Games',
-    
+
     // 遊戲規則
     scoringSystem: 'Scoring System',
     rules: 'Rules',
@@ -173,7 +173,7 @@ const translations = {
     minimumScoreDescription: '20% of basic score',
     minimumScoreExamples: '(EASY 20pts, MID 40pts, HARD 60pts, XPR 100pts)',
     scoringExample: 'EASY mode, 2 minutes, 1 mistake = 100 + 240 - 20 = 320 points',
-    
+
     // SEO 相關
     app_title: 'Killer Sudoku - Free Online Puzzle Game | Killer Sudoku Puzzle Game',
     app_description: 'Free Killer Sudoku game! 5 difficulty levels, dopamine mode, global leaderboard. No download required, play now! Perfect for students, office workers, and seniors.',
@@ -185,13 +185,89 @@ const translations = {
     audience_type: 'Students, Office Workers, Seniors',
     game_image_alt: 'Killer Sudoku Game Screenshot',
     og_locale: 'en_US',
-    
+
     // Footer Legal Links
-    terms: 'Terms',
-    privacy: 'Privacy',
-    cookies: 'Cookie',
-    contact: 'Contact',
-    
+    footer: {
+      about: 'About Us',
+      howToPlay: 'How to Play',
+      strategy: 'Strategy',
+      terms: 'Terms',
+      privacy: 'Privacy',
+      cookies: 'Cookie',
+      contact: 'Contact',
+    },
+
+    // Content Pages
+    about: {
+      seoTitle: 'About Killer Sudoku - The Best Online Puzzle Game',
+      seoDescription: 'Learn about Killer Sudoku, our mission to provide the best free online puzzle experience, and why you should choose us for your daily brain training.',
+      title: 'About Us',
+      backToGame: 'Back to Game',
+      whatWeDo: {
+        title: 'What We Do',
+        p1: 'We are dedicated to providing the best online Killer Sudoku experience for players of all levels. Our platform combines classic sudoku rules with arithmetic challenges to create a unique and engaging puzzle game.',
+        p2: 'Whether you are a beginner looking to learn the ropes or an expert seeking a challenge, our game offers various difficulty levels and modes to suit your needs.',
+      },
+      whyUs: {
+        title: 'Why Choose Us?',
+        li1: 'Free to play with no downloads required',
+        li2: 'Multiple difficulty levels from Easy to Hell',
+        li3: 'Unique Dopamine Mode for fast-paced fun',
+        li4: 'Global leaderboard to compete with players worldwide',
+      },
+      contact: {
+        title: 'Contact Us',
+        p1: 'Have questions or feedback? We would love to hear from you. Visit our Contact page to get in touch.',
+      },
+    },
+    howToPlay: {
+      seoTitle: 'How to Play Killer Sudoku - Rules and Tips',
+      seoDescription: 'Master the rules of Killer Sudoku with our comprehensive guide. Learn basic rules, scoring system, and tips to solve puzzles faster.',
+      title: 'How to Play',
+      backToGame: 'Back to Game',
+      rules: {
+        title: 'Game Rules',
+        li1: 'Fill the grid with numbers 1-9 so that each row, column, and 3x3 box contains all digits exactly once.',
+        li2: 'The grid is divided into cages (dashed lines). The sum of numbers in a cage must equal the small number in its top-left corner.',
+        li3: 'Numbers cannot repeat within a cage.',
+      },
+      tips: {
+        title: 'Tips for Success',
+        li1: 'Start with cages that have only one possible combination (e.g., a 2-cell cage with sum 3 must be 1 and 2).',
+        li2: 'Use the Rule of 45: The sum of numbers in any row, column, or 3x3 box is always 45.',
+        li3: 'Look for "innies" and "outies" by comparing cage sums with the Rule of 45.',
+      },
+      scoring: {
+        title: 'Scoring System',
+        p1: 'Your score is calculated based on difficulty, completion time, and mistakes. In Dopamine Mode, you also get bonuses for speed and combos!',
+      },
+    },
+    strategy: {
+      seoTitle: 'Killer Sudoku Strategy - Advanced Techniques',
+      seoDescription: 'Improve your Killer Sudoku skills with our strategy guide. Learn advanced techniques, common mistakes to avoid, and how to solve expert puzzles.',
+      title: 'Strategy Guide',
+      backToGame: 'Back to Game',
+      common: {
+        title: 'Common Strategies',
+        li1: 'Scan for unique sums: Some cage sums have only one possible combination of numbers.',
+        li2: 'The 45 Rule: Use the fact that every row, column, and box sums to 45 to deduce numbers in cages that cross boundaries.',
+        li3: 'Cage Combinations: Memorize common sums for 2, 3, or 4 cells to speed up your solving.',
+        li4: 'Pencil Marks: Use notes to keep track of possible candidates for each cell.',
+      },
+      advanced: {
+        title: 'Advanced Tactics',
+        li1: 'Innies and Outies: Calculate the difference between a cage sum and 45 to find numbers inside or outside a region.',
+        li2: 'Split Cages: Break down complex cages into smaller, manageable parts.',
+        li3: 'Parity Analysis: Sometimes knowing if a number is odd or even can help eliminate possibilities.',
+      },
+      mistakes: {
+        title: 'Common Mistakes',
+        li1: 'Guessing: Never guess. Always use logic to deduce the next number.',
+        li2: 'Ignoring Constraints: Remember to check row, column, and box constraints in addition to cage sums.',
+        li3: 'Rushing: Take your time to analyze the board, especially in higher difficulties.',
+      },
+    },
+
     // Legal Documents
     legal: {
       privacyPolicy: {
@@ -305,14 +381,14 @@ const translations = {
     hard: '困難',
     expert: '專家',
     hell: '地獄',
-    
+
     // 多巴胺模式
     dopamineMode: '多巴胺模式',
     startChallenge: '開始挑戰',
     remaining: '剩餘',
     score: '分數',
     combo: 'COMBO',
-    
+
     // 註解功能
     showNotes: '顯示註解',
     hideNotes: '隱藏註解',
@@ -322,19 +398,19 @@ const translations = {
     notesModeOn: '開啟註解模式',
     notesModeOff: '關閉註解模式',
     candidateNumbers: '候選數字',
-    
+
     // 提示功能
     hint: '提示',
     hintCountUsedUp: '提示次數已用完',
-    
+
     // 遊戲控制
     clickToResume: '點擊繼續',
     clickToPause: '點擊暫停',
     dopamineModeVisitorOnly: '多巴胺模式 - 註冊用戶專屬功能',
-    
+
     // 其他
     githubRepository: 'GitHub 儲存庫',
-    
+
     // 多巴胺資訊卡
     dopamineInfoTitle: '多巴胺模式',
     dopamineInfoSubtitle: '挑戰你的極限！',
@@ -376,7 +452,7 @@ const translations = {
     congratulations: '恭喜',
     remainingTime: '剩餘時間',
     maxCombo: '最大連擊',
-    
+
     // 排行榜
     leaderboard: '排行榜',
     viewLeaderboard: '查看排行榜',
@@ -386,7 +462,7 @@ const translations = {
     achievementWall: '成就牆',
     noData: '暫無成就資料',
     highestScoreDisplay: '最高分展示',
-    
+
     // 用戶相關
     welcome: '歡迎',
     welcomeToKillerSudoku: '歡迎來到殺手數獨',
@@ -401,26 +477,26 @@ const translations = {
     viewStats: '查看統計',
     normal: '普通',
     dopamine: '多巴胺',
-    
+
     // 通用
     close: '關閉',
     back: '返回',
     restart: '再次挑戰',
     returnToMain: '返回主選單',
     clear: '清除',
-    
+
     // 主題
     currentTheme: '當前主題',
     clickToToggle: '點擊切換明暗模式',
-    
+
     // 載入狀態
     loadingStats: '載入統計中...',
-    
+
     // 用戶統計
     bestScore: '最佳分數',
     bestTime: '最佳時間',
     totalGames: '總遊戲數',
-    
+
     // 遊戲規則
     scoringSystem: '計分系統',
     rules: '規則',
@@ -464,7 +540,7 @@ const translations = {
     minimumScoreDescription: '基礎分數的20%',
     minimumScoreExamples: '（簡20分、中40分、難60分、專100分）',
     scoringExample: '簡單模式，2分鐘完成，1次錯誤 = 100 + 240 - 20 = 320分',
-    
+
     // SEO 相關
     app_title: '殺手數獨 - 免費線上益智小遊戲 | Killer Sudoku 數獨遊戲',
     app_description: '免費殺手數獨遊戲！5種難度挑戰、多巴胺模式、全球排行榜。無需下載，立即遊玩！適合學生、上班族、銀髮族的益智小遊戲。',
@@ -476,13 +552,89 @@ const translations = {
     audience_type: '學生、上班族、銀髮族',
     game_image_alt: '殺手數獨遊戲截圖',
     og_locale: 'zh_TW',
-    
+
     // Footer Legal Links
-    terms: '條款',
-    privacy: '隱私',
-    cookies: 'Cookie',
-    contact: '聯絡',
-    
+    footer: {
+      about: '關於我們',
+      howToPlay: '玩法說明',
+      strategy: '策略技巧',
+      terms: '服務條款',
+      privacy: '隱私政策',
+      cookies: 'Cookie政策',
+      contact: '聯絡我們',
+    },
+
+    // Content Pages
+    about: {
+      seoTitle: '關於殺手數獨 - 最佳線上益智遊戲',
+      seoDescription: '了解殺手數獨，我們致力於提供最佳的免費線上益智體驗，以及為什麼您應該選擇我們進行日常腦力訓練。',
+      title: '關於我們',
+      backToGame: '返回遊戲',
+      whatWeDo: {
+        title: '我們做什麼',
+        p1: '我們致力於為所有級別的玩家提供最佳的線上殺手數獨體驗。我們的平台結合了經典數獨規則與算術挑戰，創造出獨特且引人入勝的益智遊戲。',
+        p2: '無論您是想學習入門的新手，還是尋求挑戰的專家，我們的遊戲都提供多種難度級別和模式來滿足您的需求。',
+      },
+      whyUs: {
+        title: '為什麼選擇我們？',
+        li1: '完全免費，無需下載',
+        li2: '多種難度級別，從簡單到地獄',
+        li3: '獨特的多巴胺模式，享受快節奏樂趣',
+        li4: '全球排行榜，與世界各地玩家競爭',
+      },
+      contact: {
+        title: '聯絡我們',
+        p1: '有問題或建議嗎？我們很樂意聽取您的意見。請訪問我們的聯絡頁面與我們聯繫。',
+      },
+    },
+    howToPlay: {
+      seoTitle: '殺手數獨玩法說明 - 規則與技巧',
+      seoDescription: '透過我們的完整指南掌握殺手數獨的規則。學習基本規則、計分系統以及快速解題的技巧。',
+      title: '玩法說明',
+      backToGame: '返回遊戲',
+      rules: {
+        title: '遊戲規則',
+        li1: '在9x9網格中填入數字1-9，使每行、每列和每個3x3宮格都包含所有數字且不重複。',
+        li2: '網格被劃分為多個虛線框。框內數字的總和必須等於左上角的小數字。',
+        li3: '虛線框內的數字不能重複。',
+      },
+      tips: {
+        title: '成功技巧',
+        li1: '從只有一種可能組合的虛線框開始（例如，總和為3的2格框必須是1和2）。',
+        li2: '使用45法則：任何行、列或3x3宮格的數字總和永遠是45。',
+        li3: '通過比較虛線框總和與45法則，尋找「內部數」和「外部數」。',
+      },
+      scoring: {
+        title: '計分系統',
+        p1: '您的分數基於難度、完成時間和錯誤次數計算。在多巴胺模式下，您還可以獲得速度和連擊獎勵！',
+      },
+    },
+    strategy: {
+      seoTitle: '殺手數獨策略 - 進階技巧',
+      seoDescription: '透過我們的策略指南提升您的殺手數獨技能。學習進階技巧、避免常見錯誤，並學會如何解決專家級謎題。',
+      title: '策略指南',
+      backToGame: '返回遊戲',
+      common: {
+        title: '常見策略',
+        li1: '尋找唯一總和：某些虛線框總和只有一種可能的數字組合。',
+        li2: '45法則：利用每行、每列和宮格總和為45的事實，推斷跨越邊界的虛線框中的數字。',
+        li3: '虛線框組合：記住2、3或4格的常見總和，以加快解題速度。',
+        li4: '鉛筆標記：使用註解來記錄每個格子可能的候選數字。',
+      },
+      advanced: {
+        title: '進階戰術',
+        li1: '內部數與外部數：計算虛線框總和與45之間的差異，找出區域內部或外部的數字。',
+        li2: '拆分虛線框：將複雜的虛線框分解為更小、更易於管理的部分。',
+        li3: '奇偶分析：有時知道數字是奇數還是偶數可以幫助排除可能性。',
+      },
+      mistakes: {
+        title: '常見錯誤',
+        li1: '猜測：永遠不要猜測。始終使用邏輯推斷下一個數字。',
+        li2: '忽略限制：除了虛線框總和外，記得檢查行、列和宮格的限制。',
+        li3: '匆忙：花時間分析盤面，特別是在較高難度下。',
+      },
+    },
+
     // 法律文件
     legal: {
       privacyPolicy: {
@@ -596,14 +748,14 @@ const translations = {
     hard: '어려움',
     expert: '전문가',
     hell: '지옥',
-    
+
     // 多巴胺 모드
     dopamineMode: '도파민 모드',
     startChallenge: '도전 시작',
     remaining: '남은',
     score: '점수',
     combo: 'COMBO',
-    
+
     // 註解功能
     showNotes: '표시',
     hideNotes: '숨기기',
@@ -613,19 +765,19 @@ const translations = {
     notesModeOn: '메모 모드 활성화',
     notesModeOff: '메모 모드 비활성화',
     candidateNumbers: '후보 숫자',
-    
+
     // 提示功能
     hint: '힌트',
     hintCountUsedUp: '힌트 횟수가 모두 사용되었습니다',
-    
+
     // 遊戲控制
     clickToResume: '클릭하여 재개',
     clickToPause: '클릭하여 일시정지',
     dopamineModeVisitorOnly: '도파민 모드 - 등록된 사용자만',
-    
+
     // 其他
     githubRepository: 'GitHub 저장소',
-    
+
     // 도파민 정보 카드
     dopamineInfoTitle: '도파민 모드',
     dopamineInfoSubtitle: '한계에 도전하세요!',
@@ -667,7 +819,7 @@ const translations = {
     congratulations: '축하합니다',
     remainingTime: '남은 시간',
     maxCombo: '최대 콤보',
-    
+
     // 리더보드
     leaderboard: '리더보드',
     viewLeaderboard: '리더보드 보기',
@@ -677,7 +829,7 @@ const translations = {
     achievementWall: '성취 벽',
     noData: '데이터 없음',
     highestScoreDisplay: '최고 점수 표시',
-    
+
     // 사용자 관련
     welcome: '환영합니다',
     welcomeToKillerSudoku: '킬러 스도쿠에 오신 것을 환영합니다',
@@ -691,26 +843,26 @@ const translations = {
     viewStats: '통계 보기',
     normal: '일반',
     dopamine: '도파민',
-    
+
     // 일반
     close: '닫기',
     back: '뒤로',
     restart: '다시 도전',
     returnToMain: '메인 메뉴로',
     clear: '지우기',
-    
+
     // 테마
     currentTheme: '현재 테마',
     clickToToggle: '라이트/다크 모드 전환',
-    
+
     // 로딩 상태
     loadingStats: '통계 로딩 중...',
-    
+
     // 사용자 통계
     bestScore: '최고 점수',
     bestTime: '최고 시간',
     totalGames: '총 게임 수',
-    
+
     // 게임 규칙
     scoringSystem: '점수 시스템',
     rules: '규칙',
@@ -754,7 +906,7 @@ const translations = {
     minimumScoreDescription: '기본 점수의 20%',
     minimumScoreExamples: '(쉬움 20점, 보통 40점, 어려움 60점, 전문가 100점)',
     scoringExample: '쉬움 모드, 2분 완료, 1회 실수 = 100 + 240 - 20 = 320점',
-    
+
     // SEO 相關
     app_title: '킬러 스도쿠 - 무료 온라인 퍼즐 게임 | 킬러 스도쿠 퍼즐 게임',
     app_description: '무료 킬러 스도쿠 게임! 5가지 난이도, 도파민 모드, 글로벌 리더보드. 다운로드 없이 바로 플레이! 학생, 직장인, 시니어에게 완벽한 게임.',
@@ -766,13 +918,89 @@ const translations = {
     audience_type: '학생, 직장인, 시니어',
     game_image_alt: '킬러 스도쿠 게임 스크린샷',
     og_locale: 'ko_KR',
-    
+
     // Footer Legal Links
-    terms: '약관',
-    privacy: '개인정보',
-    cookies: '쿠키',
-    contact: '문의',
-    
+    footer: {
+      about: '소개',
+      howToPlay: '게임 방법',
+      strategy: '공략',
+      terms: '이용약관',
+      privacy: '개인정보처리방침',
+      cookies: '쿠키 정책',
+      contact: '문의하기',
+    },
+
+    // Content Pages
+    about: {
+      seoTitle: '킬러 스도쿠 소개 - 최고의 온라인 퍼즐 게임',
+      seoDescription: '킬러 스도쿠에 대해 알아보고, 최고의 무료 온라인 퍼즐 경험을 제공하려는 우리의 사명과 매일의 두뇌 훈련을 위해 우리를 선택해야 하는 이유를 확인하세요.',
+      title: '소개',
+      backToGame: '게임으로 돌아가기',
+      whatWeDo: {
+        title: '우리가 하는 일',
+        p1: '우리는 모든 레벨의 플레이어에게 최고의 온라인 킬러 스도쿠 경험을 제공하기 위해 최선을 다하고 있습니다. 우리의 플랫폼은 고전적인 스도쿠 규칙과 산술 도전을 결합하여 독특하고 매력적인 퍼즐 게임을 만듭니다.',
+        p2: '기초를 배우려는 초보자이든 도전을 찾는 전문가이든, 우리 게임은 귀하의 필요에 맞는 다양한 난이도와 모드를 제공합니다.',
+      },
+      whyUs: {
+        title: '우리를 선택해야 하는 이유',
+        li1: '다운로드 없이 완전 무료 플레이',
+        li2: '쉬움부터 지옥까지 다양한 난이도',
+        li3: '빠른 속도의 재미를 위한 독특한 도파민 모드',
+        li4: '전 세계 플레이어와 경쟁할 수 있는 글로벌 리더보드',
+      },
+      contact: {
+        title: '문의하기',
+        p1: '질문이나 의견이 있으신가요? 귀하의 의견을 듣고 싶습니다. 문의 페이지를 방문하여 연락해 주세요.',
+      },
+    },
+    howToPlay: {
+      seoTitle: '킬러 스도쿠 게임 방법 - 규칙 및 팁',
+      seoDescription: '포괄적인 가이드를 통해 킬러 스도쿠 규칙을 마스터하세요. 기본 규칙, 점수 시스템 및 퍼즐을 더 빨리 푸는 팁을 배우세요.',
+      title: '게임 방법',
+      backToGame: '게임으로 돌아가기',
+      rules: {
+        title: '게임 규칙',
+        li1: '9x9 격자에 1-9 숫자를 채워 각 행, 열, 3x3 박스에 모든 숫자가 정확히 한 번씩 포함되도록 합니다.',
+        li2: '격자는 점선 상자로 나뉩니다. 상자 안의 숫자 합은 왼쪽 상단의 작은 숫자와 같아야 합니다.',
+        li3: '상자 내에서 숫자는 반복될 수 없습니다.',
+      },
+      tips: {
+        title: '성공을 위한 팁',
+        li1: '가능한 조합이 하나뿐인 상자부터 시작하세요 (예: 합이 3인 2칸 상자는 1과 2여야 함).',
+        li2: '45 규칙 사용: 모든 행, 열 또는 3x3 박스의 숫자 합은 항상 45입니다.',
+        li3: '상자 합과 45 규칙을 비교하여 "내부 수"와 "외부 수"를 찾으세요.',
+      },
+      scoring: {
+        title: '점수 시스템',
+        p1: '점수는 난이도, 완료 시간 및 실수를 기준으로 계산됩니다. 도파민 모드에서는 속도와 콤보에 대한 보너스도 받습니다!',
+      },
+    },
+    strategy: {
+      seoTitle: '킬러 스도쿠 공략 - 고급 기술',
+      seoDescription: '공략 가이드를 통해 킬러 스도쿠 실력을 향상시키세요. 고급 기술, 피해야 할 일반적인 실수 및 전문가 퍼즐을 푸는 방법을 배우세요.',
+      title: '공략 가이드',
+      backToGame: '게임으로 돌아가기',
+      common: {
+        title: '일반적인 전략',
+        li1: '유일한 합 찾기: 일부 상자 합은 숫자의 가능한 조합이 하나뿐입니다.',
+        li2: '45 규칙: 모든 행, 열, 박스의 합이 45라는 사실을 이용하여 경계를 넘는 상자의 숫자를 추론하세요.',
+        li3: '상자 조합: 해결 속도를 높이기 위해 2, 3, 4칸의 일반적인 합을 외우세요.',
+        li4: '연필 표시: 메모를 사용하여 각 셀의 가능한 후보를 추적하세요.',
+      },
+      advanced: {
+        title: '고급 전술',
+        li1: '내부 수와 외부 수: 상자 합과 45의 차이를 계산하여 영역 내부 또는 외부의 숫자를 찾으세요.',
+        li2: '상자 분할: 복잡한 상자를 더 작고 관리하기 쉬운 부분으로 나누세요.',
+        li3: '홀짝 분석: 때로는 숫자가 홀수인지 짝수인지 아는 것이 가능성을 제거하는 데 도움이 될 수 있습니다.',
+      },
+      mistakes: {
+        title: '일반적인 실수',
+        li1: '추측: 절대 추측하지 마세요. 항상 논리를 사용하여 다음 숫자를 추론하세요.',
+        li2: '제약 무시: 상자 합 외에도 행, 열, 박스 제약을 확인하는 것을 잊지 마세요.',
+        li3: '서두름: 특히 높은 난이도에서는 보드를 분석하는 데 시간을 투자하세요.',
+      },
+    },
+
     // 법적 문서
     legal: {
       privacyPolicy: {
@@ -886,14 +1114,14 @@ const translations = {
     hard: '上級',
     expert: '達人',
     hell: '地獄級',
-    
+
     // ドーパミンモード
     dopamineMode: 'ドーパミンモード',
     startChallenge: 'チャレンジ開始',
     remaining: '残り',
     score: 'スコア',
     combo: 'COMBO',
-    
+
     // 註解功能
     showNotes: '表示',
     hideNotes: '非表示',
@@ -903,19 +1131,19 @@ const translations = {
     notesModeOn: 'メモモード有効',
     notesModeOff: 'メモモード無効',
     candidateNumbers: '候補数字',
-    
+
     // 提示功能
     hint: 'ヒント',
     hintCountUsedUp: 'ヒント回数が使い切れました',
-    
+
     // 遊戲控制
     clickToResume: 'クリックして再開',
     clickToPause: 'クリックして一時停止',
     dopamineModeVisitorOnly: 'ドーパミンモード - 登録ユーザーのみ',
-    
+
     // 其他
     githubRepository: 'GitHub リポジトリ',
-    
+
     // ドーパミン情報カード
     dopamineInfoTitle: 'ドーパミンモード',
     dopamineInfoSubtitle: '限界に挑戦しよう！',
@@ -957,7 +1185,7 @@ const translations = {
     congratulations: 'おめでとうございます',
     remainingTime: '残り時間',
     maxCombo: '最大コンボ',
-    
+
     // リーダーボード
     leaderboard: 'リーダーボード',
     viewLeaderboard: 'リーダーボードを見る',
@@ -967,7 +1195,7 @@ const translations = {
     achievementWall: '実績ウォール',
     noData: 'データなし',
     highestScoreDisplay: '最高スコア表示',
-    
+
     // ユーザー関連
     welcome: 'ようこそ',
     welcomeToKillerSudoku: 'キラー数独へようこそ',
@@ -981,26 +1209,26 @@ const translations = {
     viewStats: '統計を見る',
     normal: '通常',
     dopamine: 'ドーパミン',
-    
+
     // 一般
     close: '閉じる',
     back: '戻る',
     restart: '再挑戦',
     returnToMain: 'メインメニューに戻る',
     clear: 'クリア',
-    
+
     // テーマ
     currentTheme: '現在のテーマ',
     clickToToggle: 'ライト/ダークモード切り替え',
-    
+
     // ローディング状態
     loadingStats: '統計読み込み中...',
-    
+
     // ユーザー統計
     bestScore: '最高スコア',
     bestTime: '最高時間',
     totalGames: '総ゲーム数',
-    
+
     // ゲームルール
     scoringSystem: 'スコアシステム',
     rules: 'ルール',
@@ -1044,7 +1272,7 @@ const translations = {
     minimumScoreDescription: '基本スコアの20%',
     minimumScoreExamples: '（簡単20点、普通40点、困難60点、専門家100点）',
     scoringExample: '簡単モード、2分完了、1回ミス = 100 + 240 - 20 = 320点',
-    
+
     // SEO 相關
     app_title: 'キラー数独 - 無料オンラインパズルゲーム | キラー数独パズルゲーム',
     app_description: '無料キラー数独ゲーム！5つの難易度、ドーパミンモード、グローバルリーダーボード。ダウンロード不要で今すぐプレイ！学生、会社員、シニアに最適。',
@@ -1056,13 +1284,89 @@ const translations = {
     audience_type: '学生、会社員、シニア',
     game_image_alt: 'キラー数独ゲームスクリーンショット',
     og_locale: 'ja_JP',
-    
+
     // Footer Legal Links
-    terms: '規約',
-    privacy: 'プライバシー',
-    cookies: 'Cookie',
-    contact: 'お問い合わせ',
-    
+    footer: {
+      about: '運営者情報',
+      howToPlay: '遊び方',
+      strategy: '攻略法',
+      terms: '利用規約',
+      privacy: 'プライバシー',
+      cookies: 'Cookie',
+      contact: 'お問い合わせ',
+    },
+
+    // Content Pages
+    about: {
+      seoTitle: 'キラー数独について - 最高のオンラインパズルゲーム',
+      seoDescription: 'キラー数独について、最高の無料オンラインパズル体験を提供するという私たちの使命、そして毎日の脳トレに私たちが選ばれる理由をご覧ください。',
+      title: '運営者情報',
+      backToGame: 'ゲームに戻る',
+      whatWeDo: {
+        title: '私たちの活動',
+        p1: '私たちは、あらゆるレベルのプレイヤーに最高のオンラインキラー数独体験を提供することに専念しています。私たちのプラットフォームは、古典的な数独のルールと計算の課題を組み合わせて、ユニークで魅力的なパズルゲームを作成しています。',
+        p2: '基本を学びたい初心者でも、挑戦を求める上級者でも、私たちのゲームはあなたのニーズに合った様々な難易度とモードを提供します。',
+      },
+      whyUs: {
+        title: '選ばれる理由',
+        li1: 'ダウンロード不要で完全無料プレイ',
+        li2: '初級から地獄級まで多彩な難易度',
+        li3: 'スピーディーな楽しさのためのユニークなドーパミンモード',
+        li4: '世界中のプレイヤーと競えるグローバルリーダーボード',
+      },
+      contact: {
+        title: 'お問い合わせ',
+        p1: 'ご質問やご意見はありますか？お問い合わせページからお気軽にご連絡ください。',
+      },
+    },
+    howToPlay: {
+      seoTitle: 'キラー数独の遊び方 - ルールとヒント',
+      seoDescription: '包括的なガイドでキラー数独のルールをマスターしましょう。基本ルール、スコアシステム、パズルをより速く解くためのヒントを学びます。',
+      title: '遊び方',
+      backToGame: 'ゲームに戻る',
+      rules: {
+        title: 'ゲームルール',
+        li1: '9x9のグリッドに1から9の数字を入れ、各行、列、3x3ボックスにすべての数字が重複なく1回だけ含まれるようにします。',
+        li2: 'グリッドは点線の枠（ケージ）で区切られています。ケージ内の数字の合計は、左上の小さな数字と等しくなければなりません。',
+        li3: 'ケージ内で数字は重複できません。',
+      },
+      tips: {
+        title: '成功のヒント',
+        li1: '可能な組み合わせが1つしかないケージから始めましょう（例：合計が3の2マスは1と2でなければなりません）。',
+        li2: '45の法則を使用：任意の行、列、または3x3ボックスの数字の合計は常に45です。',
+        li3: 'ケージの合計と45の法則を比較して、「内側の数」と「外側の数」を探します。',
+      },
+      scoring: {
+        title: 'スコアシステム',
+        p1: 'スコアは難易度、完了時間、ミスに基づいて計算されます。ドーパミンモードでは、スピードとコンボのボーナスも獲得できます！',
+      },
+    },
+    strategy: {
+      seoTitle: 'キラー数独攻略 - 高度なテクニック',
+      seoDescription: '攻略ガイドでキラー数独のスキルを向上させましょう。高度なテクニック、避けるべき一般的な間違い、達人レベルのパズルの解き方を学びます。',
+      title: '攻略ガイド',
+      backToGame: 'ゲームに戻る',
+      common: {
+        title: '一般的な戦略',
+        li1: '一意の合計を探す：一部のケージの合計には、数字の可能な組み合わせが1つしかありません。',
+        li2: '45の法則：すべての行、列、ボックスの合計が45であるという事実を利用して、境界を越えるケージ内の数字を推論します。',
+        li3: 'ケージの組み合わせ：解決速度を上げるために、2、3、または4マスの一般的な合計を暗記します。',
+        li4: '鉛筆マーク：メモを使用して、各セルの可能な候補を追跡します。',
+      },
+      advanced: {
+        title: '高度な戦術',
+        li1: '内側の数と外側の数：ケージの合計と45の差を計算して、領域の内側または外側の数字を見つけます。',
+        li2: 'ケージの分割：複雑なケージをより小さく、管理しやすい部分に分解します。',
+        li3: '偶奇分析：数字が奇数か偶数かを知ることで、可能性を排除できる場合があります。',
+      },
+      mistakes: {
+        title: 'よくある間違い',
+        li1: '推測：決して推測しないでください。常に論理を使用して次の数字を導き出してください。',
+        li2: '制約の無視：ケージの合計に加えて、行、列、ボックスの制約を確認することを忘れないでください。',
+        li3: '急ぐこと：特に高難易度では、ボードを分析するために時間をかけてください。',
+      },
+    },
+
     // 法的文書
     legal: {
       privacyPolicy: {
@@ -1174,13 +1478,13 @@ export const useLanguage = () => {
     if (savedLanguage && ['en', 'zh', 'ko', 'ja'].includes(savedLanguage)) {
       return savedLanguage;
     }
-    
+
     // 如果沒有保存的語言，根據瀏覽器語言檢測
     const browserLang = navigator.language.toLowerCase();
     if (browserLang.startsWith('zh')) return 'zh';
     if (browserLang.startsWith('ko')) return 'ko';
     if (browserLang.startsWith('ja')) return 'ja';
-    
+
     return 'en';
   };
 
@@ -1204,7 +1508,7 @@ export const useLanguage = () => {
     if (typeof key === 'string' && key.includes('.')) {
       const keys = key.split('.');
       let value: any = translations[language];
-      
+
       for (const k of keys) {
         if (value && typeof value === 'object' && k in value) {
           value = value[k];
@@ -1221,10 +1525,10 @@ export const useLanguage = () => {
           break;
         }
       }
-      
+
       return typeof value === 'string' ? value : key;
     }
-    
+
     // 原有的單層鍵值處理
     return translations[language][key as keyof typeof translations.en] || translations.en[key as keyof typeof translations.en] || key;
   };

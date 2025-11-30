@@ -1,67 +1,50 @@
 import React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { useNavigate } from "react-router-dom";
+import { BookOpen } from "lucide-react";
 import { useLanguage } from "@/hooks/useLanguage";
-import { useEffect } from "react";
+import { ContentPageLayout } from "@/components/layout/ContentPageLayout";
 
 const HowToPlay: React.FC = () => {
-  const navigate = useNavigate();
   const { t } = useLanguage();
 
-  useEffect(() => {
-    document.title = t('howToPlay.seoTitle');
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) metaDescription.setAttribute('content', t('howToPlay.seoDescription'));
-  }, [t]);
-
   return (
-    <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 py-8 max-w-3xl">
-        <div className="mb-6 flex items-center justify-between">
-          <h1 className="text-3xl font-bold">{t('howToPlay.title')}</h1>
-          <Button variant="outline" size="sm" onClick={() => navigate("/")}>{t('howToPlay.backToGame')}</Button>
-        </div>
+    <ContentPageLayout
+      title={t('howToPlay.title')}
+      seoTitle={t('howToPlay.seoTitle')}
+      seoDescription={t('howToPlay.seoDescription')}
+      icon={<BookOpen className="w-6 h-6 text-primary" />}
+    >
+      <section className="mb-8">
+        <h2 className="text-2xl font-semibold mb-4 text-foreground/90">{t('howToPlay.rules.title')}</h2>
+        <ul className="space-y-3 text-muted-foreground">
+          {[1, 2, 3].map((i) => (
+            <li key={i} className="flex items-start gap-3">
+              <span className="mt-2 w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+              <span>{t(`howToPlay.rules.li${i}`)}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
 
-        <Card className="mb-6">
-          <CardHeader>
-            <CardTitle>{t('howToPlay.rules.title')}</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-2 leading-relaxed text-muted-foreground">
-            <ul className="list-disc pl-6 space-y-2">
-              <li>{t('howToPlay.rules.li1')}</li>
-              <li>{t('howToPlay.rules.li2')}</li>
-              <li>{t('howToPlay.rules.li3')}</li>
-            </ul>
-          </CardContent>
-        </Card>
+      <section className="mb-8">
+        <h2 className="text-2xl font-semibold mb-4 text-foreground/90">{t('howToPlay.tips.title')}</h2>
+        <ul className="space-y-3 text-muted-foreground">
+          {[1, 2, 3].map((i) => (
+            <li key={i} className="flex items-start gap-3">
+              <span className="mt-2 w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+              <span>{t(`howToPlay.tips.li${i}`)}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
 
-        <Card className="mb-6">
-          <CardHeader>
-            <CardTitle>{t('howToPlay.tips.title')}</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-2 leading-relaxed text-muted-foreground">
-            <ul className="list-disc pl-6 space-y-2">
-              <li>{t('howToPlay.tips.li1')}</li>
-              <li>{t('howToPlay.tips.li2')}</li>
-              <li>{t('howToPlay.tips.li3')}</li>
-            </ul>
-          </CardContent>
-        </Card>
-
-        <Card className="mb-6">
-          <CardHeader>
-            <CardTitle>{t('howToPlay.scoring.title')}</CardTitle>
-          </CardHeader>
-          <CardContent className="leading-relaxed text-muted-foreground">
-            {t('howToPlay.scoring.p1')}
-          </CardContent>
-        </Card>
-      </div>
-    </div>
+      <section>
+        <h2 className="text-2xl font-semibold mb-4 text-foreground/90">{t('howToPlay.scoring.title')}</h2>
+        <p className="text-muted-foreground leading-relaxed">
+          {t('howToPlay.scoring.p1')}
+        </p>
+      </section>
+    </ContentPageLayout>
   );
 };
 
 export default HowToPlay;
-
-

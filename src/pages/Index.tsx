@@ -14,6 +14,7 @@ import { Leaderboard } from "@/components/Leaderboard";
 import { LeaderboardDebug } from "@/components/LeaderboardDebug";
 import { FeatureHintModal } from "@/components/FeatureHintModal";
 import { HintAdModal } from "@/components/HintAdModal";
+import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Zap } from "lucide-react";
@@ -31,78 +32,78 @@ import { Link } from "react-router-dom";
 
 const Index = () => {
   const { t, language } = useLanguage();
-  
+
   // 動態設置頁面標題和 meta 標籤
   useEffect(() => {
     // 設置頁面標題
     document.title = t('app_title');
-    
+
     // 設置 meta description
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.setAttribute('content', t('app_description'));
     }
-    
+
     // 設置 meta keywords
     const metaKeywords = document.querySelector('meta[name="keywords"]');
     if (metaKeywords) {
       metaKeywords.setAttribute('content', t('app_keywords'));
     }
-    
+
     // 設置 application name
     const appName = document.querySelector('meta[name="application-name"]');
     if (appName) {
       appName.setAttribute('content', t('app_name'));
     }
-    
+
     const appleAppTitle = document.querySelector('meta[name="apple-mobile-web-app-title"]');
     if (appleAppTitle) {
       appleAppTitle.setAttribute('content', t('app_name'));
     }
-    
+
     // 設置遊戲相關 meta 標籤
     const gameCategory = document.querySelector('meta[name="game:category"]');
     if (gameCategory) {
       gameCategory.setAttribute('content', t('game_category'));
     }
-    
+
     const gameGenre = document.querySelector('meta[name="game:genre"]');
     if (gameGenre) {
       gameGenre.setAttribute('content', t('game_genre'));
     }
-    
+
     const gamePlatform = document.querySelector('meta[name="game:platform"]');
     if (gamePlatform) {
       gamePlatform.setAttribute('content', t('game_platform'));
     }
-    
+
     // 設置 Open Graph 標題
     const ogTitle = document.querySelector('meta[property="og:title"]');
     if (ogTitle) {
       ogTitle.setAttribute('content', t('app_title'));
     }
-    
+
     // 設置 Open Graph 描述
     const ogDescription = document.querySelector('meta[property="og:description"]');
     if (ogDescription) {
       ogDescription.setAttribute('content', t('app_description'));
     }
-    
+
     const ogLocale = document.querySelector('meta[property="og:locale"]');
     if (ogLocale) {
       ogLocale.setAttribute('content', t('og_locale'));
     }
-    
+
     const ogSiteName = document.querySelector('meta[property="og:site_name"]');
     if (ogSiteName) {
       ogSiteName.setAttribute('content', t('app_name'));
     }
-    
+
     const ogImage = document.querySelector('meta[property="og:image"]');
     if (ogImage) {
       // 根據語言選擇對應的分享圖片
       let imageFileName = '';
-      switch(language) {
+      switch (language) {
         case 'zh': imageFileName = 'og-image-zh.png'; break;
         case 'en': imageFileName = 'og-image-en.png'; break;
         case 'ja': imageFileName = 'og-image-jp.png'; break;
@@ -112,29 +113,29 @@ const Index = () => {
       const imageUrl = `https://killer-sudoku-score.onrender.com/${imageFileName}`;
       ogImage.setAttribute('content', imageUrl);
     }
-    
+
     const ogImageAlt = document.querySelector('meta[property="og:image:alt"]');
     if (ogImageAlt) {
       ogImageAlt.setAttribute('content', t('game_image_alt'));
     }
-    
+
     // 設置 Twitter 標題
     const twitterTitle = document.querySelector('meta[name="twitter:title"]');
     if (twitterTitle) {
       twitterTitle.setAttribute('content', t('app_title'));
     }
-    
+
     // 設置 Twitter 描述
     const twitterDescription = document.querySelector('meta[name="twitter:description"]');
     if (twitterDescription) {
       twitterDescription.setAttribute('content', t('app_description'));
     }
-    
+
     const twitterImage = document.querySelector('meta[name="twitter:image"]');
     if (twitterImage) {
       // 根據語言選擇對應的分享圖片
       let imageFileName = '';
-      switch(language) {
+      switch (language) {
         case 'zh': imageFileName = 'og-image-zh.png'; break;
         case 'en': imageFileName = 'og-image-en.png'; break;
         case 'ja': imageFileName = 'og-image-jp.png'; break;
@@ -144,12 +145,12 @@ const Index = () => {
       const imageUrl = `https://killer-sudoku-score.onrender.com/${imageFileName}`;
       twitterImage.setAttribute('content', imageUrl);
     }
-    
+
     const twitterImageAlt = document.querySelector('meta[name="twitter:image:alt"]');
     if (twitterImageAlt) {
       twitterImageAlt.setAttribute('content', t('game_image_alt'));
     }
-    
+
     // 設置結構化數據
     const structuredData = document.querySelector('script[type="application/ld+json"]');
     if (structuredData) {
@@ -174,11 +175,11 @@ const Index = () => {
   const [isPaused, setIsPaused] = useState(false);
   const [currentTheme, setCurrentTheme] = useState(() => {
     const savedTheme = localStorage.getItem('killer-sudoku-theme');
-    return savedTheme && ['blue', 'orange', 'green', 'purple', 'pink', 'teal'].includes(savedTheme) 
-      ? savedTheme 
+    return savedTheme && ['blue', 'orange', 'green', 'purple', 'pink', 'teal'].includes(savedTheme)
+      ? savedTheme
       : 'blue';
   });
-  
+
   // 多巴胺模式狀態
   const [isDopamineMode, setIsDopamineMode] = useState(false);
   const [dopamineDifficulty, setDopamineDifficulty] = useState<DopamineDifficulty>('medium');
@@ -190,7 +191,7 @@ const Index = () => {
   const [dopamineGameOverData, setDopamineGameOverData] = useState<any>(null);
   const [showDopamineWin, setShowDopamineWin] = useState(false);
   const [dopamineWinData, setDopamineWinData] = useState<any>(null);
-  
+
   // 新增狀態
   const [showUserNameInput, setShowUserNameInput] = useState(false);
   const [showGameCompleteModal, setShowGameCompleteModal] = useState(false);
@@ -198,22 +199,22 @@ const Index = () => {
   const [currentLeaderboardMode, setCurrentLeaderboardMode] = useState<'normal' | 'dopamine'>('normal');
   const [showRules, setShowRules] = useState(false);
   const [gameCompletionResult, setGameCompletionResult] = useState<GameCompletionResult | null>(null);
-  
+
   // 普通模式錯誤處理狀態
   const [isDisqualified, setIsDisqualified] = useState(false);
-  
+
   // 註解功能狀態
   const [showNotes, setShowNotes] = useState(false);
-  
+
   // 提示功能狀態
   const [hintCount, setHintCount] = useState(3);
   const [showHintAdModal, setShowHintAdModal] = useState(false);
-  
+
   // 功能提示狀態
   const [showFeatureHint, setShowFeatureHint] = useState(false);
-  
+
   // Hooks
-const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisitorMode, isLoggedIn } = useUser();
+  const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisitorMode, isLoggedIn } = useUser();
   const { shouldShowHint, dismissHint } = useFeatureHint();
   const { saveNormalGameRecord, saveDopamineGameRecord, getNormalUserBestScore, getDopamineUserBestScore, getAllDopamineUsersTopScore } = useGameRecord();
 
@@ -235,7 +236,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
 
   // 檢查遊戲是否完成
   const isGameComplete = (): boolean => {
-    const completed = gameData.grid.every(row => 
+    const completed = gameData.grid.every(row =>
       row.every(cell => cell.value === cell.solution)
     );
     if (completed) {
@@ -248,7 +249,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
   const handleGameComplete = async () => {
     console.log('🚀 handleGameComplete 被調用');
     console.log('👤 用戶狀態:', { user: !!user, isVisitorMode, isDopamineMode });
-    
+
     if (!user && !isVisitorMode) {
       console.log('❌ 用戶未登入且非訪客模式，退出');
       return;
@@ -256,9 +257,9 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
 
     console.log('✅ 通過用戶檢查，繼續處理');
     setIsPaused(true);
-    
+
     let score: number;
-    
+
     if (isDopamineMode) {
       // 多巴胺模式計分
       const dopamineScore = calculateDopamineScore({
@@ -270,7 +271,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
         completionTime: timeLimit - time
       });
       score = dopamineScore.finalScore;
-      
+
       // 多巴胺模式完成時顯示 Win 畫面
       handleDopamineWin();
       return;
@@ -278,36 +279,36 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
       // 普通模式計分
       score = calculateScore({ difficulty, completionTime: time, mistakes });
     }
-    
+
     // 訪客模式下不保存記錄，只顯示完成模態框
     if (isVisitorMode) {
       console.log('👤 訪客模式，顯示完成模態框');
-      setGameCompletionResult({ 
-        score, 
-        rank: null, 
-        isNewRecord: false 
+      setGameCompletionResult({
+        score,
+        rank: null,
+        isNewRecord: false
       });
       setShowGameCompleteModal(true);
-      
+
       // 檢查是否應該顯示功能提示
       if (shouldShowHint) {
         setShowFeatureHint(true);
       }
       return;
     }
-    
+
     // 普通模式：如果失格則不保存記錄
     if (!isDopamineMode && isDisqualified) {
       console.log('❌ 普通模式失格，顯示完成模態框但不保存記錄');
-      setGameCompletionResult({ 
-        score, 
-        rank: null, 
-        isNewRecord: false 
+      setGameCompletionResult({
+        score,
+        rank: null,
+        isNewRecord: false
       });
       setShowGameCompleteModal(true);
       return;
     }
-    
+
     try {
       console.log('💾 開始保存普通模式記錄');
       const result = await saveNormalGameRecord(user!.id, difficulty, time, mistakes);
@@ -318,10 +319,10 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
       } else {
         console.log('❌ 記錄保存失敗，但仍顯示完成模態框');
         // 即使保存失敗，也顯示獲勝資訊卡
-        setGameCompletionResult({ 
-          score, 
-          rank: null, 
-          isNewRecord: false 
+        setGameCompletionResult({
+          score,
+          rank: null,
+          isNewRecord: false
         });
         setShowGameCompleteModal(true);
       }
@@ -329,10 +330,10 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
       console.error('❌ 處理遊戲完成時發生錯誤:', error);
       // 即使發生錯誤，也顯示獲勝資訊卡
       console.log('🔄 發生錯誤但仍顯示完成模態框');
-      setGameCompletionResult({ 
-        score, 
-        rank: null, 
-        isNewRecord: false 
+      setGameCompletionResult({
+        score,
+        rank: null,
+        isNewRecord: false
       });
       setShowGameCompleteModal(true);
     }
@@ -372,12 +373,12 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
         setGameData(newGameData);
         setMistakes(0);
         setSelectedCell(null);
-        
+
         // 重置多巴胺模式狀態
         setIsDopamineMode(false);
         setTime(0); // 正數計時
         setIsDisqualified(false);
-        
+
         setIsPaused(false);
       }, 0);
     } catch (error) {
@@ -387,7 +388,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
 
   useEffect(() => {
     if (isPaused) return;
-    
+
     const interval = setInterval(() => {
       if (isDopamineMode) {
         // 多巴胺模式：倒數計時
@@ -413,7 +414,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
     if (!selectedCell) return;
 
     const { row, col } = selectedCell;
-    
+
     // 註解模式：添加或移除候選數字
     if (showNotes) {
       const newGrid = gameData.grid.map((r, i) =>
@@ -480,7 +481,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
 
   const handleClear = () => {
     if (!selectedCell) return;
-    
+
     // 註解模式：清除所有候選數字
     if (showNotes) {
       const { row, col } = selectedCell;
@@ -495,7 +496,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
       setGameData({ ...gameData, grid: newGrid });
       return;
     }
-    
+
     // 正常模式：清除數字
     handleNumberInput(0);
   };
@@ -512,7 +513,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
       if (selectedCell) {
         const { row, col } = selectedCell;
         const cell = gameData.grid[row][col];
-        
+
         // 防呆機制：只有空白格子才能使用提示
         if (!cell.given && !cell.value) {
           // 使用 cell.solution 獲取正確答案
@@ -527,10 +528,10 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
               )
             );
             setGameData({ ...gameData, grid: newGrid });
-            
+
             // 減少提示次數
             setHintCount(hintCount - 1);
-            
+
             // 清除選擇
             setSelectedCell(null);
           }
@@ -556,7 +557,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
         if (isDopamineMode) {
           // 多巴胺模式：重新生成相同難度的多巴胺遊戲
           const data = generateKillerSudoku(dopamineDifficulty);
-          
+
           // 根據難度設定時間限制
           const timeLimits = {
             easy: 360,    // 6分鐘
@@ -565,7 +566,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
             expert: 1440, // 24分鐘
             hell: 1200    // 20分鐘
           };
-          
+
           setTimeLimit(timeLimits[dopamineDifficulty]);
           setGameData(data);
           setMistakes(0);
@@ -584,7 +585,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
           setTime(0);
           setHintCount(3);
         }
-        
+
         setIsDisqualified(false);
         setIsPaused(false);
         setShowGameCompleteModal(false);
@@ -638,7 +639,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
   // 處理多巴胺模式啟動
   const handleDopamineMode = (difficulty: DopamineDifficulty) => {
     const data = generateKillerSudoku(difficulty);
-    
+
     // 根據難度設定時間限制
     const timeLimits = {
       easy: 360,    // 6分鐘
@@ -647,7 +648,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
       expert: 1440, // 24分鐘
       hell: 1200    // 20分鐘
     };
-    
+
     setDopamineDifficulty(difficulty);
     setTimeLimit(timeLimits[difficulty]);
     setGameData(data);
@@ -667,7 +668,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
   // 一鍵答題測試函數 - 自動填入所有答案
   const handleTestComplete = () => {
     console.log('⚡ 一鍵解題開始');
-    
+
     // 自動填入所有答案
     const newGrid = gameData.grid.map((row) =>
       row.map((cell) => ({
@@ -677,15 +678,15 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
         isGiven: cell.given // 保持原始給定狀態
       }))
     );
-    
+
     setGameData({ ...gameData, grid: newGrid });
-    
+
     // 更新多巴胺模式相關狀態
     if (isDopamineMode) {
       setRemainingCells(0); // 所有格子都填完了
       setComboCount(0); // 重置combo
     }
-    
+
     // 直接觸發遊戲完成，像多巴胺模式一樣
     setTimeout(() => {
       console.log(`🎯 觸發遊戲完成 - 模式: ${isDopamineMode ? '多巴胺' : '普通'}`);
@@ -694,10 +695,10 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
       } else {
         // 普通模式：先設置基本結果，然後調用處理函數
         console.log('🔧 設置基本遊戲完成結果');
-        setGameCompletionResult({ 
+        setGameCompletionResult({
           score: calculateScore({ difficulty, completionTime: time, mistakes }),
-          rank: null, 
-          isNewRecord: false 
+          rank: null,
+          isNewRecord: false
         });
         handleGameComplete();
       }
@@ -721,7 +722,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
     if (user && !isVisitorMode) {
       try {
         const bestScore = await getDopamineUserBestScore(user.id, dopamineDifficulty);
-        
+
         if (bestScore && bestScore.score === score) {
           isNewRecord = true;
         }
@@ -742,7 +743,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
       topScores,
       isNewRecord
     });
-    
+
     setShowDopamineWin(true);
     setIsPaused(true);
   };
@@ -775,7 +776,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
   // 處理多巴胺模式 Game Over
   const handleDopamineGameOver = () => {
     console.log('💀 多巴胺模式 Game Over');
-    
+
     setDopamineGameOverData({
       difficulty: dopamineDifficulty,
       score: calculateDopamineScore({
@@ -790,7 +791,7 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
       comboCount,
       mistakes
     });
-    
+
     setShowDopamineGameOver(true);
     setIsPaused(true);
   };
@@ -818,13 +819,13 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
           mistakes,
           comboCount
         );
-        
+
         if (result) {
           console.log('多巴胺模式遊戲記錄已保存:', result);
-          
+
           // 獲取該難度的最高分
           const bestScore = await getDopamineUserBestScore(user.id, dopamineDifficulty);
-          
+
           if (bestScore && bestScore.score === score) {
             // 如果當前分數等於最佳分數，說明是新的最高分
             isNewRecord = true;
@@ -847,352 +848,269 @@ const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisi
       topScores,
       isNewRecord
     });
-    
+
     setShowDopamineWin(true);
     setIsPaused(true);
   };
 
   return (
     <>
-    {/* AdSense 廣告容器 - 隱藏狀態 */}
-    <div 
-      className="adsbygoogle" 
-      style={{ display: 'none' }}
-      data-ad-client="ca-pub-7317171958452167" 
-      data-ad-slot="xxxxxxxxxx"
-      data-ad-format="auto"
-      data-full-width-responsive="true"
-      data-ad-layout="in-article"
-      data-ad-layout-key="-6t+ed+2i-1n-4w"
-    ></div>
-    
-    <div className={`min-h-screen flex items-center justify-center p-2 md:p-4 bg-transparent ${isDopamineMode ? 'pt-20 sm:pt-16' : ''}`} data-theme={currentTheme}>
-      <div className="w-full max-w-6xl mx-auto animate-fade-in bg-transparent">
-        {/* 動態漸層背景 */}
-        <AnimatedGradientBackground isDopamineMode={isDopamineMode} />
-        
-        {/* 多巴胺模式進度條 */}
-        <DopamineProgressBar
-          remainingCells={remainingCells}
-          comboCount={comboCount}
-          currentScore={calculateDopamineScore({
-            difficulty: dopamineDifficulty,
-            timeLeft: time,
-            remainingCells,
-            comboCount,
-            mistakes,
-            completionTime: timeLimit - time
-          }).finalScore}
-          timeLeft={time}
-          timeLimit={timeLimit}
-          isVisible={isDopamineMode}
-        />
-        
-        {/* 移動裝置佈局 */}
-        <div className="block md:hidden">
-          <div className="space-y-2">
-            <GameHeader 
-              onNewGame={handleNewGame}
-              onThemeChange={handleThemeChange}
-              currentTheme={currentTheme}
-              onShowLeaderboard={handleShowLeaderboard}
-              onShowRules={handleShowRules}
-            />
-            
-            <DifficultySelector 
-              difficulty={difficulty} 
-              onDifficultyChange={setDifficulty}
-              mistakes={mistakes}
-              time={time}
-              isPaused={isPaused}
-              onTogglePause={handleTogglePause}
-              onDopamineMode={handleDopamineMode}
-              onToggleNotes={handleToggleNotes}
-              showNotes={showNotes}
-              onBecomeUser={handleBecomeUser}
-              onHint={handleHint}
-              hintCount={hintCount}
-              selectedCell={selectedCell}
-              currentTheme={currentTheme}
-            />
+      {/* AdSense 廣告容器 - 隱藏狀態 */}
+      <div
+        className="adsbygoogle"
+        style={{ display: 'none' }}
+        data-ad-client="ca-pub-7317171958452167"
+        data-ad-slot="xxxxxxxxxx"
+        data-ad-format="auto"
+        data-full-width-responsive="true"
+        data-ad-layout="in-article"
+        data-ad-layout-key="-6t+ed+2i-1n-4w"
+      ></div>
 
+      <div className={`min-h-screen flex items-center justify-center p-2 md:p-4 bg-transparent ${isDopamineMode ? 'pt-20 sm:pt-16' : ''}`} data-theme={currentTheme}>
+        <div className="w-full max-w-6xl mx-auto animate-fade-in bg-transparent">
+          {/* 動態漸層背景 */}
+          <AnimatedGradientBackground isDopamineMode={isDopamineMode} />
+
+          {/* 多巴胺模式進度條 */}
+          <DopamineProgressBar
+            remainingCells={remainingCells}
+            comboCount={comboCount}
+            currentScore={calculateDopamineScore({
+              difficulty: dopamineDifficulty,
+              timeLeft: time,
+              remainingCells,
+              comboCount,
+              mistakes,
+              completionTime: timeLimit - time
+            }).finalScore}
+            timeLeft={time}
+            timeLimit={timeLimit}
+            isVisible={isDopamineMode}
+          />
+
+          {/* 移動裝置佈局 */}
+          <div className="block md:hidden">
             <div className="space-y-2">
-              <KillerSudokuGrid
-                grid={gameData.grid}
-                cages={gameData.cages}
-                selectedCell={selectedCell}
-                onCellSelect={setSelectedCell}
-              />
-
-              <NumberPad
-                onNumberSelect={handleNumberInput}
-                onClear={handleClear}
-                disabled={!selectedCell}
+              <GameHeader
+                onNewGame={handleNewGame}
+                onThemeChange={handleThemeChange}
                 currentTheme={currentTheme}
-                onTestComplete={handleTestComplete}
+                onShowLeaderboard={handleShowLeaderboard}
+                onShowRules={handleShowRules}
               />
-          </div>
-        </div>
-        </div>
 
-        {/* 桌面/平板佈局 */}
-        <div className="hidden md:block relative">
-          <div className="flex items-center justify-center gap-6 h-[500px]">
-            {/* 左側：九宮格 - 使用固定尺寸確保大小合適 */}
-            <div className="flex-shrink-0">
-              <div className="w-[500px] h-[500px]">
-              <KillerSudokuGrid
-                grid={gameData.grid}
-                cages={gameData.cages}
+              <DifficultySelector
+                difficulty={difficulty}
+                onDifficultyChange={setDifficulty}
+                mistakes={mistakes}
+                time={time}
+                isPaused={isPaused}
+                onTogglePause={handleTogglePause}
+                onDopamineMode={handleDopamineMode}
+                onToggleNotes={handleToggleNotes}
+                showNotes={showNotes}
+                onBecomeUser={handleBecomeUser}
+                onHint={handleHint}
+                hintCount={hintCount}
                 selectedCell={selectedCell}
-                onCellSelect={setSelectedCell}
+                currentTheme={currentTheme}
               />
-              </div>
-            </div>
 
-            {/* 右側：垂直排列所有其他元件 - 統一間距系統 */}
-            <div className="flex flex-col w-[430px] h-[500px] space-y-3">
-              {/* GameHeader - 與九宮格上緣切齊 */}
-              <div>
-                <GameHeader 
-                  onNewGame={handleNewGame}
-                  onThemeChange={handleThemeChange}
-                  currentTheme={currentTheme}
-                  onShowLeaderboard={handleShowLeaderboard}
-                  onShowRules={handleShowRules}
-                />
-              </div>
-
-
-              {/* DifficultySelector */}
-              <div>
-                <DifficultySelector 
-                  difficulty={difficulty} 
-                  onDifficultyChange={setDifficulty}
-                  mistakes={mistakes}
-                  time={time}
-                  isPaused={isPaused}
-                  onTogglePause={handleTogglePause}
-                  onDopamineMode={handleDopamineMode}
-                  onToggleNotes={handleToggleNotes}
-                  showNotes={showNotes}
-                  onBecomeUser={handleBecomeUser}
-                  onHint={handleHint}
-                  hintCount={hintCount}
+              <div className="space-y-2">
+                <KillerSudokuGrid
+                  grid={gameData.grid}
+                  cages={gameData.cages}
                   selectedCell={selectedCell}
-                  currentTheme={currentTheme}
+                  onCellSelect={setSelectedCell}
                 />
-              </div>
 
-              {/* Clear 按鈕 */}
-              <div>
                 <NumberPad
                   onNumberSelect={handleNumberInput}
                   onClear={handleClear}
                   disabled={!selectedCell}
-                  showClearOnly={true}
-                  currentTheme={currentTheme}
-                  onTestComplete={handleTestComplete}
-                />
-              </div>
-
-              {/* NumberPad - 自動填滿剩餘空間並與九宮格底部對齊 */}
-              <div className="flex-1 flex justify-end">
-                <NumberPad
-                  onNumberSelect={handleNumberInput}
-                  onClear={handleClear}
-                  disabled={!selectedCell}
-                  showNumbersOnly={true}
                   currentTheme={currentTheme}
                   onTestComplete={handleTestComplete}
                 />
               </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      {/* 用戶名稱輸入模態框 */}
-      {showUserNameInput && (
-        <UserNameInput
-          onSubmit={handleUserNameSubmit}
-          onVisitorMode={handleVisitorMode}
-          loading={userLoading}
-        />
-      )}
+          {/* 桌面/平板佈局 */}
+          <div className="hidden md:block relative">
+            <div className="flex items-center justify-center gap-6 h-[500px]">
+              {/* 左側：九宮格 - 使用固定尺寸確保大小合適 */}
+              <div className="flex-shrink-0">
+                <div className="w-[500px] h-[500px]">
+                  <KillerSudokuGrid
+                    grid={gameData.grid}
+                    cages={gameData.cages}
+                    selectedCell={selectedCell}
+                    onCellSelect={setSelectedCell}
+                  />
+                </div>
+              </div>
 
-      {/* 遊戲完成模態框 */}
-      {showGameCompleteModal && (
-        <GameCompleteModal
-          isOpen={showGameCompleteModal}
-          onClose={() => setShowGameCompleteModal(false)}
-          onNewGame={handleNewGame}
-          onShowLeaderboard={handleShowLeaderboard}
-          score={gameCompletionResult?.score || 0}
-          completionTime={time}
-          mistakes={mistakes}
-          difficulty={difficulty}
-          rank={gameCompletionResult?.rank}
-          isNewRecord={gameCompletionResult?.isNewRecord || false}
-          currentUserId={user?.id}
-        />
-      )}
+              {/* 右側：垂直排列所有其他元件 - 統一間距系統 */}
+              <div className="flex flex-col w-[430px] h-[500px] space-y-3">
+                {/* GameHeader - 與九宮格上緣切齊 */}
+                <div>
+                  <GameHeader
+                    onNewGame={handleNewGame}
+                    onThemeChange={handleThemeChange}
+                    currentTheme={currentTheme}
+                    onShowLeaderboard={handleShowLeaderboard}
+                    onShowRules={handleShowRules}
+                  />
+                </div>
 
-      {/* 排行榜模態框 */}
-      {showLeaderboard && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-          <div className="w-full max-w-[400px] max-h-[90vh] overflow-auto">
-            <Card className="bg-background">
-              <Leaderboard
-                currentUserId={user?.name}
-                onClose={handleCloseLeaderboard}
-                mode={currentLeaderboardMode}
-              />
-            </Card>
-          </div>
-        </div>
-      )}
 
-      {/* 多巴胺模式 Win 模態框 */}
-      {showDopamineWin && dopamineWinData && (
-        <DopamineWinModal
-          isOpen={showDopamineWin}
-          onClose={() => setShowDopamineWin(false)}
-          onRestart={() => handleDopamineMode(dopamineDifficulty)}
-          onReturnToMain={handleReturnToMain}
-          score={dopamineWinData.score}
-          timeLeft={dopamineWinData.timeLeft}
-          difficulty={dopamineWinData.difficulty}
-          comboCount={dopamineWinData.comboCount}
-          mistakes={dopamineWinData.mistakes}
-          topScores={dopamineWinData.topScores}
-          isNewRecord={dopamineWinData.isNewRecord}
-        />
-      )}
+                {/* DifficultySelector */}
+                <div>
+                  <DifficultySelector
+                    difficulty={difficulty}
+                    onDifficultyChange={setDifficulty}
+                    mistakes={mistakes}
+                    time={time}
+                    isPaused={isPaused}
+                    onTogglePause={handleTogglePause}
+                    onDopamineMode={handleDopamineMode}
+                    onToggleNotes={handleToggleNotes}
+                    showNotes={showNotes}
+                    onBecomeUser={handleBecomeUser}
+                    onHint={handleHint}
+                    hintCount={hintCount}
+                    selectedCell={selectedCell}
+                    currentTheme={currentTheme}
+                  />
+                </div>
 
-      {/* 多巴胺模式 Game Over 模態框 */}
-      {showDopamineGameOver && dopamineGameOverData && (
-        <DopamineGameOverModal
-          isOpen={showDopamineGameOver}
-          onClose={() => setShowDopamineGameOver(false)}
-          onRestart={() => handleDopamineMode(dopamineDifficulty)}
-          onReturnToMain={handleReturnToMain}
-          score={0}
-          timeLeft={0}
-          difficulty={dopamineGameOverData.difficulty}
-          comboCount={0}
-          mistakes={0}
-          topScores={[]}
-        />
-      )}
+                {/* Clear 按鈕 */}
+                <div>
+                  <NumberPad
+                    onNumberSelect={handleNumberInput}
+                    onClear={handleClear}
+                    disabled={!selectedCell}
+                    showClearOnly={true}
+                    currentTheme={currentTheme}
+                    onTestComplete={handleTestComplete}
+                  />
+                </div>
 
-      {/* 遊戲規則模態框 */}
-      <GameRulesModal 
-        isOpen={showRules} 
-        onClose={handleCloseRules} 
-      />
-
-      {/* 功能提示模態框 */}
-      <FeatureHintModal
-        isOpen={showFeatureHint}
-        onClose={handleFeatureHintClose}
-        onBecomeUser={handleBecomeUser}
-      />
-
-      {/* 提示廣告模態框 */}
-      <HintAdModal
-        isOpen={showHintAdModal}
-        onClose={() => setShowHintAdModal(false)}
-        onWatchAd={handleWatchAd}
-        currentTheme={currentTheme}
-      />
-
-    </div>
-
-    {/* 簡潔 Footer - 放在主容器外 */}
-    <footer className="py-3 bg-background/20 backdrop-blur-sm">
-      <div className="max-w-6xl mx-auto px-4">
-        {/* 桌面版：法律與內容導覽居中，版權和GitHub靠攏 */}
-        <div className="hidden md:flex items-center justify-center">
-          {/* 版權資訊 */}
-          <div className="text-xs text-muted-foreground/50 mr-5">
-            © 2025 mintae. All rights reserved.
-          </div>
-          
-          {/* 法律與內容導覽連結 */}
-          <div className="text-xs text-muted-foreground/60 space-x-3">
-            <Link to="/about" className="hover:text-muted-foreground transition-colors">{t('footer.about')}</Link>
-            <span>•</span>
-            <Link to="/how-to-play" className="hover:text-muted-foreground transition-colors">{t('footer.howToPlay')}</Link>
-            <span>•</span>
-            <Link to="/strategy" className="hover:text-muted-foreground transition-colors">{t('footer.strategy')}</Link>
-            <span>•</span>
-            <a href="/legal.html?tab=terms" className="hover:text-muted-foreground transition-colors">{t('terms')}</a>
-            <span>•</span>
-            <a href="/legal.html?tab=privacy" className="hover:text-muted-foreground transition-colors">{t('privacy')}</a>
-            <span>•</span>
-            <a href="/legal.html?tab=cookie" className="hover:text-muted-foreground transition-colors">{t('cookies')}</a>
-            <span>•</span>
-            <a href="/legal.html?tab=contact" className="hover:text-muted-foreground transition-colors">{t('contact')}</a>
-          </div>
-          
-          {/* GitHub icon */}
-          <div className="text-xs ml-5">
-            <a 
-              href="https://github.com/mintaemt/Killer-sudoku-score" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-muted-foreground/60 hover:text-muted-foreground transition-colors"
-              title={t('githubRepository')}
-            >
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-
-        {/* 行動版：兩行佈局 */}
-        <div className="block md:hidden">
-          {/* 第一行：內容導覽 + 法律文件連結居中 */}
-          <div className="text-center mb-2">
-            <div className="text-xs text-muted-foreground/60 space-x-3">
-              <Link to="/about" className="hover:text-muted-foreground transition-colors">{t('footer.about')}</Link>
-              <span>•</span>
-              <Link to="/how-to-play" className="hover:text-muted-foreground transition-colors">{t('footer.howToPlay')}</Link>
-              <span>•</span>
-              <Link to="/strategy" className="hover:text-muted-foreground transition-colors">{t('footer.strategy')}</Link>
-              <span>•</span>
-              <a href="/legal.html?tab=terms" className="hover:text-muted-foreground transition-colors">{t('terms')}</a>
-              <span>•</span>
-              <a href="/legal.html?tab=privacy" className="hover:text-muted-foreground transition-colors">{t('privacy')}</a>
-              <span>•</span>
-              <a href="/legal.html?tab=cookie" className="hover:text-muted-foreground transition-colors">{t('cookies')}</a>
-              <span>•</span>
-              <a href="/legal.html?tab=contact" className="hover:text-muted-foreground transition-colors">{t('contact')}</a>
-            </div>
-          </div>
-          
-          {/* 第二行：版權資訊居中，GitHub icon 在句尾 */}
-          <div className="text-center">
-            <div className="text-xs text-muted-foreground/50 inline-flex items-center">
-              © 2025 mintae. All rights reserved.
-              <a 
-                href="https://github.com/mintaemt/Killer-sudoku-score" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-muted-foreground/60 hover:text-muted-foreground transition-colors ml-[10px]"
-                title={t('githubRepository')}
-              >
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                </svg>
-              </a>
+                {/* NumberPad - 自動填滿剩餘空間並與九宮格底部對齊 */}
+                <div className="flex-1 flex justify-end">
+                  <NumberPad
+                    onNumberSelect={handleNumberInput}
+                    onClear={handleClear}
+                    disabled={!selectedCell}
+                    showNumbersOnly={true}
+                    currentTheme={currentTheme}
+                    onTestComplete={handleTestComplete}
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
+
+        {/* 用戶名稱輸入模態框 */}
+        {showUserNameInput && (
+          <UserNameInput
+            onSubmit={handleUserNameSubmit}
+            onVisitorMode={handleVisitorMode}
+            loading={userLoading}
+          />
+        )}
+
+        {/* 遊戲完成模態框 */}
+        {showGameCompleteModal && (
+          <GameCompleteModal
+            isOpen={showGameCompleteModal}
+            onClose={() => setShowGameCompleteModal(false)}
+            onNewGame={handleNewGame}
+            onShowLeaderboard={handleShowLeaderboard}
+            score={gameCompletionResult?.score || 0}
+            completionTime={time}
+            mistakes={mistakes}
+            difficulty={difficulty}
+            rank={gameCompletionResult?.rank}
+            isNewRecord={gameCompletionResult?.isNewRecord || false}
+            currentUserId={user?.id}
+          />
+        )}
+
+        {/* 排行榜模態框 */}
+        {showLeaderboard && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
+            <div className="w-full max-w-[400px] max-h-[90vh] overflow-auto">
+              <Card className="bg-background">
+                <Leaderboard
+                  currentUserId={user?.name}
+                  onClose={handleCloseLeaderboard}
+                  mode={currentLeaderboardMode}
+                />
+              </Card>
+            </div>
+          </div>
+        )}
+
+        {/* 多巴胺模式 Win 模態框 */}
+        {showDopamineWin && dopamineWinData && (
+          <DopamineWinModal
+            isOpen={showDopamineWin}
+            onClose={() => setShowDopamineWin(false)}
+            onRestart={() => handleDopamineMode(dopamineDifficulty)}
+            onReturnToMain={handleReturnToMain}
+            score={dopamineWinData.score}
+            timeLeft={dopamineWinData.timeLeft}
+            difficulty={dopamineWinData.difficulty}
+            comboCount={dopamineWinData.comboCount}
+            mistakes={dopamineWinData.mistakes}
+            topScores={dopamineWinData.topScores}
+            isNewRecord={dopamineWinData.isNewRecord}
+          />
+        )}
+
+        {/* 多巴胺模式 Game Over 模態框 */}
+        {showDopamineGameOver && dopamineGameOverData && (
+          <DopamineGameOverModal
+            isOpen={showDopamineGameOver}
+            onClose={() => setShowDopamineGameOver(false)}
+            onRestart={() => handleDopamineMode(dopamineDifficulty)}
+            onReturnToMain={handleReturnToMain}
+            score={0}
+            timeLeft={0}
+            difficulty={dopamineGameOverData.difficulty}
+            comboCount={0}
+            mistakes={0}
+            topScores={[]}
+          />
+        )}
+
+        {/* 遊戲規則模態框 */}
+        <GameRulesModal
+          isOpen={showRules}
+          onClose={handleCloseRules}
+        />
+
+        {/* 功能提示模態框 */}
+        <FeatureHintModal
+          isOpen={showFeatureHint}
+          onClose={handleFeatureHintClose}
+          onBecomeUser={handleBecomeUser}
+        />
+
+        {/* 提示廣告模態框 */}
+        <HintAdModal
+          isOpen={showHintAdModal}
+          onClose={() => setShowHintAdModal(false)}
+          onWatchAd={handleWatchAd}
+          currentTheme={currentTheme}
+        />
+
       </div>
-    </footer>
+
+      <Footer />
     </>
   );
 };

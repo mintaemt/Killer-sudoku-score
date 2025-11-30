@@ -1,65 +1,46 @@
 import React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { useNavigate } from "react-router-dom";
+import { Info } from "lucide-react";
 import { useLanguage } from "@/hooks/useLanguage";
-import { useEffect } from "react";
+import { ContentPageLayout } from "@/components/layout/ContentPageLayout";
 
 const About: React.FC = () => {
-  const navigate = useNavigate();
   const { t } = useLanguage();
 
-  useEffect(() => {
-    document.title = t('about.seoTitle');
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) metaDescription.setAttribute('content', t('about.seoDescription'));
-  }, [t]);
-
   return (
-    <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 py-8 max-w-3xl">
-        <div className="mb-6 flex items-center justify-between">
-          <h1 className="text-3xl font-bold">{t('about.title')}</h1>
-          <Button variant="outline" size="sm" onClick={() => navigate("/")}>{t('about.backToGame')}</Button>
+    <ContentPageLayout
+      title={t('about.title')}
+      seoTitle={t('about.seoTitle')}
+      seoDescription={t('about.seoDescription')}
+      icon={<Info className="w-6 h-6 text-primary" />}
+    >
+      <section className="mb-8">
+        <h2 className="text-2xl font-semibold mb-4 text-foreground/90">{t('about.whatWeDo.title')}</h2>
+        <div className="space-y-4 text-muted-foreground leading-relaxed">
+          <p>{t('about.whatWeDo.p1')}</p>
+          <p>{t('about.whatWeDo.p2')}</p>
         </div>
+      </section>
 
-        <Card className="mb-6">
-          <CardHeader>
-            <CardTitle>{t('about.whatWeDo.title')}</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-3 leading-relaxed text-muted-foreground">
-            <p>{t('about.whatWeDo.p1')}</p>
-            <p>{t('about.whatWeDo.p2')}</p>
-          </CardContent>
-        </Card>
+      <section className="mb-8">
+        <h2 className="text-2xl font-semibold mb-4 text-foreground/90">{t('about.whyUs.title')}</h2>
+        <ul className="space-y-3 text-muted-foreground">
+          {[1, 2, 3, 4].map((i) => (
+            <li key={i} className="flex items-start gap-3">
+              <span className="mt-2 w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+              <span>{t(`about.whyUs.li${i}`)}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
 
-        <Card className="mb-6">
-          <CardHeader>
-            <CardTitle>{t('about.whyUs.title')}</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-2 leading-relaxed text-muted-foreground">
-            <ul className="list-disc pl-6 space-y-2">
-              <li>{t('about.whyUs.li1')}</li>
-              <li>{t('about.whyUs.li2')}</li>
-              <li>{t('about.whyUs.li3')}</li>
-              <li>{t('about.whyUs.li4')}</li>
-            </ul>
-          </CardContent>
-        </Card>
-
-        <Card className="mb-6">
-          <CardHeader>
-            <CardTitle>{t('about.contact.title')}</CardTitle>
-          </CardHeader>
-          <CardContent className="leading-relaxed text-muted-foreground">
-            {t('about.contact.p1')}
-          </CardContent>
-        </Card>
-      </div>
-    </div>
+      <section>
+        <h2 className="text-2xl font-semibold mb-4 text-foreground/90">{t('about.contact.title')}</h2>
+        <p className="text-muted-foreground leading-relaxed">
+          {t('about.contact.p1')}
+        </p>
+      </section>
+    </ContentPageLayout>
   );
 };
 
 export default About;
-
-

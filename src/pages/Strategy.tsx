@@ -1,72 +1,55 @@
 import React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { useNavigate } from "react-router-dom";
+import { Lightbulb } from "lucide-react";
 import { useLanguage } from "@/hooks/useLanguage";
-import { useEffect } from "react";
+import { ContentPageLayout } from "@/components/layout/ContentPageLayout";
 
 const Strategy: React.FC = () => {
-  const navigate = useNavigate();
   const { t } = useLanguage();
 
-  useEffect(() => {
-    document.title = t('strategy.seoTitle');
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) metaDescription.setAttribute('content', t('strategy.seoDescription'));
-  }, [t]);
-
   return (
-    <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 py-8 max-w-3xl">
-        <div className="mb-6 flex items-center justify-between">
-          <h1 className="text-3xl font-bold">{t('strategy.title')}</h1>
-          <Button variant="outline" size="sm" onClick={() => navigate("/")}>{t('strategy.backToGame')}</Button>
-        </div>
+    <ContentPageLayout
+      title={t('strategy.title')}
+      seoTitle={t('strategy.seoTitle')}
+      seoDescription={t('strategy.seoDescription')}
+      icon={<Lightbulb className="w-6 h-6 text-primary" />}
+    >
+      <section className="mb-8">
+        <h2 className="text-2xl font-semibold mb-4 text-foreground/90">{t('strategy.common.title')}</h2>
+        <ul className="space-y-3 text-muted-foreground">
+          {[1, 2, 3, 4].map((i) => (
+            <li key={i} className="flex items-start gap-3">
+              <span className="mt-2 w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+              <span>{t(`strategy.common.li${i}`)}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
 
-        <Card className="mb-6">
-          <CardHeader>
-            <CardTitle>{t('strategy.common.title')}</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-2 leading-relaxed text-muted-foreground">
-            <ul className="list-disc pl-6 space-y-2">
-              <li>{t('strategy.common.li1')}</li>
-              <li>{t('strategy.common.li2')}</li>
-              <li>{t('strategy.common.li3')}</li>
-              <li>{t('strategy.common.li4')}</li>
-            </ul>
-          </CardContent>
-        </Card>
+      <section className="mb-8">
+        <h2 className="text-2xl font-semibold mb-4 text-foreground/90">{t('strategy.advanced.title')}</h2>
+        <ul className="space-y-3 text-muted-foreground">
+          {[1, 2, 3].map((i) => (
+            <li key={i} className="flex items-start gap-3">
+              <span className="mt-2 w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+              <span>{t(`strategy.advanced.li${i}`)}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
 
-        <Card className="mb-6">
-          <CardHeader>
-            <CardTitle>{t('strategy.advanced.title')}</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-2 leading-relaxed text-muted-foreground">
-            <ul className="list-disc pl-6 space-y-2">
-              <li>{t('strategy.advanced.li1')}</li>
-              <li>{t('strategy.advanced.li2')}</li>
-              <li>{t('strategy.advanced.li3')}</li>
-            </ul>
-          </CardContent>
-        </Card>
-
-        <Card className="mb-6">
-          <CardHeader>
-            <CardTitle>{t('strategy.mistakes.title')}</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-2 leading-relaxed text-muted-foreground">
-            <ul className="list-disc pl-6 space-y-2">
-              <li>{t('strategy.mistakes.li1')}</li>
-              <li>{t('strategy.mistakes.li2')}</li>
-              <li>{t('strategy.mistakes.li3')}</li>
-            </ul>
-          </CardContent>
-        </Card>
-      </div>
-    </div>
+      <section>
+        <h2 className="text-2xl font-semibold mb-4 text-foreground/90">{t('strategy.mistakes.title')}</h2>
+        <ul className="space-y-3 text-muted-foreground">
+          {[1, 2, 3].map((i) => (
+            <li key={i} className="flex items-start gap-3">
+              <span className="mt-2 w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+              <span>{t(`strategy.mistakes.li${i}`)}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </ContentPageLayout>
   );
 };
 
 export default Strategy;
-
-
