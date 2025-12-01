@@ -41,12 +41,12 @@ export const Contact: React.FC = () => {
               <p className="text-sm text-muted-foreground mb-3 flex-1">{t('legal.contact.emailContent')}</p>
 
               {/* Email Copy Section */}
-              <div className="flex items-center gap-2 p-3 bg-background/80 rounded-lg border border-primary/20 min-w-0">
+              <div className="flex items-center gap-2 p-3 h-14 bg-background/80 rounded-lg border border-primary/20 min-w-0">
                 <code className="flex-1 text-sm font-mono text-primary break-all">{email}</code>
                 <Button
                   variant="ghost"
                   onClick={copyEmail}
-                  className="h-8 px-3 hover:bg-primary/10 shrink-0 flex items-center gap-2"
+                  className="h-8 px-3 py-0 hover:bg-primary/10 shrink-0 flex items-center gap-2"
                 >
                   {copied ? (
                     <>
@@ -76,7 +76,7 @@ export const Contact: React.FC = () => {
                 href={githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 p-3 bg-background/80 rounded-lg border border-primary/20 hover:border-primary/40 transition-colors group min-w-0"
+                className="flex items-center gap-2 p-3 h-14 bg-background/80 rounded-lg border border-primary/20 hover:border-primary/40 transition-colors group min-w-0"
               >
                 <code className="flex-1 text-sm font-mono text-primary truncate">
                   mintaemt/Killer-sudoku-score
