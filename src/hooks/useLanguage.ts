@@ -921,6 +921,17 @@ const translations = {
 
     // Footer Legal Links
     footer: {
+      about: '소개',
+      howToPlay: '게임 방법',
+      strategy: '전략',
+      terms: '서비스 이용약관',
+      privacy: '개인정보처리방침',
+      cookies: '쿠키',
+      contact: '문의하기',
+    },
+
+    // Content Pages
+    about: {
       seoTitle: '킬러 스도쿠 소개 - 최고의 온라인 퍼즐 게임',
       seoDescription: '킬러 스도쿠에 대해 알아보고, 최고의 무료 온라인 퍼즐 경험을 제공하려는 우리의 사명과 매일의 두뇌 훈련을 위해 우리를 선택해야 하는 이유를 확인하세요.',
       title: '소개',
@@ -1026,8 +1037,10 @@ const translations = {
         privacyContent: '귀하의 개인정보보호는 저희에게 중요합니다. 저희가 귀하의 정보를 수집하고 사용하는 방법을 이해하려면 개인정보처리방침을 검토해 주세요.',
         serviceAvailability: '서비스 가용성',
         serviceAvailabilityContent: '저희는 서비스 가용성을 유지하기 위해 노력하지만 중단 없는 접근을 보장할 수는 없습니다. 저희는 언제든지 서비스를 수정하거나 중단할 권리를 보유합니다.',
-        liability: '책임 제한',
-        liabilityContent: '법률이 허용하는 최대 범위 내에서 저희는 서비스 사용으로 인해 발생하는 간접적, 부수적, 특별, 결과적 또는 징벌적 손해에 대해 책임지지 않습니다.',
+        disclaimer: '면책 조항',
+        disclaimerContent: '서비스는 어떠한 종류의 보증 없이 "있는 그대로" 제공됩니다. 저희는 서비스의 정확성, 신뢰성 또는 가용성을 보장하지 않습니다.',
+        limitationOfLiability: '책임 제한',
+        limitationOfLiabilityContent: '법률이 허용하는 최대 범위 내에서 저희는 서비스 사용으로 인해 발생하는 간접적, 부수적, 특별, 결과적 또는 징벌적 손해에 대해 책임지지 않습니다.',
         termination: '계약 해지',
         terminationContent: '저희는 이러한 약관 위반을 포함하여 어떤 이유로든 사전 통지 없이 귀하의 서비스 접근을 즉시 종료하거나 중단할 수 있습니다.',
         governingLaw: '준거법',
