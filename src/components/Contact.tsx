@@ -72,20 +72,19 @@ export const Contact: React.FC = () => {
               <p className="text-sm text-muted-foreground mb-3 flex-1">{t('legal.contact.githubContent')}</p>
 
               {/* GitHub Link Section - Symmetric with Email */}
-              <a
-                href={githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 p-3 h-14 bg-background/80 rounded-lg border border-primary/20 hover:border-primary/40 transition-colors group min-w-0"
-              >
+              <div className="flex items-center gap-2 p-3 h-14 bg-background/80 rounded-lg border border-primary/20 min-w-0">
                 <code className="flex-1 text-sm font-mono text-primary truncate">
                   mintaemt/Killer-sudoku-score
                 </code>
-                <div className="h-8 px-3 flex items-center justify-center gap-2 hover:bg-primary/10 rounded transition-colors shrink-0 font-medium">
+                <Button
+                  variant="ghost"
+                  onClick={() => window.open(githubUrl, '_blank', 'noopener,noreferrer')}
+                  className="h-8 px-3 py-0 hover:bg-primary/10 shrink-0 flex items-center gap-2"
+                >
                   <ExternalLink className="h-4 w-4 text-primary" />
                   <span className="text-xs">Visit</span>
-                </div>
-              </a>
+                </Button>
+              </div>
             </div>
           </div>
         </section>
