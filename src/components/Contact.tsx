@@ -44,20 +44,19 @@ export const Contact: React.FC = () => {
               <div className="flex items-center gap-2 p-3 bg-background/80 rounded-lg border border-primary/20 min-w-0">
                 <code className="flex-1 text-sm font-mono text-primary break-all">{email}</code>
                 <Button
-                  size="sm"
                   variant="ghost"
                   onClick={copyEmail}
-                  className="h-8 px-3 hover:bg-primary/10 shrink-0"
+                  className="h-8 px-3 hover:bg-primary/10 shrink-0 flex items-center gap-2"
                 >
                   {copied ? (
                     <>
                       <Check className="h-4 w-4 text-primary" />
-                      <span className="ml-1 text-xs text-primary">Copied!</span>
+                      <span className="text-xs text-primary">Copied!</span>
                     </>
                   ) : (
                     <>
                       <Copy className="h-4 w-4 text-primary" />
-                      <span className="ml-1 text-xs">Copy</span>
+                      <span className="text-xs">Copy</span>
                     </>
                   )}
                 </Button>
@@ -82,7 +81,7 @@ export const Contact: React.FC = () => {
                 <code className="flex-1 text-sm font-mono text-primary truncate">
                   mintaemt/Killer-sudoku-score
                 </code>
-                <div className="h-8 px-3 flex items-center gap-1 hover:bg-primary/10 rounded transition-colors shrink-0">
+                <div className="h-8 px-3 flex items-center justify-center gap-2 hover:bg-primary/10 rounded transition-colors shrink-0 font-medium">
                   <ExternalLink className="h-4 w-4 text-primary" />
                   <span className="text-xs">Visit</span>
                 </div>
