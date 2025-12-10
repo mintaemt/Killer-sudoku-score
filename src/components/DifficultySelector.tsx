@@ -82,7 +82,7 @@ export const DifficultySelector = ({
 
   return (
     <div className="glass rounded-2xl px-3 md:px-4 py-3 shadow-apple-md relative z-10 w-full max-w-7xl mx-auto">
-      <div className="flex items-center gap-1 md:gap-2 w-full">
+      <div className="flex items-center justify-between gap-0 md:gap-1 w-full">
         {/* 1. 難度選擇器 */}
         <div className="relative" ref={dropdownRef}>
           <Button
@@ -117,85 +117,85 @@ export const DifficultySelector = ({
         </div>
 
         {/* Control Buttons Group - Helper, Note, Dopamine */}
-        <div className="flex items-center gap-1 md:gap-2">
-          {/* 2. 提示按鈕 */}
-          {onHint && (
-            <div className="relative">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={onHint}
-                className={cn(
-                  "transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md px-2 md:px-3",
-                  hintCount > 0 && selectedCell
-                    ? "bg-primary text-primary-foreground hover:text-primary-foreground border-primary/30 shadow-apple-md"
-                    : hintCount > 0
-                      ? "border-border/50 hover:bg-muted/50 text-foreground hover:text-foreground"
-                      : "border-border/30 hover:bg-muted/30 text-muted-foreground hover:text-muted-foreground"
-                )}
-                title={hintCount > 0 ? t('hint') : t('hintCountUsedUp')}
-              >
-                <Lightbulb className="h-4 w-4" />
-              </Button>
-
-              {/* 提示次數 Badge */}
-              {hintCount > 0 && (
-                <div className="absolute -top-1 -right-1 bg-gradient-to-br from-gray-700 to-gray-800 text-white text-[8px] md:text-[10px] font-bold px-1 py-0.5 rounded-full min-w-[16px] h-4 flex items-center justify-center z-10 shadow-lg border border-gray-600/30">
-                  <div className="drop-shadow-sm">{hintCount}</div>
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* 3. 註解按鈕 */}
-          {onToggleNotes && (
-            <div className="relative">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={onToggleNotes}
-                className={cn(
-                  "transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md px-2 md:px-3",
-                  showNotes
-                    ? "bg-primary text-primary-foreground hover:text-primary-foreground border-primary/30 shadow-apple-md"
-                    : "border-border/50 hover:bg-muted/50 text-foreground hover:text-foreground"
-                )}
-                title={showNotes ? t('notesModeOff') : t('notesModeOn')}
-              >
-                <Pencil className="h-4 w-4" />
-              </Button>
-
-              {/* ON/OFF Badge */}
-              {showNotes && (
-                <div className="absolute -top-1 -right-1 bg-gradient-to-br from-gray-700 to-gray-800 text-white text-[8px] md:text-[10px] font-bold px-1 py-0.5 rounded-full min-w-[16px] h-4 flex items-center justify-center z-10 shadow-lg border border-gray-600/30">
-                  <div className="drop-shadow-sm">ON</div>
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* 4. 多巴胺模式按鈕 */}
-          {onDopamineMode && (
+        {/* Ungrouped for better justify-between distribution */}
+        {/* 2. 提示按鈕 */}
+        {onHint && (
+          <div className="relative">
             <Button
               variant="outline"
               size="sm"
-              onClick={() => {
-                if (user && !isVisitorMode) {
-                  setShowDopamineInfo(true);
-                } else {
-                  setShowFeatureHint(true);
-                }
-              }}
-              className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md border-purple-500/30 hover:border-purple-500/50 text-purple-600 hover:text-purple-700 px-2 md:px-3"
-              title={user && !isVisitorMode ? `${t('dopamineMode')} - ${t('challengeYourLimits')}!` : t('dopamineModeVisitorOnly')}
+              onClick={onHint}
+              className={cn(
+                "transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md px-2 md:px-3",
+                hintCount > 0 && selectedCell
+                  ? "bg-primary text-primary-foreground hover:text-primary-foreground border-primary/30 shadow-apple-md"
+                  : hintCount > 0
+                    ? "border-border/50 hover:bg-muted/50 text-foreground hover:text-foreground"
+                    : "border-border/30 hover:bg-muted/30 text-muted-foreground hover:text-muted-foreground"
+              )}
+              title={hintCount > 0 ? t('hint') : t('hintCountUsedUp')}
             >
-              <Zap className="h-4 w-4" />
+              <Lightbulb className="h-4 w-4" />
             </Button>
-          )}
-        </div>
+
+            {/* 提示次數 Badge */}
+            {hintCount > 0 && (
+              <div className="absolute -top-1 -right-1 bg-gradient-to-br from-gray-700 to-gray-800 text-white text-[8px] md:text-[10px] font-bold px-1 py-0.5 rounded-full min-w-[16px] h-4 flex items-center justify-center z-10 shadow-lg border border-gray-600/30">
+                <div className="drop-shadow-sm">{hintCount}</div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* 3. 註解按鈕 */}
+        {onToggleNotes && (
+          <div className="relative">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={onToggleNotes}
+              className={cn(
+                "transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md px-2 md:px-3",
+                showNotes
+                  ? "bg-primary text-primary-foreground hover:text-primary-foreground border-primary/30 shadow-apple-md"
+                  : "border-border/50 hover:bg-muted/50 text-foreground hover:text-foreground"
+              )}
+              title={showNotes ? t('notesModeOff') : t('notesModeOn')}
+            >
+              <Pencil className="h-4 w-4" />
+            </Button>
+
+            {/* ON/OFF Badge */}
+            {showNotes && (
+              <div className="absolute -top-1 -right-1 bg-gradient-to-br from-gray-700 to-gray-800 text-white text-[8px] md:text-[10px] font-bold px-1 py-0.5 rounded-full min-w-[16px] h-4 flex items-center justify-center z-10 shadow-lg border border-gray-600/30">
+                <div className="drop-shadow-sm">ON</div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* 4. 多巴胺模式按鈕 */}
+        {onDopamineMode && (
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => {
+              if (user && !isVisitorMode) {
+                setShowDopamineInfo(true);
+              } else {
+                setShowFeatureHint(true);
+              }
+            }}
+            className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md border-purple-500/30 hover:border-purple-500/50 text-purple-600 hover:text-purple-700 px-2 md:px-3"
+            title={user && !isVisitorMode ? `${t('dopamineMode')} - ${t('challengeYourLimits')}!` : t('dopamineModeVisitorOnly')}
+          >
+            <Zap className="h-4 w-4" />
+          </Button>
+        )}
+        {/* End of Control Buttons */}
 
         {/* 5. 計時元件 - 整合暫停功能 */}
-        <div className="relative ml-auto">
+        <div className="relative">
           <div className="flex items-center gap-2">
             <Clock className="h-3 w-3 md:h-4 md:w-4 text-muted-foreground" />
             <span
