@@ -195,7 +195,7 @@ export const DifficultySelector = ({
         </div>
 
         {/* 5. 計時元件 - 整合暫停功能 */}
-        <div className="relative">
+        <div className="relative ml-auto">
           <div className="flex items-center gap-2">
             <Clock className="h-3 w-3 md:h-4 md:w-4 text-muted-foreground" />
             <span
