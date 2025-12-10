@@ -89,7 +89,7 @@ export const DifficultySelector = ({
             variant="outline"
             size="sm"
             onClick={() => setIsOpen(!isOpen)}
-            className="transition-smooth font-medium text-xs md:text-sm w-full justify-between px-2 md:px-3"
+            className="transition-smooth font-medium text-xs md:text-sm w-full justify-center px-1 md:px-2 truncate"
           >
             {currentDifficulty ? t(currentDifficulty.translationKey as any) : difficulty}
             <ChevronDown className={cn("h-3 w-3 transition-transform hidden md:block", isOpen && "rotate-180")} />
@@ -126,7 +126,7 @@ export const DifficultySelector = ({
               size="sm"
               onClick={onHint}
               className={cn(
-                "transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md w-9 h-9 p-0 shrink",
+                "transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md w-9 h-9 p-0 shrink-0",
                 hintCount > 0 && selectedCell
                   ? "bg-primary text-primary-foreground hover:text-primary-foreground border-primary/30 shadow-apple-md"
                   : hintCount > 0
@@ -155,7 +155,7 @@ export const DifficultySelector = ({
               size="sm"
               onClick={onToggleNotes}
               className={cn(
-                "transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md w-9 h-9 p-0 shrink",
+                "transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md w-9 h-9 p-0 shrink-0",
                 showNotes
                   ? "bg-primary text-primary-foreground hover:text-primary-foreground border-primary/30 shadow-apple-md"
                   : "border-border/50 hover:bg-muted/50 text-foreground hover:text-foreground"
@@ -186,7 +186,7 @@ export const DifficultySelector = ({
                 setShowFeatureHint(true);
               }
             }}
-            className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md border-purple-500/30 hover:border-purple-500/50 text-purple-600 hover:text-purple-700 w-9 h-9 p-0 shrink"
+            className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md border-purple-500/30 hover:border-purple-500/50 text-purple-600 hover:text-purple-700 w-9 h-9 p-0 shrink-0"
             title={user && !isVisitorMode ? `${t('dopamineMode')} - ${t('challengeYourLimits')}!` : t('dopamineModeVisitorOnly')}
           >
             <Zap className="h-4 w-4" />
