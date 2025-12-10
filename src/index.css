@@ -47,6 +47,8 @@ All colors MUST be HSL.
     --cage-border: 0 0% 18%;
     --cage-sum: 0 0% 60%;
 
+    --radius: 0.75rem;
+
     --dopamine-bg: #1a1a1a;
     /* Dark Mode: Soft Dark Base */
     --dopamine-filter: saturate(1.5) contrast(1.1);
