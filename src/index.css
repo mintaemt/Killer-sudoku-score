@@ -47,7 +47,11 @@ All colors MUST be HSL.
     --cage-border: 0 0% 18%;
     --cage-sum: 0 0% 60%;
 
+    --cage-sum: 0 0% 60%;
+
     --radius: 0.75rem;
+    --dopamine-bg: #1a1a1a;
+    /* Dark Mode: Soft Dark Base */
 
     /* Shadows */
     --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
@@ -94,7 +98,11 @@ All colors MUST be HSL.
     --cell-error: 0 100% 92%;
     --cell-given: 0 0% 97%;
     --cage-border: 0 0% 97%;
+    --cage-border: 0 0% 97%;
     --cage-sum: 0 0% 50%;
+
+    --dopamine-bg: #000000;
+    /* Light Mode: Deep Black for High Contrast */
   }
 
   /* Theme variations */
@@ -620,8 +628,9 @@ All colors MUST be HSL.
 }
 
 /* Dopamine Rich Aurora Animation (Favicon Drifting Glow) - 50% Richer */
+/* Dopamine Rich Aurora Animation (Favicon Drifting Glow) - 50% Richer */
 .btn-dopamine-animated {
-  background: #1a1a1a;
+  background: var(--dopamine-bg);
   position: relative;
   overflow: hidden;
   border: none !important;
