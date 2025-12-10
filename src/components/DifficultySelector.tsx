@@ -32,12 +32,7 @@ const difficulties: { value: Difficulty; label: string; translationKey: string }
   { value: "expert", label: "Expert", translationKey: "expert" },
 ];
 
-const difficultyColors: Record<Difficulty, string> = {
-  easy: "bg-emerald-500 hover:bg-emerald-600",
-  medium: "bg-blue-500 hover:bg-blue-600",
-  hard: "bg-orange-500 hover:bg-orange-600",
-  expert: "bg-rose-500 hover:bg-rose-600",
-};
+
 
 export const DifficultySelector = ({
   difficulty,
@@ -91,18 +86,15 @@ export const DifficultySelector = ({
     <div className="glass rounded-2xl px-3 md:px-4 py-3 shadow-apple-md relative z-10 w-full max-w-7xl mx-auto">
       <div className="flex items-center gap-1 md:gap-2 w-full">
         {/* 1. 難度選擇器 */}
-        <div className="relative flex-none" ref={dropdownRef}>
+        <div className="relative flex-[1_10_0%] min-w-[55px]" ref={dropdownRef}>
           <Button
             variant="outline"
             size="sm"
             onClick={() => setIsOpen(!isOpen)}
-            className={cn(
-              "transition-smooth font-medium text-xs md:text-sm w-auto justify-center px-3 md:px-4 rounded-full border-none text-white shadow-md hover:scale-105 active:scale-95",
-              difficultyColors[difficulty]
-            )}
+            className="transition-smooth font-medium text-xs md:text-sm w-full justify-between px-2 md:px-3"
           >
             {currentDifficulty ? t(currentDifficulty.translationKey as any) : difficulty}
-            <ChevronDown className={cn("h-3 w-3 transition-transform hidden md:block", isOpen && "rotate-180")} />
+            <ChevronDown className={cn("h-3 w-3 transition-transform", isOpen && "rotate-180")} />
           </Button>
 
           {isOpen && (
