@@ -19,7 +19,7 @@ interface GameHeaderProps {
 const themes = [
   { name: "blue", label: "Blue", color: "#3b82f6" },
   { name: "orange", label: "Orange", color: "#ff7710" },
-  { name: "green", label: "Lime", color: "#bef264" },
+  { name: "green", label: "Lime", color: "#BFFF00" },
   { name: "purple", label: "Purple", color: "#a855f7" },
   { name: "pink", label: "Pink", color: "#ec4899" },
   { name: "teal", label: "Teal", color: "#14b8a6" },

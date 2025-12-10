@@ -8,7 +8,7 @@ interface AnimatedGradientBackgroundProps {
 const themeColors = {
   blue: { h: 210, s: 100, l: 50 },     // hsl(210, 100%, 50%)
   orange: { h: 25, s: 100, l: 50 },    // hsl(25, 100%, 50%)
-  green: { h: 80, s: 100, l: 50 },     // hsl(80, 100%, 50%) - Lime
+  green: { h: 74, s: 100, l: 50 },     // hsl(74, 100%, 50%) - Lime (#BFFF00)
   purple: { h: 262, s: 83, l: 58 },    // hsl(262, 83%, 58%)
   pink: { h: 330, s: 81, l: 60 },      // hsl(330, 81%, 60%)
   teal: { h: 173, s: 80, l: 40 }       // hsl(173, 80%, 40%)
