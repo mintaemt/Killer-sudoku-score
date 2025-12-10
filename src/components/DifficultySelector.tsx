@@ -202,7 +202,7 @@ export const DifficultySelector = ({
             <div className="flex items-center gap-2">
               <Clock className="h-3 w-3 md:h-4 md:w-4 text-muted-foreground" />
               <span
-                className="text-xs md:text-sm font-bold bg-muted/50 px-2 md:px-3 py-1 rounded-md min-w-[50px] md:min-w-[60px] text-center cursor-pointer transition-smooth hover:bg-muted/70"
+                className="text-xs md:text-sm font-bold bg-muted/50 px-2 md:px-3 py-1 rounded-md min-w-[50px] md:min-w-[60px] text-center cursor-pointer transition-smooth hover:bg-muted/70 shadow-md border border-border/50"
                 onClick={onTogglePause}
                 title={isPaused ? t('clickToResume') : t('clickToPause')}
               >
@@ -223,7 +223,7 @@ export const DifficultySelector = ({
             <AlertTriangle className="h-3 w-3 md:h-4 md:w-4 text-muted-foreground" />
             <span className={cn(
               "text-xs md:text-sm font-bold transition-smooth px-2 md:px-3 py-1 rounded-md min-w-[40px] md:min-w-[50px] text-center",
-              mistakes > 0 ? "text-destructive bg-destructive/10" : "text-foreground bg-muted/50"
+              mistakes > 0 ? "text-destructive bg-destructive/10 shadow-md border border-destructive/20" : "text-foreground bg-muted/50 shadow-md border border-border/50"
             )}>
               {mistakes}/3
             </span>

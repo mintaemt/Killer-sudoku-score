@@ -42,7 +42,7 @@ export const GameCompleteModal = ({
   currentUserId
 }: GameCompleteModalProps) => {
   const { t } = useLanguage();
-  
+
   if (!isOpen) return null;
 
   return (
@@ -57,34 +57,34 @@ export const GameCompleteModal = ({
           >
             <X className="h-4 w-4" />
           </Button>
-          
+
           {/* 上半部分：遊戲完成資訊 */}
           <CardHeader className="text-center pb-4">
-            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
-              <Trophy className="h-8 w-8 text-primary" />
+            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 shadow-md">
+              <Trophy className="h-8 w-8 text-primary drop-shadow-md" />
             </div>
-            <CardTitle className="text-2xl text-primary">{t('congratulationsComplete')}</CardTitle>
+            <CardTitle className="text-2xl text-primary drop-shadow-md">{t('congratulationsComplete')}</CardTitle>
             <CardDescription>
               {t('successfullyCompletedGame')}
             </CardDescription>
           </CardHeader>
-          
+
           <CardContent className="px-4 pb-0">
             {/* 成績統計 - 單排並列 */}
             <div className="flex gap-3 mb-4">
               {/* 時間 */}
-              <div className="flex-1 flex flex-col items-center p-3 bg-muted/50 rounded-lg">
-                <Clock className="h-4 w-4 text-primary mb-1.5" />
+              <div className="flex-1 flex flex-col items-center p-3 bg-muted/50 rounded-lg shadow-md border border-border/50">
+                <Clock className="h-4 w-4 text-primary mb-1.5 drop-shadow-sm" />
                 <span className="text-xs text-muted-foreground mb-1">{t('completionTime')}</span>
                 <span className="text-base font-semibold">{formatTime(completionTime)}</span>
               </div>
 
               {/* 分數 */}
-              <div className="flex-1 flex flex-col items-center p-3 bg-primary/10 rounded-lg border border-primary/30">
-                <Star className="h-4 w-4 text-primary mb-1.5" />
+              <div className="flex-1 flex flex-col items-center p-3 bg-primary/10 rounded-lg border border-primary/30 shadow-md">
+                <Star className="h-4 w-4 text-primary mb-1.5 drop-shadow-sm" />
                 <span className="text-xs text-muted-foreground mb-1">{t('totalScore')}</span>
                 <div className="text-center">
-                  <div className="text-xl font-bold text-primary">
+                  <div className="text-xl font-bold text-primary drop-shadow-md">
                     {formatScore(score)}
                   </div>
                   {isNewRecord && (
@@ -96,8 +96,8 @@ export const GameCompleteModal = ({
               </div>
 
               {/* 錯誤次數 */}
-              <div className="flex-1 flex flex-col items-center p-3 bg-muted/50 rounded-lg">
-                <Target className="h-4 w-4 text-primary mb-1.5" />
+              <div className="flex-1 flex flex-col items-center p-3 bg-muted/50 rounded-lg shadow-md border border-border/50">
+                <Target className="h-4 w-4 text-primary mb-1.5 drop-shadow-sm" />
                 <span className="text-xs text-muted-foreground mb-1">{t('errorCount')}</span>
                 <div className="text-center">
                   <span className="text-base font-semibold">{mistakes}</span>
@@ -107,8 +107,8 @@ export const GameCompleteModal = ({
 
             {/* 目前排名 - 如果有排名 */}
             {rank && (
-              <div className="flex items-center justify-center p-2.5 bg-primary/5 rounded-lg border border-primary/20 mb-4">
-                <Trophy className="h-4 w-4 text-primary mr-2" />
+              <div className="flex items-center justify-center p-2.5 bg-primary/5 rounded-lg border border-primary/20 mb-4 shadow-md">
+                <Trophy className="h-4 w-4 text-primary mr-2 drop-shadow-sm" />
                 <span className="text-sm font-medium">{t('currentRank')}</span>
                 <span className="text-lg font-bold text-primary ml-2">#{rank}</span>
               </div>
@@ -116,8 +116,8 @@ export const GameCompleteModal = ({
 
             {/* 按鈕區域 */}
             <div className="flex justify-center mb-4">
-              <Button 
-                onClick={onNewGame} 
+              <Button
+                onClick={onNewGame}
                 size="lg"
                 className="px-6 py-2.5 text-sm font-medium h-11"
               >
@@ -126,10 +126,10 @@ export const GameCompleteModal = ({
               </Button>
             </div>
           </CardContent>
-          
+
           {/* 下半部分：排行榜 - 直接貼到獲勝資訊卡底部 */}
           <div className="border-t-0">
-            <Leaderboard 
+            <Leaderboard
               currentUserId={currentUserId}
               mode="normal"
             />

@@ -15,7 +15,7 @@ interface GameRulesModalProps {
 export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
   const [activeTab, setActiveTab] = useState<string>("rules");
   const { t } = useLanguage();
-  
+
   if (!isOpen) return null;
 
   return (
@@ -26,7 +26,7 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
             <div className="flex items-center justify-between">
               <div>
                 <CardTitle className="flex items-center space-x-2 font-bold">
-                  <Info className="h-6 w-6 text-primary" />
+                  <Info className="h-6 w-6 text-primary drop-shadow-md" />
                   <span>{t('gameRules')} & {t('scoringSystem')}</span>
                 </CardTitle>
               </div>
@@ -35,7 +35,7 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
               </Button>
             </div>
           </CardHeader>
-          
+
           <CardContent>
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
               <TabsList className="grid w-full grid-cols-3">
@@ -46,162 +46,162 @@ export const GameRulesModal = ({ isOpen, onClose }: GameRulesModalProps) => {
 
               <TabsContent value="rules" className="mt-6">
                 <div className="space-y-3">
-                    <div className="flex items-start gap-3 p-3 rounded-lg bg-card border">
-                      <Badge variant="outline" className="mt-0.5 flex-shrink-0">1</Badge>
-                      <div className="min-w-0">
-                        <strong className="text-foreground text-sm">{t('basicRules')}:</strong>
-                        <span className="text-muted-foreground text-sm"> {t('basicRulesDescription')}</span>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-start gap-3 p-3 rounded-lg bg-card border">
-                      <Badge variant="outline" className="mt-0.5 flex-shrink-0">2</Badge>
-                      <div className="min-w-0">
-                        <strong className="text-foreground text-sm">{t('killerSudokuFeatures')}:</strong>
-                        <span className="text-muted-foreground text-sm"> {t('killerSudokuFeaturesDescription')}</span>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-start gap-3 p-3 rounded-lg bg-card border">
-                      <Badge variant="outline" className="mt-0.5 flex-shrink-0">3</Badge>
-                      <div className="min-w-0">
-                        <strong className="text-foreground text-sm">{t('solvingStrategy')}:</strong>
-                        <span className="text-muted-foreground text-sm"> {t('solvingStrategyDescription')}</span>
-                      </div>
+                  <div className="flex items-start gap-3 p-3 rounded-lg bg-card border shadow-md">
+                    <Badge variant="outline" className="mt-0.5 flex-shrink-0">1</Badge>
+                    <div className="min-w-0">
+                      <strong className="text-foreground text-sm">{t('basicRules')}:</strong>
+                      <span className="text-muted-foreground text-sm"> {t('basicRulesDescription')}</span>
                     </div>
                   </div>
+
+                  <div className="flex items-start gap-3 p-3 rounded-lg bg-card border shadow-md">
+                    <Badge variant="outline" className="mt-0.5 flex-shrink-0">2</Badge>
+                    <div className="min-w-0">
+                      <strong className="text-foreground text-sm">{t('killerSudokuFeatures')}:</strong>
+                      <span className="text-muted-foreground text-sm"> {t('killerSudokuFeaturesDescription')}</span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3 p-3 rounded-lg bg-card border shadow-md">
+                    <Badge variant="outline" className="mt-0.5 flex-shrink-0">3</Badge>
+                    <div className="min-w-0">
+                      <strong className="text-foreground text-sm">{t('solvingStrategy')}:</strong>
+                      <span className="text-muted-foreground text-sm"> {t('solvingStrategyDescription')}</span>
+                    </div>
+                  </div>
+                </div>
               </TabsContent>
 
               <TabsContent value="tips" className="mt-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="p-4 rounded-lg bg-card border">
-                      <h4 className="font-medium mb-2 flex items-center gap-2">
-                        <Target className="h-4 w-4 text-blue-500 flex-shrink-0" />
-                        <span className="break-words">{t('uniqueCandidate')}</span>
-                      </h4>
-                      <p className="text-sm text-muted-foreground break-words">
-                        {t('uniqueCandidateDescription')}
-                      </p>
-                    </div>
-                    
-                    <div className="p-4 rounded-lg bg-card border">
-                      <h4 className="font-medium mb-2 flex items-center gap-2">
-                        <Brain className="h-4 w-4 text-green-500 flex-shrink-0" />
-                        <span className="break-words">{t('hiddenSingle')}</span>
-                      </h4>
-                      <p className="text-sm text-muted-foreground break-words">
-                        {t('hiddenSingleDescription')}
-                      </p>
-                    </div>
-                    
-                    <div className="p-4 rounded-lg bg-card border">
-                      <h4 className="font-medium mb-2 flex items-center gap-2">
-                        <BookOpen className="h-4 w-4 text-purple-500 flex-shrink-0" />
-                        <span className="break-words">{t('killerSudokuTips')}</span>
-                      </h4>
-                      <p className="text-sm text-muted-foreground break-words">
-                        {t('killerSudokuTipsDescription')}
-                      </p>
-                    </div>
-                    
-                    <div className="p-4 rounded-lg bg-card border">
-                      <h4 className="font-medium mb-2 flex items-center gap-2">
-                        <Zap className="h-4 w-4 text-orange-500 flex-shrink-0" />
-                        <span className="break-words">{t('speedImprovement')}</span>
-                      </h4>
-                      <p className="text-sm text-muted-foreground break-words">
-                        {t('speedImprovementDescription')}
-                      </p>
-                    </div>
+                  <div className="p-4 rounded-lg bg-card border shadow-md">
+                    <h4 className="font-medium mb-2 flex items-center gap-2">
+                      <Target className="h-4 w-4 text-blue-500 flex-shrink-0" />
+                      <span className="break-words">{t('uniqueCandidate')}</span>
+                    </h4>
+                    <p className="text-sm text-muted-foreground break-words">
+                      {t('uniqueCandidateDescription')}
+                    </p>
                   </div>
+
+                  <div className="p-4 rounded-lg bg-card border shadow-md">
+                    <h4 className="font-medium mb-2 flex items-center gap-2">
+                      <Brain className="h-4 w-4 text-green-500 flex-shrink-0" />
+                      <span className="break-words">{t('hiddenSingle')}</span>
+                    </h4>
+                    <p className="text-sm text-muted-foreground break-words">
+                      {t('hiddenSingleDescription')}
+                    </p>
+                  </div>
+
+                  <div className="p-4 rounded-lg bg-card border shadow-md">
+                    <h4 className="font-medium mb-2 flex items-center gap-2">
+                      <BookOpen className="h-4 w-4 text-purple-500 flex-shrink-0" />
+                      <span className="break-words">{t('killerSudokuTips')}</span>
+                    </h4>
+                    <p className="text-sm text-muted-foreground break-words">
+                      {t('killerSudokuTipsDescription')}
+                    </p>
+                  </div>
+
+                  <div className="p-4 rounded-lg bg-card border shadow-md">
+                    <h4 className="font-medium mb-2 flex items-center gap-2">
+                      <Zap className="h-4 w-4 text-orange-500 flex-shrink-0" />
+                      <span className="break-words">{t('speedImprovement')}</span>
+                    </h4>
+                    <p className="text-sm text-muted-foreground break-words">
+                      {t('speedImprovementDescription')}
+                    </p>
+                  </div>
+                </div>
               </TabsContent>
 
               <TabsContent value="scoring" className="mt-6">
                 {/* 計分規則 - 1/1/2/1 排列 */}
                 <div className="space-y-3">
-                    {/* 排行榜說明 - 全寬 */}
-                    <div className="p-3 rounded-lg bg-card border">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-muted-foreground">
-                        <div className="break-words">• {t('leaderboardDescription')}</div>
-                        <div className="break-words">• {t('rankingCriteria')}</div>
-                        <div className="break-words">• {t('autoUpdate')}</div>
-                        <div className="break-words">• {t('transparentScoring')}</div>
+                  {/* 排行榜說明 - 全寬 */}
+                  <div className="p-3 rounded-lg bg-card border shadow-md">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-muted-foreground">
+                      <div className="break-words">• {t('leaderboardDescription')}</div>
+                      <div className="break-words">• {t('rankingCriteria')}</div>
+                      <div className="break-words">• {t('autoUpdate')}</div>
+                      <div className="break-words">• {t('transparentScoring')}</div>
+                    </div>
+                  </div>
+
+                  {/* 時間獎勵 - 全寬 */}
+                  <div className="p-3 rounded-lg bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-950/20 dark:to-blue-950/20 border shadow-md">
+                    <h4 className="font-semibold mb-2 flex items-center gap-2 text-sm">
+                      <Clock className="h-4 w-4 text-blue-500 flex-shrink-0" />
+                      <span className="break-words">{t('timeBonus')}</span>
+                    </h4>
+
+                    {/* 提前獎勵和超時懲罰 - 響應式排版 */}
+                    <div className="space-y-2 md:space-y-0 md:flex md:gap-4">
+                      <div className="flex items-center gap-2">
+                        <Badge variant="secondary" className="text-sm px-1 py-0.5 flex-shrink-0">{t('earlyBonus')}</Badge>
+                        <span className="text-sm text-muted-foreground break-words">{t('earlyBonusDescription')}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Badge variant="secondary" className="text-sm px-1 py-0.5 flex-shrink-0">{t('overtimePenalty')}</Badge>
+                        <span className="text-sm text-muted-foreground break-words">{t('overtimePenaltyDescription')}</span>
                       </div>
                     </div>
-
-                    {/* 時間獎勵 - 全寬 */}
-                    <div className="p-3 rounded-lg bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-950/20 dark:to-blue-950/20 border">
-                      <h4 className="font-semibold mb-2 flex items-center gap-2 text-sm">
-                        <Clock className="h-4 w-4 text-blue-500 flex-shrink-0" />
-                        <span className="break-words">{t('timeBonus')}</span>
-                      </h4>
-                      
-                      {/* 提前獎勵和超時懲罰 - 響應式排版 */}
-                      <div className="space-y-2 md:space-y-0 md:flex md:gap-4">
-                        <div className="flex items-center gap-2">
-                          <Badge variant="secondary" className="text-sm px-1 py-0.5 flex-shrink-0">{t('earlyBonus')}</Badge>
-                          <span className="text-sm text-muted-foreground break-words">{t('earlyBonusDescription')}</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <Badge variant="secondary" className="text-sm px-1 py-0.5 flex-shrink-0">{t('overtimePenalty')}</Badge>
-                          <span className="text-sm text-muted-foreground break-words">{t('overtimePenaltyDescription')}</span>
-                        </div>
-                      </div>
-                      <div className="space-y-1.5 text-sm text-muted-foreground">
-                        <div className="mt-2">
-                          <div className="text-sm font-medium text-muted-foreground mb-1 break-words">{t('idealTime')}:</div>
-                          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm">
-                            <div className="text-center p-2 rounded bg-background/50 flex items-center justify-center min-h-[2.5rem]">
-                              <div className="break-words">{t('easy')}: 6{t('minutes')}</div>
-                            </div>
-                            <div className="text-center p-2 rounded bg-background/50 flex items-center justify-center min-h-[2.5rem]">
-                              <div className="break-words">{t('medium')}: 12{t('minutes')}</div>
-                            </div>
-                            <div className="text-center p-2 rounded bg-background/50 flex items-center justify-center min-h-[2.5rem]">
-                              <div className="break-words">{t('hard')}: 18{t('minutes')}</div>
-                            </div>
-                            <div className="text-center p-2 rounded bg-background/50 flex items-center justify-center min-h-[2.5rem]">
-                              <div className="break-words">{t('expert')}: 24{t('minutes')}</div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* 基礎分數 - 全寬 */}
-                    <div className="p-3 rounded-lg bg-gradient-to-r from-blue-50 to-green-50 dark:from-blue-950/20 dark:to-green-950/20 border">
-                      <h4 className="font-semibold mb-2 flex items-center gap-2 text-sm">
-                        <Trophy className="h-4 w-4 text-yellow-500 flex-shrink-0" />
-                        <span className="break-words">{t('basicScore')}</span>
-                        <Badge variant="destructive" className="text-sm px-1 py-0.5 flex-shrink-0">{t('mistake')}</Badge>
-                        <span className="text-sm text-muted-foreground break-words">{t('mistakePenaltyDescription')}</span>
-                      </h4>
-                      <div className="text-sm text-muted-foreground">
+                    <div className="space-y-1.5 text-sm text-muted-foreground">
+                      <div className="mt-2">
+                        <div className="text-sm font-medium text-muted-foreground mb-1 break-words">{t('idealTime')}:</div>
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm">
-                          <div className="text-center p-2 rounded bg-background/50 flex items-center justify-center min-h-[2.5rem]">
-                            <div className="break-words">{t('easy')}: 100{t('points')}</div>
+                          <div className="text-center p-2 rounded bg-background/50 flex items-center justify-center min-h-[2.5rem] shadow-sm border">
+                            <div className="break-words">{t('easy')}: 6{t('minutes')}</div>
                           </div>
-                          <div className="text-center p-2 rounded bg-background/50 flex items-center justify-center min-h-[2.5rem]">
-                            <div className="break-words">{t('medium')}: 200{t('points')}</div>
+                          <div className="text-center p-2 rounded bg-background/50 flex items-center justify-center min-h-[2.5rem] shadow-sm border">
+                            <div className="break-words">{t('medium')}: 12{t('minutes')}</div>
                           </div>
-                          <div className="text-center p-2 rounded bg-background/50 flex items-center justify-center min-h-[2.5rem]">
-                            <div className="break-words">{t('hard')}: 300{t('points')}</div>
+                          <div className="text-center p-2 rounded bg-background/50 flex items-center justify-center min-h-[2.5rem] shadow-sm border">
+                            <div className="break-words">{t('hard')}: 18{t('minutes')}</div>
                           </div>
-                          <div className="text-center p-2 rounded bg-background/50 flex items-center justify-center min-h-[2.5rem]">
-                            <div className="break-words">{t('expert')}: 500{t('points')}</div>
+                          <div className="text-center p-2 rounded bg-background/50 flex items-center justify-center min-h-[2.5rem] shadow-sm border">
+                            <div className="break-words">{t('expert')}: 24{t('minutes')}</div>
                           </div>
                         </div>
                       </div>
                     </div>
+                  </div>
 
-                    {/* 分數計算公式 - 全寬 */}
-                    <div className="p-3 rounded-lg bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/20 dark:to-pink-950/20 border">
-                      <h4 className="font-semibold flex items-center gap-2 text-sm">
-                        <Calculator className="h-4 w-4 text-purple-500 flex-shrink-0" />
-                        <span className="break-words">{t('calculationFormula')}</span>
-                        <span className="text-sm text-muted-foreground break-words">{t('finalScoreFormula')}</span>
-                      </h4>
+                  {/* 基礎分數 - 全寬 */}
+                  <div className="p-3 rounded-lg bg-gradient-to-r from-blue-50 to-green-50 dark:from-blue-950/20 dark:to-green-950/20 border shadow-md">
+                    <h4 className="font-semibold mb-2 flex items-center gap-2 text-sm">
+                      <Trophy className="h-4 w-4 text-yellow-500 flex-shrink-0" />
+                      <span className="break-words">{t('basicScore')}</span>
+                      <Badge variant="destructive" className="text-sm px-1 py-0.5 flex-shrink-0">{t('mistake')}</Badge>
+                      <span className="text-sm text-muted-foreground break-words">{t('mistakePenaltyDescription')}</span>
+                    </h4>
+                    <div className="text-sm text-muted-foreground">
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm">
+                        <div className="text-center p-2 rounded bg-background/50 flex items-center justify-center min-h-[2.5rem] shadow-sm border">
+                          <div className="break-words">{t('easy')}: 100{t('points')}</div>
+                        </div>
+                        <div className="text-center p-2 rounded bg-background/50 flex items-center justify-center min-h-[2.5rem] shadow-sm border">
+                          <div className="break-words">{t('medium')}: 200{t('points')}</div>
+                        </div>
+                        <div className="text-center p-2 rounded bg-background/50 flex items-center justify-center min-h-[2.5rem] shadow-sm border">
+                          <div className="break-words">{t('hard')}: 300{t('points')}</div>
+                        </div>
+                        <div className="text-center p-2 rounded bg-background/50 flex items-center justify-center min-h-[2.5rem] shadow-sm border">
+                          <div className="break-words">{t('expert')}: 500{t('points')}</div>
+                        </div>
+                      </div>
                     </div>
+                  </div>
+
+                  {/* 分數計算公式 - 全寬 */}
+                  <div className="p-3 rounded-lg bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/20 dark:to-pink-950/20 border shadow-md">
+                    <h4 className="font-semibold flex items-center gap-2 text-sm">
+                      <Calculator className="h-4 w-4 text-purple-500 flex-shrink-0" />
+                      <span className="break-words">{t('calculationFormula')}</span>
+                      <span className="text-sm text-muted-foreground break-words">{t('finalScoreFormula')}</span>
+                    </h4>
+                  </div>
                 </div>
               </TabsContent>
             </Tabs>
