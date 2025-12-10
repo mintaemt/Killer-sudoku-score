@@ -617,7 +617,7 @@ All colors MUST be HSL.
   }
 }
 
-/* Dopamine Aurora Animation (Favicon Drifting Glow) - Fix Color Balance */
+/* Dopamine Rich Aurora Animation (Favicon Drifting Glow) - 50% Richer */
 .btn-dopamine-animated {
   background: #1a1a1a;
   position: relative;
@@ -625,6 +625,8 @@ All colors MUST be HSL.
   border: none !important;
   color: white !important;
   z-index: 1;
+  /* Boost saturation and contrast for richness */
+  filter: saturate(1.5) contrast(1.1);
 }
 
 /* Layer 1: Cool Colors (Blue, Purple, Teal) - Full Background Swirl */
@@ -637,12 +639,13 @@ All colors MUST be HSL.
   height: 400%;
   background: conic-gradient(from 180deg, #3b82f6, #a855f7, #14b8a6, #3b82f6);
   filter: blur(20px);
-  opacity: 0.8;
+  opacity: 1.0;
+  /* Max Opacity */
   animation: dopamine-aurora-drift 15s linear infinite reverse;
   z-index: -2;
 }
 
-/* Layer 2: Warm Colors (Orange, Pink, Lime) - Floating "Petals" on top */
+/* Layer 2: Warm Colors (Orange, Pink, Lime) - Floating Petals (Top) */
 .btn-dopamine-animated::after {
   content: '';
   position: absolute;
@@ -650,6 +653,7 @@ All colors MUST be HSL.
   left: -150%;
   width: 400%;
   height: 400%;
+  /* Orange, Pink, Lime separated by transparent gaps */
   background: conic-gradient(from 0deg,
       transparent 0deg,
       #ff7710 40deg,
@@ -658,15 +662,14 @@ All colors MUST be HSL.
       transparent 220deg,
       #BFFF00 280deg,
       transparent 340deg);
-  filter: blur(20px);
-  opacity: 0.9;
+  filter: blur(18px);
+  /* Slightly less blur to keep intensity */
+  opacity: 1.0;
+  /* Max Opacity */
   mix-blend-mode: normal;
   animation: dopamine-aurora-drift 10s linear infinite;
   z-index: -1;
 }
-
-/* Layer 2: Cool/Deep Colors (Blue, Teal, Purple) - Moving in overlap */
-
 
 @keyframes dopamine-aurora-drift {
   0% {
