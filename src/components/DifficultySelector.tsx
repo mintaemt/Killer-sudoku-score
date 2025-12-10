@@ -82,14 +82,14 @@ export const DifficultySelector = ({
 
   return (
     <div className="glass rounded-2xl px-3 md:px-4 py-3 shadow-apple-md relative z-10 w-full max-w-7xl mx-auto">
-      <div className="flex items-center justify-between gap-0 md:gap-1 w-full">
+      <div className="flex items-center gap-1 md:gap-2 w-full">
         {/* 1. 難度選擇器 */}
-        <div className="relative" ref={dropdownRef}>
+        <div className="relative flex-1" ref={dropdownRef}>
           <Button
             variant="outline"
             size="sm"
             onClick={() => setIsOpen(!isOpen)}
-            className="transition-smooth font-medium text-xs md:text-sm w-[70px] md:w-[75px] justify-between"
+            className="transition-smooth font-medium text-xs md:text-sm w-full justify-between"
           >
             {currentDifficulty ? t(currentDifficulty.translationKey as any) : difficulty}
             <ChevronDown className={cn("h-3 w-3 transition-transform", isOpen && "rotate-180")} />
@@ -195,7 +195,7 @@ export const DifficultySelector = ({
         {/* End of Control Buttons */}
 
         {/* 5. 計時元件 - 整合暫停功能 */}
-        <div className="relative">
+        <div className="relative flex-1 flex justify-center">
           <div className="flex items-center gap-2">
             <Clock className="h-3 w-3 md:h-4 md:w-4 text-muted-foreground" />
             <span
@@ -216,7 +216,7 @@ export const DifficultySelector = ({
         </div>
 
         {/* 6. 錯誤顯示元件 */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 flex-1 justify-end">
           <AlertTriangle className="h-3 w-3 md:h-4 md:w-4 text-muted-foreground" />
           <span className={cn(
             "text-xs md:text-sm font-bold transition-smooth px-2 md:px-3 py-1 rounded-md min-w-[40px] md:min-w-[50px] text-center",
