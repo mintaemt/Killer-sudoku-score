@@ -617,7 +617,7 @@ All colors MUST be HSL.
   }
 }
 
-/* Dopamine Aurora Animation (Favicon Drifting Glow) - Fluid Organic Motion */
+/* Dopamine Aurora Animation (Favicon Drifting Glow) - Fix Color Balance */
 .btn-dopamine-animated {
   background: #1a1a1a;
   position: relative;
@@ -627,7 +627,7 @@ All colors MUST be HSL.
   z-index: 1;
 }
 
-/* Layer 1: Warm/Bright Colors (Lime, Orange, Pink) */
+/* Layer 1: Cool Colors (Blue, Purple, Teal) - Full Background Swirl */
 .btn-dopamine-animated::before {
   content: '';
   position: absolute;
@@ -635,14 +635,14 @@ All colors MUST be HSL.
   left: -150%;
   width: 400%;
   height: 400%;
-  background: conic-gradient(from 0deg, #BFFF00, #ff7710, #ec4899, #BFFF00);
-  filter: blur(15px);
-  opacity: 0.7;
-  animation: dopamine-aurora-drift 8s linear infinite;
+  background: conic-gradient(from 180deg, #3b82f6, #a855f7, #14b8a6, #3b82f6);
+  filter: blur(20px);
+  opacity: 0.8;
+  animation: dopamine-aurora-drift 15s linear infinite reverse;
   z-index: -2;
 }
 
-/* Layer 2: Cool/Deep Colors (Blue, Teal, Purple) - Moving in overlap */
+/* Layer 2: Warm Colors (Orange, Pink, Lime) - Floating "Petals" on top */
 .btn-dopamine-animated::after {
   content: '';
   position: absolute;
@@ -650,25 +650,39 @@ All colors MUST be HSL.
   left: -150%;
   width: 400%;
   height: 400%;
-  background: conic-gradient(from 180deg, #3b82f6, #14b8a6, #a855f7, #3b82f6);
-  mix-blend-mode: hard-light;
-  filter: blur(10px);
-  opacity: 0.8;
-  animation: dopamine-aurora-drift 12s linear infinite reverse;
+  background: conic-gradient(from 0deg,
+      transparent 0deg,
+      #ff7710 40deg,
+      transparent 100deg,
+      #ec4899 160deg,
+      transparent 220deg,
+      #BFFF00 280deg,
+      transparent 340deg);
+  filter: blur(20px);
+  opacity: 0.9;
+  mix-blend-mode: normal;
+  animation: dopamine-aurora-drift 10s linear infinite;
   z-index: -1;
 }
+
+/* Layer 2: Cool/Deep Colors (Blue, Teal, Purple) - Moving in overlap */
+
 
 @keyframes dopamine-aurora-drift {
   0% {
     transform: rotate(0deg) translate(0, 0);
   }
 
-  33% {
-    transform: rotate(120deg) translate(10px, 10px);
+  25% {
+    transform: rotate(90deg) translate(8px, 8px);
   }
 
-  66% {
-    transform: rotate(240deg) translate(-10px, 15px);
+  50% {
+    transform: rotate(180deg) translate(-5px, 12px);
+  }
+
+  75% {
+    transform: rotate(270deg) translate(-8px, -5px);
   }
 
   100% {
