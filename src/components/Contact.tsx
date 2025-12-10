@@ -41,7 +41,7 @@ export const Contact: React.FC = () => {
               <p className="text-sm text-muted-foreground mb-3 flex-1">{t('legal.contact.emailContent')}</p>
 
               {/* Email Copy Section */}
-              <div className="flex items-center gap-2 p-3 h-14 bg-background/80 rounded-lg border border-primary/20 min-w-0">
+              <div className="flex items-center gap-2 p-3 bg-background/80 rounded-lg border border-primary/20 min-w-0">
                 <code className="flex-1 text-sm font-mono text-primary break-all">{email}</code>
                 <Button
                   variant="ghost"
@@ -72,8 +72,8 @@ export const Contact: React.FC = () => {
               <p className="text-sm text-muted-foreground mb-3 flex-1">{t('legal.contact.githubContent')}</p>
 
               {/* GitHub Link Section - Symmetric with Email */}
-              <div className="flex items-center gap-2 p-3 h-14 bg-background/80 rounded-lg border border-primary/20 min-w-0">
-                <code className="flex-1 text-sm font-mono text-primary truncate">
+              <div className="flex items-center gap-2 p-3 bg-background/80 rounded-lg border border-primary/20 min-w-0">
+                <code className="flex-1 text-sm font-mono text-primary break-all">
                   mintaemt/Killer-sudoku-score
                 </code>
                 <Button
