@@ -100,8 +100,8 @@ All colors MUST be HSL.
     --cell-given: 0 0% 97%;
     --dopamine-bg: #000000;
     /* Light Mode: Deep Black */
-    --dopamine-filter: saturate(2.0) contrast(1.1) brightness(1.1);
-    /* Light Mode: Tuned Vivid (2.0) */
+    --dopamine-filter: saturate(2.0) contrast(1.1) brightness(1.0);
+    /* Light Mode: Tuned Vivid (2.0/1.1/1.0) */
   }
 
   /* Theme variations */
