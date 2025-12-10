@@ -188,10 +188,10 @@ export const DifficultySelector = ({
                 setShowFeatureHint(true);
               }
             }}
-            className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md border-purple-500/30 hover:border-purple-500/50 text-purple-600 hover:text-purple-700 w-9 h-9 p-0 shrink-0"
+            className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md w-9 h-9 p-0 shrink-0 btn-dopamine-animated"
             title={user && !isVisitorMode ? `${t('dopamineMode')} - ${t('challengeYourLimits')}!` : t('dopamineModeVisitorOnly')}
           >
-            <Zap className="h-4 w-4" />
+            <Zap className="h-4 w-4 drop-shadow-md" />
           </Button>
         )}
         {/* End of Control Buttons */}
