@@ -110,6 +110,8 @@ All colors MUST be HSL.
   html[data-theme="green"] {
     /* Nike Volt Style Lime - Updated to #BFFF00 */
     --primary: 74 100% 50%;
+    --primary-foreground: 0 0% 18%;
+    /* Dark Text for Light Background */
     --accent: 74 100% 50%;
     --ring: 74 100% 50%;
     --cell-selected: 74 100% 92%;
@@ -615,51 +617,61 @@ All colors MUST be HSL.
   }
 }
 
-/* Dopamine Breathing Button (Filled & Fluid) - Option 3 */
+/* Dopamine Aurora Animation (Favicon Drifting Glow) - Fluid Organic Motion */
 .btn-dopamine-animated {
-  /* Using strict theme colors: Blue, Teal, Lime, Orange, Pink, Purple */
-  background: linear-gradient(120deg, #3b82f6, #14b8a6, #BFFF00, #ff7710, #ec4899, #a855f7);
-  background-size: 300% 300%;
-  animation: dopamine-breathe 4s ease-in-out infinite;
+  background: #1a1a1a;
+  position: relative;
+  overflow: hidden;
   border: none !important;
   color: white !important;
-  overflow: visible;
-  position: relative;
   z-index: 1;
 }
 
+/* Layer 1: Warm/Bright Colors (Lime, Orange, Pink) */
 .btn-dopamine-animated::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: inherit;
-  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.4), transparent 60%);
+  top: -150%;
+  left: -150%;
+  width: 400%;
+  height: 400%;
+  background: conic-gradient(from 0deg, #BFFF00, #ff7710, #ec4899, #BFFF00);
+  filter: blur(15px);
+  opacity: 0.7;
+  animation: dopamine-aurora-drift 8s linear infinite;
+  z-index: -2;
+}
+
+/* Layer 2: Cool/Deep Colors (Blue, Teal, Purple) - Moving in overlap */
+.btn-dopamine-animated::after {
+  content: '';
+  position: absolute;
+  top: -150%;
+  left: -150%;
+  width: 400%;
+  height: 400%;
+  background: conic-gradient(from 180deg, #3b82f6, #14b8a6, #a855f7, #3b82f6);
+  mix-blend-mode: hard-light;
+  filter: blur(10px);
   opacity: 0.8;
+  animation: dopamine-aurora-drift 12s linear infinite reverse;
   z-index: -1;
 }
 
-@keyframes dopamine-breathe {
+@keyframes dopamine-aurora-drift {
   0% {
-    background-position: 0% 50%;
-    transform: scale(1);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transform: rotate(0deg) translate(0, 0);
   }
 
-  50% {
-    background-position: 100% 50%;
-    transform: scale(1.08);
-    /* Subtle breath */
-    box-shadow: 0 0 15px rgba(191, 255, 0, 0.6);
-    /* Lime/White Glow */
-    filter: brightness(1.1);
+  33% {
+    transform: rotate(120deg) translate(10px, 10px);
+  }
+
+  66% {
+    transform: rotate(240deg) translate(-10px, 15px);
   }
 
   100% {
-    background-position: 0% 50%;
-    transform: scale(1);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transform: rotate(360deg) translate(0, 0);
   }
 }
