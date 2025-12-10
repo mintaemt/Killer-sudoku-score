@@ -84,7 +84,7 @@ export const DifficultySelector = ({
     <div className="glass rounded-2xl px-3 md:px-4 py-3 shadow-apple-md relative z-10 w-full max-w-7xl mx-auto">
       <div className="flex items-center gap-1 md:gap-2 w-full">
         {/* 1. 難度選擇器 */}
-        <div className="relative flex-1" ref={dropdownRef}>
+        <div className="relative flex-[1_10_0%] min-w-[70px]" ref={dropdownRef}>
           <Button
             variant="outline"
             size="sm"
@@ -126,7 +126,7 @@ export const DifficultySelector = ({
               size="sm"
               onClick={onHint}
               className={cn(
-                "transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md w-9 h-9 p-0",
+                "transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md w-9 h-9 p-0 shrink",
                 hintCount > 0 && selectedCell
                   ? "bg-primary text-primary-foreground hover:text-primary-foreground border-primary/30 shadow-apple-md"
                   : hintCount > 0
@@ -155,7 +155,7 @@ export const DifficultySelector = ({
               size="sm"
               onClick={onToggleNotes}
               className={cn(
-                "transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md w-9 h-9 p-0",
+                "transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md w-9 h-9 p-0 shrink",
                 showNotes
                   ? "bg-primary text-primary-foreground hover:text-primary-foreground border-primary/30 shadow-apple-md"
                   : "border-border/50 hover:bg-muted/50 text-foreground hover:text-foreground"
@@ -186,7 +186,7 @@ export const DifficultySelector = ({
                 setShowFeatureHint(true);
               }
             }}
-            className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md border-purple-500/30 hover:border-purple-500/50 text-purple-600 hover:text-purple-700 w-9 h-9 p-0"
+            className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md border-purple-500/30 hover:border-purple-500/50 text-purple-600 hover:text-purple-700 w-9 h-9 p-0 shrink"
             title={user && !isVisitorMode ? `${t('dopamineMode')} - ${t('challengeYourLimits')}!` : t('dopamineModeVisitorOnly')}
           >
             <Zap className="h-4 w-4" />
@@ -195,7 +195,7 @@ export const DifficultySelector = ({
         {/* End of Control Buttons */}
 
         {/* Right Group: Timer and Mistakes */}
-        <div className="flex-1 flex items-center justify-end gap-2 md:gap-4">
+        <div className="flex-[1_10_0%] flex items-center justify-end gap-2 md:gap-4">
           <div className="relative">
             <div className="flex items-center gap-2">
               <Clock className="h-3 w-3 md:h-4 md:w-4 text-muted-foreground" />
