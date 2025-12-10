@@ -126,7 +126,7 @@ export const DifficultySelector = ({
               size="sm"
               onClick={onHint}
               className={cn(
-                "transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md px-2 md:px-3",
+                "transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md w-9 h-9 p-0",
                 hintCount > 0 && selectedCell
                   ? "bg-primary text-primary-foreground hover:text-primary-foreground border-primary/30 shadow-apple-md"
                   : hintCount > 0
@@ -155,7 +155,7 @@ export const DifficultySelector = ({
               size="sm"
               onClick={onToggleNotes}
               className={cn(
-                "transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md px-2 md:px-3",
+                "transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md w-9 h-9 p-0",
                 showNotes
                   ? "bg-primary text-primary-foreground hover:text-primary-foreground border-primary/30 shadow-apple-md"
                   : "border-border/50 hover:bg-muted/50 text-foreground hover:text-foreground"
@@ -186,7 +186,7 @@ export const DifficultySelector = ({
                 setShowFeatureHint(true);
               }
             }}
-            className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md border-purple-500/30 hover:border-purple-500/50 text-purple-600 hover:text-purple-700 px-2 md:px-3"
+            className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md border-purple-500/30 hover:border-purple-500/50 text-purple-600 hover:text-purple-700 w-9 h-9 p-0"
             title={user && !isVisitorMode ? `${t('dopamineMode')} - ${t('challengeYourLimits')}!` : t('dopamineModeVisitorOnly')}
           >
             <Zap className="h-4 w-4" />
@@ -194,36 +194,38 @@ export const DifficultySelector = ({
         )}
         {/* End of Control Buttons */}
 
-        {/* 5. 計時元件 - 整合暫停功能 */}
-        <div className="relative flex-1 flex justify-center">
-          <div className="flex items-center gap-2">
-            <Clock className="h-3 w-3 md:h-4 md:w-4 text-muted-foreground" />
-            <span
-              className="text-xs md:text-sm font-bold bg-muted/50 px-2 md:px-3 py-1 rounded-md min-w-[50px] md:min-w-[60px] text-center cursor-pointer transition-smooth hover:bg-muted/70"
-              onClick={onTogglePause}
-              title={isPaused ? t('clickToResume') : t('clickToPause')}
-            >
-              {formatTime(time)}
-            </span>
-          </div>
+        {/* Right Group: Timer and Mistakes */}
+        <div className="flex-1 flex items-center justify-end gap-2 md:gap-4">
+          <div className="relative">
+            <div className="flex items-center gap-2">
+              <Clock className="h-3 w-3 md:h-4 md:w-4 text-muted-foreground" />
+              <span
+                className="text-xs md:text-sm font-bold bg-muted/50 px-2 md:px-3 py-1 rounded-md min-w-[50px] md:min-w-[60px] text-center cursor-pointer transition-smooth hover:bg-muted/70"
+                onClick={onTogglePause}
+                title={isPaused ? t('clickToResume') : t('clickToPause')}
+              >
+                {formatTime(time)}
+              </span>
+            </div>
 
-          {/* Play/Pause Badge */}
-          <div className="absolute -top-2 -right-2 bg-gradient-to-br from-gray-700 to-gray-800 border border-gray-600/30 rounded-full w-4 h-4 flex items-center justify-center z-10 shadow-lg">
-            <div className="flex items-center justify-center w-full h-full">
-              {isPaused ? <Play className="h-2.5 w-2.5 text-white fill-white drop-shadow-sm" /> : <Pause className="h-2.5 w-2.5 text-white fill-white drop-shadow-sm" />}
+            {/* Play/Pause Badge */}
+            <div className="absolute -top-2 -right-2 bg-gradient-to-br from-gray-700 to-gray-800 border border-gray-600/30 rounded-full w-4 h-4 flex items-center justify-center z-10 shadow-lg">
+              <div className="flex items-center justify-center w-full h-full">
+                {isPaused ? <Play className="h-2.5 w-2.5 text-white fill-white drop-shadow-sm" /> : <Pause className="h-2.5 w-2.5 text-white fill-white drop-shadow-sm" />}
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* 6. 錯誤顯示元件 */}
-        <div className="flex items-center gap-2 flex-1 justify-end">
-          <AlertTriangle className="h-3 w-3 md:h-4 md:w-4 text-muted-foreground" />
-          <span className={cn(
-            "text-xs md:text-sm font-bold transition-smooth px-2 md:px-3 py-1 rounded-md min-w-[40px] md:min-w-[50px] text-center",
-            mistakes > 0 ? "text-destructive bg-destructive/10" : "text-foreground bg-muted/50"
-          )}>
-            {mistakes}/3
-          </span>
+          {/* 6. 錯誤顯示元件 */}
+          <div className="flex items-center gap-2">
+            <AlertTriangle className="h-3 w-3 md:h-4 md:w-4 text-muted-foreground" />
+            <span className={cn(
+              "text-xs md:text-sm font-bold transition-smooth px-2 md:px-3 py-1 rounded-md min-w-[40px] md:min-w-[50px] text-center",
+              mistakes > 0 ? "text-destructive bg-destructive/10" : "text-foreground bg-muted/50"
+            )}>
+              {mistakes}/3
+            </span>
+          </div>
         </div>
       </div>
 
