@@ -113,6 +113,8 @@ All colors MUST be HSL.
     --primary-foreground: 0 0% 18%;
     /* Dark Text for Light Background */
     --accent: 74 100% 50%;
+    --accent-foreground: 0 0% 18%;
+    /* Ensuring Hover Text is also Dark */
     --ring: 74 100% 50%;
     --cell-selected: 74 100% 92%;
     --cell-highlighted: 74 100% 95%;
