@@ -83,7 +83,8 @@ export const LanguageToggle = () => {
             className={cn(
               "transition-smooth hover:scale-105 active:scale-95",
               "shadow-apple-sm hover:shadow-apple-md flex-shrink-0",
-              "ring-0 outline-none focus-visible:ring-0 focus-visible:outline-none focus:outline-none" // Force remove focus ring
+              "shadow-apple-sm hover:shadow-apple-md flex-shrink-0",
+              "ring-0 ring-offset-0 focus:ring-0 focus:ring-offset-0 focus-visible:ring-0 focus-visible:ring-offset-0 outline-none border-input" // Aggressively remove all focus rings and offsets
             )}
             ref={buttonRef}
             onMouseEnter={() => {
