@@ -113,13 +113,15 @@ export const UserStatsDialog = ({
                     </div>
                 </DialogHeader>
 
-                <Tabs defaultValue="profile" className="w-full">
-                    <TabsList className="grid w-full grid-cols-2">
-                        <TabsTrigger value="profile">{t('myStats') || '個人戰績'}</TabsTrigger>
-                        <TabsTrigger value="leaderboard">{t('leaderboard') || '世界排名'}</TabsTrigger>
-                    </TabsList>
+                <Tabs defaultValue="profile" className="flex-1 flex flex-col min-h-0 w-full">
+                    <div className="px-6 pb-2 shrink-0">
+                        <TabsList className="grid w-full grid-cols-2">
+                            <TabsTrigger value="profile">{t('myStats') || '個人戰績'}</TabsTrigger>
+                            <TabsTrigger value="leaderboard">{t('leaderboard') || '世界排名'}</TabsTrigger>
+                        </TabsList>
+                    </div>
 
-                    <TabsContent value="profile" className="flex-1 mt-2 overflow-y-auto pr-1 h-[520px]">
+                    <TabsContent value="profile" className="flex-1 overflow-y-auto px-6 pb-6 min-h-[300px] mt-0">
 
                         <div className="flex flex-col gap-4 py-4">
                             <div className="flex items-center justify-between p-3 rounded-xl bg-secondary/20 border border-border/50">
@@ -195,7 +197,7 @@ export const UserStatsDialog = ({
                         </div>
                     </TabsContent>
 
-                    <TabsContent value="leaderboard" className="h-[600px] flex flex-col pt-2">
+                    <TabsContent value="leaderboard" className="flex-1 flex flex-col min-h-[300px] mt-0 overflow-hidden">
                         <Leaderboard
                             currentUserId={user?.user_metadata?.full_name || user?.email}
                             mode={viewMode}

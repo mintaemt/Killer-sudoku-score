@@ -108,7 +108,7 @@ export const Leaderboard = ({ currentUserId, onClose, mode = 'normal' }: Leaderb
   return (
     <div className="w-full h-full flex flex-col">
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full h-full flex flex-col">
-        <div className="px-2 py-2 flex items-center justify-between shrink-0 mb-2">
+        <div className="px-6 py-2 flex items-center justify-between shrink-0 mb-2">
           <TabsList className={`inline-flex w-auto ${mode === 'normal' ? 'grid-cols-5' : 'grid-cols-6'}`}>
             <TabsTrigger value="all" className="px-3 py-1.5 text-xs">
               {t('all')}
@@ -132,7 +132,7 @@ export const Leaderboard = ({ currentUserId, onClose, mode = 'normal' }: Leaderb
           </div>
         </div>
 
-        <TabsContent value={activeTab} className="flex-1 min-h-0 mt-0 px-2 overflow-hidden">
+        <TabsContent value={activeTab} className="flex-1 min-h-0 mt-0 px-6 overflow-hidden">
           {leaderboard.length === 0 ? (
             <div className="h-full flex items-center justify-center text-muted-foreground">
               {t('noData')}
