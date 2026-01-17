@@ -24,7 +24,7 @@ interface LeaderboardProps {
   mode?: 'normal' | 'dopamine';
 }
 
-const ITEMS_PER_PAGE = 10;
+const ITEMS_PER_PAGE = 5;
 
 const getDifficultyLabel = (difficulty: Difficulty, t: (key: string) => string): string => {
   return t(difficulty);
