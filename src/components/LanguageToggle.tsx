@@ -62,9 +62,11 @@ export const LanguageToggle = () => {
     window.dispatchEvent(new CustomEvent('languageChange', { detail: { language } }));
 
     // Remove focus to prevent sticky tooltip/styles
-    if (buttonRef.current) {
-      buttonRef.current.blur();
-    }
+    setTimeout(() => {
+      if (buttonRef.current) {
+        buttonRef.current.blur();
+      }
+    }, 0);
   };
 
   const currentLangData = languages.find(lang => lang.code === currentLanguage) || languages[0];

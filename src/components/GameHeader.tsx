@@ -65,6 +65,9 @@ const UserButton = ({
   // 取得當前主題色
   const currentThemeColor = themes.find(theme => theme.name === currentTheme)?.color || "#3b82f6";
 
+  // CSS Variable style for theme color
+  const themeStyle = { '--theme-color': currentThemeColor } as React.CSSProperties;
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -99,18 +102,10 @@ const UserButton = ({
           variant="outline"
           size="sm"
           onClick={handleLogin}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-          className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md"
-          style={{
-            borderColor: currentThemeColor,
-            // Removed specific backgroundColor logic to let shadcn's variant="outline" handle the default background (white/dark)
-            // Only overriding text color on hover if needed, but for now let's keep it simple to match other buttons.
-            // If we want color on hover, we can do:
-            color: isHovered ? currentThemeColor : undefined
-          }}
+          className="transition-smooth shadow-apple-sm hover:shadow-apple-md border-[var(--theme-color)] text-[var(--theme-color)] hover:bg-[var(--theme-color)] hover:text-white"
+          style={themeStyle}
         >
-          <LogIn className="h-3 w-3 md:h-4 md:w-4" style={{ color: isHovered ? undefined : currentThemeColor }} />
+          <LogIn className="h-3 w-3 md:h-4 md:w-4" />
         </Button>
       </CustomTooltip>
     );
@@ -127,8 +122,8 @@ const UserButton = ({
           onClick={() => setIsOpen(!isOpen)}
           // 關鍵修正：移除 overflow-hidden 以顯示完整陰影
           // 圖片裁切交給 Avatar 元件處理
-          className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md p-0 w-9 aspect-square shrink-0"
-          style={{ borderColor: currentThemeColor }}
+          className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md p-0 w-9 aspect-square shrink-0 border-[var(--theme-color)]"
+          style={themeStyle}
         >
           <Avatar className="h-full w-full rounded-md">
             <AvatarImage
@@ -136,7 +131,9 @@ const UserButton = ({
               alt={user.user_metadata?.full_name || user.email}
               className="object-cover rounded-md"
             />
-            <AvatarFallback className="rounded-md">{user.email?.slice(0, 2).toUpperCase()}</AvatarFallback>
+            <AvatarFallback className="rounded-md bg-muted text-foreground font-bold">
+              {user.email?.slice(0, 2).toUpperCase()}
+            </AvatarFallback>
           </Avatar>
         </Button>
       </CustomTooltip>
@@ -184,7 +181,12 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
   const titleContainerRef = useRef<HTMLDivElement>(null);
   const titleTextRef = useRef<HTMLHeadingElement>(null);
 
-  const { user, isLoggedIn, isVisitorMode } = useUser();
+  const { user: localUser, isLoggedIn, isVisitorMode } = useUser();
+  const { user: authUser } = useAuth();
+
+  // Prioritize Auth user (Google Login) over local user
+  const user = authUser || localUser;
+
   const { stats, loading: statsLoading } = useUserStats(user?.id || null, viewMode);
   const { t, language } = useLanguage(); // Added language to dependency
 
