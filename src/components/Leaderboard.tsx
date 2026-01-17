@@ -36,9 +36,8 @@ const getRankIcon = (rank: number) => {
 };
 
 const LeaderboardEntryItem = ({ entry, isCurrentUser, t, showDifficulty = false }: { entry: LeaderboardEntry; isCurrentUser?: boolean; t: (key: string) => string; showDifficulty?: boolean }) => (
-  <div className={`flex items-center justify-between p-2.5 rounded-lg border ${
-    isCurrentUser ? 'bg-primary/5 border-primary' : 'bg-card'
-  }`}>
+  <div className={`flex items-center justify-between p-2.5 rounded-lg border ${isCurrentUser ? 'bg-primary/5 border-primary' : 'bg-card'
+    }`}>
     <div className="flex items-center space-x-2.5">
       <div className="flex items-center space-x-1.5">
         {getRankIcon(entry.rank)}
@@ -81,7 +80,7 @@ export const Leaderboard = ({ currentUserId, onClose, mode = 'normal' }: Leaderb
   const { t } = useLanguage();
 
   // 根據模式決定顯示的難度
-  const availableDifficulties = mode === 'normal' 
+  const availableDifficulties = mode === 'normal'
     ? ['easy', 'medium', 'hard', 'expert'] as Difficulty[]
     : ['easy', 'medium', 'hard', 'expert', 'hell'] as Difficulty[];
 
@@ -107,34 +106,10 @@ export const Leaderboard = ({ currentUserId, onClose, mode = 'normal' }: Leaderb
   }
 
   return (
-    <div className="w-full">
-      <div className="px-4 py-3 border-b">
-        <div className="flex items-center justify-between">
-          <div>
-            <h3 className="text-lg font-semibold flex items-center space-x-2">
-              <Trophy className="h-5 w-5" />
-              <span>{t('leaderboard')}</span>
-              {mode === 'dopamine' && (
-                <span className="text-sm text-muted-foreground ml-2">({t('dopamine')})</span>
-              )}
-            </h3>
-          </div>
-          <div className="flex space-x-2">
-            <Button variant="outline" size="sm" onClick={handleRefresh}>
-              <RefreshCw className="h-4 w-4" />
-            </Button>
-            {onClose && (
-              <Button variant="outline" size="sm" onClick={onClose}>
-                <X className="h-4 w-4" />
-              </Button>
-            )}
-          </div>
-        </div>
-      </div>
-      <div className="px-4 py-3">
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <div className="flex justify-center">
-            <TabsList className={`inline-flex w-auto ${mode === 'normal' ? 'grid-cols-5' : 'grid-cols-6'}`}>
+    <div className="w-full h-full flex flex-col">
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full h-full flex flex-col">
+        <div className="px-2 py-2 flex items-center justify-between shrink-0 mb-2">
+          <TabsList className={`inline-flex w-auto ${mode === 'normal' ? 'grid-cols-5' : 'grid-cols-6'}`}>
             <TabsTrigger value="all" className="px-3 py-1.5 text-xs">
               {t('all')}
             </TabsTrigger>
@@ -144,34 +119,44 @@ export const Leaderboard = ({ currentUserId, onClose, mode = 'normal' }: Leaderb
               </TabsTrigger>
             ))}
           </TabsList>
-          </div>
 
-          <TabsContent value={activeTab} className="mt-4">
-            {leaderboard.length === 0 ? (
-              <div className="text-center py-8 text-muted-foreground">
-                {t('noData')}
-              </div>
-            ) : (
-              <div className="max-h-[400px] overflow-y-auto space-y-2 pr-2">
-                {leaderboard.map((entry, index) => (
-                  <LeaderboardEntryItem
-                    key={`${entry.name}-${entry.difficulty}-${index}`}
-                    entry={entry}
-                    isCurrentUser={currentUserId === entry.name}
-                    t={t}
-                    showDifficulty={activeTab === "all"}
-                  />
-                ))}
-                {leaderboard.length > 10 && (
-                  <div className="text-center py-2 text-xs text-muted-foreground border-t">
-                    顯示前 {Math.min(leaderboard.length, 50)} 名，共 {leaderboard.length} 名玩家
-                  </div>
-                )}
-              </div>
+          <div className="flex items-center gap-1">
+            <Button variant="ghost" size="icon" onClick={handleRefresh} className="h-8 w-8 text-muted-foreground hover:text-foreground">
+              <RefreshCw className="h-4 w-4" />
+            </Button>
+            {onClose && (
+              <Button variant="ghost" size="icon" onClick={onClose} className="h-8 w-8 text-muted-foreground hover:text-foreground">
+                <X className="h-4 w-4" />
+              </Button>
             )}
-          </TabsContent>
-        </Tabs>
-      </div>
+          </div>
+        </div>
+
+        <TabsContent value={activeTab} className="flex-1 min-h-0 mt-0 px-2 overflow-hidden">
+          {leaderboard.length === 0 ? (
+            <div className="h-full flex items-center justify-center text-muted-foreground">
+              {t('noData')}
+            </div>
+          ) : (
+            <div className="h-full overflow-y-auto space-y-2 pr-2 scrollbar-hide">
+              {leaderboard.map((entry, index) => (
+                <LeaderboardEntryItem
+                  key={`${entry.name}-${entry.difficulty}-${index}`}
+                  entry={entry}
+                  isCurrentUser={currentUserId === entry.name}
+                  t={t}
+                  showDifficulty={activeTab === "all"}
+                />
+              ))}
+              {leaderboard.length > 10 && (
+                <div className="text-center py-4 text-xs text-muted-foreground border-t mt-2">
+                  顯示前 {Math.min(leaderboard.length, 50)} 名，共 {leaderboard.length} 名玩家
+                </div>
+              )}
+            </div>
+          )}
+        </TabsContent>
+      </Tabs>
     </div>
   );
 };

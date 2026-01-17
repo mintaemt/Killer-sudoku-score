@@ -86,7 +86,7 @@ export const UserStatsDialog = ({
                 <Tabs defaultValue="profile" value={activeTab} onValueChange={setActiveTab} className="w-full">
                     <TabsList className="grid w-full grid-cols-2">
                         <TabsTrigger value="profile">{t('myStats') || '個人戰績'}</TabsTrigger>
-                        <TabsTrigger value="leaderboard">{t('leaderboard') || '排行榜'}</TabsTrigger>
+                        <TabsTrigger value="leaderboard">{t('leaderboard') || '世界排名'}</TabsTrigger>
                     </TabsList>
 
                     <TabsContent value="profile" className="h-[600px] overflow-y-auto pr-1">

@@ -35,7 +35,7 @@ const App = () => (
             <Sonner />
             <MigrationModal />
             <BrowserRouter>
-              <CatOverlay />
+              {/* <CatOverlay /> */}
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/leaderboard" element={<LeaderboardPage />} />

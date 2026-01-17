@@ -36,18 +36,21 @@ export const useLeaderboard = (
   const fetchLeaderboard = async () => {
     // 防止重複請求
     if (loading) return;
-    
+
     try {
       setLoading(true);
       setError(null);
 
       const viewName = mode === 'normal' ? 'normal_leaderboard' : 'dopamine_leaderboard';
       console.log(`🔍 嘗試讀取視圖: ${viewName}, 難度: ${difficulty || 'all'}`);
-      
+
       let query = supabase.from(viewName).select('*');
 
       if (difficulty) {
         query = query.eq('difficulty', difficulty);
+      } else if (mode === 'normal') {
+        // Enforce normal difficulties only
+        query = query.in('difficulty', ['easy', 'medium', 'hard', 'expert']);
       }
 
       // 限制顯示筆數，提升效能
