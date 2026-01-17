@@ -31,9 +31,10 @@ const getDifficultyLabel = (difficulty: Difficulty, t: (key: string) => string):
 };
 
 export const Leaderboard = ({ currentUserId, onClose, mode = 'normal' }: LeaderboardProps) => {
-  const [activeTab, setActiveTab] = useState<string>("all");
+  // Default to 'easy' since 'all' is removed
+  const [activeTab, setActiveTab] = useState<string>("easy");
   const [currentPage, setCurrentPage] = useState(1);
-  const selectedDifficulty = activeTab === "all" ? undefined : activeTab as Difficulty;
+  const selectedDifficulty = activeTab as Difficulty;
   const { leaderboard, loading, error, refetch } = useLeaderboard(selectedDifficulty, mode);
   const { t } = useLanguage();
 
@@ -78,24 +79,21 @@ export const Leaderboard = ({ currentUserId, onClose, mode = 'normal' }: Leaderb
   return (
     <div className="w-full h-full flex flex-col">
       <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full h-full flex flex-col">
-        <div className="px-6 py-2 flex items-center justify-between shrink-0 mb-2">
-          <TabsList className={`inline-flex w-auto ${mode === 'normal' ? 'grid-cols-5' : 'grid-cols-6'}`}>
-            <TabsTrigger value="all" className="px-3 py-1.5 text-xs">
-              {t('all')}
-            </TabsTrigger>
+        <div className="px-6 py-2 flex items-center justify-between shrink-0 mb-2 gap-4">
+          <TabsList className={`grid w-full h-9 p-1 bg-muted/50 ${mode === 'normal' ? 'grid-cols-4' : 'grid-cols-5'}`}>
             {availableDifficulties.map((difficulty) => (
-              <TabsTrigger key={difficulty} value={difficulty} className="px-3 py-1.5 text-xs">
+              <TabsTrigger key={difficulty} value={difficulty} className="text-xs">
                 {getDifficultyLabel(difficulty, t)}
               </TabsTrigger>
             ))}
           </TabsList>
 
-          <div className="flex items-center gap-1">
-            <Button variant="ghost" size="icon" onClick={handleRefresh} className="h-8 w-8 text-muted-foreground hover:text-foreground">
+          <div className="flex items-center gap-1 shrink-0">
+            <Button variant="outline" size="icon" onClick={handleRefresh} className="h-9 w-9 shadow-sm">
               <RefreshCw className="h-4 w-4" />
             </Button>
             {onClose && (
-              <Button variant="ghost" size="icon" onClick={onClose} className="h-8 w-8 text-muted-foreground hover:text-foreground">
+              <Button variant="ghost" size="icon" onClick={onClose} className="h-9 w-9 text-muted-foreground hover:text-foreground">
                 <X className="h-4 w-4" />
               </Button>
             )}
@@ -116,7 +114,6 @@ export const Leaderboard = ({ currentUserId, onClose, mode = 'normal' }: Leaderb
                     <TableRow>
                       <TableHead className="w-[80px] text-center">#</TableHead>
                       <TableHead>{t('player') || '玩家'}</TableHead>
-                      {activeTab === 'all' && <TableHead className="w-[100px]">{t('difficulty') || '難度'}</TableHead>}
                       <TableHead className="text-right">{t('score') || '分數'}</TableHead>
                       <TableHead className="text-right">{t('time') || '時間'}</TableHead>
                     </TableRow>
@@ -145,13 +142,6 @@ export const Leaderboard = ({ currentUserId, onClose, mode = 'normal' }: Leaderb
                               {isCurrentUser && <Badge variant="secondary" className="text-[10px] px-1 py-0 h-5">YOU</Badge>}
                             </div>
                           </TableCell>
-                          {activeTab === 'all' && (
-                            <TableCell>
-                              <Badge variant="outline" className="font-normal text-xs capitalize">
-                                {getDifficultyLabel(entry.difficulty, t)}
-                              </Badge>
-                            </TableCell>
-                          )}
                           <TableCell className="text-right font-mono font-medium">
                             {formatScore(entry.best_score)}
                           </TableCell>
