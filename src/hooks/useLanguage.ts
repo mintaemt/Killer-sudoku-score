@@ -546,6 +546,11 @@ const translations = {
     playerHub: '玩家中心',
     myStats: '個人戰績',
     statsMode: '統計模式',
+    // Table Headers
+    colDifficulty: '難度',
+    colGames: '場次',
+    colTime: '時間',
+    colScore: '分數',
     dopamine: '多巴胺',
     // Suffix Dopamine Mode Keys
     dopamineMode: '多巴胺模式',
@@ -852,6 +857,11 @@ const translations = {
     playerHub: '플레이어 허브',
     myStats: '내 통계',
     statsMode: '통계 모드',
+    // Table Headers
+    colDifficulty: '난이도',
+    colGames: '횟수',
+    colTime: '시간',
+    colScore: '점수',
     dopamine: '도파민',
     // Suffix Dopamine Mode
     dopamineMode: '도파민 모드',
@@ -1330,6 +1340,11 @@ const translations = {
     playerHub: 'プレイヤーセンター',
     myStats: '個人戦績',
     statsMode: '統計モード',
+    // Table Headers
+    colDifficulty: '難易度',
+    colGames: '回数',
+    colTime: '時間',
+    colScore: 'スコア',
     total: '合計',
     pleaseRegister: '登録してプレイ',
 

@@ -161,10 +161,10 @@ export const UserStatsDialog = ({
                             {/* Difficulty Breakdown Table */}
                             <div className="rounded-lg border bg-card overflow-hidden">
                                 <div className="grid grid-cols-4 gap-2 p-3 bg-secondary/50 font-medium text-xs text-muted-foreground text-center">
-                                    <div className="text-left pl-2">難度</div>
-                                    <div>場次</div>
-                                    <div>時間</div>
-                                    <div>分數</div>
+                                    <div className="text-left pl-2">{t('colDifficulty')}</div>
+                                    <div>{t('colGames')}</div>
+                                    <div>{t('colTime')}</div>
+                                    <div>{t('colScore')}</div>
                                 </div>
                                 {difficulties
                                     .filter(diff => viewMode === 'dopamine' || diff !== 'hell')
