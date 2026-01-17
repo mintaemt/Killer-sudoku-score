@@ -89,7 +89,7 @@ export const UserStatsDialog = ({
                         <TabsTrigger value="leaderboard">{t('leaderboard') || '排行榜'}</TabsTrigger>
                     </TabsList>
 
-                    <TabsContent value="profile" className="max-h-[60vh] overflow-y-auto pr-1">
+                    <TabsContent value="profile" className="h-[500px] overflow-y-auto pr-1">
                         <div className="flex flex-col gap-4 py-4">
                             <div className="flex items-center gap-4 p-4 rounded-xl bg-secondary/20 border border-border/50">
                                 <Avatar className="h-16 w-16 rounded-xl border-2 border-[var(--theme-color)] shadow-md" style={themeStyle}>
