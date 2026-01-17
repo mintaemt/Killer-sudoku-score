@@ -17,6 +17,7 @@ const translations = {
 
     // Theme & Language
     theme: 'Theme',
+    mode: 'Mode',
     themeLight: 'Light',
     themeDark: 'Dark',
     language: 'Language',
@@ -394,6 +395,7 @@ const translations = {
 
     // Theme & Language
     theme: '主題',
+    mode: '模式',
     themeLight: '亮色',
     themeDark: '暗色',
     language: '語言',
@@ -771,6 +773,7 @@ const translations = {
 
     // Theme & Language
     theme: '테마',
+    mode: '모드',
     themeLight: '라이트',
     themeDark: '다크',
     language: '언어',

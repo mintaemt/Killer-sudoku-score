@@ -40,6 +40,7 @@ export const LanguageToggle = () => {
   const [isOpen, setIsOpen] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [showTooltip, setShowTooltip] = useState(false);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
   const { t } = useLanguage();
 
   // 初始化語言
@@ -85,9 +86,17 @@ export const LanguageToggle = () => {
               "ring-0 outline-none focus-visible:ring-0 focus-visible:outline-none focus:outline-none" // Force remove focus ring
             )}
             ref={buttonRef}
-            onMouseEnter={() => setShowTooltip(true)}
-            onMouseLeave={() => setShowTooltip(false)}
-            onPointerDown={() => setShowTooltip(false)} // Hide immediately on click
+            onMouseEnter={() => {
+              timerRef.current = setTimeout(() => setShowTooltip(true), 500);
+            }}
+            onMouseLeave={() => {
+              if (timerRef.current) clearTimeout(timerRef.current);
+              setShowTooltip(false);
+            }}
+            onPointerDown={() => {
+              if (timerRef.current) clearTimeout(timerRef.current);
+              setShowTooltip(false);
+            }} // Hide immediately on click
           >
             <Globe className="h-3 w-3 md:h-4 md:w-4" />
           </Button>

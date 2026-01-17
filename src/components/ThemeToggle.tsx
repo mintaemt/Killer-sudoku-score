@@ -40,7 +40,7 @@ export const ThemeToggle = () => {
 
   return (
     <CustomTooltip
-      content={t('theme')}
+      content={t('mode')}
       variant="glass"
     >
       <Button

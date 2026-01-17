@@ -297,8 +297,8 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
 
 
 
-          <ThemeToggle />
           <LanguageToggle />
+          <ThemeToggle />
 
           {/* 主題選擇器 */}
           <div className="relative" ref={dropdownRef}>
