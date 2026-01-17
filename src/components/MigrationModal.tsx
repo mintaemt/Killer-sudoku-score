@@ -71,7 +71,7 @@ export const MigrationModal = () => {
                     <AlertDialogAction onClick={handleMigrationLogin} className="w-full sm:w-auto">
                         立即綁定 Google
                     </AlertDialogAction>
-                    <AlertDialogCancel onClick={handleClearLegacy} className="w-full sm:w-auto">
+                    <AlertDialogCancel onClick={handleClearLegacy} className="w-full sm:w-auto hover:bg-secondary hover:text-secondary-foreground text-muted-foreground border-border">
                         放棄紀錄回到訪客
                     </AlertDialogCancel>
                 </AlertDialogFooter>
