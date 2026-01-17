@@ -57,6 +57,7 @@ const UserButton = ({
   themes
 }: UserButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { signInWithGoogle, signOut } = useAuth();
 
@@ -87,41 +88,44 @@ const UserButton = ({
     setIsOpen(false);
   };
 
-  // 1. 未登入 (或訪客) -> 顯示 LogIn Icon (圓形，Outline 風格，字/框為主體色)
+  // 1. 未登入 (或訪客) -> 顯示 LogIn Icon (標準導角，Outline 風格，字/框為主體色)
   // 修正邏輯：只要是匿名用戶或未登入，就顯示登入按鈕。移除 strict provider check 以避免 redirect loop。
   const isAnonymous = !user || user.is_anonymous;
 
   if (isAnonymous) {
     return (
       <Button
-        variant="ghost" // 改回 ghost/outline
-        size="icon"     // 確保是正方形/圓形 (icon size usually implies square)
+        variant="ghost"
+        size="icon"     // 使用 icon size 配合自定義寬高
         onClick={handleLogin}
-        className="rounded-full h-8 w-8 md:h-9 md:w-9 p-0 border-2 transition-smooth hover:scale-105 active:scale-95 shadow-sm" // 加上 rounded-full 確保與 Avatar 一致
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        className="rounded-md h-8 w-8 md:h-9 md:w-9 p-0 border-2 transition-smooth hover:scale-105 active:scale-95 shadow-sm" // 改為 rounded-md
         title={t('login')}
         style={{
           borderColor: currentThemeColor,
-          color: currentThemeColor
+          backgroundColor: isHovered ? currentThemeColor : 'transparent',
+          color: isHovered ? '#ffffff' : currentThemeColor
         }}
       >
-        <LogIn className="h-4 w-4 md:h-5 md:w-5" /> {/* 稍微加大 Icon */}
+        <LogIn className="h-4 w-4 md:h-5 md:w-5" />
       </Button>
     );
   }
 
-  // 2. 已登入 (Google) -> 顯示 Avatar (圓形)
+  // 2. 已登入 (Google) -> 顯示 Avatar (標準導角)
   return (
     <div className="relative" ref={dropdownRef}>
       <Button
         variant="ghost"
         size="icon"
         onClick={() => setIsOpen(!isOpen)}
-        className="rounded-full h-8 w-8 md:h-9 md:w-9 p-0 border-2 transition-all hover:scale-105 active:scale-95 shadow-sm overflow-hidden"
+        className="rounded-md h-8 w-8 md:h-9 md:w-9 p-0 border-2 transition-all hover:scale-105 active:scale-95 shadow-sm overflow-hidden" // 改為 rounded-md
         style={{ borderColor: currentThemeColor }}
       >
-        <Avatar className="h-full w-full">
-          <AvatarImage src={user.user_metadata?.avatar_url} alt={user.user_metadata?.full_name || user.email} />
-          <AvatarFallback>{user.email?.slice(0, 2).toUpperCase()}</AvatarFallback>
+        <Avatar className="h-full w-full rounded-none"> {/* 設為 rounded-none 或 rounded-md 讓它填滿方形按鈕 */}
+          <AvatarImage src={user.user_metadata?.avatar_url} alt={user.user_metadata?.full_name || user.email} className="object-cover" />
+          <AvatarFallback className="rounded-none">{user.email?.slice(0, 2).toUpperCase()}</AvatarFallback>
         </Avatar>
       </Button>
 
