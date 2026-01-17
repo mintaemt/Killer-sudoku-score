@@ -139,7 +139,7 @@ export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge, onShowFea
                 className="w-full h-12 text-lg font-bold text-white shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden flowing-button"
               >
                 <Trophy className="mr-2 h-5 w-5" />
-                {user && !isVisitorMode ? t('startChallenge') : '請先註冊用戶'}
+                {user && !isVisitorMode ? t('startChallenge') : t('pleaseRegister')}
               </Button>
             </div>
           </CardContent>

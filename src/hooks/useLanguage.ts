@@ -143,6 +143,7 @@ const translations = {
     myStats: 'My Stats',
     statsMode: 'Stats Mode',
     total: 'Total',
+    pleaseRegister: 'Please register to play',
 
 
     // 遊戲規則
@@ -528,8 +529,8 @@ const translations = {
     playerHub: '玩家中心',
     myStats: '個人戰績',
     statsMode: '統計模式',
-
-
+    total: '總計',
+    pleaseRegister: '請先註冊用戶',
     // 遊戲規則
     scoringSystem: '計分系統',
     rules: '規則',
@@ -768,7 +769,7 @@ const translations = {
         beforeContacting: '聯絡我們之前',
         beforeContactingContent: '請查看我們的常見問題部分，並確保您使用的是最新版本的瀏覽器。許多問題可以透過清除瀏覽器快取或更新瀏覽器來解決。',
         privacyNote: '隱私注意事項',
-        privacyNoteContent: '聯絡我們時，除非必要，請勿包含敏感的個人資訊。我們只會使用您的資訊來回應您的詢問。',
+        privacyNoteContent: '聯絡我們時，除非必要，請勿包含敏感的個人資訊除非必要。我們只會使用您的資訊來回應您的詢問。',
         businessHours: '營業時間',
         businessHoursContent: '我們通常在週一至週五上午9點至下午5點（UTC）回應詢問。',
       },
@@ -816,8 +817,8 @@ const translations = {
     playerHub: '플레이어 허브',
     myStats: '내 통계',
     statsMode: '통계 모드',
-
-
+    total: '합계',
+    pleaseRegister: '가입 후 플레이하세요',
     // 提示功能
     hint: '힌트',
     hintCountUsedUp: '힌트 횟수가 모두 사용되었습니다',
