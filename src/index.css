@@ -114,7 +114,7 @@ All colors MUST be HSL.
   }
 
 
-  html[data-theme="green"] {
+  html[data-theme="lime"] {
     /* Nike Volt Style Lime - Updated to #BFFF00 */
     --primary: 74 100% 50%;
     --primary-foreground: 0 0% 18%;
@@ -162,7 +162,7 @@ All colors MUST be HSL.
     --cell-highlighted: 0 30% 18%;
   }
 
-  .dark [data-theme="green"] {
+  .dark [data-theme="lime"] {
     --cell-selected: 80 50% 20%;
     --cell-highlighted: 80 30% 18%;
   }

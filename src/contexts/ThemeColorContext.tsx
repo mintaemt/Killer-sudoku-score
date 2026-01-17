@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-type ThemeColor = 'blue' | 'orange' | 'green' | 'purple' | 'pink' | 'teal';
+type ThemeColor = 'blue' | 'orange' | 'lime' | 'purple' | 'pink' | 'teal';
 
 interface ThemeColorContextType {
     theme: ThemeColor;
@@ -12,7 +12,8 @@ const ThemeColorContext = createContext<ThemeColorContextType | undefined>(undef
 export const ThemeColorProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [theme, setThemeState] = useState<ThemeColor>(() => {
         const savedTheme = localStorage.getItem('killer-sudoku-theme');
-        return (savedTheme && ['blue', 'orange', 'green', 'purple', 'pink', 'teal'].includes(savedTheme))
+        if (savedTheme === 'green') return 'lime';
+        return (savedTheme && ['blue', 'orange', 'lime', 'purple', 'pink', 'teal'].includes(savedTheme))
             ? (savedTheme as ThemeColor)
             : 'blue';
     });
