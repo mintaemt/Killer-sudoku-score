@@ -75,9 +75,9 @@ export const UserStatsDialog = ({
                     </Button>
                 </div>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px] md:max-w-[600px] max-h-[90vh] flex flex-col glass border-none shadow-2xl gap-0">
+            <DialogContent className="sm:max-w-[425px] md:max-w-[600px] h-[85vh] flex flex-col glass border-none shadow-2xl gap-0">
                 <DialogHeader className="p-6 pb-2">
-                    <div className="flex items-center justify-between pr-8">
+                    <div className="flex items-center justify-between">
                         <DialogTitle className="text-xl font-bold flex items-center gap-2">
                             <UserIcon className="h-5 w-5" />
                             {t('playerHub') || '玩家中心'}

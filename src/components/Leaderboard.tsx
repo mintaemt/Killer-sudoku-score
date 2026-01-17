@@ -1,14 +1,22 @@
-import { useState } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { useState, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Loader2, Trophy, Medal, Award, Crown, RefreshCw, X } from 'lucide-react';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Loader2, RefreshCw, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useLeaderboard } from '@/hooks/useLeaderboard';
 import { useLanguage } from '@/hooks/useLanguage';
-import { Difficulty, LeaderboardEntry } from '@/lib/types';
+import { Difficulty } from '@/lib/types';
 import { formatTime, formatScore } from '@/lib/scoreCalculator';
+import { cn } from '@/lib/utils';
 
 interface LeaderboardProps {
   currentUserId?: string;
@@ -16,81 +24,43 @@ interface LeaderboardProps {
   mode?: 'normal' | 'dopamine';
 }
 
+const ITEMS_PER_PAGE = 10;
+
 const getDifficultyLabel = (difficulty: Difficulty, t: (key: string) => string): string => {
   return t(difficulty);
 };
 
-const difficultyColors: Record<Difficulty, string> = {
-  easy: 'bg-green-100 text-green-800',
-  medium: 'bg-yellow-100 text-yellow-800',
-  hard: 'bg-orange-100 text-orange-800',
-  expert: 'bg-red-100 text-red-800',
-  hell: 'bg-purple-100 text-purple-800'
-};
-
-const getRankIcon = (rank: number) => {
-  if (rank === 1) return <Crown className="h-5 w-5 text-yellow-500" />;
-  if (rank === 2) return <Medal className="h-5 w-5 text-gray-400" />;
-  if (rank === 3) return <Award className="h-5 w-5 text-amber-600" />;
-  return <Trophy className="h-4 w-4 text-muted-foreground" />;
-};
-
-const LeaderboardEntryItem = ({ entry, isCurrentUser, t, showDifficulty = false }: { entry: LeaderboardEntry; isCurrentUser?: boolean; t: (key: string) => string; showDifficulty?: boolean }) => (
-  <div className={`flex items-center justify-between p-2.5 rounded-lg border ${isCurrentUser ? 'bg-primary/5 border-primary' : 'bg-card'
-    }`}>
-    <div className="flex items-center space-x-2.5">
-      <div className="flex items-center space-x-1.5">
-        {getRankIcon(entry.rank)}
-        <span className="font-semibold text-base">#{entry.rank}</span>
-      </div>
-      <div>
-        <div className="flex items-center space-x-1.5">
-          <span className="font-medium text-sm">{entry.name}</span>
-          {isCurrentUser && (
-            <Badge variant="secondary" className="text-xs px-1.5 py-0.5">
-              您
-            </Badge>
-          )}
-        </div>
-        <div className="flex items-center space-x-2">
-          <span className="text-xs text-muted-foreground">
-            {entry.games_played} {t('gamesPlayed')}
-          </span>
-          {showDifficulty && (
-            <Badge variant="outline" className="text-xs px-1.5 py-0.5">
-              {getDifficultyLabel(entry.difficulty, t)}
-            </Badge>
-          )}
-        </div>
-      </div>
-    </div>
-    <div className="text-right">
-      <div className="font-bold text-base">{formatScore(entry.best_score)}</div>
-      <div className="text-xs text-muted-foreground">
-        {formatTime(entry.best_time)}
-      </div>
-    </div>
-  </div>
-);
-
 export const Leaderboard = ({ currentUserId, onClose, mode = 'normal' }: LeaderboardProps) => {
   const [activeTab, setActiveTab] = useState<string>("all");
+  const [currentPage, setCurrentPage] = useState(1);
   const selectedDifficulty = activeTab === "all" ? undefined : activeTab as Difficulty;
   const { leaderboard, loading, error, refetch } = useLeaderboard(selectedDifficulty, mode);
   const { t } = useLanguage();
 
-  // 根據模式決定顯示的難度
   const availableDifficulties = mode === 'normal'
     ? ['easy', 'medium', 'hard', 'expert'] as Difficulty[]
     : ['easy', 'medium', 'hard', 'expert', 'hell'] as Difficulty[];
 
   const handleRefresh = () => {
     refetch();
+    setCurrentPage(1); // Reset to first page on refresh
   };
+
+  const handleTabChange = (val: string) => {
+    setActiveTab(val);
+    setCurrentPage(1);
+  }
+
+  // Pagination Logic
+  const totalPages = Math.ceil(leaderboard.length / ITEMS_PER_PAGE);
+  const paginatedData = useMemo(() => {
+    const start = (currentPage - 1) * ITEMS_PER_PAGE;
+    return leaderboard.slice(start, start + ITEMS_PER_PAGE);
+  }, [leaderboard, currentPage]);
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center p-8">
+      <div className="flex items-center justify-center p-8 h-full">
         <Loader2 className="h-8 w-8 animate-spin" />
         <span className="ml-2">{t('loadingStats')}...</span>
       </div>
@@ -99,7 +69,7 @@ export const Leaderboard = ({ currentUserId, onClose, mode = 'normal' }: Leaderb
 
   if (error) {
     return (
-      <Alert variant="destructive">
+      <Alert variant="destructive" className="m-4">
         <AlertDescription>{error}</AlertDescription>
       </Alert>
     );
@@ -107,7 +77,7 @@ export const Leaderboard = ({ currentUserId, onClose, mode = 'normal' }: Leaderb
 
   return (
     <div className="w-full h-full flex flex-col">
-      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full h-full flex flex-col">
+      <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full h-full flex flex-col">
         <div className="px-6 py-2 flex items-center justify-between shrink-0 mb-2">
           <TabsList className={`inline-flex w-auto ${mode === 'normal' ? 'grid-cols-5' : 'grid-cols-6'}`}>
             <TabsTrigger value="all" className="px-3 py-1.5 text-xs">
@@ -132,28 +102,101 @@ export const Leaderboard = ({ currentUserId, onClose, mode = 'normal' }: Leaderb
           </div>
         </div>
 
-        <TabsContent value={activeTab} className="flex-1 min-h-0 mt-0 px-6 overflow-hidden">
+        <TabsContent value={activeTab} className="flex-1 min-h-0 mt-0 px-6 overflow-hidden flex flex-col">
           {leaderboard.length === 0 ? (
             <div className="h-full flex items-center justify-center text-muted-foreground">
               {t('noData')}
             </div>
           ) : (
-            <div className="h-full overflow-y-auto space-y-2 pr-2 scrollbar-hide">
-              {leaderboard.map((entry, index) => (
-                <LeaderboardEntryItem
-                  key={`${entry.name}-${entry.difficulty}-${index}`}
-                  entry={entry}
-                  isCurrentUser={currentUserId === entry.name}
-                  t={t}
-                  showDifficulty={activeTab === "all"}
-                />
-              ))}
-              {leaderboard.length > 10 && (
-                <div className="text-center py-4 text-xs text-muted-foreground border-t mt-2">
-                  顯示前 {Math.min(leaderboard.length, 50)} 名，共 {leaderboard.length} 名玩家
+            <>
+              {/* Table Container - Scrollable */}
+              <div className="flex-1 overflow-auto border rounded-md bg-card">
+                <Table>
+                  <TableHeader className="sticky top-0 bg-secondary/50 backdrop-blur-sm z-10">
+                    <TableRow>
+                      <TableHead className="w-[80px] text-center">#</TableHead>
+                      <TableHead>{t('player') || '玩家'}</TableHead>
+                      {activeTab === 'all' && <TableHead className="w-[100px]">{t('difficulty') || '難度'}</TableHead>}
+                      <TableHead className="text-right">{t('score') || '分數'}</TableHead>
+                      <TableHead className="text-right">{t('time') || '時間'}</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {paginatedData.map((entry, index) => {
+                      const isCurrentUser = currentUserId === entry.name;
+                      const globalRank = (currentPage - 1) * ITEMS_PER_PAGE + index + 1;
+
+                      // Rank Styling
+                      let rankColor = "text-muted-foreground";
+                      if (globalRank === 1) rankColor = "text-yellow-500 font-bold text-lg";
+                      if (globalRank === 2) rankColor = "text-gray-400 font-bold text-lg";
+                      if (globalRank === 3) rankColor = "text-amber-700 font-bold text-lg";
+
+                      return (
+                        <TableRow key={`${entry.name}-${entry.difficulty}-${index}`} className={isCurrentUser ? "bg-primary/5 hover:bg-primary/10" : ""}>
+                          <TableCell className={cn("text-center font-mono", rankColor)}>
+                            {globalRank}
+                          </TableCell>
+                          <TableCell>
+                            <div className="flex items-center gap-2">
+                              <span className={cn("font-medium", isCurrentUser && "text-primary")}>
+                                {entry.name}
+                              </span>
+                              {isCurrentUser && <Badge variant="secondary" className="text-[10px] px-1 py-0 h-5">YOU</Badge>}
+                            </div>
+                          </TableCell>
+                          {activeTab === 'all' && (
+                            <TableCell>
+                              <Badge variant="outline" className="font-normal text-xs capitalize">
+                                {getDifficultyLabel(entry.difficulty, t)}
+                              </Badge>
+                            </TableCell>
+                          )}
+                          <TableCell className="text-right font-mono font-medium">
+                            {formatScore(entry.best_score)}
+                          </TableCell>
+                          <TableCell className="text-right font-mono text-muted-foreground">
+                            {formatTime(entry.best_time)}
+                          </TableCell>
+                        </TableRow>
+                      );
+                    })}
+                  </TableBody>
+                </Table>
+              </div>
+
+              {/* Pagination Controls */}
+              {totalPages > 1 && (
+                <div className="flex items-center justify-between py-4 shrink-0">
+                  <div className="text-xs text-muted-foreground">
+                    {t('total') || '總計'}: {leaderboard.length}
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                      disabled={currentPage === 1}
+                      className="h-8 w-8 p-0"
+                    >
+                      <ChevronLeft className="h-4 w-4" />
+                    </Button>
+                    <span className="text-xs font-mono w-12 text-center">
+                      {currentPage} / {totalPages}
+                    </span>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                      disabled={currentPage === totalPages}
+                      className="h-8 w-8 p-0"
+                    >
+                      <ChevronRight className="h-4 w-4" />
+                    </Button>
+                  </div>
                 </div>
               )}
-            </div>
+            </>
           )}
         </TabsContent>
       </Tabs>
