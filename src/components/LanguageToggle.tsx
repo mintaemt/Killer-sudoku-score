@@ -39,6 +39,7 @@ export const LanguageToggle = () => {
   const [currentLanguage, setCurrentLanguage] = useState<Language>('en');
   const [isOpen, setIsOpen] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const [showTooltip, setShowTooltip] = useState(false);
   const { t } = useLanguage();
 
   // 初始化語言
@@ -73,16 +74,20 @@ export const LanguageToggle = () => {
 
   return (
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
-      <CustomTooltip content={t('language')} variant="glass">
+      <CustomTooltip content={t('language')} variant="glass" open={showTooltip}>
         <DropdownMenuTrigger asChild>
           <Button
             variant="outline"
             size="sm"
             className={cn(
               "transition-smooth hover:scale-105 active:scale-95",
-              "shadow-apple-sm hover:shadow-apple-md flex-shrink-0"
+              "shadow-apple-sm hover:shadow-apple-md flex-shrink-0",
+              "ring-0 outline-none focus-visible:ring-0 focus-visible:outline-none focus:outline-none" // Force remove focus ring
             )}
             ref={buttonRef}
+            onMouseEnter={() => setShowTooltip(true)}
+            onMouseLeave={() => setShowTooltip(false)}
+            onPointerDown={() => setShowTooltip(false)} // Hide immediately on click
           >
             <Globe className="h-3 w-3 md:h-4 md:w-4" />
           </Button>

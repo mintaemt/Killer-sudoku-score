@@ -114,7 +114,7 @@ const UserButton = ({
   // 2. 已登入 (Google) -> 顯示 Avatar
   // Shadow Fix: 移除 overflow-hidden，將 rounded-md 套用到 inner Component
   return (
-    <div className="relative shrink-0" ref={dropdownRef}>
+    <div className="relative shrink-0 h-9 w-9 flex items-center justify-center" ref={dropdownRef}>
       <CustomTooltip content={user.user_metadata?.full_name || user.email} variant="glass">
         <Button
           variant="outline"
@@ -122,7 +122,7 @@ const UserButton = ({
           onClick={() => setIsOpen(!isOpen)}
           // 關鍵修正：移除 overflow-hidden 以顯示完整陰影
           // 圖片裁切交給 Avatar 元件處理
-          className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md p-0 w-9 aspect-square shrink-0 border-[var(--theme-color)]"
+          className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md p-0 w-full h-full aspect-square shrink-0 border-[var(--theme-color)]"
           style={themeStyle}
         >
           <Avatar className="h-full w-full rounded-md">

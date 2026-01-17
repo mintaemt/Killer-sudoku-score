@@ -14,6 +14,8 @@ interface CustomTooltipProps {
     side?: "top" | "bottom" | "left" | "right";
     variant?: "minimal" | "glass" | "themed";
     className?: string; // Allow custom styles for content
+    open?: boolean; // Controlled open state
+    onOpenChange?: (open: boolean) => void;
 }
 
 export function CustomTooltip({
@@ -22,6 +24,8 @@ export function CustomTooltip({
     side = "bottom",
     variant = "glass",
     className,
+    open,
+    onOpenChange,
 }: CustomTooltipProps) {
 
     // Variant styles
@@ -33,7 +37,7 @@ export function CustomTooltip({
 
     return (
         <TooltipProvider delayDuration={300}>
-            <Tooltip>
+            <Tooltip open={open} onOpenChange={onOpenChange}>
                 <TooltipTrigger asChild>
                     {children}
                 </TooltipTrigger>
