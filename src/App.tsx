@@ -16,6 +16,7 @@ import { TermsOfService } from "./components/TermsOfService";
 import { CookiePolicy } from "./components/CookiePolicy";
 import { Contact } from "./components/Contact";
 import { TestRoute } from "./components/TestRoute";
+import { MigrationModal } from "./components/MigrationModal";
 
 import { ThemeColorProvider } from "@/contexts/ThemeColorContext";
 import { AuthProvider } from "@/contexts/AuthContext";
@@ -31,6 +32,7 @@ const App = () => (
             <Toaster />
             <Toaster />
             <Sonner />
+            <MigrationModal />
             <BrowserRouter>
               <Routes>
                 <Route path="/" element={<Index />} />

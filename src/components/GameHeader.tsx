@@ -28,147 +28,7 @@ const themes = [
   { name: "teal", label: "Teal", color: "#14b8a6" },
 ];
 
-interface UserButtonProps {
-  user: any;
-  isVisitorMode: boolean;
-  onShowLeaderboard: (mode?: 'normal' | 'dopamine') => void;
-  viewMode: 'normal' | 'dopamine';
-  setViewMode: (mode: 'normal' | 'dopamine') => void;
-  t: (key: string) => string;
-  stats: any;
-  statsLoading: boolean;
-  currentDifficultyIndex: number;
-  setCurrentDifficultyIndex: React.Dispatch<React.SetStateAction<number>>;
-  currentTheme: string;
-  themes: { name: string; color: string }[];
-}
-
-const UserButton = ({
-  user,
-  isVisitorMode,
-  onShowLeaderboard,
-  viewMode,
-  setViewMode,
-  t,
-  stats,
-  statsLoading,
-  currentDifficultyIndex,
-  setCurrentDifficultyIndex,
-  currentTheme,
-  themes
-}: UserButtonProps) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-  const { signInWithGoogle, signOut } = useAuth();
-
-  // 取得當前主題色
-  const currentThemeColor = themes.find(theme => theme.name === currentTheme)?.color || "#3b82f6";
-
-  // CSS Variable style for theme color
-  const themeStyle = { '--theme-color': currentThemeColor } as React.CSSProperties;
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
-    };
-
-    if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [isOpen]);
-
-  const handleLogin = async () => {
-    await signInWithGoogle();
-  };
-
-  const handleLogout = async () => {
-    await signOut();
-    setIsOpen(false);
-  };
-
-  // 1. 未登入 (或訪客) -> 顯示 LogIn Icon (與其他按鈕一致樣式)
-  const isAnonymous = !user || user.is_anonymous;
-
-  if (isAnonymous) {
-    return (
-      <CustomTooltip content={t('login')} variant="glass">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={handleLogin}
-          className="transition-smooth shadow-apple-sm hover:shadow-apple-md border-[var(--theme-color)] text-[var(--theme-color)] hover:bg-[var(--theme-color)] hover:text-white"
-          style={themeStyle}
-        >
-          <LogIn className="h-3 w-3 md:h-4 md:w-4" />
-        </Button>
-      </CustomTooltip>
-    );
-  }
-
-  // 2. 已登入 (Google) -> 顯示 Avatar
-  // Shadow Fix: 移除 overflow-hidden，將 rounded-md 套用到 inner Component
-  return (
-    <div className="relative shrink-0 h-9 w-9 flex items-center justify-center" ref={dropdownRef}>
-      <CustomTooltip content={user.user_metadata?.full_name || user.email} variant="glass">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => setIsOpen(!isOpen)}
-          // 關鍵修正：移除 overflow-hidden 以顯示完整陰影
-          // 圖片裁切交給 Avatar 元件處理
-          className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md p-0 w-full h-full aspect-square shrink-0 border-[var(--theme-color)]"
-          style={themeStyle}
-        >
-          <Avatar className="h-full w-full rounded-md">
-            <AvatarImage
-              src={user.user_metadata?.avatar_url}
-              alt={user.user_metadata?.full_name || user.email}
-              className="object-cover rounded-md"
-            />
-            <AvatarFallback className="rounded-md bg-muted text-foreground font-bold">
-              {user.email?.slice(0, 2).toUpperCase()}
-            </AvatarFallback>
-          </Avatar>
-        </Button>
-      </CustomTooltip>
-
-      {isOpen && (
-        <div className="absolute top-full right-0 mt-1 bg-background/95 backdrop-blur-sm border rounded-md shadow-lg z-[9999] p-3 min-w-[200px] dropdown-menu">
-          {/* Dropdown Content */}
-          <div className="space-y-3">
-            <div className="text-center border-b pb-2">
-              <div className="text-sm font-bold truncate">{user.user_metadata?.full_name}</div>
-              <div className="text-xs text-muted-foreground truncate">{user.email}</div>
-            </div>
-            <div className="space-y-1">
-              <div className="text-xs font-medium text-muted-foreground px-1 mb-1">{t('viewLeaderboard')}</div>
-              <Button variant="ghost" size="sm" onClick={() => { onShowLeaderboard('normal'); setIsOpen(false); }} className="w-full text-xs justify-start h-8">
-                <ListOrdered className="h-3 w-3 mr-2 text-blue-500" />
-                {t('normal')}
-              </Button>
-              <Button variant="ghost" size="sm" onClick={() => { onShowLeaderboard('dopamine'); setIsOpen(false); }} className="w-full text-xs justify-start h-8">
-                <Zap className="h-3 w-3 mr-2 text-yellow-500" />
-                {t('dopamine')}
-              </Button>
-            </div>
-            <div className="border-t pt-2">
-              <Button variant="ghost" size="sm" onClick={handleLogout} className="w-full text-xs justify-start text-red-500 hover:text-red-600 hover:bg-red-50">
-                <LogOut className="h-3 w-3 mr-2" />
-                {t('logout')}
-              </Button>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-};
+import { UserStatsDialog } from "@/components/UserStatsDialog";
 
 export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeaderboard, onShowRules }: GameHeaderProps) => {
   const [isThemeOpen, setIsThemeOpen] = useState(false);
@@ -182,7 +42,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
   const titleTextRef = useRef<HTMLHeadingElement>(null);
 
   const { user: localUser, isLoggedIn, isVisitorMode } = useUser();
-  const { user: authUser } = useAuth();
+  const { user: authUser, signInWithGoogle } = useAuth();
 
   // Prioritize Auth user (Google Login) over local user
   const user = authUser || localUser;
@@ -337,32 +197,29 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
           </div>
 
           {/* 新遊戲按鈕 - 移至用戶按鈕左側 */}
-          <CustomTooltip content={t('newGame')} variant="glass">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={onNewGame}
-              className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md flex-shrink-0"
-            >
-              <RotateCcw className="h-3 w-3 md:h-4 md:w-4" />
-            </Button>
-          </CustomTooltip>
-
           {/* 用戶狀態按鈕 - 最右側 */}
-          <UserButton
-            user={user}
-            isVisitorMode={isVisitorMode}
-            onShowLeaderboard={onShowLeaderboard}
-            viewMode={viewMode}
-            setViewMode={setViewMode}
-            t={t}
-            stats={stats}
-            statsLoading={statsLoading}
-            currentDifficultyIndex={currentDifficultyIndex}
-            setCurrentDifficultyIndex={setCurrentDifficultyIndex}
-            currentTheme={currentTheme}
-            themes={themes}
-          />
+          {(!user || (user as any).is_anonymous) ? (
+            <CustomTooltip content={t('login')} variant="glass">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => signInWithGoogle()}
+                className="transition-smooth shadow-apple-sm hover:shadow-apple-md border-[var(--theme-color)] text-[var(--theme-color)] hover:bg-[var(--theme-color)] hover:text-white"
+                style={{ '--theme-color': themes.find(t => t.name === currentTheme)?.color || "#3b82f6" } as React.CSSProperties}
+              >
+                <LogIn className="h-3 w-3 md:h-4 md:w-4" />
+              </Button>
+            </CustomTooltip>
+          ) : (
+            <UserStatsDialog
+              user={user}
+              currentTheme={currentTheme}
+              themes={themes}
+              t={t}
+              isVisitorMode={isVisitorMode}
+              onShowLeaderboard={onShowLeaderboard}
+            />
+          )}
         </div>
       </div>
     </div>
