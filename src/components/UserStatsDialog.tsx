@@ -38,7 +38,8 @@ export const UserStatsDialog = ({
 
     const [viewMode, setViewMode] = useState<'normal' | 'dopamine'>('normal');
     const { stats, loading } = useUserStats(user?.id, viewMode);
-    const [activeTab, setActiveTab] = useState("profile");
+    const { stats, loading } = useUserStats(user?.id, viewMode);
+
 
 
     const currentThemeColor = themes.find(theme => theme.name === currentTheme)?.color || "#3b82f6";
@@ -75,8 +76,8 @@ export const UserStatsDialog = ({
                     </Button>
                 </div>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px] md:max-w-[600px] glass border-none shadow-2xl">
-                <DialogHeader>
+            <DialogContent className="sm:max-w-[425px] md:max-w-[600px] max-h-[90vh] flex flex-col glass border-none shadow-2xl gap-0">
+                <DialogHeader className="p-6 pb-2">
                     <div className="flex items-center justify-between pr-8">
                         <DialogTitle className="text-xl font-bold flex items-center gap-2">
                             <UserIcon className="h-5 w-5" />
@@ -119,7 +120,7 @@ export const UserStatsDialog = ({
                         <TabsTrigger value="leaderboard">{t('leaderboard') || '世界排名'}</TabsTrigger>
                     </TabsList>
 
-                    <TabsContent value="profile" className="h-[600px] overflow-y-auto pr-1">
+                    <TabsContent value="profile" className="flex-1 mt-2 overflow-y-auto pr-1 h-[520px]">
 
                         <div className="flex flex-col gap-4 py-4">
                             <div className="flex items-center justify-between p-3 rounded-xl bg-secondary/20 border border-border/50">
