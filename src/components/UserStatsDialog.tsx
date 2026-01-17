@@ -90,7 +90,7 @@ export const UserStatsDialog = ({
                                 className={cn(
                                     "px-3 py-1 rounded-md text-xs font-medium transition-all",
                                     viewMode === 'normal'
-                                        ? `bg-[var(--theme-color)] ${currentTheme === 'lime' ? 'text-black' : 'text-white'} shadow-sm`
+                                        ? `bg-[var(--theme-color)] ${currentTheme === 'green' ? 'text-black' : 'text-white'} shadow-sm`
                                         : "text-muted-foreground hover:text-foreground hover:bg-transparent"
                                 )}
                                 style={viewMode === 'normal' ? themeStyle : undefined}
@@ -102,7 +102,7 @@ export const UserStatsDialog = ({
                                 className={cn(
                                     "px-3 py-1 rounded-md text-xs font-medium transition-all",
                                     viewMode === 'dopamine'
-                                        ? `bg-[var(--theme-color)] ${currentTheme === 'lime' ? 'text-black' : 'text-white'} shadow-sm`
+                                        ? `bg-[var(--theme-color)] ${currentTheme === 'green' ? 'text-black' : 'text-white'} shadow-sm`
                                         : "text-muted-foreground hover:text-foreground hover:bg-transparent"
                                 )}
                                 style={viewMode === 'dopamine' ? themeStyle : undefined}
