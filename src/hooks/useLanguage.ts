@@ -1327,6 +1327,11 @@ const translations = {
     viewStats: '統計を見る',
     normal: '通常',
     dopamine: 'ドーパミン',
+    playerHub: 'プレイヤーセンター',
+    myStats: '個人戦績',
+    statsMode: '統計モード',
+    total: '合計',
+    pleaseRegister: '登録してプレイ',
 
     // 一般
     close: '閉じる',
