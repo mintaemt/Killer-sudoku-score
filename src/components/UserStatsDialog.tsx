@@ -110,22 +110,23 @@ export const UserStatsDialog = ({
                                         className={cn(
                                             "px-4 py-1.5 rounded-md text-sm font-medium transition-all",
                                             statsMode === 'normal'
-                                                ? "bg-white dark:bg-zinc-800 shadow-sm text-primary"
-                                                : "text-muted-foreground hover:text-foreground"
+                                                ? "bg-[var(--theme-color)] text-white shadow-sm"
+                                                : "text-muted-foreground hover:bg-background/50"
                                         )}
+                                        style={statsMode === 'normal' ? themeStyle : undefined}
                                     >
                                         {t('normal') || '普通'}
                                     </button>
                                     <button
                                         onClick={() => setStatsMode('dopamine')}
                                         className={cn(
-                                            "px-4 py-1.5 rounded-md text-sm font-medium transition-all flex items-center gap-1",
+                                            "px-4 py-1.5 rounded-md text-sm font-medium transition-all",
                                             statsMode === 'dopamine'
-                                                ? "bg-white dark:bg-zinc-800 shadow-sm text-purple-600"
-                                                : "text-muted-foreground hover:text-foreground"
+                                                ? "bg-[var(--theme-color)] text-white shadow-sm"
+                                                : "text-muted-foreground hover:bg-background/50"
                                         )}
+                                        style={statsMode === 'dopamine' ? themeStyle : undefined}
                                     >
-                                        <Zap className="h-3 w-3" />
                                         {t('dopamine') || '多巴胺'}
                                     </button>
                                 </div>
@@ -133,25 +134,21 @@ export const UserStatsDialog = ({
 
                             {/* Overall Stats Grid */}
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                                <div className="bg-card p-3 rounded-lg border flex flex-col items-center">
-                                    <Target className="h-4 w-4 text-blue-500 mb-1" />
+                                <div className="bg-card p-3 rounded-lg border flex flex-col items-center justify-center min-h-[80px]">
                                     <span className="text-2xl font-bold">{stats?.totalGames || 0}</span>
-                                    <span className="text-xs text-muted-foreground">{t('totalGames') || '總場次'}</span>
+                                    <span className="text-xs text-muted-foreground mt-1">{t('totalGames') || '總場次'}</span>
                                 </div>
-                                <div className="bg-card p-3 rounded-lg border flex flex-col items-center">
-                                    <Trophy className="h-4 w-4 text-yellow-500 mb-1" />
+                                <div className="bg-card p-3 rounded-lg border flex flex-col items-center justify-center min-h-[80px]">
                                     <span className="text-2xl font-bold">{stats?.bestScore || 0}</span>
-                                    <span className="text-xs text-muted-foreground">{t('bestScore') || '最高分'}</span>
+                                    <span className="text-xs text-muted-foreground mt-1">{t('bestScore') || '最高分'}</span>
                                 </div>
-                                <div className="bg-card p-3 rounded-lg border flex flex-col items-center">
-                                    <Clock className="h-4 w-4 text-green-500 mb-1" />
+                                <div className="bg-card p-3 rounded-lg border flex flex-col items-center justify-center min-h-[80px]">
                                     <span className="text-2xl font-bold">{stats?.bestTime ? `${stats.bestTime}s` : '--'}</span>
-                                    <span className="text-xs text-muted-foreground">{t('bestTime') || '最佳時間'}</span>
+                                    <span className="text-xs text-muted-foreground mt-1">{t('bestTime') || '最佳時間'}</span>
                                 </div>
-                                <div className="bg-card p-3 rounded-lg border flex flex-col items-center">
-                                    <div className="text-red-500 font-bold text-sm mb-1">ERR</div>
+                                <div className="bg-card p-3 rounded-lg border flex flex-col items-center justify-center min-h-[80px]">
                                     <span className="text-2xl font-bold">{stats?.totalMistakes || 0}</span>
-                                    <span className="text-xs text-muted-foreground">{t('mistakes') || '失誤'}</span>
+                                    <span className="text-xs text-muted-foreground mt-1">{t('mistakes') || '失誤'}</span>
                                 </div>
                             </div>
 
@@ -201,22 +198,23 @@ export const UserStatsDialog = ({
                                     className={cn(
                                         "px-4 py-1.5 rounded-md text-sm font-medium transition-all",
                                         leaderboardMode === 'normal'
-                                            ? "bg-white dark:bg-zinc-800 shadow-sm text-primary"
-                                            : "text-muted-foreground hover:text-foreground"
+                                            ? "bg-[var(--theme-color)] text-white shadow-sm"
+                                            : "text-muted-foreground hover:bg-background/50"
                                     )}
+                                    style={leaderboardMode === 'normal' ? themeStyle : undefined}
                                 >
                                     {t('normal') || '普通'}
                                 </button>
                                 <button
                                     onClick={() => setLeaderboardMode('dopamine')}
                                     className={cn(
-                                        "px-4 py-1.5 rounded-md text-sm font-medium transition-all flex items-center gap-1",
+                                        "px-4 py-1.5 rounded-md text-sm font-medium transition-all",
                                         leaderboardMode === 'dopamine'
-                                            ? "bg-white dark:bg-zinc-800 shadow-sm text-purple-600"
-                                            : "text-muted-foreground hover:text-foreground"
+                                            ? "bg-[var(--theme-color)] text-white shadow-sm"
+                                            : "text-muted-foreground hover:bg-background/50"
                                     )}
+                                    style={leaderboardMode === 'dopamine' ? themeStyle : undefined}
                                 >
-                                    <Zap className="h-3 w-3" />
                                     {t('dopamine') || '多巴胺'}
                                 </button>
                             </div>

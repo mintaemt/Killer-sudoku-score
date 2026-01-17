@@ -168,6 +168,8 @@ const translations = {
     earlyBonus: 'Early',
     overtimePenalty: 'Overtime',
     mistake: 'Mistake',
+    mistakes: 'Mistakes',
+
     minimumScore: 'Minimum Score',
     example: 'Example',
     points: 'pts',
@@ -550,6 +552,8 @@ const translations = {
     earlyBonus: '提前',
     overtimePenalty: '超時',
     mistake: '錯誤',
+    mistakes: '失誤',
+
     minimumScore: '最低分數',
     example: '範例',
     points: '分',
@@ -933,6 +937,8 @@ const translations = {
     earlyBonus: '조기 완료',
     overtimePenalty: '시간 초과',
     mistake: '실수',
+    mistakes: '실수',
+
     minimumScore: '최소 점수',
     example: '예시',
     points: '점',
