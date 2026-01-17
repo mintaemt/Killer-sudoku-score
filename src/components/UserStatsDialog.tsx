@@ -164,26 +164,28 @@ export const UserStatsDialog = ({
                                     <div>時間</div>
                                     <div>分數</div>
                                 </div>
-                                {difficulties.map((diff) => {
-                                    const dStats = stats?.difficultyStats[diff];
-                                    if (!dStats) return null;
-                                    return (
-                                        <div key={diff} className="grid grid-cols-4 gap-2 p-3 border-t text-sm text-center items-center hover:bg-accent/50 transition-colors">
-                                            <div className="text-left pl-2 font-medium capitalize flex items-center gap-2">
-                                                <div className={cn("w-2 h-2 rounded-full",
-                                                    diff === 'easy' ? 'bg-green-500' :
-                                                        diff === 'medium' ? 'bg-blue-500' :
-                                                            diff === 'hard' ? 'bg-orange-500' :
-                                                                diff === 'expert' ? 'bg-red-500' : 'bg-purple-600'
-                                                )} />
-                                                {t(diff) || diff}
+                                {difficulties
+                                    .filter(diff => viewMode === 'dopamine' || diff !== 'hell')
+                                    .map((diff) => {
+                                        const dStats = stats?.difficultyStats[diff];
+                                        if (!dStats) return null;
+                                        return (
+                                            <div key={diff} className="grid grid-cols-4 gap-2 p-3 border-t text-sm text-center items-center hover:bg-accent/50 transition-colors">
+                                                <div className="text-left pl-2 font-medium capitalize flex items-center gap-2">
+                                                    <div className={cn("w-2 h-2 rounded-full",
+                                                        diff === 'easy' ? 'bg-green-500' :
+                                                            diff === 'medium' ? 'bg-blue-500' :
+                                                                diff === 'hard' ? 'bg-orange-500' :
+                                                                    diff === 'expert' ? 'bg-red-500' : 'bg-purple-600'
+                                                    )} />
+                                                    {t(diff) || diff}
+                                                </div>
+                                                <div className="font-mono">{dStats.gamesPlayed}</div>
+                                                <div className="font-mono">{dStats.bestTime > 0 ? `${dStats.bestTime}s` : '-'}</div>
+                                                <div className="font-mono">{dStats.bestScore > 0 ? dStats.bestScore : '-'}</div>
                                             </div>
-                                            <div className="font-mono">{dStats.gamesPlayed}</div>
-                                            <div className="font-mono">{dStats.bestTime > 0 ? `${dStats.bestTime}s` : '-'}</div>
-                                            <div className="font-mono">{dStats.bestScore > 0 ? dStats.bestScore : '-'}</div>
-                                        </div>
-                                    )
-                                })}
+                                        )
+                                    })}
                             </div>
 
                             <Button variant="outline" className="w-full text-red-500 hover:text-red-600 hover:bg-red-50 mt-2" onClick={handleLogout}>
@@ -194,13 +196,10 @@ export const UserStatsDialog = ({
                     </TabsContent>
 
                     <TabsContent value="leaderboard" className="h-[600px] flex flex-col pt-2">
-
-                        <div className="h-[400px] overflow-hidden">
-                            <Leaderboard
-                                currentUserId={user?.user_metadata?.full_name || user?.email}
-                                mode={viewMode}
-                            />
-                        </div>
+                        <Leaderboard
+                            currentUserId={user?.user_metadata?.full_name || user?.email}
+                            mode={viewMode}
+                        />
                     </TabsContent>
                 </Tabs>
             </DialogContent>
