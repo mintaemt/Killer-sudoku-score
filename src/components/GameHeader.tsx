@@ -215,7 +215,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
                 variant="outline"
                 size="sm"
                 onClick={() => signInWithGoogle()}
-                className="transition-smooth shadow-apple-sm hover:shadow-apple-md border-[var(--theme-color)] text-[var(--theme-color)] hover:bg-[var(--theme-color)] hover:text-white"
+                className={`transition-smooth shadow-apple-sm hover:shadow-apple-md border-[var(--theme-color)] text-[var(--theme-color)] hover:bg-[var(--theme-color)] ${currentTheme === 'lime' ? 'hover:text-black' : 'hover:text-white'}`}
                 style={{ '--theme-color': themes.find(t => t.name === currentTheme)?.color || "#3b82f6" } as React.CSSProperties}
               >
                 <LogIn className="h-3 w-3 md:h-4 md:w-4" />
