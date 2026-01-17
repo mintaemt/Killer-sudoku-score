@@ -35,7 +35,7 @@ export const UserStatsDialog = ({
 }: UserStatsDialogProps) => {
     const [isOpen, setIsOpen] = useState(false);
     const { signOut } = useAuth();
-    const { signOut } = useAuth();
+
     const [viewMode, setViewMode] = useState<'normal' | 'dopamine'>('normal');
     const { stats, loading } = useUserStats(user?.id, viewMode);
     const [activeTab, setActiveTab] = useState("profile");
