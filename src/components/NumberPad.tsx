@@ -8,7 +8,7 @@ const getThemeColors = (theme: string) => {
   const themeColors: Record<string, { bg: string; hover: string; text: string }> = {
     blue: { bg: "bg-blue-500", hover: "hover:bg-blue-600", text: "text-white" },
     orange: { bg: "bg-orange-500", hover: "hover:bg-orange-600", text: "text-white" },
-    green: { bg: "bg-[#BFFF00]", hover: "hover:bg-[#99cc00]", text: "text-white drop-shadow-md" },
+    green: { bg: "bg-[#BFFF00]", hover: "hover:bg-[#99cc00]", text: "text-[#2e2e2e]" },
     purple: { bg: "bg-purple-500", hover: "hover:bg-purple-600", text: "text-white" },
     pink: { bg: "bg-pink-500", hover: "hover:bg-pink-600", text: "text-white" },
     teal: { bg: "bg-teal-500", hover: "hover:bg-teal-600", text: "text-white" },
@@ -176,7 +176,7 @@ export const NumberPad = ({
     <div className="glass rounded-2xl p-3 md:p-3 shadow-apple-lg w-full">
       <div className="space-y-3">
         {/* Numbers 1-9 in a single row on mobile */}
-        <div className="grid grid-cols-9 gap-1 md:gap-2">
+        <div className="grid grid-cols-9 gap-2 md:gap-2">
           {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
             <Button
               key={num}
