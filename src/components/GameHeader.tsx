@@ -197,6 +197,17 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
           </div>
 
           {/* 新遊戲按鈕 - 移至用戶按鈕左側 */}
+          <CustomTooltip content={t('newGame')} variant="glass">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={onNewGame}
+              className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md flex-shrink-0"
+            >
+              <RotateCcw className="h-3 w-3 md:h-4 md:w-4" />
+            </Button>
+          </CustomTooltip>
+
           {/* 用戶狀態按鈕 - 最右側 */}
           {(!user || (user as any).is_anonymous) ? (
             <CustomTooltip content={t('login')} variant="glass">
