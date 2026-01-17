@@ -138,6 +138,10 @@ const translations = {
     bestScore: 'Best Score',
     bestTime: 'Best Time',
     totalGames: 'Total Games',
+    playerHub: 'Player Hub',
+    myStats: 'My Stats',
+    statsMode: 'Stats Mode',
+
 
     // 遊戲規則
     scoringSystem: 'Scoring System',
@@ -516,6 +520,10 @@ const translations = {
     bestScore: '最佳分數',
     bestTime: '最佳時間',
     totalGames: '總遊戲數',
+    playerHub: '玩家中心',
+    myStats: '個人戰績',
+    statsMode: '統計模式',
+
 
     // 遊戲規則
     scoringSystem: '計分系統',
@@ -796,6 +804,12 @@ const translations = {
     notesModeOn: '메모 모드 활성화',
     notesModeOff: '메모 모드 비활성화',
     candidateNumbers: '후보 숫자',
+
+    // Player Hub
+    playerHub: '플레이어 허브',
+    myStats: '내 통계',
+    statsMode: '통계 모드',
+
 
     // 提示功能
     hint: '힌트',
