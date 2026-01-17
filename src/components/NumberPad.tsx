@@ -176,7 +176,7 @@ export const NumberPad = ({
     <div className="glass rounded-2xl p-3 md:p-3 shadow-apple-lg w-full">
       <div className="space-y-3">
         {/* Numbers 1-9 in a single row on mobile */}
-        <div className="grid grid-cols-9 gap-2 md:gap-2">
+        <div className="grid grid-cols-9 gap-1 md:gap-2">
           {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
             <Button
               key={num}
