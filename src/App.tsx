@@ -18,39 +18,42 @@ import { Contact } from "./components/Contact";
 import { TestRoute } from "./components/TestRoute";
 
 import { ThemeColorProvider } from "@/contexts/ThemeColorContext";
+import { AuthProvider } from "@/contexts/AuthContext";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeColorProvider>
-      <ThemeProvider attribute="class" defaultTheme="system" enableSystem={true}>
-        <TooltipProvider>
-          <Toaster />
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/leaderboard" element={<LeaderboardPage />} />
-              {/* Content pages */}
-              <Route path="/about" element={<About />} />
-              <Route path="/how-to-play" element={<HowToPlay />} />
-              <Route path="/strategy" element={<Strategy />} />
-              <Route path="/faq" element={<FAQ />} />
-              {/* Test Route */}
-              <Route path="/test" element={<TestRoute />} />
-              {/* Legal Documents */}
-              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-              <Route path="/terms-of-service" element={<TermsOfService />} />
-              <Route path="/cookie-policy" element={<CookiePolicy />} />
-              <Route path="/contact" element={<Contact />} />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
-        </TooltipProvider>
-      </ThemeProvider>
+      <AuthProvider>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem={true}>
+          <TooltipProvider>
+            <Toaster />
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/leaderboard" element={<LeaderboardPage />} />
+                {/* Content pages */}
+                <Route path="/about" element={<About />} />
+                <Route path="/how-to-play" element={<HowToPlay />} />
+                <Route path="/strategy" element={<Strategy />} />
+                <Route path="/faq" element={<FAQ />} />
+                {/* Test Route */}
+                <Route path="/test" element={<TestRoute />} />
+                {/* Legal Documents */}
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/terms-of-service" element={<TermsOfService />} />
+                <Route path="/cookie-policy" element={<CookiePolicy />} />
+                <Route path="/contact" element={<Contact />} />
+                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </BrowserRouter>
+          </TooltipProvider>
+        </ThemeProvider>
+      </AuthProvider>
     </ThemeColorProvider>
   </QueryClientProvider>
 );

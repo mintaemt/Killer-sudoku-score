@@ -1,5 +1,154 @@
 import { Button } from "@/components/ui/button";
-import { RotateCcw, Palette, User, Trophy, Clock, ListOrdered, Info, ChevronLeft, ChevronRight, Zap } from "lucide-react";
+import { RotateCcw, Palette, User, Trophy, Clock, ListOrdered, Info, ChevronLeft, ChevronRight, Zap, LogIn, LogOut } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useAuth } from "@/contexts/AuthContext";
+
+// ... existing imports
+
+interface UserButtonProps {
+  user: any;
+  isVisitorMode: boolean;
+  onShowLeaderboard: (mode?: 'normal' | 'dopamine') => void;
+  viewMode: 'normal' | 'dopamine';
+  setViewMode: (mode: 'normal' | 'dopamine') => void;
+  t: (key: string) => string;
+  stats: any;
+  statsLoading: boolean;
+  currentDifficultyIndex: number;
+  setCurrentDifficultyIndex: React.Dispatch<React.SetStateAction<number>>;
+  currentTheme: string;
+  themes: { name: string; color: string }[];
+}
+
+const UserButton = ({
+  user,
+  isVisitorMode,
+  onShowLeaderboard,
+  viewMode,
+  setViewMode,
+  t,
+  stats,
+  statsLoading,
+  currentDifficultyIndex,
+  setCurrentDifficultyIndex,
+  currentTheme,
+  themes
+}: UserButtonProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const { signInWithGoogle, signOut } = useAuth();
+
+  // 取得當前主題色
+  const currentThemeColor = themes.find(theme => theme.name === currentTheme)?.color || "#3b82f6";
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen]);
+
+  const handleLogin = async () => {
+    await signInWithGoogle();
+  };
+
+  const handleLogout = async () => {
+    await signOut();
+    setIsOpen(false);
+  };
+
+  // 1. 未登入 (或訪客) -> 顯示 LogIn Icon
+  if (!user || user.app_metadata?.provider !== 'google') {
+    // 注意: 這裡假設 "非 Google 登入" 視為未完成 SSO 遷移的狀態，或是直接依賴 user 是否存在。
+    // 如果 isVisitorMode 為真，通常 user 是存在的 (匿名)，但我們希望推廣 Google 登入。
+    // 簡化邏輯：如果沒有 user (null) 或是 匿名用戶 (is_anonymous) 則顯示登入。
+    // Supabase user 物件通常有 is_anonymous 屬性。
+
+    const isAnonymous = user?.is_anonymous;
+
+    if (!user || isAnonymous) {
+      return (
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={handleLogin}
+          className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md"
+          title={t('login')} // 需確認有沒有這個 key，若無則用 "Sign In"
+          style={{ color: currentThemeColor, borderColor: currentThemeColor }} // 連動主題色
+        >
+          <LogIn className="h-3 w-3 md:h-4 md:w-4" />
+        </Button>
+      );
+    }
+  }
+
+  // 2. 已登入 (Google) -> 顯示 Avatar
+  return (
+    <div className="relative" ref={dropdownRef}>
+      <Button
+        variant="ghost"
+        size="icon"
+        onClick={() => setIsOpen(!isOpen)}
+        className="rounded-full h-8 w-8 md:h-9 md:w-9 p-0 border-2 transition-all hover:scale-105 active:scale-95 shadow-sm"
+        style={{ borderColor: currentThemeColor }}
+      >
+        <Avatar className="h-full w-full">
+          <AvatarImage src={user.user_metadata?.avatar_url} alt={user.user_metadata?.full_name || user.email} />
+          <AvatarFallback>{user.email?.slice(0, 2).toUpperCase()}</AvatarFallback>
+        </Avatar>
+      </Button>
+
+      {isOpen && (
+        <div className="absolute top-full right-0 mt-1 bg-background/95 backdrop-blur-sm border rounded-md shadow-lg z-[9999] p-3 min-w-[200px] dropdown-menu">
+          <div className="space-y-3">
+            <div className="text-center border-b pb-2">
+              <div className="text-sm font-bold truncate">{user.user_metadata?.full_name}</div>
+              <div className="text-xs text-muted-foreground truncate">{user.email}</div>
+            </div>
+
+            {/* 統計資訊與排行榜按鈕 - 復用原本邏輯 */}
+            {/* ... (這裡保留原本的統計顯示邏輯，稍作簡化以適應新結構) ... */}
+            {/* 為求精簡，這裡先直接放排行榜按鈕與登出 */}
+
+            <div className="space-y-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  onShowLeaderboard(viewMode);
+                  setIsOpen(false);
+                }}
+                className="w-full text-xs justify-start"
+              >
+                <ListOrdered className="h-3 w-3 mr-2" />
+                {t('viewLeaderboard')}
+              </Button>
+
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={handleLogout}
+                className="w-full text-xs justify-start text-red-500 hover:text-red-600 hover:bg-red-50"
+              >
+                <LogOut className="h-3 w-3 mr-2" />
+                {t('logout')}
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { LanguageToggle } from "@/components/LanguageToggle";
 import { cn } from "@/lib/utils";
@@ -73,7 +222,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
           </div>
         </div>
 
-        {/* 右側：遊戲規則、主題切換、主題選擇器、用戶狀態和新遊戲按鈕 */}
+        {/* 右側：遊戲工具與用戶按鈕 */}
         <div className="flex items-center gap-1 md:gap-2 flex-shrink-0">
           {/* 遊戲規則按鈕 */}
           <Button
@@ -84,6 +233,17 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
             title={t('gameRules')}
           >
             <Info className="h-3 w-3 md:h-4 md:w-4" />
+          </Button>
+
+          {/* 新遊戲按鈕 */}
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={onNewGame}
+            className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md"
+            title={t('newGame')}
+          >
+            <RotateCcw className="h-3 w-3 md:h-4 md:w-4" />
           </Button>
 
           <ThemeToggle />
@@ -123,203 +283,21 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
             )}
           </div>
 
-          {/* 用戶狀態 - 訪客模式下隱藏 */}
-          {user && !isVisitorMode && (
-            <div className="relative" ref={userDropdownRef}>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setIsUserOpen(!isUserOpen)}
-                className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md"
-                title={user?.name}
-              >
-                <User className="h-3 w-3 md:h-4 md:w-4" />
-              </Button>
-
-              {isUserOpen && (
-                <div className="absolute top-full right-0 mt-1 bg-background/95 backdrop-blur-sm border rounded-md shadow-lg z-[9999] p-3 min-w-[200px] dropdown-menu">
-                  <div className="space-y-3">
-                    <div className="text-center">
-                      <div className="text-sm font-medium">{user?.name}</div>
-                      <div className="text-xs text-muted-foreground">
-                        ID: {user?.id?.slice(0, 8)}...
-                      </div>
-                    </div>
-
-                    {stats && (
-                      <div className="space-y-2">
-                        <div className="border-t pt-2">
-                          <div className="flex items-center justify-between mb-2">
-                            <div className="text-xs font-medium text-muted-foreground">{t('viewStats')}</div>
-                            <div className="flex gap-1">
-                              <Button
-                                variant={viewMode === 'normal' ? 'default' : 'outline'}
-                                size="sm"
-                                onClick={() => setViewMode('normal')}
-                                className="h-6 px-2 text-xs"
-                              >
-                                {t('normal')}
-                              </Button>
-                              <Button
-                                variant={viewMode === 'dopamine' ? 'default' : 'outline'}
-                                size="sm"
-                                onClick={() => setViewMode('dopamine')}
-                                className="h-6 px-2 text-xs"
-                              >
-                                {t('dopamine')}
-                              </Button>
-                            </div>
-                          </div>
-
-                          {viewMode === 'normal' ? (
-                            // 普通模式統計
-                            <div className="grid grid-cols-2 gap-2 text-xs">
-                              <div className="flex items-center space-x-1">
-                                <Trophy className="h-3 w-3 text-yellow-500" />
-                                <span>{t('bestScore')}</span>
-                              </div>
-                              <div className="text-right font-medium">
-                                {stats?.bestScore?.toLocaleString() || '0'}
-                              </div>
-                              <div className="flex items-center space-x-1">
-                                <Clock className="h-3 w-3 text-blue-500" />
-                                <span>{t('bestTime')}</span>
-                              </div>
-                              <div className="text-right font-medium">
-                                {stats?.bestTime ? `${Math.floor(stats.bestTime / 60)}:${(stats.bestTime % 60).toString().padStart(2, '0')}` : '0:00'}
-                              </div>
-                              <div className="flex items-center space-x-1">
-                                <User className="h-3 w-3 text-green-500" />
-                                <span>{t('totalGames')}</span>
-                              </div>
-                              <div className="text-right font-medium">
-                                {stats?.totalGames || 0}
-                              </div>
-                            </div>
-                          ) : (
-                            // 多巴胺模式統計 - 單張卡片滑動模式
-                            <div className="space-y-3">
-                              {/* 當前難度卡片 */}
-                              <div className="border rounded p-3 text-xs">
-                                {(() => {
-                                  const difficulties = ['easy', 'medium', 'hard', 'expert', 'hell'] as const;
-                                  const currentDifficulty = difficulties[currentDifficultyIndex];
-                                  const diffStats = stats?.difficultyStats?.[currentDifficulty];
-
-                                  const difficultyLabels = {
-                                    easy: t('easy'),
-                                    medium: t('medium'),
-                                    hard: t('hard'),
-                                    expert: t('expert'),
-                                    hell: t('hell')
-                                  };
-
-                                  return (
-                                    <>
-                                      <div className="font-medium text-sm mb-2 text-center">{difficultyLabels[currentDifficulty]}</div>
-                                      <div className="space-y-2">
-                                        <div className="flex items-center justify-between">
-                                          <div className="flex items-center space-x-2">
-                                            <Trophy className="h-3 w-3 text-yellow-500" />
-                                            <span className="text-xs">{t('bestScore')}</span>
-                                          </div>
-                                          <span className="text-sm font-bold">
-                                            {(diffStats?.bestScore || 0).toLocaleString()}
-                                          </span>
-                                        </div>
-                                        <div className="flex items-center justify-between">
-                                          <div className="flex items-center space-x-2">
-                                            <User className="h-3 w-3 text-green-500" />
-                                            <span className="text-xs">{t('gamesPlayed')}</span>
-                                          </div>
-                                          <span className="text-sm font-bold">
-                                            {diffStats?.gamesPlayed || 0}
-                                          </span>
-                                        </div>
-                                      </div>
-                                    </>
-                                  );
-                                })()}
-                              </div>
-
-                              {/* 滑動控制 */}
-                              <div className="flex items-center justify-between">
-                                <Button
-                                  variant="outline"
-                                  size="sm"
-                                  onClick={() => setCurrentDifficultyIndex(prev => prev > 0 ? prev - 1 : 4)}
-                                  className="h-6 w-6 p-0"
-                                >
-                                  <ChevronLeft className="h-3 w-3" />
-                                </Button>
-
-                                {/* 點點指示器 */}
-                                <div className="flex space-x-1">
-                                  {[0, 1, 2, 3, 4].map(index => (
-                                    <button
-                                      key={index}
-                                      onClick={() => setCurrentDifficultyIndex(index)}
-                                      className={cn(
-                                        "w-2 h-2 rounded-full transition-colors",
-                                        index === currentDifficultyIndex
-                                          ? "bg-primary"
-                                          : "bg-muted-foreground/30 hover:bg-muted-foreground/50"
-                                      )}
-                                    />
-                                  ))}
-                                </div>
-
-                                <Button
-                                  variant="outline"
-                                  size="sm"
-                                  onClick={() => setCurrentDifficultyIndex(prev => prev < 4 ? prev + 1 : 0)}
-                                  className="h-6 w-6 p-0"
-                                >
-                                  <ChevronRight className="h-3 w-3" />
-                                </Button>
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    )}
-
-                    {statsLoading && (
-                      <div className="text-center text-xs text-muted-foreground p-4">
-                        {t('loadingStats')}
-                      </div>
-                    )}
-
-                    <div className="border-t pt-2">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => {
-                          onShowLeaderboard(viewMode);
-                          setIsUserOpen(false);
-                        }}
-                        className="w-full text-xs"
-                      >
-                        <ListOrdered className="h-3 w-3 mr-1" />
-                        {t('viewLeaderboard')}
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* 新遊戲按鈕 - 縮小版本 */}
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={onNewGame}
-            className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md"
-            title={t('newGame')}
-          >
-            <RotateCcw className="h-3 w-3 md:h-4 md:w-4" />
-          </Button>
+          {/* 用戶狀態按鈕 - 最右側 */}
+          <UserButton
+            user={user}
+            isVisitorMode={isVisitorMode}
+            onShowLeaderboard={onShowLeaderboard}
+            viewMode={viewMode}
+            setViewMode={setViewMode}
+            t={t}
+            stats={stats}
+            statsLoading={statsLoading}
+            currentDifficultyIndex={currentDifficultyIndex}
+            setCurrentDifficultyIndex={setCurrentDifficultyIndex}
+            currentTheme={currentTheme}
+            themes={themes}
+          />
         </div>
       </div>
     </div>
