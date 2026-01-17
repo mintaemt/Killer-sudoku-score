@@ -19,7 +19,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Zap } from "lucide-react";
 import { checkEnvironment, testSupabaseConnection } from "@/lib/envChecker";
-import { generateKillerSudoku, generateDopamineSudoku } from "@/lib/sudoku-generator";
+import { generateKillerSudoku, generateDopamineSudoku, generateHellDifficultySudoku } from "@/lib/sudoku-generator";
 import { useUser } from "@/hooks/useUser";
 import { useGameRecord } from "@/hooks/useGameRecord";
 import { useFeatureHint } from "@/hooks/useFeatureHint";
@@ -31,6 +31,7 @@ import { useLanguage } from "@/hooks/useLanguage";
 import { Link } from "react-router-dom";
 
 import { useThemeColor } from "@/contexts/ThemeColorContext";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Index = () => {
   const { t, language } = useLanguage();
@@ -214,6 +215,7 @@ const Index = () => {
 
   // Hooks
   const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisitorMode, isLoggedIn } = useUser();
+  const { signInWithGoogle } = useAuth();
   const { shouldShowHint, dismissHint } = useFeatureHint();
   const { saveNormalGameRecord, saveDopamineGameRecord, getNormalUserBestScore, getDopamineUserBestScore, getAllDopamineUsersTopScore } = useGameRecord();
 
@@ -360,9 +362,14 @@ const Index = () => {
     dismissHint(); // 記錄用戶選擇繼續訪客模式
   };
 
-  const handleBecomeUser = () => {
+  const handleBecomeUser = async () => {
     setShowFeatureHint(false);
-    setShowUserNameInput(true); // 跳轉到用戶註冊頁面
+    // Replace old "UserNameInput" flow with Google Login directly
+    try {
+      await signInWithGoogle();
+    } catch (error) {
+      console.error("Login failed:", error);
+    }
   };
 
   useEffect(() => {
@@ -555,7 +562,12 @@ const Index = () => {
       setTimeout(() => {
         if (isDopamineMode) {
           // 多巴胺模式：重新生成相同難度的多巴胺遊戲
-          const data = generateKillerSudoku(dopamineDifficulty);
+          let data;
+          if (dopamineDifficulty === 'hell') {
+            data = generateHellDifficultySudoku();
+          } else {
+            data = generateKillerSudoku(dopamineDifficulty as Difficulty);
+          }
 
           // 根據難度設定時間限制
           const timeLimits = {
@@ -635,7 +647,12 @@ const Index = () => {
 
   // 處理多巴胺模式啟動
   const handleDopamineMode = (difficulty: DopamineDifficulty) => {
-    const data = generateKillerSudoku(difficulty);
+    let data;
+    if (difficulty === 'hell') {
+      data = generateHellDifficultySudoku();
+    } else {
+      data = generateKillerSudoku(difficulty as Difficulty);
+    }
 
     // 根據難度設定時間限制
     const timeLimits = {

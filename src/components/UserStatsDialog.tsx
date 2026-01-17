@@ -8,12 +8,14 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { LogOut, ListOrdered, User as UserIcon, Settings, Clock, Trophy, Target } from "lucide-react";
+import { LogOut, ListOrdered, User as UserIcon, Settings, Clock, Trophy, Target, Zap } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useUserStats } from "@/hooks/useUserStats";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { DopamineDifficulty } from "@/lib/types";
+import { Leaderboard } from "@/components/Leaderboard";
+
 
 interface UserStatsDialogProps {
     user: any;
@@ -33,8 +35,11 @@ export const UserStatsDialog = ({
 }: UserStatsDialogProps) => {
     const [isOpen, setIsOpen] = useState(false);
     const { signOut } = useAuth();
-    const { stats, loading } = useUserStats(user?.id);
+    const [statsMode, setStatsMode] = useState<'normal' | 'dopamine'>('normal');
+    const [leaderboardMode, setLeaderboardMode] = useState<'normal' | 'dopamine'>('normal');
+    const { stats, loading } = useUserStats(user?.id, statsMode);
     const [activeTab, setActiveTab] = useState("profile");
+
 
     const currentThemeColor = themes.find(theme => theme.name === currentTheme)?.color || "#3b82f6";
     const themeStyle = { '--theme-color': currentThemeColor } as React.CSSProperties;
@@ -86,7 +91,6 @@ export const UserStatsDialog = ({
 
                     <TabsContent value="profile" className="max-h-[60vh] overflow-y-auto pr-1">
                         <div className="flex flex-col gap-4 py-4">
-                            {/* User Info Card */}
                             <div className="flex items-center gap-4 p-4 rounded-xl bg-secondary/20 border border-border/50">
                                 <Avatar className="h-16 w-16 rounded-xl border-2 border-[var(--theme-color)] shadow-md" style={themeStyle}>
                                     <AvatarImage src={user.user_metadata?.avatar_url} />
@@ -95,6 +99,35 @@ export const UserStatsDialog = ({
                                 <div className="flex flex-col">
                                     <h3 className="font-bold text-lg">{user.user_metadata?.full_name || 'Player'}</h3>
                                     <p className="text-sm text-muted-foreground">{user.email}</p>
+                                </div>
+                            </div>
+
+                            {/* Stats Mode Toggle */}
+                            <div className="flex justify-center my-2">
+                                <div className="bg-muted p-1 rounded-lg inline-flex">
+                                    <button
+                                        onClick={() => setStatsMode('normal')}
+                                        className={cn(
+                                            "px-4 py-1.5 rounded-md text-sm font-medium transition-all",
+                                            statsMode === 'normal'
+                                                ? "bg-white dark:bg-zinc-800 shadow-sm text-primary"
+                                                : "text-muted-foreground hover:text-foreground"
+                                        )}
+                                    >
+                                        {t('normal') || '普通'}
+                                    </button>
+                                    <button
+                                        onClick={() => setStatsMode('dopamine')}
+                                        className={cn(
+                                            "px-4 py-1.5 rounded-md text-sm font-medium transition-all flex items-center gap-1",
+                                            statsMode === 'dopamine'
+                                                ? "bg-white dark:bg-zinc-800 shadow-sm text-purple-600"
+                                                : "text-muted-foreground hover:text-foreground"
+                                        )}
+                                    >
+                                        <Zap className="h-3 w-3" />
+                                        {t('dopamine') || '多巴胺'}
+                                    </button>
                                 </div>
                             </div>
 
@@ -159,27 +192,41 @@ export const UserStatsDialog = ({
                         </div>
                     </TabsContent>
 
-                    <TabsContent value="leaderboard" className="min-h-[300px] flex items-center justify-center">
-                        <div className="text-center space-y-4 py-8">
-                            <p className="text-muted-foreground">
-                                {t('leaderboardPlaceholder') || '排行榜功能已整合至主畫面按鈕，是否要前往完整排行榜頁面？'}
-                            </p>
-                            {/* 
-                    Note: Originally the user wanted Leaderboard Integration here.
-                    However, Leaderboard is a full page or a complex modal.
-                    If we want to embed it, we need the Leaderboard Component.
-                    For now, I'll provide a button to switch to the Leaderboard Modal logic or just link.
-                    Actually, let's just use the logic from GameHeader to show the Leaderboard Modal?
-                    But this IS a Dialog. We can't easily nest Modals.
-                    So maybe we just link or keep it simple.
-                    Wait, User Request: "整合原本的排行榜視圖" (Integrate the original leaderboard view).
-                    The original view is likely a component. Let's assume we can reuse it later.
-                    For now, I'll put a placeholder or simple list if I can access the component.
-                 */}
-                            <Button onClick={() => window.location.href = '/leaderboard'}>
-                                <ListOrdered className="mr-2 h-4 w-4" />
-                                前往完整排行榜
-                            </Button>
+                    <TabsContent value="leaderboard" className="min-h-[400px]">
+                        {/* Leaderboard Mode Toggle */}
+                        <div className="flex justify-center mb-4 mt-2">
+                            <div className="bg-muted p-1 rounded-lg inline-flex">
+                                <button
+                                    onClick={() => setLeaderboardMode('normal')}
+                                    className={cn(
+                                        "px-4 py-1.5 rounded-md text-sm font-medium transition-all",
+                                        leaderboardMode === 'normal'
+                                            ? "bg-white dark:bg-zinc-800 shadow-sm text-primary"
+                                            : "text-muted-foreground hover:text-foreground"
+                                    )}
+                                >
+                                    {t('normal') || '普通'}
+                                </button>
+                                <button
+                                    onClick={() => setLeaderboardMode('dopamine')}
+                                    className={cn(
+                                        "px-4 py-1.5 rounded-md text-sm font-medium transition-all flex items-center gap-1",
+                                        leaderboardMode === 'dopamine'
+                                            ? "bg-white dark:bg-zinc-800 shadow-sm text-purple-600"
+                                            : "text-muted-foreground hover:text-foreground"
+                                    )}
+                                >
+                                    <Zap className="h-3 w-3" />
+                                    {t('dopamine') || '多巴胺'}
+                                </button>
+                            </div>
+                        </div>
+
+                        <div className="h-[400px] overflow-hidden">
+                            <Leaderboard
+                                currentUserId={user?.user_metadata?.full_name || user?.email}
+                                mode={leaderboardMode}
+                            />
                         </div>
                     </TabsContent>
                 </Tabs>

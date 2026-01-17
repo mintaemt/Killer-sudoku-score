@@ -45,7 +45,7 @@ function generateRandomSolvedGrid(): number[][] {
   for (let i = 0; i < 3; i++) {
     const blockStart = i * 3;
     const rows = [blockStart, blockStart + 1, blockStart + 2];
-    
+
     // 隨機交換行
     for (let j = 0; j < 2; j++) {
       const row1 = rows[Math.floor(Math.random() * 3)];
@@ -60,7 +60,7 @@ function generateRandomSolvedGrid(): number[][] {
   for (let i = 0; i < 3; i++) {
     const blockStart = i * 3;
     const cols = [blockStart, blockStart + 1, blockStart + 2];
-    
+
     // 隨機交換列
     for (let j = 0; j < 2; j++) {
       const col1 = cols[Math.floor(Math.random() * 3)];
@@ -97,14 +97,14 @@ function hasUniqueSolution(grid: number[][], cages: Cage[]): boolean {
   for (const cage of cages) {
     const cageValues = cage.cells.map(cell => grid[cell.row][cell.col]);
     const sum = cageValues.reduce((a, b) => a + b, 0);
-    
+
     if (sum !== cage.sum) return false;
-    
+
     // 檢查cage內是否有重複數字
     const uniqueValues = new Set(cageValues);
     if (uniqueValues.size !== cageValues.length) return false;
   }
-  
+
   return true;
 }
 
@@ -147,7 +147,7 @@ function generateRandomCages(grid: number[][]): Cage[] {
     // 決定 cage 大小 - 優先生成多格 cage
     let targetSize: number;
     const remainingPositions = allPositions.filter(pos => !used[pos.row][pos.col]).length;
-    
+
     // 如果已經達到最大單格 cage 數量，強制生成多格 cage
     if (singleCageCount >= maxSingleCages) {
       targetSize = Math.floor(Math.random() * 3) + 2; // 2-4 格
@@ -176,7 +176,7 @@ function generateRandomCages(grid: number[][]): Cage[] {
     while (cageCells.length < targetSize && attempts < maxAttempts) {
       // 獲取當前 cage 的鄰居
       const neighbors: { row: number; col: number }[] = [];
-      
+
       for (const cell of cageCells) {
         const adjacent = [
           { row: cell.row - 1, col: cell.col },
@@ -184,12 +184,12 @@ function generateRandomCages(grid: number[][]): Cage[] {
           { row: cell.row, col: cell.col - 1 },
           { row: cell.row, col: cell.col + 1 },
         ];
-        
+
         for (const adj of adjacent) {
-          if (adj.row >= 0 && adj.row < 9 && 
-              adj.col >= 0 && adj.col < 9 && 
-              !used[adj.row][adj.col] &&
-              !neighbors.some(n => n.row === adj.row && n.col === adj.col)) {
+          if (adj.row >= 0 && adj.row < 9 &&
+            adj.col >= 0 && adj.col < 9 &&
+            !used[adj.row][adj.col] &&
+            !neighbors.some(n => n.row === adj.row && n.col === adj.col)) {
             neighbors.push(adj);
           }
         }
@@ -219,11 +219,11 @@ function generateRandomCages(grid: number[][]): Cage[] {
     });
   }
 
-  console.log(`Generated ${totalCages} cages with ${singleCageCount} single-cell cages (${(singleCageCount/totalCages*100).toFixed(1)}%)`);
-  
+  console.log(`Generated ${totalCages} cages with ${singleCageCount} single-cell cages (${(singleCageCount / totalCages * 100).toFixed(1)}%)`);
+
   // 後處理：嘗試合併一些單格 cage 來進一步減少單格 cage 數量
   const optimizedCages = optimizeCages(cages, grid);
-  
+
   return optimizedCages;
 }
 
@@ -231,27 +231,27 @@ function generateRandomCages(grid: number[][]): Cage[] {
 function optimizeCages(cages: Cage[], grid: number[][]): Cage[] {
   const optimizedCages = [...cages];
   const singleCages = optimizedCages.filter(cage => cage.cells.length === 1);
-  
+
   // 如果單格 cage 數量仍然太多，嘗試合併一些
   if (singleCages.length > 6) {
     console.log(`Optimizing cages: ${singleCages.length} single-cell cages found`);
-    
+
     // 嘗試合併相鄰的單格 cage
     for (let i = 0; i < singleCages.length - 1 && singleCages.length > 6; i++) {
       const cage1 = singleCages[i];
       const cell1 = cage1.cells[0];
-      
+
       // 尋找相鄰的單格 cage
       for (let j = i + 1; j < singleCages.length; j++) {
         const cage2 = singleCages[j];
         const cell2 = cage2.cells[0];
-        
+
         // 檢查是否相鄰
         const isAdjacent = (
           (Math.abs(cell1.row - cell2.row) === 1 && cell1.col === cell2.col) ||
           (Math.abs(cell1.col - cell2.col) === 1 && cell1.row === cell2.row)
         );
-        
+
         if (isAdjacent) {
           // 合併兩個單格 cage
           const mergedCage: Cage = {
@@ -259,15 +259,15 @@ function optimizeCages(cages: Cage[], grid: number[][]): Cage[] {
             cells: [cell1, cell2],
             sum: cage1.sum + cage2.sum
           };
-          
+
           // 替換原來的 cage
           const cage1Index = optimizedCages.findIndex(c => c.id === cage1.id);
           const cage2Index = optimizedCages.findIndex(c => c.id === cage2.id);
-          
+
           if (cage1Index !== -1 && cage2Index !== -1) {
             optimizedCages[cage1Index] = mergedCage;
             optimizedCages.splice(cage2Index, 1);
-            
+
             // 更新 singleCages 列表
             singleCages.splice(j, 1);
             singleCages.splice(i, 1);
@@ -277,11 +277,11 @@ function optimizeCages(cages: Cage[], grid: number[][]): Cage[] {
         }
       }
     }
-    
+
     const finalSingleCages = optimizedCages.filter(cage => cage.cells.length === 1).length;
-    console.log(`After optimization: ${finalSingleCages} single-cell cages (${(finalSingleCages/optimizedCages.length*100).toFixed(1)}%)`);
+    console.log(`After optimization: ${finalSingleCages} single-cell cages (${(finalSingleCages / optimizedCages.length * 100).toFixed(1)}%)`);
   }
-  
+
   return optimizedCages;
 }
 
@@ -289,10 +289,10 @@ function optimizeCages(cages: Cage[], grid: number[][]): Cage[] {
 function generatePuzzleId(grid: number[][], cages: Cage[]): string {
   try {
     const gridString = grid.map(row => row.join('')).join('');
-    const cageString = cages.map(cage => 
+    const cageString = cages.map(cage =>
       `${cage.sum}:${cage.cells.map(c => `${c.row},${c.col}`).join(';')}`
     ).join('|');
-    
+
     // 使用簡單的哈希函數
     let hash = 0;
     const str = gridString + cageString;
@@ -301,7 +301,7 @@ function generatePuzzleId(grid: number[][], cages: Cage[]): string {
       hash = ((hash << 5) - hash) + char;
       hash = hash & hash; // 轉換為32位整數
     }
-    
+
     return Math.abs(hash).toString(36);
   } catch (error) {
     console.error('Error generating puzzle ID:', error);
@@ -315,10 +315,10 @@ export function generateKillerSudoku(difficulty: Difficulty): KillerSudokuData {
     const solution = generateRandomSolvedGrid();
     const cages = generateRandomCages(solution);
     const puzzleId = generatePuzzleId(solution, cages);
-    
+
     // 記錄已生成的題目（簡化版本）
     generatedPuzzles.add(puzzleId);
-    
+
     // 根據難度決定顯示的數字數量
     const givensCount = {
       easy: 30,      // 簡單：30個數字，適合初學者
@@ -344,7 +344,7 @@ export function generateKillerSudoku(difficulty: Difficulty): KillerSudokuData {
           positions.push({ row: i, col: j });
         }
       }
-      
+
       // 隨機選擇一個位置
       const randomPos = positions[Math.floor(Math.random() * positions.length)];
       grid[randomPos.row][randomPos.col].given = true;
@@ -375,25 +375,25 @@ export function generateKillerSudoku(difficulty: Difficulty): KillerSudokuData {
     return { grid, cages, puzzleId };
   } catch (error) {
     console.error('Critical error in generateKillerSudoku:', error);
-    
+
     // 返回一個最基本的題目作為後備
-    const fallbackGrid: Cell[][] = Array(9).fill(null).map(() => 
+    const fallbackGrid: Cell[][] = Array(9).fill(null).map(() =>
       Array(9).fill(null).map(() => ({
         value: null,
         solution: 1,
         given: false,
       }))
     );
-    
+
     const fallbackCages: Cage[] = [{
       id: 0,
       cells: [{ row: 0, col: 0 }],
       sum: 1
     }];
-    
-    return { 
-      grid: fallbackGrid, 
-      cages: fallbackCages, 
+
+    return {
+      grid: fallbackGrid,
+      cages: fallbackCages,
       puzzleId: 'fallback-' + Math.random().toString(36).substring(2)
     };
   }
@@ -402,13 +402,13 @@ export function generateKillerSudoku(difficulty: Difficulty): KillerSudokuData {
 /**
  * 生成地獄難度數獨 - 無給定數字，限制單格 cage
  */
-function generateHellDifficultySudoku(): KillerSudokuData {
+export function generateHellDifficultySudoku(): KillerSudokuData {
   try {
     const solvedGrid = generateRandomSolvedGrid();
-    
+
     // 生成 cage，但限制單格 cage 數量
     let cages = generateRandomCages(solvedGrid);
-    
+
     // 檢查單格 cage 數量，如果超過2個則重新生成
     let attempts = 0;
     while (attempts < 20) { // 增加嘗試次數
@@ -416,37 +416,37 @@ function generateHellDifficultySudoku(): KillerSudokuData {
       if (singleCageCount <= 2) {
         break;
       }
-      
+
       // 重新生成 cage
       cages = generateRandomCages(solvedGrid);
       attempts++;
     }
-    
+
     // 如果仍然超過2個單格 cage，手動合併一些
     const singleCages = cages.filter(cage => cage.cells.length === 1);
     if (singleCages.length > 2) {
       console.log(`Hell mode: Found ${singleCages.length} single cages, merging excess ones`);
-      
+
       // 移除多餘的單格 cage
       const cagesToRemove = singleCages.slice(2);
       cages = cages.filter(cage => !cagesToRemove.includes(cage));
-      
+
       // 將移除的單格合併到相鄰的 cage 中
       cagesToRemove.forEach(cageToRemove => {
         const cell = cageToRemove.cells[0];
         const { row, col } = cell;
-        
+
         // 尋找相鄰的 cage
         const neighbors = [
           { row: row - 1, col }, { row: row + 1, col },
           { row, col: col - 1 }, { row, col: col + 1 }
         ].filter(pos => pos.row >= 0 && pos.row < 9 && pos.col >= 0 && pos.col < 9);
-        
+
         for (const neighbor of neighbors) {
-          const adjacentCage = cages.find(cage => 
+          const adjacentCage = cages.find(cage =>
             cage.cells.some(c => c.row === neighbor.row && c.col === neighbor.col)
           );
-          
+
           if (adjacentCage) {
             // 合併到相鄰 cage
             adjacentCage.cells.push(cell);
@@ -456,7 +456,7 @@ function generateHellDifficultySudoku(): KillerSudokuData {
         }
       });
     }
-    
+
     // 確保所有格子都被分配到 cage 中
     const usedCells = new Set<string>();
     cages.forEach(cage => {
@@ -464,7 +464,7 @@ function generateHellDifficultySudoku(): KillerSudokuData {
         usedCells.add(`${cell.row}-${cell.col}`);
       });
     });
-    
+
     // 如果還有未分配的格子，創建額外的 cage
     for (let row = 0; row < 9; row++) {
       for (let col = 0; col < 9; col++) {
@@ -477,40 +477,40 @@ function generateHellDifficultySudoku(): KillerSudokuData {
         }
       }
     }
-    
+
     // 地獄難度：不提供任何給定數字
-    const grid: Cell[][] = solvedGrid.map(row => 
+    const grid: Cell[][] = solvedGrid.map(row =>
       row.map(cell => ({
         value: null,
         solution: cell,
         given: false,
       }))
     );
-    
+
     const puzzleId = 'hell-' + Math.random().toString(36).substring(2);
     generatedPuzzles.add(puzzleId);
-    
+
     console.log(`Hell mode generated: ${cages.length} cages, ${cages.filter(c => c.cells.length === 1).length} single cages`);
-    
+
     return { grid, cages, puzzleId };
   } catch (error) {
     console.error('Error generating hell difficulty sudoku:', error);
-    
+
     // 回退方案 - 生成一個完整的數獨
     const solvedGrid = generateRandomSolvedGrid();
     const cages = generateRandomCages(solvedGrid);
-    
-    const grid: Cell[][] = solvedGrid.map(row => 
+
+    const grid: Cell[][] = solvedGrid.map(row =>
       row.map(cell => ({
         value: null,
         solution: cell,
         given: false,
       }))
     );
-    
-    return { 
-      grid, 
-      cages, 
+
+    return {
+      grid,
+      cages,
       puzzleId: 'hell-fallback-' + Math.random().toString(36).substring(2)
     };
   }
@@ -535,12 +535,12 @@ const PITY_THRESHOLD = 20; // 20次保底
 export function generateDopamineSudoku(): { data: KillerSudokuData; difficulty: DopamineDifficulty } {
   // 增加保底計數器
   dopaminePityCounter++;
-  
+
   // 檢查是否觸發保底機制
   const isPityTriggered = dopaminePityCounter >= PITY_THRESHOLD;
-  
+
   let difficulty: DopamineDifficulty;
-  
+
   if (isPityTriggered) {
     // 保底觸發，必定生成地獄模式
     difficulty = 'hell';
@@ -548,7 +548,7 @@ export function generateDopamineSudoku(): { data: KillerSudokuData; difficulty: 
   } else {
     // 正常隨機生成，按照稀有度設計機率分佈
     const random = Math.random();
-    
+
     if (random < 0.542) {
       difficulty = 'easy';      // 54.2% - R級，最常見
     } else if (random < 0.942) {
@@ -562,15 +562,15 @@ export function generateDopamineSudoku(): { data: KillerSudokuData; difficulty: 
       dopaminePityCounter = 0; // 如果隨機抽到地獄，也重置計數器
     }
   }
-  
+
   let data: KillerSudokuData;
-  
+
   if (difficulty === 'hell') {
     data = generateHellDifficultySudoku();
   } else {
     data = generateKillerSudoku(difficulty as Difficulty);
   }
-  
+
   return { data, difficulty };
 }
 
