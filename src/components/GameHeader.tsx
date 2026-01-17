@@ -119,7 +119,7 @@ const UserButton = ({
   // 2. 已登入 (Google) -> 顯示 Avatar
   // Shadow Fix: 移除 overflow-hidden，將 rounded-md 套用到 inner Component
   return (
-    <div className="relative" ref={dropdownRef}>
+    <div className="relative shrink-0" ref={dropdownRef}>
       <CustomTooltip content={user.user_metadata?.full_name || user.email} variant="glass">
         <Button
           variant="outline"
@@ -127,7 +127,7 @@ const UserButton = ({
           onClick={() => setIsOpen(!isOpen)}
           // 關鍵修正：移除 overflow-hidden 以顯示完整陰影
           // 圖片裁切交給 Avatar 元件處理
-          className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md p-0 w-9 aspect-square"
+          className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md p-0 w-9 aspect-square shrink-0"
           style={{ borderColor: currentThemeColor }}
         >
           <Avatar className="h-full w-full rounded-md">
@@ -293,17 +293,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
             </Button>
           </CustomTooltip>
 
-          {/* 新遊戲按鈕 */}
-          <CustomTooltip content={t('newGame')} variant="glass">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={onNewGame}
-              className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md"
-            >
-              <RotateCcw className="h-3 w-3 md:h-4 md:w-4" />
-            </Button>
-          </CustomTooltip>
+
 
           <ThemeToggle />
           <LanguageToggle />
@@ -343,6 +333,18 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
               </div>
             )}
           </div>
+
+          {/* 新遊戲按鈕 - 移至用戶按鈕左側 */}
+          <CustomTooltip content={t('newGame')} variant="glass">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={onNewGame}
+              className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md flex-shrink-0"
+            >
+              <RotateCcw className="h-3 w-3 md:h-4 md:w-4" />
+            </Button>
+          </CustomTooltip>
 
           {/* 用戶狀態按鈕 - 最右側 */}
           <UserButton
