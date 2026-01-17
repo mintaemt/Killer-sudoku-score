@@ -35,9 +35,9 @@ export const UserStatsDialog = ({
 }: UserStatsDialogProps) => {
     const [isOpen, setIsOpen] = useState(false);
     const { signOut } = useAuth();
-    const [statsMode, setStatsMode] = useState<'normal' | 'dopamine'>('normal');
-    const [leaderboardMode, setLeaderboardMode] = useState<'normal' | 'dopamine'>('normal');
-    const { stats, loading } = useUserStats(user?.id, statsMode);
+    const { signOut } = useAuth();
+    const [viewMode, setViewMode] = useState<'normal' | 'dopamine'>('normal');
+    const { stats, loading } = useUserStats(user?.id, viewMode);
     const [activeTab, setActiveTab] = useState("profile");
 
 
@@ -77,10 +77,40 @@ export const UserStatsDialog = ({
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px] md:max-w-[600px] glass border-none shadow-2xl">
                 <DialogHeader>
-                    <DialogTitle className="text-xl font-bold flex items-center gap-2">
-                        <UserIcon className="h-5 w-5" />
-                        {t('playerHub') || '玩家中心'}
-                    </DialogTitle>
+                    <div className="flex items-center justify-between pr-8">
+                        <DialogTitle className="text-xl font-bold flex items-center gap-2">
+                            <UserIcon className="h-5 w-5" />
+                            {t('playerHub') || '玩家中心'}
+                        </DialogTitle>
+
+                        {/* Unified Mode Toggle */}
+                        <div className="bg-muted/50 p-1 rounded-lg flex items-center gap-1">
+                            <button
+                                onClick={() => setViewMode('normal')}
+                                className={cn(
+                                    "px-3 py-1 rounded-md text-xs font-medium transition-all",
+                                    viewMode === 'normal'
+                                        ? "bg-[var(--theme-color)] text-white shadow-sm"
+                                        : "text-muted-foreground hover:text-foreground hover:bg-transparent"
+                                )}
+                                style={viewMode === 'normal' ? themeStyle : undefined}
+                            >
+                                {t('normal') || '普通'}
+                            </button>
+                            <button
+                                onClick={() => setViewMode('dopamine')}
+                                className={cn(
+                                    "px-3 py-1 rounded-md text-xs font-medium transition-all",
+                                    viewMode === 'dopamine'
+                                        ? "bg-[var(--theme-color)] text-white shadow-sm"
+                                        : "text-muted-foreground hover:text-foreground hover:bg-transparent"
+                                )}
+                                style={viewMode === 'dopamine' ? themeStyle : undefined}
+                            >
+                                {t('dopamine') || '多巴胺'}
+                            </button>
+                        </div>
+                    </div>
                 </DialogHeader>
 
                 <Tabs defaultValue="profile" value={activeTab} onValueChange={setActiveTab} className="w-full">
@@ -224,7 +254,7 @@ export const UserStatsDialog = ({
                         <div className="h-[400px] overflow-hidden">
                             <Leaderboard
                                 currentUserId={user?.user_metadata?.full_name || user?.email}
-                                mode={leaderboardMode}
+                                mode={viewMode}
                             />
                         </div>
                     </TabsContent>

@@ -96,7 +96,8 @@ const translations = {
     maxCombo: 'Max Combo',
 
     // 排行榜
-    leaderboard: 'Leaderboard',
+    leaderboard: 'World Ranking',
+
     viewLeaderboard: 'View Leaderboard',
     viewHighestScore: 'View Highest Score',
     all: 'All',
@@ -480,7 +481,8 @@ const translations = {
     maxCombo: '最大連擊',
 
     // 排行榜
-    leaderboard: '排行榜',
+    leaderboard: '世界排名',
+
     viewLeaderboard: '查看排行榜',
     viewHighestScore: '查看最高分',
     all: '全部',
