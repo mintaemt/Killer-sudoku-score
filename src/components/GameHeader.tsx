@@ -127,7 +127,7 @@ const UserButton = ({
           onClick={() => setIsOpen(!isOpen)}
           // 關鍵修正：移除 overflow-hidden 以顯示完整陰影
           // 圖片裁切交給 Avatar 元件處理
-          className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md p-0"
+          className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md p-0 w-9 aspect-square"
           style={{ borderColor: currentThemeColor }}
         >
           <Avatar className="h-full w-full rounded-md">

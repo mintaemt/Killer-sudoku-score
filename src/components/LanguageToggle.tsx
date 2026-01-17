@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Globe, Languages } from 'lucide-react';
@@ -38,6 +38,7 @@ import { CustomTooltip } from "@/components/CustomTooltip";
 export const LanguageToggle = () => {
   const [currentLanguage, setCurrentLanguage] = useState<Language>('en');
   const [isOpen, setIsOpen] = useState(false);
+  const buttonRef = useRef<HTMLButtonElement>(null);
   const { t } = useLanguage();
 
   // 初始化語言
@@ -59,6 +60,11 @@ export const LanguageToggle = () => {
 
     // 這裡可以觸發語言變更事件
     window.dispatchEvent(new CustomEvent('languageChange', { detail: { language } }));
+
+    // Remove focus to prevent sticky tooltip/styles
+    if (buttonRef.current) {
+      buttonRef.current.blur();
+    }
   };
 
   const currentLangData = languages.find(lang => lang.code === currentLanguage) || languages[0];
@@ -72,9 +78,9 @@ export const LanguageToggle = () => {
             size="sm"
             className={cn(
               "transition-smooth hover:scale-105 active:scale-95",
-              "shadow-apple-sm hover:shadow-apple-md flex-shrink-0",
-              isOpen && "bg-accent text-accent-foreground border-primary/30 shadow-apple-md"
+              "shadow-apple-sm hover:shadow-apple-md flex-shrink-0"
             )}
+            ref={buttonRef}
           >
             <Globe className="h-3 w-3 md:h-4 md:w-4" />
           </Button>
