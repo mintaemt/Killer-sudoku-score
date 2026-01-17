@@ -17,6 +17,7 @@ import { CookiePolicy } from "./components/CookiePolicy";
 import { Contact } from "./components/Contact";
 import { TestRoute } from "./components/TestRoute";
 import { MigrationModal } from "./components/MigrationModal";
+import { CatOverlay } from "./components/CatOverlay";
 
 import { ThemeColorProvider } from "@/contexts/ThemeColorContext";
 import { AuthProvider } from "@/contexts/AuthContext";
@@ -34,6 +35,7 @@ const App = () => (
             <Sonner />
             <MigrationModal />
             <BrowserRouter>
+              <CatOverlay />
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/leaderboard" element={<LeaderboardPage />} />
