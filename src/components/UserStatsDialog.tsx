@@ -89,29 +89,30 @@ export const UserStatsDialog = ({
                         <TabsTrigger value="leaderboard">{t('leaderboard') || '排行榜'}</TabsTrigger>
                     </TabsList>
 
-                    <TabsContent value="profile" className="h-[500px] overflow-y-auto pr-1">
-                        <div className="flex flex-col gap-4 py-4">
-                            <div className="flex items-center gap-4 p-4 rounded-xl bg-secondary/20 border border-border/50">
-                                <Avatar className="h-16 w-16 rounded-xl border-2 border-[var(--theme-color)] shadow-md" style={themeStyle}>
-                                    <AvatarImage src={user.user_metadata?.avatar_url} />
-                                    <AvatarFallback className="rounded-xl text-lg font-bold">{user.email?.slice(0, 2).toUpperCase()}</AvatarFallback>
-                                </Avatar>
-                                <div className="flex flex-col">
-                                    <h3 className="font-bold text-lg">{user.user_metadata?.full_name || 'Player'}</h3>
-                                    <p className="text-sm text-muted-foreground">{user.email}</p>
-                                </div>
-                            </div>
+                    <TabsContent value="profile" className="h-[600px] overflow-y-auto pr-1">
 
-                            {/* Stats Mode Toggle */}
-                            <div className="flex justify-center my-2">
-                                <div className="bg-muted p-1 rounded-lg inline-flex">
+                        <div className="flex flex-col gap-4 py-4">
+                            <div className="flex items-center justify-between p-3 rounded-xl bg-secondary/20 border border-border/50">
+                                <div className="flex items-center gap-3">
+                                    <Avatar className="h-12 w-12 rounded-lg border-2 border-[var(--theme-color)] shadow-sm" style={themeStyle}>
+                                        <AvatarImage src={user.user_metadata?.avatar_url} />
+                                        <AvatarFallback className="rounded-lg text-base font-bold">{user.email?.slice(0, 2).toUpperCase()}</AvatarFallback>
+                                    </Avatar>
+                                    <div className="flex flex-col">
+                                        <h3 className="font-bold text-base leading-tight">{user.user_metadata?.full_name || 'Player'}</h3>
+                                        <p className="text-xs text-muted-foreground">{user.email}</p>
+                                    </div>
+                                </div>
+
+                                {/* Compact Stats Mode Toggle */}
+                                <div className="bg-muted/50 p-1 rounded-lg flex items-center gap-1">
                                     <button
                                         onClick={() => setStatsMode('normal')}
                                         className={cn(
-                                            "px-4 py-1.5 rounded-md text-sm font-medium transition-all",
+                                            "px-3 py-1 rounded-md text-xs font-medium transition-all",
                                             statsMode === 'normal'
                                                 ? "bg-[var(--theme-color)] text-white shadow-sm"
-                                                : "text-muted-foreground hover:bg-background/50"
+                                                : "text-muted-foreground hover:text-foreground hover:bg-transparent"
                                         )}
                                         style={statsMode === 'normal' ? themeStyle : undefined}
                                     >
@@ -120,10 +121,10 @@ export const UserStatsDialog = ({
                                     <button
                                         onClick={() => setStatsMode('dopamine')}
                                         className={cn(
-                                            "px-4 py-1.5 rounded-md text-sm font-medium transition-all",
+                                            "px-3 py-1 rounded-md text-xs font-medium transition-all",
                                             statsMode === 'dopamine'
                                                 ? "bg-[var(--theme-color)] text-white shadow-sm"
-                                                : "text-muted-foreground hover:bg-background/50"
+                                                : "text-muted-foreground hover:text-foreground hover:bg-transparent"
                                         )}
                                         style={statsMode === 'dopamine' ? themeStyle : undefined}
                                     >
