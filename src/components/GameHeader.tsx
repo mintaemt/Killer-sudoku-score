@@ -87,26 +87,26 @@ const UserButton = ({
     setIsOpen(false);
   };
 
-  // 1. 未登入 (或訪客) -> 顯示 LogIn Icon (填滿主題色)
-  if (!user || user.app_metadata?.provider !== 'google') {
-    const isAnonymous = user?.is_anonymous;
+  // 1. 未登入 (或訪客) -> 顯示 LogIn Icon (圓形，Outline 風格，字/框為主體色)
+  // 修正邏輯：只要是匿名用戶或未登入，就顯示登入按鈕。移除 strict provider check 以避免 redirect loop。
+  const isAnonymous = !user || user.is_anonymous;
 
-    if (!user || isAnonymous) {
-      return (
-        <Button
-          size="sm"
-          onClick={handleLogin}
-          className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md border-0"
-          title={t('login')}
-          style={{
-            backgroundColor: currentThemeColor,
-            color: '#ffffff'
-          }}
-        >
-          <LogIn className="h-3 w-3 md:h-4 md:w-4" />
-        </Button>
-      );
-    }
+  if (isAnonymous) {
+    return (
+      <Button
+        variant="ghost" // 改回 ghost/outline
+        size="icon"     // 確保是正方形/圓形 (icon size usually implies square)
+        onClick={handleLogin}
+        className="rounded-full h-8 w-8 md:h-9 md:w-9 p-0 border-2 transition-smooth hover:scale-105 active:scale-95 shadow-sm" // 加上 rounded-full 確保與 Avatar 一致
+        title={t('login')}
+        style={{
+          borderColor: currentThemeColor,
+          color: currentThemeColor
+        }}
+      >
+        <LogIn className="h-4 w-4 md:h-5 md:w-5" /> {/* 稍微加大 Icon */}
+      </Button>
+    );
   }
 
   // 2. 已登入 (Google) -> 顯示 Avatar (圓形)
@@ -194,6 +194,30 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
   const { stats, loading: statsLoading } = useUserStats(user?.id || null, viewMode);
   const { t } = useLanguage();
 
+  // 計算標題長度以自動縮放
+  const titleText = t('gameTitle');
+  const titleLength = titleText.length;
+  // 簡易字體大小計算：基準 23px (Mobile) / 26px (Desktop)
+  // 如果字數 > 6 (CJK 或是長單字)，開始縮小
+  const getResponsiveTitleSize = () => {
+    // 這裡使用 inline style 的 fontSize 計算
+    // Mobile: 基準 20px (稍微縮小以保險)，每多 1 字減 1.5px，最小 14px
+    // Desktop: 基準 26px，每多 1 字減 1.5px，最小 16px
+    const baseMobile = 22;
+    const baseDesktop = 28;
+    const deduction = Math.max(0, titleLength - 5) * 2; // 超過 5 字，每字扣 2px
+
+    const sizeMobile = Math.max(14, baseMobile - deduction);
+    const sizeDesktop = Math.max(16, baseDesktop - deduction);
+
+    return {
+      mobile: `${sizeMobile}px`,
+      desktop: `${sizeDesktop}px`
+    };
+  };
+
+  const titleSizes = getResponsiveTitleSize();
+
   // Handle click outside to close dropdowns
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -219,16 +243,16 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
       <div className="flex items-center">
         {/* 左側：標題 */}
         <div className="flex items-center gap-2 md:gap-8 flex-1 min-w-0">
-          <div className="flex flex-col items-start min-w-0">
+          <div className="flex flex-col items-start min-w-0 flex-1">
             <h1
-              className="font-bold tracking-tight leading-tight whitespace-nowrap overflow-hidden text-ellipsis w-full"
+              className="font-bold tracking-tight leading-tight whitespace-nowrap overflow-hidden w-full text-left"
               style={{
-                fontSize: isVisitorMode
-                  ? (window.innerWidth >= 768 ? '26px' : 'clamp(16px, 5vw, 23px)')
-                  : undefined
+                // 使用 CSS 變數或直接 style 實作 RWD 縮放
+                // 簡化：直接設定 responsive font size style
+                fontSize: window.innerWidth >= 768 ? titleSizes.desktop : titleSizes.mobile
               }}
             >
-              {t('gameTitle')}
+              {titleText}
             </h1>
           </div>
         </div>
@@ -244,6 +268,17 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
             title={t('gameRules')}
           >
             <Info className="h-3 w-3 md:h-4 md:w-4" />
+          </Button>
+
+          {/* 新遊戲按鈕 */}
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={onNewGame}
+            className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md"
+            title={t('newGame')}
+          >
+            <RotateCcw className="h-3 w-3 md:h-4 md:w-4" />
           </Button>
 
           <ThemeToggle />
@@ -282,17 +317,6 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
               </div>
             )}
           </div>
-
-          {/* 新遊戲按鈕 - 移至用戶按鈕左側 */}
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={onNewGame}
-            className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md"
-            title={t('newGame')}
-          >
-            <RotateCcw className="h-3 w-3 md:h-4 md:w-4" />
-          </Button>
 
           {/* 用戶狀態按鈕 - 最右側 */}
           <UserButton
