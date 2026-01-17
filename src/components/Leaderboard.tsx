@@ -156,11 +156,11 @@ export const Leaderboard = ({ currentUserId, onClose, mode = 'normal' }: Leaderb
               </div>
 
               {/* Pagination Controls */}
-              {totalPages > 1 && (
-                <div className="flex items-center justify-between py-4 shrink-0">
-                  <div className="text-xs text-muted-foreground">
-                    {t('total') || '總計'}: {leaderboard.length}
-                  </div>
+              <div className="flex items-center justify-between py-4 shrink-0 border-t mt-2">
+                <div className="text-xs text-muted-foreground">
+                  {t('total')}: {leaderboard.length}
+                </div>
+                {totalPages > 1 && (
                   <div className="flex items-center gap-2">
                     <Button
                       variant="outline"
@@ -184,8 +184,8 @@ export const Leaderboard = ({ currentUserId, onClose, mode = 'normal' }: Leaderb
                       <ChevronRight className="h-4 w-4" />
                     </Button>
                   </div>
-                </div>
-              )}
+                )}
+              </div>
             </>
           )}
         </TabsContent>

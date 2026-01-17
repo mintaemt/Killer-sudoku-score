@@ -142,6 +142,7 @@ const translations = {
     playerHub: 'Player Hub',
     myStats: 'My Stats',
     statsMode: 'Stats Mode',
+    total: 'Total',
 
 
     // 遊戲規則
