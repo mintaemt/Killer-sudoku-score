@@ -134,33 +134,6 @@ export const UserStatsDialog = ({
                                     </div>
                                 </div>
 
-                                {/* Compact Stats Mode Toggle */}
-                                <div className="bg-muted/50 p-1 rounded-lg flex items-center gap-1">
-                                    <button
-                                        onClick={() => setStatsMode('normal')}
-                                        className={cn(
-                                            "px-3 py-1 rounded-md text-xs font-medium transition-all",
-                                            statsMode === 'normal'
-                                                ? "bg-[var(--theme-color)] text-white shadow-sm"
-                                                : "text-muted-foreground hover:text-foreground hover:bg-transparent"
-                                        )}
-                                        style={statsMode === 'normal' ? themeStyle : undefined}
-                                    >
-                                        {t('normal') || '普通'}
-                                    </button>
-                                    <button
-                                        onClick={() => setStatsMode('dopamine')}
-                                        className={cn(
-                                            "px-3 py-1 rounded-md text-xs font-medium transition-all",
-                                            statsMode === 'dopamine'
-                                                ? "bg-[var(--theme-color)] text-white shadow-sm"
-                                                : "text-muted-foreground hover:text-foreground hover:bg-transparent"
-                                        )}
-                                        style={statsMode === 'dopamine' ? themeStyle : undefined}
-                                    >
-                                        {t('dopamine') || '多巴胺'}
-                                    </button>
-                                </div>
                             </div>
 
                             {/* Overall Stats Grid */}
@@ -220,36 +193,7 @@ export const UserStatsDialog = ({
                         </div>
                     </TabsContent>
 
-                    <TabsContent value="leaderboard" className="min-h-[400px]">
-                        {/* Leaderboard Mode Toggle */}
-                        <div className="flex justify-center mb-4 mt-2">
-                            <div className="bg-muted p-1 rounded-lg inline-flex">
-                                <button
-                                    onClick={() => setLeaderboardMode('normal')}
-                                    className={cn(
-                                        "px-4 py-1.5 rounded-md text-sm font-medium transition-all",
-                                        leaderboardMode === 'normal'
-                                            ? "bg-[var(--theme-color)] text-white shadow-sm"
-                                            : "text-muted-foreground hover:bg-background/50"
-                                    )}
-                                    style={leaderboardMode === 'normal' ? themeStyle : undefined}
-                                >
-                                    {t('normal') || '普通'}
-                                </button>
-                                <button
-                                    onClick={() => setLeaderboardMode('dopamine')}
-                                    className={cn(
-                                        "px-4 py-1.5 rounded-md text-sm font-medium transition-all",
-                                        leaderboardMode === 'dopamine'
-                                            ? "bg-[var(--theme-color)] text-white shadow-sm"
-                                            : "text-muted-foreground hover:bg-background/50"
-                                    )}
-                                    style={leaderboardMode === 'dopamine' ? themeStyle : undefined}
-                                >
-                                    {t('dopamine') || '多巴胺'}
-                                </button>
-                            </div>
-                        </div>
+                    <TabsContent value="leaderboard" className="h-[600px] flex flex-col pt-2">
 
                         <div className="h-[400px] overflow-hidden">
                             <Leaderboard
