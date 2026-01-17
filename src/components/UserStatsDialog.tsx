@@ -38,7 +38,6 @@ export const UserStatsDialog = ({
 
     const [viewMode, setViewMode] = useState<'normal' | 'dopamine'>('normal');
     const { stats, loading } = useUserStats(user?.id, viewMode);
-    const { stats, loading } = useUserStats(user?.id, viewMode);
 
 
 
@@ -114,7 +113,7 @@ export const UserStatsDialog = ({
                     </div>
                 </DialogHeader>
 
-                <Tabs defaultValue="profile" value={activeTab} onValueChange={setActiveTab} className="w-full">
+                <Tabs defaultValue="profile" className="w-full">
                     <TabsList className="grid w-full grid-cols-2">
                         <TabsTrigger value="profile">{t('myStats') || '個人戰績'}</TabsTrigger>
                         <TabsTrigger value="leaderboard">{t('leaderboard') || '世界排名'}</TabsTrigger>
