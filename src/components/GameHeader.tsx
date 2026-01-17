@@ -5,10 +5,11 @@ import { useAuth } from "@/contexts/AuthContext";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { LanguageToggle } from "@/components/LanguageToggle";
 import { cn } from "@/lib/utils";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useLayoutEffect } from "react";
 import { useUser } from "@/hooks/useUser";
 import { useUserStats } from "@/hooks/useUserStats";
 import { useLanguage } from "@/hooks/useLanguage";
+import { CustomTooltip } from "@/components/CustomTooltip";
 
 interface GameHeaderProps {
   onNewGame: () => void;
@@ -88,94 +89,79 @@ const UserButton = ({
     setIsOpen(false);
   };
 
-  // 1. 未登入 (或訪客) -> 顯示 LogIn Icon (標準導角，Outline 風格，字/框為主體色)
-  // 修正邏輯：只要是匿名用戶或未登入，就顯示登入按鈕。移除 strict provider check 以避免 redirect loop。
+  // 1. 未登入 (或訪客) -> 顯示 LogIn Icon (與其他按鈕一致樣式)
   const isAnonymous = !user || user.is_anonymous;
 
   if (isAnonymous) {
     return (
-      <Button
-        variant="ghost"
-        size="icon"     // 使用 icon size 配合自定義寬高
-        onClick={handleLogin}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        className="rounded-md h-8 w-8 md:h-9 md:w-9 p-0 border-2 transition-smooth hover:scale-105 active:scale-95 shadow-sm" // 改為 rounded-md
-        title={t('login')}
-        style={{
-          borderColor: currentThemeColor,
-          backgroundColor: isHovered ? currentThemeColor : 'transparent',
-          color: isHovered ? '#ffffff' : currentThemeColor
-        }}
-      >
-        <LogIn className="h-4 w-4 md:h-5 md:w-5" />
-      </Button>
+      <CustomTooltip content={t('login')} variant="glass">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={handleLogin}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md"
+          style={{
+            borderColor: currentThemeColor,
+            // Removed specific backgroundColor logic to let shadcn's variant="outline" handle the default background (white/dark)
+            // Only overriding text color on hover if needed, but for now let's keep it simple to match other buttons.
+            // If we want color on hover, we can do:
+            color: isHovered ? currentThemeColor : undefined
+          }}
+        >
+          <LogIn className="h-3 w-3 md:h-4 md:w-4" style={{ color: isHovered ? undefined : currentThemeColor }} />
+        </Button>
+      </CustomTooltip>
     );
   }
 
-  // 2. 已登入 (Google) -> 顯示 Avatar (標準導角)
+  // 2. 已登入 (Google) -> 顯示 Avatar
+  // Shadow Fix: 移除 overflow-hidden，將 rounded-md 套用到 inner Component
   return (
     <div className="relative" ref={dropdownRef}>
-      <Button
-        variant="ghost"
-        size="icon"
-        onClick={() => setIsOpen(!isOpen)}
-        className="rounded-md h-8 w-8 md:h-9 md:w-9 p-0 border-2 transition-all hover:scale-105 active:scale-95 shadow-sm overflow-hidden" // 改為 rounded-md
-        style={{ borderColor: currentThemeColor }}
-      >
-        <Avatar className="h-full w-full rounded-none"> {/* 設為 rounded-none 或 rounded-md 讓它填滿方形按鈕 */}
-          <AvatarImage src={user.user_metadata?.avatar_url} alt={user.user_metadata?.full_name || user.email} className="object-cover" />
-          <AvatarFallback className="rounded-none">{user.email?.slice(0, 2).toUpperCase()}</AvatarFallback>
-        </Avatar>
-      </Button>
+      <CustomTooltip content={user.user_metadata?.full_name || user.email} variant="glass">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => setIsOpen(!isOpen)}
+          // 關鍵修正：移除 overflow-hidden 以顯示完整陰影
+          // 圖片裁切交給 Avatar 元件處理
+          className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md p-0"
+          style={{ borderColor: currentThemeColor }}
+        >
+          <Avatar className="h-full w-full rounded-md">
+            <AvatarImage
+              src={user.user_metadata?.avatar_url}
+              alt={user.user_metadata?.full_name || user.email}
+              className="object-cover rounded-md"
+            />
+            <AvatarFallback className="rounded-md">{user.email?.slice(0, 2).toUpperCase()}</AvatarFallback>
+          </Avatar>
+        </Button>
+      </CustomTooltip>
 
       {isOpen && (
         <div className="absolute top-full right-0 mt-1 bg-background/95 backdrop-blur-sm border rounded-md shadow-lg z-[9999] p-3 min-w-[200px] dropdown-menu">
+          {/* Dropdown Content */}
           <div className="space-y-3">
-            {/* 用戶資訊 */}
             <div className="text-center border-b pb-2">
               <div className="text-sm font-bold truncate">{user.user_metadata?.full_name}</div>
               <div className="text-xs text-muted-foreground truncate">{user.email}</div>
             </div>
-
-            {/* 排行榜選項 */}
             <div className="space-y-1">
               <div className="text-xs font-medium text-muted-foreground px-1 mb-1">{t('viewLeaderboard')}</div>
-
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => {
-                  onShowLeaderboard('normal');
-                  setIsOpen(false);
-                }}
-                className="w-full text-xs justify-start h-8"
-              >
+              <Button variant="ghost" size="sm" onClick={() => { onShowLeaderboard('normal'); setIsOpen(false); }} className="w-full text-xs justify-start h-8">
                 <ListOrdered className="h-3 w-3 mr-2 text-blue-500" />
                 {t('normal')}
               </Button>
-
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => {
-                  onShowLeaderboard('dopamine');
-                  setIsOpen(false);
-                }}
-                className="w-full text-xs justify-start h-8"
-              >
+              <Button variant="ghost" size="sm" onClick={() => { onShowLeaderboard('dopamine'); setIsOpen(false); }} className="w-full text-xs justify-start h-8">
                 <Zap className="h-3 w-3 mr-2 text-yellow-500" />
                 {t('dopamine')}
               </Button>
             </div>
-
             <div className="border-t pt-2">
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={handleLogout}
-                className="w-full text-xs justify-start text-red-500 hover:text-red-600 hover:bg-red-50"
-              >
+              <Button variant="ghost" size="sm" onClick={handleLogout} className="w-full text-xs justify-start text-red-500 hover:text-red-600 hover:bg-red-50">
                 <LogOut className="h-3 w-3 mr-2" />
                 {t('logout')}
               </Button>
@@ -194,35 +180,66 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
   const [currentDifficultyIndex, setCurrentDifficultyIndex] = useState(0);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const userDropdownRef = useRef<HTMLDivElement>(null);
+  // Title Refs
+  const titleContainerRef = useRef<HTMLDivElement>(null);
+  const titleTextRef = useRef<HTMLHeadingElement>(null);
+
   const { user, isLoggedIn, isVisitorMode } = useUser();
   const { stats, loading: statsLoading } = useUserStats(user?.id || null, viewMode);
-  const { t } = useLanguage();
+  const { t, language } = useLanguage(); // Added language to dependency
 
-  // 計算標題長度以自動縮放
-  const titleText = t('gameTitle');
-  const titleLength = titleText.length;
-  // 簡易字體大小計算：基準 23px (Mobile) / 26px (Desktop)
-  // 如果字數 > 6 (CJK 或是長單字)，開始縮小
-  const getResponsiveTitleSize = () => {
-    // 這裡使用 inline style 的 fontSize 計算
-    // Mobile: 基準 20px (稍微縮小以保險)，每多 1 字減 1.5px，最小 14px
-    // Desktop: 基準 26px，每多 1 字減 1.5px，最小 16px
-    const baseMobile = 22;
-    const baseDesktop = 28;
-    const deduction = Math.max(0, titleLength - 5) * 2; // 超過 5 字，每字扣 2px
+  // Title Auto-Scaling Logic (Scale-to-Fit)
+  // Re-runs on window resize, title text change (language), or mounting.
+  useLayoutEffect(() => {
+    const adjustFontSize = () => {
+      const container = titleContainerRef.current;
+      const text = titleTextRef.current;
+      if (!container || !text) return;
 
-    const sizeMobile = Math.max(14, baseMobile - deduction);
-    const sizeDesktop = Math.max(16, baseDesktop - deduction);
+      // Start with a large font and scale down
+      let size = 28; // Max size
+      text.style.fontSize = `${size}px`;
 
-    return {
-      mobile: `${sizeMobile}px`,
-      desktop: `${sizeDesktop}px`
+      // Force layout update to check width
+      // We want to maximize size such that textWidth <= containerWidth
+      // Binary search or iterative approach?
+      // Iterative is safer for simple text.
+
+      // Check if text overflows
+      // We subtract a small buffer (e.g. 4px) to be safe
+      const availableWidth = container.clientWidth - 4;
+
+      // Simple loop to shrink
+      while (text.scrollWidth > availableWidth && size > 12) {
+        size -= 1;
+        text.style.fontSize = `${size}px`;
+      }
+
+      // Optimization: If text is WAAAY smaller than container, we don't scale UP beyond max size (28px).
+      // But if we start at 28px, we only need to shrink.
+      // What if the container grows? We need to checking from Max size effectively.
+      // So setting current to max (28) at start of function is correct.
     };
-  };
 
-  const titleSizes = getResponsiveTitleSize();
+    adjustFontSize(); // Initial call
 
-  // Handle click outside to close dropdowns
+    const resizeObserver = new ResizeObserver(() => {
+      requestAnimationFrame(adjustFontSize);
+    });
+
+    if (titleContainerRef.current) {
+      resizeObserver.observe(titleContainerRef.current);
+    }
+
+    window.addEventListener('resize', adjustFontSize);
+
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener('resize', adjustFontSize);
+    };
+  }, [t, language]); // Dependency on language/text change
+
+  // Handle click outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -232,72 +249,77 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
         setIsUserOpen(false);
       }
     };
-
     if (isThemeOpen || isUserOpen) {
       document.addEventListener('mousedown', handleClickOutside);
     }
-
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [isThemeOpen, isUserOpen]);
 
+  const titleText = t('gameTitle');
+
   return (
     <div className="glass rounded-2xl px-3 md:px-4 py-2 md:py-3 shadow-apple-md relative z-20 w-full max-w-7xl mx-auto">
       <div className="flex items-center">
         {/* 左側：標題 */}
-        <div className="flex items-center gap-2 md:gap-8 flex-1 min-w-0">
-          <div className="flex flex-col items-start min-w-0 flex-1">
-            <h1
-              className="font-bold tracking-tight leading-tight whitespace-nowrap overflow-hidden w-full text-left"
-              style={{
-                // 使用 CSS 變數或直接 style 實作 RWD 縮放
-                // 簡化：直接設定 responsive font size style
-                fontSize: window.innerWidth >= 768 ? titleSizes.desktop : titleSizes.mobile
-              }}
-            >
-              {titleText}
-            </h1>
-          </div>
+        {/* Title Auto-scaling using JS ResizeObserver */}
+        {/* Flex-1 ensures it takes available space */}
+        <div
+          ref={titleContainerRef}
+          className="flex flex-col items-start justify-center min-w-0 flex-1 relative z-0 h-10 mr-2 overflow-hidden"
+        >
+          <h1
+            ref={titleTextRef}
+            className="font-bold tracking-tight leading-tight whitespace-nowrap text-left origin-left"
+            style={{ fontSize: '28px' }} // Initial max size
+          >
+            {titleText}
+          </h1>
         </div>
 
         {/* 右側：遊戲工具與用戶按鈕 */}
-        <div className="flex items-center gap-1 md:gap-2 flex-shrink-0">
+        {/* z-30 ensures buttons are clickable and above title if overlap happens */}
+        <div className="flex items-center gap-1 md:gap-2 flex-shrink-0 relative z-30 bg-transparent">
           {/* 遊戲規則按鈕 */}
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={onShowRules}
-            className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md flex-shrink-0"
-            title={t('gameRules')}
-          >
-            <Info className="h-3 w-3 md:h-4 md:w-4" />
-          </Button>
+          <CustomTooltip content={t('gameRules')} variant="glass">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={onShowRules}
+              className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md flex-shrink-0"
+            >
+              <Info className="h-3 w-3 md:h-4 md:w-4" />
+            </Button>
+          </CustomTooltip>
 
           {/* 新遊戲按鈕 */}
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={onNewGame}
-            className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md"
-            title={t('newGame')}
-          >
-            <RotateCcw className="h-3 w-3 md:h-4 md:w-4" />
-          </Button>
+          <CustomTooltip content={t('newGame')} variant="glass">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={onNewGame}
+              className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md"
+            >
+              <RotateCcw className="h-3 w-3 md:h-4 md:w-4" />
+            </Button>
+          </CustomTooltip>
 
           <ThemeToggle />
           <LanguageToggle />
 
           {/* 主題選擇器 */}
           <div className="relative" ref={dropdownRef}>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setIsThemeOpen(!isThemeOpen)}
-              className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md"
-            >
-              <Palette className="h-3 w-3 md:h-4 md:w-4" />
-            </Button>
+            <CustomTooltip content={t('theme')} variant="glass">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setIsThemeOpen(!isThemeOpen)}
+                className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md"
+              >
+                <Palette className="h-3 w-3 md:h-4 md:w-4" />
+              </Button>
+            </CustomTooltip>
 
             {isThemeOpen && (
               <div className="absolute top-full right-0 mt-1 bg-background/95 backdrop-blur-sm border rounded-md shadow-lg z-[9999] p-2 min-w-[120px] dropdown-menu">

@@ -7,6 +7,7 @@ import { useUser } from "@/hooks/useUser";
 import { DopamineInfoModal } from "./DopamineInfoModal";
 import { FeatureHintModal } from "./FeatureHintModal";
 import { useLanguage } from "@/hooks/useLanguage";
+import { CustomTooltip } from "@/components/CustomTooltip";
 
 interface DifficultySelectorProps {
   difficulty: Difficulty;
@@ -123,22 +124,23 @@ export const DifficultySelector = ({
         {/* 2. 提示按鈕 */}
         {onHint && (
           <div className="relative">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={onHint}
-              className={cn(
-                "transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md w-9 h-9 p-0 shrink-0",
-                hintCount > 0 && selectedCell
-                  ? "bg-primary text-primary-foreground hover:text-primary-foreground border-primary/30 shadow-apple-md"
-                  : hintCount > 0
-                    ? "border-border/50 hover:bg-muted/50 text-foreground hover:text-foreground"
-                    : "border-border/30 hover:bg-muted/30 text-muted-foreground hover:text-muted-foreground"
-              )}
-              title={hintCount > 0 ? t('hint') : t('hintCountUsedUp')}
-            >
-              <Lightbulb className="h-4 w-4" />
-            </Button>
+            <CustomTooltip content={hintCount > 0 ? t('hint') : t('hintCountUsedUp')} variant="glass">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={onHint}
+                className={cn(
+                  "transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md w-9 h-9 p-0 shrink-0",
+                  hintCount > 0 && selectedCell
+                    ? "bg-primary text-primary-foreground hover:text-primary-foreground border-primary/30 shadow-apple-md"
+                    : hintCount > 0
+                      ? "border-border/50 hover:bg-muted/50 text-foreground hover:text-foreground"
+                      : "border-border/30 hover:bg-muted/30 text-muted-foreground hover:text-muted-foreground"
+                )}
+              >
+                <Lightbulb className="h-4 w-4" />
+              </Button>
+            </CustomTooltip>
 
             {/* 提示次數 Badge */}
             {hintCount > 0 && (
@@ -152,20 +154,21 @@ export const DifficultySelector = ({
         {/* 3. 註解按鈕 */}
         {onToggleNotes && (
           <div className="relative">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={onToggleNotes}
-              className={cn(
-                "transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md w-9 h-9 p-0 shrink-0",
-                showNotes
-                  ? "bg-primary text-primary-foreground hover:text-primary-foreground border-primary/30 shadow-apple-md"
-                  : "border-border/50 hover:bg-muted/50 text-foreground hover:text-foreground"
-              )}
-              title={showNotes ? t('notesModeOff') : t('notesModeOn')}
-            >
-              <Pencil className="h-4 w-4" />
-            </Button>
+            <CustomTooltip content={showNotes ? t('notesModeOff') : t('notesModeOn')} variant="glass">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={onToggleNotes}
+                className={cn(
+                  "transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md w-9 h-9 p-0 shrink-0",
+                  showNotes
+                    ? "bg-primary text-primary-foreground hover:text-primary-foreground border-primary/30 shadow-apple-md"
+                    : "border-border/50 hover:bg-muted/50 text-foreground hover:text-foreground"
+                )}
+              >
+                <Pencil className="h-4 w-4" />
+              </Button>
+            </CustomTooltip>
 
             {/* ON/OFF Badge */}
             {showNotes && (
@@ -178,21 +181,25 @@ export const DifficultySelector = ({
 
         {/* 4. 多巴胺模式按鈕 */}
         {onDopamineMode && (
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => {
-              if (user && !isVisitorMode) {
-                setShowDopamineInfo(true);
-              } else {
-                setShowFeatureHint(true);
-              }
-            }}
-            className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md w-9 h-9 p-0 shrink-0 btn-dopamine-animated"
-            title={user && !isVisitorMode ? `${t('dopamineMode')} - ${t('challengeYourLimits')}!` : t('dopamineModeVisitorOnly')}
+          <CustomTooltip
+            content={user && !isVisitorMode ? `${t('dopamineMode')} - ${t('challengeYourLimits')}!` : t('dopamineModeVisitorOnly')}
+            variant="glass"
           >
-            <Zap className="h-4 w-4 drop-shadow-md" />
-          </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => {
+                if (user && !isVisitorMode) {
+                  setShowDopamineInfo(true);
+                } else {
+                  setShowFeatureHint(true);
+                }
+              }}
+              className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md w-9 h-9 p-0 shrink-0 btn-dopamine-animated"
+            >
+              <Zap className="h-4 w-4 drop-shadow-md" />
+            </Button>
+          </CustomTooltip>
         )}
         {/* End of Control Buttons */}
 
@@ -201,13 +208,14 @@ export const DifficultySelector = ({
           <div className="relative">
             <div className="flex items-center gap-2">
               <Clock className="h-3 w-3 md:h-4 md:w-4 text-muted-foreground" />
-              <span
-                className="text-xs md:text-sm font-bold bg-muted/50 px-2 md:px-3 py-1 rounded-md min-w-[50px] md:min-w-[60px] text-center cursor-pointer transition-smooth hover:bg-muted/70 shadow-md border border-border/50"
-                onClick={onTogglePause}
-                title={isPaused ? t('clickToResume') : t('clickToPause')}
-              >
-                {formatTime(time)}
-              </span>
+              <CustomTooltip content={isPaused ? t('clickToResume') : t('clickToPause')} variant="glass">
+                <span
+                  className="text-xs md:text-sm font-bold bg-muted/50 px-2 md:px-3 py-1 rounded-md min-w-[50px] md:min-w-[60px] text-center cursor-pointer transition-smooth hover:bg-muted/70 shadow-md border border-border/50"
+                  onClick={onTogglePause}
+                >
+                  {formatTime(time)}
+                </span>
+              </CustomTooltip>
             </div>
 
             {/* Play/Pause Badge */}

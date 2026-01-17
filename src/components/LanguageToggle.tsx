@@ -25,13 +25,15 @@ const languages: LanguageOption[] = [
 const detectDefaultLanguage = (): Language => {
   // 這裡可以集成IP檢測服務，暫時使用瀏覽器語言
   const browserLang = navigator.language.toLowerCase();
-  
+
   if (browserLang.startsWith('zh')) return 'zh';
   if (browserLang.startsWith('ko')) return 'ko';
   if (browserLang.startsWith('ja')) return 'ja';
-  
+
   return 'en';
 };
+
+import { CustomTooltip } from "@/components/CustomTooltip";
 
 export const LanguageToggle = () => {
   const [currentLanguage, setCurrentLanguage] = useState<Language>('en');
@@ -54,7 +56,7 @@ export const LanguageToggle = () => {
     setCurrentLanguage(language);
     localStorage.setItem('killer-sudoku-language', language);
     setIsOpen(false);
-    
+
     // 這裡可以觸發語言變更事件
     window.dispatchEvent(new CustomEvent('languageChange', { detail: { language } }));
   };
@@ -63,20 +65,21 @@ export const LanguageToggle = () => {
 
   return (
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
-      <DropdownMenuTrigger asChild>
-        <Button
-          variant="outline"
-          size="sm"
-          className={cn(
-            "transition-smooth hover:scale-105 active:scale-95",
-            "shadow-apple-sm hover:shadow-apple-md flex-shrink-0",
-            isOpen && "bg-accent text-accent-foreground border-primary/30 shadow-apple-md"
-          )}
-          title={`${t('language')}: ${currentLangData.nativeName}`}
-        >
-          <Globe className="h-3 w-3 md:h-4 md:w-4" />
-        </Button>
-      </DropdownMenuTrigger>
+      <CustomTooltip content={t('language')} variant="glass">
+        <DropdownMenuTrigger asChild>
+          <Button
+            variant="outline"
+            size="sm"
+            className={cn(
+              "transition-smooth hover:scale-105 active:scale-95",
+              "shadow-apple-sm hover:shadow-apple-md flex-shrink-0",
+              isOpen && "bg-accent text-accent-foreground border-primary/30 shadow-apple-md"
+            )}
+          >
+            <Globe className="h-3 w-3 md:h-4 md:w-4" />
+          </Button>
+        </DropdownMenuTrigger>
+      </CustomTooltip>
       <DropdownMenuContent align="end" className="w-48">
         {languages.map((language) => (
           <DropdownMenuItem

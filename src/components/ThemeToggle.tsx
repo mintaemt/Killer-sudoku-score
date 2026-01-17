@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { useLanguage } from "@/hooks/useLanguage";
 
+import { CustomTooltip } from "@/components/CustomTooltip";
+
 export const ThemeToggle = () => {
   const { theme, setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
@@ -37,14 +39,18 @@ export const ThemeToggle = () => {
   };
 
   return (
-    <Button
-      variant="outline"
-      size="sm"
-      onClick={toggleTheme}
-      className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md flex-shrink-0"
-      title={`${t('currentTheme')}: ${resolvedTheme}. ${t('clickToToggle')}`}
+    <CustomTooltip
+      content={t('theme')}
+      variant="glass"
     >
-      {getIcon()}
-    </Button>
+      <Button
+        variant="outline"
+        size="sm"
+        onClick={toggleTheme}
+        className="transition-smooth hover:scale-105 active:scale-95 shadow-apple-sm hover:shadow-apple-md flex-shrink-0"
+      >
+        {getIcon()}
+      </Button>
+    </CustomTooltip>
   );
 };

@@ -15,6 +15,14 @@ const translations = {
     expert: 'XPR',
     hell: 'HELL',
 
+    // Theme & Language
+    theme: 'Theme',
+    themeLight: 'Light',
+    themeDark: 'Dark',
+    language: 'Language',
+    login: 'Login',
+    logout: 'Logout',
+
     // 多巴胺模式
     dopamineMode: 'Dopamine Mode',
     startChallenge: 'Start Challenge',
@@ -383,6 +391,14 @@ const translations = {
     hard: '困難',
     expert: '專家',
     hell: '地獄',
+
+    // Theme & Language
+    theme: '主題',
+    themeLight: '亮色',
+    themeDark: '暗色',
+    language: '語言',
+    login: '登入',
+    logout: '登出',
 
     // 多巴胺模式
     dopamineMode: '多巴胺模式',
@@ -753,6 +769,14 @@ const translations = {
     expert: '전문가',
     hell: '지옥',
 
+    // Theme & Language
+    theme: '테마',
+    themeLight: '라이트',
+    themeDark: '다크',
+    language: '언어',
+    login: '로그인',
+    logout: '로그아웃',
+
     // 多巴胺 모드
     dopamineMode: '도파민 모드',
     startChallenge: '도전 시작',
@@ -1120,6 +1144,14 @@ const translations = {
     hard: '上級',
     expert: '達人',
     hell: '地獄級',
+
+    // Theme & Language
+    theme: 'テーマ',
+    themeLight: 'ライト',
+    themeDark: 'ダーク',
+    language: '言語',
+    login: 'ログイン',
+    logout: 'ログアウト',
 
     // ドーパミンモード
     dopamineMode: 'ドーパミンモード',
