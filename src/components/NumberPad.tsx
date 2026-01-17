@@ -186,6 +186,7 @@ export const NumberPad = ({
               disabled={disabled}
               className={cn(
                 "aspect-square text-lg md:text-2xl font-semibold transition-smooth p-0",
+                "h-auto min-h-0", // Override fixed height constraints
                 "border hover:border-primary hover:bg-primary/10",
                 "hover:scale-105 active:scale-95",
                 "disabled:opacity-40 disabled:cursor-not-allowed",
