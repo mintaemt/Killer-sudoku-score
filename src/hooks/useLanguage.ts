@@ -156,6 +156,14 @@ const translations = {
     playerHub: 'Player Hub',
     myStats: 'My Stats',
 
+    // Table Headers
+    colPlayer: 'Player',
+    colDifficulty: 'Difficulty',
+    colGames: 'Games',
+    colTime: 'Time',
+    colScore: 'Score',
+    top50: 'Top 50',
+
     pleaseRegister: 'Register to Play',
 
     // Dopamine Mode
@@ -582,9 +590,11 @@ const translations = {
     statsMode: '統計模式',
     // Table Headers
     colDifficulty: '難度',
+    colPlayer: '玩家',
     colGames: '場次',
     colTime: '時間',
     colScore: '分數',
+    top50: '前 50 名',
 
     // Suffix Dopamine Mode Keys
     pleaseRegister: '註冊以挑戰',

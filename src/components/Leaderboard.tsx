@@ -112,10 +112,10 @@ export const Leaderboard = ({ currentUserId, onClose, mode = 'normal' }: Leaderb
                 <Table>
                   <TableHeader className="sticky top-0 bg-secondary/50 backdrop-blur-sm z-10">
                     <TableRow>
-                      <TableHead className="w-[80px] text-center">#</TableHead>
-                      <TableHead>{t('player') || '玩家'}</TableHead>
-                      <TableHead className="text-right">{t('score') || '分數'}</TableHead>
-                      <TableHead className="text-right">{t('time') || '時間'}</TableHead>
+                      <TableHead className="w-[80px] text-center first:rounded-tl-lg">#</TableHead>
+                      <TableHead>{t('colPlayer') || '玩家'}</TableHead>
+                      <TableHead className="text-right">{t('colScore') || '分數'}</TableHead>
+                      <TableHead className="text-right last:rounded-tr-lg">{t('colTime') || '時間'}</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -157,8 +157,8 @@ export const Leaderboard = ({ currentUserId, onClose, mode = 'normal' }: Leaderb
 
               {/* Pagination Controls */}
               <div className="flex items-center justify-between py-4 shrink-0 border-t mt-2">
-                <div className="text-xs text-muted-foreground">
-                  {t('total')}: {leaderboard.length}
+                <div className="text-xs text-muted-foreground font-medium">
+                  {t('top50') || 'Top 50'}
                 </div>
                 {totalPages > 1 && (
                   <div className="flex items-center gap-2">
