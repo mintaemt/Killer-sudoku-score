@@ -5,8 +5,8 @@
 
 import { useState } from 'react';
 import { supabase } from '@/lib/supabase';
-import { GameRecord, Difficulty, GameCompletionResult } from '@/lib/types';
-import { calculateScore, calculateScoreWithDetails } from '@/lib/scoreCalculator';
+import { GameRecord, Difficulty, DopamineDifficulty, GameCompletionResult } from '@/lib/types';
+import { calculateScore, calculateScoreWithDetails, calculateDopamineScore } from '@/lib/scoreCalculator';
 
 /**
  * Hook 返回值介面
@@ -22,17 +22,17 @@ interface UseGameRecordReturn {
   ) => Promise<GameCompletionResult | null>;
   saveDopamineGameRecord: (
     userId: string,
-    difficulty: Difficulty,
+    difficulty: DopamineDifficulty,
     completionTime: number,
     mistakes: number,
     comboCount: number
   ) => Promise<GameCompletionResult | null>;
   getNormalUserRank: (userId: string, difficulty: Difficulty) => Promise<number | null>;
-  getDopamineUserRank: (userId: string, difficulty: Difficulty) => Promise<number | null>;
+  getDopamineUserRank: (userId: string, difficulty: DopamineDifficulty) => Promise<number | null>;
   getNormalUserBestScore: (userId: string, difficulty: Difficulty) => Promise<GameRecord | null>;
-  getDopamineUserBestScore: (userId: string, difficulty: Difficulty) => Promise<GameRecord | null>;
+  getDopamineUserBestScore: (userId: string, difficulty: DopamineDifficulty) => Promise<GameRecord | null>;
   getAllNormalUsersTopScore: (difficulty: Difficulty) => Promise<any[]>;
-  getAllDopamineUsersTopScore: (difficulty: Difficulty) => Promise<any[]>;
+  getAllDopamineUsersTopScore: (difficulty: DopamineDifficulty) => Promise<any[]>;
 }
 
 /**
@@ -124,7 +124,7 @@ export const useGameRecord = (): UseGameRecordReturn => {
   // 儲存多巴胺模式遊戲記錄
   const saveDopamineGameRecord = async (
     userId: string,
-    difficulty: Difficulty,
+    difficulty: DopamineDifficulty,
     completionTime: number,
     mistakes: number,
     comboCount: number
@@ -134,10 +134,14 @@ export const useGameRecord = (): UseGameRecordReturn => {
       setError(null);
 
       // 計算分數和詳細計算過程
-      const scoreDetails = calculateScoreWithDetails({
+      // 注意：這裡使用 calculateDopamineScore，因為它包含了多巴胺模式的特有邏輯
+      const scoreDetails = calculateDopamineScore({
         difficulty,
-        completionTime,
-        mistakes
+        timeLeft: 0, // 這裡僅用於兼容介面，已由 completionTime 反映
+        remainingCells: 0, // 假設已完成
+        comboCount,
+        mistakes,
+        completionTime
       });
       const score = scoreDetails.finalScore;
 
@@ -224,7 +228,7 @@ export const useGameRecord = (): UseGameRecordReturn => {
   };
 
   // 獲取多巴胺模式用戶在特定難度的排名
-  const getDopamineUserRank = async (userId: string, difficulty: Difficulty): Promise<number | null> => {
+  const getDopamineUserRank = async (userId: string, difficulty: DopamineDifficulty): Promise<number | null> => {
     try {
       const { data, error } = await supabase.rpc('get_dopamine_user_rank', {
         p_user_id: userId,
@@ -268,7 +272,7 @@ export const useGameRecord = (): UseGameRecordReturn => {
   };
 
   // 獲取多巴胺模式用戶的最佳成績
-  const getDopamineUserBestScore = async (userId: string, difficulty: Difficulty): Promise<GameRecord | null> => {
+  const getDopamineUserBestScore = async (userId: string, difficulty: DopamineDifficulty): Promise<GameRecord | null> => {
     try {
       const { data, error } = await supabase
         .from('dopamine_records')
@@ -314,7 +318,7 @@ export const useGameRecord = (): UseGameRecordReturn => {
   };
 
   // 獲取所有用戶在特定難度的最高分（多巴胺模式）
-  const getAllDopamineUsersTopScore = async (difficulty: Difficulty) => {
+  const getAllDopamineUsersTopScore = async (difficulty: DopamineDifficulty) => {
     try {
       const { data, error } = await supabase
         .from('dopamine_records')

@@ -911,6 +911,8 @@ const translations = {
     colGames: '횟수',
     colTime: '시간',
     colScore: '점수',
+    colPlayer: '플레이어',
+    top50: '상위 50위',
 
     pleaseRegister: '등록하고 플레이',
     userLimited: '유저 전용',
@@ -1310,6 +1312,7 @@ const translations = {
     themeLight: 'ライト',
     themeDark: 'ダーク',
     language: '言語',
+    mode: 'モード',
     login: 'ログイン',
     logout: 'ログアウト',
 
@@ -1429,6 +1432,8 @@ const translations = {
     colGames: '回数',
     colTime: '時間',
     colScore: 'スコア',
+    colPlayer: 'プレイヤー',
+    top50: 'トップ50',
     total: '合計',
     pleaseRegister: '登録してプレイ',
     userLimited: 'ユーザー限定',

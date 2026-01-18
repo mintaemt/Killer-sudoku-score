@@ -881,7 +881,7 @@ const Index = () => {
         data-ad-layout-key="-6t+ed+2i-1n-4w"
       ></div>
 
-      <div className={`min-h-screen flex items-center justify-center p-2 md:p-4 bg-transparent ${isDopamineMode ? 'pt-20 sm:pt-16' : ''}`} data-theme={currentTheme}>
+      <div className={`min-h-screen flex items-center justify-center p-2 md:p-4 bg-transparent ${isDopamineMode ? 'pt-24 sm:pt-16' : ''}`} data-theme={currentTheme}>
         <div className="w-full max-w-6xl mx-auto animate-fade-in bg-transparent">
           {/* 動態漸層背景 */}
           <AnimatedGradientBackground isDopamineMode={isDopamineMode} />
