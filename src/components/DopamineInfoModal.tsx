@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Zap, Crown, Star, AlertTriangle, Trophy, X, Users } from "lucide-react";
+import { Zap, Star, AlertTriangle, X, Users } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { DopamineDifficulty } from "@/lib/types";
 import { useLanguage } from "@/hooks/useLanguage";
@@ -89,7 +89,6 @@ export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge, onShowFea
             {/* 難度選擇 */}
             <div className="space-y-3">
               <h3 className="font-semibold flex items-center gap-2 text-sm">
-                <Crown className="h-4 w-4 text-yellow-500" />
                 {t('selectChallengeDifficulty')}
               </h3>
               <div className="grid grid-cols-5 gap-2">
@@ -138,7 +137,6 @@ export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge, onShowFea
                 }}
                 className="w-full h-12 text-lg font-bold sci-fi-button"
               >
-                <Trophy className="mr-2 h-5 w-5" />
                 {user && !isVisitorMode ? t('startChallenge') : t('pleaseRegister')}
               </Button>
             </div>

@@ -757,6 +757,8 @@ All colors MUST be HSL.
 
 /* Hover Effects: Brighter Glow, Stonger Border, Text Spacing */
 .sci-fi-button:hover {
+  background: rgba(15, 23, 42, 0.95) !important;
+  /* Ensure background stays dark/navy, ignoring theme colors */
   border-color: rgba(168, 85, 247, 0.8);
   /* Purple border */
   box-shadow:
