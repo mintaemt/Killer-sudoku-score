@@ -66,10 +66,10 @@ export const DopamineWinModal = ({
             </div>
           </CardHeader>
 
-          {/* 大型 WELL DONE 標題 (Sharp Font) */}
-          <div className="text-center py-6">
-            <div className="text-5xl sm:text-6xl md:text-7xl font-black tracking-tighter italic text-white drop-shadow-[0_0_15px_rgba(0,243,255,0.5)] bg-clip-text text-transparent bg-gradient-to-b from-white to-cyan-200"
-              style={{ fontFamily: 'ui-sans-serif, system-ui, sans-serif' }}>
+          {/* 大型 WELL DONE 標題 (Sharp Font) - Adjusted sizes */}
+          <div className="text-center py-6 px-1">
+            <div className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl font-black tracking-tighter italic text-white drop-shadow-[0_0_15px_rgba(0,243,255,0.5)] bg-clip-text text-transparent bg-gradient-to-b from-white to-cyan-200"
+              style={{ fontFamily: 'ui-sans-serif, system-ui, sans-serif', wordBreak: 'break-word', lineHeight: 1.1 }}>
               WELL DONE
             </div>
             <CardDescription className="text-cyan-200/50 uppercase tracking-widest text-xs mt-2"
@@ -81,24 +81,24 @@ export const DopamineWinModal = ({
           <CardContent className="space-y-6">
             {/* 本次遊戲統計 - Minimalist Grid */}
             <div className="grid grid-cols-2 gap-3">
-              <div className="dopamine-stat-box">
-                <span className="dopamine-stat-label">{t('score')}</span>
-                <span className="dopamine-stat-value">{score.toLocaleString()}</span>
+              <div className="flex flex-col items-center justify-center p-3 rounded-lg bg-black/40 border border-white/10 backdrop-blur-md">
+                <span className="text-[10px] md:text-xs uppercase tracking-widest text-cyan-100/60 mb-1">{t('score')}</span>
+                <span className="text-xl md:text-2xl font-bold text-white drop-shadow-[0_0_8px_rgba(0,243,255,0.4)]">{score.toLocaleString()}</span>
               </div>
 
-              <div className="dopamine-stat-box">
-                <span className="dopamine-stat-label">{t('remainingTime')}</span>
-                <span className="dopamine-stat-value">{formatTime(timeLeft)}</span>
+              <div className="flex flex-col items-center justify-center p-3 rounded-lg bg-black/40 border border-white/10 backdrop-blur-md">
+                <span className="text-[10px] md:text-xs uppercase tracking-widest text-cyan-100/60 mb-1">{t('remainingTime')}</span>
+                <span className="text-xl md:text-2xl font-bold text-white drop-shadow-[0_0_8px_rgba(0,243,255,0.4)]">{formatTime(timeLeft)}</span>
               </div>
 
-              <div className="dopamine-stat-box">
-                <span className="dopamine-stat-label">{t('maxCombo')}</span>
-                <span className="dopamine-stat-value">{comboCount}x</span>
+              <div className="flex flex-col items-center justify-center p-3 rounded-lg bg-black/40 border border-white/10 backdrop-blur-md">
+                <span className="text-[10px] md:text-xs uppercase tracking-widest text-cyan-100/60 mb-1">{t('maxCombo')}</span>
+                <span className="text-xl md:text-2xl font-bold text-white drop-shadow-[0_0_8px_rgba(0,243,255,0.4)]">{comboCount}x</span>
               </div>
 
-              <div className="dopamine-stat-box">
-                <span className="dopamine-stat-label">{t('difficulty')}</span>
-                <span className="dopamine-stat-value text-sm pt-1">{getDifficultyLabel(difficulty)}</span>
+              <div className="flex flex-col items-center justify-center p-3 rounded-lg bg-black/40 border border-white/10 backdrop-blur-md">
+                <span className="text-[10px] md:text-xs uppercase tracking-widest text-cyan-100/60 mb-1">{t('difficulty')}</span>
+                <span className="text-lg md:text-xl font-bold text-white pt-1">{getDifficultyLabel(difficulty)}</span>
               </div>
             </div>
 
