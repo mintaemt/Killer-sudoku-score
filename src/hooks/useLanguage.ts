@@ -944,24 +944,24 @@ const translations = {
     dopamineInfoSubtitle: '한계에 도전하세요!',
     dopamineFeatures: '모드 특징',
     dopamineRules: '게임 규칙',
-    // basicAchievement: '기본 성취감', // This was a duplicate, removed as per instruction
-    // moderateChallenge: '적당한 도전', // This was a duplicate, removed as per instruction
-    // highAchievement: '높은 성취감', // This was a duplicate, removed as per instruction
-    // topChallenge: '최고 도전', // This was a duplicate, removed as per instruction
-    // highestAchievement: '최고 성취감', // This was a duplicate, removed as per instruction
+    basicAchievement: '기본 성취감',
+    moderateChallenge: '적당한 도전',
+    highAchievement: '높은 성취감',
+    topChallenge: '최고 도전',
+    highestAchievement: '최고 성취감',
     selectDifficulty: '난이도 선택',
     startDopamineChallenge: '도전 시작',
     challengeYourLimits: '한계에 도전',
     // userLimited: '사용자 제한', // This was a duplicate, removed as per instruction
-    // beyondNormalMode: '일반 모드 초월', // This was a duplicate, removed as per instruction
-    // modeFeatures: '모드 특징', // This was a duplicate, removed as per instruction
-    // selectChallengeDifficulty: '도전 난이도 선택', // This was a duplicate, removed as per instruction
-    // chooseDifficultyChallenge: '난이도 도전 선택, 특정 난이도에 집중', // This was a duplicate, removed as per instruction
-    // specialScoringSystem: '특별 점수 시스템, 콤보와 속도 보상', // This was a duplicate, removed as per instruction
-    // timeLimitChallenge: '시간 제한 내에 스도쿠 도전 완료', // This was a duplicate, removed as per instruction
-    // errorCountAffectsScore: '오류 횟수가 최종 점수에 영향', // This was a duplicate, removed as per instruction
-    // consecutiveCorrectReward: '연속 정확한 입력으로 콤보 보상 획득', // This was a duplicate, removed as per instruction
-    // speedCompletionBonus: '완료 속도가 빠를수록 높은 점수 보너스', // This was a duplicate, removed as per instruction
+    beyondNormalMode: '일반 모드 초월',
+    modeFeatures: '모드 특징',
+    selectChallengeDifficulty: '도전 난이도 선택',
+    chooseDifficultyChallenge: '난이도 도전 선택, 특정 난이도에 집중',
+    specialScoringSystem: '특별 점수 시스템, 콤보와 속도 보상',
+    timeLimitChallenge: '시간 제한 내에 스도쿠 도전 완료',
+    errorCountAffectsScore: '오류 횟수가 최종 점수에 영향',
+    consecutiveCorrectReward: '연속 정확한 입력으로 콤보 보상 획득',
+    speedCompletionBonus: '완료 속도가 빠를수록 높은 점수 보너스',
     challengeFailed: '도전 실패',
     dopamineAchievementWall: '도파민 성취 벽',
     noTopScoreData: '최고 점수 데이터 없음',
