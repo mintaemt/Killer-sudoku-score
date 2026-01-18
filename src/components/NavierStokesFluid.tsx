@@ -372,8 +372,11 @@ const NavierStokesFluid = () => {
 
         function resizeCanvas() {
             if (!canvas) return;
-            const width = window.innerWidth;
-            const height = window.innerHeight;
+            const dpr = window.devicePixelRatio || 1;
+            const width = Math.floor(canvas.clientWidth * dpr);
+            const height = Math.floor(canvas.clientHeight * dpr);
+
+            // Only update if dimensions changed
             if (canvas.width !== width || canvas.height !== height) {
                 canvas.width = width;
                 canvas.height = height;
@@ -381,13 +384,19 @@ const NavierStokesFluid = () => {
             }
         }
 
+        let resizeObserver: ResizeObserver | undefined;
+
         try {
             // --- Programs Init ---
             // (Here I would compile all shaders. For brevity, assuming createProgram works)
             // Actually need to check for extensions like EXT_color_buffer_float and OES_texture_float_linear
             // But WebGL2 supports most by default.
-            gl.getExtension('EXT_color_buffer_float');
-            gl.getExtension('OES_texture_float_linear');
+            if (!gl.getExtension('EXT_color_buffer_float')) {
+                console.warn("EXT_color_buffer_float not supported");
+            }
+            if (!gl.getExtension('OES_texture_float_linear')) {
+                console.warn("OES_texture_float_linear not supported");
+            }
 
             copyProgram = createProgram(gl, baseVertexShader, copyShader);
             splatProgram = createProgram(gl, baseVertexShader, splatShader);
@@ -602,9 +611,11 @@ const NavierStokesFluid = () => {
                 updatePointerMoveData(touch.clientX, touch.clientY);
             }, { passive: false });
 
-            // Initial resize
+            // Initial resize & Observer
             resizeCanvas();
-            window.addEventListener('resize', resizeCanvas);
+
+            resizeObserver = new ResizeObserver(() => resizeCanvas());
+            resizeObserver.observe(canvas);
 
             // Start loop
             update();
@@ -614,7 +625,7 @@ const NavierStokesFluid = () => {
 
         // Clean up
         return () => {
-            window.removeEventListener('resize', resizeCanvas);
+            resizeObserver.disconnect();
         };
     }, []);
 
