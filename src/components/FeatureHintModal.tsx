@@ -3,12 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useLanguage } from "@/hooks/useLanguage";
-import { 
-  Zap, 
-  Users, 
-  Trophy, 
-  Clock, 
-  Target, 
+import {
+  Zap,
+  Users,
+  Trophy,
+  Clock,
+  Target,
   Star,
   Crown
 } from "lucide-react";
@@ -30,23 +30,23 @@ export const FeatureHintModal = ({ isOpen, onClose, onBecomeUser }: FeatureHintM
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2 text-2xl">
             <Star className="h-6 w-6 text-yellow-500" />
-            註冊用戶，解鎖更多！
+            {t('registerToUnlock')}
           </DialogTitle>
         </DialogHeader>
 
         <div className="space-y-4">
           {/* 註冊用戶專屬功能 */}
           <div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* 多巴胺模式 */}
               <Card className="border-purple-200 dark:border-purple-800 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/30">
                 <CardHeader className="pb-2 px-3 pt-3">
                   <CardTitle className="text-lg flex items-center gap-2 text-purple-700 dark:text-purple-300">
                     <Zap className="h-5 w-5 text-purple-600 dark:text-purple-400" />
-                    多巴胺挑戰模式
+                    {t('dopamineMode')}
                     <Badge variant="secondary" className="bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300">
-                      獨家功能
+                      {t('exclusiveFeature')}
                     </Badge>
                   </CardTitle>
                 </CardHeader>
@@ -55,25 +55,25 @@ export const FeatureHintModal = ({ isOpen, onClose, onBecomeUser }: FeatureHintM
                     <div className="flex items-start gap-1">
                       <span className="text-xs text-muted-foreground dark:text-muted-foreground">•</span>
                       <p className="text-xs text-muted-foreground dark:text-muted-foreground">
-                        限時挑戰模式
+                        {t('timeLimitChallenge')}
                       </p>
                     </div>
                     <div className="flex items-start gap-1">
                       <span className="text-xs text-muted-foreground dark:text-muted-foreground">•</span>
                       <p className="text-xs text-muted-foreground dark:text-muted-foreground">
-                        連擊獎勵系統
+                        {t('comboRewardSystem')}
                       </p>
                     </div>
                     <div className="flex items-start gap-1">
                       <span className="text-xs text-muted-foreground dark:text-muted-foreground">•</span>
                       <p className="text-xs text-muted-foreground dark:text-muted-foreground">
-                        魔王級地獄難度
+                        {t('hellDifficulty')}
                       </p>
                     </div>
                     <div className="flex items-start gap-1">
                       <span className="text-xs text-muted-foreground dark:text-muted-foreground">•</span>
                       <p className="text-xs text-muted-foreground dark:text-muted-foreground">
-                        專屬計分排行榜
+                        {t('exclusiveLeaderboard')}
                       </p>
                     </div>
                   </div>
@@ -85,7 +85,7 @@ export const FeatureHintModal = ({ isOpen, onClose, onBecomeUser }: FeatureHintM
                 <CardHeader className="pb-2 px-3 pt-3">
                   <CardTitle className="text-lg flex items-center gap-2 text-yellow-700 dark:text-yellow-300">
                     <Trophy className="h-5 w-5 text-yellow-600 dark:text-yellow-400" />
-                    全球排行榜競爭
+                    {t('globalLeaderboardCompetition')}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4 px-3 pb-3">
@@ -93,25 +93,25 @@ export const FeatureHintModal = ({ isOpen, onClose, onBecomeUser }: FeatureHintM
                     <div className="flex items-start gap-1">
                       <span className="text-xs text-muted-foreground dark:text-muted-foreground">•</span>
                       <p className="text-xs text-muted-foreground dark:text-muted-foreground">
-                        與全球玩家競爭
+                        {t('competeWithGlobal')}
                       </p>
                     </div>
                     <div className="flex items-start gap-1">
                       <span className="text-xs text-muted-foreground dark:text-muted-foreground">•</span>
                       <p className="text-xs text-muted-foreground dark:text-muted-foreground">
-                        按難度分類排行
+                        {t('rankByDifficulty')}
                       </p>
                     </div>
                     <div className="flex items-start gap-1">
                       <span className="text-xs text-muted-foreground dark:text-muted-foreground">•</span>
                       <p className="text-xs text-muted-foreground dark:text-muted-foreground">
-                        個人最佳成績
+                        {t('personalBest')}
                       </p>
                     </div>
                     <div className="flex items-start gap-1">
                       <span className="text-xs text-muted-foreground dark:text-muted-foreground">•</span>
                       <p className="text-xs text-muted-foreground dark:text-muted-foreground">
-                        遊戲記錄永久保存
+                        {t('permanentRecord')}
                       </p>
                     </div>
                   </div>
@@ -125,7 +125,7 @@ export const FeatureHintModal = ({ isOpen, onClose, onBecomeUser }: FeatureHintM
             <CardHeader className="pb-2 px-3 pt-3">
               <CardTitle className="text-lg flex items-center gap-2 text-green-700 dark:text-green-300">
                 <Users className="h-5 w-5 text-green-600 dark:text-green-400" />
-                如何成為註冊用戶？
+                {t('howToRegister')}
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-3 px-3 pb-3">
@@ -135,33 +135,33 @@ export const FeatureHintModal = ({ isOpen, onClose, onBecomeUser }: FeatureHintM
                     <span className="text-xs font-bold text-green-600 dark:text-green-400">1</span>
                   </div>
                   <div>
-                    <p className="text-xs font-medium text-foreground dark:text-foreground">輸入用戶名稱</p>
+                    <p className="text-xs font-medium text-foreground dark:text-foreground">{t('enterUsername')}</p>
                     <p className="text-xs text-muted-foreground dark:text-muted-foreground">
-                      選擇獨特的用戶名稱
+                      {t('chooseUniqueName')}
                     </p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start gap-2">
                   <div className="flex-shrink-0 w-5 h-5 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center">
                     <span className="text-xs font-bold text-green-600 dark:text-green-400">2</span>
                   </div>
                   <div>
-                    <p className="text-xs font-medium text-foreground dark:text-foreground">立即開始遊戲</p>
+                    <p className="text-xs font-medium text-foreground dark:text-foreground">{t('startPlayingNow')}</p>
                     <p className="text-xs text-muted-foreground dark:text-muted-foreground">
-                      無需複雜驗證流程
+                      {t('noComplexVerification')}
                     </p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start gap-2">
                   <div className="flex-shrink-0 w-5 h-5 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center">
                     <span className="text-xs font-bold text-green-600 dark:text-green-400">3</span>
                   </div>
                   <div>
-                    <p className="text-xs font-medium text-foreground dark:text-foreground">數據自動同步</p>
+                    <p className="text-xs font-medium text-foreground dark:text-foreground">{t('dataAutoSync')}</p>
                     <p className="text-xs text-muted-foreground dark:text-muted-foreground">
-                      遊戲記錄自動保存到雲端
+                      {t('recordSavedToCloud')}
                     </p>
                   </div>
                 </div>
@@ -171,15 +171,15 @@ export const FeatureHintModal = ({ isOpen, onClose, onBecomeUser }: FeatureHintM
 
           {/* 行動按鈕 */}
           <div>
-            <Button 
+            <Button
               onClick={onBecomeUser}
               className="w-full h-12 text-lg font-bold text-white shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden flowing-button"
             >
               <Crown className="mr-2 h-5 w-5" />
-              立即成為註冊用戶
+              {t('becomeRegisteredUser')}
             </Button>
             <Button variant="outline" onClick={onClose} className="w-full mt-3">
-              繼續訪客模式
+              {t('continueAsGuest')}
             </Button>
           </div>
         </div>

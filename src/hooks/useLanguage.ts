@@ -66,7 +66,7 @@ const translations = {
     selectDifficulty: 'Select Difficulty',
     startDopamineChallenge: 'Start Challenge',
     challengeYourLimits: 'Challenge Your Limits',
-    userLimited: 'User Limited',
+
     beyondNormalMode: 'Beyond Normal Mode',
     modeFeatures: 'Mode Features',
     selectChallengeDifficulty: 'Select Challenge Difficulty',
@@ -105,11 +105,25 @@ const translations = {
     achievementWall: 'Achievement Wall',
     noData: 'No Data',
     highestScoreDisplay: 'Highest Score Display',
+    leaderboardPageTitle: 'Leaderboard',
+    highestScoreTitle: 'Highest Score Showcase',
+    backToGame: 'Back to Game',
 
     // 用戶相關
     welcome: 'Welcome',
     welcomeToKillerSudoku: 'Welcome to Sudoku',
     enterNameToStart: 'Please enter your name to start playing and participate in the leaderboard',
+    welcomeUser: 'Welcome, ',
+
+    // User Status
+    userStatusTitle: 'User Status',
+    userStatusDesc: 'Your game data is saved locally',
+    nameLabel: 'Name',
+    userIdLabel: 'User ID',
+    joinDateLabel: 'Joined',
+    unknownDate: 'Unknown',
+    switchUser: 'Switch User',
+
     enterYourName: 'Please enter your name',
     processing: 'Processing...',
     startGame: 'Start Game',
@@ -140,27 +154,32 @@ const translations = {
     bestTime: 'Best Time',
     totalGames: 'Total Games',
     playerHub: 'Player Hub',
-    dopamine: 'Dopamine',
+
+    pleaseRegister: 'Register to Play',
+
     // Dopamine Mode
-    dopamineMode: 'Dopamine Mode',
+    registerToUnlock: 'Register to Unlock More!',
+    exclusiveFeature: 'Exclusive Feature',
+    comboRewardSystem: 'Combo Reward System',
+    hellDifficulty: 'Hell Difficulty',
+    exclusiveLeaderboard: 'Exclusive Leaderboard',
+    globalLeaderboardCompetition: 'Global Leaderboard Competition',
+    competeWithGlobal: 'Compete with Global Players',
+    rankByDifficulty: 'Rank by Difficulty',
+    personalBest: 'Personal Best',
+    permanentRecord: 'Permanent Record',
+    howToRegister: 'How to Register?',
+    enterUsername: 'Enter Username',
+    chooseUniqueName: 'Choose a unique username',
+    startPlayingNow: 'Start Playing Now',
+    noComplexVerification: 'No complex verification required',
+    dataAutoSync: 'Data Auto Sync',
+    recordSavedToCloud: 'Game records automatically saved to cloud',
+    becomeRegisteredUser: 'Become a Registered User',
+    continueAsGuest: 'Continue as Guest',
+
     userLimited: 'User Exclusive',
-    beyondNormalMode: 'Challenge beyond normal limits',
-    modeFeatures: 'Mode Features',
-    chooseDifficultyChallenge: 'Choose difficulty to challenge',
-    specialScoringSystem: 'Special scoring system',
-    gameRules: 'Game Rules',
-    timeLimitChallenge: 'Time limit challenge',
-    errorCountAffectsScore: 'Error count affects score',
-    consecutiveCorrectReward: 'Consecutive correct reward',
-    speedCompletionBonus: 'Speed completion bonus',
-    selectChallengeDifficulty: 'Select Challenge Difficulty',
-    startChallenge: 'Start Challenge',
-    // Difficulty Descriptions
-    basicAchievement: 'Basic Achievement',
-    moderateChallenge: 'Moderate Challenge',
-    highAchievement: 'High Achievement',
-    topChallenge: 'Top Challenge',
-    highestAchievement: 'Highest Achievement',
+
 
 
     // 遊戲規則
@@ -509,11 +528,25 @@ const translations = {
     achievementWall: '成就牆',
     noData: '暫無成就資料',
     highestScoreDisplay: '最高分展示',
+    leaderboardPageTitle: '排行榜',
+    highestScoreTitle: '最高分展示',
+    backToGame: '返回遊戲',
 
     // 用戶相關
     welcome: '歡迎',
     welcomeToKillerSudoku: '歡迎來到殺手數獨',
     enterNameToStart: '請輸入您的名稱以開始遊戲並參與排行榜',
+    welcomeUser: '歡迎，',
+
+    // User Status
+    userStatusTitle: '用戶狀態',
+    userStatusDesc: '您的遊戲資料已儲存在本地',
+    nameLabel: '姓名',
+    userIdLabel: '用戶 ID',
+    joinDateLabel: '加入時間',
+    unknownDate: '未知',
+    switchUser: '切換用戶',
+
     enterYourName: '請輸入您的名稱',
     processing: '處理中...',
     startGame: '開始遊戲',
@@ -551,26 +584,31 @@ const translations = {
     colGames: '場次',
     colTime: '時間',
     colScore: '分數',
-    dopamine: '多巴胺',
+
     // Suffix Dopamine Mode Keys
-    dopamineMode: '多巴胺模式',
-    userLimited: '用戶限定',
-    beyondNormalMode: '超越普通模式的極限挑戰',
-    modeFeatures: '模式特色',
-    chooseDifficultyChallenge: '自由選擇難度挑戰',
-    specialScoringSystem: '特殊的計分系統',
-    gameRules: '遊戲規則',
-    timeLimitChallenge: '限時挑戰',
-    errorCountAffectsScore: '錯誤次數影響分數',
-    consecutiveCorrectReward: '連續答對獎勵',
-    speedCompletionBonus: '極速完成加分',
-    selectChallengeDifficulty: '選擇挑戰難度',
-    startChallenge: '開始挑戰',
-    basicAchievement: '基礎成就',
-    moderateChallenge: '進階挑戰',
-    highAchievement: '高階成就',
-    topChallenge: '頂級挑戰',
-    highestAchievement: '最高榮耀',
+    pleaseRegister: '註冊以挑戰',
+
+    registerToUnlock: '註冊用戶，解鎖更多！',
+    exclusiveFeature: '獨家功能',
+    comboRewardSystem: '連擊獎勵系統',
+    hellDifficulty: '魔王級地獄難度',
+    exclusiveLeaderboard: '專屬計分排行榜',
+    globalLeaderboardCompetition: '全球排行榜競爭',
+    competeWithGlobal: '與全球玩家競爭',
+    rankByDifficulty: '按難度分類排行',
+    personalBest: '個人最佳成績',
+    permanentRecord: '遊戲記錄永久保存',
+    howToRegister: '如何成為註冊用戶？',
+    enterUsername: '輸入用戶名稱',
+    chooseUniqueName: '選擇獨特的用戶名稱',
+    startPlayingNow: '立即開始遊戲',
+    noComplexVerification: '無需複雜驗證流程',
+    dataAutoSync: '數據自動同步',
+    recordSavedToCloud: '遊戲記錄自動保存到雲端',
+    becomeRegisteredUser: '立即成為註冊用戶',
+    continueAsGuest: '繼續訪客模式',
+
+
     // 遊戲規則
     scoringSystem: '計分系統',
     rules: '規則',
@@ -862,26 +900,31 @@ const translations = {
     colGames: '횟수',
     colTime: '시간',
     colScore: '점수',
-    dopamine: '도파민',
-    // Suffix Dopamine Mode
-    dopamineMode: '도파민 모드',
-    userLimited: '유저 전용',
-    beyondNormalMode: '일반 모드를 뛰어넘는 극한 도전',
-    modeFeatures: '모드 특징',
-    chooseDifficultyChallenge: '난이도 선택 도전',
-    specialScoringSystem: '특별 점수 시스템',
-    gameRules: '게임 규칙',
-    timeLimitChallenge: '제한 시간 도전',
-    errorCountAffectsScore: '오류 횟수가 점수에 영향',
-    consecutiveCorrectReward: '연속 정답 보상',
-    speedCompletionBonus: '빠른 완료 보너스',
-    selectChallengeDifficulty: '도전 난이도 선택',
-    startChallenge: '도전 시작',
-    basicAchievement: '기본 성취',
-    moderateChallenge: '중급 도전',
-    highAchievement: '고급 성취',
-    topChallenge: '최상급 도전',
-    highestAchievement: '최고의 영광',
+
+    pleaseRegister: '등록하고 플레이',
+
+    // Dopamine Mode
+    registerToUnlock: '등록하고 더 많은 기능 해제!',
+    exclusiveFeature: '독점 기능',
+    comboRewardSystem: '콤보 보상 시스템',
+    hellDifficulty: '지옥 난이도',
+    exclusiveLeaderboard: '전용 순위표',
+    globalLeaderboardCompetition: '글로벌 순위 경쟁',
+    competeWithGlobal: '전 세계 플레이어와 경쟁',
+    rankByDifficulty: '난이도별 순위',
+    personalBest: '개인 최고 기록',
+    permanentRecord: '영구 게임 기록',
+    howToRegister: '등록 유저가 되는 방법?',
+    enterUsername: '사용자 이름 입력',
+    chooseUniqueName: '고유한 사용자 이름 선택',
+    startPlayingNow: '지금 게임 시작',
+    noComplexVerification: '복잡한 인증 불필요',
+    dataAutoSync: '데이터 자동 동기화',
+    recordSavedToCloud: '게임 기록 클라우드 자동 저장',
+    becomeRegisteredUser: '등록 유저 되기',
+    continueAsGuest: '게스트로 계속하기',
+
+
     // 提示功能
     hint: '힌트',
     hintCountUsedUp: '힌트 횟수가 모두 사용되었습니다',
@@ -899,24 +942,24 @@ const translations = {
     dopamineInfoSubtitle: '한계에 도전하세요!',
     dopamineFeatures: '모드 특징',
     dopamineRules: '게임 규칙',
-    basicAchievement: '기본 성취감',
-    moderateChallenge: '적당한 도전',
-    highAchievement: '높은 성취감',
-    topChallenge: '최고 도전',
-    highestAchievement: '최고 성취감',
+    // basicAchievement: '기본 성취감', // This was a duplicate, removed as per instruction
+    // moderateChallenge: '적당한 도전', // This was a duplicate, removed as per instruction
+    // highAchievement: '높은 성취감', // This was a duplicate, removed as per instruction
+    // topChallenge: '최고 도전', // This was a duplicate, removed as per instruction
+    // highestAchievement: '최고 성취감', // This was a duplicate, removed as per instruction
     selectDifficulty: '난이도 선택',
     startDopamineChallenge: '도전 시작',
     challengeYourLimits: '한계에 도전',
-    userLimited: '사용자 제한',
-    beyondNormalMode: '일반 모드 초월',
-    modeFeatures: '모드 특징',
-    selectChallengeDifficulty: '도전 난이도 선택',
-    chooseDifficultyChallenge: '난이도 도전 선택, 특정 난이도에 집중',
-    specialScoringSystem: '특별 점수 시스템, 콤보와 속도 보상',
-    timeLimitChallenge: '시간 제한 내에 스도쿠 도전 완료',
-    errorCountAffectsScore: '오류 횟수가 최종 점수에 영향',
-    consecutiveCorrectReward: '연속 정확한 입력으로 콤보 보상 획득',
-    speedCompletionBonus: '완료 속도가 빠를수록 높은 점수 보너스',
+    // userLimited: '사용자 제한', // This was a duplicate, removed as per instruction
+    // beyondNormalMode: '일반 모드 초월', // This was a duplicate, removed as per instruction
+    // modeFeatures: '모드 특징', // This was a duplicate, removed as per instruction
+    // selectChallengeDifficulty: '도전 난이도 선택', // This was a duplicate, removed as per instruction
+    // chooseDifficultyChallenge: '난이도 도전 선택, 특정 난이도에 집중', // This was a duplicate, removed as per instruction
+    // specialScoringSystem: '특별 점수 시스템, 콤보와 속도 보상', // This was a duplicate, removed as per instruction
+    // timeLimitChallenge: '시간 제한 내에 스도쿠 도전 완료', // This was a duplicate, removed as per instruction
+    // errorCountAffectsScore: '오류 횟수가 최종 점수에 영향', // This was a duplicate, removed as per instruction
+    // consecutiveCorrectReward: '연속 정확한 입력으로 콤보 보상 획득', // This was a duplicate, removed as per instruction
+    // speedCompletionBonus: '완료 속도가 빠를수록 높은 점수 보너스', // This was a duplicate, removed as per instruction
     challengeFailed: '도전 실패',
     dopamineAchievementWall: '도파민 성취 벽',
     noTopScoreData: '최고 점수 데이터 없음',
@@ -945,11 +988,25 @@ const translations = {
     achievementWall: '성취 벽',
     noData: '데이터 없음',
     highestScoreDisplay: '최고 점수 표시',
+    leaderboardPageTitle: '순위표',
+    highestScoreTitle: '최고 점수',
+    backToGame: '게임으로 돌아가기',
 
     // 사용자 관련
     welcome: '환영합니다',
     welcomeToKillerSudoku: '킬러 스도쿠에 오신 것을 환영합니다',
     enterNameToStart: '게임을 시작하고 리더보드에 참여하려면 이름을 입력하세요',
+    welcomeUser: '환영합니다, ',
+
+    // User Status
+    userStatusTitle: '사용자 상태',
+    userStatusDesc: '게임 데이터가 로컬에 저장됩니다',
+    nameLabel: '이름',
+    userIdLabel: '시스템 ID',
+    joinDateLabel: '가입일',
+    unknownDate: '알 수 없음',
+    switchUser: '사용자 전환',
+
     enterYourName: '이름을 입력하세요',
     processing: '처리 중...',
     startGame: '게임 시작',
@@ -959,6 +1016,7 @@ const translations = {
     viewStats: '통계 보기',
     normal: '일반',
     dopamine: '도파민',
+    // pleaseRegister: '등록하고 플레이', // This was a duplicate, removed as per instruction
 
     // 일반
     close: '닫기',
@@ -1285,7 +1343,7 @@ const translations = {
     selectDifficulty: '難易度選択',
     startDopamineChallenge: 'チャレンジ開始',
     challengeYourLimits: '限界に挑戦',
-    userLimited: 'ユーザー限定',
+    // userLimited: 'ユーザー限定', // This was a duplicate, removed as per instruction
     beyondNormalMode: '通常モードを超越',
     modeFeatures: 'モード特徴',
     selectChallengeDifficulty: 'チャレンジ難易度選択',
@@ -1322,12 +1380,26 @@ const translations = {
     gamesPlayed: 'ゲーム',
     achievementWall: '実績ウォール',
     noData: 'データなし',
-    highestScoreDisplay: '最高スコア表示',
+    highestScoreDisplay: 'ハイスコア表示',
+    leaderboardPageTitle: 'リーダーボード',
+    highestScoreTitle: 'ハイスコア',
+    backToGame: 'ゲームに戻る',
 
     // ユーザー関連
     welcome: 'ようこそ',
     welcomeToKillerSudoku: 'キラー数独へようこそ',
     enterNameToStart: 'ゲームを開始し、リーダーボードに参加するために名前を入力してください',
+    welcomeUser: 'ようこそ、',
+
+    // User Status
+    userStatusTitle: 'ユーザーステータス',
+    userStatusDesc: 'ゲームデータはローカルに保存されます',
+    nameLabel: '名前',
+    userIdLabel: 'ユーザーID',
+    joinDateLabel: '参加日',
+    unknownDate: '不明',
+    switchUser: 'ユーザー切替',
+
     enterYourName: '名前を入力してください',
     processing: '処理中...',
     startGame: 'ゲーム開始',
@@ -1347,6 +1419,28 @@ const translations = {
     colScore: 'スコア',
     total: '合計',
     pleaseRegister: '登録してプレイ',
+
+    // Dopamine Mode
+    registerToUnlock: '登録して機能を解除！',
+    exclusiveFeature: '専用機能',
+    comboRewardSystem: 'コンボ報酬システム',
+    hellDifficulty: '地獄級難易度',
+    exclusiveLeaderboard: '専用ランキング',
+    globalLeaderboardCompetition: '世界ランキング競争',
+    competeWithGlobal: '世界中のプレイヤーと競争',
+    rankByDifficulty: '難易度別ランク',
+    personalBest: '自己ベスト',
+    permanentRecord: '永久ゲーム記録',
+    howToRegister: '登録ユーザーになるには？',
+    enterUsername: 'ユーザー名を入力',
+    chooseUniqueName: 'ユニークな名前を選択',
+    startPlayingNow: '今すぐプレイ',
+    noComplexVerification: '複雑な認証は不要',
+    dataAutoSync: 'データ自動同期',
+    recordSavedToCloud: 'ゲーム記録をクラウドに自動保存',
+    becomeRegisteredUser: '登録ユーザーになる',
+    continueAsGuest: 'ゲストとして続ける',
+
 
     // 一般
     close: '閉じる',

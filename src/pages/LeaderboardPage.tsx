@@ -4,11 +4,13 @@ import { Leaderboard } from '@/components/Leaderboard';
 import { ArrowLeft, Trophy } from 'lucide-react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useUser } from '@/hooks/useUser';
+import { useLanguage } from '@/hooks/useLanguage';
 
 const LeaderboardPage = () => {
   const navigate = useNavigate();
   const { user } = useUser();
   const [searchParams] = useSearchParams();
+  const { t } = useLanguage();
   const mode = searchParams.get('mode') || 'normal'; // 默認為普通模式
 
   const isDopamineMode = mode === 'dopamine';
@@ -26,18 +28,18 @@ const LeaderboardPage = () => {
               className="flex items-center space-x-2"
             >
               <ArrowLeft className="h-4 w-4" />
-              <span>返回遊戲</span>
+              <span>{t('backToGame')}</span>
             </Button>
             <div className="flex items-center space-x-2">
               <Trophy className="h-6 w-6 text-yellow-500" />
               <h1 className="text-2xl font-bold">
-                {isDopamineMode ? '最高分展示' : '排行榜'}
+                {isDopamineMode ? t('highestScoreTitle') : t('leaderboardPageTitle')}
               </h1>
             </div>
           </div>
           {user && (
             <div className="text-sm text-muted-foreground">
-              歡迎，{user.name}
+              {t('welcomeUser')}{user.name}
             </div>
           )}
         </div>

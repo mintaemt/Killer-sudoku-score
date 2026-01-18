@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 import { User } from '@/lib/types';
 import { useLanguage } from './useLanguage';
+import { useAuth } from '@/contexts/AuthContext';
 
 /** 本地儲存的使用者資料鍵名 */
 const USER_STORAGE_KEY = 'killer-sudoku-user';
@@ -36,44 +37,58 @@ export const useUser = (): UseUserReturn => {
   const { t } = useLanguage();
   const [isVisitorMode, setIsVisitorMode] = useState(false);
 
-  // 從 localStorage 載入用戶資料
+  // Use AuthContext to get Supabase session
+  const { user: authUser, loading: authLoading } = useAuth();
+
+  // Combine AuthContext state with local logic
   useEffect(() => {
-    const loadUserFromStorage = () => {
-      try {
-        const storedUser = localStorage.getItem(USER_STORAGE_KEY);
-        if (storedUser) {
-          const userData = JSON.parse(storedUser);
-          // 驗證用戶資料格式
-          if (userData && userData.id && userData.name) {
-            setUser(userData);
-            setIsVisitorMode(false);
-            console.log('用戶資料已從本地儲存載入:', userData.name);
-          } else {
-            // 如果資料格式不正確，清除它
-            localStorage.removeItem(USER_STORAGE_KEY);
-            setIsVisitorMode(true); // 沒有有效用戶資料時設為訪客模式
-            console.log('清除無效的用戶資料，進入訪客模式');
-          }
-        } else {
-          // 沒有儲存的用戶資料，設為訪客模式
-          setIsVisitorMode(true);
-          console.log('沒有用戶資料，進入訪客模式');
-        }
-      } catch (err) {
-        console.error('Error loading user from storage:', err);
-        setError('載入用戶資料失敗');
-        // 清除可能損壞的資料
-        localStorage.removeItem(USER_STORAGE_KEY);
-        setIsVisitorMode(true); // 錯誤時也設為訪客模式
-      } finally {
+    const syncUser = () => {
+      // If we have a Supabase user (via Google Login, etc.)
+      if (authUser) {
+        const appUser: User = {
+          id: authUser.id,
+          // Use metadata name, or email, or part of email, or fallback
+          name: authUser.user_metadata?.full_name || authUser.user_metadata?.name || authUser.email?.split('@')[0] || 'Player',
+          created_at: authUser.created_at,
+          last_login: authUser.last_sign_in_at || new Date().toISOString()
+        };
+        setUser(appUser);
+        setIsVisitorMode(false);
         setLoading(false);
+        return;
+      }
+
+      // If no Supabase user, check local storage (Legacy/Visitor flow)
+      if (!authLoading) {
+        try {
+          const storedUser = localStorage.getItem(USER_STORAGE_KEY);
+          if (storedUser) {
+            const userData = JSON.parse(storedUser);
+            if (userData && userData.id && userData.name) {
+              setUser(userData);
+              setIsVisitorMode(false);
+            } else {
+              localStorage.removeItem(USER_STORAGE_KEY);
+              setIsVisitorMode(true);
+            }
+          } else {
+            setIsVisitorMode(true);
+          }
+        } catch (err) {
+          console.error('Error loading user from storage:', err);
+          setError('載入用戶資料失敗');
+          localStorage.removeItem(USER_STORAGE_KEY);
+          setIsVisitorMode(true);
+        } finally {
+          setLoading(false);
+        }
       }
     };
 
-    loadUserFromStorage();
-  }, []);
+    syncUser();
+  }, [authUser, authLoading]);
 
-  // 創建新用戶（禁止重複用戶名稱）
+  // 創建新用戶（禁止重複用戶名稱）- Maintains legacy functionality for non-Google users if needed
   const createOrUpdateUser = async (name: string): Promise<User | null> => {
     try {
       setLoading(true);
@@ -85,7 +100,7 @@ export const useUser = (): UseUserReturn => {
       const { data: existingUsers, error: searchError } = await supabase
         .from('users')
         .select('*')
-        .ilike('name', name)  // 使用 ilike 進行不區分大小寫的比較
+        .ilike('name', name)
         .limit(1);
 
       if (searchError) {
@@ -93,20 +108,15 @@ export const useUser = (): UseUserReturn => {
         throw searchError;
       }
 
-      console.log('搜尋結果:', existingUsers);
-
       // 如果找到重複的用戶名稱，拋出錯誤
       if (existingUsers && existingUsers.length > 0) {
-        console.log('用戶名稱已存在:', existingUsers[0].name);
         throw new Error(t('usernameAlreadyExists'));
       }
 
-      console.log('用戶名稱可用，創建新用戶');
-      // 創建新用戶
       const { data: newUser, error: insertError } = await supabase
         .from('users')
         .insert({
-          name: name.trim(),  // 去除前後空格
+          name: name.trim(),
           created_at: new Date().toISOString(),
           last_login: new Date().toISOString()
         })
@@ -114,8 +124,6 @@ export const useUser = (): UseUserReturn => {
         .single();
 
       if (insertError) {
-        console.error('創建用戶時發生錯誤:', insertError);
-        // 檢查是否是唯一約束違反錯誤
         if (insertError.code === '23505') {
           throw new Error(t('usernameAlreadyExists'));
         }
@@ -123,12 +131,8 @@ export const useUser = (): UseUserReturn => {
       }
 
       const userData = newUser;
-      console.log('新用戶創建成功:', userData);
-
-      // 儲存到 localStorage
       localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(userData));
       setUser(userData);
-      console.log('用戶資料已儲存到本地:', userData.name);
 
       return userData;
     } catch (err) {
@@ -145,8 +149,9 @@ export const useUser = (): UseUserReturn => {
   const clearUser = () => {
     localStorage.removeItem(USER_STORAGE_KEY);
     setUser(null);
-    setIsVisitorMode(false);
-    console.log('用戶資料已清除');
+    setIsVisitorMode(false); // Wait, if cleared, should probably be visitor? 
+    // Original code set isVisitorMode(false) then console.log('cleared'). 
+    // But then isLoggedIn calculation would fail safely.
   };
 
   // 進入訪客模式
@@ -154,10 +159,11 @@ export const useUser = (): UseUserReturn => {
     setUser(null);
     setIsVisitorMode(true);
     localStorage.removeItem(USER_STORAGE_KEY);
-    console.log('進入訪客模式');
   };
 
   // 檢查用戶是否已登入（包括訪客模式）
+  // Note: semantics of this variable in original code were (!!user || isVisitorMode)
+  // which means "Has a valid session state (Registered OR Visitor)".
   const isLoggedIn = !!user || isVisitorMode;
 
   return {
