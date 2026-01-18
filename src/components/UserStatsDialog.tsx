@@ -76,7 +76,7 @@ export const UserStatsDialog = ({
                 </div>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px] md:max-w-[600px] h-[600px] md:h-[650px] max-h-[90vh] flex flex-col glass border-none shadow-2xl gap-0 overflow-hidden">
-                <DialogHeader className="p-6 pb-2">
+                <DialogHeader className="p-4 pb-2">
                     <div className="flex items-center justify-between">
                         <DialogTitle className="text-xl font-bold flex items-center gap-2">
                             <UserIcon className="h-5 w-5" />
@@ -114,7 +114,7 @@ export const UserStatsDialog = ({
                 </DialogHeader>
 
                 <Tabs defaultValue="profile" className="flex-1 flex flex-col min-h-0 w-full">
-                    <div className="px-6 pb-2 shrink-0">
+                    <div className="px-4 pb-2 shrink-0">
                         <TabsList className="grid w-full grid-cols-2">
                             <TabsTrigger value="profile">{t('myStats') || '個人戰績'}</TabsTrigger>
                             <TabsTrigger value="leaderboard">{t('leaderboard') || '世界排名'}</TabsTrigger>
@@ -125,7 +125,7 @@ export const UserStatsDialog = ({
                         <div className="flex flex-col h-full overflow-hidden">
 
                             {/* User Info & Overall Stats - Fixed at top with padding */}
-                            <div className="shrink-0 flex flex-col gap-4 px-6 pt-4 pb-0">
+                            <div className="shrink-0 flex flex-col gap-4 px-4 pt-4 pb-0">
                                 <div className="flex items-center justify-between p-3 rounded-xl bg-secondary/20 border border-border/50">
                                     <div className="flex items-center gap-3">
                                         <Avatar className="h-12 w-12 rounded-lg border-2 border-[var(--theme-color)] shadow-sm" style={themeStyle}>
@@ -161,7 +161,7 @@ export const UserStatsDialog = ({
                             </div>
 
                             {/* Difficulty Breakdown Table - Flexible height with internal scroll */}
-                            <div className="flex-1 min-h-0 flex flex-col overflow-hidden px-6 pt-4">
+                            <div className="flex-1 min-h-0 flex flex-col overflow-hidden px-4 pt-4">
                                 <div className="flex-1 flex flex-col rounded-lg border bg-card overflow-hidden">
                                     <div className="grid grid-cols-4 gap-2 p-3 bg-secondary/50 font-medium text-xs text-muted-foreground text-center shrink-0 border-b z-10">
                                         <div className="text-left pl-2">{t('colDifficulty')}</div>
@@ -198,7 +198,7 @@ export const UserStatsDialog = ({
                             </div>
 
                             {/* Logout Button - Fixed at bottom */}
-                            <div className="shrink-0 mt-auto p-6 pt-4">
+                            <div className="shrink-0 mt-auto p-4 pt-4">
                                 <Button variant="outline" className="w-full text-red-500 hover:text-red-600 hover:bg-red-50" onClick={handleLogout}>
                                     <LogOut className="h-4 w-4 mr-2" />
                                     {t('logout') || '登出'}
