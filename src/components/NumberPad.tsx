@@ -8,7 +8,7 @@ const getThemeColors = (theme: string) => {
   const themeColors: Record<string, { bg: string; hover: string; text: string }> = {
     blue: { bg: "bg-blue-500", hover: "hover:bg-blue-600", text: "text-white" },
     orange: { bg: "bg-orange-500", hover: "hover:bg-orange-600", text: "text-white" },
-    green: { bg: "bg-[#BFFF00]", hover: "hover:bg-[#99cc00]", text: "text-[#2e2e2e]" },
+    lime: { bg: "bg-[#BFFF00]", hover: "hover:bg-[#99cc00]", text: "text-[#2e2e2e]" },
     purple: { bg: "bg-purple-500", hover: "hover:bg-purple-600", text: "text-white" },
     pink: { bg: "bg-pink-500", hover: "hover:bg-pink-600", text: "text-white" },
     teal: { bg: "bg-teal-500", hover: "hover:bg-teal-600", text: "text-white" },
