@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Trophy, Clock, RotateCcw, X, Zap } from "lucide-react";
+import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { createPortal } from "react-dom";
 import { useLanguage } from "@/hooks/useLanguage";
@@ -47,119 +47,73 @@ export const DopamineWinModal = ({
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
-  const getDifficultyColor = (diff: string) => {
-    switch (diff) {
-      case 'easy': return 'bg-green-500/20 text-green-600 border-green-500/30';
-      case 'medium': return 'bg-yellow-500/20 text-yellow-600 border-yellow-500/30';
-      case 'hard': return 'bg-orange-500/20 text-orange-600 border-orange-500/30';
-      case 'expert': return 'bg-red-500/20 text-red-600 border-red-500/30';
-      case 'hell': return 'bg-purple-500/20 text-purple-600 border-purple-500/30';
-      default: return 'bg-gray-500/20 text-gray-600 border-gray-500/30';
-    }
-  };
-
   const getDifficultyLabel = (diff: string) => {
     return t(diff as any);
   };
 
   return createPortal(
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-2 sm:p-4 z-[9999]">
-      <div className="w-full max-w-[400px] max-h-[95vh] sm:max-h-[90vh] overflow-auto">
-        <Card className="glass rounded-2xl shadow-apple-lg m-2 sm:m-0">
-          <CardHeader>
-            <div className="flex items-start justify-between">
-              <div className="flex items-center gap-3">
-                <div>
-                  <CardTitle className="flex items-center gap-2 flex-wrap">
-                    <span className="whitespace-nowrap">{t('dopamineMode')}</span>
-                    <Badge
-                      variant="secondary"
-                      className="text-white relative overflow-hidden flowing-button flex-shrink-0"
-                    >
-                      <Zap className="h-3 w-3 mr-1" />
-                      WELL DONE
-                    </Badge>
-                  </CardTitle>
-                  <CardDescription className="mt-2">{t('congratulations')}</CardDescription>
-                </div>
-              </div>
-              <Button variant="ghost" size="sm" onClick={onClose} className="mt-1 dopamine-close-btn">
+    <div className="fixed inset-0 flex items-center justify-center p-2 sm:p-4 z-[9999]">
+      {/* 黑色半透明遮罩 (確保文字可讀性) */}
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm z-[-1]" />
+
+      <div className="relative w-full max-w-[400px] max-h-[95vh] sm:max-h-[90vh] overflow-auto z-10">
+        <Card className="dopamine-card-diamond">
+          <CardHeader className="pb-2">
+            <div className="flex items-start justify-end">
+              <Button variant="ghost" size="sm" onClick={onClose} className="dopamine-close-btn">
                 <X className="h-4 w-4" />
               </Button>
             </div>
           </CardHeader>
 
-          {/* 大型 WELL DONE 標題 */}
-          <div className="text-center py-8">
-            <div
-              className="text-6xl md:text-8xl font-black flowing-text-well-done"
-              style={{
-                fontFamily: 'Huninn, sans-serif'
-              }}
-            >
+          {/* 大型 WELL DONE 標題 (Sharp Font) */}
+          <div className="text-center py-6">
+            <div className="text-6xl md:text-7xl font-black tracking-tighter italic text-white drop-shadow-[0_0_15px_rgba(0,243,255,0.5)] bg-clip-text text-transparent bg-gradient-to-b from-white to-cyan-200"
+              style={{ fontFamily: 'ui-sans-serif, system-ui, sans-serif' }}>
               WELL DONE
             </div>
+            <CardDescription className="text-cyan-200/50 uppercase tracking-widest text-xs mt-2"
+              style={{ fontFamily: 'ui-sans-serif, system-ui, sans-serif' }}>
+              {t('congratulations')}
+            </CardDescription>
           </div>
 
           <CardContent className="space-y-6">
-            {/* 本次遊戲統計 */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="text-center p-3 rounded-lg bg-card border">
-                <div className="flex items-center justify-center gap-1 mb-1">
-                  <Trophy className="h-4 w-4 text-yellow-500" />
-                  <span className="text-sm font-medium">{t('score')}</span>
-                </div>
-                <div className="text-lg font-bold text-primary">{score.toLocaleString()}</div>
+            {/* 本次遊戲統計 - Minimalist Grid */}
+            <div className="grid grid-cols-2 gap-3">
+              <div className="dopamine-stat-box">
+                <span className="dopamine-stat-label">{t('score')}</span>
+                <span className="dopamine-stat-value">{score.toLocaleString()}</span>
               </div>
 
-              <div className="text-center p-3 rounded-lg bg-card border">
-                <div className="flex items-center justify-center gap-1 mb-1">
-                  <Clock className="h-4 w-4 text-blue-500" />
-                  <span className="text-sm font-medium">{t('remainingTime')}</span>
-                </div>
-                <div className="text-lg font-bold text-primary">{formatTime(timeLeft)}</div>
+              <div className="dopamine-stat-box">
+                <span className="dopamine-stat-label">{t('remainingTime')}</span>
+                <span className="dopamine-stat-value">{formatTime(timeLeft)}</span>
               </div>
 
-              <div className="text-center p-3 rounded-lg bg-card border">
-                <div className="flex items-center justify-center gap-1 mb-1">
-                  <Zap className="h-4 w-4 text-purple-500" />
-                  <span className="text-sm font-medium">{t('maxCombo')}</span>
-                </div>
-                <div className="text-lg font-bold text-primary">{comboCount}x</div>
+              <div className="dopamine-stat-box">
+                <span className="dopamine-stat-label">{t('maxCombo')}</span>
+                <span className="dopamine-stat-value">{comboCount}x</span>
               </div>
 
-              <div className="text-center p-3 rounded-lg bg-card border">
-                <div className="flex items-center justify-center gap-1 mb-1">
-                  <Badge variant="outline" className={cn("text-xs", getDifficultyColor(difficulty))}>
-                    {getDifficultyLabel(difficulty)}
-                  </Badge>
-                </div>
-                <div className="text-sm text-muted-foreground mt-1">{t('difficulty')}</div>
+              <div className="dopamine-stat-box">
+                <span className="dopamine-stat-label">{t('difficulty')}</span>
+                <span className="dopamine-stat-value text-sm pt-1">{getDifficultyLabel(difficulty)}</span>
               </div>
             </div>
 
-            {/* 多巴胺模式成就牆 */}
-            <div className="space-y-3">
-              <div className="flex items-center gap-2">
-                <Trophy className="h-5 w-5 text-yellow-500" />
-                <h3 className="text-lg font-semibold">{t('dopamineAchievementWall')}</h3>
-              </div>
+            {/* 多巴胺模式成就牆 - Minimalist List */}
+            <div className="space-y-3 pt-2">
+              <h3 className="text-sm font-semibold text-center uppercase tracking-widest text-cyan-200/70 border-b border-white/10 pb-2">
+                {t('dopamineAchievementWall')}
+              </h3>
 
               <div className="space-y-2">
-                <div className="flex items-center justify-between p-3 rounded-lg bg-card border">
-                  <div className="flex items-center gap-3">
-                    <div className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold bg-yellow-500 text-white">
-                      1
-                    </div>
-                    <div>
-                      <div className="font-medium text-muted-foreground">
-                        {topScores.length > 0 ?
-                          `${topScores[0].score.toLocaleString()} ${t('points')}` :
-                          t('noTopScoreData')}
-                      </div>
-                      <div className="text-sm text-muted-foreground">
-                        {getDifficultyLabel(difficulty)} {t('difficultyLevel')}
-                      </div>
+                <div className="flex items-center justify-between px-4 py-2 rounded bg-white/5 border border-white/10">
+                  <span className="text-sm font-medium text-white/80">BEST</span>
+                  <div className="text-right">
+                    <div className="font-bold text-white">
+                      {topScores.length > 0 ? topScores[0].score.toLocaleString() : '-'}
                     </div>
                   </div>
                 </div>
@@ -167,16 +121,13 @@ export const DopamineWinModal = ({
             </div>
 
             {/* 操作按鈕 */}
-            <div className="flex gap-3 pt-4">
+            <div className="pt-2">
               <Button
                 onClick={onRestart}
-                className="flex-1 h-12 text-lg font-bold sci-fi-button-glory"
+                className="w-full h-14 text-xl font-bold sci-fi-button-glory tracking-widest uppercase italic"
+                style={{ fontFamily: 'ui-sans-serif, system-ui, sans-serif' }}
               >
-                <RotateCcw className="h-4 w-4 mr-2" />
                 {t('againChallenge')}
-              </Button>
-              <Button variant="outline" onClick={onReturnToMain} className="flex-1 h-12">
-                {t('returnToMainMenu')}
               </Button>
             </div>
           </CardContent>
