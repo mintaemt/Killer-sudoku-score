@@ -6,7 +6,7 @@ import { DifficultySelector } from "@/components/DifficultySelector";
 import { DopamineProgressBar } from "@/components/DopamineProgressBar";
 import { DopamineGameOverModal } from "@/components/DopamineGameOverModal";
 import { DopamineWinModal } from "@/components/DopamineWinModal";
-import NavierStokesFluid from "@/components/NavierStokesFluid";
+import { AnimatedGradientBackground } from "@/components/AnimatedGradientBackground";
 import { UserNameInput } from "@/components/UserNameInput";
 import { GameCompleteModal } from "@/components/GameCompleteModal";
 import { GameRulesModal } from "@/components/GameRulesModal";
@@ -886,7 +886,7 @@ const Index = () => {
         {isDopamineMode && <DopamineFluidBackground />}
         <div className="w-full max-w-6xl mx-auto animate-fade-in bg-transparent">
           {/* 動態漸層背景 */}
-          <NavierStokesFluid />
+          <AnimatedGradientBackground isDopamineMode={isDopamineMode} />
 
           {/* 多巴胺模式進度條 */}
           <DopamineProgressBar
