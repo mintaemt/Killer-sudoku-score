@@ -29,7 +29,7 @@ import { cn } from "@/lib/utils";
 import { supabase } from "@/lib/supabase";
 import { useLanguage } from "@/hooks/useLanguage";
 import { Link } from "react-router-dom";
-import { DopamineFluidBackground } from "@/components/DopamineFluidBackground";
+
 
 import { useThemeColor } from "@/contexts/ThemeColorContext";
 import { useAuth } from "@/contexts/AuthContext";
@@ -883,7 +883,7 @@ const Index = () => {
       ></div>
 
       <div className={`min-h-screen flex items-center justify-center p-2 md:p-4 bg-transparent ${isDopamineMode ? 'pt-24 sm:pt-16' : ''}`} data-theme={currentTheme}>
-        {isDopamineMode && <DopamineFluidBackground />}
+
         <div className="w-full max-w-6xl mx-auto animate-fade-in bg-transparent">
           {/* 動態漸層背景 */}
           <AnimatedGradientBackground isDopamineMode={isDopamineMode} />
