@@ -109,10 +109,10 @@ export const DopamineWinModal = ({
               </h3>
 
               <div className="space-y-2">
-                <div className="flex items-center justify-between px-4 py-2 rounded bg-white/5 border border-white/10">
-                  <span className="text-sm font-medium text-white/80">BEST</span>
+                <div className="flex items-center justify-between px-4 py-3 rounded-lg bg-white/5 border border-white/10 backdrop-blur-sm">
+                  <span className="text-sm font-bold text-cyan-100 tracking-wide">{t('personalBest')}</span>
                   <div className="text-right">
-                    <div className="font-bold text-white">
+                    <div className="font-black text-2xl text-white drop-shadow-[0_0_5px_rgba(255,255,255,0.5)]">
                       {topScores.length > 0 ? topScores[0].score.toLocaleString() : '-'}
                     </div>
                   </div>
