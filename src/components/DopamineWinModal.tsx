@@ -68,7 +68,7 @@ export const DopamineWinModal = ({
 
           {/* 大型 WELL DONE 標題 (Sharp Font) */}
           <div className="text-center py-6">
-            <div className="text-6xl md:text-7xl font-black tracking-tighter italic text-white drop-shadow-[0_0_15px_rgba(0,243,255,0.5)] bg-clip-text text-transparent bg-gradient-to-b from-white to-cyan-200"
+            <div className="text-5xl sm:text-6xl md:text-7xl font-black tracking-tighter italic text-white drop-shadow-[0_0_15px_rgba(0,243,255,0.5)] bg-clip-text text-transparent bg-gradient-to-b from-white to-cyan-200"
               style={{ fontFamily: 'ui-sans-serif, system-ui, sans-serif' }}>
               WELL DONE
             </div>
