@@ -38,7 +38,7 @@ export const DopamineWinModal = ({
   isNewRecord = false
 }: DopamineWinModalProps) => {
   const { t } = useLanguage();
-  
+
   if (!isOpen) return null;
 
   const formatTime = (seconds: number) => {
@@ -72,8 +72,8 @@ export const DopamineWinModal = ({
                 <div>
                   <CardTitle className="flex items-center gap-2 flex-wrap">
                     <span className="whitespace-nowrap">{t('dopamineMode')}</span>
-                    <Badge 
-                      variant="secondary" 
+                    <Badge
+                      variant="secondary"
                       className="text-white relative overflow-hidden flowing-button flex-shrink-0"
                     >
                       <Zap className="h-3 w-3 mr-1" />
@@ -83,15 +83,15 @@ export const DopamineWinModal = ({
                   <CardDescription className="mt-2">{t('congratulations')}</CardDescription>
                 </div>
               </div>
-              <Button variant="outline" size="sm" onClick={onClose} className="mt-1">
+              <Button variant="ghost" size="sm" onClick={onClose} className="mt-1 dopamine-close-btn">
                 <X className="h-4 w-4" />
               </Button>
             </div>
           </CardHeader>
-          
+
           {/* 大型 WELL DONE 標題 */}
           <div className="text-center py-8">
-            <div 
+            <div
               className="text-6xl md:text-8xl font-black flowing-text-well-done"
               style={{
                 fontFamily: 'Huninn, sans-serif'
@@ -100,7 +100,7 @@ export const DopamineWinModal = ({
               WELL DONE
             </div>
           </div>
-          
+
           <CardContent className="space-y-6">
             {/* 本次遊戲統計 */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -111,7 +111,7 @@ export const DopamineWinModal = ({
                 </div>
                 <div className="text-lg font-bold text-primary">{score.toLocaleString()}</div>
               </div>
-              
+
               <div className="text-center p-3 rounded-lg bg-card border">
                 <div className="flex items-center justify-center gap-1 mb-1">
                   <Clock className="h-4 w-4 text-blue-500" />
@@ -119,7 +119,7 @@ export const DopamineWinModal = ({
                 </div>
                 <div className="text-lg font-bold text-primary">{formatTime(timeLeft)}</div>
               </div>
-              
+
               <div className="text-center p-3 rounded-lg bg-card border">
                 <div className="flex items-center justify-center gap-1 mb-1">
                   <Zap className="h-4 w-4 text-purple-500" />
@@ -127,7 +127,7 @@ export const DopamineWinModal = ({
                 </div>
                 <div className="text-lg font-bold text-primary">{comboCount}x</div>
               </div>
-              
+
               <div className="text-center p-3 rounded-lg bg-card border">
                 <div className="flex items-center justify-center gap-1 mb-1">
                   <Badge variant="outline" className={cn("text-xs", getDifficultyColor(difficulty))}>
@@ -144,7 +144,7 @@ export const DopamineWinModal = ({
                 <Trophy className="h-5 w-5 text-yellow-500" />
                 <h3 className="text-lg font-semibold">{t('dopamineAchievementWall')}</h3>
               </div>
-              
+
               <div className="space-y-2">
                 <div className="flex items-center justify-between p-3 rounded-lg bg-card border">
                   <div className="flex items-center gap-3">
@@ -153,8 +153,8 @@ export const DopamineWinModal = ({
                     </div>
                     <div>
                       <div className="font-medium text-muted-foreground">
-                        {topScores.length > 0 ? 
-                          `${topScores[0].score.toLocaleString()} ${t('points')}` : 
+                        {topScores.length > 0 ?
+                          `${topScores[0].score.toLocaleString()} ${t('points')}` :
                           t('noTopScoreData')}
                       </div>
                       <div className="text-sm text-muted-foreground">
@@ -170,7 +170,7 @@ export const DopamineWinModal = ({
             <div className="flex gap-3 pt-4">
               <Button
                 onClick={onRestart}
-                className="flex-1 h-12 text-lg font-bold text-white shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden flowing-button"
+                className="flex-1 h-12 text-lg font-bold sci-fi-button-glory"
               >
                 <RotateCcw className="h-4 w-4 mr-2" />
                 {t('againChallenge')}
