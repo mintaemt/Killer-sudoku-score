@@ -110,12 +110,12 @@ export const Leaderboard = ({ currentUserId, onClose, mode = 'normal' }: Leaderb
               {/* Table Container - Scrollable */}
               <div className="flex-1 overflow-auto border rounded-md bg-card">
                 <Table>
-                  <TableHeader className="sticky top-0 bg-secondary/50 backdrop-blur-sm z-10">
-                    <TableRow>
-                      <TableHead className="w-[80px] text-center first:rounded-tl-lg">#</TableHead>
-                      <TableHead>{t('colPlayer') || '玩家'}</TableHead>
-                      <TableHead className="text-right">{t('colScore') || '分數'}</TableHead>
-                      <TableHead className="text-right last:rounded-tr-lg">{t('colTime') || '時間'}</TableHead>
+                  <TableHeader className="sticky top-0 z-10">
+                    <TableRow className="hover:bg-transparent border-none">
+                      <TableHead className="w-[80px] text-center first:rounded-tl-lg bg-secondary/50 backdrop-blur-sm">#</TableHead>
+                      <TableHead className="bg-secondary/50 backdrop-blur-sm">{t('colPlayer') || '玩家'}</TableHead>
+                      <TableHead className="text-right bg-secondary/50 backdrop-blur-sm">{t('colScore') || '分數'}</TableHead>
+                      <TableHead className="text-right last:rounded-tr-lg bg-secondary/50 backdrop-blur-sm">{t('colTime') || '時間'}</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
