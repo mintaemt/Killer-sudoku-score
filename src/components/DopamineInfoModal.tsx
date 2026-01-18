@@ -16,12 +16,12 @@ interface DopamineInfoModalProps {
   onShowFeatureHint?: () => void;
 }
 
-const difficultyOptions: { value: DopamineDifficulty; label: string; descKey: string; color: string; ringColor: string; radioColor: string; translationKey: string }[] = [
-  { value: "easy", label: "Easy", descKey: "basicAchievement", color: "bg-gray-500/20 text-gray-600 border-gray-500/30", ringColor: "ring-gray-500", radioColor: "accent-gray-500", translationKey: "easy" },
-  { value: "medium", label: "Medium", descKey: "moderateChallenge", color: "bg-blue-500/20 text-blue-600 border-blue-500/30", ringColor: "ring-blue-500", radioColor: "accent-blue-500", translationKey: "medium" },
-  { value: "hard", label: "Hard", descKey: "highAchievement", color: "bg-purple-500/20 text-purple-600 border-purple-500/30", ringColor: "ring-purple-500", radioColor: "accent-purple-500", translationKey: "hard" },
-  { value: "expert", label: "Expert", descKey: "topChallenge", color: "bg-orange-500/20 text-orange-600 border-orange-500/30", ringColor: "ring-orange-500", radioColor: "accent-orange-600", translationKey: "expert" },
-  { value: "hell", label: "Hell", descKey: "highestAchievement", color: "bg-red-500/20 text-red-600 border-red-500/30", ringColor: "ring-red-500", radioColor: "accent-red-500", translationKey: "hell" }
+const difficultyOptions: { value: DopamineDifficulty; label: string; descKey: string; translationKey: string }[] = [
+  { value: "easy", label: "Easy", descKey: "basicAchievement", translationKey: "easy" },
+  { value: "medium", label: "Medium", descKey: "moderateChallenge", translationKey: "medium" },
+  { value: "hard", label: "Hard", descKey: "highAchievement", translationKey: "hard" },
+  { value: "expert", label: "Expert", descKey: "topChallenge", translationKey: "expert" },
+  { value: "hell", label: "Hell", descKey: "highestAchievement", translationKey: "hell" }
 ];
 
 export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge, onShowFeatureHint }: DopamineInfoModalProps) => {
@@ -61,23 +61,23 @@ export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge, onShowFea
           <CardContent className="space-y-6">
             {/* 模式介紹 */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="p-3 rounded-lg bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/20 dark:to-pink-950/20 border border-purple-200/50 dark:border-purple-800/50">
-                <h3 className="font-semibold mb-2 flex items-center gap-2 text-sm text-purple-700 dark:text-purple-300">
-                  <Star className="h-4 w-4 text-purple-500" />
+              <div className="p-4 dopamine-card">
+                <h3 className="mb-2 flex items-center gap-2 text-sm dopamine-gradient-text">
+                  <Star className="h-4 w-4 text-purple-400" />
                   {t('modeFeatures')}
                 </h3>
-                <ul className="text-sm text-muted-foreground dark:text-muted-foreground space-y-1">
+                <ul className="text-sm text-gray-300 space-y-1">
                   <li>• {t('chooseDifficultyChallenge')}</li>
                   <li>• {t('specialScoringSystem')}</li>
                 </ul>
               </div>
 
-              <div className="p-3 rounded-lg bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-950/20 border border-blue-200/50 dark:border-blue-800/50">
-                <h3 className="font-semibold mb-2 flex items-center gap-2 text-sm text-blue-700 dark:text-blue-300">
-                  <AlertTriangle className="h-4 w-4 text-blue-500" />
+              <div className="p-4 dopamine-card">
+                <h3 className="mb-2 flex items-center gap-2 text-sm dopamine-gradient-text">
+                  <AlertTriangle className="h-4 w-4 text-blue-400" />
                   {t('gameRules')}
                 </h3>
-                <ul className="text-sm text-muted-foreground dark:text-muted-foreground space-y-1">
+                <ul className="text-sm text-gray-300 space-y-1">
                   <li>• {t('timeLimitChallenge')}</li>
                   <li>• {t('errorCountAffectsScore')}</li>
                   <li>• {t('consecutiveCorrectReward')}</li>
@@ -96,9 +96,8 @@ export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge, onShowFea
                   <div
                     key={difficulty.value}
                     className={cn(
-                      "flex flex-col items-center justify-center p-2 rounded-lg border cursor-pointer transition-all duration-200 text-center",
-                      difficulty.color,
-                      selectedDifficulty === difficulty.value && `ring-2 ${difficulty.ringColor} ring-offset-2`
+                      "flex flex-col items-center justify-center p-2 cursor-pointer difficulty-card min-h-[70px]",
+                      selectedDifficulty === difficulty.value && "selected"
                     )}
                     onClick={() => setSelectedDifficulty(difficulty.value)}
                   >
@@ -110,13 +109,10 @@ export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge, onShowFea
                       checked={selectedDifficulty === difficulty.value}
                       onChange={() => setSelectedDifficulty(difficulty.value)}
                       autoComplete="off"
-                      className={cn(
-                        "w-3 h-3 mb-1",
-                        difficulty.radioColor
-                      )}
+                      className="w-3 h-3 mb-1 accent-white/80 opacity-60"
                     />
                     <div className="text-xs font-bold">{t(difficulty.translationKey as any)}</div>
-                    <div className="text-[10px] opacity-80">{t(difficulty.descKey as any)}</div>
+                    <div className="text-[10px] opacity-70">{t(difficulty.descKey as any)}</div>
                   </div>
                 ))}
               </div>
