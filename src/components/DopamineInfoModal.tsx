@@ -136,7 +136,7 @@ export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge, onShowFea
                     onShowFeatureHint?.();
                   }
                 }}
-                className="w-full h-12 text-lg font-bold text-white shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden flowing-button"
+                className="w-full h-12 text-lg font-bold sci-fi-button"
               >
                 <Trophy className="mr-2 h-5 w-5" />
                 {user && !isVisitorMode ? t('startChallenge') : t('pleaseRegister')}

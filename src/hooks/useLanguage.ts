@@ -154,6 +154,7 @@ const translations = {
     bestTime: 'Best Time',
     totalGames: 'Total Games',
     playerHub: 'Player Hub',
+    myStats: 'My Stats',
 
     pleaseRegister: 'Register to Play',
 
@@ -902,6 +903,7 @@ const translations = {
     colScore: '점수',
 
     pleaseRegister: '등록하고 플레이',
+    userLimited: '유저 전용',
 
     // Dopamine Mode
     registerToUnlock: '등록하고 더 많은 기능 해제!',
@@ -1419,6 +1421,7 @@ const translations = {
     colScore: 'スコア',
     total: '合計',
     pleaseRegister: '登録してプレイ',
+    userLimited: 'ユーザー限定',
 
     // Dopamine Mode
     registerToUnlock: '登録して機能を解除！',
