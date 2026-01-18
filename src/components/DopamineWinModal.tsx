@@ -60,8 +60,8 @@ export const DopamineWinModal = ({
         <Card className="dopamine-card-diamond">
           <CardHeader className="pb-2">
             <div className="flex items-start justify-end">
-              <Button variant="ghost" size="sm" onClick={onClose} className="dopamine-close-btn">
-                <X className="h-4 w-4" />
+              <Button variant="ghost" size="sm" onClick={onClose} className="text-white/50 hover:text-white hover:bg-white/10 transition-colors">
+                <X className="h-5 w-5" />
               </Button>
             </div>
           </CardHeader>

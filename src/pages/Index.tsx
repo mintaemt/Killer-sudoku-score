@@ -6,7 +6,7 @@ import { DifficultySelector } from "@/components/DifficultySelector";
 import { DopamineProgressBar } from "@/components/DopamineProgressBar";
 import { DopamineGameOverModal } from "@/components/DopamineGameOverModal";
 import { DopamineWinModal } from "@/components/DopamineWinModal";
-import { AnimatedGradientBackground } from "@/components/AnimatedGradientBackground";
+import NavierStokesFluid from "@/components/NavierStokesFluid";
 import { UserNameInput } from "@/components/UserNameInput";
 import { GameCompleteModal } from "@/components/GameCompleteModal";
 import { GameRulesModal } from "@/components/GameRulesModal";
@@ -29,6 +29,7 @@ import { cn } from "@/lib/utils";
 import { supabase } from "@/lib/supabase";
 import { useLanguage } from "@/hooks/useLanguage";
 import { Link } from "react-router-dom";
+import { DopamineFluidBackground } from "@/components/DopamineFluidBackground";
 
 import { useThemeColor } from "@/contexts/ThemeColorContext";
 import { useAuth } from "@/contexts/AuthContext";
@@ -882,9 +883,10 @@ const Index = () => {
       ></div>
 
       <div className={`min-h-screen flex items-center justify-center p-2 md:p-4 bg-transparent ${isDopamineMode ? 'pt-24 sm:pt-16' : ''}`} data-theme={currentTheme}>
+        {isDopamineMode && <DopamineFluidBackground />}
         <div className="w-full max-w-6xl mx-auto animate-fade-in bg-transparent">
           {/* 動態漸層背景 */}
-          <AnimatedGradientBackground isDopamineMode={isDopamineMode} />
+          <NavierStokesFluid />
 
           {/* 多巴胺模式進度條 */}
           <DopamineProgressBar

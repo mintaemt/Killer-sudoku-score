@@ -270,6 +270,90 @@
     border: 1px solid rgba(255, 255, 255, 0.08);
     /* Faint grey border */
     border-radius: 12px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
     /* Heavy shadow */
+}
+
+/* ==========================================================================
+   Diamond Card Style (Win Modal)
+   Represents: Clarity, Prism, High Value
+   ========================================================================== */
+.dopamine-card-diamond {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 16px;
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.5),
+        0 0 20px rgba(0, 243, 255, 0.1),
+        inset 0 0 20px rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.dopamine-card-diamond::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.4) 0%,
+            rgba(255, 255, 255, 0) 40%,
+            rgba(0, 243, 255, 0.1) 60%,
+            rgba(255, 0, 255, 0.1) 100%);
+    opacity: 0.3;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Minimalist Stat Box */
+.dopamine-stat-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.dopamine-stat-box:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.dopamine-stat-label {
+    font-size: 0.75rem;
+    /* text-xs */
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 0.25rem;
+}
+
+.dopamine-stat-value {
+    font-size: 1.125rem;
+    /* text-lg */
+    font-weight: 700;
+    color: #FFFFFF;
+    text-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
+}
+
+/* Breathing Animation for Phoenix Button */
+.phoenix-breathing {
+    animation: phoenix-breath 3s ease-in-out infinite;
+}
+
+@keyframes phoenix-breath {
+
+    0%,
+    100% {
+        box-shadow: 0 0 15px rgba(255, 69, 0, 0.2);
+        transform: scale(1);
+    }
+
+    50% {
+        box-shadow: 0 0 25px rgba(255, 140, 0, 0.5);
+        transform: scale(1.02);
+    }
 }
