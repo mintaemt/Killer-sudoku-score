@@ -16,12 +16,12 @@ interface DopamineInfoModalProps {
   onShowFeatureHint?: () => void;
 }
 
-const difficultyOptions: { value: DopamineDifficulty; label: string; descKey: string; translationKey: string }[] = [
-  { value: "easy", label: "Easy", descKey: "basicAchievement", translationKey: "easy" },
-  { value: "medium", label: "Medium", descKey: "moderateChallenge", translationKey: "medium" },
-  { value: "hard", label: "Hard", descKey: "highAchievement", translationKey: "hard" },
-  { value: "expert", label: "Expert", descKey: "topChallenge", translationKey: "expert" },
-  { value: "hell", label: "Hell", descKey: "highestAchievement", translationKey: "hell" }
+const difficultyOptions: { value: DopamineDifficulty; label: string; translationKey: string }[] = [
+  { value: "easy", label: "Easy", translationKey: "easy" },
+  { value: "medium", label: "Medium", translationKey: "medium" },
+  { value: "hard", label: "Hard", translationKey: "hard" },
+  { value: "expert", label: "Expert", translationKey: "expert" },
+  { value: "hell", label: "Hell", translationKey: "hell" }
 ];
 
 export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge, onShowFeatureHint }: DopamineInfoModalProps) => {
@@ -112,7 +112,6 @@ export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge, onShowFea
                       className="w-3 h-3 mb-1 accent-white/80 opacity-60"
                     />
                     <div className="text-xs font-bold">{t(difficulty.translationKey as any)}</div>
-                    <div className="text-[10px] opacity-70">{t(difficulty.descKey as any)}</div>
                   </div>
                 ))}
               </div>
