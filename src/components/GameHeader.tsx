@@ -129,7 +129,8 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
         {/* Flex-1 ensures it takes available space */}
         <div
           ref={titleContainerRef}
-          className="flex flex-col items-start justify-center min-w-0 flex-1 relative z-0 h-10 mr-2 overflow-hidden"
+          className="flex flex-col items-start justify-center min-w-0 flex-1 relative z-0 h-10 mr-2 overflow-hidden cursor-pointer"
+          onClick={() => window.location.href = '/'}
         >
           <h1
             ref={titleTextRef}
