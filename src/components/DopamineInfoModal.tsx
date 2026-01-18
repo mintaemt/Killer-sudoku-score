@@ -52,7 +52,7 @@ export const DopamineInfoModal = ({ isOpen, onClose, onStartChallenge, onShowFea
                   <CardDescription className="mt-2">{t('beyondNormalMode')}</CardDescription>
                 </div>
               </div>
-              <Button variant="outline" size="sm" onClick={onClose} className="mt-1">
+              <Button variant="ghost" size="sm" onClick={onClose} className="mt-1 dopamine-close-btn">
                 <X className="h-4 w-4" />
               </Button>
             </div>

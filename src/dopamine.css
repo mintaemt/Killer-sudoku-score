@@ -125,3 +125,18 @@
     color: #FFFFFF !important;
     /* White text on hover for contrast */
 }
+
+/* Close Button Style - Neon Cyan Override */
+.dopamine-close-btn {
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    color: rgba(255, 255, 255, 0.6) !important;
+    transition: all 0.3s ease !important;
+}
+
+.dopamine-close-btn:hover {
+    background: rgba(0, 243, 255, 0.1) !important;
+    border-color: #00F3FF !important;
+    color: #00F3FF !important;
+    box-shadow: 0 0 10px rgba(0, 243, 255, 0.3) !important;
+    transform: rotate(90deg);
+}
