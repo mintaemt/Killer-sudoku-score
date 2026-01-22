@@ -46,8 +46,8 @@ All colors MUST be HSL.
     --cell-given: 0 0% 18%;
     --cage-border: 0 0% 18%;
     --cage-sum: 0 0% 60%;
-    /* Mobile: Hairline Border */
-    --cage-border-width: 0.5px;
+    /* Mobile: Thinner Border (1px for safe rendering) */
+    --cage-border-width: 1px;
 
     --radius: 0.75rem;
 

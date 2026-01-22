@@ -36,17 +36,22 @@ export const KillerSudokuBorderLayer = ({ cages }: KillerSudokuBorderLayerProps)
                     gridStyle.gridRowEnd = `span ${segment.span}`;
                 }
 
-                // Inner style for the dashed line
+                // Inner style for the dashed line using CSS Gradient
+                // This fixes iOS/WebKit rendering issues with sub-pixel dashed borders
                 const innerStyle: React.CSSProperties = {
                     position: 'absolute',
-                    borderColor: 'hsl(var(--cage-border))',
-                    borderStyle: 'dashed',
-                    borderWidth: 0, // Reset
-                    width: 'auto',
-                    height: 'auto',
                     // Default Insets
                     top: 0, left: 0, right: 0, bottom: 0,
+                    // Gradient settings
+                    backgroundRepeat: segment.type === 'horizontal' ? 'repeat-x' : 'repeat-y',
                 };
+
+                const dashColor = 'hsl(var(--cage-border))';
+                const dashPattern = `linear-gradient(${segment.type === 'horizontal' ? 'to right' : 'to bottom'}, ${dashColor} 50%, transparent 50%)`;
+                const dashSize = segment.type === 'horizontal' ? '6px 100%' : '100% 6px'; // 3px dash, 3px gap
+
+                innerStyle.backgroundImage = dashPattern;
+                innerStyle.backgroundSize = dashSize;
 
                 // Orientation specific
                 if (segment.type === 'horizontal') {
@@ -54,7 +59,6 @@ export const KillerSudokuBorderLayer = ({ cages }: KillerSudokuBorderLayerProps)
                         innerStyle.bottom = inset;
                         innerStyle.top = 'auto';
                         innerStyle.height = borderWidth;
-                        innerStyle.borderBottomWidth = borderWidth;
                         innerStyle.left = segment.startExtended ? `calc(-1 * ${inset})` : inset;
                         innerStyle.right = segment.endExtended ? `calc(-1 * ${inset})` : inset;
                         if (segment.startShortened) innerStyle.left = inset;
@@ -64,10 +68,8 @@ export const KillerSudokuBorderLayer = ({ cages }: KillerSudokuBorderLayerProps)
                         innerStyle.top = inset;
                         innerStyle.bottom = 'auto';
                         innerStyle.height = borderWidth;
-                        innerStyle.borderTopWidth = borderWidth;
                         innerStyle.left = segment.startExtended ? `calc(-1 * ${inset})` : inset;
                         innerStyle.right = segment.endExtended ? `calc(-1 * ${inset})` : inset;
-                        // Note: Shorten logic can be applied here too if needed
                     }
                 } else {
                     // Vertical
@@ -75,7 +77,6 @@ export const KillerSudokuBorderLayer = ({ cages }: KillerSudokuBorderLayerProps)
                         innerStyle.right = inset;
                         innerStyle.left = 'auto';
                         innerStyle.width = borderWidth;
-                        innerStyle.borderRightWidth = borderWidth;
                         innerStyle.top = segment.startExtended ? `calc(-1 * ${inset})` : inset;
                         innerStyle.bottom = segment.endExtended ? `calc(-1 * ${inset})` : inset;
                         if (segment.startShortened) innerStyle.top = inset;
@@ -85,7 +86,6 @@ export const KillerSudokuBorderLayer = ({ cages }: KillerSudokuBorderLayerProps)
                         innerStyle.left = inset;
                         innerStyle.right = 'auto';
                         innerStyle.width = borderWidth;
-                        innerStyle.borderLeftWidth = borderWidth;
                         innerStyle.top = segment.startExtended ? `calc(-1 * ${inset})` : inset;
                         innerStyle.bottom = segment.endExtended ? `calc(-1 * ${inset})` : inset;
                     }
