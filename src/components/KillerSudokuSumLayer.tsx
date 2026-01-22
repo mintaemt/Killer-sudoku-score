@@ -8,8 +8,8 @@ interface KillerSudokuSumLayerProps {
 }
 
 export const KillerSudokuSumLayer = ({ grid, cages, selectedCell }: KillerSudokuSumLayerProps) => {
-    // Inset matching the Border Layer (adjusted to 2px for tighter fit)
-    const inset = "2px";
+    // Inset matching the Border Layer (adjusted to 3px for looser fit)
+    const inset = "3px";
 
     /**
      * Helper to determine background color for a specific cell.

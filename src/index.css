@@ -46,6 +46,8 @@ All colors MUST be HSL.
     --cell-given: 0 0% 18%;
     --cage-border: 0 0% 18%;
     --cage-sum: 0 0% 60%;
+    /* Mobile: Hairline Border */
+    --cage-border-width: 0.5px;
 
     --radius: 0.75rem;
 
@@ -387,6 +389,14 @@ All colors MUST be HSL.
     font-weight: 700;
     letter-spacing: 0.1em;
     /* 移除文字陰影，讓flowing-text效果正常顯示 */
+  }
+
+  /* Desktop Adjustments */
+  @media (min-width: 768px) {
+    :root {
+      /* Desktop: Standard Thickness */
+      --cage-border-width: 1.5px;
+    }
   }
 
 }
