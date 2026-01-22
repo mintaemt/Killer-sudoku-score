@@ -103,7 +103,7 @@ All colors MUST be HSL.
 
     /* Light Mode Cage Border: 35% Gray (Darker) */
     --cage-border: 0 0% 35%;
-    --cage-sum: 0 0% 60%;
+    --cage-sum: 0 0% 35%;
 
     --dopamine-bg: #000000;
     /* Light Mode: Deep Black */
@@ -224,7 +224,7 @@ All colors MUST be HSL.
     --cell-given: 0 0% 18%;
     /* Dark Mode Cage Border: 85% Gray (Whiter) */
     --cage-border: 0 0% 85%;
-    --cage-sum: 0 0% 60%;
+    --cage-sum: 0 0% 85%;
   }
 
   * {
