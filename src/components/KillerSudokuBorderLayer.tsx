@@ -10,7 +10,7 @@ export const KillerSudokuBorderLayer = ({ cages }: KillerSudokuBorderLayerProps)
     // Generate segments from service
     const segments = useMemo(() => getCageBorderSegments(cages), [cages]);
 
-    const inset = "3px";
+    const inset = "2px";
     const borderWidth = "var(--cage-border-width)";
 
     return (
