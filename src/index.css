@@ -99,7 +99,7 @@ All colors MUST be HSL.
     --cell-selected: 211 100% 92%;
     --cell-highlighted: 211 100% 95%;
     --cell-error: 0 100% 92%;
-    --cell-given: 0 0% 97%;
+    --cell-given: 0 0% 100%;
 
     /* Light Mode Cage Border: 35% Gray (Darker) */
     --cage-border: 0 0% 35%;
@@ -221,7 +221,7 @@ All colors MUST be HSL.
     --cell-selected: 211 50% 20%;
     --cell-highlighted: 211 30% 18%;
     --cell-error: 0 50% 20%;
-    --cell-given: 0 0% 18%;
+    --cell-given: 0 0% 15%;
     /* Dark Mode Cage Border: 85% Gray (Whiter) */
     --cage-border: 0 0% 85%;
     --cage-sum: 0 0% 85%;
