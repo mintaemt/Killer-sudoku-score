@@ -98,6 +98,11 @@ All colors MUST be HSL.
     --cell-highlighted: 211 100% 95%;
     --cell-error: 0 100% 92%;
     --cell-given: 0 0% 97%;
+
+    /* Light Mode Cage Border: 60% Gray */
+    --cage-border: 0 0% 60%;
+    --cage-sum: 0 0% 60%;
+
     --dopamine-bg: #000000;
     /* Light Mode: Deep Black */
     --dopamine-filter: saturate(2.0) contrast(1.1) brightness(1.0);
@@ -215,7 +220,8 @@ All colors MUST be HSL.
     --cell-highlighted: 211 30% 18%;
     --cell-error: 0 50% 20%;
     --cell-given: 0 0% 18%;
-    --cage-border: 0 0% 18%;
+    /* Dark Mode Cage Border: 60% Gray */
+    --cage-border: 0 0% 60%;
     --cage-sum: 0 0% 60%;
   }
 
