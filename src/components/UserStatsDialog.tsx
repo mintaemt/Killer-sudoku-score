@@ -11,7 +11,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { LogOut, ListOrdered, User as UserIcon, Settings, Clock, Trophy, Target, Zap } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useUserStats } from "@/hooks/useUserStats";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { DopamineDifficulty } from "@/lib/types";
 import { Leaderboard } from "@/components/Leaderboard";
@@ -37,9 +37,14 @@ export const UserStatsDialog = ({
     const { signOut } = useAuth();
 
     const [viewMode, setViewMode] = useState<'normal' | 'dopamine'>('normal');
-    const { stats, loading } = useUserStats(user?.id, viewMode);
+    const { stats, loading, refetch } = useUserStats(user?.id, viewMode);
 
-
+    // 每當對話框打開，或切換模式時，強制重新獲取最新統計資料
+    useEffect(() => {
+        if (isOpen) {
+            refetch();
+        }
+    }, [isOpen, viewMode, refetch]);
 
     const currentThemeColor = themes.find(theme => theme.name === currentTheme)?.color || "#3b82f6";
     const themeStyle = { '--theme-color': currentThemeColor } as React.CSSProperties;
