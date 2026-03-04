@@ -3,7 +3,7 @@
  * 處理普通模式與多巴胺模式的排行榜查詢與使用者排名
  */
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { supabase } from '@/lib/supabase';
 import { LeaderboardEntry, Difficulty } from '@/lib/types';
 
@@ -32,12 +32,14 @@ export const useLeaderboard = (
   const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const isFetchingRef = useRef(false);
 
   const fetchLeaderboard = async () => {
-    // 防止重複請求
-    if (loading) return;
+    // 防止重複請求與避免 stale closure
+    if (isFetchingRef.current) return;
 
     try {
+      isFetchingRef.current = true;
       setLoading(true);
       setError(null);
 
@@ -72,6 +74,7 @@ export const useLeaderboard = (
       setError(errorMessage);
     } finally {
       setLoading(false);
+      isFetchingRef.current = false;
     }
   };
 

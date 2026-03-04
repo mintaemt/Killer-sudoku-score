@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { KillerSudokuGrid } from "@/components/KillerSudokuGrid";
 import { NumberPad } from "@/components/NumberPad";
 import { GameHeader } from "@/components/GameHeader";
@@ -82,6 +82,9 @@ const Index = () => {
   // 功能提示狀態
   const [showFeatureHint, setShowFeatureHint] = useState(false);
 
+  // 防重複觸發鎖定
+  const isHandlingComplete = useRef(false);
+
   // Hooks
   const { user, loading: userLoading, createOrUpdateUser, enterVisitorMode, isVisitorMode, isLoggedIn } = useUser();
   const { signInWithGoogle } = useAuth();
@@ -110,6 +113,9 @@ const Index = () => {
 
   // 處理遊戲完成
   const handleGameComplete = async () => {
+    if (isHandlingComplete.current) return;
+    isHandlingComplete.current = true;
+
     console.log('🚀 handleGameComplete 被調用');
     console.log('👤 用戶狀態:', { user: !!user, isVisitorMode, isDopamineMode });
 
@@ -228,6 +234,7 @@ const Index = () => {
         setGameData(newGameData);
         setMistakes(0);
         setSelectedCell(null);
+        isHandlingComplete.current = false; // 重置鎖定狀態
 
         // 重置多巴胺模式狀態
         setIsDopamineMode(false);
@@ -452,6 +459,7 @@ const Index = () => {
         setShowDopamineGameOver(false);
         setShowDopamineWin(false);
         setGameCompletionResult(null);
+        isHandlingComplete.current = false; // 重置鎖定狀態
       }, 0);
     } catch (error) {
       console.error('Error generating new game:', error);
