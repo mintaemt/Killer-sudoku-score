@@ -7,7 +7,7 @@ import { DopamineProgressBar } from "@/components/DopamineProgressBar";
 import { DopamineGameOverModal } from "@/components/DopamineGameOverModal";
 import { DopamineWinModal } from "@/components/DopamineWinModal";
 import { AnimatedGradientBackground } from "@/components/AnimatedGradientBackground";
-import { UserNameInput } from "@/components/UserNameInput";
+// Removed UserNameInput import
 import { GameCompleteModal } from "@/components/GameCompleteModal";
 import { GameRulesModal } from "@/components/GameRulesModal";
 import { Leaderboard } from "@/components/Leaderboard";
@@ -62,7 +62,7 @@ const Index = () => {
   const [dopamineWinData, setDopamineWinData] = useState<any>(null);
 
   // 新增狀態
-  const [showUserNameInput, setShowUserNameInput] = useState(false);
+  // Removed showUserNameInput state
   const [showGameCompleteModal, setShowGameCompleteModal] = useState(false);
   const [showLeaderboard, setShowLeaderboard] = useState(false);
   const [currentLeaderboardMode, setCurrentLeaderboardMode] = useState<'normal' | 'dopamine'>('normal');
@@ -88,14 +88,7 @@ const Index = () => {
   const { shouldShowHint, dismissHint } = useFeatureHint();
   const { saveNormalGameRecord, saveDopamineGameRecord, getNormalUserBestScore, getDopamineUserBestScore, getAllDopamineUsersTopScore } = useGameRecord();
 
-  // 檢查用戶是否已登入
-  useEffect(() => {
-    if (!userLoading && !isLoggedIn) {
-      setShowUserNameInput(true);
-    } else if (!userLoading && isLoggedIn) {
-      setShowUserNameInput(false);
-    }
-  }, [userLoading, isLoggedIn, user, isVisitorMode]);
+
 
   // 遊戲完成檢查
   useEffect(() => {
@@ -209,21 +202,8 @@ const Index = () => {
     }
   };
 
-  // 處理用戶名稱提交
-  const handleUserNameSubmit = async (name: string) => {
-    const userData = await createOrUpdateUser(name);
-    if (userData) {
-      setShowUserNameInput(false);
-      // 重新載入頁面以確保用戶按鈕正確顯示
-      window.location.reload();
-    }
-  };
-
-  // 處理訪客模式
-  const handleVisitorMode = () => {
-    enterVisitorMode();
-    setShowUserNameInput(false);
-  };
+  // Removed handleUserNameSubmit
+  // Removed handleVisitorMode (is now default when not logged in)
 
   // 處理功能提示相關
   const handleFeatureHintClose = () => {
@@ -898,13 +878,7 @@ const Index = () => {
         </div>
 
         {/* 用戶名稱輸入模態框 */}
-        {showUserNameInput && (
-          <UserNameInput
-            onSubmit={handleUserNameSubmit}
-            onVisitorMode={handleVisitorMode}
-            loading={userLoading}
-          />
-        )}
+
 
         {/* 遊戲完成模態框 */}
         {showGameCompleteModal && (

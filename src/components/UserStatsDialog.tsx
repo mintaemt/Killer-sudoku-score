@@ -122,7 +122,7 @@ export const UserStatsDialog = ({
                     </div>
 
                     <TabsContent value="profile" className="h-full mt-0 min-h-0">
-                        <div className="flex flex-col h-full overflow-hidden">
+                        <div className="flex flex-col h-full overflow-y-auto">
 
                             {/* User Info & Overall Stats - Fixed at top with padding */}
                             <div className="shrink-0 flex flex-col gap-4 px-4 pt-4 pb-0">
@@ -160,9 +160,9 @@ export const UserStatsDialog = ({
                                 </div>
                             </div>
 
-                            {/* Difficulty Breakdown Table - Flexible height with internal scroll */}
-                            <div className="flex-1 min-h-0 flex flex-col overflow-hidden px-4 pt-4">
-                                <div className="flex-1 flex flex-col rounded-lg border bg-card overflow-hidden">
+                            {/* Difficulty Breakdown Table - 完整展示所有難度 */}
+                            <div className="px-4 pt-4 pb-0">
+                                <div className="rounded-lg border bg-card overflow-hidden">
                                     <div className="grid grid-cols-4 gap-2 p-3 bg-secondary/50 font-medium text-xs text-muted-foreground text-center shrink-0 border-b z-10">
                                         <div className="text-left pl-2">{t('colDifficulty')}</div>
                                         <div>{t('colGames')}</div>
@@ -170,7 +170,7 @@ export const UserStatsDialog = ({
                                         <div>{t('colScore')}</div>
                                     </div>
 
-                                    <div className="overflow-y-auto flex-1 p-0">
+                                    <div className="p-0">
                                         {difficulties
                                             .filter(diff => viewMode === 'dopamine' || diff !== 'hell')
                                             .map((diff) => {

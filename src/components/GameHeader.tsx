@@ -210,7 +210,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
           </CustomTooltip>
 
           {/* 用戶狀態按鈕 - 最右側 */}
-          {(!user || (user as any).is_anonymous) ? (
+          {!authUser ? (
             <CustomTooltip content={t('login')} variant="glass">
               <Button
                 variant="outline"

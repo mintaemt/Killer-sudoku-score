@@ -41,38 +41,27 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             setUser(session?.user ?? null)
             setLoading(false)
 
-            // Migration Logic: If we just signed in and have a local legacy user
             if (_event === 'SIGNED_IN' && session?.user) {
-                const localUserStr = localStorage.getItem('killer-sudoku-user');
-                if (localUserStr) {
-                    try {
-                        const localUser = JSON.parse(localUserStr);
-                        if (localUser && localUser.id) {
-                            console.log('Migrating legacy user data:', localUser.id, 'to', session.user.id);
+                // 自動同步 Google 用戶到 public.users 表
+                // 確保外鍵約束（normal_records.user_id REFERENCES users(id)）不會失敗
+                const displayName = session.user.user_metadata?.full_name
+                    || session.user.user_metadata?.name
+                    || session.user.email?.split('@')[0]
+                    || 'Player';
 
-                            // Migrate Normal Records
-                            const { error: normalError } = await supabase
-                                .from('normal_records')
-                                .update({ user_id: session.user.id })
-                                .eq('user_id', localUser.id);
+                const { error: upsertError } = await supabase
+                    .from('users')
+                    .upsert({
+                        id: session.user.id,
+                        name: displayName,
+                        created_at: session.user.created_at,
+                        last_login: new Date().toISOString()
+                    }, { onConflict: 'id' });
 
-                            if (normalError) console.error('Error migrating normal records:', normalError);
-
-                            // Migrate Dopamine Records
-                            const { error: dopamineError } = await supabase
-                                .from('dopamine_records')
-                                .update({ user_id: session.user.id })
-                                .eq('user_id', localUser.id);
-
-                            if (dopamineError) console.error('Error migrating dopamine records:', dopamineError);
-
-                            // Clear local legacy user after migration attempt
-                            localStorage.removeItem('killer-sudoku-user');
-                            console.log('Migration complete. Legacy local user cleared.');
-                        }
-                    } catch (e) {
-                        console.error('Migration failed:', e);
-                    }
+                if (upsertError) {
+                    console.error('Error syncing Google user to users table:', upsertError);
+                } else {
+                    console.log('✅ Google user synced to users table:', session.user.id);
                 }
             }
         })
