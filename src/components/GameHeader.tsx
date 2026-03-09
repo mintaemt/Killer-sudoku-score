@@ -39,7 +39,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
   const titleTextRef = useRef<HTMLHeadingElement>(null);
 
   const navigate = useNavigate();
-  const { user: authUser, signInWithGoogle, loading: authLoading } = useAuth();
+
   const { user: authUser, signInWithGoogle, loading: authLoading } = useAuth();
   const { t, language } = useLanguage(); // Added language to dependency
 
