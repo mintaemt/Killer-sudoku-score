@@ -10,6 +10,7 @@ import { useUser } from "@/hooks/useUser";
 import { useUserStats } from "@/hooks/useUserStats";
 import { useLanguage } from "@/hooks/useLanguage";
 import { CustomTooltip } from "@/components/CustomTooltip";
+import { useNavigate } from "react-router-dom";
 
 interface GameHeaderProps {
   onNewGame: () => void;
@@ -41,8 +42,10 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
   const titleContainerRef = useRef<HTMLDivElement>(null);
   const titleTextRef = useRef<HTMLHeadingElement>(null);
 
+  const navigate = useNavigate();
+
   const { user: localUser, isLoggedIn, isVisitorMode } = useUser();
-  const { user: authUser, signInWithGoogle } = useAuth();
+  const { user: authUser, signInWithGoogle, loading: authLoading } = useAuth();
 
   // Prioritize Auth user (Google Login) over local user
   const user = authUser || localUser;
@@ -130,7 +133,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
         <div
           ref={titleContainerRef}
           className="flex flex-col items-start justify-center min-w-0 flex-1 relative z-0 h-10 mr-2 overflow-hidden cursor-pointer"
-          onClick={() => window.location.href = '/'}
+          onClick={() => navigate('/')}
         >
           <h1
             ref={titleTextRef}
@@ -210,7 +213,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
           </CustomTooltip>
 
           {/* 用戶狀態按鈕 - 最右側 */}
-          {!authUser ? (
+          {!user && !authLoading ? (
             <CustomTooltip content={t('login')} variant="glass">
               <Button
                 variant="outline"
@@ -222,6 +225,15 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
                 <LogIn className="h-3 w-3 md:h-4 md:w-4" />
               </Button>
             </CustomTooltip>
+          ) : !user && authLoading ? (
+            <Button
+              variant="outline"
+              size="sm"
+              disabled
+              className="transition-smooth shadow-apple-sm opacity-80 cursor-wait"
+            >
+              <Clock className="h-3 w-3 md:h-4 md:w-4 animate-pulse" />
+            </Button>
           ) : (
             <UserStatsDialog
               user={user}
