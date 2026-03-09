@@ -53,6 +53,8 @@ export const useUserStats = (
 
   const fetchUserStats = useCallback(async () => {
     if (!userId) {
+      setLoading(false);
+      setError(null);
       // 沒有用戶ID時，設置為空統計
       setStats({
         totalGames: 0,

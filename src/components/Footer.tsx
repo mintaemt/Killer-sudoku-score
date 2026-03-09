@@ -6,6 +6,8 @@ import { Github } from 'lucide-react';
 export const Footer: React.FC = () => {
     const { t } = useLanguage();
     const currentYear = new Date().getFullYear();
+    const rawVersion = import.meta.env.VITE_APP_VERSION || 'dev';
+    const version = rawVersion.slice(0, 7);
 
     return (
         <footer className="py-6 bg-background/20 backdrop-blur-sm border-t border-white/5">
@@ -46,6 +48,11 @@ export const Footer: React.FC = () => {
                             <Github className="w-4 h-4" />
                         </a>
                     </div>
+
+                    {/* Version */}
+                    <div className="ml-4 text-xs text-muted-foreground/40 select-all">
+                        v{version}
+                    </div>
                 </div>
 
                 {/* Mobile Layout */}
@@ -73,6 +80,10 @@ export const Footer: React.FC = () => {
                         >
                             <Github className="w-4 h-4" />
                         </a>
+                    </div>
+
+                    <div className="text-center text-[10px] text-muted-foreground/40 select-all">
+                        v{version}
                     </div>
                 </div>
             </div>

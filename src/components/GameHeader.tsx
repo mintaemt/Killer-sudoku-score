@@ -6,10 +6,9 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { LanguageToggle } from "@/components/LanguageToggle";
 import { cn } from "@/lib/utils";
 import { useState, useRef, useEffect, useLayoutEffect } from "react";
-import { useUser } from "@/hooks/useUser";
-import { useUserStats } from "@/hooks/useUserStats";
 import { useLanguage } from "@/hooks/useLanguage";
 import { CustomTooltip } from "@/components/CustomTooltip";
+import { useNavigate } from "react-router-dom";
 
 interface GameHeaderProps {
   onNewGame: () => void;
@@ -33,21 +32,15 @@ import { UserStatsDialog } from "@/components/UserStatsDialog";
 export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeaderboard, onShowRules }: GameHeaderProps) => {
   const [isThemeOpen, setIsThemeOpen] = useState(false);
   const [isUserOpen, setIsUserOpen] = useState(false);
-  const [viewMode, setViewMode] = useState<'normal' | 'dopamine'>('normal');
-  const [currentDifficultyIndex, setCurrentDifficultyIndex] = useState(0);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const userDropdownRef = useRef<HTMLDivElement>(null);
   // Title Refs
   const titleContainerRef = useRef<HTMLDivElement>(null);
   const titleTextRef = useRef<HTMLHeadingElement>(null);
 
-  const { user: localUser, isLoggedIn, isVisitorMode } = useUser();
-  const { user: authUser, signInWithGoogle } = useAuth();
+  const navigate = useNavigate();
 
-  // Prioritize Auth user (Google Login) over local user
-  const user = authUser || localUser;
-
-  const { stats, loading: statsLoading } = useUserStats(user?.id || null, viewMode);
+  const { user: authUser, signInWithGoogle, loading: authLoading } = useAuth();
   const { t, language } = useLanguage(); // Added language to dependency
 
   // Title Auto-Scaling Logic (Scale-to-Fit)
@@ -130,7 +123,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
         <div
           ref={titleContainerRef}
           className="flex flex-col items-start justify-center min-w-0 flex-1 relative z-0 h-10 mr-2 overflow-hidden cursor-pointer"
-          onClick={() => window.location.href = '/'}
+          onClick={() => navigate('/')}
         >
           <h1
             ref={titleTextRef}
@@ -210,7 +203,7 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
           </CustomTooltip>
 
           {/* 用戶狀態按鈕 - 最右側 */}
-          {!authUser ? (
+          {!authUser && !authLoading ? (
             <CustomTooltip content={t('login')} variant="glass">
               <Button
                 variant="outline"
@@ -222,13 +215,22 @@ export const GameHeader = ({ onNewGame, onThemeChange, currentTheme, onShowLeade
                 <LogIn className="h-3 w-3 md:h-4 md:w-4" />
               </Button>
             </CustomTooltip>
+          ) : !authUser && authLoading ? (
+            <Button
+              variant="outline"
+              size="sm"
+              disabled
+              className="transition-smooth shadow-apple-sm opacity-80 cursor-wait"
+            >
+              <Clock className="h-3 w-3 md:h-4 md:w-4 animate-pulse" />
+            </Button>
           ) : (
             <UserStatsDialog
-              user={user}
+              user={authUser}
               currentTheme={currentTheme}
               themes={themes}
               t={t}
-              isVisitorMode={isVisitorMode}
+              isVisitorMode={false}
               onShowLeaderboard={onShowLeaderboard}
             />
           )}
