@@ -34,6 +34,7 @@ export const UserStatsDialog = ({
     t,
 }: UserStatsDialogProps) => {
     const [isOpen, setIsOpen] = useState(false);
+    const [isSigningOut, setIsSigningOut] = useState(false);
     const { signOut } = useAuth();
 
     const [viewMode, setViewMode] = useState<'normal' | 'dopamine'>('normal');
@@ -50,8 +51,14 @@ export const UserStatsDialog = ({
     const themeStyle = { '--theme-color': currentThemeColor } as React.CSSProperties;
 
     const handleLogout = async () => {
-        await signOut();
+        if (isSigningOut) return;
+        setIsSigningOut(true);
         setIsOpen(false);
+        try {
+            await signOut();
+        } finally {
+            setIsSigningOut(false);
+        }
     };
 
     const difficulties: DopamineDifficulty[] = ['easy', 'medium', 'hard', 'expert', 'hell'];
@@ -204,9 +211,14 @@ export const UserStatsDialog = ({
 
                             {/* Logout Button - Fixed at bottom */}
                             <div className="shrink-0 mt-auto p-4 pt-4">
-                                <Button variant="outline" className="w-full text-red-500 hover:text-red-600 hover:bg-red-50" onClick={handleLogout}>
+                                <Button
+                                    variant="outline"
+                                    className="w-full text-red-500 hover:text-red-600 hover:bg-red-50"
+                                    onClick={handleLogout}
+                                    disabled={isSigningOut}
+                                >
                                     <LogOut className="h-4 w-4 mr-2" />
-                                    {t('logout') || '登出'}
+                                    {isSigningOut ? (t('loadingStats') || 'Loading...') : (t('logout') || '登出')}
                                 </Button>
                             </div>
                         </div>

@@ -6,8 +6,8 @@ import { Github } from 'lucide-react';
 export const Footer: React.FC = () => {
     const { t } = useLanguage();
     const currentYear = new Date().getFullYear();
-    const version = '88fef7b';
-
+    const rawVersion = import.meta.env.VITE_APP_VERSION || 'dev';
+    const version = rawVersion.slice(0, 7);
     return (
         <footer className="py-6 bg-background/20 backdrop-blur-sm border-t border-white/5">
             <div className="max-w-6xl mx-auto px-4">
